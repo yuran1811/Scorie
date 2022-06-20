@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	* {
+		font-family: 'Khand', sans-serif;
+
+		&::selection {
+			@apply bg-ctcolor text-ctbackground;
+		}
+
+		&,
+		&::before,
+		&::after {
+			@apply p-0 m-0 select-auto box-border;
+		}
+		&::-webkit-scrollbar {
+			@apply w-0 h-[0.5rem] bg-ctcolor;
+
+			&-thumb {
+				@apply bg-ctwhite;
+			}
+		}
+	}
+
+	html {
+		@apply text-[62.5%];
+	}
+
+	body {
+		@apply overflow-x-hidden overflow-y-auto scroll-smooth bg-ctbackground;
+	}
+}
