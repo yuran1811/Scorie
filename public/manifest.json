@@ -1,11 +1,11 @@
 {
 	"name": "Scorie",
 	"short_name": "Scorie",
-	"start_url": ".",
+	"start_url": "/Scorie",
 	"display": "standalone",
-	"theme_color": "#000000",
+	"theme_color": "#3730a3",
 	"orientation": "portrait",
-	"background_color": "#ffffff",
+	"background_color": "#3730a3",
 	"prefer_related_applications": true,
 	"icons": [
 		{

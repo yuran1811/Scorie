@@ -5,6 +5,8 @@ module.exports = {
 	theme: {
 		colors: {
 			...colors,
+			ctbg: '#312e81',
+			ctcolor: '#a5b4fc',
 		},
 	},
 	plugins: [require('@tailwindcss/line-clamp'), require('@tailwindcss/aspect-ratio')],

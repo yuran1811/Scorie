@@ -4,7 +4,7 @@
 
 ### Technologies
 
--   ReactJS , React Router
+-   ReactJS, React Router
 -   Typescript
 -   TailwindCSS
 -   Libs: SwiperJS
