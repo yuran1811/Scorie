@@ -13,7 +13,7 @@ export const Panel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 		<div
 			className={`${className} ${
 				active ? 'translate-x-0' : 'translate-x-[-200%]'
-			} transition-all duration-300 fixed top-0 left-0 px-12 py-20 w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
+			} transition-all duration-300 fixed top-0 left-0 px-12 py-20 max-w-[40rem] w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
 		>
 			<div className='flexcenter w-full pt-8'>
 				<Avatar className='cursor-pointer' imgUrl='' radius='5rem' />

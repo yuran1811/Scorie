@@ -31,13 +31,13 @@ const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 		<div
 			className={`${className} ${
 				active ? 'translate-y-0' : 'translate-y-[-200%]'
-			} z-20 transition-all duration-300 fixed top-0 left-0 px-12 py-20 w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
+			} z-20 transition-all duration-300 fixed top-0 left-0 px-12 py-20 max-w-[40rem] w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
 		>
 			<BackIcon onClick={() => setActive && setActive(false)} />
 
 			{!auth.isAuth ? (
 				<>
-					<form className='flexcentercol' onSubmit={handleSubmit(onSubmit)}>
+					<form className='mt-[2rem] flexcentercol' onSubmit={handleSubmit(onSubmit)}>
 						<Input
 							placeholder='Email'
 							defaultValue=''

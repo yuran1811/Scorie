@@ -11,11 +11,9 @@ export const SectionSwiper: FC = () => {
 			centeredSlides: true,
 			slideToClickedSlide: true,
 			breakpoints: {
-				1024: { slidesPerView: 6 },
-				768: { slidesPerView: 5 },
-				640: { slidesPerView: 4 },
-				520: { slidesPerView: 3 },
-				480: { slidesPerView: 2 },
+				1224: { slidesPerView: 4 },
+				780: { slidesPerView: 3 },
+				550: { slidesPerView: 2 },
 				0: { slidesPerView: 1 },
 			},
 			onSlideChange: ({ activeIndex }) => console.log(activeIndex),
@@ -26,6 +24,22 @@ export const SectionSwiper: FC = () => {
 	return (
 		<div className='mt-4 p-4 w-full h-[15rem] rounded-[2rem]'>
 			<ReactSwiper {...swiperOptions} className='flex items-center w-full h-full'>
+				<SwiperSlide>
+					<ScoreCard />
+				</SwiperSlide>
+
+				<SwiperSlide>
+					<ScoreCard />
+				</SwiperSlide>
+
+				<SwiperSlide>
+					<ScoreCard />
+				</SwiperSlide>
+
+				<SwiperSlide>
+					<ScoreCard />
+				</SwiperSlide>
+
 				<SwiperSlide>
 					<ScoreCard />
 				</SwiperSlide>
