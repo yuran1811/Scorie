@@ -1,1 +1,1 @@
-export const HOST_URL: string = '/'; // /scorie
+export const HOST_URL: string = '/scorie';
