@@ -7,7 +7,7 @@ const AccountBar: FC<HTMLProps<HTMLDivElement>> = (props) => {
 
 	return (
 		<div {...props} onClick={() => setActive && setActive(!active)}>
-			<UserIcon className='text-ctbg cursor-pointer' width='32' height='32' />
+			<UserIcon className='text-ctbg cursor-pointer' width='40' height='40' />
 			<div className='font-bold ml-6 line-clamp-1'>Account</div>
 		</div>
 	);

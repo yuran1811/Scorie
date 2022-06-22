@@ -1,19 +1,24 @@
 import { AUTH_CONTEXT_DEFAULT } from '../constants';
-import { createContext, Dispatch, FC, useContext, useReducer } from 'react';
+import { createContext, Dispatch, FC, useContext, useEffect, useReducer } from 'react';
 import { useLocalStore } from 'hooks';
+import { validateFakeUserData } from 'services';
 
-interface UserType {
-	email: string;
-	password: string;
+export interface UserType {
+	email?: string;
+	password?: string;
+	reset?: boolean;
 }
 
-interface AuthStateType extends UserType {
+export interface AuthStateType {
+	// extends UserType {
+
 	name: string;
-	type: string;
-	isAuth: boolean;
+	isAuth: boolean | null;
+	errorMessage: string;
+	// 	type: string;
 }
 
-interface AuthProviderProps {
+export interface AuthProviderProps {
 	auth: AuthStateType;
 	setAuth: Dispatch<UserType> | null;
 }
@@ -26,16 +31,26 @@ export const AuthContext = createContext<AuthProviderProps>({
 export const AuthProvider: FC = ({ children }) => {
 	const [localData, setLocalData] = useLocalStore<AuthStateType>('data', { ...AUTH_CONTEXT_DEFAULT }, '{}');
 
-	const [auth, setAuth] = useReducer((state: AuthStateType, { email, password }: UserType): AuthStateType => {
-		console.log(email, password, state);
+	const [auth, setAuth] = useReducer((state: AuthStateType, { email, password, reset }: UserType): AuthStateType => {
+		if (reset) {
+			const resetData = {
+				name: '',
+				isAuth: null,
+				errorMessage: '',
+			};
 
-		if (email === 'a@gmail.com' && password === 'aaaaaa') {
-			setLocalData({ email, password: 'aaaaaa', name: email, type: 'ADMIN', isAuth: true });
-			return { email, password: 'aaaaaa', name: email, type: 'ADMIN', isAuth: true };
+			setLocalData(resetData);
+			return resetData;
 		}
 
-		setLocalData({ ...AUTH_CONTEXT_DEFAULT });
-		return { ...AUTH_CONTEXT_DEFAULT };
+		const resp = validateFakeUserData({
+			email: email ? email.trim().toLowerCase() : '',
+			password: password ? password.trim().toLowerCase() : '',
+		});
+
+		setLocalData({ ...resp });
+
+		return resp;
 	}, localData || { ...AUTH_CONTEXT_DEFAULT });
 
 	return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;

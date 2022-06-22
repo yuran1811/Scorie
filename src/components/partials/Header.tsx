@@ -6,14 +6,15 @@ import { FC } from 'react';
 
 export const Header: FC = () => {
 	return (
-		<header className='z-10 flexcenter !justify-between sticky top-0 w-full h-[7rem] bg-ctbg'>
+		<header className='z-10 flexcenter !justify-between sticky top-0 w-full h-[8rem] bg-ctbg'>
 			<MenuProvider>
-				<MenuIcon className='mx-7 z-20' />
+				<MenuIcon className='mx-10 z-20' />
 				<Panel className='z-10' />
 			</MenuProvider>
 
-			<div className='font-bold text-[4rem] text-center'>Scorie</div>
-			<Avatar className='mx-4' imgUrl='' radius='4.2rem' />
+			<div className='font-bold text-[4.6rem] text-center'>Scorie</div>
+
+			<Avatar className='mx-8' imgUrl='' radius='5.5rem' />
 		</header>
 	);
 };

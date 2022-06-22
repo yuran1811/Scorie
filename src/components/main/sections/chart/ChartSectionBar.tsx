@@ -1,14 +1,18 @@
-import { ToolIcon } from 'components/icons/ToolIcon';
-import { ToolCard } from './ToolCard';
+import { ChartIcon } from 'components/icons';
+import { ChartCard } from './ChartCard';
 import { SectionSwiper } from '../SectionSwiper';
 import { Title } from '../Title';
 
-export const ToolsSectionBar = () => {
+export const ChartSectionBar = () => {
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
-			<Title Icon={ToolIcon} content='Tools' />
+			<Title Icon={ChartIcon} content='Analytics' />
 			<SectionSwiper
-				Slide={ToolCard}
+				Slide={ChartCard}
+				breakpoints={{
+					1220: { slidesPerView: 2 },
+					0: { slidesPerView: 1 },
+				}}
 				slideChilds={[
 					{
 						id: 1,

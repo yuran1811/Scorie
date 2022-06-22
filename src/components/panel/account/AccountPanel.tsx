@@ -1,37 +1,79 @@
 import { BackIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces/ErrorMessage';
 import { Button, Input } from 'components/shared';
-import { useAccount, useAuth } from 'contexts';
-import { FC, HTMLProps, useCallback } from 'react';
+import { AuthStateType, useAccount, useAuth, useMenu } from 'contexts';
+import { useLocalStore } from 'hooks';
+import { FC, HTMLProps, useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { AUTH_CONTEXT_DEFAULT } from '../../../constants';
 import { AccountInfo } from './AccountInfo';
 
-type Inputs = {
+export interface AccountPanelInputs {
 	email: string;
 	password: string;
-};
+}
 
 const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
+	const [localData, setLocalData] = useLocalStore<AuthStateType>('data', { ...AUTH_CONTEXT_DEFAULT }, '{}');
+	const { active: menuActive } = useMenu();
 	const { active, setActive } = useAccount();
 	const { auth, setAuth } = useAuth();
+
+	const [errorMsg, setErrorMsg] = useState('');
 
 	const {
 		register,
 		handleSubmit,
 		watch,
+		reset,
 		formState: { errors },
-	} = useForm<Inputs>();
+	} = useForm<AccountPanelInputs>();
 
-	const onSubmit: SubmitHandler<Inputs> = useCallback((data) => {
+	const onSubmit: SubmitHandler<AccountPanelInputs> = useCallback((data) => {
 		const { email, password } = data;
 		setAuth && setAuth({ email, password });
 	}, []);
 
+	useEffect(() => {
+		if (auth.isAuth === null) {
+			setLocalData({ ...localData, errorMessage: '' });
+			setErrorMsg('');
+			return;
+		}
+
+		if (auth.isAuth === false) {
+			setErrorMsg(auth.errorMessage);
+			return;
+		}
+	}, [auth]);
+
+	useEffect(() => {
+		setLocalData({ ...localData, errorMessage: '' });
+		setErrorMsg('');
+	}, [watch('email'), watch('password')]);
+
+	useEffect(() => {
+		setErrorMsg('');
+		setActive && setActive(false);
+	}, [menuActive]);
+
+	useEffect(() => {
+		setErrorMsg('');
+	}, [active]);
+
+	useEffect(() => {
+		return () => {
+			setAuth && setAuth({ reset: true });
+			setErrorMsg('');
+			reset({ email: '', password: '' }, { keepErrors: false });
+		};
+	}, []);
+
 	return (
 		<div
-			className={`${className} ${
+			className={`${className || ''} ${
 				active ? 'translate-y-0' : 'translate-y-[-200%]'
-			} z-20 transition-all duration-300 fixed top-0 left-0 px-12 py-20 max-w-[40rem] w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
+			} z-20 transition-all duration-300 fixed top-0 left-0 px-12 pt-28 pb-14 max-w-[40rem] w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
 		>
 			<BackIcon onClick={() => setActive && setActive(false)} />
 
@@ -64,11 +106,13 @@ const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 							/>
 						)}
 
+						{errorMsg && <ErrorMessage extraStyle='text-[2rem]' content={errorMsg} />}
+
 						<Button type='submit' content='Log in' />
 					</form>
 				</>
 			) : (
-				<AccountInfo />
+				<AccountInfo setErrorMsg={setErrorMsg} resetForms={reset} />
 			)}
 		</div>
 	);

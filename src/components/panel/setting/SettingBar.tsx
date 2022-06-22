@@ -7,7 +7,7 @@ const SettingBar: FC<HTMLProps<HTMLDivElement>> = (props) => {
 
 	return (
 		<div {...props} onClick={() => setActive && setActive(!active)}>
-			<SettingIcon className='text-ctbg cursor-pointer' width='32' height='32' />
+			<SettingIcon className='text-ctbg cursor-pointer' width='40' height='40' />
 			<div className='font-bold ml-6 line-clamp-1'>Settings</div>
 		</div>
 	);
