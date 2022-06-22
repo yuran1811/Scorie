@@ -1,8 +1,8 @@
 {
 	"name": "Scorie",
 	"short_name": "Scorie",
-	"scope": "/Scorie/",
-	"start_url": "/Scorie/",
+	"scope": "/",
+	"start_url": "/",
 	"display": "standalone",
 	"theme_color": "#3730a3",
 	"orientation": "portrait",

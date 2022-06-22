@@ -1,1 +1,2 @@
-export const HOST_URL: string = '/scorie';
+export const HOST_URL: string = '/';
+// GH Pages : export const HOST_URL: string = '/scorie';
