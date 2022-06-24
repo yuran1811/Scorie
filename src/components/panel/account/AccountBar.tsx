@@ -1,9 +1,9 @@
 import { UserIcon } from 'components/icons';
-import { useAccount } from 'contexts';
+import { useAccountPanel } from 'contexts';
 import { FC, HTMLProps } from 'react';
 
 const AccountBar: FC<HTMLProps<HTMLDivElement>> = (props) => {
-	const { active, setActive } = useAccount();
+	const { active, setActive } = useAccountPanel();
 
 	return (
 		<div {...props} onClick={() => setActive && setActive(!active)}>

@@ -1,6 +1,6 @@
-import { CloseIcon, ImportantIcon, ListAllIcon, ListIcon, StarIcon } from 'components/icons';
+import { CloseIcon, IgnoreIcon, ImportantIcon, ListAllIcon, ListIcon, StarIcon } from 'components/icons';
 import { useScoreDetail } from 'contexts/ScoreDetailContext';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 export const ScoreDetail: FC = () => {
 	const {
@@ -8,7 +8,7 @@ export const ScoreDetail: FC = () => {
 		setViewDetail,
 	} = useScoreDetail();
 
-	const { isVital, isSpecial, subject, scores } = data;
+	const { isVital, isSpecial, isIgnored, subject, scores } = data;
 
 	const averageScore = useMemo(() => {
 		return scores?.reduce(
@@ -34,13 +34,39 @@ export const ScoreDetail: FC = () => {
 
 	const [viewMode, setViewMode] = useState('all');
 
+	const [scoreOptions, setScoreOptions] = useState({ isIgnored, isSpecial, isVital });
+
+	useEffect(() => {
+		setScoreOptions(data);
+	}, [data]);
+
 	return (
 		<>
 			{isOpened && (
 				<div className='z-20 !fixed top-0 left-0 w-[100vw] h-[100vh] font-bold text-center text-rose-700 bg-violet-200 overflow-x-hidden overflow-y-auto'>
 					<div className='flexcenter sticky top-0 left-0 p-8 bg-violet-200'>
-						<StarIcon className='cursor-pointer mx-5' fill={!isSpecial ? 'white' : '#d97706'} width='50' height='50' />
-						<ImportantIcon className='cursor-pointer mx-5' fill={!isVital ? 'white' : '#57534e'} width='50' height='50' />
+						<StarIcon
+							className='cursor-pointer mx-5'
+							fill={!scoreOptions.isSpecial ? 'white' : '#d97706'}
+							width='50'
+							height='50'
+							onClick={() => setScoreOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
+						/>
+						<ImportantIcon
+							className='cursor-pointer mx-5'
+							fill={!scoreOptions.isVital ? 'white' : '#57534e'}
+							width='50'
+							height='50'
+							onClick={() => setScoreOptions((s) => ({ ...s, isVital: !s.isVital }))}
+						/>
+						<IgnoreIcon
+							className='cursor-pointer mx-5'
+							fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
+							width='50'
+							height='50'
+							onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
+						/>
+
 						<CloseIcon
 							className='cursor-pointer absolute right-3 tablet:right-6 top-[50%] translate-y-[-50%] mx-4'
 							width='50'

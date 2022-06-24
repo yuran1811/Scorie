@@ -2,6 +2,7 @@ import { Avatar, Overlay } from 'components/shared';
 import { useAuth, useMenu } from 'contexts';
 import { FC, HTMLProps } from 'react';
 import AccountContainer from './account/AccountContainer';
+import DocContainer from './doc/DocContainer';
 import SettingContainer from './setting/SettingContainer';
 
 export const Panel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
@@ -28,6 +29,7 @@ export const Panel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 				<div className='z-[1] flexcentercol !justify-start w-full h-[80%] py-4 pb-12 my-4 text-[4rem] overflow-x-hidden overflow-y-auto'>
 					<AccountContainer />
 					<SettingContainer />
+					<DocContainer />
 				</div>
 			</div>
 		</>

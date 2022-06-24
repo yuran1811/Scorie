@@ -1,7 +1,7 @@
-import { AUTH_CONTEXT_DEFAULT } from '../constants';
-import { createContext, Dispatch, FC, useContext, useEffect, useReducer } from 'react';
 import { useLocalStore } from 'hooks';
+import { createContext, Dispatch, FC, useContext, useReducer } from 'react';
 import { validateFakeUserData } from 'services';
+import { AUTH_CONTEXT_DEFAULT } from '../constants';
 
 export interface UserType {
 	email?: string;
@@ -52,6 +52,12 @@ export const AuthProvider: FC = ({ children }) => {
 
 		return resp;
 	}, localData || { ...AUTH_CONTEXT_DEFAULT });
+
+	// useEffect(() => {
+	// 	window.addEventListener('load', async () => {
+	// 		console.log((await checkOnlineStatus()) ? 'Online' : 'Offline');
+	// 	});
+	// }, []);
 
 	return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
 };

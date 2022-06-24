@@ -1,4 +1,4 @@
-import { CloseIcon, ImportantIcon, StarIcon } from 'components/icons';
+import { CloseIcon, IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input } from 'components/shared';
 import { FC, HTMLProps, useCallback, useEffect, useMemo, useState } from 'react';
@@ -63,6 +63,8 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick: clickHa
 		].map((_) => createOption(_));
 	}, [scores]);
 
+	const [scoreOptions, setScoreOptions] = useState({ isIgnored: false });
+
 	const [selectState, setSelectState] = useState<SelectState>({
 		options: typeList,
 		value: typeList[0],
@@ -78,10 +80,13 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick: clickHa
 		formState: { errors },
 	} = useForm<Inputs>();
 
-	const onSubmit: SubmitHandler<Inputs> = useCallback((data) => {
-		console.log(data.type);
-		// reset({ subject: '', score: '', type: '' }, { keepErrors: false });
-	}, []);
+	const onSubmit: SubmitHandler<Inputs> = useCallback(
+		(data) => {
+			console.log('Ok');
+			// reset({ subject: '', score: '', type: { label: '', value: '' } }, { keepErrors: false });
+		},
+		[scoreOptions]
+	);
 
 	const handleCreate = useCallback((inputValue: string) => {
 		const { options } = selectState;
@@ -98,14 +103,22 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick: clickHa
 	}, [selectState.options]);
 
 	return (
-		<div className='z-[11] flexcentercol fixed top-0 left-0 w-[100vw] h-[100vh]'>
+		<div className='z-[11] flexcenter fixed top-0 left-0 w-[100vw] h-[100vh]'>
 			<div className='z-[1] cursor-pointer absolute top-0 left-0 w-full h-full bg-slate-700 opacity-80' onClick={clickHandle}></div>
 
-			<div className='z-[2] flexcentercol !justify-start top-0 h-[70%] text-[5rem] text-white'>
-				<div className='font-bold text-center text-rose-700 bg-violet-200 p-4 pb-8 overflow-x-hidden overflow-y-auto rounded-[3rem]'>
-					<div className='flexcenter p-8 bg-violet-200 relative'>
-						<StarIcon className='cursor-pointer mx-5' fill={!1 ? 'white' : '#d97706'} width='50' height='50' />
-						<ImportantIcon className='cursor-pointer mx-5' fill={!1 ? 'white' : '#57534e'} width='50' height='50' />
+			<div className='z-[2] absolute top-[12rem] max-w-[80%] max-h-[56rem] h-[calc(100vh-15rem)] text-[5rem] text-white'>
+				<div className='h-full font-bold text-center text-rose-700 bg-violet-200 overflow-x-hidden overflow-y-auto rounded-[3rem]'>
+					<div className='sticky top-0 left-0 right-0 flex items-center justify-between p-8 bg-violet-200'>
+						<div className='flexcenter flex-wrap'>
+							<IgnoreIcon
+								className='cursor-pointer mx-5'
+								fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
+								width='40'
+								height='40'
+								onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
+							/>
+						</div>
+
 						<CloseIcon
 							className='cursor-pointer absolute right-3 tablet:right-6 top-[50%] translate-y-[-50%] mx-4'
 							width='50'
@@ -114,6 +127,7 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick: clickHa
 						/>
 					</div>
 
+					<div className='text-[4rem] text-indigo-900 line-clamp-2'>New score record</div>
 					<form
 						className='flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1'
 						onSubmit={handleSubmit(onSubmit)}

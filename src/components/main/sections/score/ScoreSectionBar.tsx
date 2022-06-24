@@ -1,9 +1,10 @@
-import { HashtagIcon, ImportantIcon, StarIcon } from 'components/icons';
+import { AddIcon, HashtagIcon, IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { ScoreDetailProvider } from 'contexts/ScoreDetailContext';
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { fakeUser } from 'services';
 import { SectionSwiper } from '../SectionSwiper';
 import { Title } from '../Title';
+import { ScoreAddNew } from './ScoreAddNew';
 import { ScoreCard } from './ScoreCard';
 import { ScoreDetail } from './ScoreDetail';
 
@@ -13,7 +14,10 @@ export const ScoreSectionBar = () => {
 	const [filter, setFilter] = useState({
 		hasVital: false,
 		hasSpecial: false,
+		hasIgnored: false,
 	});
+
+	const [addNewOpen, setAddNewOpen] = useState(false);
 
 	const scoreList = useMemo(() => {
 		if (!filter.hasVital && !filter.hasSpecial) return scores;
@@ -27,9 +31,9 @@ export const ScoreSectionBar = () => {
 
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
-			<div className='w-full flexcenter !justify-between'>
+			<div className='w-full flexcenter flex-wrap'>
 				<Title Icon={HashtagIcon} content='Score' />
-				<div className='flexcenter'>
+				<div className='flexcenter px-6 py-8'>
 					<StarIcon
 						className='cursor-pointer mx-5'
 						fill={!filter.hasSpecial ? 'white' : '#fcd34d'}
@@ -44,6 +48,15 @@ export const ScoreSectionBar = () => {
 						height='50'
 						onClick={() => setFilter((f) => ({ ...f, hasVital: !f.hasVital }))}
 					/>
+					<IgnoreIcon
+						className='cursor-pointer mx-5'
+						fill={!filter.hasIgnored ? 'white' : '#0891b2'}
+						width='50'
+						height='50'
+						onClick={() => setFilter((f) => ({ ...f, hasIgnored: !f.hasIgnored }))}
+					/>
+
+					<AddIcon className='cursor-pointer mx-5' fill={'white'} width='50' height='50' onClick={() => setAddNewOpen(true)} />
 				</div>
 			</div>
 
@@ -61,6 +74,8 @@ export const ScoreSectionBar = () => {
 				/>
 				<ScoreDetail />
 			</ScoreDetailProvider>
+
+			{addNewOpen && <ScoreAddNew onClickHandle={setAddNewOpen} />}
 		</div>
 	);
 };

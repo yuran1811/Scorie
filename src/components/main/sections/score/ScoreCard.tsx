@@ -1,4 +1,4 @@
-import { ImportantIcon, StarIcon } from 'components/icons';
+import { IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { useScoreDetail } from 'contexts';
 import { FC, useMemo } from 'react';
 import { A11y } from 'swiper';
@@ -7,7 +7,7 @@ import { ScoreCardProps } from 'types';
 import { MAX_SCORE_RECENT_LTH } from '../../../../constants';
 
 export const ScoreCard: FC<ScoreCardProps> = ({ data }) => {
-	const { isVital, isSpecial, subject, scores } = data;
+	const { isVital, isSpecial, isIgnored, subject, scores } = data;
 
 	const swiperOptions = useMemo<SwiperProps>(
 		() => ({
@@ -39,6 +39,7 @@ export const ScoreCard: FC<ScoreCardProps> = ({ data }) => {
 				<div className='flexcenter p-4'>
 					<StarIcon className='mx-4' fill={!isSpecial ? 'white' : '#d97706'} width='40' height='40' />
 					<ImportantIcon className='mx-4' fill={!isVital ? 'white' : '#57534e'} width='40' height='40' />
+					<IgnoreIcon className='mx-4' fill={!isIgnored ? 'white' : '#0891b2'} width='40' height='40' />
 				</div>
 
 				<div className='flexcentercol'>

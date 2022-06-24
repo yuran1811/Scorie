@@ -1,7 +1,7 @@
 import { BackIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces/ErrorMessage';
 import { Button, Input } from 'components/shared';
-import { AuthStateType, useAccount, useAuth, useMenu } from 'contexts';
+import { AuthStateType, useAccountPanel, useAuth, useMenu } from 'contexts';
 import { useLocalStore } from 'hooks';
 import { FC, HTMLProps, useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -16,7 +16,7 @@ export interface AccountPanelInputs {
 const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 	const [localData, setLocalData] = useLocalStore<AuthStateType>('data', { ...AUTH_CONTEXT_DEFAULT }, '{}');
 	const { active: menuActive } = useMenu();
-	const { active, setActive } = useAccount();
+	const { active, setActive } = useAccountPanel();
 	const { auth, setAuth } = useAuth();
 
 	const [errorMsg, setErrorMsg] = useState('');

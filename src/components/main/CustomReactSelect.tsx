@@ -63,7 +63,7 @@ export const SelectMenuList = ({ children, ...otherProps }: MenuListProps<Option
 );
 
 export const SelectOption = (props: OptionProps<Option, false>) => (
-	<components.Option {...props} className='!w-[10rem] !h-[5rem] !rounded-[2rem] text-center !text-[2.5rem] line-clamp-1' />
+	<components.Option {...props} className='!w-[10rem] !h-[5rem] !m-6 !rounded-[2rem] text-center !text-[2.5rem] line-clamp-1' />
 );
 
 export const SelectPlaceholder = (props: PlaceholderProps<Option, false>) => <components.Placeholder {...props} />;

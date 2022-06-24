@@ -12,9 +12,13 @@ export const MainLayout: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 		<div className={`${className || ''} transition-all duration-300 relative top-0 left-0 px-12 py-4 w-[100vw]`}>
 			<AddButton />
 
-			<div className='w-full pt-8'>
-				<div className='font-bold text-[4.5rem] text-center w-full line-clamp-1'>Welcome,</div>
-				<div className='font-bold text-[6rem] text-center w-full line-clamp-1'>{auth.isAuth ? auth.name : 'Guest'}!</div>
+			<div className='flexcentercol tablet:flex-row w-full pt-8'>
+				<div className='font-bold text-[4.5rem] tablet:text-[5rem] text-center tablet:text-right w-full tablet:px-2 line-clamp-1'>
+					Welcome,
+				</div>
+				<div className='font-bold text-[6rem] tablet:text-[5rem] text-center tablet:text-left w-full tablet:px-2 line-clamp-1'>
+					{auth.isAuth ? auth.name : 'Guest'}!
+				</div>
 			</div>
 
 			<div className='w-full pt-8'>

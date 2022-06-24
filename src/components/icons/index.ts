@@ -1,3 +1,4 @@
+export * from './AddIcon';
 export * from './BackIcon';
 export * from './BookIcon';
 export * from './ChartIcon';
