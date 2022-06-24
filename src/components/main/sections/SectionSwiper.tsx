@@ -19,9 +19,8 @@ export const SectionSwiper: FC<SectionSwiperProps> = ({ Slide, breakpoints, slid
 			centeredSlides: true,
 			slideToClickedSlide: true,
 			breakpoints: breakpoints || {
-				1224: { slidesPerView: 4 },
-				780: { slidesPerView: 3 },
-				550: { slidesPerView: 2 },
+				1500: { slidesPerView: 3 },
+				750: { slidesPerView: 2 },
 				0: { slidesPerView: 1 },
 			},
 			onSlideChange: ({ activeIndex }) => {},

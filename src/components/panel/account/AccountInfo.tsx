@@ -17,8 +17,8 @@ export const AccountInfo: FC<AccountInfoProps> = ({ setErrorMsg, resetForms }) =
 	const { auth, setAuth } = useAuth();
 
 	return (
-		<div className='flexcentercol mt-[2rem] p-3'>
-			<div>{auth.name}</div>
+		<div className='flexcentercol !justify-start mt-[2rem] h-[80%] p-3 pb-16 overflow-x-hidden overflow-y-auto'>
+			<div className='font-bold text-[5rem]'>{auth.name}</div>
 
 			<Button
 				content='Log out'
@@ -28,7 +28,7 @@ export const AccountInfo: FC<AccountInfoProps> = ({ setErrorMsg, resetForms }) =
 					setErrorMsg('');
 				}}
 			/>
-			{/* <Button content='Change password' /> */}
+			<Button content='Change password' />
 		</div>
 	);
 };

@@ -25,15 +25,15 @@ export const SettingInfo: FC = () => {
 		<div className='flexcentercol !justify-start mt-[2rem] p-3 pb-8 w-full h-[80%] overflow-x-hidden overflow-y-auto'>
 			<div className='w-full'>
 				<form className='mt-[2rem] flexcentercol' onSubmit={handleSubmit(onSubmit)}>
-					<span className='text-center'>Score Format (9.xxxx)</span>
+					<span className='font-bold text-[4rem] text-center'>Score Format (9.xxxx)</span>
 					<Input
 						placeholder='Type a number'
 						defaultValue={localSetting.numberFormat}
 						formHandle={{ ...register('numberFormat', { required: true, pattern: /^\d+$/ }) }}
 					/>
-					<Button content='Change' onClick={handleSubmit(onSubmit)} />
+					{errors?.numberFormat && <ErrorMessage extraStyle='text-[3rem]' content='Invalid number' />}
 
-					{errors?.numberFormat && <ErrorMessage extraStyle='text-[2rem]' content='Invalid number' />}
+					<Button content='Change' onClick={handleSubmit(onSubmit)} />
 				</form>
 			</div>
 		</div>

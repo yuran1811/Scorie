@@ -1,1 +1,1 @@
-export const types = {};
+export * from './scores';

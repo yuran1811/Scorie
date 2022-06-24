@@ -73,13 +73,16 @@ const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 		<div
 			className={`${className || ''} ${
 				active ? 'translate-y-0' : 'translate-y-[-200%]'
-			} z-20 transition-all duration-300 fixed top-0 left-0 px-12 pt-28 pb-14 max-w-[40rem] w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
+			} z-20 transition-all duration-300 fixed top-0 left-0 px-12 pt-28 pb-14 tablet:max-w-[50rem] w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
 		>
 			<BackIcon onClick={() => setActive && setActive(false)} />
 
 			{!auth.isAuth ? (
 				<>
-					<form className='mt-[2rem] flexcentercol' onSubmit={handleSubmit(onSubmit)}>
+					<form
+						className='flexcentercol !justify-start h-[80%] pb-8 mt-[2rem] overflow-x-hidden overflow-y-auto'
+						onSubmit={handleSubmit(onSubmit)}
+					>
 						<Input
 							placeholder='Email'
 							defaultValue=''
@@ -89,7 +92,7 @@ const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 						/>
 						{errors?.email && (
 							<ErrorMessage
-								extraStyle='text-[2rem]'
+								extraStyle='text-[3rem]'
 								content={errors?.email.type === 'required' ? 'Please fill this field' : 'Not an email'}
 							/>
 						)}
@@ -101,12 +104,12 @@ const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 						/>
 						{errors?.password && (
 							<ErrorMessage
-								extraStyle='text-[2rem]'
+								extraStyle='text-[3rem]'
 								content={errors?.password.type === 'required' ? 'Please fill this field' : 'At least 6 characters'}
 							/>
 						)}
 
-						{errorMsg && <ErrorMessage extraStyle='text-[2rem]' content={errorMsg} />}
+						{errorMsg && <ErrorMessage extraStyle='text-[3rem]' content={errorMsg} />}
 
 						<Button type='submit' content='Log in' />
 					</form>

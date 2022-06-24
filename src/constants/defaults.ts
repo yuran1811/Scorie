@@ -24,4 +24,13 @@ export const SETTINGS_DEFAULT: SETTINGS_DEFAULT_Props = {
 	numberFormat: 2,
 };
 
-export const MAX_SCORE_RECENT_LTH = 5;
+export const VIEW_DATA_DEFAULT = {
+	id: 0,
+	isIgnored: false,
+	isVital: false,
+	isSpecial: false,
+	subject: '',
+	scores: [],
+};
+
+export const MAX_SCORE_RECENT_LTH = 4;

@@ -1,27 +1,14 @@
 import { ImportantIcon, StarIcon } from 'components/icons';
-import { MAX_SCORE_RECENT_LTH } from '../../../../constants';
+import { useScoreDetail } from 'contexts';
 import { FC, useMemo } from 'react';
 import { A11y } from 'swiper';
 import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { ScoreCardProps } from 'types';
+import { MAX_SCORE_RECENT_LTH } from '../../../../constants';
 
-interface ScoreCardProps {
-	data: {
-		id: number;
-		isIgnored: boolean;
-		isVital: boolean;
-		isSpecial: boolean;
-		subject: string;
-		scores: {
-			id: number;
-			isIgnored: boolean;
-			base: number;
-			type: string;
-			value: number;
-		}[];
-	};
-}
+export const ScoreCard: FC<ScoreCardProps> = ({ data }) => {
+	const { isVital, isSpecial, subject, scores } = data;
 
-export const ScoreCard: FC<ScoreCardProps> = ({ data: { isVital, isSpecial, subject, scores } }) => {
 	const swiperOptions = useMemo<SwiperProps>(
 		() => ({
 			modules: [A11y],
@@ -31,7 +18,6 @@ export const ScoreCard: FC<ScoreCardProps> = ({ data: { isVital, isSpecial, subj
 		}),
 		[]
 	);
-
 	const averageScore = useMemo(() => {
 		return scores.reduce(
 			(prevValue, score) => {
@@ -42,33 +28,40 @@ export const ScoreCard: FC<ScoreCardProps> = ({ data: { isVital, isSpecial, subj
 		);
 	}, [scores]);
 
-	return (
-		<div className='max-w-[30rem] p-4 rounded-[1.5rem] font-bold text-center text-purple-900 bg-purple-300'>
-			<div className='flexcenter p-4'>
-				<StarIcon className='mx-4' fill={!isSpecial ? 'white' : '#d97706'} width='40' height='40' />
-				<ImportantIcon className='mx-4' fill={!isVital ? 'white' : '#57534e'} width='40' height='40' />
-			</div>
+	const { setViewDetail } = useScoreDetail();
 
-			<div className='flexcentercol'>
-				<div className='font-bold text-[3.5rem] text-center w-full line-clamp-1'>{subject}</div>
-				<div className='font-bold text-[5rem] text-center text-rose-600 w-full line-clamp-1'>
-					{(averageScore.total / averageScore.count).toFixed(2)}
+	return (
+		<>
+			<div
+				className='cursor-pointer tablet:max-w-[25rem] w-full p-4 rounded-[2.5rem] font-bold text-center text-rose-700 bg-violet-200'
+				onClick={() => setViewDetail && setViewDetail({ data, isOpened: true })}
+			>
+				<div className='flexcenter p-4'>
+					<StarIcon className='mx-4' fill={!isSpecial ? 'white' : '#d97706'} width='40' height='40' />
+					<ImportantIcon className='mx-4' fill={!isVital ? 'white' : '#57534e'} width='40' height='40' />
 				</div>
 
-				<div className='font-bold text-[3.5rem] text-slate-800 text-left w-full px-8 line-clamp-1'>Recents</div>
-				<ReactSwiper {...swiperOptions} className='flex items-center w-full text-teal-700'>
-					{scores.slice(0, MAX_SCORE_RECENT_LTH).map((_) => (
-						<SwiperSlide key={_.id}>
-							<div className='w-[7rem] h-[6rem] p-3 text-center'>{_.value}</div>
-						</SwiperSlide>
-					))}
-					{scores.length > MAX_SCORE_RECENT_LTH && (
-						<SwiperSlide>
-							<div className='w-[7rem] h-[6rem] p-3 text-center'>...</div>
-						</SwiperSlide>
-					)}
-				</ReactSwiper>
+				<div className='flexcentercol'>
+					<div className='font-bold text-[3.5rem] text-center text-teal-700 w-full line-clamp-1'>{subject}</div>
+					<div className='font-bold text-[5rem] text-center text-red-600 w-full line-clamp-1'>
+						{(averageScore.total / averageScore.count).toFixed(2)}
+					</div>
+
+					<div className='font-bold text-[3.5rem] text-slate-800 text-left w-full px-8 line-clamp-1'>Recents</div>
+					<ReactSwiper {...swiperOptions} className='flex items-center w-full text-sky-700'>
+						{scores.slice(-MAX_SCORE_RECENT_LTH).map((_) => (
+							<SwiperSlide key={_.id}>
+								<div className='w-[7rem] h-[6rem] p-3 text-center'>{_.value}</div>
+							</SwiperSlide>
+						))}
+						{scores.length > MAX_SCORE_RECENT_LTH && (
+							<SwiperSlide>
+								<div className='w-[7rem] h-[6rem] p-3 text-center'>...</div>
+							</SwiperSlide>
+						)}
+					</ReactSwiper>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
