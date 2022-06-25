@@ -1,4 +1,4 @@
-import { BackIcon } from 'components/icons';
+import { BackIcon, LogInIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces/ErrorMessage';
 import { Button, Input } from 'components/shared';
 import { AuthStateType, useAccountPanel, useAuth, useMenu } from 'contexts';
@@ -111,7 +111,9 @@ const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 
 						{errorMsg && <ErrorMessage extraStyle='text-[3rem]' content={errorMsg} />}
 
-						<Button type='submit' content='Log in' />
+						<Button type='submit' content='Log in'>
+							<LogInIcon className='mr-6' width='50' height='50' />
+						</Button>
 					</form>
 				</>
 			) : (

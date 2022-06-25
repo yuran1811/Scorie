@@ -15,7 +15,7 @@ export const Panel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 			{active && <Overlay onClick={() => setActive && setActive(false)} />}
 
 			<div
-				className={`${className} ${
+				className={`${className || ''} ${
 					active ? 'translate-x-0' : 'translate-x-[-200%]'
 				} transition-all duration-300 fixed top-0 left-0 px-12 py-20 tablet:max-w-[50rem] w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
 			>

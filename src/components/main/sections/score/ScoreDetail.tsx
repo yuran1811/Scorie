@@ -44,31 +44,33 @@ export const ScoreDetail: FC = () => {
 		<>
 			{isOpened && (
 				<div className='z-20 !fixed top-0 left-0 w-[100vw] h-[100vh] font-bold text-center text-rose-700 bg-violet-200 overflow-x-hidden overflow-y-auto'>
-					<div className='flexcenter sticky top-0 left-0 p-8 bg-violet-200'>
-						<StarIcon
-							className='cursor-pointer mx-5'
-							fill={!scoreOptions.isSpecial ? 'white' : '#d97706'}
-							width='50'
-							height='50'
-							onClick={() => setScoreOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
-						/>
-						<ImportantIcon
-							className='cursor-pointer mx-5'
-							fill={!scoreOptions.isVital ? 'white' : '#57534e'}
-							width='50'
-							height='50'
-							onClick={() => setScoreOptions((s) => ({ ...s, isVital: !s.isVital }))}
-						/>
-						<IgnoreIcon
-							className='cursor-pointer mx-5'
-							fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
-							width='50'
-							height='50'
-							onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
-						/>
+					<div className='sticky top-0 left-0 right-0 flex items-center justify-between p-8 bg-violet-200'>
+						<div className='flexcenter flex-wrap w-full mobile:pl-24'>
+							<StarIcon
+								className='cursor-pointer mx-5'
+								fill={!scoreOptions.isSpecial ? 'white' : '#d97706'}
+								width='50'
+								height='50'
+								onClick={() => setScoreOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
+							/>
+							<ImportantIcon
+								className='cursor-pointer mx-5'
+								fill={!scoreOptions.isVital ? 'white' : '#57534e'}
+								width='50'
+								height='50'
+								onClick={() => setScoreOptions((s) => ({ ...s, isVital: !s.isVital }))}
+							/>
+							<IgnoreIcon
+								className='cursor-pointer mx-5'
+								fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
+								width='50'
+								height='50'
+								onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
+							/>
+						</div>
 
 						<CloseIcon
-							className='cursor-pointer absolute right-3 tablet:right-6 top-[50%] translate-y-[-50%] mx-4'
+							className='cursor-pointer mx-4'
 							width='50'
 							height='50'
 							onClick={() =>
@@ -81,13 +83,13 @@ export const ScoreDetail: FC = () => {
 						/>
 					</div>
 
-					<div className='flexcentercol p-8'>
+					<div className='flexcentercol px-8 py-8'>
 						<div className='font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1'>{subject}</div>
 						<div className='font-bold text-[8rem] text-center text-red-600 w-full line-clamp-1'>
 							{(averageScore.total / averageScore.count).toFixed(2)}
 						</div>
 
-						<div className='flex items-center justify-between w-full text-slate-800'>
+						<div className='flex items-center justify-between w-full text-slate-800 bg-violet-200'>
 							<div className='font-bold text-[4rem] text-left w-full px-6 line-clamp-1'>Recents</div>
 							<ListIcon
 								className={`${viewMode === 'group' ? 'block' : 'hidden'} cursor-pointer mx-5`}

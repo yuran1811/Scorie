@@ -82,7 +82,7 @@ export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({ 
 						<CloseIcon className='cursor-pointer mx-4' width='50' height='50' onClick={() => onClickHandle(false)} />
 					</div>
 
-					<div className='text-[4rem] text-indigo-900 line-clamp-2'>New subject</div>
+					<div className='w-full text-[4rem] text-indigo-900 line-clamp-1'>New subject</div>
 					<form
 						className='flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1'
 						onSubmit={handleSubmit(onSubmit)}

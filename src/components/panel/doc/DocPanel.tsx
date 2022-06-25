@@ -14,7 +14,7 @@ const DocPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 
 	return (
 		<div
-			className={`${className} ${
+			className={`${className || ''} ${
 				active ? 'translate-x-0' : 'translate-x-[-200%]'
 			} z-20 transition-all duration-300 fixed top-0 left-0 px-12 py-20 tablet:max-w-[50rem] w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
 		>

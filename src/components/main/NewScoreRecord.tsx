@@ -108,7 +108,7 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick: clickHa
 
 			<div className='z-[2] absolute top-[12rem] max-w-[80%] max-h-[56rem] h-[calc(100vh-15rem)] text-[5rem] text-white'>
 				<div className='h-full font-bold text-center text-rose-700 bg-violet-200 overflow-x-hidden overflow-y-auto rounded-[3rem]'>
-					<div className='sticky top-0 left-0 right-0 flex items-center justify-between p-8 bg-violet-200'>
+					<div className='z-10 sticky top-0 left-0 right-0 flex items-center justify-between p-8 bg-violet-200'>
 						<div className='flexcenter flex-wrap'>
 							<IgnoreIcon
 								className='cursor-pointer mx-5'
@@ -127,7 +127,7 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick: clickHa
 						/>
 					</div>
 
-					<div className='text-[4rem] text-indigo-900 line-clamp-2'>New score record</div>
+					<div className='w-full text-[4rem] text-indigo-900 line-clamp-1'>New record</div>
 					<form
 						className='flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1'
 						onSubmit={handleSubmit(onSubmit)}
@@ -168,7 +168,7 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick: clickHa
 								<>
 									<CreatableSelect
 										{...field}
-										className='flexcentercol max-w-[40rem] w-[80%] text-[2rem] text-left'
+										className='flexcentercol max-w-[40rem] w-full min-w-[22rem] text-[2rem] text-left'
 										isClearable
 										value={selectState.value}
 										options={selectState.options}
@@ -221,15 +221,6 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick: clickHa
 								))}
 							</div>
 						)} */}
-
-						{/* <CreatableSelect
-							className='w-full text-[2rem] text-left'
-							isClearable
-							onChange={handleChange}
-							onCreateOption={handleCreate}
-							options={state.options}
-							value={state.value}
-						/> */}
 
 						<Button type='submit' content='Add' />
 					</form>

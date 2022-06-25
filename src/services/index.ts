@@ -1,2 +1,2 @@
 export * from './api';
-export * from './data/fakeUser';
+export * from './data';

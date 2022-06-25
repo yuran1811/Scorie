@@ -13,7 +13,7 @@ import {
 	OptionProps,
 	PlaceholderProps,
 	SingleValueProps,
-	ValueContainerProps
+	ValueContainerProps,
 } from 'react-select';
 import { Option, SelectState } from './NewScoreRecord';
 
@@ -24,7 +24,7 @@ export interface CustomClearIndicatorProps extends ClearIndicatorProps<Option, f
 export const SelectControl = (props: ControlProps<Option, false>) => (
 	<components.Control
 		{...props}
-		className='!flex !items-center !justify-start !text-[3rem] !bg-ctbg !max-w-[25rem] !min-w-[25rem] !my-[0.5rem] !outline-none !border-none !rounded-[2.5rem] !shadow-none'
+		className='!flex !items-center !justify-start !text-[3rem] !bg-ctbg !max-w-[25rem] !w-full !my-[0.5rem] !outline-none !border-none !rounded-[2.5rem] !shadow-none'
 	/>
 );
 
@@ -48,22 +48,22 @@ export const SelectInput = (props: InputProps<Option, false>) => (
 );
 
 export const SelectMenu = ({ children, ...otherProps }: MenuProps<Option, false>) => (
-	<components.Menu {...otherProps} className='!relative !top-[50%] !max-w-[25rem] !overflow-y-auto px-6 py-4 !rounded-[2.5rem]'>
+	<components.Menu {...otherProps} className='!relative !top-[50%] !max-w-[25rem] !overflow-y-auto px-4 py-4 !rounded-[2.5rem]'>
 		{children}
 	</components.Menu>
 );
 
 export const SelectMenuList = ({ children, ...otherProps }: MenuListProps<Option, false>) => (
-	<components.MenuList
-		{...otherProps}
-		className='!relative !top-[50%] !max-w-[25rem] !overflow-y-auto !flex !items-center !justify-center !flex-wrap'
-	>
+	<components.MenuList {...otherProps} className='!overflow-y-auto !flex !items-center !justify-center !flex-wrap'>
 		{children}
 	</components.MenuList>
 );
 
 export const SelectOption = (props: OptionProps<Option, false>) => (
-	<components.Option {...props} className='!w-[10rem] !h-[5rem] !m-6 !rounded-[2rem] text-center !text-[2.5rem] line-clamp-1' />
+	<components.Option
+		{...props}
+		className='!cursor-pointer !w-[8rem] !h-[4.2rem] !m-4 !rounded-[2rem] text-center !text-[2rem] line-clamp-1'
+	/>
 );
 
 export const SelectPlaceholder = (props: PlaceholderProps<Option, false>) => <components.Placeholder {...props} />;

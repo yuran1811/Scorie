@@ -1,1 +1,3 @@
-export const types = {};
+import { FC } from 'react';
+
+export const Card: FC = () => <div>Card</div>;

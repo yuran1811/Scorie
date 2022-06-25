@@ -16,6 +16,7 @@ export const SectionSwiper: FC<SectionSwiperProps> = ({ Slide, breakpoints, slid
 	const swiperOptions = useMemo<SwiperProps>(
 		() => ({
 			modules: [A11y],
+			threshold: 80,
 			centeredSlides: true,
 			slideToClickedSlide: true,
 			breakpoints: breakpoints || {

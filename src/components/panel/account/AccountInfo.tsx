@@ -1,3 +1,4 @@
+import { LogOutIcon } from 'components/icons';
 import { Button } from 'components/shared';
 import { useAuth } from 'contexts';
 import { Dispatch, FC, SetStateAction } from 'react';
@@ -27,7 +28,9 @@ export const AccountInfo: FC<AccountInfoProps> = ({ setErrorMsg, resetForms }) =
 					setAuth && setAuth({ reset: true });
 					setErrorMsg('');
 				}}
-			/>
+			>
+				<LogOutIcon className='mr-6' width='50' height='50' />
+			</Button>
 			<Button content='Change password' />
 		</div>
 	);

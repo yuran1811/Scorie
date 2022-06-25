@@ -1,3 +1,4 @@
+import { DownloadIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input } from 'components/shared';
 import { useLocalStore } from 'hooks';
@@ -23,6 +24,12 @@ export const SettingInfo: FC = () => {
 
 	return (
 		<div className='flexcentercol !justify-start mt-[2rem] p-3 pb-8 w-full h-[80%] overflow-x-hidden overflow-y-auto'>
+			<div className='flexcenter w-full'>
+				<Button content='Create backup data'>
+					<DownloadIcon className='m-4' width='50' height='50' />
+				</Button>
+			</div>
+
 			<div className='w-full'>
 				<form className='mt-[2rem] flexcentercol' onSubmit={handleSubmit(onSubmit)}>
 					<span className='font-bold text-[4rem] text-center'>Score Format (9.xxxx)</span>
