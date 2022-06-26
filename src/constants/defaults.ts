@@ -1,10 +1,14 @@
+import { fakeNotesProps } from 'services';
+import { ScoreDetail } from 'shared/types';
+
 export interface AUTH_CONTEXT_DEFAULT_Props {
-	readonly email: string;
-	readonly password: string;
-	readonly name: string;
-	readonly type: string;
-	readonly isAuth: boolean | null;
-	readonly errorMessage: string;
+	name: string;
+	isAuth: boolean | null;
+	errorMessage: string;
+	data: {
+		scores: ScoreDetail[];
+		notes: fakeNotesProps[];
+	};
 }
 
 export interface SETTINGS_DEFAULT_Props {
@@ -12,12 +16,13 @@ export interface SETTINGS_DEFAULT_Props {
 }
 
 export const AUTH_CONTEXT_DEFAULT: AUTH_CONTEXT_DEFAULT_Props = {
-	email: '',
-	password: '',
 	name: '',
-	type: 'null',
 	isAuth: null,
 	errorMessage: '',
+	data: {
+		scores: [],
+		notes: [],
+	},
 };
 
 export const SETTINGS_DEFAULT: SETTINGS_DEFAULT_Props = {
@@ -31,6 +36,16 @@ export const VIEW_DATA_DEFAULT = {
 	isSpecial: false,
 	subject: '',
 	scores: [],
+};
+
+export const NOTE_VIEW_DATA_DEFAULT = {
+	id: 0,
+	isDone: false,
+	isInProgress: false,
+	title: '',
+	data: '',
+	createdAt: '',
+	updatedAt: '',
 };
 
 export const MAX_SCORE_RECENT_LTH = 4;

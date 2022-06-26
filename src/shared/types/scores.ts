@@ -1,18 +1,20 @@
 import { Dispatch, SetStateAction } from 'react';
 
+export interface ScoreItemDetail {
+	id: number;
+	isIgnored: boolean;
+	base: number;
+	type: string;
+	value: number;
+}
+
 export interface ScoreDetail {
 	id: number;
 	isIgnored: boolean;
 	isVital: boolean;
 	isSpecial: boolean;
 	subject: string;
-	scores: {
-		id: number;
-		isIgnored: boolean;
-		base: number;
-		type: string;
-		value: number;
-	}[];
+	scores: ScoreItemDetail[];
 }
 
 export interface ScoreCardProps {

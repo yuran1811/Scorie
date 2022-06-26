@@ -10,9 +10,9 @@ export const SettingInfo: FC = () => {
 	const [localSetting, setLocalSetting] = useLocalStore<SETTINGS_DEFAULT_Props>('settings', { ...SETTINGS_DEFAULT }, '{}');
 
 	const {
+		watch,
 		register,
 		handleSubmit,
-		watch,
 		formState: { errors },
 	} = useForm<SETTINGS_DEFAULT_Props>({
 		mode: 'onChange',

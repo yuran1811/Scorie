@@ -1,5 +1,5 @@
 import { CloseIcon, IgnoreIcon, ImportantIcon, ListAllIcon, ListIcon, StarIcon } from 'components/icons';
-import { useScoreDetail } from 'contexts/ScoreDetailContext';
+import { useScoreDetail } from 'contexts';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 export const ScoreDetail: FC = () => {
@@ -43,7 +43,7 @@ export const ScoreDetail: FC = () => {
 	return (
 		<>
 			{isOpened && (
-				<div className='z-20 !fixed top-0 left-0 w-[100vw] h-[100vh] font-bold text-center text-rose-700 bg-violet-200 overflow-x-hidden overflow-y-auto'>
+				<div className='z-20 !fixed top-0 left-0 w-[100vw] h-[100vh] font-bold text-center text-rose-600 bg-violet-200 overflow-x-hidden overflow-y-auto'>
 					<div className='sticky top-0 left-0 right-0 flex items-center justify-between p-8 bg-violet-200'>
 						<div className='flexcenter flex-wrap w-full mobile:pl-24'>
 							<StarIcon
@@ -84,8 +84,8 @@ export const ScoreDetail: FC = () => {
 					</div>
 
 					<div className='flexcentercol px-8 py-8'>
-						<div className='font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1'>{subject}</div>
-						<div className='font-bold text-[8rem] text-center text-red-600 w-full line-clamp-1'>
+						<div className='text-[5rem] text-center text-teal-700 w-full line-clamp-1'>{subject}</div>
+						<div className='text-[8rem] text-center text-red-600 w-full line-clamp-1'>
 							{(averageScore.total / averageScore.count).toFixed(2)}
 						</div>
 

@@ -6,11 +6,15 @@ import { Title } from '../Title';
 export const ChartSectionBar = () => {
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
-			<Title Icon={ChartIcon} content='Analytics' />
+			<div className='w-full flexcenter flex-wrap'>
+				<Title Icon={ChartIcon} content='Analytics' />
+			</div>
+
 			<SectionSwiper
 				Slide={ChartCard}
 				breakpoints={{
-					1220: { slidesPerView: 2 },
+					1080: { slidesPerView: 3 },
+					640: { slidesPerView: 2 },
 					0: { slidesPerView: 1 },
 				}}
 				slideChilds={[

@@ -6,25 +6,28 @@ import { Title } from '../Title';
 export const ToolsSectionBar = () => {
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
-			<Title Icon={ToolIcon} content='Tools' />
+			<div className='w-full flexcenter flex-wrap'>
+				<Title Icon={ToolIcon} content='Tools' />
+			</div>
+
 			<SectionSwiper
 				Slide={ToolCard}
 				slideChilds={[
 					{
 						id: 1,
-						name: 'Chart',
+						name: 'Tool',
 					},
 					{
 						id: 2,
-						name: 'Chart',
+						name: 'Tool',
 					},
 					{
 						id: 3,
-						name: 'Chart',
+						name: 'Tool',
 					},
 					{
 						id: 4,
-						name: 'Chart',
+						name: 'Tool',
 					},
 				]}
 			/>

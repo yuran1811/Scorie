@@ -1,1 +1,2 @@
-export const shared = {};
+export * from './axios';
+export * from './firebase';

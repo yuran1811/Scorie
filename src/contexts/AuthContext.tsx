@@ -1,7 +1,8 @@
-import { useLocalStore } from 'hooks';
+import { NotesProvider, ScoresProvider } from 'contexts';
 import { createContext, Dispatch, FC, useContext, useReducer } from 'react';
-import { validateFakeUserData } from 'services';
+import { fakeNotesProps, fakeScoresProps, validateFakeUserData } from 'services';
 import { AUTH_CONTEXT_DEFAULT } from '../constants';
+import { useNotesData, useScoresData } from './index';
 
 export interface UserType {
 	email?: string;
@@ -10,12 +11,16 @@ export interface UserType {
 }
 
 export interface AuthStateType {
-	// extends UserType {
-
 	name: string;
 	isAuth: boolean | null;
 	errorMessage: string;
-	// 	type: string;
+}
+
+export interface AuthDataContextType {
+	data: {
+		scores: fakeScoresProps[];
+		notes: fakeNotesProps[];
+	};
 }
 
 export interface AuthProviderProps {
@@ -28,38 +33,69 @@ export const AuthContext = createContext<AuthProviderProps>({
 	setAuth: null,
 });
 
+export const AuthDataContext = createContext<AuthDataContextType>({
+	data: {
+		notes: [],
+		scores: [],
+	},
+});
+
+export const AuthDataProvider: FC = ({ children }) => {
+	const { notes } = useNotesData();
+	const { scores } = useScoresData();
+
+	return <AuthDataContext.Provider value={{ data: { notes, scores } }}>{children}</AuthDataContext.Provider>;
+};
+
 export const AuthProvider: FC = ({ children }) => {
-	const [localData, setLocalData] = useLocalStore<AuthStateType>('data', { ...AUTH_CONTEXT_DEFAULT }, '{}');
+	// const [localData, setLocalData] = useLocalStore<AuthStateType>('data', { ...AUTH_CONTEXT_DEFAULT }, '{}');
 
-	const [auth, setAuth] = useReducer((state: AuthStateType, { email, password, reset }: UserType): AuthStateType => {
-		if (reset) {
-			const resetData = {
-				name: '',
-				isAuth: null,
-				errorMessage: '',
-			};
+	const { setNotesData } = useNotesData();
+	const { setScoresData } = useScoresData();
 
-			setLocalData(resetData);
-			return resetData;
-		}
+	const [auth, setAuth] = useReducer(
+		(state: AuthStateType, { email, password, reset }: UserType): AuthStateType => {
+			if (reset) {
+				const resetData: AuthStateType = {
+					name: '',
+					isAuth: null,
+					errorMessage: '',
+				};
 
-		const resp = validateFakeUserData({
-			email: email ? email.trim().toLowerCase() : '',
-			password: password ? password.trim().toLowerCase() : '',
-		});
+				setNotesData && setNotesData([]);
+				setScoresData && setScoresData([]);
 
-		setLocalData({ ...resp });
+				return resetData;
+			}
 
-		return resp;
-	}, localData || { ...AUTH_CONTEXT_DEFAULT });
+			const {
+				data: { scores, notes },
+				...resp
+			} = validateFakeUserData({
+				email: email ? email.trim().toLowerCase() : '',
+				password: password ? password.trim().toLowerCase() : '',
+			});
 
-	// useEffect(() => {
-	// 	window.addEventListener('load', async () => {
-	// 		console.log((await checkOnlineStatus()) ? 'Online' : 'Offline');
-	// 	});
-	// }, []);
+			setNotesData && setNotesData(notes);
+			setScoresData && setScoresData(scores);
 
-	return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
+			return resp;
+		},
+		{ ...AUTH_CONTEXT_DEFAULT }
+		// { ...AUTH_CONTEXT_DEFAULT, ...localData }
+	);
+
+	return (
+		<ScoresProvider>
+			<NotesProvider>
+				<AuthContext.Provider value={{ auth, setAuth }}>
+					<AuthDataProvider>{children}</AuthDataProvider>
+				</AuthContext.Provider>
+			</NotesProvider>
+		</ScoresProvider>
+	);
 };
 
 export const useAuth = () => useContext(AuthContext);
+
+export const useAuthData = () => useContext(AuthDataContext);

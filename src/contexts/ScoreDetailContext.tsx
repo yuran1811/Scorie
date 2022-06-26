@@ -1,5 +1,5 @@
 import { createContext, FC, useContext, useState } from 'react';
-import { ScoreDetailProviderProps, ScoreViewDetailProps } from 'types';
+import { ScoreDetailProviderProps, ScoreViewDetailProps } from 'shared/types';
 import { VIEW_DATA_DEFAULT } from '../constants';
 
 export const ScoreDetailContext_Default = { data: { ...VIEW_DATA_DEFAULT }, isOpened: false };

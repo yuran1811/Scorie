@@ -1,3 +1,4 @@
+import { SignIn } from 'components/auth/SignIn';
 import { BackIcon, LogInIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces/ErrorMessage';
 import { Button, Input } from 'components/shared';
@@ -87,7 +88,10 @@ const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 							placeholder='Email'
 							defaultValue=''
 							formHandle={{
-								...register('email', { required: true, pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ }),
+								...register('email', {
+									required: true,
+									pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+								}),
 							}}
 						/>
 						{errors?.email && (
@@ -105,7 +109,11 @@ const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 						{errors?.password && (
 							<ErrorMessage
 								extraStyle='text-[3rem]'
-								content={errors?.password.type === 'required' ? 'Please fill this field' : 'At least 6 characters'}
+								content={
+									errors?.password.type === 'required'
+										? 'Please fill this field'
+										: 'At least 6 characters'
+								}
 							/>
 						)}
 
@@ -114,6 +122,8 @@ const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 						<Button type='submit' content='Log in'>
 							<LogInIcon className='mr-6' width='50' height='50' />
 						</Button>
+
+						<SignIn />
 					</form>
 				</>
 			) : (

@@ -66,7 +66,9 @@ export const SelectOption = (props: OptionProps<Option, false>) => (
 	/>
 );
 
-export const SelectPlaceholder = (props: PlaceholderProps<Option, false>) => <components.Placeholder {...props} />;
+export const SelectPlaceholder = (props: PlaceholderProps<Option, false>) => (
+	<components.Placeholder {...props} className='absolute left-0 !w-full !p-0 !px-8 !text-white !text-center !font-normal italic' />
+);
 
 export const SelectIndicatorsContainer = (props: IndicatorsContainerProps<Option, false>) => (
 	<components.IndicatorsContainer {...props} className='flexcenter p-4 w-[7rem] h-[7rem]' />

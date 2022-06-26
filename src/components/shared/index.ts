@@ -5,4 +5,7 @@ export * from './ErrorContent';
 export * from './Input';
 export * from './Loading';
 export * from './LoadMoreButton';
+export * from './ModalBox';
+export * from './ModalBoxHeader';
 export * from './Overlay';
+export * from './TextArea';
