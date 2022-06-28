@@ -9,14 +9,13 @@ import { NoteDetail } from './NoteDetail';
 import { NoteItem } from './NoteItem';
 
 export const NoteSectionBar = () => {
+	const [addNewOpen, setAddNewOpen] = useState(false);
 	const [filter, setFilter] = useState({
 		hasDone: false,
 		hasProgress: false,
 	});
 
-	const [addNewOpen, setAddNewOpen] = useState(false);
-
-	const notes: NoteDetailType[] = [];
+	const notes = [] as NoteDetailType[];
 
 	const noteList = useMemo(() => {
 		if (!filter.hasDone && !filter.hasProgress) return notes;
@@ -58,9 +57,11 @@ export const NoteSectionBar = () => {
 					/>
 				</div>
 			</div>
+
 			<div className='font-semibold text-[3rem] text-white text-center italic p-4 mt-4'>
 				{noteList.length} notes found
 			</div>
+
 			<NoteDetailProvider>
 				<SectionSwiper
 					Slide={NoteItem}

@@ -3,7 +3,7 @@ import { LogOutIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button } from 'components/shared';
 import { sendPasswordResetEmail, signOut } from 'firebase/auth';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { auth } from 'shared';
 import { useStore } from 'store';
 import { getFirebaseErr } from 'utils';

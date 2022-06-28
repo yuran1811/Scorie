@@ -11,16 +11,16 @@ export interface NoteDetailType {
 }
 
 export interface NoteCardProps {
-	data: NoteDetailType;
+	note: NoteDetailType;
 }
 
 export interface NoteDetailProps {
-	data: NoteDetailType;
+	note: NoteDetailType;
 	setActive: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface NoteViewDetailProps {
-	data: NoteDetailType;
+	id: string;
 	isOpened: boolean;
 }
 

@@ -4,22 +4,21 @@ import { auth } from 'shared';
 import { getFirebaseErr } from 'utils';
 
 const reVerifyEmail = (canResend: boolean, setCanResend: Dispatch<SetStateAction<boolean>>) => {
-	if (!canResend) return;
+	if (!canResend || !auth.currentUser) return;
 
 	setCanResend(false);
 
-	if (auth.currentUser)
-		sendEmailVerification(auth.currentUser)
-			.then(() => {
-				console.log('Email verification sent !');
-			})
-			.catch((err) => {
-				console.log('Cannot send email verification !');
-				console.log(getFirebaseErr(err.message));
-			})
-			.finally(() => {
-				setCanResend(true);
-			});
+	sendEmailVerification(auth.currentUser)
+		.then(() => {
+			console.log('Email verification sent !');
+		})
+		.catch((err) => {
+			console.log('Cannot send email verification !');
+			console.log(getFirebaseErr(err.message));
+		})
+		.finally(() => {
+			setCanResend(true);
+		});
 };
 
 export const NotVerifyEmail: FC = () => {

@@ -40,7 +40,7 @@ const App: FC = () => {
 			<Routes>
 				<Route path='/'>
 					<Route index element={currentUser === undefined ? <Loading /> : <MainLayout />} />
-					<Route path='scores'>
+					<Route path='subjects'>
 						<Route index element={<ScoreSectionBar />} />
 						<Route path=':subjectId'>
 							<Route index element={<ScoreDetail />} />

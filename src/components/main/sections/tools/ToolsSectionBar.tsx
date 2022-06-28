@@ -1,7 +1,7 @@
 import { ToolIcon } from 'components/icons/ToolIcon';
-import { ToolCard } from './ToolCard';
 import { SectionSwiper } from '../SectionSwiper';
 import { Title } from '../Title';
+import { ToolCard } from './ToolCard';
 
 export const ToolsSectionBar = () => {
 	return (

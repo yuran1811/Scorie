@@ -4,9 +4,9 @@ import { ScoreDetailProvider } from 'contexts';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { useCollectionQuery } from 'hooks';
 import { useMemo, useState } from 'react';
-import { db } from 'shared';
+import { db, SubjectDetailType } from 'shared';
 import { useStore } from 'store';
-import { standardizeScores } from 'utils';
+import { standardizeCollectionData } from 'utils';
 import { SectionSwiper } from '../SectionSwiper';
 import { Title } from '../Title';
 import { ScoreAddNew } from './ScoreAddNew';
@@ -23,15 +23,16 @@ export const ScoreSectionBar = () => {
 	});
 
 	const { data } = useCollectionQuery(
-		'scores_tmp',
-		query(collection(db, 'users', currentUser?.uid as string, 'scores'), orderBy('createdAt'))
+		'user_subjects',
+		query(collection(db, 'users', currentUser?.uid as string, 'subjects'), orderBy('createdAt'))
 	);
 
-	const scores = useMemo(() => standardizeScores(data), [data]);
+	const subjects = useMemo(() => standardizeCollectionData(data) as SubjectDetailType[], [data]);
 	const scoreList = useMemo(() => {
-		if (!filter.hasVital && !filter.hasSpecial) return scores;
+		if (!filter.hasVital && !filter.hasSpecial) return subjects;
 
-		return scores.filter((score) => {
+		return subjects.filter((score) => {
+			if (filter.hasIgnored) return score.isIgnored && !score.isSpecial && !score.isVital;
 			if (filter.hasSpecial && filter.hasVital) return score.isSpecial && score.isVital;
 			if (filter.hasVital) return score.isVital && !score.isSpecial;
 			if (filter.hasSpecial) return score.isSpecial;
@@ -40,7 +41,7 @@ export const ScoreSectionBar = () => {
 
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
-			<AddButton />
+			<AddButton isOrigin={false} />
 
 			<div className='w-full flexcenter flex-wrap'>
 				<Title Icon={HashtagIcon} content='Score' />
@@ -94,7 +95,7 @@ export const ScoreSectionBar = () => {
 				/>
 			</ScoreDetailProvider>
 
-			{addNewOpen && <ScoreAddNew onClickHandle={setAddNewOpen} scores={scores} />}
+			{addNewOpen && <ScoreAddNew onClickHandle={setAddNewOpen} scores={subjects} />}
 		</div>
 	);
 };

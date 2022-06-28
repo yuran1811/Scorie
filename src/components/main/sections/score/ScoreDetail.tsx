@@ -1,20 +1,12 @@
-import {
-	CloseIcon,
-	IgnoreIcon,
-	ImportantIcon,
-	ListAllIcon,
-	ListIcon,
-	PlusIcon,
-	StarIcon,
-	TrashIcon,
-} from 'components/icons';
-import { arrayUnion, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { useDocumentQuery } from 'hooks';
+import { CloseIcon, IgnoreIcon, ImportantIcon, ListAllIcon, ListIcon, StarIcon, TrashIcon } from 'components/icons';
+import { collection, deleteDoc, doc } from 'firebase/firestore';
+import { useCollectionQuery, useDocumentQuery } from 'hooks';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate, useParams } from 'react-router-dom';
-import { db, ScoreDetailType } from 'shared';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { db, ScoreDetailType, SubjectDetailType } from 'shared';
 import { useStore } from 'store';
+import { standardizeCollectionData } from 'utils';
+import { AddButton } from './AddButton';
 
 export const ScoreDetail: FC = () => {
 	const currentUser = useStore((s) => s.currentUser);
@@ -22,59 +14,18 @@ export const ScoreDetail: FC = () => {
 	const { subjectId } = useParams();
 	const navigate = useNavigate();
 
-	const { data } = useDocumentQuery(
-		'score_detail',
-		doc(db, 'users', currentUser?.uid as string, 'scores', subjectId as string)
+	const { data, loading } = useDocumentQuery(
+		'users_subject',
+		doc(db, 'users', currentUser?.uid as string, 'subjects', subjectId as string)
 	);
 
-	const [subject, setSubject] = useState<ScoreDetailType>();
+	const { data: scoresData, loading: scoresLoading } = useCollectionQuery(
+		'users_subjects_scores',
+		collection(db, 'users', currentUser?.uid as string, 'subjects', subjectId as string, 'scores')
+	);
 
-	const averageScore = useMemo(() => {
-		if (!subject || !subject?.scores) return { total: 0, count: 0 };
-
-		return subject.scores.reduce(
-			(prevValue, score) => {
-				if (score.isIgnored) return prevValue;
-				return { total: +prevValue.total + +score.base * +score.value, count: +prevValue.count + +score.base };
-			},
-			{ total: 0, count: 0 }
-		);
-	}, [subject]);
-
-	const addScoreRecord = () => {
-		if (!currentUser || !currentUser?.uid) return;
-
-		updateDoc(doc(db, 'users', currentUser.uid, 'scores', subjectId as string), {
-			scores: arrayUnion({
-				id: `score-${Math.floor(Math.random() * 1000) + 10}`,
-				isIgnored: false,
-				base: 1,
-				type: '15mins',
-				value: Math.floor(Math.random() * 4) + 7,
-			}),
-		});
-	};
-
-	const removeScoreRecord = useCallback(() => {
-		if (!currentUser || !currentUser?.uid) return;
-
-		deleteDoc(doc(db, 'users', currentUser.uid, 'scores', subjectId as string));
-	}, [data]);
-
-	const getTypeList = useCallback(() => {
-		if (!subject?.scores) return {};
-
-		const list: {
-			[key: string]: boolean;
-		} = {};
-
-		subject.scores.forEach((_) => {
-			list[_.type] = true;
-		});
-
-		return list;
-	}, [subject?.scores]);
-
+	const [subject, setSubject] = useState<SubjectDetailType>();
+	const [scores, setScores] = useState<ScoreDetailType[]>([] as ScoreDetailType[]);
 	const [viewMode, setViewMode] = useState('all');
 	const [scoreOptions, setScoreOptions] = useState({
 		isIgnored: subject?.isIgnored || false,
@@ -82,14 +33,54 @@ export const ScoreDetail: FC = () => {
 		isVital: subject?.isVital || false,
 	});
 
-	useEffect(() => {
-		setSubject((data?.data() as ScoreDetailType) || {});
+	const averageScore = useMemo(() => {
+		if (!scores) return { total: 0, count: 0 };
+
+		return scores.reduce(
+			(prevValue, score) => {
+				if (score.isIgnored) return prevValue;
+				return {
+					total: +prevValue.total + +score.base * +score.value,
+					count: +prevValue.count + +score.base,
+				};
+			},
+			{ total: 0, count: 0 }
+		);
+	}, [subject]);
+
+	const removeSubjectRecord = useCallback(() => {
+		if (!currentUser || !currentUser?.uid) return;
+
+		deleteDoc(doc(db, 'users', currentUser.uid, 'subjects', subjectId as string));
 	}, [data]);
 
+	const getTypeList = () => {
+		if (!scores) return {};
+
+		const list: {
+			[key: string]: boolean;
+		} = {};
+
+		scores.forEach((_) => (list[_.type] = true));
+
+		return list;
+	};
+
 	useEffect(() => {
-		subject && setScoreOptions(subject);
-		console.log(subject?.id);
-	}, [subject]);
+		if (loading || !data) return;
+
+		const newSubject = data?.data() as SubjectDetailType;
+		setSubject(newSubject || {});
+
+		newSubject && setScoreOptions(newSubject);
+	}, [data, loading]);
+
+	useEffect(() => {
+		if (!scoresData || scoresLoading) return;
+
+		const newScores = standardizeCollectionData(scoresData) as ScoreDetailType[];
+		setScores(newScores || []);
+	}, [scoresData, scoresLoading]);
 
 	return (
 		<div className='z-20 !fixed top-0 left-0 w-[100vw] h-[100vh] font-bold text-center text-rose-600 bg-violet-200 overflow-x-hidden overflow-y-auto'>
@@ -121,18 +112,18 @@ export const ScoreDetail: FC = () => {
 						width='45'
 						height='45'
 						onClick={() => {
-							removeScoreRecord();
-							navigate(-1);
+							navigate('/scores');
+							removeSubjectRecord();
 						}}
 					/>
 				</div>
 
-				<CloseIcon className='cursor-pointer mx-4' width='50' height='50' onClick={() => navigate(-1)} />
+				<CloseIcon className='cursor-pointer mx-4' width='50' height='50' onClick={() => navigate('/scores')} />
 			</div>
 
 			<div className='flexcentercol px-8 py-8'>
 				<div className='text-[5rem] text-center text-teal-700 w-full line-clamp-1'>
-					{subject?.subject || 'Nothing to show'}
+					{subject?.name || ''}
 				</div>
 				<div className='text-[8rem] text-center text-red-600 w-full line-clamp-1'>
 					{!averageScore.count ? '' : (averageScore.total / averageScore.count).toFixed(2)}
@@ -141,12 +132,7 @@ export const ScoreDetail: FC = () => {
 				<div className='flex items-center justify-between w-full text-slate-800 bg-violet-200'>
 					<div className='font-bold text-[4rem] text-left w-full px-6 line-clamp-1'>Recents</div>
 					<div className='flex items-start justify-end'>
-						<PlusIcon
-							className='cursor-pointer mx-5'
-							width='50'
-							height='50'
-							onClick={() => addScoreRecord()}
-						/>
+						<AddButton isOrigin={true} />
 
 						<ListIcon
 							className={`${viewMode === 'group' ? 'block' : 'hidden'} cursor-pointer mx-5`}
@@ -165,7 +151,7 @@ export const ScoreDetail: FC = () => {
 				<div className='flexcenter flex-wrap w-full pb-6'>
 					{viewMode === 'all' ? (
 						<>
-							{subject?.scores?.map((_) => (
+							{scores.map((_) => (
 								<Link key={_.id} to={_.id}>
 									<div className='bg-indigo-900 px-10 py-4 rounded-[2rem] m-6'>
 										<div className='w-full text-[3.5rem] text-white'>{_.type}</div>
@@ -182,9 +168,9 @@ export const ScoreDetail: FC = () => {
 										{_}
 									</div>
 									<div className='w-full flexcenter !justify-start flex-wrap'>
-										{subject?.scores
-											?.filter((score) => score.type === _)
-											?.map((score) => (
+										{scores
+											.filter((score) => score.type === _)
+											.map((score) => (
 												<Link key={score.id} to={score.id}>
 													<div className='bg-indigo-900 px-12 py-6 rounded-[2rem] m-6'>
 														<div className='w-full text-[4rem] text-sky-200'>

@@ -18,9 +18,7 @@ export const SettingInfo: FC = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<SETTINGS_DEFAULT_Props>({
-		mode: 'onChange',
-	});
+	} = useForm<SETTINGS_DEFAULT_Props>({ mode: 'onChange' });
 
 	const onSubmit: SubmitHandler<SETTINGS_DEFAULT_Props> = useCallback((data) => {
 		setLocalSetting({ ...localSetting, numberFormat: watch('numberFormat') });

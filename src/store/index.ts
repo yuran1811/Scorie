@@ -8,8 +8,11 @@ interface StoreType {
 }
 
 export const useStore = create<StoreType>()(
-	persist((set, get) => ({
-		currentUser: undefined,
-		setCurrentUser: (user) => set({ currentUser: user }),
-	}))
+	persist(
+		(set, get) => ({
+			currentUser: undefined,
+			setCurrentUser: (user) => set({ currentUser: user }),
+		}),
+		{ name: 'local_user_data' }
+	)
 );

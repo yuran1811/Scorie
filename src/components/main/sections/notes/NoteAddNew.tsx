@@ -13,12 +13,11 @@ export interface NoteAddNewProps {
 }
 
 export const NoteAddNew: FC<NoteAddNewProps & HTMLProps<HTMLDivElement>> = ({ onClickHandle }) => {
+	const [status, setStatus] = useState({ type: 'ok', message: '' });
 	const [scoreOptions, setScoreOptions] = useState({
 		isDone: false,
 		isInProgress: false,
 	});
-
-	const [status, setStatus] = useState({ type: 'ok', message: '' });
 
 	const {
 		register,

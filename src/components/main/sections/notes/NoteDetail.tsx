@@ -1,14 +1,16 @@
 import { CloseIcon, DoneIcon, ProgressIcon } from 'components/icons';
 import { useNoteDetail } from 'contexts';
 import { FC, useEffect, useState } from 'react';
+import { fakeNotes } from 'services';
 
 export const NoteDetail: FC = () => {
 	const {
-		viewDetail: { data: noteData, isOpened },
+		viewDetail: { id: noteId, isOpened },
 		setViewDetail,
 	} = useNoteDetail();
 
-	const { title, data, createdAt, isDone, isInProgress } = noteData;
+	const noteData = { ...fakeNotes[0] };
+	const { id, isDone, isInProgress, title, data, createdAt, updatedAt } = noteData;
 
 	const [noteOptions, setNoteOptions] = useState({ isDone, isInProgress });
 
@@ -45,7 +47,7 @@ export const NoteDetail: FC = () => {
 							onClick={() =>
 								setViewDetail &&
 								setViewDetail({
-									data: noteData,
+									id: noteId,
 									isOpened: false,
 								})
 							}
@@ -53,8 +55,12 @@ export const NoteDetail: FC = () => {
 					</div>
 
 					<div className='flexcentercol px-8 py-8'>
-						<div className='font-bold text-[6rem] text-sky-800 text-center w-full line-clamp-1'>{title}</div>
-						<div className='font-bold text-[4rem] text-left italic w-full px-12 mb-8 line-clamp-1'>{createdAt}</div>
+						<div className='font-bold text-[6rem] text-sky-800 text-center w-full line-clamp-1'>
+							{title}
+						</div>
+						<div className='font-bold text-[4rem] text-left italic w-full px-12 mb-8 line-clamp-1'>
+							{createdAt}
+						</div>
 						<div className='text-[3.6rem] text-left w-full px-6'>{data}</div>
 					</div>
 				</div>

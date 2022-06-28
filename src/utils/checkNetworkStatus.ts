@@ -1,4 +1,4 @@
-export const checkOnlineStatus = async () => {
+export const checkNetworkStatus = async () => {
 	try {
 		const online = await fetch('/1pixel.png');
 		console.log('App is running in online mode');

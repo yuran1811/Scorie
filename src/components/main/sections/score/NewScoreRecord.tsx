@@ -1,14 +1,15 @@
 import { IgnoreIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
-import { collection, orderBy, query } from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, doc, orderBy, query, updateDoc } from 'firebase/firestore';
 import { useCollectionQuery } from 'hooks';
 import { FC, HTMLProps, useCallback, useEffect, useMemo, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import CreatableSelect from 'react-select/creatable';
-import { db } from 'shared';
+import { db, ScoreDetailType, SubjectDetailType } from 'shared';
 import { useStore } from 'store';
-import { standardizeScores } from 'utils';
+import { standardizeCollectionData } from 'utils';
 import {
 	SelectClearIndicator,
 	SelectControl,
@@ -21,8 +22,9 @@ import {
 	SelectOption,
 	SelectPlaceholder,
 	SelectSingleValue,
-	SelectValueContainer
+	SelectValueContainer,
 } from '../../../shared/CustomReactSelect';
+import { AddButtonProps } from './AddButton';
 
 export interface Option {
 	readonly label: string;
@@ -35,7 +37,7 @@ export interface SelectState {
 }
 
 export interface Inputs {
-	subject: string;
+	subject?: string;
 	score: string;
 	base: string;
 	type: Option;
@@ -47,15 +49,25 @@ interface StateReducerType {
 
 const createOption = (label: string) => ({ label, value: label.toLowerCase().replace(/\W/g, '') });
 
-export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick }) => {
+export const NewScoreRecord: FC<AddButtonProps & HTMLProps<HTMLDivElement>> = ({ isOrigin, subject, onClick }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
+	const { subjectId } = useParams();
+
 	const { data } = useCollectionQuery(
-		'scores_tmp',
-		query(collection(db, 'users', currentUser?.uid as string, 'scores'), orderBy('createdAt'))
+		'user_subjects',
+		query(collection(db, 'users', currentUser?.uid as string, 'subjects'), orderBy('createdAt'))
+	);
+	const { data: recentData } = useCollectionQuery(
+		'user_subjects_scores',
+		query(
+			collection(db, 'users', currentUser?.uid as string, 'subjects', subjectId as string, 'scores'),
+			orderBy('createdAt')
+		)
 	);
 
-	const scores = useMemo(() => standardizeScores(data), [data]);
+	const subjects = useMemo(() => standardizeCollectionData(data) as SubjectDetailType[], [data]);
+	const scores = useMemo(() => standardizeCollectionData(data) as ScoreDetailType[], [data]);
 
 	const typeList = useMemo(() => {
 		return [
@@ -63,10 +75,7 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick }) => {
 				new Set(
 					Object.keys(
 						scores.reduce<StateReducerType>((prevVal, thisVal) => {
-							thisVal.scores.forEach(({ type }) => {
-								prevVal[type] = true;
-							});
-
+							prevVal[thisVal.type] = true;
 							return prevVal;
 						}, {})
 					)
@@ -92,7 +101,7 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick }) => {
 
 	const onSubmit: SubmitHandler<Inputs> = useCallback(
 		(data) => {
-			console.log(data);
+			if (!currentUser || !currentUser?.uid) return;
 
 			const {
 				base,
@@ -100,6 +109,13 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick }) => {
 				score: value,
 				type: { value: type },
 			} = data;
+
+			addDoc(collection(db, 'users', currentUser.uid, 'subjects', subjectId as string, 'scores'), {
+				isIgnored: scoreOptions.isIgnored,
+				base,
+				type,
+				value,
+			});
 
 			reset({ subject: '', score: '', base: '', type: { label: '', value: '' } }, { keepErrors: false });
 		},
@@ -151,20 +167,28 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick }) => {
 					/>
 				)}
 
-				<Input
-					placeholder='Subject'
-					defaultValue=''
-					formHandle={{
-						...register('subject', { required: true, pattern: /[\w\d]+/ }),
-					}}
-				/>
-				{errors?.subject && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={
-							errors?.subject.type === 'required' ? 'Please fill this field' : "Invalid subject's name"
-						}
-					/>
+				{isOrigin ? (
+					' '
+				) : (
+					<>
+						<Input
+							placeholder='Subject'
+							defaultValue=''
+							formHandle={{
+								...register('subject', { required: true, pattern: /[\w\d]+/ }),
+							}}
+						/>
+						{errors?.subject && (
+							<ErrorMessage
+								extraStyle='text-[3rem]'
+								content={
+									errors?.subject.type === 'required'
+										? 'Please fill this field'
+										: "Invalid subject's name"
+								}
+							/>
+						)}
+					</>
 				)}
 
 				<Input

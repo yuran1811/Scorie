@@ -13,7 +13,7 @@ import {
 	OptionProps,
 	PlaceholderProps,
 	SingleValueProps,
-	ValueContainerProps,
+	ValueContainerProps
 } from 'react-select';
 import { Option, SelectState } from '../main/sections/score/NewScoreRecord';
 
@@ -48,7 +48,10 @@ export const SelectInput = (props: InputProps<Option, false>) => (
 );
 
 export const SelectMenu = ({ children, ...otherProps }: MenuProps<Option, false>) => (
-	<components.Menu {...otherProps} className='!relative !top-[50%] !max-w-[25rem] !overflow-y-auto px-4 py-4 !rounded-[2.5rem]'>
+	<components.Menu
+		{...otherProps}
+		className='!relative !top-[50%] !max-w-[25rem] !overflow-y-auto px-4 py-4 !rounded-[2.5rem]'
+	>
 		{children}
 	</components.Menu>
 );
@@ -67,7 +70,10 @@ export const SelectOption = (props: OptionProps<Option, false>) => (
 );
 
 export const SelectPlaceholder = (props: PlaceholderProps<Option, false>) => (
-	<components.Placeholder {...props} className='absolute left-0 !w-full !p-0 !px-8 !text-white !text-center !font-normal italic' />
+	<components.Placeholder
+		{...props}
+		className='absolute left-0 !w-full !p-0 !px-8 !text-white !text-center !font-normal italic'
+	/>
 );
 
 export const SelectIndicatorsContainer = (props: IndicatorsContainerProps<Option, false>) => (

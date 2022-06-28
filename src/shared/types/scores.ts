@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-export interface ScoreItemDetailType {
+export interface ScoreDetailType {
 	id: string;
 	isIgnored: boolean;
 	base: number;
@@ -8,26 +8,25 @@ export interface ScoreItemDetailType {
 	value: number;
 }
 
-export interface ScoreDetailType {
+export interface SubjectDetailType {
 	id: string;
 	isIgnored: boolean;
 	isVital: boolean;
 	isSpecial: boolean;
-	subject: string;
-	scores: ScoreItemDetailType[];
+	name: string;
 }
 
-export interface ScoreCardProps {
-	data: ScoreDetailType;
+export interface SubjectCardProps {
+	subject: SubjectDetailType;
 }
 
 export interface ScoreDetailProps {
-	data: ScoreDetailType;
+	id: string;
 	setActive: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface ScoreViewDetailProps {
-	data: ScoreDetailType;
+	id: string;
 	isOpened: boolean;
 }
 

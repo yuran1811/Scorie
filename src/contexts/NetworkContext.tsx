@@ -1,5 +1,5 @@
 import { createContext, Dispatch, FC, SetStateAction, useContext, useEffect, useState } from 'react';
-import { checkOnlineStatus } from 'utils';
+import { checkNetworkStatus } from 'utils';
 
 interface NetworkProviderProps {
 	active: boolean;
@@ -16,7 +16,7 @@ export const NetworkProvider: FC = ({ children }) => {
 
 	useEffect(() => {
 		window.addEventListener('load', async () => {
-			const status = await checkOnlineStatus();
+			const status = await checkNetworkStatus();
 			setActive(status);
 			console.log(status ? 'Online' : 'Offline');
 		});

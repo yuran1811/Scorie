@@ -33,7 +33,7 @@ export const Panel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 					</div>
 				) : (
 					<div className='z-[2] flexcenter w-full tablet:px-6 pt-14 m-auto'>
-						<div className='font-bold mx-6 text-[4rem] text-left line-clamp-1'>Guest</div>
+						<div className='font-bold mx-6 text-[5rem] text-left line-clamp-1'>Guest</div>
 					</div>
 				)}
 

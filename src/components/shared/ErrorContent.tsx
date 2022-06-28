@@ -18,7 +18,10 @@ export const ErrorContent: FC<ErrorContentProps> = ({ errorBoundaries = false })
 			<BackIcon
 				className='!text-indigo-300'
 				onClick={() => {
-					errorBoundaries ? window.location.reload() : navigate(-1);
+					if (errorBoundaries) {
+						navigate('/');
+						window.location.reload();
+					} else navigate(-1);
 				}}
 			/>
 		</div>

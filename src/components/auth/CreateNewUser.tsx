@@ -17,6 +17,8 @@ export interface CreateNewInputs {
 export const CreateNewUser: FC = ({ children }) => {
 	const setCurrentUser = useStore((s) => s.setCurrentUser);
 
+	const password = useRef({});
+
 	const [errMsg, setErrMsg] = useState('');
 
 	const {
@@ -25,8 +27,6 @@ export const CreateNewUser: FC = ({ children }) => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<CreateNewInputs>();
-
-	const password = useRef({});
 
 	const onSubmit: SubmitHandler<CreateNewInputs> = useCallback((data) => {
 		const { email, password, displayName } = data;
@@ -69,12 +69,7 @@ export const CreateNewUser: FC = ({ children }) => {
 					name='displayName'
 					placeholder='Name'
 					defaultValue=''
-					formHandle={{
-						...register('displayName', {
-							required: true,
-							pattern: /^[\w\d]+$/,
-						}),
-					}}
+					formHandle={{ ...register('displayName', { required: true, pattern: /^[\w\d]+$/ }) }}
 				/>
 				{errors?.displayName && (
 					<ErrorMessage

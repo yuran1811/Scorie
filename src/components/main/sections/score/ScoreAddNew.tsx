@@ -1,10 +1,10 @@
 import { IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
-import { addDoc, collection, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { Dispatch, FC, HTMLProps, SetStateAction, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { db, ScoreDetailType } from 'shared';
+import { db, SubjectDetailType } from 'shared';
 import { useStore } from 'store';
 
 interface Inputs {
@@ -12,7 +12,7 @@ interface Inputs {
 }
 
 export interface ScoreAddNewProps {
-	scores: ScoreDetailType[];
+	scores: SubjectDetailType[];
 	onClickHandle: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -47,13 +47,12 @@ export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({ 
 				});
 
 				if (currentUser && currentUser?.uid) {
-					const isUnique = scores.find((_) => _.subject === subject);
+					const isUnique = scores.find((_) => _.name === subject);
 					if (isUnique) return;
 
-					addDoc(collection(db, 'users', currentUser.uid, 'scores'), {
+					addDoc(collection(db, 'users', currentUser.uid as string, 'subjects'), {
 						...scoreOptions,
 						subject,
-						scores: [],
 						createdAt: serverTimestamp(),
 						updatedAt: serverTimestamp(),
 					});

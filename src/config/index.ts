@@ -1,8 +1,6 @@
 export const axiosConfig = {
 	baseURL: process.env.REACT_APP_API_URL,
-	headers: {
-		'content-type': 'application/json',
-	},
+	headers: { 'content-type': 'application/json' },
 };
 
 export const firebaseConfig = {

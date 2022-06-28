@@ -24,7 +24,7 @@ export const FeatureSection: FC = () => {
 
 			<div className='flexcenter flex-wrap w-full pt-8'>
 				<FeatureCard className='bg-purple-500' title='Note' onClick={() => navigate('/notes')}>
-					<div className='p-6'>Good place to keep your mind on</div>
+					<div className='p-6'>Ideal place to keep your mind on</div>
 				</FeatureCard>
 				<FeatureCard className='bg-sky-500' title='Score' onClick={() => navigate('/scores')}>
 					<div className='p-6'>Manage all your score records</div>
