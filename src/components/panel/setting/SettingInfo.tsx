@@ -7,7 +7,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { SETTINGS_DEFAULT, SETTINGS_DEFAULT_Props } from '../../../constants';
 
 export const SettingInfo: FC = () => {
-	const [localSetting, setLocalSetting] = useLocalStore<SETTINGS_DEFAULT_Props>('settings', { ...SETTINGS_DEFAULT }, '{}');
+	const [localSetting, setLocalSetting] = useLocalStore<SETTINGS_DEFAULT_Props>(
+		'settings',
+		{ ...SETTINGS_DEFAULT },
+		'{}'
+	);
 
 	const {
 		watch,
@@ -25,14 +29,14 @@ export const SettingInfo: FC = () => {
 	return (
 		<div className='flexcentercol !justify-start mt-[2rem] p-3 pb-8 w-full h-[80%] overflow-x-hidden overflow-y-auto'>
 			<div className='flexcenter w-full'>
-				<Button content='Create backup data'>
+				<Button className='!text-[3.5rem]' content='Create backup data'>
 					<DownloadIcon className='m-4' width='50' height='50' />
 				</Button>
 			</div>
 
 			<div className='w-full'>
 				<form className='mt-[2rem] flexcentercol' onSubmit={handleSubmit(onSubmit)}>
-					<span className='font-bold text-[4rem] text-center'>Score Format (9.xxxx)</span>
+					<span className='font-bold text-[3.8rem] text-center'>Score Format (9.xxxx)</span>
 					<Input
 						placeholder='Type a number'
 						defaultValue={localSetting.numberFormat}
@@ -40,7 +44,7 @@ export const SettingInfo: FC = () => {
 					/>
 					{errors?.numberFormat && <ErrorMessage extraStyle='text-[3rem]' content='Invalid number' />}
 
-					<Button content='Change' onClick={handleSubmit(onSubmit)} />
+					<Button className='!text-[3.5rem]' content='Change' onClick={handleSubmit(onSubmit)} />
 				</form>
 			</div>
 		</div>

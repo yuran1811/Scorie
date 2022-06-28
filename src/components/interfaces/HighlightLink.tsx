@@ -1,4 +1,4 @@
-import { ctUnderline } from 'utils';
+import { customStyle } from 'utils';
 import { FC, HTMLProps } from 'react';
 
 interface HighlightLinkProps {
@@ -6,9 +6,15 @@ interface HighlightLinkProps {
 	animate?: boolean;
 }
 
-export const HighlightLink: FC<HighlightLinkProps & HTMLProps<HTMLAnchorElement>> = ({ children, url, animate = false }) => (
+const { underline } = customStyle;
+
+export const HighlightLink: FC<HighlightLinkProps & HTMLProps<HTMLAnchorElement>> = ({
+	children,
+	url,
+	animate = false,
+}) => (
 	<a
-		className={`relative text-ctlinkcolor font-semibold ${ctUnderline} after:transition-all after:duration-300 after:ease-in-out after:origin-center ${
+		className={`relative text-ctlinkcolor font-semibold ${underline} after:transition-all after:duration-300 after:ease-in-out after:origin-center ${
 			animate ? 'after:scale-x-0 hover:after:scale-x-100' : ''
 		}`}
 		href={url || '/'}

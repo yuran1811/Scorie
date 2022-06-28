@@ -1,13 +1,15 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { axiosConfig } from 'config';
-import firebase from 'firebase/compat/app';
+import { auth } from './firebase';
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
-	const currentUser = firebase.auth().currentUser;
+	const currentUser = auth.currentUser;
 
 	if (currentUser)
 		currentUser.getIdToken().then((token) => {
-			if (config?.headers && config.headers?.Authorization) config.headers.Authorization = `Bearer ${token}`;
+			if (config?.headers && config.headers?.Authorization) {
+				config.headers.Authorization = `Bearer ${token}`;
+			}
 		});
 
 	return config;

@@ -1,5 +1,5 @@
-import { HighlightLink } from 'components/interfaces';
 import { GH_LINK } from '../../constants';
+import { HighlightLink } from 'components/interfaces';
 import { FC } from 'react';
 
 export const Footer: FC = () => (

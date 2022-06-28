@@ -4,11 +4,14 @@
 
 ### Features
 
--   PWA available
+-   PWA available (can be used offline and add to homescreen)
+-   Login with Google, Facebook, Email / Password
+-   CRUD scores, notes, ...
+-   Analytics feature and other awesome tools will help improving your school life
 
 ### Technologies
 
--   Firebase, JWT
+-   Firebase
 -   React, React Router, Zustand
 -   Typescript
 -   TailwindCSS

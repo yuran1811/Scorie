@@ -1,16 +1,8 @@
-export interface fakeNotesProps {
-	id: number;
-	isDone: boolean;
-	isInProgress: boolean;
-	title: string;
-	data: string;
-	createdAt: string;
-	updatedAt: string;
-}
+import { NoteDetailType } from 'shared';
 
-export const fakeNotes: fakeNotesProps[] = [
+export const fakeNotes: NoteDetailType[] = [
 	{
-		id: 1,
+		id: 'note-1',
 		isDone: false,
 		isInProgress: true,
 		title: 'First Note',
@@ -19,7 +11,7 @@ export const fakeNotes: fakeNotesProps[] = [
 		updatedAt: '1/1/2022',
 	},
 	{
-		id: 2,
+		id: 'note-2',
 		isDone: true,
 		isInProgress: false,
 		title: 'Second Note',
@@ -28,7 +20,7 @@ export const fakeNotes: fakeNotesProps[] = [
 		updatedAt: '1/1/2022',
 	},
 	{
-		id: 3,
+		id: 'note-3',
 		isDone: false,
 		isInProgress: false,
 		title: 'Third Note',
@@ -37,7 +29,7 @@ export const fakeNotes: fakeNotesProps[] = [
 		updatedAt: '1/1/2022',
 	},
 	{
-		id: 4,
+		id: 'note-4',
 		isDone: true,
 		isInProgress: false,
 		title: 'Fourth Note',

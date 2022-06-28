@@ -1,45 +1,24 @@
-import { fakeNotesProps } from 'services';
-import { ScoreDetail } from 'shared/types';
-
-export interface AUTH_CONTEXT_DEFAULT_Props {
-	name: string;
-	isAuth: boolean | null;
-	errorMessage: string;
-	data: {
-		scores: ScoreDetail[];
-		notes: fakeNotesProps[];
-	};
-}
+import { NoteDetailType, ScoreDetailType } from 'shared';
 
 export interface SETTINGS_DEFAULT_Props {
 	numberFormat: number;
 }
 
-export const AUTH_CONTEXT_DEFAULT: AUTH_CONTEXT_DEFAULT_Props = {
-	name: '',
-	isAuth: null,
-	errorMessage: '',
-	data: {
-		scores: [],
-		notes: [],
-	},
-};
-
-export const SETTINGS_DEFAULT: SETTINGS_DEFAULT_Props = {
+export const SETTINGS_DEFAULT = {
 	numberFormat: 2,
 };
 
-export const VIEW_DATA_DEFAULT = {
-	id: 0,
+export const SCORE_VIEW_DATA_DEFAULT: ScoreDetailType = {
+	id: '0',
 	isIgnored: false,
-	isVital: false,
 	isSpecial: false,
+	isVital: false,
 	subject: '',
 	scores: [],
 };
 
-export const NOTE_VIEW_DATA_DEFAULT = {
-	id: 0,
+export const NOTE_VIEW_DATA_DEFAULT: NoteDetailType = {
+	id: '0',
 	isDone: false,
 	isInProgress: false,
 	title: '',

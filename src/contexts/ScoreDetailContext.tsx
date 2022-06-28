@@ -1,16 +1,20 @@
+import { SCORE_VIEW_DATA_DEFAULT } from '../constants';
 import { createContext, FC, useContext, useState } from 'react';
 import { ScoreDetailProviderProps, ScoreViewDetailProps } from 'shared/types';
-import { VIEW_DATA_DEFAULT } from '../constants';
-
-export const ScoreDetailContext_Default = { data: { ...VIEW_DATA_DEFAULT }, isOpened: false };
 
 export const ScoreDetailContext = createContext<ScoreDetailProviderProps>({
-	viewDetail: { ...ScoreDetailContext_Default },
+	viewDetail: {
+		data: { ...SCORE_VIEW_DATA_DEFAULT },
+		isOpened: false,
+	},
 	setViewDetail: null,
 });
 
 export const ScoreDetailProvider: FC = ({ children }) => {
-	const [viewDetail, setViewDetail] = useState<ScoreViewDetailProps>({ ...ScoreDetailContext_Default });
+	const [viewDetail, setViewDetail] = useState<ScoreViewDetailProps>({
+		data: { ...SCORE_VIEW_DATA_DEFAULT },
+		isOpened: false,
+	});
 
 	return <ScoreDetailContext.Provider value={{ viewDetail, setViewDetail }}>{children}</ScoreDetailContext.Provider>;
 };

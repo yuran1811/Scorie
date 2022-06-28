@@ -44,7 +44,7 @@ export const ScoreCard: FC<ScoreCardProps> = ({ data }) => {
 			<div className='flexcentercol'>
 				<div className='font-bold text-[3.5rem] text-center text-teal-700 w-full line-clamp-1'>{subject}</div>
 				<div className='font-bold text-[5rem] text-center text-red-600 w-full line-clamp-1'>
-					{(averageScore.total / averageScore.count).toFixed(2)}
+					{!averageScore.count ? '' : (averageScore.total / averageScore.count).toFixed(2)}
 				</div>
 
 				<div className='font-bold text-[3.5rem] text-slate-800 text-left w-full px-8 line-clamp-1'>Recents</div>

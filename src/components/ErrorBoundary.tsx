@@ -26,7 +26,12 @@ class ErrorBoundary extends Component<Props, State> {
 	}
 
 	public render() {
-		if (this.state.hasError) return <ErrorContent />;
+		if (this.state.hasError)
+			return (
+				<div className='bg-ctbg w-[100vw] h-[100vh]'>
+					<ErrorContent errorBoundaries={true} />;
+				</div>
+			);
 
 		return this.props.children;
 	}

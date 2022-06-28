@@ -1,6 +1,7 @@
 import { AddIcon, DoneIcon, NoteIcon, ProgressIcon } from 'components/icons';
-import { NoteDetailProvider, useAuthData } from 'contexts';
+import { NoteDetailProvider } from 'contexts';
 import { useMemo, useState } from 'react';
+import { NoteDetailType } from 'shared';
 import { SectionSwiper } from '../SectionSwiper';
 import { Title } from '../Title';
 import { NoteAddNew } from './NoteAddNew';
@@ -13,11 +14,9 @@ export const NoteSectionBar = () => {
 		hasProgress: false,
 	});
 
-	const {
-		data: { notes },
-	} = useAuthData();
-
 	const [addNewOpen, setAddNewOpen] = useState(false);
+
+	const notes: NoteDetailType[] = [];
 
 	const noteList = useMemo(() => {
 		if (!filter.hasDone && !filter.hasProgress) return notes;
@@ -50,10 +49,18 @@ export const NoteSectionBar = () => {
 						onClick={() => setFilter((f) => ({ ...f, hasProgress: !f.hasProgress }))}
 					/>
 
-					<AddIcon className='cursor-pointer mx-5' fill={'white'} width='50' height='50' onClick={() => setAddNewOpen(true)} />
+					<AddIcon
+						className='cursor-pointer mx-5'
+						fill={'white'}
+						width='50'
+						height='50'
+						onClick={() => setAddNewOpen(true)}
+					/>
 				</div>
 			</div>
-			<div className='font-semibold text-[3rem] text-white text-center italic p-4 mt-4'>{noteList.length} notes found</div>
+			<div className='font-semibold text-[3rem] text-white text-center italic p-4 mt-4'>
+				{noteList.length} notes found
+			</div>
 			<NoteDetailProvider>
 				<SectionSwiper
 					Slide={NoteItem}

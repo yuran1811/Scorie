@@ -1,25 +1,30 @@
 import { IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
+import { addDoc, collection, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { Dispatch, FC, HTMLProps, SetStateAction, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { db, ScoreDetailType } from 'shared';
+import { useStore } from 'store';
 
-export interface Inputs {
+interface Inputs {
 	subject: string;
 }
 
 export interface ScoreAddNewProps {
+	scores: ScoreDetailType[];
 	onClickHandle: Dispatch<SetStateAction<boolean>>;
 }
 
-export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({ onClickHandle }) => {
+export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({ scores, onClickHandle }) => {
+	const currentUser = useStore((s) => s.currentUser);
+
+	const [status, setStatus] = useState({ type: 'ok', message: '' });
 	const [scoreOptions, setScoreOptions] = useState({
 		isIgnored: false,
 		isSpecial: false,
 		isVital: false,
 	});
-
-	const [status, setStatus] = useState({ type: 'ok', message: '' });
 
 	const {
 		register,
@@ -28,7 +33,7 @@ export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({ 
 	} = useForm<Inputs>();
 
 	const onSubmit: SubmitHandler<Inputs> = useCallback(
-		(data) => {
+		({ subject }) => {
 			if (scoreOptions.isIgnored && (scoreOptions.isSpecial || scoreOptions.isVital))
 				setStatus({
 					type: 'errors',
@@ -40,6 +45,19 @@ export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({ 
 					type: 'ok',
 					message: 'Alright',
 				});
+
+				if (currentUser && currentUser?.uid) {
+					const isUnique = scores.find((_) => _.subject === subject);
+					if (isUnique) return;
+
+					addDoc(collection(db, 'users', currentUser.uid, 'scores'), {
+						...scoreOptions,
+						subject,
+						scores: [],
+						createdAt: serverTimestamp(),
+						updatedAt: serverTimestamp(),
+					});
+				}
 			}
 		},
 		[scoreOptions]

@@ -15,7 +15,7 @@ import {
 	SingleValueProps,
 	ValueContainerProps,
 } from 'react-select';
-import { Option, SelectState } from './NewScoreRecord';
+import { Option, SelectState } from '../main/sections/score/NewScoreRecord';
 
 export interface CustomClearIndicatorProps extends ClearIndicatorProps<Option, false> {
 	setSelectState: Dispatch<SetStateAction<SelectState>>;

@@ -1,10 +1,10 @@
 import { DoneIcon, ProgressIcon } from 'components/icons';
 import { useNoteDetail } from 'contexts';
 import { FC } from 'react';
-import { fakeNotesProps } from 'services';
+import { NoteDetailType } from 'shared';
 
 export interface NoteItemProps {
-	data: fakeNotesProps;
+	data: NoteDetailType;
 }
 
 export const NoteItem: FC<NoteItemProps> = ({ data: noteData }) => {

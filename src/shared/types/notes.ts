@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
-export interface NoteDetail {
-	id: number;
+export interface NoteDetailType {
+	id: string;
 	isDone: boolean;
 	isInProgress: boolean;
 	title: string;
@@ -11,16 +11,16 @@ export interface NoteDetail {
 }
 
 export interface NoteCardProps {
-	data: NoteDetail;
+	data: NoteDetailType;
 }
 
 export interface NoteDetailProps {
-	data: NoteDetail;
+	data: NoteDetailType;
 	setActive: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface NoteViewDetailProps {
-	data: NoteDetail;
+	data: NoteDetailType;
 	isOpened: boolean;
 }
 

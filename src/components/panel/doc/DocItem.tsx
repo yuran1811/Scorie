@@ -1,10 +1,10 @@
 import { ArrowDownIcon, ArrowRightIcon } from 'components/icons';
 import { FC, useState } from 'react';
-import { fakeDocDataPropType } from 'services';
+import { DocDataType } from 'shared';
 import { DocItemContent } from './DocItemContent';
 
 export interface DocItemProps {
-	data: fakeDocDataPropType;
+	data: DocDataType;
 }
 
 export const ArrowIconConfig = {

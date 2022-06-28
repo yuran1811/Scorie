@@ -3,6 +3,7 @@ import { Panel } from 'components/panel';
 import { Avatar, ModalBox, ModalBoxHeader } from 'components/shared';
 import { MenuProvider } from 'contexts';
 import { FC, useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Header: FC = () => {
 	const [notificationActive, setNotificationActive] = useState(false);
@@ -30,7 +31,6 @@ export const Header: FC = () => {
 		if (permission === 'denied') {
 			setNotificationActive(false);
 			setOpened(true);
-			// alert('Please enable notification on this site to use');
 		}
 	}, []);
 
@@ -41,9 +41,11 @@ export const Header: FC = () => {
 				<Panel className='z-[19]' />
 			</MenuProvider>
 
-			<div className='font-bold text-[4.6rem] text-center'>Scorie</div>
+			<Link to='/'>
+				<div className='font-bold text-[4.6rem] text-center'>Scorie</div>
+			</Link>
 
-			<div className='flex items-center justify-end w-[5.5rem] h-[5.5rem]'>
+			<div className='flex items-center justify-end w-[9.5rem] h-[5.5rem]'>
 				<Avatar
 					className='cursor-pointer absolute right-0 mx-8'
 					imgUrl=''
@@ -53,7 +55,7 @@ export const Header: FC = () => {
 				<div
 					className={`${
 						showMore ? 'flex' : 'hidden'
-					} tablet:flex tablet:flex-row flex-col items-center tablet:justify-end justify-start absolute tablet:right-[8rem] right-[1rem] tablet:top-[1rem] top-[9rem] bg-ctbg rounded-[1.5rem] border-indigo-200 border-l-[0.5rem] border-b-[0.5rem]`}
+					} tablet:flex tablet:flex-row flex-col items-center tablet:justify-end justify-start absolute tablet:right-[10rem] right-[1rem] tablet:top-[1rem] top-[9rem] bg-ctbg rounded-[1.5rem] border-indigo-200 border-l-[0.5rem] border-b-[0.5rem]`}
 				>
 					<MessageIcon className='cursor-pointer my-4 mx-6' width='40' height='40' />
 					<NotificationIcon

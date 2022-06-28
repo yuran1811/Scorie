@@ -1,12 +1,9 @@
 import { SignIn } from 'components/auth/SignIn';
-import { BackIcon, LogInIcon } from 'components/icons';
-import { ErrorMessage } from 'components/interfaces/ErrorMessage';
-import { Button, Input } from 'components/shared';
-import { AuthStateType, useAccountPanel, useAuth, useMenu } from 'contexts';
-import { useLocalStore } from 'hooks';
-import { FC, HTMLProps, useCallback, useEffect, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { AUTH_CONTEXT_DEFAULT } from '../../../constants';
+import SignInUseEmailPassWord from 'components/auth/SignInUseEmailPassword';
+import { BackIcon } from 'components/icons';
+import { useAccountPanel, useMenu } from 'contexts';
+import { FC, HTMLProps, useEffect } from 'react';
+import { useStore } from 'store';
 import { AccountInfo } from './AccountInfo';
 
 export interface AccountPanelInputs {
@@ -15,60 +12,14 @@ export interface AccountPanelInputs {
 }
 
 const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
-	const [localData, setLocalData] = useLocalStore<AuthStateType>('data', { ...AUTH_CONTEXT_DEFAULT }, '{}');
+	const currentUser = useStore((s) => s.currentUser);
+
 	const { active: menuActive } = useMenu();
 	const { active, setActive } = useAccountPanel();
-	const { auth, setAuth } = useAuth();
-
-	const [errorMsg, setErrorMsg] = useState('');
-
-	const {
-		register,
-		handleSubmit,
-		watch,
-		reset,
-		formState: { errors },
-	} = useForm<AccountPanelInputs>();
-
-	const onSubmit: SubmitHandler<AccountPanelInputs> = useCallback((data) => {
-		const { email, password } = data;
-		setAuth && setAuth({ email, password });
-	}, []);
 
 	useEffect(() => {
-		if (auth.isAuth === null) {
-			setLocalData({ ...localData, errorMessage: '' });
-			setErrorMsg('');
-			return;
-		}
-
-		if (auth.isAuth === false) {
-			setErrorMsg(auth.errorMessage);
-			return;
-		}
-	}, [auth]);
-
-	useEffect(() => {
-		setLocalData({ ...localData, errorMessage: '' });
-		setErrorMsg('');
-	}, [watch('email'), watch('password')]);
-
-	useEffect(() => {
-		setErrorMsg('');
 		setActive && setActive(false);
 	}, [menuActive]);
-
-	useEffect(() => {
-		setErrorMsg('');
-	}, [active]);
-
-	useEffect(() => {
-		return () => {
-			setAuth && setAuth({ reset: true });
-			setErrorMsg('');
-			reset({ email: '', password: '' }, { keepErrors: false });
-		};
-	}, []);
 
 	return (
 		<div
@@ -78,56 +29,13 @@ const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 		>
 			<BackIcon onClick={() => setActive && setActive(false)} />
 
-			{!auth.isAuth ? (
-				<>
-					<form
-						className='flexcentercol !justify-start h-[80%] pb-8 mt-[2rem] overflow-x-hidden overflow-y-auto'
-						onSubmit={handleSubmit(onSubmit)}
-					>
-						<Input
-							placeholder='Email'
-							defaultValue=''
-							formHandle={{
-								...register('email', {
-									required: true,
-									pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-								}),
-							}}
-						/>
-						{errors?.email && (
-							<ErrorMessage
-								extraStyle='text-[3rem]'
-								content={errors?.email.type === 'required' ? 'Please fill this field' : 'Not an email'}
-							/>
-						)}
-
-						<Input
-							placeholder='Password'
-							defaultValue=''
-							formHandle={{ ...register('password', { required: true, pattern: /^[\d\w]{6,}$/ }) }}
-						/>
-						{errors?.password && (
-							<ErrorMessage
-								extraStyle='text-[3rem]'
-								content={
-									errors?.password.type === 'required'
-										? 'Please fill this field'
-										: 'At least 6 characters'
-								}
-							/>
-						)}
-
-						{errorMsg && <ErrorMessage extraStyle='text-[3rem]' content={errorMsg} />}
-
-						<Button type='submit' content='Log in'>
-							<LogInIcon className='mr-6' width='50' height='50' />
-						</Button>
-
-						<SignIn />
-					</form>
-				</>
+			{currentUser ? (
+				<AccountInfo />
 			) : (
-				<AccountInfo setErrorMsg={setErrorMsg} resetForms={reset} />
+				<div className='w-full h-[80%] overflow-x-hidden overflow-y-auto'>
+					<SignInUseEmailPassWord />
+					<SignIn />
+				</div>
 			)}
 		</div>
 	);

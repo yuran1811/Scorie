@@ -1,10 +1,9 @@
 {
 	"name": "scorie",
 	"version": "1.0.0",
-	"description": "Scorie - All for your scores management",
+	"description": "Scorie - All for your scores' management",
 	"author": "yuran1811",
 	"license": "MIT",
-	"private": true,
 	"dependencies": {
 		"axios": "^0.25.0",
 		"dayjs": "^1.11.3",

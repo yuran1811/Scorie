@@ -1,25 +1,33 @@
 import { AddIcon, HashtagIcon, IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
-import { ScoreDetailProvider, useAuthData } from 'contexts';
+import { AddButton } from 'components/main/sections/score/AddButton';
+import { ScoreDetailProvider } from 'contexts';
+import { collection, orderBy, query } from 'firebase/firestore';
+import { useCollectionQuery } from 'hooks';
 import { useMemo, useState } from 'react';
+import { db } from 'shared';
+import { useStore } from 'store';
+import { standardizeScores } from 'utils';
 import { SectionSwiper } from '../SectionSwiper';
 import { Title } from '../Title';
 import { ScoreAddNew } from './ScoreAddNew';
 import { ScoreCard } from './ScoreCard';
-import { ScoreDetail } from './ScoreDetail';
 
 export const ScoreSectionBar = () => {
-	const {
-		data: { scores },
-	} = useAuthData();
+	const currentUser = useStore((s) => s.currentUser);
 
+	const [addNewOpen, setAddNewOpen] = useState(false);
 	const [filter, setFilter] = useState({
 		hasVital: false,
 		hasSpecial: false,
 		hasIgnored: false,
 	});
 
-	const [addNewOpen, setAddNewOpen] = useState(false);
+	const { data } = useCollectionQuery(
+		'scores_tmp',
+		query(collection(db, 'users', currentUser?.uid as string, 'scores'), orderBy('createdAt'))
+	);
 
+	const scores = useMemo(() => standardizeScores(data), [data]);
 	const scoreList = useMemo(() => {
 		if (!filter.hasVital && !filter.hasSpecial) return scores;
 
@@ -28,10 +36,12 @@ export const ScoreSectionBar = () => {
 			if (filter.hasVital) return score.isVital && !score.isSpecial;
 			if (filter.hasSpecial) return score.isSpecial;
 		});
-	}, [filter, scores]);
+	}, [filter, data]);
 
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
+			<AddButton />
+
 			<div className='w-full flexcenter flex-wrap'>
 				<Title Icon={HashtagIcon} content='Score' />
 				<div className='flexcenter px-6 py-8'>
@@ -73,6 +83,7 @@ export const ScoreSectionBar = () => {
 
 			<ScoreDetailProvider>
 				<SectionSwiper
+					type='/scores'
 					Slide={ScoreCard}
 					slideChilds={scoreList}
 					breakpoints={{
@@ -81,10 +92,9 @@ export const ScoreSectionBar = () => {
 						0: { slidesPerView: 1 },
 					}}
 				/>
-				<ScoreDetail />
 			</ScoreDetailProvider>
 
-			{addNewOpen && <ScoreAddNew onClickHandle={setAddNewOpen} />}
+			{addNewOpen && <ScoreAddNew onClickHandle={setAddNewOpen} scores={scores} />}
 		</div>
 	);
 };

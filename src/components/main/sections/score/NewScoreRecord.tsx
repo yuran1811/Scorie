@@ -1,12 +1,14 @@
 import { IgnoreIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
-import { useAuthData } from 'contexts';
-import { useLocalStore } from 'hooks';
+import { collection, orderBy, query } from 'firebase/firestore';
+import { useCollectionQuery } from 'hooks';
 import { FC, HTMLProps, useCallback, useEffect, useMemo, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import CreatableSelect from 'react-select/creatable';
-import { ScoreDetail } from 'shared/types';
+import { db } from 'shared';
+import { useStore } from 'store';
+import { standardizeScores } from 'utils';
 import {
 	SelectClearIndicator,
 	SelectControl,
@@ -20,7 +22,7 @@ import {
 	SelectPlaceholder,
 	SelectSingleValue,
 	SelectValueContainer
-} from './CustomReactSelect';
+} from '../../../shared/CustomReactSelect';
 
 export interface Option {
 	readonly label: string;
@@ -46,11 +48,14 @@ interface StateReducerType {
 const createOption = (label: string) => ({ label, value: label.toLowerCase().replace(/\W/g, '') });
 
 export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick }) => {
-	const {
-		data: { scores },
-	} = useAuthData();
+	const currentUser = useStore((s) => s.currentUser);
 
-	const [scoresTmp, setScoresTmp] = useLocalStore<ScoreDetail[]>('scores_tmp', [], '[]');
+	const { data } = useCollectionQuery(
+		'scores_tmp',
+		query(collection(db, 'users', currentUser?.uid as string, 'scores'), orderBy('createdAt'))
+	);
+
+	const scores = useMemo(() => standardizeScores(data), [data]);
 
 	const typeList = useMemo(() => {
 		return [
@@ -95,21 +100,6 @@ export const NewScoreRecord: FC<HTMLProps<HTMLDivElement>> = ({ onClick }) => {
 				score: value,
 				type: { value: type },
 			} = data;
-
-			const newScoreTmp = [...scoresTmp];
-			newScoreTmp
-				.filter((_) => _.subject === subject)
-				.forEach((_) =>
-					_.scores.push({
-						id: scoresTmp.length + 1,
-						isIgnored: scoreOptions.isIgnored,
-						base: +base,
-						value: +value,
-						type,
-					})
-				);
-
-			setScoresTmp(newScoreTmp);
 
 			reset({ subject: '', score: '', base: '', type: { label: '', value: '' } }, { keepErrors: false });
 		},

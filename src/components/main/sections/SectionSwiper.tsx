@@ -2,8 +2,11 @@ import { FC, useMemo } from 'react';
 import { A11y, SwiperOptions } from 'swiper';
 import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface SectionSwiperProps {
+	type?: string;
 	Slide: FC<any>;
 	slideChilds: any[];
 	breakpoints?: {
@@ -12,7 +15,7 @@ interface SectionSwiperProps {
 	};
 }
 
-export const SectionSwiper: FC<SectionSwiperProps> = ({ Slide, breakpoints, slideChilds }) => {
+export const SectionSwiper: FC<SectionSwiperProps> = ({ Slide, breakpoints, slideChilds, type }) => {
 	const swiperOptions = useMemo<SwiperProps>(
 		() => ({
 			modules: [A11y],
@@ -36,7 +39,9 @@ export const SectionSwiper: FC<SectionSwiperProps> = ({ Slide, breakpoints, slid
 					<ReactSwiper {...swiperOptions} className='flex items-center w-full'>
 						{slideChilds.map((_) => (
 							<SwiperSlide key={_.id}>
-								<Slide data={_} />
+								<Link to={`${type || ''}/${_.id}`}>
+									<Slide data={_} />
+								</Link>
 							</SwiperSlide>
 						))}
 					</ReactSwiper>

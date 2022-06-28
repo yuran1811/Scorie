@@ -1,13 +1,16 @@
+import { FacebookIcon, GoogleIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
-import { ModalBox } from 'components/shared';
+import { ModalBox, ModalBoxHeader } from 'components/shared';
 import { AuthProvider, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { FC, useState } from 'react';
 import { auth } from 'shared';
+import { getFirebaseErr } from 'utils';
+import { LogInButton } from './LogInButton';
 
 export const SignIn: FC = () => {
+	const [isAlertOpened, setIsAlertOpened] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
-	const [isAlertOpened, setIsAlertOpened] = useState(false);
 
 	const handleSignIn = (provider: AuthProvider) => {
 		setLoading(true);
@@ -18,7 +21,7 @@ export const SignIn: FC = () => {
 			})
 			.catch((err) => {
 				setIsAlertOpened(true);
-				setError(`Error: ${err.code}`);
+				setError(getFirebaseErr(err.message));
 			})
 			.finally(() => {
 				setLoading(false);
@@ -27,27 +30,35 @@ export const SignIn: FC = () => {
 
 	return (
 		<>
-			<div className='mt-12 flex flex-1 flex-col items-center gap-4 md:items-start lg:mt-24'>
-				<button
+			<div className='flex flex-1 flex-col items-center gap-4 mt-20 mb-16'>
+				<LogInButton
+					extraStyle='bg-slate-900 text-white'
 					disabled={loading}
 					onClick={() => handleSignIn(new GoogleAuthProvider())}
-					className='flex min-w-[25rem] cursor-pointer items-center gap-3 rounded-md bg-white p-3 text-black transition duration-300 hover:brightness-90 disabled:!cursor-default disabled:!brightness-75'
 				>
-					<span>Sign In With Google</span>
-				</button>
+					<GoogleIcon width='35' height='35' />
+					<span className='font-semibold px-4'>Sign in with Google</span>
+				</LogInButton>
 
-				<button
+				<LogInButton
+					extraStyle='bg-blue-600 text-white'
 					disabled={loading}
 					onClick={() => handleSignIn(new FacebookAuthProvider())}
-					className='flex min-w-[25rem] cursor-pointer items-center gap-3 rounded-md bg-black p-3 text-white transition duration-300 hover:brightness-90 disabled:!cursor-default disabled:!brightness-75'
 				>
-					<span>Sign In With Facebook</span>
-				</button>
+					<FacebookIcon width='35' height='35' />
+					<span className='font-semibold px-4'>Sign in with Facebook</span>
+				</LogInButton>
 			</div>
 
 			{isAlertOpened && (
 				<ModalBox onClick={() => setIsAlertOpened(false)}>
-					<ErrorMessage content={error} />
+					<ModalBoxHeader onClick={() => setIsAlertOpened(false)} />
+					
+					<ErrorMessage
+						extraStyle='text-[3rem] px-8 pb-10'
+						content='We cannot sign in to your account. Please try again !'
+					/>
+					<ErrorMessage extraStyle='text-[3rem] px-8 pb-10' content={error} />
 				</ModalBox>
 			)}
 		</>
