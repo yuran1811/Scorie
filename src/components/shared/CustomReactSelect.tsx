@@ -15,7 +15,16 @@ import {
 	SingleValueProps,
 	ValueContainerProps
 } from 'react-select';
-import { Option, SelectState } from '../main/sections/score/NewScoreRecord';
+
+export interface Option {
+	readonly label: string;
+	readonly value: string;
+}
+
+export interface SelectState {
+	readonly options: readonly Option[];
+	readonly value: Option;
+}
 
 export interface CustomClearIndicatorProps extends ClearIndicatorProps<Option, false> {
 	setSelectState: Dispatch<SetStateAction<SelectState>>;

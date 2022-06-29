@@ -1,21 +1,23 @@
 import { AddIcon, HashtagIcon, IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { AddButton } from 'components/main/sections/score/AddButton';
-import { ScoreDetailProvider } from 'contexts';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { useCollectionQuery } from 'hooks';
 import { useMemo, useState } from 'react';
 import { db, SubjectDetailType } from 'shared';
 import { useStore } from 'store';
+import { SwiperSlide } from 'swiper/react';
 import { standardizeCollectionData } from 'utils';
 import { SectionSwiper } from '../SectionSwiper';
 import { Title } from '../Title';
-import { ScoreAddNew } from './ScoreAddNew';
-import { ScoreCard } from './ScoreCard';
+import { ScoreSubjectAddNew } from './ScoreSubjectAddNew';
+import { SubjectAddNew } from './SubjectAddNew';
+import { SubjectCard } from './SubjectCard';
 
 export const ScoreSectionBar = () => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const [addNewOpen, setAddNewOpen] = useState(false);
+	const [addNewSSOpen, setAddNewSSOpen] = useState(false);
 	const [filter, setFilter] = useState({
 		hasVital: false,
 		hasSpecial: false,
@@ -23,12 +25,12 @@ export const ScoreSectionBar = () => {
 	});
 
 	const { data } = useCollectionQuery(
-		'user_subjects',
-		query(collection(db, 'users', currentUser?.uid as string, 'subjects'), orderBy('createdAt'))
+		'users_subjects',
+		query(collection(db, 'users', currentUser?.uid as string, 'subjects'), orderBy('createdAt', 'desc'))
 	);
 
 	const subjects = useMemo(() => standardizeCollectionData(data) as SubjectDetailType[], [data]);
-	const scoreList = useMemo(() => {
+	const subjectList = useMemo(() => {
 		if (!filter.hasVital && !filter.hasSpecial) return subjects;
 
 		return subjects.filter((score) => {
@@ -41,7 +43,7 @@ export const ScoreSectionBar = () => {
 
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
-			<AddButton isOrigin={false} />
+			<AddButton onClick={() => setAddNewSSOpen(true)} />
 
 			<div className='w-full flexcenter flex-wrap'>
 				<Title Icon={HashtagIcon} content='Score' />
@@ -79,23 +81,27 @@ export const ScoreSectionBar = () => {
 			</div>
 
 			<div className='font-semibold text-[3rem] text-white text-center italic p-4 mt-4'>
-				{scoreList.length} records found
+				{subjectList.length} records found
 			</div>
 
-			<ScoreDetailProvider>
+			<div className='mx-auto mt-4 p-4 max-w-[100rem] w-full rounded-[2rem]'>
 				<SectionSwiper
-					type='/scores'
-					Slide={ScoreCard}
-					slideChilds={scoreList}
 					breakpoints={{
 						1080: { slidesPerView: 3 },
 						640: { slidesPerView: 2 },
 						0: { slidesPerView: 1 },
 					}}
-				/>
-			</ScoreDetailProvider>
+				>
+					{subjectList.map((subject) => (
+						<SwiperSlide key={subject.id}>
+							<SubjectCard subject={subject} />
+						</SwiperSlide>
+					))}
+				</SectionSwiper>
+			</div>
 
-			{addNewOpen && <ScoreAddNew onClickHandle={setAddNewOpen} scores={subjects} />}
+			{addNewOpen && <SubjectAddNew subjects={subjects} onClickHandle={() => setAddNewOpen(false)} />}
+			{addNewSSOpen && <ScoreSubjectAddNew subjects={subjects} onClick={() => setAddNewSSOpen(false)} />}
 		</div>
 	);
 };

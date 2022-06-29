@@ -26,7 +26,7 @@ export const FeatureSection: FC = () => {
 				<FeatureCard className='bg-purple-500' title='Note' onClick={() => navigate('/notes')}>
 					<div className='p-6'>Ideal place to keep your mind on</div>
 				</FeatureCard>
-				<FeatureCard className='bg-sky-500' title='Score' onClick={() => navigate('/scores')}>
+				<FeatureCard className='bg-sky-500' title='Score' onClick={() => navigate('/subjects')}>
 					<div className='p-6'>Manage all your score records</div>
 				</FeatureCard>
 				<FeatureCard className='bg-teal-400' title='Analytics' onClick={() => navigate('/chart')}>

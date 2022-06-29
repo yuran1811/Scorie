@@ -4,9 +4,8 @@ import { FC, HTMLProps, useEffect } from 'react';
 import { SettingInfo } from './SettingInfo';
 
 const SettingPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
-	const { active, setActive } = useSetting();
-
 	const { active: menuActive } = useMenu();
+	const { active, setActive } = useSetting();
 
 	useEffect(() => {
 		setActive && setActive(false);

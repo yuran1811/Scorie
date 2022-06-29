@@ -8,11 +8,6 @@ import { auth } from 'shared';
 import { useStore } from 'store';
 import { getFirebaseErr } from 'utils';
 
-export interface AccountInfoInputs {
-	email: string;
-	password: string;
-}
-
 export const AccountInfo: FC = () => {
 	const currentUser = useStore((s) => s.currentUser);
 

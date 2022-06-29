@@ -1,5 +1,4 @@
 import { MainLayout } from 'components/main/MainLayout';
-import { ScoreDetail } from 'components/main/sections/score/ScoreDetail';
 import { ScoreSectionBar } from 'components/main/sections/score/ScoreSectionBar';
 import { Footer, Header } from 'components/partials';
 import { ErrorContent, Loading } from 'components/shared';
@@ -34,26 +33,24 @@ const App: FC = () => {
 	}, []);
 
 	return (
-		<div className='relative w-[100vw] h-[100vh] overflow-x-hidden text-[3rem] text-white bg-ctbg'>
-			<Header />
+		<>
+			<div className='relative w-[100vw] h-[100vh] overflow-x-hidden text-[3rem] text-white bg-ctbg'>
+				<Header />
 
-			<Routes>
-				<Route path='/'>
-					<Route index element={currentUser === undefined ? <Loading /> : <MainLayout />} />
-					<Route path='subjects'>
-						<Route index element={<ScoreSectionBar />} />
-						<Route path=':subjectId'>
-							<Route index element={<ScoreDetail />} />
-							<Route path=':scoreId' element={<ScoreDetail />} />
-						</Route>
+				<Routes>
+					<Route path='/'>
+						<Route index element={currentUser === undefined ? <Loading /> : <MainLayout />} />
+						<Route path='subjects' element={<ScoreSectionBar />} />
 					</Route>
-				</Route>
-				<Route path='*' element={<ErrorContent />} />
-			</Routes>
-			<Outlet />
+					<Route path='*' element={<ErrorContent />} />
+				</Routes>
+				<Outlet />
 
-			<Footer />
-		</div>
+				<Footer />
+			</div>
+
+			<div id='modal-container'></div>
+		</>
 	);
 };
 

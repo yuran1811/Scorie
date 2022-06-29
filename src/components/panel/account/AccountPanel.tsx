@@ -6,11 +6,6 @@ import { FC, HTMLProps, useEffect } from 'react';
 import { useStore } from 'store';
 import { AccountInfo } from './AccountInfo';
 
-export interface AccountPanelInputs {
-	email: string;
-	password: string;
-}
-
 const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 	const currentUser = useStore((s) => s.currentUser);
 

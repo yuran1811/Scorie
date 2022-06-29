@@ -3,11 +3,11 @@ import { FC, useState } from 'react';
 import { DocDataType } from 'shared';
 import { DocItemContent } from './DocItemContent';
 
-export interface DocItemProps {
+interface DocItemProps {
 	data: DocDataType;
 }
 
-export const ArrowIconConfig = {
+const ArrowIconConfig = {
 	className: 'mx-4',
 	width: '50',
 	height: '50',

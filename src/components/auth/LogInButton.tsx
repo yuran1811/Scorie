@@ -1,6 +1,6 @@
 import { FC, HTMLProps } from 'react';
 
-export interface LogInButtonProps {
+interface LogInButtonProps {
 	extraStyle?: string;
 }
 

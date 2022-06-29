@@ -4,9 +4,8 @@ import { FC, HTMLProps, useEffect } from 'react';
 import { DocInfo } from './DocInfo';
 
 const DocPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
-	const { active, setActive } = useDocPanel();
-
 	const { active: menuActive } = useMenu();
+	const { active, setActive } = useDocPanel();
 
 	useEffect(() => {
 		setActive && setActive(false);

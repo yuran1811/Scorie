@@ -1,9 +1,10 @@
-import { IgnoreIcon } from 'components/icons';
+import { IgnoreIcon, TrashIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
 import { FC, HTMLProps, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { addNewScore } from 'services';
+import { deleteScore, editScore } from 'services';
+import { ScoreDetailType, SubjectDetailType } from 'shared';
 import { useStore } from 'store';
 
 interface Inputs {
@@ -12,32 +13,42 @@ interface Inputs {
 	type: string;
 }
 
-export const ScoreAddNew: FC<HTMLProps<HTMLDivElement>> = ({ id: subjectId, onClick }) => {
+interface ScoreDetailProps {
+	subject: SubjectDetailType | undefined;
+	score: ScoreDetailType;
+}
+
+export const ScoreDetailEdit: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> = ({ subject, score, onClick }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
-	const [scoreOptions, setScoreOptions] = useState({ isIgnored: false });
+	const [scoreOptions, setScoreOptions] = useState({
+		isIgnored: score.isIgnored,
+	});
 
 	const {
-		reset,
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<Inputs>();
 
+	const removeScoreRecord = useCallback(() => {
+		if (!currentUser || !currentUser?.uid || !subject?.id || !score?.id) return;
+
+		const resp = deleteScore(currentUser.uid, subject.id, score.id);
+	}, [subject, score]);
+
 	const onSubmit: SubmitHandler<Inputs> = useCallback(
 		(data) => {
-			if (!currentUser || !currentUser?.uid || !subjectId) return;
+			if (!currentUser || !currentUser?.uid || !subject?.id || !score?.id) return;
 
 			const { base, score: value, type } = data;
 
-			const resp = addNewScore(currentUser.uid, subjectId, {
+			const resp = editScore(currentUser.uid, subject.id, score.id, {
 				isIgnored: scoreOptions.isIgnored,
 				base: +base,
 				type,
 				value: +value,
 			});
-
-			reset({ score: '', base: '', type: '' }, { keepErrors: false });
 		},
 		[scoreOptions]
 	);
@@ -52,16 +63,21 @@ export const ScoreAddNew: FC<HTMLProps<HTMLDivElement>> = ({ id: subjectId, onCl
 					height='40'
 					onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
 				/>
+				<TrashIcon
+					className='cursor-pointer mx-5 text-slate-500'
+					width='45'
+					height='45'
+					onClick={() => removeScoreRecord()}
+				/>
 			</ModalBoxHeader>
 
-			<div className='w-full text-[4rem] text-indigo-900 line-clamp-1'>New record</div>
 			<form
 				className='flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1'
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Input
 					placeholder='Score'
-					defaultValue=''
+					defaultValue={score?.value || ''}
 					formHandle={{
 						...register('score', { required: true, pattern: /(\d+)(\.\d+)?/ }),
 					}}
@@ -75,7 +91,7 @@ export const ScoreAddNew: FC<HTMLProps<HTMLDivElement>> = ({ id: subjectId, onCl
 
 				<Input
 					placeholder='Base'
-					defaultValue=''
+					defaultValue={score?.base || ''}
 					formHandle={{
 						...register('base', { required: true, pattern: /\d+/ }),
 					}}
@@ -89,7 +105,7 @@ export const ScoreAddNew: FC<HTMLProps<HTMLDivElement>> = ({ id: subjectId, onCl
 
 				<Input
 					placeholder='Type'
-					defaultValue=''
+					defaultValue={score?.type || ''}
 					formHandle={{
 						...register('type', { required: true, pattern: /^\S[\w\d\s]+\S$/ }),
 					}}
@@ -101,7 +117,7 @@ export const ScoreAddNew: FC<HTMLProps<HTMLDivElement>> = ({ id: subjectId, onCl
 					/>
 				)}
 
-				<Button type='submit' content='Add' />
+				<Button type='submit' content='Update' />
 			</form>
 		</ModalBox>
 	);

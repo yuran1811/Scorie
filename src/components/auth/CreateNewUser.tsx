@@ -7,7 +7,7 @@ import { auth } from 'shared';
 import { useStore } from 'store';
 import { getFirebaseErr } from 'utils';
 
-export interface CreateNewInputs {
+interface CreateNewInputs {
 	displayName: string;
 	email: string;
 	password: string;

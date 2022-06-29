@@ -1,22 +1,16 @@
 import { DoneIcon, ProgressIcon } from 'components/icons';
-import { useNoteDetail } from 'contexts';
 import { FC } from 'react';
 import { NoteDetailType } from 'shared';
 
-export interface NoteItemProps {
+interface NoteItemProps {
 	note: NoteDetailType;
 }
 
 export const NoteItem: FC<NoteItemProps> = ({ note }) => {
 	const { id, title, data, isDone, isInProgress, createdAt, updatedAt } = note;
 
-	const { setViewDetail } = useNoteDetail();
-
 	return (
-		<div
-			className='cursor-pointer flexcentercol tablet:max-w-[30rem] w-full px-8 py-6 bg-sky-100 text-slate-900 border-sky-500 border-[0.5rem] rounded-[2rem]'
-			onClick={() => setViewDetail && setViewDetail({ id, isOpened: true })}
-		>
+		<div className='cursor-pointer flexcentercol tablet:max-w-[30rem] w-full px-8 py-6 bg-sky-100 text-slate-900 border-sky-500 border-[0.5rem] rounded-[2rem]'>
 			<div className='flexcenter'>
 				<DoneIcon className='mx-4' width='40' height='40' fill={isDone ? '#eab308' : 'white'} />
 				<ProgressIcon className='mx-4' width='40' height='40' fill={isInProgress ? '#64748b' : 'white'} />

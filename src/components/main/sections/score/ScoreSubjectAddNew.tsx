@@ -3,16 +3,22 @@ import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
 import { FC, HTMLProps, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { addNewScore } from 'services';
+import { addNewScore, addNewSubject } from 'services';
+import { SubjectDetailType } from 'shared';
 import { useStore } from 'store';
 
 interface Inputs {
+	subject: string;
 	score: string;
 	base: string;
 	type: string;
 }
 
-export const ScoreAddNew: FC<HTMLProps<HTMLDivElement>> = ({ id: subjectId, onClick }) => {
+interface ScoreSubjectAddNewProps {
+	subjects: SubjectDetailType[];
+}
+
+export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & HTMLProps<HTMLDivElement>> = ({ onClick, subjects }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const [scoreOptions, setScoreOptions] = useState({ isIgnored: false });
@@ -26,16 +32,35 @@ export const ScoreAddNew: FC<HTMLProps<HTMLDivElement>> = ({ id: subjectId, onCl
 
 	const onSubmit: SubmitHandler<Inputs> = useCallback(
 		(data) => {
-			if (!currentUser || !currentUser?.uid || !subjectId) return;
+			if (!currentUser || !currentUser?.uid) return;
 
-			const { base, score: value, type } = data;
+			const { base, score: value, type, subject } = data;
 
-			const resp = addNewScore(currentUser.uid, subjectId, {
-				isIgnored: scoreOptions.isIgnored,
-				base: +base,
-				type,
-				value: +value,
-			});
+			const notUnique = subjects.find((_) => _.name === subject);
+			if (!notUnique) {
+				addNewSubject(currentUser.uid, {
+					isIgnored: false,
+					isSpecial: false,
+					isVital: false,
+					name: subject,
+				}).then(({ data }) => {
+					if (typeof data === 'string' || !data?.id) return;
+
+					addNewScore(currentUser.uid, data.id, {
+						isIgnored: scoreOptions.isIgnored,
+						base: +base,
+						type,
+						value: +value,
+					});
+				});
+			} else {
+				addNewScore(currentUser.uid, notUnique.id, {
+					isIgnored: scoreOptions.isIgnored,
+					base: +base,
+					type,
+					value: +value,
+				});
+			}
 
 			reset({ score: '', base: '', type: '' }, { keepErrors: false });
 		},
@@ -59,6 +84,20 @@ export const ScoreAddNew: FC<HTMLProps<HTMLDivElement>> = ({ id: subjectId, onCl
 				className='flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1'
 				onSubmit={handleSubmit(onSubmit)}
 			>
+				<Input
+					placeholder='Subject'
+					defaultValue=''
+					formHandle={{
+						...register('subject', { required: true, pattern: /[\w\d]+/ }),
+					}}
+				/>
+				{errors?.subject && (
+					<ErrorMessage
+						extraStyle='text-[3rem]'
+						content={errors?.subject.type === 'required' ? 'Please fill this field' : 'Invalid subject'}
+					/>
+				)}
+
 				<Input
 					placeholder='Score'
 					defaultValue=''

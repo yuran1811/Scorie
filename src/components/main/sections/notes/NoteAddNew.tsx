@@ -4,11 +4,11 @@ import { Button, Input, ModalBox, ModalBoxHeader, TextArea } from 'components/sh
 import { Dispatch, FC, HTMLProps, SetStateAction, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-export interface Inputs {
+interface Inputs {
 	title: string;
 }
 
-export interface NoteAddNewProps {
+interface NoteAddNewProps {
 	onClickHandle: Dispatch<SetStateAction<boolean>>;
 }
 

@@ -1,12 +1,10 @@
 import { AddIcon, DoneIcon, NoteIcon, ProgressIcon } from 'components/icons';
-import { NoteDetailProvider } from 'contexts';
 import { useMemo, useState } from 'react';
 import { NoteDetailType } from 'shared';
 import { SectionSwiper } from '../SectionSwiper';
 import { Title } from '../Title';
 import { NoteAddNew } from './NoteAddNew';
 import { NoteDetail } from './NoteDetail';
-import { NoteItem } from './NoteItem';
 
 export const NoteSectionBar = () => {
 	const [addNewOpen, setAddNewOpen] = useState(false);
@@ -62,18 +60,14 @@ export const NoteSectionBar = () => {
 				{noteList.length} notes found
 			</div>
 
-			<NoteDetailProvider>
-				<SectionSwiper
-					Slide={NoteItem}
-					slideChilds={noteList}
-					breakpoints={{
-						1080: { slidesPerView: 3 },
-						640: { slidesPerView: 2 },
-						0: { slidesPerView: 1 },
-					}}
-				/>
-				<NoteDetail />
-			</NoteDetailProvider>
+			<SectionSwiper
+				breakpoints={{
+					1080: { slidesPerView: 3 },
+					640: { slidesPerView: 2 },
+					0: { slidesPerView: 1 },
+				}}
+			></SectionSwiper>
+			<NoteDetail />
 
 			{addNewOpen && <NoteAddNew onClickHandle={setAddNewOpen} />}
 		</div>

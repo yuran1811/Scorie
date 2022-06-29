@@ -13,3 +13,8 @@
 	}
 }
 ```
+
+```js
+// src/constants/links.ts
+const HOST_URL: string = '/scorie'; // instead of '/'
+```

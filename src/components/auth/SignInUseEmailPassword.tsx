@@ -9,25 +9,25 @@ import { useStore } from 'store';
 import { getFirebaseErr } from 'utils';
 import { CreateNewUser } from './CreateNewUser';
 
-interface AccountPanelInputs {
+interface Inputs {
 	email: string;
 	password: string;
 }
 
 const SignInUseEmailPassWord = () => {
+	const setCurrentUser = useStore((s) => s.setCurrentUser);
+
 	const [isNew, setNew] = useState(false);
 	const [errMsg, setErrMsg] = useState('');
-
-	const setCurrentUser = useStore((s) => s.setCurrentUser);
 
 	const {
 		watch,
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<AccountPanelInputs>();
+	} = useForm<Inputs>();
 
-	const onSubmit: SubmitHandler<AccountPanelInputs> = useCallback((data) => {
+	const onSubmit: SubmitHandler<Inputs> = useCallback((data) => {
 		const { email, password } = data;
 
 		signInWithEmailAndPassword(auth, email, password)

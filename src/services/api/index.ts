@@ -1,1 +1,1 @@
-export * from './notesApi'
+export * from './firebase'
