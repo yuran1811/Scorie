@@ -9,12 +9,13 @@ import {
 	TrashIcon,
 } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
-import { FullScreenLoading } from 'components/shared';
+import { FullScreenLoading, TimeContainer } from 'components/shared';
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { deleteSubject, editSubject, validateSubjectOption } from 'services';
 import { ScoreDetailType, SubjectDetailType } from 'shared';
 import { useStore } from 'store';
+import { deepObjectCompare } from 'utils';
 import { ScoreAddNew } from './ScoreAddNew';
 import { ScoreContainer } from './ScoreContainer';
 
@@ -45,6 +46,12 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 		const isError = validateSubjectOption({ ...scoreOptions });
 		if (isError) {
 			setSaveErr('Subject cannot be both ignored and vital (or special)');
+			return;
+		}
+
+		if (deepObjectCompare(subject, { ...subject, ...scoreOptions })) {
+			setSaveErr('');
+			setOpenDetail(false);
 			return;
 		}
 
@@ -90,32 +97,32 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 			{loading ? (
 				<FullScreenLoading />
 			) : (
-				<div className='z-20 !fixed !top-0 !left-0 !w-[100vw] !h-[100vh] font-bold text-center text-rose-600 bg-violet-200 overflow-x-hidden overflow-y-auto'>
+				<div className='z-20 fullscreen font-bold text-center text-rose-600 bg-violet-200 scrollY'>
 					<div className='sticky top-0 left-0 right-0 flex items-center justify-between p-8 bg-violet-200'>
 						<div className='flexcenter flex-wrap w-full mobile:pl-24'>
 							<StarIcon
-								className='cursor-pointer mx-5'
+								className='scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5'
 								fill={!scoreOptions.isSpecial ? 'white' : '#d97706'}
 								width='50'
 								height='50'
 								onClick={() => setScoreOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
 							/>
 							<ImportantIcon
-								className='cursor-pointer mx-5'
+								className='scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5'
 								fill={!scoreOptions.isVital ? 'white' : '#57534e'}
 								width='50'
 								height='50'
 								onClick={() => setScoreOptions((s) => ({ ...s, isVital: !s.isVital }))}
 							/>
 							<IgnoreIcon
-								className='cursor-pointer mx-5'
+								className='scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5'
 								fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
 								width='50'
 								height='50'
 								onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
 							/>
 							<TrashIcon
-								className='cursor-pointer mx-5 text-slate-500'
+								className='scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5 text-slate-500'
 								width='45'
 								height='45'
 								onClick={() => removeSubjectRecord()}
@@ -132,7 +139,12 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 						/>
 					</div>
 
-					{saveErr && <ErrorMessage extraStyle='text-[5rem]' content={saveErr} />}
+					{saveErr && <ErrorMessage extraStyle='px-6 text-[3rem] mobile:text-[4rem]' content={saveErr} />}
+
+					<TimeContainer
+						className='!text-[4rem]'
+						obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }}
+					/>
 
 					<div className='flexcentercol px-8 py-8'>
 						<div className='text-[5rem] text-center text-teal-700 w-full line-clamp-1'>
@@ -140,9 +152,11 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 						</div>
 						<div className='text-[8rem] text-center text-red-600 w-full line-clamp-1'>{averageScore}</div>
 
-						<div className='flex items-center justify-between w-full text-slate-800 bg-violet-200'>
-							<div className='font-bold text-[4rem] text-left w-full px-6 line-clamp-1'>Recents</div>
-							<div className='flex items-start justify-end'>
+						<div className='flex items-center justify-between flex-wrap w-full text-slate-800 bg-violet-200'>
+							<div className='font-bold text-[4rem] text-center smallmb:text-left w-full smallmb:w-auto px-6 line-clamp-1'>
+								Recents
+							</div>
+							<div className='flex items-start justify-center smallmb:justify-end w-full smallmb:w-auto'>
 								<AddIcon
 									className={`cursor-pointer mx-5`}
 									width='50'

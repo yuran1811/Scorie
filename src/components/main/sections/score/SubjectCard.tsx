@@ -1,4 +1,4 @@
-import { IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
+import { IgnoreIcon, ImportantIcon, StarIcon, ThreeDotsFade } from 'components/icons';
 import { LoadingCard } from 'components/shared';
 import { collection, doc } from 'firebase/firestore';
 import { useCollectionQuery, useDocumentQuery } from 'hooks';
@@ -8,7 +8,7 @@ import { ScoreDetailType, SubjectCardProps, SubjectDetailType } from 'shared/typ
 import { useStore } from 'store';
 import { A11y } from 'swiper';
 import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
-import { getAverageScore, standardizeCollectionData } from 'utils';
+import { getAverageScore, getAverageScoreString, standardizeCollectionData } from 'utils';
 import { MAX_SCORE_RECENT_LTH } from '../../../../constants';
 import { SubjectDetail } from './SubjectDetail';
 
@@ -19,7 +19,10 @@ const swiperOptions: SwiperProps = {
 	onSlideChange: ({ activeIndex }) => console.log(activeIndex),
 };
 
-export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({ subject: { id: subjectId } }) => {
+export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({
+	subject: { id: subjectId },
+	setSubjectAverages,
+}) => {
 	const currentUser = useStore((s) => s.currentUser);
 	const settings = useStore((s) => s.settings);
 
@@ -37,10 +40,21 @@ export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({ 
 	const [scores, setScores] = useState<ScoreDetailType[]>([] as ScoreDetailType[]);
 
 	const averageScore = useMemo(() => {
-		if (!scores) return '';
+		if (!scores || !scores.length || scoresLoading) return '';
 
-		return getAverageScore(scores, settings.numberFormat);
-	}, [scores, settings.numberFormat]);
+		const averageScoreRaw = getAverageScore(scores);
+		const averageScoreString = getAverageScoreString(averageScoreRaw, settings.numberFormat);
+
+		setSubjectAverages((s) => ({
+			...s,
+			[subject.name]: {
+				averageScore: averageScoreRaw.count && averageScoreRaw.total / averageScoreRaw.count,
+				isLoaded: scoresLoading,
+			},
+		}));
+
+		return averageScoreString;
+	}, [scores, scoresLoading, settings.numberFormat]);
 
 	useEffect(() => {
 		if (loading || !data) return;
@@ -97,6 +111,12 @@ export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({ 
 						<div className='font-bold text-[3.5rem] text-slate-800 text-left w-full px-8 line-clamp-1'>
 							Recents
 						</div>
+
+						{scoresLoading && (
+							<div className='w-full flexcenter'>
+								<ThreeDotsFade />
+							</div>
+						)}
 						{scores.length ? (
 							<ReactSwiper {...swiperOptions} className='flex items-center w-full text-sky-700'>
 								{scores

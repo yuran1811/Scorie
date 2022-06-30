@@ -24,16 +24,16 @@ export const FeatureSection: FC = () => {
 
 			<div className='flexcenter flex-wrap w-full pt-8'>
 				<FeatureCard className='bg-purple-500' title='Note' onClick={() => navigate('/notes')}>
-					<div className='p-6'>Ideal place to keep your mind on</div>
+					<div className='py-4 px-6 mobile:p-8'>Ideal place to keep your mind on</div>
 				</FeatureCard>
 				<FeatureCard className='bg-sky-500' title='Score' onClick={() => navigate('/subjects')}>
-					<div className='p-6'>Manage all your score records</div>
+					<div className='py-4 px-6 mobile:p-8'>Manage all your score records</div>
 				</FeatureCard>
 				<FeatureCard className='bg-teal-400' title='Analytics' onClick={() => navigate('/chart')}>
-					<div className='p-6'>Variant useful charts</div>
+					<div className='py-4 px-6 mobile:p-8'>Variant useful charts</div>
 				</FeatureCard>
 				<FeatureCard className='bg-red-400' title='Tools' onClick={() => navigate('/tools')}>
-					<div className='p-6'>Helpful tools make school life be better</div>
+					<div className='py-4 px-6 mobile:p-8'>Helpful tools make school life be better</div>
 				</FeatureCard>
 			</div>
 		</>

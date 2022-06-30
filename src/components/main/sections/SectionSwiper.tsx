@@ -12,7 +12,6 @@ interface SectionSwiperProps {
 
 const swiperOptions: SwiperProps = {
 	modules: [A11y],
-	threshold: 45,
 	centeredSlides: true,
 	slideToClickedSlide: true,
 	breakpoints: {

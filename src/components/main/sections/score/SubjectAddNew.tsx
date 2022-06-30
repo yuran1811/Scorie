@@ -64,21 +64,21 @@ export const SubjectAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = (
 		<ModalBox onClick={() => onClickHandle(false)}>
 			<ModalBoxHeader onClick={() => onClickHandle(false)}>
 				<StarIcon
-					className='cursor-pointer mx-5'
+					className='cursor-pointer m-[0.6rem] mx-4 mobile:m-5'
 					fill={!subjectOptions.isSpecial ? 'white' : '#d97706'}
 					width='40'
 					height='40'
 					onClick={() => setSubjectOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
 				/>
 				<ImportantIcon
-					className='cursor-pointer mx-5'
+					className='cursor-pointer m-[0.6rem] mx-4 mobile:m-5'
 					fill={!subjectOptions.isVital ? 'white' : '#57534e'}
 					width='40'
 					height='40'
 					onClick={() => setSubjectOptions((s) => ({ ...s, isVital: !s.isVital }))}
 				/>
 				<IgnoreIcon
-					className='cursor-pointer mx-5'
+					className='cursor-pointer m-[0.6rem] mx-4 mobile:m-5'
 					fill={!subjectOptions.isIgnored ? 'white' : '#0891b2'}
 					width='40'
 					height='40'

@@ -19,7 +19,7 @@ export const ScoreDetail: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> = ({ 
 				} cursor-pointer rounded-[2rem] px-10 py-4`}
 				onClick={() => setEdited(true)}
 			>
-				<div className='w-full text-[3.5rem] text-white'>{score.type}</div>
+				<div className='hidden smallmb:block w-full text-[3.5rem] text-white'>{score.type}</div>
 				<div className='w-full text-[4.5rem] text-sky-200'>{score.value}</div>
 			</div>
 

@@ -24,7 +24,7 @@ export const MenuIcon: FC<MenuIconProps & HTMLProps<HTMLDivElement>> = (props) =
 	return (
 		<div
 			{...otherProps}
-			className={`${className || ''} cursor-pointer flexcenter w-[4rem] h-[4rem] transition-all flexcentercol relative ${beforeStyle(
+			className={`${className || ''} cursor-pointer flexcenter min-w-[4rem] min-h-[4rem] w-[4rem] h-[4rem] transition-all flexcentercol relative ${beforeStyle(
 				active
 			)} ${afterStyle(active)}`}
 			onClick={onClickHandle}

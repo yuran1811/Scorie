@@ -25,10 +25,10 @@ export const ScoreContainer: FC<ScoreContainerProps> = ({ viewMode, scores, subj
 			<>
 				{typeList.map((_) => (
 					<div key={_} className='w-full mt-6 mb-16'>
-						<div className='w-full text-left text-[4rem] indent-[3rem] border-l-[1rem] border-current'>
+						<div className='w-full ml-6 text-left text-[4rem] indent-[3rem] border-l-[1rem] border-current'>
 							{_}
 						</div>
-						<div className='w-full flexcenter !justify-start flex-wrap'>
+						<div className='w-full ml-6 flexcenter !justify-start flex-wrap'>
 							{scores
 								.filter((score) => score.type === _)
 								.map((score) => (

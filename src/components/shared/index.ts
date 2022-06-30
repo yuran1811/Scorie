@@ -11,3 +11,4 @@ export * from './ModalBox';
 export * from './ModalBoxHeader';
 export * from './Overlay';
 export * from './TextArea';
+export * from './TimeContainer';

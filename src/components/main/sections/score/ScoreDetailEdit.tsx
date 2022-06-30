@@ -1,6 +1,6 @@
 import { IgnoreIcon, TrashIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
-import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
+import { Button, Input, ModalBox, ModalBoxHeader, TimeContainer } from 'components/shared';
 import { FC, HTMLProps, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { deleteScore, editScore } from 'services';
@@ -57,19 +57,21 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> =
 		<ModalBox onClick={onClick}>
 			<ModalBoxHeader onClick={onClick}>
 				<IgnoreIcon
-					className='cursor-pointer mx-5'
+					className='cursor-pointer m-[0.6rem] mx-4 mobile:m-5'
 					fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
 					width='40'
 					height='40'
 					onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
 				/>
 				<TrashIcon
-					className='cursor-pointer mx-5 text-slate-500'
-					width='45'
-					height='45'
+					className='cursor-pointer m-[0.6rem] mx-4 mobile:m-5 text-slate-500'
+					width='40'
+					height='40'
 					onClick={() => removeScoreRecord()}
 				/>
 			</ModalBoxHeader>
+
+			<TimeContainer obj={{ createdAt: score?.createdAt, updatedAt: score?.updatedAt }} />
 
 			<form
 				className='flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1'

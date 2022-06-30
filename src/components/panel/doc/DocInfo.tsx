@@ -3,7 +3,7 @@ import { fakeDocData } from 'services';
 import { DocItem } from './DocItem';
 
 export const DocInfo: FC = () => (
-	<div className='flexcentercol !justify-start px-3 pb-8 w-full h-[80%] overflow-x-hidden overflow-y-auto'>
+	<div className='flexcentercol !justify-start px-3 pb-8 w-full h-[80%] scrollY'>
 		<ul className='w-full'>
 			{fakeDocData.map((_) => (
 				<li className='cursor-pointer w-full' key={_.id}>

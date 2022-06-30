@@ -1,3 +1,5 @@
+import { SubjectAverageType } from 'components/main/sections/score/SubjectAverage';
+import { Timestamp } from 'firebase/firestore';
 import { Dispatch, SetStateAction } from 'react';
 
 export interface ScoreDetailType {
@@ -6,6 +8,8 @@ export interface ScoreDetailType {
 	base: number;
 	type: string;
 	value: number;
+	createdAt?: Timestamp;
+	updatedAt?: Timestamp;
 }
 
 export interface SubjectDetailType {
@@ -14,10 +18,17 @@ export interface SubjectDetailType {
 	isVital: boolean;
 	isSpecial: boolean;
 	name: string;
+	createdAt?: Timestamp;
+	updatedAt?: Timestamp;
 }
 
 export interface SubjectCardProps {
 	subject: SubjectDetailType;
+	setSubjectAverages: Dispatch<
+		SetStateAction<{
+			[key: string]: SubjectAverageType;
+		}>
+	>;
 }
 
 export interface ScoreDetailProps {

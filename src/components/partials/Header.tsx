@@ -42,7 +42,7 @@ export const Header: FC = () => {
 			</MenuProvider>
 
 			<Link to='/'>
-				<div className='font-bold text-[4.6rem] text-center'>Scorie</div>
+				<div className='font-bold text-[4rem] mobile:text-[4.6rem] text-center'>Scorie</div>
 			</Link>
 
 			<div className='flex items-center justify-end w-[9.5rem] h-[5.5rem]'>

@@ -6,7 +6,7 @@ export interface AverageScoreType {
 	count: number;
 }
 
-export const getAverageScore = (scores: ScoreDetailType[], trail?: number, initialValue?: AverageScoreType) => {
+export const getAverageScore = (scores: ScoreDetailType[], initialValue?: AverageScoreType) => {
 	const result = scores.reduce((prevValue, score) => {
 		if (score.isIgnored) return prevValue;
 		return {
@@ -15,5 +15,8 @@ export const getAverageScore = (scores: ScoreDetailType[], trail?: number, initi
 		};
 	}, initialValue || { total: 0, count: 0 });
 
-	return !result.count ? '' : (result.total / result.count).toFixed(trail || SETTINGS_DEFAULT.numberFormat);
+	return result;
 };
+
+export const getAverageScoreString = (a: AverageScoreType, trail?: number): string =>
+	!a.count ? '' : (a.total / a.count).toFixed(trail || SETTINGS_DEFAULT.numberFormat);

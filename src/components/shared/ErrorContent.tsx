@@ -12,8 +12,8 @@ export const ErrorContent: FC<ErrorContentProps> = ({ errorBoundaries = false })
 
 	return (
 		<div className='p-[5rem]'>
-			<ErrorText extraStyle='text-[15rem] line-clamp-1'>Oops!</ErrorText>
-			<ErrorText extraStyle='text-[5rem] line-clamp-1'>Something went wrong!</ErrorText>
+			<ErrorText extraStyle='text-[7rem] tablet:text-[15rem] mobile:line-clamp-1'>Oops!</ErrorText>
+			<ErrorText extraStyle='text-[4rem] tablet:text-[5rem] line-clamp-3'>Something went wrong!</ErrorText>
 
 			<BackIcon
 				className='!text-indigo-300'

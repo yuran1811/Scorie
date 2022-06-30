@@ -13,7 +13,7 @@ export const NoteDetail: FC = () => {
 	}, [data]);
 
 	return (
-		<div className='z-20 !fixed top-0 left-0 w-[100vw] h-[100vh] text-center bg-sky-100 text-slate-900 overflow-x-hidden overflow-y-auto'>
+		<div className='z-20 fullscreen text-center bg-sky-100 text-slate-900 scrollY'>
 			<div className='sticky top-0 left-0 right-0 flex items-center justify-between p-8 bg-sky-100'>
 				<div className='flexcenter flex-wrap w-full mobile:pl-24'>
 					<DoneIcon

@@ -18,22 +18,22 @@ export const Panel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 			<div
 				className={`${className || ''} ${
 					active ? 'translate-x-0' : 'translate-x-[-200%]'
-				} transition-all duration-300 fixed top-0 left-0 px-12 py-20 tablet:max-w-[50rem] w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
+				} isAnimated fullscreen px-12 py-20 tablet:max-w-[50rem] bg-ctcolor text-ctbg`}
 			>
 				<div className='z-[2] flexcenter w-full tablet:px-6 pt-14 m-auto'>
 					{currentUser && (
 						<Avatar
-							className='cursor-pointer'
+							className='mobile:block hidden cursor-pointer'
 							imgUrl={currentUser?.photoURL ? currentUser.photoURL : ''}
 							radius='7rem'
 						/>
 					)}
-					<div className='font-bold mx-6 text-[4rem] text-left line-clamp-1'>
+					<div className='font-bold mx-6 text-[4.5rem] text-center mobile:text-left line-clamp-1'>
 						{currentUser?.displayName ? currentUser.displayName : 'Guest'}
 					</div>
 				</div>
 
-				<div className='z-[1] flexcentercol !justify-start w-full h-[80%] py-4 pb-12 my-4 text-[4rem] overflow-x-hidden overflow-y-auto'>
+				<div className='z-[1] flexcentercol !justify-start w-full h-[80%] pb-12 my-4 text-[4rem] scrollY'>
 					<AccountContainer />
 					<SettingContainer />
 					<DocContainer />

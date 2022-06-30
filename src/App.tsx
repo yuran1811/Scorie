@@ -34,7 +34,7 @@ const App: FC = () => {
 
 	return (
 		<>
-			<div className='relative w-[100vw] h-[100vh] overflow-x-hidden text-[3rem] text-white bg-ctbg'>
+			<div className='relative fullsize overflow-x-hidden text-[3rem] text-white bg-ctbg'>
 				<Header />
 
 				<Routes>

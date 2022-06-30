@@ -15,7 +15,7 @@ const SettingPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 		<div
 			className={`${className || ''} ${
 				active ? 'translate-y-0' : 'translate-y-[200%]'
-			} z-20 transition-all duration-300 fixed top-0 left-0 px-12 py-20 tablet:max-w-[50rem] w-[100vw] h-[100vh] bg-ctcolor text-ctbg`}
+			} z-20 isAnimated fullscreen px-12 py-20 tablet:max-w-[50rem] bg-ctcolor text-ctbg`}
 		>
 			<BackIcon onClick={() => setActive && setActive(false)} />
 

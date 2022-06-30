@@ -64,8 +64,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & HTMLProps<HTMLDivE
 
 			reset({ score: '', base: '', type: '' }, { keepErrors: false });
 		},
-		[scoreOptions]
-	);
+		[scoreOptions, subjects]);
 
 	return (
 		<ModalBox onClick={onClick}>

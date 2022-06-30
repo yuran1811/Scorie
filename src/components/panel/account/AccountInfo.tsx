@@ -37,11 +37,11 @@ export const AccountInfo: FC = () => {
 	return (
 		<>
 			{!currentUser?.emailVerified ? (
-				<div className='w-full h-[80%] overflow-x-hidden overflow-y-auto'>
+				<div className='w-full h-[80%] scrollY'>
 					<NotVerifyEmail />
 				</div>
 			) : (
-				<div className='flexcentercol !justify-start mt-[2rem] h-[80%] p-3 pb-16 overflow-x-hidden overflow-y-auto'>
+				<div className='flexcentercol !justify-start mt-[0.6rem] h-[80%] p-3 pb-16 scrollY'>
 					<div className='font-bold text-[5rem]'>{currentUser ? currentUser.displayName : 'Guest'}</div>
 
 					<Button className='!text-[3.5rem]' before={false} content='Log out' onClick={() => signOut(auth)}>
@@ -51,6 +51,7 @@ export const AccountInfo: FC = () => {
 					<Button
 						className='!text-[3.5rem]'
 						content='Change password'
+						lineClamp='2'
 						disabled={!canChangePW}
 						onClick={() => {
 							setCanChangePW(false);
