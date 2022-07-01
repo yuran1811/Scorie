@@ -1,13 +1,13 @@
-import { ArrowLeftIcon, ArrowRightIcon, LogInIcon } from 'components/icons';
-import { ErrorMessage } from 'components/interfaces';
-import { Button, Input } from 'components/shared';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useCallback, useEffect, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { auth } from 'shared';
 import { useStore } from 'store';
 import { getFirebaseErr } from 'utils';
 import { CreateNewUser } from './CreateNewUser';
+import { Button, Input } from 'components/shared';
+import { ErrorMessage } from 'components/interfaces';
+import { ArrowLeftIcon, ArrowRightIcon, LogInIcon } from 'components/icons';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useCallback, useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface Inputs {
 	email: string;
@@ -17,8 +17,8 @@ interface Inputs {
 const SignInUseEmailPassWord = () => {
 	const setCurrentUser = useStore((s) => s.setCurrentUser);
 
-	const [isNew, setNew] = useState(false);
 	const [errMsg, setErrMsg] = useState('');
+	const [isNew, setNew] = useState(false);
 
 	const {
 		watch,

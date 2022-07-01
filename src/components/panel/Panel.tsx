@@ -1,10 +1,10 @@
-import { Avatar, Overlay } from 'components/shared';
-import { useMenu } from 'contexts';
-import { FC, HTMLProps } from 'react';
 import { useStore } from 'store';
-import AccountContainer from './account/AccountContainer';
+import { useMenu } from 'contexts';
 import DocContainer from './doc/DocContainer';
+import { Avatar, Overlay } from 'components/shared';
+import AccountContainer from './account/AccountContainer';
 import SettingContainer from './setting/SettingContainer';
+import { FC, HTMLProps } from 'react';
 
 export const Panel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 	const currentUser = useStore((s) => s.currentUser);

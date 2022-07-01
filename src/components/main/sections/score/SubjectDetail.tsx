@@ -1,3 +1,9 @@
+import { useStore } from 'store';
+import { deepObjectCompare } from 'utils';
+import { ScoreDetailType, SubjectDetailType } from 'shared';
+import { deleteSubject, editSubject, validateSubjectOption } from 'services';
+import { ScoreContainer } from './ScoreContainer';
+import { ScoreAddNew } from './ScoreAddNew';
 import {
 	AddIcon,
 	CloseIcon,
@@ -12,12 +18,6 @@ import { ErrorMessage } from 'components/interfaces';
 import { FullScreenLoading, TimeContainer } from 'components/shared';
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { deleteSubject, editSubject, validateSubjectOption } from 'services';
-import { ScoreDetailType, SubjectDetailType } from 'shared';
-import { useStore } from 'store';
-import { deepObjectCompare } from 'utils';
-import { ScoreAddNew } from './ScoreAddNew';
-import { ScoreContainer } from './ScoreContainer';
 
 interface SubjectDetailProps {
 	subject: SubjectDetailType | undefined;
@@ -30,9 +30,9 @@ interface SubjectDetailProps {
 export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, averageScore, loading, setOpenDetail }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
-	const [timeoutId, setTimeoutId] = useState<any>();
 	const [saveErr, setSaveErr] = useState('');
 	const [viewMode, setViewMode] = useState('all');
+	const [timeoutId, setTimeoutId] = useState<any>();
 	const [addNewOpen, setAddNewOpen] = useState(false);
 	const [scoreOptions, setScoreOptions] = useState({
 		isIgnored: subject?.isIgnored || false,
@@ -49,13 +49,13 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 			return;
 		}
 
-		if (deepObjectCompare(subject, { ...subject, ...scoreOptions })) {
+		if (deepObjectCompare(subject, { ...subject, ...scoreOptions, scores: [...scores] })) {
 			setSaveErr('');
 			setOpenDetail(false);
 			return;
 		}
 
-		editSubject(currentUser.uid, subject.id, { ...scoreOptions })
+		editSubject(currentUser.uid, subject.id, { ...scoreOptions, scores: [...scores] })
 			.then(() => {
 				setSaveErr('');
 				setOpenDetail(false);
@@ -74,8 +74,8 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 
 	const removeSubjectRecord = useCallback(() => {
 		if (!currentUser || !currentUser?.uid || !subject?.id) return;
-		const resp = deleteSubject(currentUser.uid, subject.id);
-	}, [subject, scores]);
+		deleteSubject(currentUser.uid, subject.id);
+	}, [subject]);
 
 	const typeList = useMemo<string[]>(() => {
 		if (!scores) return [] as string[];
@@ -142,7 +142,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 					{saveErr && <ErrorMessage extraStyle='px-6 text-[3rem] mobile:text-[4rem]' content={saveErr} />}
 
 					<TimeContainer
-						className='!text-[4rem]'
+						className='mobile:text-[4rem]'
 						obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }}
 					/>
 
@@ -163,7 +163,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 									height='50'
 									onClick={() => setAddNewOpen(true)}
 								/>
-								{addNewOpen && <ScoreAddNew id={subject?.id} onClick={() => setAddNewOpen(false)} />}
+								{addNewOpen && <ScoreAddNew subject={subject} onClick={() => setAddNewOpen(false)} />}
 
 								<ListIcon
 									className={`${viewMode === 'group' ? 'block' : 'hidden'} cursor-pointer mx-5`}
@@ -180,7 +180,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 							</div>
 						</div>
 						<div className='flexcenter flex-wrap w-full pb-6'>
-							<ScoreContainer viewMode={viewMode} scores={scores} subject={subject} typeList={typeList} />
+							<ScoreContainer viewMode={viewMode} typeList={typeList} subject={subject} scores={scores} />
 						</div>
 					</div>
 				</div>

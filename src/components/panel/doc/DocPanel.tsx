@@ -1,7 +1,7 @@
+import { DocInfo } from './DocInfo';
 import { BackIcon } from 'components/icons';
 import { useMenu, useDocPanel } from 'contexts';
 import { FC, HTMLProps, useEffect } from 'react';
-import { DocInfo } from './DocInfo';
 
 const DocPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 	const { active: menuActive } = useMenu();

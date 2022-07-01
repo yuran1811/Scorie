@@ -4,7 +4,6 @@ export * from './CustomReactSelect';
 export * from './ErrorContent';
 export * from './FullScreenLoading';
 export * from './Input';
-export * from './Loading';
 export * from './LoadingCard';
 export * from './LoadMoreButton';
 export * from './ModalBox';

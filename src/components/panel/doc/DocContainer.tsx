@@ -1,6 +1,6 @@
 import { DocPanelProvider } from 'contexts';
-import DocBar from './DocBar';
 import DocPanel from './DocPanel';
+import DocBar from './DocBar';
 
 const DocContainer = () => (
 	<DocPanelProvider>

@@ -1,6 +1,6 @@
-import { FC } from 'react';
 import { fakeDocData } from 'services';
 import { DocItem } from './DocItem';
+import { FC } from 'react';
 
 export const DocInfo: FC = () => (
 	<div className='flexcentercol !justify-start px-3 pb-8 w-full h-[80%] scrollY'>

@@ -1,74 +1,71 @@
+import { db, ScoreDetailType, SubjectDetailType } from 'shared';
+import { getAverageScore, getAverageScoreString } from 'utils';
+import { MAX_SCORE_RECENT_LTH } from '../../../../constants';
+import { useDocumentQuery } from 'hooks';
+import { useStore } from 'store';
 import { IgnoreIcon, ImportantIcon, StarIcon, ThreeDotsFade } from 'components/icons';
 import { LoadingCard } from 'components/shared';
-import { collection, doc } from 'firebase/firestore';
-import { useCollectionQuery, useDocumentQuery } from 'hooks';
-import { FC, HTMLProps, useEffect, useMemo, useState } from 'react';
-import { db } from 'shared';
-import { ScoreDetailType, SubjectCardProps, SubjectDetailType } from 'shared/types';
-import { useStore } from 'store';
-import { A11y } from 'swiper';
-import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
-import { getAverageScore, getAverageScoreString, standardizeCollectionData } from 'utils';
-import { MAX_SCORE_RECENT_LTH } from '../../../../constants';
 import { SubjectDetail } from './SubjectDetail';
+import { doc } from 'firebase/firestore';
+import { FC, HTMLProps, useEffect, useMemo, useState } from 'react';
+import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { A11y } from 'swiper';
+import 'swiper/css';
+
+interface SubjectCardProps {
+	isShow: boolean;
+	subject: SubjectDetailType;
+}
 
 const swiperOptions: SwiperProps = {
 	modules: [A11y],
 	centeredSlides: false,
-	breakpoints: { 0: { slidesPerView: 3 } },
-	onSlideChange: ({ activeIndex }) => console.log(activeIndex),
+	breakpoints: {
+		640: { slidesPerView: 3 },
+		420: { slidesPerView: 5 },
+		0: { slidesPerView: 3 },
+	},
 };
 
 export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({
+	isShow,
 	subject: { id: subjectId },
-	setSubjectAverages,
 }) => {
-	const currentUser = useStore((s) => s.currentUser);
 	const settings = useStore((s) => s.settings);
+	const currentUser = useStore((s) => s.currentUser);
 
 	const { data, loading } = useDocumentQuery(
 		'users_subject',
 		doc(db, 'users', currentUser?.uid as string, 'subjects', subjectId as string)
 	);
-	const { data: scoresData, loading: scoresLoading } = useCollectionQuery(
-		'users_subjects_scores',
-		collection(db, 'users', currentUser?.uid as string, 'subjects', subjectId as string, 'scores')
-	);
 
-	const [openDetail, setOpenDetail] = useState<boolean>(false);
 	const [subject, setSubject] = useState<SubjectDetailType>({} as SubjectDetailType);
 	const [scores, setScores] = useState<ScoreDetailType[]>([] as ScoreDetailType[]);
+	const [openDetail, setOpenDetail] = useState<boolean>(false);
 
 	const averageScore = useMemo(() => {
-		if (!scores || !scores.length || scoresLoading) return '';
+		if (!scores || !scores.length) return '';
 
 		const averageScoreRaw = getAverageScore(scores);
 		const averageScoreString = getAverageScoreString(averageScoreRaw, settings.numberFormat);
 
-		setSubjectAverages((s) => ({
-			...s,
-			[subject.name]: {
-				averageScore: averageScoreRaw.count && averageScoreRaw.total / averageScoreRaw.count,
-				isLoaded: scoresLoading,
-			},
-		}));
-
 		return averageScoreString;
-	}, [scores, scoresLoading, settings.numberFormat]);
+	}, [scores, settings.numberFormat]);
 
 	useEffect(() => {
 		if (loading || !data) return;
 
 		const newSubject = data?.data() as SubjectDetailType;
+
+		if (!newSubject) return;
+
 		setSubject({ ...newSubject, id: subjectId } || {});
 	}, [data, loading]);
 
 	useEffect(() => {
-		if (!scoresData || scoresLoading) return;
-
-		const newScores = standardizeCollectionData(scoresData) as ScoreDetailType[];
-		setScores(newScores || []);
-	}, [scoresData, scoresLoading]);
+		if (!subject?.scores || !subject.scores.length) return;
+		setScores([...subject.scores]);
+	}, [subject]);
 
 	return (
 		<>
@@ -76,7 +73,9 @@ export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({
 				<LoadingCard />
 			) : (
 				<div
-					className='cursor-pointer tablet:max-w-[25rem] w-full p-4 rounded-[2.5rem] font-bold text-center text-rose-600 bg-violet-200'
+					className={`${
+						!isShow ? '!hidden' : ''
+					} overflow-hidden cursor-pointer tablet:max-w-[25rem] h-[32rem] w-full m-6 p-4 rounded-[2.5rem] font-bold text-center text-rose-600 bg-violet-200`}
 					onClick={() => setOpenDetail((s) => !s)}
 				>
 					<div className='flexcenter p-4'>
@@ -112,13 +111,13 @@ export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({
 							Recents
 						</div>
 
-						{scoresLoading && (
+						{loading && (
 							<div className='w-full flexcenter'>
 								<ThreeDotsFade />
 							</div>
 						)}
 						{scores.length ? (
-							<ReactSwiper {...swiperOptions} className='flex items-center w-full text-sky-700'>
+							<ReactSwiper {...swiperOptions} className='flex flex-row items-center w-full text-sky-700'>
 								{scores
 									.slice(-MAX_SCORE_RECENT_LTH)
 									.reverse()
@@ -135,7 +134,7 @@ export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({
 							</ReactSwiper>
 						) : (
 							<div className='font-semibold text-[3rem] text-slate-800 text-center w-full px-8 line-clamp-1'>
-								Nothing here
+								No record
 							</div>
 						)}
 					</div>
@@ -144,10 +143,10 @@ export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({
 
 			{openDetail && (
 				<SubjectDetail
-					subject={subject}
 					scores={scores}
-					averageScore={averageScore}
+					subject={subject}
 					loading={loading}
+					averageScore={averageScore}
 					setOpenDetail={setOpenDetail}
 				/>
 			)}

@@ -1,11 +1,11 @@
-import { IgnoreIcon, TrashIcon } from 'components/icons';
+import { useStore } from 'store';
+import { ScoreDetailType, SubjectDetailType } from 'shared';
 import { ErrorMessage } from 'components/interfaces';
+import { IgnoreIcon, TrashIcon } from 'components/icons';
 import { Button, Input, ModalBox, ModalBoxHeader, TimeContainer } from 'components/shared';
 import { FC, HTMLProps, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { deleteScore, editScore } from 'services';
-import { ScoreDetailType, SubjectDetailType } from 'shared';
-import { useStore } from 'store';
+import { editSubject } from 'services';
 
 interface Inputs {
 	score: string;
@@ -14,15 +14,21 @@ interface Inputs {
 }
 
 interface ScoreDetailProps {
-	subject: SubjectDetailType | undefined;
 	score: ScoreDetailType;
+	subject: SubjectDetailType | undefined;
+	scores: ScoreDetailType[];
 }
 
-export const ScoreDetailEdit: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> = ({ subject, score, onClick }) => {
+export const ScoreDetailEdit: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> = ({
+	subject,
+	score,
+	scores,
+	onClick,
+}) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const [scoreOptions, setScoreOptions] = useState({
-		isIgnored: score.isIgnored,
+		isIgnored: score && score?.isIgnored ? score.isIgnored : false,
 	});
 
 	const {
@@ -32,23 +38,36 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> =
 	} = useForm<Inputs>();
 
 	const removeScoreRecord = useCallback(() => {
-		if (!currentUser || !currentUser?.uid || !subject?.id || !score?.id) return;
+		if (!currentUser || !currentUser?.uid || !subject?.id || !subject?.scores) return;
 
-		const resp = deleteScore(currentUser.uid, subject.id, score.id);
-	}, [subject, score]);
+		const scoreIdx = scores.findIndex((_) => _.id === score.id);
+		const newscores = [...scores];
+
+		newscores.splice(scoreIdx, 1);
+
+		editSubject(currentUser.uid, subject.id, { scores: [...newscores] });
+	}, []);
 
 	const onSubmit: SubmitHandler<Inputs> = useCallback(
 		(data) => {
-			if (!currentUser || !currentUser?.uid || !subject?.id || !score?.id) return;
+			if (!currentUser || !currentUser?.uid || !subject?.id || !scores.length || !score || !score?.id)
+				return;
 
 			const { base, score: value, type } = data;
 
-			const resp = editScore(currentUser.uid, subject.id, score.id, {
+			const scoreToEdit = {
+				id: score.id,
 				isIgnored: scoreOptions.isIgnored,
-				base: +base,
 				type,
+				base: +base,
 				value: +value,
-			});
+			};
+
+			const scoreIdx = scores.findIndex((_) => _.id === score.id);
+			const newscores = [...scores];
+			newscores.splice(scoreIdx, 1, scoreToEdit);
+
+			editSubject(currentUser.uid, subject.id, { scores: [...newscores] });
 		},
 		[scoreOptions]
 	);
@@ -71,7 +90,12 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> =
 				/>
 			</ModalBoxHeader>
 
-			<TimeContainer obj={{ createdAt: score?.createdAt, updatedAt: score?.updatedAt }} />
+			<TimeContainer
+				obj={{
+					createdAt: score?.createdAt,
+					updatedAt: score?.updatedAt,
+				}}
+			/>
 
 			<form
 				className='flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1'

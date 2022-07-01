@@ -1,11 +1,11 @@
-import { IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
+import { useStore } from 'store';
+import { SubjectDetailType } from 'shared';
+import { addNewSubject, validateSubjectOption } from 'services';
 import { ErrorMessage } from 'components/interfaces';
+import { IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
 import { Dispatch, FC, HTMLProps, SetStateAction, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { addNewSubject, validateSubjectOption } from 'services';
-import { SubjectDetailType } from 'shared';
-import { useStore } from 'store';
 
 interface Inputs {
 	subject: string;
@@ -34,27 +34,30 @@ export const SubjectAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = (
 
 	const onSubmit: SubmitHandler<Inputs> = useCallback(
 		({ subject }) => {
-			if (validateSubjectOption(subjectOptions))
+			if (validateSubjectOption(subjectOptions)) {
 				setStatus({
 					type: 'errors',
 					message: 'Subject cannot be both ignored and vital | special',
 				});
-			else {
-				onClickHandle(false);
-				setStatus({
-					type: 'ok',
-					message: 'Alright',
+
+				return;
+			}
+
+			onClickHandle(false);
+			setStatus({
+				type: 'ok',
+				message: 'Alright',
+			});
+
+			if (currentUser && currentUser?.uid) {
+				const notUnique = subjects.find((_) => _.name === subject);
+				if (notUnique) return;
+
+				addNewSubject(currentUser.uid, {
+					...subjectOptions,
+					name: subject,
+					scores: [],
 				});
-
-				if (currentUser && currentUser?.uid) {
-					const notUnique = subjects.find((_) => _.name === subject);
-					if (notUnique) return;
-
-					const resp = addNewSubject(currentUser.uid, {
-						...subjectOptions,
-						name: subject,
-					});
-				}
 			}
 		},
 		[subjectOptions]

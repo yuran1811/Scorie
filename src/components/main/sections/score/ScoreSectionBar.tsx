@@ -1,53 +1,64 @@
-import { AddIcon, FlatLoading, HashtagIcon, IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
-import { AddButton } from 'components/main/sections/score/AddButton';
-import { collection, orderBy, query } from 'firebase/firestore';
-import { useCollectionQuery } from 'hooks';
-import { useMemo, useState } from 'react';
-import { db, SubjectDetailType } from 'shared';
-import { useStore } from 'store';
-import { SwiperSlide } from 'swiper/react';
-import { standardizeCollectionData } from 'utils';
-import { SectionSwiper } from '../SectionSwiper';
 import { Title } from '../Title';
-import { ScoreSubjectAddNew } from './ScoreSubjectAddNew';
-import { SubjectAddNew } from './SubjectAddNew';
-import { SubjectAverage, SubjectAverageType } from './SubjectAverage';
 import { SubjectCard } from './SubjectCard';
+import { SubjectAddNew } from './SubjectAddNew';
+import { SubjectAverage } from './SubjectAverage';
+import { ScoreSubjectAddNew } from './ScoreSubjectAddNew';
+import { AddButton } from 'components/main/sections/score/AddButton';
+import { AddIcon, FlatLoading, HashtagIcon, IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
+import { useStore } from 'store';
+import { useCollectionQuery } from 'hooks';
+import { db, SubjectDetailType } from 'shared';
+import { standardizeCollectionData } from 'utils';
+import { collection, orderBy, query } from 'firebase/firestore';
+import { useMemo, useState } from 'react';
 
 export const ScoreSectionBar = () => {
 	const currentUser = useStore((s) => s.currentUser);
 
-	const [subjectAverages, setSubjectAverages] = useState<{ [key: string]: SubjectAverageType }>({});
-	const [addNewOpen, setAddNewOpen] = useState(false);
+	const { data, loading } = useCollectionQuery(
+		'users_subjects',
+		query(collection(db, 'users', currentUser?.uid as string, 'subjects'), orderBy('updatedAt', 'desc'))
+	);
+
 	const [addNewSSOpen, setAddNewSSOpen] = useState(false);
+	const [addNewOpen, setAddNewOpen] = useState(false);
 	const [filter, setFilter] = useState({
 		hasVital: false,
 		hasSpecial: false,
 		hasIgnored: false,
 	});
 
-	const { data, loading } = useCollectionQuery(
-		'users_subjects',
-		query(collection(db, 'users', currentUser?.uid as string, 'subjects'), orderBy('createdAt', 'desc'))
-	);
+	const subjects = useMemo(() => {
+		const resp = standardizeCollectionData(data) as SubjectDetailType[];
+		return resp.map((subject) => ({ isShow: true, subject }));
+	}, [data]);
 
-	const subjects = useMemo(() => standardizeCollectionData(data) as SubjectDetailType[], [data]);
 	const subjectList = useMemo(() => {
-		if (!filter.hasVital && !filter.hasSpecial) return subjects;
+		if (!filter.hasVital && !filter.hasSpecial && !filter.hasIgnored) {
+			subjects.forEach((_) => (_.isShow = true));
+			return subjects;
+		}
 
-		return subjects.filter((score) => {
-			if (filter.hasIgnored) return score.isIgnored && !score.isSpecial && !score.isVital;
-			if (filter.hasSpecial && filter.hasVital) return score.isSpecial && score.isVital;
-			if (filter.hasVital) return score.isVital && !score.isSpecial;
-			if (filter.hasSpecial) return score.isSpecial;
+		const list = subjects.filter((item) => {
+			if (
+				(filter.hasIgnored && item.subject.isIgnored) ||
+				(filter.hasSpecial && item.subject.isSpecial) ||
+				(filter.hasVital && item.subject.isVital)
+			) {
+				item.isShow = true;
+			} else item.isShow = false;
+
+			return item.isShow;
 		});
-	}, [filter, data]);
+
+		return list;
+	}, [filter, subjects]);
 
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
 			<AddButton onClick={() => setAddNewSSOpen(true)} />
 
-			{/* <SubjectAverage subjectAverages={subjectAverages} /> */}
+			<SubjectAverage subjects={subjects.map((_) => _.subject)} />
 
 			<div className='w-full flexcenter flex-wrap px-4'>
 				<Title Icon={HashtagIcon} content='Score' />
@@ -91,29 +102,25 @@ export const ScoreSectionBar = () => {
 			) : (
 				<>
 					<div className='font-semibold text-[3rem] text-white text-center italic p-4 mt-4'>
-						{subjectList.length} records found
+						{subjectList.length} record{subjectList.length > 2 ? 's' : ''} found
 					</div>
 
 					<div className='mx-auto mt-4 p-4 max-w-[100rem] w-full rounded-[2rem]'>
-						<SectionSwiper
-							breakpoints={{
-								1080: { slidesPerView: 3 },
-								640: { slidesPerView: 2 },
-								0: { slidesPerView: 1 },
-							}}
-						>
-							{subjectList.map((subject) => (
-								<SwiperSlide key={subject.id}>
-									<SubjectCard subject={subject} setSubjectAverages={setSubjectAverages} />
-								</SwiperSlide>
+						<div className='flex flex-wrap justify-center items-start w-full'>
+							{subjects.map((item) => (
+								<SubjectCard key={item.subject.id} isShow={item.isShow} subject={item.subject} />
 							))}
-						</SectionSwiper>
+						</div>
 					</div>
 				</>
 			)}
 
-			{addNewOpen && <SubjectAddNew subjects={subjects} onClickHandle={() => setAddNewOpen(false)} />}
-			{addNewSSOpen && <ScoreSubjectAddNew subjects={subjects} onClick={() => setAddNewSSOpen(false)} />}
+			{addNewOpen && (
+				<SubjectAddNew subjects={subjects.map((_) => _.subject)} onClickHandle={() => setAddNewOpen(false)} />
+			)}
+			{addNewSSOpen && (
+				<ScoreSubjectAddNew subjects={subjects.map((_) => _.subject)} onClick={() => setAddNewSSOpen(false)} />
+			)}
 		</div>
 	);
 };

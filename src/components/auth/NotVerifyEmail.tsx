@@ -1,7 +1,7 @@
-import { sendEmailVerification } from 'firebase/auth';
-import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { auth } from 'shared';
 import { getFirebaseErr } from 'utils';
+import { sendEmailVerification } from 'firebase/auth';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 const reVerifyEmail = (canResend: boolean, setCanResend: Dispatch<SetStateAction<boolean>>) => {
 	if (!canResend || !auth.currentUser) return;
@@ -27,12 +27,12 @@ export const NotVerifyEmail: FC = () => {
 	return (
 		<div className='p-10 m-6'>
 			<div className='font-semibold text-[4rem] text-center'>Please verify your email before using this app</div>
-			<div className='text-[3rem] text-center w-[80%] mx-auto mt-10'>We've send to your mail a verify link</div>
+			<div className='text-[3rem] text-center w-[80%] mx-auto mt-10'>We've sent you a verify link via email</div>
 			<div className='text-[3rem] text-center w-[80%] mx-auto mt-2'>
-				Please check carefully all your mails (our mail can be in spam)
+				Please check all your mails carefully (our mail can be in spam by many reasons)
 			</div>
 			<div className='text-[3rem] text-center w-[80%] mx-auto mt-10'>
-				Or if you can't find any mail from us,{' '}
+				Or if you can't find any,{' '}
 				<span
 					className='cursor-pointer font-semibold underline'
 					onClick={() => reVerifyEmail(canResend, setCanResend)}

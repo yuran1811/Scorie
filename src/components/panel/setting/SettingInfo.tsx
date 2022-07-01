@@ -1,10 +1,10 @@
-import { DownloadIcon } from 'components/icons';
-import { ErrorMessage } from 'components/interfaces';
-import { Button, Input } from 'components/shared';
-import { FC, useCallback } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useStore } from 'store';
 import { SETTINGS_DEFAULT_TYPE } from '../../../constants';
+import { DownloadIcon } from 'components/icons';
+import { Button, Input } from 'components/shared';
+import { ErrorMessage } from 'components/interfaces';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { FC, useCallback } from 'react';
+import { useStore } from 'store';
 
 export const SettingInfo: FC = () => {
 	const settings = useStore((s) => s.settings);

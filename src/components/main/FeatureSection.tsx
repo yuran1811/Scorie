@@ -1,9 +1,9 @@
-import { NotVerifyEmail } from 'components/auth/NotVerifyEmail';
-import { FC, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useStore } from 'store';
 import { FeatureCard } from './FeatureCard';
 import { WelcomBanner } from './WelcomBanner';
+import { NotVerifyEmail } from 'components/auth/NotVerifyEmail';
+import { useNavigate } from 'react-router-dom';
+import { FC, useMemo } from 'react';
 
 export const FeatureSection: FC = () => {
 	const currentUser = useStore((s) => s.currentUser);

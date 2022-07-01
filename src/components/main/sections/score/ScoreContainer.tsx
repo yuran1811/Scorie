@@ -1,23 +1,24 @@
-import { FC } from 'react';
 import { ScoreDetailType, SubjectDetailType } from 'shared';
 import { ScoreDetail } from './ScoreDetail';
+import { FC } from 'react';
 
 interface ScoreContainerProps {
 	viewMode: string;
+	typeList: string[];
 	scores: ScoreDetailType[];
 	subject: SubjectDetailType | undefined;
-	typeList: string[];
 }
 
-export const ScoreContainer: FC<ScoreContainerProps> = ({ viewMode, scores, subject, typeList }) => (
+export const ScoreContainer: FC<ScoreContainerProps> = ({ viewMode, subject, typeList, scores }) => (
 	<>
 		{viewMode === 'all' && (
 			<>
-				{scores.map((score) => (
-					<div key={score.id} className='bg-indigo-900 rounded-[2rem] m-6'>
-						<ScoreDetail score={score} subject={subject} />
-					</div>
-				))}
+				{subject &&
+					subject.scores.map((score) => (
+						<div key={score.id} className='bg-indigo-900 rounded-[2rem] m-6'>
+							<ScoreDetail score={score} subject={subject} scores={scores} />
+						</div>
+					))}
 			</>
 		)}
 
@@ -29,13 +30,14 @@ export const ScoreContainer: FC<ScoreContainerProps> = ({ viewMode, scores, subj
 							{_}
 						</div>
 						<div className='w-full ml-6 flexcenter !justify-start flex-wrap'>
-							{scores
-								.filter((score) => score.type === _)
-								.map((score) => (
-									<div key={score.id} className='bg-indigo-900 rounded-[2rem] m-6'>
-										<ScoreDetail score={score} subject={subject} />
-									</div>
-								))}
+							{subject &&
+								subject.scores
+									.filter((score) => score.type === _)
+									.map((score) => (
+										<div key={score.id} className='bg-indigo-900 rounded-[2rem] m-6'>
+											<ScoreDetail score={score} subject={subject} scores={scores} />
+										</div>
+									))}
 						</div>
 					</div>
 				))}

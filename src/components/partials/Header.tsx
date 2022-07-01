@@ -1,14 +1,14 @@
-import { MenuIcon, MessageIcon, NotificationIcon } from 'components/icons';
+import { MenuProvider } from 'contexts';
 import { Panel } from 'components/panel';
 import { Avatar, ModalBox, ModalBoxHeader } from 'components/shared';
-import { MenuProvider } from 'contexts';
+import { MenuIcon, MessageIcon, NotificationIcon } from 'components/icons';
 import { FC, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const Header: FC = () => {
 	const [notificationActive, setNotificationActive] = useState(false);
-	const [isOpened, setOpened] = useState(false);
 	const [showMore, setShowMore] = useState(false);
+	const [isOpened, setOpened] = useState(false);
 
 	const getNotification = useCallback(({ title, options }) => new Notification(title, options), []);
 
@@ -73,8 +73,8 @@ export const Header: FC = () => {
 					<ModalBoxHeader onClick={() => setOpened(false)} />
 
 					<div className='flexcentercol px-6 pb-7'>
-						<div className='w-[80%] text-[3rem] text-indigo-900 text-center px-8 pb-8'>
-							Please enable notification on this site to use
+						<div className='w-[80%] text-[3rem] text-indigo-900 text-center mobile:px-8 pb-8'>
+							Please enable notification on this site to use notification feature
 						</div>
 					</div>
 				</ModalBox>

@@ -1,11 +1,11 @@
-import { ErrorMessage } from 'components/interfaces';
-import { Button, Input } from 'components/shared';
-import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { auth } from 'shared';
 import { useStore } from 'store';
 import { getFirebaseErr } from 'utils';
+import { Button, Input } from 'components/shared';
+import { ErrorMessage } from 'components/interfaces';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 
 interface CreateNewInputs {
 	displayName: string;
@@ -17,9 +17,9 @@ interface CreateNewInputs {
 export const CreateNewUser: FC = ({ children }) => {
 	const setCurrentUser = useStore((s) => s.setCurrentUser);
 
-	const password = useRef({});
-
 	const [errMsg, setErrMsg] = useState('');
+	
+	const password = useRef({});
 
 	const {
 		watch,

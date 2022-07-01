@@ -1,18 +1,29 @@
-import { FirebaseError } from 'firebase/app';
-import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
-import { db } from 'shared';
+import { db, ScoreDetailType, SubjectDetailType } from 'shared';
 import { getFirebaseErr } from 'utils';
+import { FirebaseError } from 'firebase/app';
+import { addDoc, collection, deleteDoc, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 
 export const validateSubjectOption = (opt: { isIgnored: boolean; isSpecial: boolean; isVital: boolean }) =>
 	opt.isIgnored && (opt.isSpecial || opt.isVital);
 
-export const addNewScore = async (userId: string, subjectId: string, data: any) => {
+export const addNewScore = async (userId: string, subjectId: string, data: ScoreDetailType) => {
 	try {
-		const resp = await addDoc(collection(db, 'users', userId, 'subjects', subjectId, 'scores'), {
-			...data,
+		const subjectRaw = await getDoc(doc(db, 'users', userId, 'subjects', subjectId));
+
+		const subjectData = subjectRaw?.data() as SubjectDetailType;
+
+		if (!subjectData)
+			return {
+				data: null,
+				errorMessage: 'No subject',
+			};
+
+		const resp = await editSubject(userId, subjectId, {
+			scores: [...subjectData.scores, data],
 			createdAt: serverTimestamp(),
 			updatedAt: serverTimestamp(),
 		});
+
 		return {
 			data: resp,
 			errorMessage: '',
@@ -20,8 +31,8 @@ export const addNewScore = async (userId: string, subjectId: string, data: any) 
 	} catch (error) {
 		const err = error as FirebaseError;
 		return {
-			data: getFirebaseErr(err.message),
-			errorMessage: '',
+			data: null,
+			errorMessage: getFirebaseErr(err.message),
 		};
 	}
 };
@@ -33,6 +44,7 @@ export const addNewSubject = async (userId: string, data: any) => {
 			createdAt: serverTimestamp(),
 			updatedAt: serverTimestamp(),
 		});
+
 		return {
 			data: resp,
 			errorMessage: '',
@@ -40,18 +52,32 @@ export const addNewSubject = async (userId: string, data: any) => {
 	} catch (error) {
 		const err = error as FirebaseError;
 		return {
-			data: getFirebaseErr(err.message),
-			errorMessage: '',
+			data: null,
+			errorMessage: getFirebaseErr(err.message),
 		};
 	}
 };
 
-export const editScore = async (userId: string, subjectId: string, scoreId: string, data: any) => {
+export const editScore = async (userId: string, subjectId: string, data: ScoreDetailType) => {
 	try {
-		await updateDoc(doc(db, 'users', userId, 'subjects', subjectId, 'scores', scoreId), {
-			...data,
+		const subjectRaw = await getDoc(doc(db, 'users', userId, 'subjects', subjectId));
+
+		if (!subjectRaw || !subjectRaw?.data()) return '';
+		const subjectData = { ...subjectRaw?.data() } as SubjectDetailType;
+
+		if (!subjectData || !subjectData?.scores) return '';
+		const scoreIndex = subjectData.scores.findIndex((_) => _.id === data.id);
+
+		if (scoreIndex > -1) {
+			subjectData.scores.splice(scoreIndex, 1);
+		}
+
+		await editSubject(userId, subjectId, {
+			scores: [...subjectData.scores, data],
+			createdAt: serverTimestamp(),
 			updatedAt: serverTimestamp(),
 		});
+
 		return '';
 	} catch (error) {
 		const err = error as FirebaseError;
@@ -65,16 +91,6 @@ export const editSubject = async (userId: string, subjectId: string, data: any) 
 			...data,
 			updatedAt: serverTimestamp(),
 		});
-		return '';
-	} catch (error) {
-		const err = error as FirebaseError;
-		return getFirebaseErr(err.message);
-	}
-};
-
-export const deleteScore = async (userId: string, subjectId: string, scoreId: string) => {
-	try {
-		await deleteDoc(doc(db, 'users', userId, 'subjects', subjectId, 'scores', scoreId));
 		return '';
 	} catch (error) {
 		const err = error as FirebaseError;

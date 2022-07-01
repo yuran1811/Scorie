@@ -1,10 +1,11 @@
+import { SubjectDetailType } from 'shared';
+import { addNewScore } from 'services';
+import { useStore } from 'store';
 import { IgnoreIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
-import { FC, HTMLProps, useCallback, useState } from 'react';
+import { FC, HTMLProps, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { addNewScore } from 'services';
-import { useStore } from 'store';
 
 interface Inputs {
 	score: string;
@@ -12,7 +13,15 @@ interface Inputs {
 	type: string;
 }
 
-export const ScoreAddNew: FC<HTMLProps<HTMLDivElement>> = ({ id: subjectId, onClick }) => {
+interface ScoreAddNewProps {
+	subject: SubjectDetailType | undefined;
+}
+
+export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({
+	subject,
+
+	onClick,
+}) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const [scoreOptions, setScoreOptions] = useState({ isIgnored: false });
@@ -24,23 +33,23 @@ export const ScoreAddNew: FC<HTMLProps<HTMLDivElement>> = ({ id: subjectId, onCl
 		formState: { errors },
 	} = useForm<Inputs>();
 
-	const onSubmit: SubmitHandler<Inputs> = useCallback(
-		(data) => {
-			if (!currentUser || !currentUser?.uid || !subjectId) return;
+	const onSubmit: SubmitHandler<Inputs> = (data) => {
+		if (!currentUser || !currentUser?.uid || !subject || !subject.id) return;
 
-			const { base, score: value, type } = data;
+		const { base, score: value, type } = data;
 
-			const resp = addNewScore(currentUser.uid, subjectId, {
-				isIgnored: scoreOptions.isIgnored,
-				base: +base,
-				type,
-				value: +value,
-			});
+		const scoreToAdd = {
+			id: (subject.scores.length ? +subject.scores[subject.scores.length - 1].id + 1 : 1) + '',
+			isIgnored: scoreOptions.isIgnored,
+			type,
+			base: +base,
+			value: +value,
+		};
 
-			reset({ score: '', base: '', type: '' }, { keepErrors: false });
-		},
-		[scoreOptions]
-	);
+		addNewScore(currentUser.uid, subject.id, scoreToAdd);
+
+		reset({ score: '', base: '', type: '' }, { keepErrors: false });
+	};
 
 	return (
 		<ModalBox onClick={onClick}>

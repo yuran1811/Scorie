@@ -1,7 +1,7 @@
-import { ArrowDownIcon, ArrowRightIcon } from 'components/icons';
-import { FC, useState } from 'react';
 import { DocDataType } from 'shared';
 import { DocItemContent } from './DocItemContent';
+import { ArrowDownIcon, ArrowRightIcon } from 'components/icons';
+import { FC, useState } from 'react';
 
 interface DocItemProps {
 	data: DocDataType;

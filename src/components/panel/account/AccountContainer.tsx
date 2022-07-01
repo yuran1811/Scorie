@@ -1,6 +1,6 @@
 import { AccountPanelProvider } from 'contexts';
-import AccountBar from './AccountBar';
 import AccountPanel from './AccountPanel';
+import AccountBar from './AccountBar';
 
 const AccountContainer = () => (
 	<AccountPanelProvider>

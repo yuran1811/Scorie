@@ -1,11 +1,11 @@
-import { FacebookIcon, GoogleIcon } from 'components/icons';
-import { ErrorMessage } from 'components/interfaces';
-import { ModalBox, ModalBoxHeader } from 'components/shared';
-import { AuthProvider, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { FC, useState } from 'react';
 import { auth } from 'shared';
 import { getFirebaseErr } from 'utils';
 import { LogInButton } from './LogInButton';
+import { ErrorMessage } from 'components/interfaces';
+import { FacebookIcon, GoogleIcon } from 'components/icons';
+import { ModalBox, ModalBoxHeader } from 'components/shared';
+import { AuthProvider, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { FC, useState } from 'react';
 
 export const SignIn: FC = () => {
 	const [isAlertOpened, setIsAlertOpened] = useState(false);

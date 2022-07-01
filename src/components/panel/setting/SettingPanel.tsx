@@ -1,7 +1,7 @@
 import { BackIcon } from 'components/icons';
+import { SettingInfo } from './SettingInfo';
 import { useMenu, useSetting } from 'contexts';
 import { FC, HTMLProps, useEffect } from 'react';
-import { SettingInfo } from './SettingInfo';
 
 const SettingPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
 	const { active: menuActive } = useMenu();

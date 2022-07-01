@@ -19,7 +19,6 @@ const swiperOptions: SwiperProps = {
 		750: { slidesPerView: 2 },
 		0: { slidesPerView: 1 },
 	},
-	onSlideChange: ({ activeIndex }) => console.log(activeIndex),
 };
 
 export const SectionSwiper: FC<SectionSwiperProps> = ({ children, breakpoints }) => (

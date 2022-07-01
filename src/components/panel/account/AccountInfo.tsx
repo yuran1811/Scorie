@@ -1,24 +1,20 @@
-import { NotVerifyEmail } from 'components/auth/NotVerifyEmail';
-import { LogOutIcon } from 'components/icons';
-import { ErrorMessage } from 'components/interfaces';
-import { Button } from 'components/shared';
-import { sendPasswordResetEmail, signOut } from 'firebase/auth';
-import { FC, useEffect, useState } from 'react';
 import { auth } from 'shared';
 import { useStore } from 'store';
 import { getFirebaseErr } from 'utils';
+import { Button } from 'components/shared';
+import { LogOutIcon } from 'components/icons';
+import { ErrorMessage } from 'components/interfaces';
+import { NotVerifyEmail } from 'components/auth/NotVerifyEmail';
+import { sendPasswordResetEmail, signOut } from 'firebase/auth';
+import { FC, useEffect, useState } from 'react';
 
 export const AccountInfo: FC = () => {
 	const currentUser = useStore((s) => s.currentUser);
 
-	const [timeoutId, setTimeoutId] = useState<any>();
-	const [canChangePW, setCanChangePW] = useState(true);
+	const [changePWMes, setChangePWMes] = useState({ type: 'null', message: '', timer: -1 });
 	const [messageExpired, setMessageExpired] = useState(true);
-	const [changePWMes, setChangePWMes] = useState({
-		type: 'null',
-		message: '',
-		timer: -1,
-	});
+	const [canChangePW, setCanChangePW] = useState(true);
+	const [timeoutId, setTimeoutId] = useState<any>();
 
 	useEffect(() => {
 		setMessageExpired(false);
@@ -28,7 +24,6 @@ export const AccountInfo: FC = () => {
 		if (changePWMes.timer > 0)
 			setTimeoutId(
 				setTimeout(() => {
-					console.log('Set time out');
 					setMessageExpired(true);
 				}, changePWMes.timer * 1000)
 			);

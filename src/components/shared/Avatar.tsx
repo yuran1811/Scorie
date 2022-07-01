@@ -22,5 +22,5 @@ export const Avatar: FC<AvatarProps & HTMLProps<HTMLDivElement>> = ({ imgUrl, ra
 			backgroundRepeat: 'no-repeat',
 			border: '0.2rem solid white',
 		}}
-	></div>
+	/>
 );

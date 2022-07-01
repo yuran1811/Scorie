@@ -1,6 +1,6 @@
 import { SettingProvider } from 'contexts';
-import SettingBar from './SettingBar';
 import SettingPanel from './SettingPanel';
+import SettingBar from './SettingBar';
 
 const SettingContainer = () => (
 	<SettingProvider>

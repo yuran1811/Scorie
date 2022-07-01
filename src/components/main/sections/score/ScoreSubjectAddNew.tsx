@@ -1,11 +1,12 @@
+import { useStore } from 'store';
+import { getFirebaseErr } from 'utils';
+import { SubjectDetailType } from 'shared';
+import { addNewScore, addNewSubject, editSubject } from 'services';
 import { IgnoreIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
 import { FC, HTMLProps, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { addNewScore, addNewSubject } from 'services';
-import { SubjectDetailType } from 'shared';
-import { useStore } from 'store';
 
 interface Inputs {
 	subject: string;
@@ -36,35 +37,39 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & HTMLProps<HTMLDivE
 
 			const { base, score: value, type, subject } = data;
 
-			const notUnique = subjects.find((_) => _.name === subject);
-			if (!notUnique) {
+			const validSubject = subjects.find((_) => _.name === subject);
+			if (!validSubject) {
 				addNewSubject(currentUser.uid, {
-					isIgnored: false,
+					name: subject,
 					isSpecial: false,
 					isVital: false,
-					name: subject,
+					isIgnored: false,
+					scores: [],
 				}).then(({ data }) => {
-					if (typeof data === 'string' || !data?.id) return;
+					if (!data) return;
 
 					addNewScore(currentUser.uid, data.id, {
+						id: '1',
 						isIgnored: scoreOptions.isIgnored,
-						base: +base,
 						type,
+						base: +base,
 						value: +value,
 					});
 				});
 			} else {
-				addNewScore(currentUser.uid, notUnique.id, {
+				addNewScore(currentUser.uid, validSubject.id, {
+					id: +validSubject.scores[validSubject.scores.length - 1].id + 1 + '',
 					isIgnored: scoreOptions.isIgnored,
-					base: +base,
 					type,
+					base: +base,
 					value: +value,
 				});
 			}
 
 			reset({ score: '', base: '', type: '' }, { keepErrors: false });
 		},
-		[scoreOptions, subjects]);
+		[scoreOptions, subjects]
+	);
 
 	return (
 		<ModalBox onClick={onClick}>

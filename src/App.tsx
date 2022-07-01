@@ -1,13 +1,13 @@
-import { MainLayout } from 'components/main/MainLayout';
-import { ScoreSectionBar } from 'components/main/sections/score/ScoreSectionBar';
+import { useStore } from 'store';
+import { auth, db } from 'shared';
 import { Footer, Header } from 'components/partials';
-import { ErrorContent, Loading } from 'components/shared';
+import { MainLayout } from 'components/main/MainLayout';
+import { ErrorContent, FullScreenLoading } from 'components/shared';
+import { ScorePage } from 'components/main/sections/score/ScorePage';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { FC, useEffect } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
-import { auth, db } from 'shared';
-import { useStore } from 'store';
 
 const App: FC = () => {
 	const currentUser = useStore((s) => s.currentUser);
@@ -39,8 +39,8 @@ const App: FC = () => {
 
 				<Routes>
 					<Route path='/'>
-						<Route index element={currentUser === undefined ? <Loading /> : <MainLayout />} />
-						<Route path='subjects' element={<ScoreSectionBar />} />
+						<Route index element={currentUser === undefined ? <FullScreenLoading /> : <MainLayout />} />
+						<Route path='subjects' element={<ScorePage />} />
 					</Route>
 					<Route path='*' element={<ErrorContent />} />
 				</Routes>
