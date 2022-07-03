@@ -1,36 +1,53 @@
-import { AddIcon, DoneIcon, NoteIcon, ProgressIcon } from 'components/icons';
-import { useMemo, useState } from 'react';
-import { NoteDetailType } from 'shared';
-import { SectionSwiper } from '../SectionSwiper';
+import { useStore } from 'store';
+import { useCollectionQuery } from 'hooks';
+import { db, NoteDetailType } from 'shared';
+import { filterList, getNoteList } from 'utils';
 import { Title } from '../Title';
 import { NoteAddNew } from './NoteAddNew';
-import { NoteDetail } from './NoteDetail';
+import { NoteSection } from './NoteSection';
+import { AddIcon, ArchiveIcon, DoneIcon, FlatLoading, NoteIcon, ProgressIcon } from 'components/icons';
+import { collection, orderBy, query } from 'firebase/firestore';
+import { useMemo, useState } from 'react';
+
+export interface NoteListType {
+	id: string;
+	isShow: boolean;
+	note: NoteDetailType;
+}
+
+export interface NoteListFilterType {
+	hasDone: boolean;
+	hasInProgress: boolean;
+	hasArchived: boolean;
+}
 
 export const NoteSectionBar = () => {
+	const currentUser = useStore((s) => s.currentUser);
+
+	const { data, loading, error } = useCollectionQuery(
+		'users_notes',
+		query(collection(db, 'users', currentUser?.uid as string, 'notes'), orderBy('updatedAt', 'desc'))
+	);
+
 	const [addNewOpen, setAddNewOpen] = useState(false);
 	const [filter, setFilter] = useState({
 		hasDone: false,
-		hasProgress: false,
+		hasInProgress: false,
+		hasArchived: false,
 	});
 
-	const notes = [] as NoteDetailType[];
+	const notes = useMemo(() => {
+		if (loading || error || data === null) return [];
 
-	const noteList = useMemo(() => {
-		if (!filter.hasDone && !filter.hasProgress) return notes;
-
-		return notes.filter((note) => {
-			if (filter.hasDone && filter.hasProgress) return note;
-
-			if (filter.hasDone) return note.isDone && !note.isInProgress;
-			if (filter.hasProgress) return note.isInProgress && !note.isDone;
-		});
-	}, [filter, notes]);
+		return getNoteList(data);
+	}, [data, loading, error]);
+	const noteList = useMemo(() => filterList(notes, filter), [filter, notes]);
 
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
-			<div className='w-full flexcenter flex-wrap'>
+			<div className='w-full flexcenter flex-wrap px-4'>
 				<Title Icon={NoteIcon} content='Notes' />
-				<div className='flexcenter px-6 py-8'>
+				<div className='flexcenter flex-wrap px-6 py-8'>
 					<DoneIcon
 						className='cursor-pointer mx-5'
 						fill={!filter.hasDone ? 'white' : '#fcd34d'}
@@ -40,10 +57,17 @@ export const NoteSectionBar = () => {
 					/>
 					<ProgressIcon
 						className='cursor-pointer mx-5'
-						fill={!filter.hasProgress ? 'white' : '#38bdf8'}
+						fill={!filter.hasInProgress ? 'white' : '#38bdf8'}
 						width='50'
 						height='50'
-						onClick={() => setFilter((f) => ({ ...f, hasProgress: !f.hasProgress }))}
+						onClick={() => setFilter((f) => ({ ...f, hasInProgress: !f.hasInProgress }))}
+					/>
+					<ArchiveIcon
+						className='cursor-pointer mx-5'
+						fill={!filter.hasArchived ? 'white' : '#38bdf8'}
+						width='50'
+						height='50'
+						onClick={() => setFilter((f) => ({ ...f, hasArchived: !f.hasArchived }))}
 					/>
 
 					<AddIcon
@@ -56,20 +80,22 @@ export const NoteSectionBar = () => {
 				</div>
 			</div>
 
-			<div className='font-semibold text-[3rem] text-white text-center italic p-4 mt-4'>
-				{noteList.length} notes found
-			</div>
+			{loading ? (
+				<div className='flexcenter w-full h-[10rem]'>
+					<FlatLoading />
+				</div>
+			) : (
+				<>
+					{noteList !== null && noteList.length !== 0 && (
+						<NoteSection filter={filter} group='pinned' title='Pinned' notes={noteList} />
+					)}
+					{noteList !== null && noteList.length !== 0 && (
+						<NoteSection filter={filter} group='other' title='Other' notes={noteList} />
+					)}
+				</>
+			)}
 
-			<SectionSwiper
-				breakpoints={{
-					1080: { slidesPerView: 3 },
-					640: { slidesPerView: 2 },
-					0: { slidesPerView: 1 },
-				}}
-			></SectionSwiper>
-			<NoteDetail />
-
-			{addNewOpen && <NoteAddNew onClickHandle={setAddNewOpen} />}
+			{addNewOpen && <NoteAddNew notes={noteList} onClickHandle={setAddNewOpen} />}
 		</div>
 	);
 };

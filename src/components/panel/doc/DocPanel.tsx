@@ -1,9 +1,10 @@
-import { DocInfo } from './DocInfo';
+import { useDocPanel, useMenu } from 'contexts';
 import { BackIcon } from 'components/icons';
-import { useMenu, useDocPanel } from 'contexts';
-import { FC, HTMLProps, useEffect } from 'react';
+import { DocInfo } from './DocInfo';
+import { DivProps } from 'shared';
+import { FC, useEffect } from 'react';
 
-const DocPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
+const DocPanel: FC<DivProps> = ({ className }) => {
 	const { active: menuActive } = useMenu();
 	const { active, setActive } = useDocPanel();
 

@@ -1,9 +1,10 @@
-import { BackIcon } from 'components/icons';
+import { DivProps } from 'shared';
 import { SettingInfo } from './SettingInfo';
+import { BackIcon } from 'components/icons';
 import { useMenu, useSetting } from 'contexts';
-import { FC, HTMLProps, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 
-const SettingPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
+const SettingPanel: FC<DivProps> = ({ className }) => {
 	const { active: menuActive } = useMenu();
 	const { active, setActive } = useSetting();
 

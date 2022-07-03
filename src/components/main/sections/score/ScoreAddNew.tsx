@@ -1,10 +1,10 @@
-import { SubjectDetailType } from 'shared';
+import { DivProps, SubjectDetailType } from 'shared';
 import { addNewScore } from 'services';
 import { useStore } from 'store';
 import { IgnoreIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
-import { FC, HTMLProps, useState } from 'react';
+import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface Inputs {
@@ -17,7 +17,7 @@ interface ScoreAddNewProps {
 	subject: SubjectDetailType | undefined;
 }
 
-export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({
+export const ScoreAddNew: FC<ScoreAddNewProps & DivProps> = ({
 	subject,
 
 	onClick,
@@ -41,9 +41,9 @@ export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({
 		const scoreToAdd = {
 			id: (subject.scores.length ? +subject.scores[subject.scores.length - 1].id + 1 : 1) + '',
 			isIgnored: scoreOptions.isIgnored,
-			type,
-			base: +base,
-			value: +value,
+			type: type.trim(),
+			base: +base.trim(),
+			value: +value.trim(),
 		};
 
 		addNewScore(currentUser.uid, subject.id, scoreToAdd);
@@ -72,7 +72,11 @@ export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({
 					placeholder='Score'
 					defaultValue=''
 					formHandle={{
-						...register('score', { required: true, pattern: /(\d+)(\.\d+)?/ }),
+						...register('score', {
+							required: true,
+							pattern: /(\d+)(\.\d+)?/,
+							validate: (value) => value.trim().length !== 0,
+						}),
 					}}
 				/>
 				{errors?.score && (
@@ -86,7 +90,11 @@ export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({
 					placeholder='Base'
 					defaultValue=''
 					formHandle={{
-						...register('base', { required: true, pattern: /\d+/ }),
+						...register('base', {
+							required: true,
+							pattern: /\d+/,
+							validate: (value) => value.trim().length !== 0,
+						}),
 					}}
 				/>
 				{errors?.base && (
@@ -100,7 +108,11 @@ export const ScoreAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({
 					placeholder='Type'
 					defaultValue=''
 					formHandle={{
-						...register('type', { required: true, pattern: /^\S[\w\d\s]+\S$/ }),
+						...register('type', {
+							required: true,
+							pattern: /[\w\d\s]+/,
+							validate: (value) => value.trim().length !== 0,
+						}),
 					}}
 				/>
 				{errors?.type && (

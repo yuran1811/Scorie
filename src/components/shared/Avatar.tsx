@@ -1,11 +1,12 @@
-import { FC, HTMLProps } from 'react';
+import { FC } from 'react';
+import { DivProps } from 'shared';
 
 interface AvatarProps {
 	imgUrl: string | null;
 	radius: string;
 }
 
-export const Avatar: FC<AvatarProps & HTMLProps<HTMLDivElement>> = ({ imgUrl, radius, ...otherProps }) => (
+export const Avatar: FC<AvatarProps & DivProps> = ({ imgUrl, radius, ...otherProps }) => (
 	<div
 		{...otherProps}
 		style={{

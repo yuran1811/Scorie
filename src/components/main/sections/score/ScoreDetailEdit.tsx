@@ -1,11 +1,12 @@
 import { useStore } from 'store';
-import { ScoreDetailType, SubjectDetailType } from 'shared';
+import { DivProps, ScoreDetailType, SubjectDetailType } from 'shared';
 import { ErrorMessage } from 'components/interfaces';
 import { IgnoreIcon, TrashIcon } from 'components/icons';
 import { Button, Input, ModalBox, ModalBoxHeader, TimeContainer } from 'components/shared';
-import { FC, HTMLProps, useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { editSubject } from 'services';
+import { Timestamp } from 'firebase/firestore';
 
 interface Inputs {
 	score: string;
@@ -19,12 +20,7 @@ interface ScoreDetailProps {
 	scores: ScoreDetailType[];
 }
 
-export const ScoreDetailEdit: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> = ({
-	subject,
-	score,
-	scores,
-	onClick,
-}) => {
+export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, score, scores, onClick }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const [scoreOptions, setScoreOptions] = useState({
@@ -50,21 +46,24 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> =
 
 	const onSubmit: SubmitHandler<Inputs> = useCallback(
 		(data) => {
-			if (!currentUser || !currentUser?.uid || !subject?.id || !scores.length || !score || !score?.id)
-				return;
+			if (!currentUser || !currentUser?.uid || !subject?.id || !scores.length || !score || !score?.id) return;
 
 			const { base, score: value, type } = data;
 
-			const scoreToEdit = {
-				id: score.id,
-				isIgnored: scoreOptions.isIgnored,
-				type,
-				base: +base,
-				value: +value,
-			};
-
+			const prevScore = scores.find((_) => _.id === score.id);
 			const scoreIdx = scores.findIndex((_) => _.id === score.id);
 			const newscores = [...scores];
+
+			const scoreToEdit = {
+				...prevScore,
+				id: score.id,
+				isIgnored: scoreOptions.isIgnored,
+				type: type.trim(),
+				base: +base.trim(),
+				value: +value.trim(),
+				updatedAt: Timestamp.fromDate(new Date()),
+			};
+
 			newscores.splice(scoreIdx, 1, scoreToEdit);
 
 			editSubject(currentUser.uid, subject.id, { scores: [...newscores] });
@@ -133,7 +132,11 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> =
 					placeholder='Type'
 					defaultValue={score?.type || ''}
 					formHandle={{
-						...register('type', { required: true, pattern: /^\S[\w\d\s]+\S$/ }),
+						...register('type', {
+							required: true,
+							pattern: /[\w\d\s]+/,
+							validate: (value) => value.trim().length !== 0,
+						}),
 					}}
 				/>
 				{errors?.type && (

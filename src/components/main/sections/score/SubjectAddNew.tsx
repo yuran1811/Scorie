@@ -1,10 +1,10 @@
 import { useStore } from 'store';
-import { SubjectDetailType } from 'shared';
+import { DivProps, SubjectDetailType } from 'shared';
 import { addNewSubject, validateSubjectOption } from 'services';
 import { ErrorMessage } from 'components/interfaces';
 import { IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
-import { Dispatch, FC, HTMLProps, SetStateAction, useCallback, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface Inputs {
@@ -16,7 +16,7 @@ interface ScoreAddNewProps {
 	onClickHandle: Dispatch<SetStateAction<boolean>>;
 }
 
-export const SubjectAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = ({ subjects, onClickHandle }) => {
+export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onClickHandle }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const [status, setStatus] = useState({ type: 'ok', message: '' });
@@ -55,7 +55,7 @@ export const SubjectAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = (
 
 				addNewSubject(currentUser.uid, {
 					...subjectOptions,
-					name: subject,
+					name: subject.trim(),
 					scores: [],
 				});
 			}
@@ -98,7 +98,11 @@ export const SubjectAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = (
 					placeholder='Subject'
 					defaultValue=''
 					formHandle={{
-						...register('subject', { required: true, pattern: /[\w\d]+/ }),
+						...register('subject', {
+							required: true,
+							pattern: /[\w\d]+/,
+							validate: (value) => value.trim().length !== 0,
+						}),
 					}}
 				/>
 				{errors?.subject && (
@@ -109,6 +113,7 @@ export const SubjectAddNew: FC<ScoreAddNewProps & HTMLProps<HTMLDivElement>> = (
 						}
 					/>
 				)}
+
 				{status.type === 'errors' && <ErrorMessage extraStyle='text-[3rem]' content={status.message} />}
 
 				<Button type='submit' content='Add' />

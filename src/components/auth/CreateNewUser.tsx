@@ -6,6 +6,7 @@ import { ErrorMessage } from 'components/interfaces';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
+import { ThreeDotsFade } from 'components/icons';
 
 interface CreateNewInputs {
 	displayName: string;
@@ -17,8 +18,9 @@ interface CreateNewInputs {
 export const CreateNewUser: FC = ({ children }) => {
 	const setCurrentUser = useStore((s) => s.setCurrentUser);
 
+	const [loading, setLoading] = useState(false);
 	const [errMsg, setErrMsg] = useState('');
-	
+
 	const password = useRef({});
 
 	const {
@@ -31,11 +33,17 @@ export const CreateNewUser: FC = ({ children }) => {
 	const onSubmit: SubmitHandler<CreateNewInputs> = useCallback((data) => {
 		const { email, password, displayName } = data;
 
-		createUserWithEmailAndPassword(auth, email, password)
+		setLoading(true);
+
+		createUserWithEmailAndPassword(auth, email.trim(), password.trim())
 			.then((userCredential) => {
 				const user = userCredential.user;
 
-				updateProfile(user, { displayName })
+				updateProfile(user, { displayName: displayName.trim() })
+					.then((userCredential) => {
+						setLoading(false);
+						return userCredential;
+					})
 					.then(() => {
 						console.log('User Profile updated !');
 						setCurrentUser(user);
@@ -64,12 +72,27 @@ export const CreateNewUser: FC = ({ children }) => {
 
 	return (
 		<>
-			<form className='flexcentercol !justify-start mt-6' onSubmit={handleSubmit(onSubmit)}>
+			{loading && (
+				<div className='w-full flexcenter p-6 h-[10rem]'>
+					<ThreeDotsFade />
+				</div>
+			)}
+
+			<form
+				className={`${loading ? '!hidden' : ''} flexcentercol !justify-start mt-6`}
+				onSubmit={handleSubmit(onSubmit)}
+			>
 				<Input
 					name='displayName'
 					placeholder='Name'
 					defaultValue=''
-					formHandle={{ ...register('displayName', { required: true, pattern: /^[\w\d]+$/ }) }}
+					formHandle={{
+						...register('displayName', {
+							required: true,
+							pattern: /[\w\d\s]+/,
+							validate: (value) => value.trim().length !== 0,
+						}),
+					}}
 				/>
 				{errors?.displayName && (
 					<ErrorMessage
@@ -85,7 +108,8 @@ export const CreateNewUser: FC = ({ children }) => {
 					formHandle={{
 						...register('email', {
 							required: true,
-							pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+							pattern: /\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/,
+							validate: (value) => value.trim().length !== 0,
 						}),
 					}}
 				/>
@@ -100,7 +124,7 @@ export const CreateNewUser: FC = ({ children }) => {
 					name='password'
 					placeholder='Password'
 					defaultValue=''
-					formHandle={{ ...register('password', { required: true, pattern: /^[\d\w]{6,}$/ }) }}
+					formHandle={{ ...register('password', { required: true, pattern: /[\w\d]{6,}/ }) }}
 				/>
 				{errors?.password && (
 					<ErrorMessage

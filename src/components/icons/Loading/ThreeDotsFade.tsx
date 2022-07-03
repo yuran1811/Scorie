@@ -1,8 +1,9 @@
-import { FC, HTMLProps } from 'react';
+import { FC } from 'react';
+import { DivProps } from 'shared';
 
-const dotStyle = `w-[1.6rem] h-[1.6rem] rounded-[50%] bg-red-400 animate-threeDots`;
+const dotStyle = `w-[1.6rem] h-[1.6rem] rounded-[50%] bg-current animate-threeDots`;
 
-export const ThreeDotsFade: FC<HTMLProps<HTMLDivElement>> = ({ className }) => (
+export const ThreeDotsFade: FC<DivProps> = ({ className }) => (
 	<div className={`${className || ''} w-[6rem] flex flex-row flex-nowrap items-center justify-between`}>
 		<div className={dotStyle} style={{ animationDelay: '-0.4s' }}></div>
 		<div className={dotStyle} style={{ animationDelay: '-0.2s' }}></div>

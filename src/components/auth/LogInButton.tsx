@@ -1,15 +1,11 @@
-import { FC, HTMLProps } from 'react';
+import { FC } from 'react';
+import { ButtonProps } from 'shared';
 
 interface LogInButtonProps {
 	extraStyle?: string;
 }
 
-export const LogInButton: FC<LogInButtonProps & HTMLProps<HTMLButtonElement>> = ({
-	children,
-	disabled,
-	extraStyle,
-	onClick,
-}) => (
+export const LogInButton: FC<LogInButtonProps & ButtonProps> = ({ children, disabled, extraStyle, onClick }) => (
 	<button
 		disabled={disabled}
 		onClick={onClick}

@@ -4,7 +4,7 @@ import { getFirebaseErr } from 'utils';
 import { CreateNewUser } from './CreateNewUser';
 import { Button, Input } from 'components/shared';
 import { ErrorMessage } from 'components/interfaces';
-import { ArrowLeftIcon, ArrowRightIcon, LogInIcon } from 'components/icons';
+import { ArrowLeftIcon, ArrowRightIcon, LogInIcon, ThreeDotsFade } from 'components/icons';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -17,6 +17,7 @@ interface Inputs {
 const SignInUseEmailPassWord = () => {
 	const setCurrentUser = useStore((s) => s.setCurrentUser);
 
+	const [loading, setLoading] = useState(false);
 	const [errMsg, setErrMsg] = useState('');
 	const [isNew, setNew] = useState(false);
 
@@ -30,7 +31,13 @@ const SignInUseEmailPassWord = () => {
 	const onSubmit: SubmitHandler<Inputs> = useCallback((data) => {
 		const { email, password } = data;
 
-		signInWithEmailAndPassword(auth, email, password)
+		setLoading(true);
+
+		signInWithEmailAndPassword(auth, email.trim(), password.trim())
+			.then((userCredential) => {
+				setLoading(false);
+				return userCredential;
+			})
 			.then((userCredential) => {
 				const user = userCredential.user;
 				setCurrentUser(user);
@@ -54,7 +61,16 @@ const SignInUseEmailPassWord = () => {
 				</CreateNewUser>
 			) : (
 				<>
-					<form className='flexcentercol !justify-start mt-6' onSubmit={handleSubmit(onSubmit)}>
+					{loading && (
+						<div className='w-full flexcenter p-6 h-[10rem]'>
+							<ThreeDotsFade />
+						</div>
+					)}
+
+					<form
+						className={`${loading ? '!hidden' : ''} flexcentercol !justify-start mt-6`}
+						onSubmit={handleSubmit(onSubmit)}
+					>
 						<Input
 							name='email'
 							placeholder='Email'
@@ -62,7 +78,8 @@ const SignInUseEmailPassWord = () => {
 							formHandle={{
 								...register('email', {
 									required: true,
-									pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+									pattern: /\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/,
+									validate: (value) => value.trim().length !== 0,
 								}),
 							}}
 						/>
@@ -77,7 +94,7 @@ const SignInUseEmailPassWord = () => {
 							name='password'
 							placeholder='Password'
 							defaultValue=''
-							formHandle={{ ...register('password', { required: true, pattern: /^[\d\w]{6,}$/ }) }}
+							formHandle={{ ...register('password', { required: true, pattern: /[\w\d]{6,}/ }) }}
 						/>
 						{errors?.password && (
 							<ErrorMessage

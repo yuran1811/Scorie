@@ -1,7 +1,7 @@
 import { db, ScoreDetailType, SubjectDetailType } from 'shared';
 import { getFirebaseErr } from 'utils';
 import { FirebaseError } from 'firebase/app';
-import { addDoc, collection, deleteDoc, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
 
 export const validateSubjectOption = (opt: { isIgnored: boolean; isSpecial: boolean; isVital: boolean }) =>
 	opt.isIgnored && (opt.isSpecial || opt.isVital);
@@ -18,10 +18,14 @@ export const addNewScore = async (userId: string, subjectId: string, data: Score
 				errorMessage: 'No subject',
 			};
 
+		const scoreToAdd: ScoreDetailType = {
+			...data,
+			createdAt: Timestamp.fromDate(new Date()),
+			updatedAt: Timestamp.fromDate(new Date()),
+		};
+
 		const resp = await editSubject(userId, subjectId, {
-			scores: [...subjectData.scores, data],
-			createdAt: serverTimestamp(),
-			updatedAt: serverTimestamp(),
+			scores: [...subjectData.scores, scoreToAdd],
 		});
 
 		return {
@@ -68,14 +72,12 @@ export const editScore = async (userId: string, subjectId: string, data: ScoreDe
 		if (!subjectData || !subjectData?.scores) return '';
 		const scoreIndex = subjectData.scores.findIndex((_) => _.id === data.id);
 
-		if (scoreIndex > -1) {
-			subjectData.scores.splice(scoreIndex, 1);
-		}
+		if (scoreIndex > -1) subjectData.scores.splice(scoreIndex, 1);
+
+		const scoreToEdit = { ...data, updatedAt: Timestamp.fromDate(new Date()) };
 
 		await editSubject(userId, subjectId, {
-			scores: [...subjectData.scores, data],
-			createdAt: serverTimestamp(),
-			updatedAt: serverTimestamp(),
+			scores: [...subjectData.scores, scoreToEdit],
 		});
 
 		return '';

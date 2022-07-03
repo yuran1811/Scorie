@@ -1,38 +1,14 @@
+import { Tools } from './Tools';
 import { MenuProvider } from 'contexts';
 import { Panel } from 'components/panel';
-import { Avatar, ModalBox, ModalBoxHeader } from 'components/shared';
-import { MenuIcon, MessageIcon, NotificationIcon } from 'components/icons';
-import { FC, useCallback, useState } from 'react';
+import { MenuIcon } from 'components/icons';
+import { Avatar, ClickAway, ModalBox, ModalBoxHeader } from 'components/shared';
 import { Link } from 'react-router-dom';
+import { FC, useState } from 'react';
 
 export const Header: FC = () => {
-	const [notificationActive, setNotificationActive] = useState(false);
 	const [showMore, setShowMore] = useState(false);
 	const [isOpened, setOpened] = useState(false);
-
-	const getNotification = useCallback(({ title, options }) => new Notification(title, options), []);
-
-	const notificationHandle = useCallback(() => {
-		if (!('Notification' in window)) {
-			alert('This browser does not support desktop notification');
-			return;
-		}
-
-		const { permission } = Notification;
-
-		if (permission === 'granted') {
-			setNotificationActive(true);
-			getNotification({
-				title: 'Allowed Scorie to send notification !',
-				option: { body: 'Created by Scorie' },
-			});
-		}
-
-		if (permission === 'denied') {
-			setNotificationActive(false);
-			setOpened(true);
-		}
-	}, []);
 
 	return (
 		<header className='z-20 flexcenter !justify-between sticky top-0 w-full h-[8rem] bg-ctbg'>
@@ -46,26 +22,14 @@ export const Header: FC = () => {
 			</Link>
 
 			<div className='flex items-center justify-end w-[9.5rem] h-[5.5rem]'>
+				<ClickAway className={`${showMore ? 'z-0' : 'hidden z-[-1]'}`} onClick={() => setShowMore(false)} />
 				<Avatar
 					className='cursor-pointer absolute right-0 mx-8'
 					imgUrl=''
 					radius='5.5rem'
 					onClick={() => setShowMore((a) => !a)}
 				/>
-				<div
-					className={`${
-						showMore ? 'flex' : 'hidden'
-					} tablet:flex tablet:flex-row flex-col items-center tablet:justify-end justify-start absolute tablet:right-[10rem] right-[1rem] tablet:top-[1rem] top-[9rem] bg-ctbg rounded-[1.5rem] border-indigo-200 border-l-[0.5rem] border-b-[0.5rem]`}
-				>
-					<MessageIcon className='cursor-pointer my-4 mx-6' width='40' height='40' />
-					<NotificationIcon
-						className='cursor-pointer my-4 mx-6'
-						active={notificationActive}
-						width='40'
-						height='40'
-						onClick={notificationHandle}
-					/>
-				</div>
+				<Tools showMore={showMore} setOpened={setOpened} />
 			</div>
 
 			{isOpened && (

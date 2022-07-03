@@ -1,8 +1,9 @@
 import { BookIcon } from 'components/icons';
 import { useDocPanel } from 'contexts';
-import { FC, HTMLProps } from 'react';
+import { DivProps } from 'shared';
+import { FC } from 'react';
 
-const DocBar: FC<HTMLProps<HTMLDivElement>> = (props) => {
+const DocBar: FC<DivProps> = (props) => {
 	const { active, setActive } = useDocPanel();
 
 	return (

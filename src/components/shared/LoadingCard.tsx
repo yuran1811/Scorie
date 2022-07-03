@@ -1,9 +1,10 @@
-import { FC, HTMLProps } from 'react';
+import { FC } from 'react';
+import { DivProps } from 'shared';
 
-export const LoadingCard: FC<HTMLProps<HTMLDivElement>> = ({ className }) => (
+export const LoadingCard: FC<DivProps> = ({ className }) => (
 	<div
 		className={`${
 			className || ''
-		} cursor-pointer tablet:max-w-[25rem] w-full h-[30rem] p-4 rounded-[2.5rem] bg-slate-400`}
+		} cursor-pointer tablet:max-w-[25rem] w-full h-[30rem] p-4 m-6 rounded-[2.5rem] bg-slate-400`}
 	/>
 );

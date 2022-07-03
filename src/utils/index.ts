@@ -2,6 +2,7 @@ export * from './checkNetworkStatus';
 export * from './dayjsUsage';
 export * from './getFirebaseErr';
 export * from './getStyles';
+export * from './notes';
 export * from './scores';
 export * from './standardize';
 

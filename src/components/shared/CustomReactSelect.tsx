@@ -13,7 +13,7 @@ import {
 	OptionProps,
 	PlaceholderProps,
 	SingleValueProps,
-	ValueContainerProps
+	ValueContainerProps,
 } from 'react-select';
 
 export interface Option {

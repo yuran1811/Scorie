@@ -1,4 +1,4 @@
-import { db, ScoreDetailType, SubjectDetailType } from 'shared';
+import { db, DivProps, ScoreDetailType, SubjectDetailType } from 'shared';
 import { getAverageScore, getAverageScoreString } from 'utils';
 import { MAX_SCORE_RECENT_LTH } from '../../../../constants';
 import { useDocumentQuery } from 'hooks';
@@ -7,7 +7,7 @@ import { IgnoreIcon, ImportantIcon, StarIcon, ThreeDotsFade } from 'components/i
 import { LoadingCard } from 'components/shared';
 import { SubjectDetail } from './SubjectDetail';
 import { doc } from 'firebase/firestore';
-import { FC, HTMLProps, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
 import { A11y } from 'swiper';
 import 'swiper/css';
@@ -27,10 +27,7 @@ const swiperOptions: SwiperProps = {
 	},
 };
 
-export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({
-	isShow,
-	subject: { id: subjectId },
-}) => {
+export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject: { id: subjectId } }) => {
 	const settings = useStore((s) => s.settings);
 	const currentUser = useStore((s) => s.currentUser);
 
@@ -53,9 +50,9 @@ export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({
 	}, [scores, settings.numberFormat]);
 
 	useEffect(() => {
-		if (loading || !data) return;
+		if (loading || data === null) return;
 
-		const newSubject = data?.data() as SubjectDetailType;
+		const newSubject = data.data() as SubjectDetailType;
 
 		if (!newSubject) return;
 
@@ -63,7 +60,7 @@ export const SubjectCard: FC<SubjectCardProps & HTMLProps<HTMLDivElement>> = ({
 	}, [data, loading]);
 
 	useEffect(() => {
-		if (!subject?.scores || !subject.scores.length) return;
+		if (!subject?.scores) return;
 		setScores([...subject.scores]);
 	}, [subject]);
 

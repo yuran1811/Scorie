@@ -1,11 +1,10 @@
 import { useStore } from 'store';
-import { getFirebaseErr } from 'utils';
-import { SubjectDetailType } from 'shared';
-import { addNewScore, addNewSubject, editSubject } from 'services';
+import { DivProps, SubjectDetailType } from 'shared';
+import { addNewScore, addNewSubject } from 'services';
 import { IgnoreIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
-import { FC, HTMLProps, useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface Inputs {
@@ -19,7 +18,7 @@ interface ScoreSubjectAddNewProps {
 	subjects: SubjectDetailType[];
 }
 
-export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & HTMLProps<HTMLDivElement>> = ({ onClick, subjects }) => {
+export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onClick, subjects }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const [scoreOptions, setScoreOptions] = useState({ isIgnored: false });
@@ -37,10 +36,10 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & HTMLProps<HTMLDivE
 
 			const { base, score: value, type, subject } = data;
 
-			const validSubject = subjects.find((_) => _.name === subject);
+			const validSubject = subjects.find((_) => _.name === subject.trim());
 			if (!validSubject) {
 				addNewSubject(currentUser.uid, {
-					name: subject,
+					name: subject.trim(),
 					isSpecial: false,
 					isVital: false,
 					isIgnored: false,
@@ -51,18 +50,18 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & HTMLProps<HTMLDivE
 					addNewScore(currentUser.uid, data.id, {
 						id: '1',
 						isIgnored: scoreOptions.isIgnored,
-						type,
-						base: +base,
-						value: +value,
+						type: type.trim(),
+						base: +base.trim(),
+						value: +value.trim(),
 					});
 				});
 			} else {
 				addNewScore(currentUser.uid, validSubject.id, {
 					id: +validSubject.scores[validSubject.scores.length - 1].id + 1 + '',
 					isIgnored: scoreOptions.isIgnored,
-					type,
-					base: +base,
-					value: +value,
+					type: type.trim(),
+					base: +base.trim(),
+					value: +value.trim(),
 				});
 			}
 
@@ -92,7 +91,11 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & HTMLProps<HTMLDivE
 					placeholder='Subject'
 					defaultValue=''
 					formHandle={{
-						...register('subject', { required: true, pattern: /[\w\d]+/ }),
+						...register('subject', {
+							required: true,
+							pattern: /[\w\d]+/,
+							validate: (value) => value.trim().length !== 0,
+						}),
 					}}
 				/>
 				{errors?.subject && (
@@ -119,9 +122,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & HTMLProps<HTMLDivE
 				<Input
 					placeholder='Base'
 					defaultValue=''
-					formHandle={{
-						...register('base', { required: true, pattern: /\d+/ }),
-					}}
+					formHandle={{ ...register('base', { required: true, pattern: /\d+/ }) }}
 				/>
 				{errors?.base && (
 					<ErrorMessage
@@ -134,7 +135,11 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & HTMLProps<HTMLDivE
 					placeholder='Type'
 					defaultValue=''
 					formHandle={{
-						...register('type', { required: true, pattern: /^\S[\w\d\s]+\S$/ }),
+						...register('type', {
+							required: true,
+							pattern: /[\w\d\s]+/,
+							validate: (value) => value.trim().length !== 0,
+						}),
 					}}
 				/>
 				{errors?.type && (

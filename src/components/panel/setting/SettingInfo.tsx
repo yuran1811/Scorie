@@ -34,7 +34,12 @@ export const SettingInfo: FC = () => {
 					<Input
 						placeholder='Type a number'
 						defaultValue={settings.numberFormat}
-						formHandle={{ ...register('numberFormat', { required: true, pattern: /^\d+$/ }) }}
+						formHandle={{
+							...register('numberFormat', {
+								required: true,
+								pattern: /\d+/,
+							}),
+						}}
 					/>
 					{errors?.numberFormat && <ErrorMessage extraStyle='text-[3rem]' content='Invalid number' />}
 

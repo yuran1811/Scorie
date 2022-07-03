@@ -2,6 +2,7 @@ import { SETTINGS_DEFAULT, SETTINGS_DEFAULT_TYPE } from '../constants';
 import { User } from 'firebase/auth';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
+import { NoteDetailType } from 'shared';
 
 interface StoreType {
 	currentUser: User | null | undefined;
@@ -9,6 +10,9 @@ interface StoreType {
 
 	settings: SETTINGS_DEFAULT_TYPE;
 	setSettings: (opts: SETTINGS_DEFAULT_TYPE) => void;
+
+	notes: NoteDetailType[];
+	setNotes: (notes: NoteDetailType[]) => void;
 }
 
 export const useStore = create<StoreType>()(
@@ -19,6 +23,9 @@ export const useStore = create<StoreType>()(
 
 			settings: { ...SETTINGS_DEFAULT },
 			setSettings: (opts) => set({ settings: { ...opts } }),
+
+			notes: [],
+			setNotes: (data) => set({ notes: [...data] }),
 		}),
 		{ name: 'local_user_data' }
 	)

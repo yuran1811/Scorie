@@ -90,7 +90,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 
 	useEffect(() => {
 		return () => clearTimeout(timeoutId);
-	}, []);
+	});
 
 	return createPortal(
 		<>

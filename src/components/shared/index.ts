@@ -1,5 +1,6 @@
 export * from './Avatar';
 export * from './Button';
+export * from './ClickAway';
 export * from './CustomReactSelect';
 export * from './ErrorContent';
 export * from './FullScreenLoading';

@@ -1,13 +1,18 @@
+import { Timestamp } from 'firebase/firestore';
 import { Dispatch, SetStateAction } from 'react';
 
 export interface NoteDetailType {
 	id: string;
-	isDone: boolean;
-	isInProgress: boolean;
+	order: number;
 	title: string;
 	data: string;
-	createdAt: string;
-	updatedAt: string;
+	theme: string;
+	isPinned: boolean;
+	isArchived: boolean;
+	isDone: boolean;
+	isInProgress: boolean;
+	createdAt?: Timestamp;
+	updatedAt?: Timestamp;
 }
 
 export interface NoteCardProps {
@@ -22,9 +27,4 @@ export interface NoteDetailProps {
 export interface NoteViewDetailProps {
 	id: string;
 	isOpened: boolean;
-}
-
-export interface NoteDetailProviderProps {
-	viewDetail: NoteViewDetailProps;
-	setViewDetail: Dispatch<SetStateAction<NoteViewDetailProps>> | null;
 }

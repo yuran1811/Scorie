@@ -3,6 +3,7 @@ import { auth, db } from 'shared';
 import { Footer, Header } from 'components/partials';
 import { MainLayout } from 'components/main/MainLayout';
 import { ErrorContent, FullScreenLoading } from 'components/shared';
+import { NotePage } from 'components/main/sections/notes/NotePage';
 import { ScorePage } from 'components/main/sections/score/ScorePage';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
@@ -41,6 +42,7 @@ const App: FC = () => {
 					<Route path='/'>
 						<Route index element={currentUser === undefined ? <FullScreenLoading /> : <MainLayout />} />
 						<Route path='subjects' element={<ScorePage />} />
+						<Route path='notes' element={<NotePage />} />
 					</Route>
 					<Route path='*' element={<ErrorContent />} />
 				</Routes>

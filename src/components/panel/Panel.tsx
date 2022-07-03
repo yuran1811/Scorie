@@ -1,12 +1,13 @@
 import { useStore } from 'store';
+import { DivProps } from 'shared';
 import { useMenu } from 'contexts';
 import DocContainer from './doc/DocContainer';
 import { Avatar, Overlay } from 'components/shared';
 import AccountContainer from './account/AccountContainer';
 import SettingContainer from './setting/SettingContainer';
-import { FC, HTMLProps } from 'react';
+import { FC } from 'react';
 
-export const Panel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
+export const Panel: FC<DivProps> = ({ className }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const { active, setActive } = useMenu();

@@ -1,7 +1,7 @@
 import { BackIcon } from 'components/icons';
 import { ErrorText } from 'components/interfaces';
-import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FC } from 'react';
 
 interface ErrorContentProps {
 	errorBoundaries?: boolean;

@@ -1,8 +1,9 @@
 import { SettingIcon } from 'components/icons';
 import { useSetting } from 'contexts';
-import { FC, HTMLProps } from 'react';
+import { DivProps } from 'shared';
+import { FC } from 'react';
 
-const SettingBar: FC<HTMLProps<HTMLDivElement>> = (props) => {
+const SettingBar: FC<DivProps> = (props) => {
 	const { active, setActive } = useSetting();
 
 	return (

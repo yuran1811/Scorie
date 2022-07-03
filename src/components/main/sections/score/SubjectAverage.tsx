@@ -1,6 +1,6 @@
-import { SubjectDetailType } from 'shared';
 import { averageScore, getAverageScoreString } from 'utils';
-import { FC, HTMLProps, useMemo } from 'react';
+import { DivProps, SubjectDetailType } from 'shared';
+import { FC, useMemo } from 'react';
 
 export interface SubjectAverageType {
 	averageScore: number;
@@ -20,11 +20,11 @@ export interface SubjectAverageProps {
 	subjects: SubjectDetailType[];
 }
 
-export const SubjectAverage: FC<SubjectAverageProps & HTMLProps<HTMLDivElement>> = ({ subjects }) => {
+export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({ subjects }) => {
 	const subjectAverageScore = useMemo(() => {
 		const averageScore = subjects.reduce(
 			(prevScore, subject) => {
-				if (!subject.scores.length) return prevScore;
+				if (subject.isIgnored || !subject.scores.length) return prevScore;
 
 				const scores = subject.scores.reduce(
 					(prevVal, val) => {

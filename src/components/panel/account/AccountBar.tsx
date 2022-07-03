@@ -1,8 +1,9 @@
 import { UserIcon } from 'components/icons';
 import { useAccountPanel } from 'contexts';
-import { FC, HTMLProps } from 'react';
+import { DivProps } from 'shared';
+import { FC } from 'react';
 
-const AccountBar: FC<HTMLProps<HTMLDivElement>> = (props) => {
+const AccountBar: FC<DivProps> = (props) => {
 	const { active, setActive } = useAccountPanel();
 
 	return (

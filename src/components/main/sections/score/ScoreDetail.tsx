@@ -1,6 +1,6 @@
-import { ScoreDetailType, SubjectDetailType } from 'shared';
+import { DivProps, ScoreDetailType, SubjectDetailType } from 'shared';
 import { ScoreDetailEdit } from './ScoreDetailEdit';
-import { FC, HTMLProps, useState } from 'react';
+import { FC, useState } from 'react';
 
 interface ScoreDetailProps {
 	subject: SubjectDetailType | undefined;
@@ -8,7 +8,7 @@ interface ScoreDetailProps {
 	scores: ScoreDetailType[];
 }
 
-export const ScoreDetail: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> = ({ subject, score, scores }) => {
+export const ScoreDetail: FC<ScoreDetailProps & DivProps> = ({ subject, score, scores }) => {
 	const [isEdited, setEdited] = useState(false);
 
 	return (
@@ -24,12 +24,7 @@ export const ScoreDetail: FC<ScoreDetailProps & HTMLProps<HTMLDivElement>> = ({ 
 			</div>
 
 			{isEdited && (
-				<ScoreDetailEdit
-					score={score}
-					subject={subject}
-					scores={scores}
-					onClick={() => setEdited(false)}
-				/>
+				<ScoreDetailEdit score={score} subject={subject} scores={scores} onClick={() => setEdited(false)} />
 			)}
 		</>
 	);

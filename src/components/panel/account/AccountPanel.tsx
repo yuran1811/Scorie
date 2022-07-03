@@ -1,12 +1,13 @@
-import { SignIn } from 'components/auth/SignIn';
-import SignInUseEmailPassWord from 'components/auth/SignInUseEmailPassword';
-import { BackIcon } from 'components/icons';
-import { useAccountPanel, useMenu } from 'contexts';
-import { FC, HTMLProps, useEffect } from 'react';
 import { useStore } from 'store';
+import { DivProps } from 'shared';
 import { AccountInfo } from './AccountInfo';
+import { BackIcon } from 'components/icons';
+import { SignIn } from 'components/auth/SignIn';
+import { useAccountPanel, useMenu } from 'contexts';
+import SignInUseEmailPassWord from 'components/auth/SignInUseEmailPassword';
+import { FC, useEffect } from 'react';
 
-const AccountPanel: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
+const AccountPanel: FC<DivProps> = ({ className }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const { active: menuActive } = useMenu();
