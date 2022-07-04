@@ -1,50 +1,55 @@
-import { filterSectionList } from 'utils';
-import { NoteItem } from './NoteItem';
-import { NoteListFilterType, NoteListType } from './NoteSectionBar';
-import { ReactSortable } from 'react-sortablejs';
-import { FC, useEffect, useState } from 'react';
-import { editNote } from 'services';
 import { useStore } from 'store';
-import { NoteDetailType } from 'shared';
+import { NoteListType, NoteSectionProps } from 'shared';
+import { NoteItem } from './NoteItem';
+import { FC, useEffect, useState } from 'react';
+import { ReactSortable } from 'react-sortablejs';
+import { updateIdxList } from 'services';
+import { filterSectionList } from 'utils';
 
-interface RegularSectionProps {
-	title: string;
-	group: string;
-	filter: NoteListFilterType;
-	notes: NoteListType[];
-}
+const SortableConfig = {
+	animation: 200,
+	swapThreshold: 0.5,
+	filter: '.filtered',
+};
 
-export const NoteSection: FC<RegularSectionProps> = ({ filter, title, group, notes }) => {
+export const NoteSection: FC<NoteSectionProps> = (props) => {
+	const { filter, notes, orderList } = props;
+
 	const currentUser = useStore((s) => s.currentUser);
 
-	const [list, setList] = useState(notes || []);
 	const [canUpdate, setCanUpdate] = useState(false);
 	const [timeoutId, setTimeoutId] = useState<any>();
-	const [dragNote, setDragNote] = useState<NoteDetailType | null>(null);
+	const [pinnedList, setPinnedList] = useState<NoteListType[]>([]);
+	const [otherList, setOtherList] = useState<NoteListType[]>([]);
 
 	useEffect(() => {
-		setList(notes);
-	}, [notes]);
+		if (!orderList || !notes) return;
+
+		const listToUse: NoteListType[] = [];
+		orderList.forEach((_) => {
+			const noteItem = notes.find((item) => item.id === _);
+			if (!noteItem) return;
+
+			listToUse.push(noteItem);
+		});
+		if (!listToUse.length) return;
+
+		const pinnedList = listToUse.filter((_) => _.note.isPinned);
+		const otherList = listToUse.filter((_) => !_.note.isPinned);
+
+		setPinnedList([...pinnedList]);
+		setOtherList([...otherList]);
+	}, [orderList, notes]);
 
 	useEffect(() => {
-		if (dragNote === null || !currentUser || !currentUser?.uid) return;
-		if (notes === null || list === null) return;
+		if (!canUpdate || notes === null || !pinnedList || !otherList) return;
+		if (!currentUser || !currentUser?.uid) return;
 
-		let isSame = true;
-		for (let i = 0; i < notes.length; i++)
-			if (notes[i].note.id !== list[i].note.id) {
-				isSame = false;
-				break;
-			}
+		const idxListToUpdate = [...pinnedList.map((_) => _.id), ...otherList.map((_) => _.id)];
+		if (idxListToUpdate.every((_, idx) => _ === orderList[idx])) return;
 
-		if (isSame) return;
-
-		if (canUpdate) {
-			console.log('Update');
-
-			// editNote(currentUser.uid, dragNote.id, {});
-		}
-	}, [list, canUpdate, dragNote]);
+		updateIdxList(currentUser.uid, [...pinnedList.map((_) => _.id), ...otherList.map((_) => _.id)]);
+	}, [pinnedList, otherList, canUpdate]);
 
 	useEffect(() => {
 		return () => clearTimeout(timeoutId);
@@ -53,45 +58,62 @@ export const NoteSection: FC<RegularSectionProps> = ({ filter, title, group, not
 	return (
 		<div className='max-w-[100rem] w-full mx-auto my-12'>
 			<div className='w-[20rem] mx-auto mb-6 font-semibold tablet:text-[5rem] text-[4rem] text-center border-b-[0.2rem] border-indigo-100'>
-				{title}
+				Pinned
 			</div>
-
 			<ReactSortable
-				group={`notes-${group || 'dnd'}`}
+				{...SortableConfig}
+				group='notes-pinned'
+				list={pinnedList}
+				setList={setPinnedList}
 				className='flex flex-wrap justify-center items-start'
-				animation={200}
-				list={list}
-				setList={setList}
-				swapThreshold={0.5}
 				sort={Boolean(+!filter.hasDone & +!filter.hasInProgress)}
-				onChoose={(e) => {
-					if (e.oldIndex) {
-						console.log(notes[e.oldIndex]);
-						setDragNote(notes[e.oldIndex].note);
-					}
-				}}
 				onMove={() => {
-					console.log('Dragging');
-
 					clearTimeout(timeoutId);
 					setCanUpdate(false);
-
 					return true;
 				}}
 				onEnd={() => {
-					console.log('Drop');
-
+					clearTimeout(timeoutId);
 					setTimeoutId(
 						setTimeout(() => {
 							setCanUpdate(true);
-						}, 5000)
+						}, 3000)
 					);
-
 					return true;
 				}}
 			>
-				{filterSectionList(list, filter, group).map((item) => (
-					<NoteItem key={item.id} isShow={item.isShow} note={item} list={list} />
+				{filterSectionList(pinnedList, filter).map((item) => (
+					<NoteItem key={item.id} isShow={item.isShow} note={item} />
+				))}
+			</ReactSortable>
+
+			<div className='w-[20rem] mx-auto mt-[10rem] mb-6 font-semibold tablet:text-[5rem] text-[4rem] text-center border-b-[0.2rem] border-indigo-100'>
+				Other
+			</div>
+			<ReactSortable
+				{...SortableConfig}
+				group='notes-other'
+				list={otherList}
+				setList={setOtherList}
+				className='flex flex-wrap justify-center items-start'
+				sort={Boolean(+!filter.hasDone & +!filter.hasInProgress)}
+				onMove={() => {
+					clearTimeout(timeoutId);
+					setCanUpdate(false);
+					return true;
+				}}
+				onEnd={() => {
+					clearTimeout(timeoutId);
+					setTimeoutId(
+						setTimeout(() => {
+							setCanUpdate(true);
+						}, 3000)
+					);
+					return true;
+				}}
+			>
+				{filterSectionList(otherList, filter).map((item) => (
+					<NoteItem key={item.id} isShow={item.isShow} note={item} />
 				))}
 			</ReactSortable>
 		</div>

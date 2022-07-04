@@ -1,7 +1,19 @@
-import { getFirebaseErr } from 'utils';
-import { db, NoteDetailType } from 'shared';
+import {
+	addDoc,
+	collection,
+	deleteDoc,
+	doc,
+	getDoc,
+	serverTimestamp,
+	setDoc,
+	Timestamp,
+	updateDoc,
+} from 'firebase/firestore';
 import { FirebaseError } from 'firebase/app';
-import { addDoc, collection, deleteDoc, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
+import { db, NoteDetailType } from 'shared';
+import { getFirebaseErr } from 'utils';
+
+export const noteIndexListRef = (userId: string) => doc(db, 'users', userId, 'notes', 'note_index_list');
 
 export const validateNoteOption = (opt: {
 	[key: string]: boolean;
@@ -27,41 +39,37 @@ export const validateNoteOption = (opt: {
 	};
 };
 
-export const addRootNode = async (userId: string, isRootNode: number) => {
+export const updateIdxList = async (userId: string, data: string[]) => {
 	try {
-		const rootNode = {
-			title: '',
-			data: '',
-			theme: '',
-			isPinned: false,
-			isArchived: false,
-			isDone: false,
-			isInProgress: false,
-			isRootNode: isRootNode,
-			nextNode: '',
-			prevNode: '',
-			createdAt: Timestamp.fromDate(new Date()),
+		await updateDoc(noteIndexListRef(userId), {
+			idxList: [...data],
 			updatedAt: Timestamp.fromDate(new Date()),
-		};
-
-		const resp = await addDoc(collection(db, 'users', userId, 'notes'), { ...rootNode });
-
-		return { data: resp, errorMessage: '' };
+		});
+		return '';
 	} catch (error) {
 		const err = error as FirebaseError;
-		return { data: null, errorMessage: getFirebaseErr(err.message) };
+		return getFirebaseErr(err.message);
 	}
 };
 
 export const addNewNote = async (userId: string, data: NoteDetailType) => {
 	try {
-		const noteToAdd: NoteDetailType = {
+		const resp = await addDoc(collection(db, 'users', userId, 'notes'), {
 			...data,
 			createdAt: Timestamp.fromDate(new Date()),
 			updatedAt: Timestamp.fromDate(new Date()),
-		};
+		});
 
-		const resp = await addDoc(collection(db, 'users', userId, 'notes'), noteToAdd);
+		if (resp && resp?.id) {
+			const ref = noteIndexListRef(userId);
+			if (!resp.id || !ref) return '';
+
+			const listData = await getDoc(ref);
+			const list = listData?.data() as NoteDetailType;
+
+			if (list && list?.idxList) await updateIdxList(userId, [resp.id, ...list.idxList]);
+			else await setDoc(ref, { idxList: [resp.id], updatedAt: serverTimestamp() });
+		}
 
 		return {
 			data: resp,

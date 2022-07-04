@@ -9,6 +9,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { FC, useEffect } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
+import { ChartPage } from 'components/main/sections/chart/ChartPage';
 
 const App: FC = () => {
 	const currentUser = useStore((s) => s.currentUser);
@@ -43,6 +44,7 @@ const App: FC = () => {
 						<Route index element={currentUser === undefined ? <FullScreenLoading /> : <MainLayout />} />
 						<Route path='subjects' element={<ScorePage />} />
 						<Route path='notes' element={<NotePage />} />
+						<Route path='analytics' element={<ChartPage />} />
 					</Route>
 					<Route path='*' element={<ErrorContent />} />
 				</Routes>

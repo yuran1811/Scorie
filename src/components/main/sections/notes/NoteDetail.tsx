@@ -3,7 +3,7 @@ import { NoteDetailType } from 'shared';
 import { deleteNote, editNote, validateNoteOption } from 'services';
 import { ErrorMessage } from 'components/interfaces';
 import { Input, TextArea, TimeContainer } from 'components/shared';
-import { ArchiveIcon, CloseIcon, DoneIcon, PinIcon, ProgressIcon, TrashIcon } from 'components/icons';
+import { ArchiveIcon, CloseIcon, DoneIcon, ProgressIcon, TrashIcon } from 'components/icons';
 import { Dispatch, FC, SetStateAction, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { createPortal } from 'react-dom';
@@ -14,11 +14,11 @@ interface Inputs {
 }
 
 interface NoteDetailProps {
+	note: NoteDetailType;
 	noteStyle: {
 		backgroundColor: string;
 		color: string;
 	};
-	note: NoteDetailType;
 	setOpenDetail: Dispatch<SetStateAction<boolean>>;
 }
 

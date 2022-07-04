@@ -16,6 +16,7 @@ export const useCollectionQuery: useCollectionQueryType = (key, collection) => {
 	useEffect(() => {
 		const unsubscribe = onSnapshot(
 			collection,
+			{ includeMetadataChanges: true },
 			(snapshot) => {
 				setLoading(false);
 				setData(snapshot);

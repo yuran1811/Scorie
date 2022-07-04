@@ -1,47 +1,40 @@
 import { useStore } from 'store';
+import { getNoteList } from 'utils';
+import { db, NoteListType } from 'shared';
 import { useCollectionQuery } from 'hooks';
-import { db, NoteDetailType } from 'shared';
-import { filterList, getNoteList } from 'utils';
 import { Title } from '../Title';
 import { NoteAddNew } from './NoteAddNew';
 import { NoteSection } from './NoteSection';
 import { AddIcon, ArchiveIcon, DoneIcon, FlatLoading, NoteIcon, ProgressIcon } from 'components/icons';
-import { collection, orderBy, query } from 'firebase/firestore';
-import { useMemo, useState } from 'react';
-
-export interface NoteListType {
-	id: string;
-	isShow: boolean;
-	note: NoteDetailType;
-}
-
-export interface NoteListFilterType {
-	hasDone: boolean;
-	hasInProgress: boolean;
-	hasArchived: boolean;
-}
+import { collection } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 
 export const NoteSectionBar = () => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const { data, loading, error } = useCollectionQuery(
 		'users_notes',
-		query(collection(db, 'users', currentUser?.uid as string, 'notes'), orderBy('updatedAt', 'desc'))
+		collection(db, 'users', currentUser?.uid as string, 'notes')
 	);
 
 	const [addNewOpen, setAddNewOpen] = useState(false);
+	const [noteList, setNoteList] = useState<NoteListType[]>([]);
+	const [idxListState, setIdxListState] = useState<string[]>([]);
 	const [filter, setFilter] = useState({
+		hasArchived: false,
 		hasDone: false,
 		hasInProgress: false,
-		hasArchived: false,
 	});
 
-	const notes = useMemo(() => {
-		if (loading || error || data === null) return [];
+	useEffect(() => {
+		if (loading || error || data === null) return;
 
-		return getNoteList(data);
+		const rawData = getNoteList(data);
+		if (!rawData) return;
+
+		if (rawData?.idxList) setIdxListState(rawData.idxList as string[]);
+		if (rawData?.noteList) setNoteList(rawData.noteList as NoteListType[]);
 	}, [data, loading, error]);
-	const noteList = useMemo(() => filterList(notes, filter), [filter, notes]);
 
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
@@ -80,22 +73,17 @@ export const NoteSectionBar = () => {
 				</div>
 			</div>
 
-			{loading ? (
+			{loading && (
 				<div className='flexcenter w-full h-[10rem]'>
 					<FlatLoading />
 				</div>
-			) : (
-				<>
-					{noteList !== null && noteList.length !== 0 && (
-						<NoteSection filter={filter} group='pinned' title='Pinned' notes={noteList} />
-					)}
-					{noteList !== null && noteList.length !== 0 && (
-						<NoteSection filter={filter} group='other' title='Other' notes={noteList} />
-					)}
-				</>
 			)}
 
-			{addNewOpen && <NoteAddNew notes={noteList} onClickHandle={setAddNewOpen} />}
+			{!loading && noteList !== null && noteList.length !== 0 && (
+				<NoteSection filter={filter} notes={noteList} orderList={idxListState} />
+			)}
+
+			{addNewOpen && <NoteAddNew onClickHandle={setAddNewOpen} />}
 		</div>
 	);
 };

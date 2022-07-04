@@ -3,7 +3,6 @@ import { Dispatch, SetStateAction } from 'react';
 
 export interface NoteDetailType {
 	id: string;
-	order: number;
 	title: string;
 	data: string;
 	theme: string;
@@ -11,6 +10,7 @@ export interface NoteDetailType {
 	isArchived: boolean;
 	isDone: boolean;
 	isInProgress: boolean;
+	idxList?: string[];
 	createdAt?: Timestamp;
 	updatedAt?: Timestamp;
 }
@@ -24,7 +24,25 @@ export interface NoteDetailProps {
 	setActive: Dispatch<SetStateAction<boolean>>;
 }
 
-export interface NoteViewDetailProps {
+export interface NoteListType {
 	id: string;
-	isOpened: boolean;
+	isShow: boolean;
+	note: NoteDetailType;
+}
+
+export interface NoteListFilterType {
+	hasArchived: boolean;
+	hasDone: boolean;
+	hasInProgress: boolean;
+}
+
+export interface NoteSectionProps {
+	filter: NoteListFilterType;
+	notes: NoteListType[];
+	orderList: string[];
+}
+
+export interface NoteItemProps {
+	isShow: boolean;
+	note: NoteDetailType;
 }

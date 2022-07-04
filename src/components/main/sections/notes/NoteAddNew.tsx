@@ -1,12 +1,11 @@
 import { useStore } from 'store';
-import { addNewNote, validateNoteOption } from 'services';
 import { DivProps, NoteDetailType } from 'shared';
+import { addNewNote, validateNoteOption } from 'services';
 import { ErrorMessage } from 'components/interfaces';
 import { DoneIcon, ProgressIcon } from 'components/icons';
 import { Button, Input, ModalBox, ModalBoxHeader, TextArea } from 'components/shared';
 import { Dispatch, FC, SetStateAction, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { NoteListType } from './NoteSectionBar';
 
 interface Inputs {
 	title: string;
@@ -14,11 +13,10 @@ interface Inputs {
 }
 
 interface NoteAddNewProps {
-	notes: NoteListType[];
 	onClickHandle: Dispatch<SetStateAction<boolean>>;
 }
 
-export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ notes, onClickHandle }) => {
+export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const [status, setStatus] = useState({ type: 'ok', message: '' });
@@ -49,10 +47,10 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ notes, onClickHandl
 
 			if (currentUser && currentUser?.uid) {
 				const noteToAdd = {
+					...noteOptions,
 					title: data.title.trim(),
 					data: data.data.trim(),
 					theme: 'default',
-					...noteOptions,
 				} as NoteDetailType;
 
 				addNewNote(currentUser.uid, noteToAdd);

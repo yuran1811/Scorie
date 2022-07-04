@@ -29,7 +29,7 @@ export const FeatureSection: FC = () => {
 				<FeatureCard className='bg-sky-500' title='Score' onClick={() => navigate('/subjects')}>
 					<div className='py-4 px-6 mobile:p-8'>Manage all your score records</div>
 				</FeatureCard>
-				<FeatureCard className='bg-teal-400' title='Analytics' onClick={() => navigate('/chart')}>
+				<FeatureCard className='bg-teal-400' title='Analytics' onClick={() => navigate('/analytics')}>
 					<div className='py-4 px-6 mobile:p-8'>Variant useful charts</div>
 				</FeatureCard>
 				<FeatureCard className='bg-red-400' title='Tools' onClick={() => navigate('/tools')}>
