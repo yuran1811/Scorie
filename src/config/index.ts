@@ -13,3 +13,10 @@ export const firebaseConfig = {
 	projectId: process.env.REACT_APP_PROJECTID as string,
 	storageBucket: process.env.REACT_APP_STORAGEBUCKET as string,
 };
+
+export const routes = {
+	subjects: 'subjects',
+	notes: 'notes',
+	analytics: 'analytics',
+	tools: 'tools'
+};

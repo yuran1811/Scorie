@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { DivProps } from 'shared';
-import { Overlay } from './Overlay';
+import { Overlay } from 'components/shared';
 
 export const ModalBox: FC<DivProps> = ({ onClick, children }) => (
 	<div className='z-[11] flexcenter fullscreen'>

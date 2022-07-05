@@ -1,7 +1,7 @@
-import { db, ScoreDetailType, SubjectDetailType } from 'shared';
 import { getFirebaseErr } from 'utils';
-import { FirebaseError } from 'firebase/app';
+import { db, ScoreDetailType, SubjectDetailType } from 'shared';
 import { addDoc, collection, deleteDoc, doc, getDoc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
+import { FirebaseError } from 'firebase/app';
 
 export const validateSubjectOption = (opt: { isIgnored: boolean; isSpecial: boolean; isVital: boolean }) =>
 	opt.isIgnored && (opt.isSpecial || opt.isVital);

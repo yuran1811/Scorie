@@ -1,15 +1,13 @@
+import { auth } from 'shared';
 import { useStore } from 'store';
-import { auth, db } from 'shared';
-import { Footer, Header } from 'components/partials';
-import { MainLayout } from 'components/main/MainLayout';
-import { ErrorContent, FullScreenLoading } from 'components/shared';
-import { NotePage } from 'components/main/sections/notes/NotePage';
-import { ScorePage } from 'components/main/sections/score/ScorePage';
-import { onAuthStateChanged } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-import { FC, useEffect } from 'react';
+import { HomePage } from 'pages';
+import { publicRoutes } from 'routes';
+import { updateUserProfile } from 'services';
+import { ErrorContent } from 'components/shared';
+import MainLayout from 'components/layouts/MainLayout';
 import { Outlet, Route, Routes } from 'react-router-dom';
-import { ChartPage } from 'components/main/sections/chart/ChartPage';
+import { onAuthStateChanged } from 'firebase/auth';
+import { FC, useEffect } from 'react';
 
 const App: FC = () => {
 	const currentUser = useStore((s) => s.currentUser);
@@ -23,38 +21,25 @@ const App: FC = () => {
 			}
 
 			setCurrentUser(user);
-			setDoc(doc(db, 'users', user.uid), {
-				uid: user.uid,
-				photoURL: user.photoURL,
-				displayName: user.displayName,
-				email: user.email,
-			});
+			updateUserProfile(user);
 		});
 
 		return () => unregisterAuth();
 	}, []);
 
 	return (
-		<>
-			<div className='relative fullsize overflow-x-hidden text-[3rem] text-white bg-ctbg'>
-				<Header />
-
-				<Routes>
-					<Route path='/'>
-						<Route index element={currentUser === undefined ? <FullScreenLoading /> : <MainLayout />} />
-						<Route path='subjects' element={<ScorePage />} />
-						<Route path='notes' element={<NotePage />} />
-						<Route path='analytics' element={<ChartPage />} />
-					</Route>
-					<Route path='*' element={<ErrorContent />} />
-				</Routes>
-				<Outlet />
-
-				<Footer />
-			</div>
-
-			<div id='modal-container'></div>
-		</>
+		<MainLayout>
+			<Routes>
+				<Route path='/'>
+					<Route index element={<HomePage isLoading={currentUser} />} />
+					{publicRoutes.map(({ component: Page, path }) => (
+						<Route key={path} path={path} element={<Page />} />
+					))}
+				</Route>
+				<Route path='*' element={<ErrorContent />} />
+			</Routes>
+			<Outlet />
+		</MainLayout>
 	);
 };
 

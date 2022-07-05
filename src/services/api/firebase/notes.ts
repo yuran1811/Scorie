@@ -27,11 +27,11 @@ export const validateNoteOption = (opt: {
 			message: 'Note cannot be both done and in progress',
 		};
 
-	if (opt.isArchived && opt.isPinned)
-		return {
-			type: 'errors',
-			message: 'Note cannot be both pinned and archived',
-		};
+	// if (opt.isArchived && opt.isPinned)
+	// 	return {
+	// 		type: 'errors',
+	// 		message: 'Note cannot be both pinned and archived',
+	// 	};
 
 	return {
 		type: 'ok',
@@ -86,10 +86,14 @@ export const addNewNote = async (userId: string, data: NoteDetailType) => {
 
 export const editNote = async (userId: string, noteId: string, data: any) => {
 	try {
-		await updateDoc(doc(db, 'users', userId, 'notes', noteId), {
-			...data,
-			updatedAt: serverTimestamp(),
-		});
+		await setDoc(
+			doc(db, 'users', userId, 'notes', noteId),
+			{
+				...data,
+				updatedAt: serverTimestamp(),
+			},
+			{ merge: true }
+		);
 		return '';
 	} catch (error) {
 		const err = error as FirebaseError;
