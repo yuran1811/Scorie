@@ -52,7 +52,7 @@ export const updateUserProfile = async (user: User) => {
 	}
 };
 
-export const updateProfileEmailMethod = async (
+export const updateProfileData = async (
 	user: User,
 	data: {
 		displayName?: string | null | undefined;

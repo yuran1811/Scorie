@@ -2,7 +2,7 @@ import { useStore } from 'store';
 import { ThreeDotsFade } from 'components/icons';
 import { Button, Input } from 'components/shared';
 import { ErrorMessage } from 'components/interfaces';
-import { createNewUserEmailMethod, sendVerifyEmail, updateProfileEmailMethod } from 'services';
+import { createNewUserEmailMethod, sendVerifyEmail, updateProfileData } from 'services';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -39,7 +39,7 @@ export const CreateNewUser: FC = ({ children }) => {
 			if (!resp || !resp?.user) return;
 			const { user } = resp;
 
-			await updateProfileEmailMethod(user, { displayName: displayName.trim() });
+			await updateProfileData(user, { displayName: displayName.trim() });
 			setCurrentUser(user);
 
 			await sendVerifyEmail(user);

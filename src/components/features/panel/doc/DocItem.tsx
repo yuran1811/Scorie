@@ -28,7 +28,15 @@ export const DocItem: FC<DocItemProps> = ({ data: docItem }) => {
 				<span className='font-semibold w-full line-clamp-1'>{docItem.title}</span>
 			</div>
 
-			{active && <DocItemContent>{docItem.data}</DocItemContent>}
+			{active && (
+				<DocItemContent>
+					{docItem.data.map((item, idx) => (
+						<li key={idx} className=''>
+							{item}
+						</li>
+					))}
+				</DocItemContent>
+			)}
 		</div>
 	);
 };

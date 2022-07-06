@@ -72,27 +72,27 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject: 
 				<div
 					className={`${
 						!isShow ? '!hidden' : ''
-					} overflow-hidden cursor-pointer tablet:max-w-[25rem] h-[32rem] w-full m-6 p-4 rounded-[2.5rem] font-bold text-center text-rose-600 bg-violet-200`}
+					} overflow-hidden cursor-pointer tablet:max-w-[25rem] max-h-[32rem] w-full m-6 p-4 rounded-[2.5rem] font-bold text-center text-rose-600 bg-violet-200`}
 					onClick={() => setOpenDetail((s) => !s)}
 				>
 					<div className='flexcenter p-4'>
 						<StarIcon
 							className='mx-4'
 							fill={subject && !subject.isSpecial ? 'white' : '#d97706'}
-							width='40'
-							height='40'
+							width='30'
+							height='30'
 						/>
 						<ImportantIcon
 							className='mx-4'
 							fill={subject && !subject.isVital ? 'white' : '#57534e'}
-							width='40'
-							height='40'
+							width='30'
+							height='30'
 						/>
 						<IgnoreIcon
 							className='mx-4'
 							fill={subject && !subject.isIgnored ? 'white' : '#0891b2'}
-							width='40'
-							height='40'
+							width='30'
+							height='30'
 						/>
 					</div>
 
@@ -100,13 +100,15 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject: 
 						<div className='font-bold text-[3.5rem] text-center text-teal-700 w-full line-clamp-1'>
 							{subject?.name || ''}
 						</div>
-						<div className='font-bold text-[5rem] text-center text-red-600 w-full line-clamp-1'>
+						<div className='font-bold text-[6rem] text-center text-red-600 w-full line-clamp-1'>
 							{averageScore}
 						</div>
 
-						<div className='font-bold text-[3.5rem] text-slate-800 text-left w-full px-8 line-clamp-1'>
-							Recents
-						</div>
+						{scores.length !== 0 && (
+							<div className='font-bold text-[3rem] text-slate-800 text-left w-full px-8 line-clamp-1'>
+								Recents
+							</div>
+						)}
 
 						{loading && (
 							<div className='w-full flexcenter'>

@@ -22,18 +22,38 @@ export const FeatureSection: FC = () => {
 			{!isVerify ? <NotVerifyEmail /> : <WelcomBanner>{currentUser?.displayName || 'Guest'}</WelcomBanner>}
 
 			<div className='flexcenter flex-wrap w-full pt-8'>
-				<FeatureCard className='bg-purple-500' title='Note' onClick={() => navigate('/notes')}>
+				<FeatureCard
+					className='bg-gradient-to-tl from-[#5f2c82] to-[#49a09d]'
+					title='Note'
+					onClick={() => navigate('/notes')}
+				>
 					<div className='py-4 px-6 mobile:p-8'>Ideal place to keep your mind on</div>
 				</FeatureCard>
-				<FeatureCard className='bg-sky-500' title='Score' onClick={() => navigate('/subjects')}>
+
+				<FeatureCard
+					className='bg-gradient-to-tl from-[#e96443] to-[#904e95]'
+					title='Score'
+					onClick={() => navigate('/subjects')}
+				>
 					<div className='py-4 px-6 mobile:p-8'>Manage all your score records</div>
 				</FeatureCard>
-				<FeatureCard className='bg-teal-400' title='Analytics' onClick={() => navigate('/analytics')}>
+
+				<FeatureCard
+					className='bg-gradient-to-tl from-[#FC466B] to-[#8056ca]'
+					title='Analytics'
+					onClick={() => navigate('/analytics')}
+				>
 					<div className='py-4 px-6 mobile:p-8'>Variant useful charts</div>
 				</FeatureCard>
-				<FeatureCard className='bg-red-400' title='Tools' onClick={() => navigate('/tools')}>
+
+				<FeatureCard
+					className='bg-gradient-to-tl from-[#71B280] to-[#56B4D3]'
+					title='Tools'
+					onClick={() => navigate('/tools')}
+				>
 					<div className='py-4 px-6 mobile:p-8'>Helpful tools make school life be better</div>
 				</FeatureCard>
+
 				{/* {featureRoutes.map(({ path, color, content, title }) => (
 					<FeatureCard
 						key={path}

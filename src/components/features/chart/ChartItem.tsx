@@ -45,7 +45,7 @@ export const options = {
 };
 
 export const ChartItem: FC = () => (
-	<div className='w-[90%] max-w-[60rem] my-12 p-4 bg-white rounded-[2rem]'>
+	<div className='w-[90%] max-w-[60rem] my-12 p-4 bg-white'>
 		<Line options={options} data={fakeChartJSData} />
 	</div>
 );

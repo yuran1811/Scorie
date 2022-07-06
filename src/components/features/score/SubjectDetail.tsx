@@ -103,28 +103,28 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 							<StarIcon
 								className='scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5'
 								fill={!scoreOptions.isSpecial ? 'white' : '#d97706'}
-								width='50'
-								height='50'
+								width='40'
+								height='40'
 								onClick={() => setScoreOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
 							/>
 							<ImportantIcon
 								className='scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5'
 								fill={!scoreOptions.isVital ? 'white' : '#57534e'}
-								width='50'
-								height='50'
+								width='40'
+								height='40'
 								onClick={() => setScoreOptions((s) => ({ ...s, isVital: !s.isVital }))}
 							/>
 							<IgnoreIcon
 								className='scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5'
 								fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
-								width='50'
-								height='50'
+								width='40'
+								height='40'
 								onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
 							/>
 							<TrashIcon
 								className='scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5 text-slate-500'
-								width='45'
-								height='45'
+								width='35'
+								height='35'
 								onClick={() => removeSubjectRecord()}
 							/>
 						</div>
@@ -141,18 +141,15 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 
 					{saveErr && <ErrorMessage extraStyle='px-6 text-[3rem] mobile:text-[4rem]' content={saveErr} />}
 
-					<TimeContainer
-						className='mobile:text-[4rem]'
-						obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }}
-					/>
+					<TimeContainer obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }} />
 
 					<div className='flexcentercol px-8 py-8'>
 						<div className='text-[5rem] text-center text-teal-700 w-full line-clamp-1'>
 							{subject?.name || ''}
 						</div>
-						<div className='text-[8rem] text-center text-red-600 w-full line-clamp-1'>{averageScore}</div>
+						<div className='text-[10rem] text-center text-red-600 w-full line-clamp-1'>{averageScore}</div>
 
-						<div className='flex items-center justify-between flex-wrap w-full text-slate-800 bg-violet-200'>
+						<div className='flex items-center justify-between flex-wrap w-full py-8 text-slate-800 bg-violet-200'>
 							<div className='font-bold text-[4rem] text-center smallmb:text-left w-full smallmb:w-auto px-6 line-clamp-1'>
 								Recents
 							</div>

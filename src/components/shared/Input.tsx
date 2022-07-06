@@ -12,7 +12,7 @@ export const Input: FC<CustomInputProps & InputProps> = ({ formHandle, className
 			{...formHandle}
 			className={`${
 				className || ''
-			} text-[3.2rem] text-white bg-ctbg w-full max-w-[32rem] my-[0.5rem] px-[1.8rem] py-[0.5rem] outline-none border-[0.5rem] border-solid border-transparent rounded-[2.8rem] isAnimated focus:border-current`}
+			} text-[3.2rem] text-white bg-ctbg w-full max-w-[32rem] my-[0.5rem] px-[1.8rem] py-[0.5rem] outline-none border-[0.5rem] border-solid border-transparent rounded-[2.4rem] isAnimated focus:border-current`}
 		/>
 	</div>
 );

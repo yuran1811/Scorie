@@ -74,14 +74,26 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 					fill={!noteOptions.isDone ? 'white' : '#d97706'}
 					width='40'
 					height='40'
-					onClick={() => setNoteOptions((s) => ({ ...s, isDone: !s.isDone }))}
+					onClick={() =>
+						setNoteOptions((s) => ({
+							...s,
+							isDone: !s.isDone,
+							isInProgress: !s.isDone ? false : s.isInProgress,
+						}))
+					}
 				/>
 				<ProgressIcon
 					className='cursor-pointer mx-5'
 					fill={!noteOptions.isInProgress ? 'white' : '#57534e'}
 					width='40'
 					height='40'
-					onClick={() => setNoteOptions((s) => ({ ...s, isInProgress: !s.isInProgress }))}
+					onClick={() =>
+						setNoteOptions((s) => ({
+							...s,
+							isInProgress: !s.isInProgress,
+							isDone: !s.isInProgress ? false : s.isDone,
+						}))
+					}
 				/>
 			</ModalBoxHeader>
 
@@ -114,7 +126,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 
 				<TextArea defaultValue='' className='font-normal' formHandle={{ ...register('data') }} />
 
-				<Button type='submit' content='Add' />
+				<Button className='!text-[3.6rem]' type='submit' content='Add' />
 			</form>
 		</ModalBox>
 	);

@@ -10,5 +10,6 @@ export * from './LoadMoreButton';
 export * from './ModalBox';
 export * from './ModalBoxHeader';
 export * from './Overlay';
+export * from './SearchBar';
 export * from './TextArea';
 export * from './TimeContainer';

@@ -7,7 +7,7 @@ const config = {
 	autoFit: true,
 	connectNulls: true,
 
-	padding: 60,
+	padding: 80,
 
 	xField: 'year',
 	yField: 'value',

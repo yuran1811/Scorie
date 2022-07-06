@@ -1,19 +1,22 @@
 import { useStore } from 'store';
-import { NoteListType, NoteSectionProps } from 'shared';
-import { NoteItem } from './NoteItem';
-import { FC, useEffect, useState } from 'react';
-import { ReactSortable } from 'react-sortablejs';
 import { updateIdxList } from 'services';
 import { filterSectionList } from 'utils';
+import { NoteListType, NoteSectionProps } from 'shared';
+import { NoteItem } from './NoteItem';
+import { ReactSortable } from 'react-sortablejs';
+import { FC, useCallback, useEffect, useState } from 'react';
 
-const SortableConfig = {
+const sortableConfig = {
 	animation: 200,
-	swapThreshold: 0.5,
-	filter: '.filtered',
+	delay: 300,
+	swapThreshold: 0.3,
+	sort: true,
+	delayOnTouchOnly: true,
+	className: 'flex flex-wrap justify-center items-start',
 };
 
 export const NoteSection: FC<NoteSectionProps> = (props) => {
-	const { filter, notes, orderList } = props;
+	const { viewMode, filter, notes, orderList } = props;
 
 	const currentUser = useStore((s) => s.currentUser);
 
@@ -21,6 +24,22 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
 	const [timeoutId, setTimeoutId] = useState<any>();
 	const [pinnedList, setPinnedList] = useState<NoteListType[]>([]);
 	const [otherList, setOtherList] = useState<NoteListType[]>([]);
+
+	const onMoveHandle = useCallback(() => {
+		clearTimeout(timeoutId);
+		setCanUpdate(false);
+		return true;
+	}, []);
+
+	const onEndHandle = useCallback(() => {
+		clearTimeout(timeoutId);
+		setTimeoutId(
+			setTimeout(() => {
+				setCanUpdate(true);
+			}, 2200)
+		);
+		return true;
+	}, []);
 
 	useEffect(() => {
 		if (!orderList || !notes) return;
@@ -57,63 +76,39 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
 
 	return (
 		<div className='max-w-[100rem] w-full mx-auto my-12'>
-			<div className='w-[20rem] mx-auto mb-6 font-semibold tablet:text-[5rem] text-[4rem] text-center border-b-[0.2rem] border-indigo-100'>
+			<div className='w-[20rem] mx-auto mb-8 font-semibold tablet:text-[5rem] text-[4rem] text-center border-b-[0.2rem] border-indigo-100'>
 				Pinned
 			</div>
 			<ReactSortable
-				{...SortableConfig}
+				{...sortableConfig}
 				group='notes-pinned'
 				list={pinnedList}
 				setList={setPinnedList}
-				className='flex flex-wrap justify-center items-start'
-				sort={Boolean(+!filter.hasDone & +!filter.hasInProgress)}
-				onMove={() => {
-					clearTimeout(timeoutId);
-					setCanUpdate(false);
-					return true;
-				}}
-				onEnd={() => {
-					clearTimeout(timeoutId);
-					setTimeoutId(
-						setTimeout(() => {
-							setCanUpdate(true);
-						}, 2200)
-					);
-					return true;
-				}}
+				onMove={onMoveHandle}
+				onEnd={onEndHandle}
 			>
 				{filterSectionList(pinnedList, filter).map((item) => (
-					<NoteItem key={item.id} isShow={item.isShow} note={item} />
+					<div key={item.id}>
+						<NoteItem viewMode={viewMode} isShow={item.isShow} note={item} />
+					</div>
 				))}
 			</ReactSortable>
 
-			<div className='w-[20rem] mx-auto mt-[10rem] mb-6 font-semibold tablet:text-[5rem] text-[4rem] text-center border-b-[0.2rem] border-indigo-100'>
-				Other
+			<div className='w-[20rem] mx-auto mt-[7rem] mb-8 font-semibold tablet:text-[5rem] text-[4rem] text-center border-b-[0.2rem] border-indigo-100'>
+				Others
 			</div>
 			<ReactSortable
-				{...SortableConfig}
-				group='notes-other'
+				{...sortableConfig}
+				group='notes-others'
 				list={otherList}
 				setList={setOtherList}
-				className='flex flex-wrap justify-center items-start'
-				sort={Boolean(+!filter.hasDone & +!filter.hasInProgress)}
-				onMove={() => {
-					clearTimeout(timeoutId);
-					setCanUpdate(false);
-					return true;
-				}}
-				onEnd={() => {
-					clearTimeout(timeoutId);
-					setTimeoutId(
-						setTimeout(() => {
-							setCanUpdate(true);
-						}, 3000)
-					);
-					return true;
-				}}
+				onMove={onMoveHandle}
+				onEnd={onEndHandle}
 			>
 				{filterSectionList(otherList, filter).map((item) => (
-					<NoteItem key={item.id} isShow={item.isShow} note={item} />
+					<div key={item.id}>
+						<NoteItem viewMode={viewMode} key={item.id} isShow={item.isShow} note={item} />
+					</div>
 				))}
 			</ReactSortable>
 		</div>

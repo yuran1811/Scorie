@@ -149,7 +149,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
 					/>
 				)}
 
-				<Button type='submit' content='Add' />
+				<Button className='!text-[3.6rem]' type='submit' content='Add' />
 			</form>
 		</ModalBox>
 	);

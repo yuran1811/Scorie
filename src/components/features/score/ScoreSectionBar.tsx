@@ -64,32 +64,32 @@ export const ScoreSectionBar = () => {
 				<Title Icon={HashtagIcon} content='Score' />
 				<div className='flexcenter flex-wrap px-6 py-8'>
 					<StarIcon
-						className='cursor-pointer m-4'
+						className='cursor-pointer mx-5 my-4'
 						fill={!filter.hasSpecial ? 'white' : '#fcd34d'}
-						width='50'
-						height='50'
+						width='40'
+						height='40'
 						onClick={() => setFilter((f) => ({ ...f, hasSpecial: !f.hasSpecial }))}
 					/>
 					<ImportantIcon
-						className='cursor-pointer m-4'
+						className='cursor-pointer mx-5 my-4'
 						fill={!filter.hasVital ? 'white' : '#38bdf8'}
-						width='50'
-						height='50'
+						width='40'
+						height='40'
 						onClick={() => setFilter((f) => ({ ...f, hasVital: !f.hasVital }))}
 					/>
 					<IgnoreIcon
-						className='cursor-pointer m-4'
+						className='cursor-pointer mx-5 my-4'
 						fill={!filter.hasIgnored ? 'white' : '#0891b2'}
-						width='50'
-						height='50'
+						width='40'
+						height='40'
 						onClick={() => setFilter((f) => ({ ...f, hasIgnored: !f.hasIgnored }))}
 					/>
 
 					<AddIcon
-						className='cursor-pointer m-4'
+						className='cursor-pointer mx-5 my-4'
 						fill={'white'}
-						width='50'
-						height='50'
+						width='40'
+						height='40'
 						onClick={() => setAddNewOpen(true)}
 					/>
 				</div>

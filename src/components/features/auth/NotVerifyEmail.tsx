@@ -25,13 +25,15 @@ export const NotVerifyEmail: FC = () => {
 	const [canResend, setCanResend] = useState(true);
 
 	return (
-		<div className='p-10 m-6'>
+		<div className='p-4 mobile:p-10 m-6'>
 			<div className='font-semibold text-[4rem] text-center'>Please verify your email before using this app</div>
-			<div className='text-[3rem] text-center w-[80%] mx-auto mt-10'>We've sent you a verify link via email</div>
-			<div className='text-[3rem] text-center w-[80%] mx-auto mt-2'>
+			<div className='text-[3rem] text-center w-full mobile:w-[80%] mx-auto mt-10'>
+				We've sent you a verify link via email
+			</div>
+			<div className='text-[3rem] text-center w-full mobile:w-[80%] mx-auto mt-2'>
 				Please check all your mails carefully (our mail can be in spam by many reasons)
 			</div>
-			<div className='text-[3rem] text-center w-[80%] mx-auto mt-10'>
+			<div className='text-[3rem] text-center w-full mobile:w-[80%] mx-auto mt-10'>
 				Or if you can't find any,{' '}
 				<span
 					className='cursor-pointer font-semibold underline'

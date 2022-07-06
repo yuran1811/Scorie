@@ -107,55 +107,67 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 			>
 				<div className='flexcenter flex-wrap w-full mobile:pl-24'>
 					<PinIcon
-						className='scale-75 tablet:scale-100 cursor-pointer mx-5 tablet:m-5'
+						className='scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6'
 						fill={!noteOptions.isPinned ? 'white' : '#f87171'}
-						width='50'
-						height='50'
+						width='40'
+						height='40'
 						onClick={() => setNoteOptions((s) => ({ ...s, isPinned: !s.isPinned }))}
 					/>
 					<ArchiveIcon
-						className='scale-75 tablet:scale-100 cursor-pointer mx-5 tablet:m-5'
+						className='scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6'
 						fill={!noteOptions.isArchived ? 'white' : '#94a3b8'}
-						width='50'
-						height='50'
+						width='40'
+						height='40'
 						onClick={() => setNoteOptions((s) => ({ ...s, isArchived: !s.isArchived }))}
 					/>
 					<DoneIcon
-						className='scale-75 tablet:scale-100 cursor-pointer mx-5 tablet:m-5'
+						className='scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6'
 						fill={!noteOptions.isDone ? 'white' : '#d97706'}
-						width='50'
-						height='50'
-						onClick={() => setNoteOptions((s) => ({ ...s, isDone: !s.isDone }))}
+						width='40'
+						height='40'
+						onClick={() =>
+							setNoteOptions((s) => ({
+								...s,
+								isDone: !s.isDone,
+								isInProgress: !s.isDone ? false : s.isInProgress,
+							}))
+						}
 					/>
 					<ProgressIcon
-						className='scale-75 tablet:scale-100 cursor-pointer mx-5 tablet:m-5'
+						className='scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6'
 						fill={!noteOptions.isInProgress ? 'white' : '#9ca3af'}
-						width='50'
-						height='50'
-						onClick={() => setNoteOptions((s) => ({ ...s, isInProgress: !s.isInProgress }))}
+						width='40'
+						height='40'
+						onClick={() =>
+							setNoteOptions((s) => ({
+								...s,
+								isInProgress: !s.isInProgress,
+								isDone: !s.isInProgress ? false : s.isDone,
+							}))
+						}
 					/>
 					<TrashIcon
-						className='scale-75 tablet:scale-100 cursor-pointer mx-5 tablet:m-5'
-						width='45'
-						height='45'
+						className='scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6'
+						width='35'
+						height='35'
 						onClick={() => removeNote()}
 					/>
 				</div>
 
 				<button type='submit'>
-					<CloseIcon className='cursor-pointer mx-4 text-rose-600' width='50' height='50' />
+					<CloseIcon className='cursor-pointer mx-4 text-rose-600' width='40' height='40' />
 				</button>
 			</div>
 
 			{status.type === 'errors' && (
-				<ErrorMessage extraStyle='px-6 text-[3rem] mobile:text-[4rem]' content={status.message} />
+				<ErrorMessage extraStyle='p-6 text-[3rem] tablet:text-[4rem]' content={status.message} />
 			)}
 
 			<div className='flexcentercol px-8 pb-8 h-[calc(100%-14rem)] tablet:h-[calc(100%-12rem)]'>
-				<TimeContainer className='font-semibold mobile:text-[4rem]' obj={{ updatedAt }} style={noteStyle} />
+				<TimeContainer obj={{ updatedAt }} style={noteStyle} />
 
 				<Input
-					className='!font-bold !text-[3rem] mobile:!text-[6rem] text-center !max-w-full tablet:!max-w-[65rem]'
+					className='!font-bold !text-[3.5rem] mobile:!text-[4.5rem] text-center !max-w-full tablet:!max-w-[65rem]'
 					style={noteStyle}
 					defaultValue={title}
 					formHandle={{

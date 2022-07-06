@@ -1,1 +1,80 @@
-@import 'https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap';@tailwind base;@tailwind components;@tailwind utilities;@layer base {* {font-family: 'Khand', sans-serif;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}*, *:before, *::after {@apply p-0 m-0 select-none;}*::-webkit-scrollbar {@apply w-0 h-0;}html {@apply text-[62.5%];}body {@apply overflow-x-hidden overflow-y-auto scroll-smooth bg-white;}input {@apply select-auto;}}@layer utilities {.flexcenter {@apply flex items-center justify-center;}.flexcentercol {@apply flexcenter flex-col;}.isAnimated {@apply transition-all duration-300;}.fullsize {@apply w-[100vw] h-[100vh];}.fullscreen {@apply fixed top-0 left-0 fullsize;}.scrollY {@apply overflow-y-auto overflow-x-hidden;}.scrollX {@apply overflow-x-auto overflow-y-hidden;}}div[id^='reactgooglegraph'] svg, div[data-chart-source-type~='G2Plot'] svg {@apply !rounded-[2rem];}div[id^='reactgooglegraph'] text, div[data-chart-source-type~='G2Plot'] text {@apply !text-[1.8rem];}div[id^='reactgooglegraph'] {@apply !mx-auto;}.g2-tooltip, .g2-tooltip-list-item {@apply !text-[1.6rem];}.g2-tooltip-list-item {@apply !py-3;}.g2-tooltip-title {@apply !text-[2.5rem] !text-center !py-2;}.g2-tooltip-marker {@apply !scale-150 !text-left;}.g2-tooltip-name {@apply !font-semibold;}.g2-tooltip-value {@apply !text-[1.8rem];}
+@import 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+	* {
+		font-family: 'Source Sans Pro', sans-serif;
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	}
+	*,
+	*:before,
+	*::after {
+		@apply p-0 m-0 select-none tracking-[-1px];
+	}
+	*::-webkit-scrollbar {
+		@apply w-0 h-0;
+	}
+	html {
+		@apply text-[62.5%];
+	}
+	body {
+		@apply overflow-x-hidden overflow-y-auto scroll-smooth bg-white;
+	}
+	input {
+		@apply select-auto;
+	}
+}
+@layer utilities {
+	.flexcenter {
+		@apply flex items-center justify-center;
+	}
+	.flexcentercol {
+		@apply flexcenter flex-col;
+	}
+	.isAnimated {
+		@apply transition-all duration-300;
+	}
+	.fullsize {
+		@apply w-[100vw] h-[100vh];
+	}
+	.fullscreen {
+		@apply fixed top-0 left-0 fullsize;
+	}
+	.scrollY {
+		@apply overflow-y-auto overflow-x-hidden;
+	}
+	.scrollX {
+		@apply overflow-x-auto overflow-y-hidden;
+	}
+}
+div[id^='reactgooglegraph'] svg,
+div[data-chart-source-type~='G2Plot'] svg {
+	@apply !rounded-[2rem];
+}
+div[id^='reactgooglegraph'] text,
+div[data-chart-source-type~='G2Plot'] text {
+	@apply !text-[2rem];
+}
+div[id^='reactgooglegraph'] {
+	@apply !mx-auto;
+}
+.g2-tooltip,
+.g2-tooltip-list-item {
+	@apply !text-[1.6rem];
+}
+.g2-tooltip-list-item {
+	@apply !py-3;
+}
+.g2-tooltip-title {
+	@apply !text-[2.5rem] !text-center !py-2;
+}
+.g2-tooltip-marker {
+	@apply !scale-150 !text-left;
+}
+.g2-tooltip-name {
+	@apply !font-semibold !text-[1.8rem];
+}
+.g2-tooltip-value {
+	@apply !text-[1.8rem];
+}
