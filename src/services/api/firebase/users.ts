@@ -1,7 +1,7 @@
 import { auth, db } from 'shared';
 import { getFirebaseErr } from 'utils';
 import { FirebaseError } from 'firebase/app';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile, User } from 'firebase/auth';
 
 export const sendVerifyEmail = async (user: User) => {
@@ -34,43 +34,46 @@ export const createNewUserEmailMethod = async (email: string, password: string) 
 
 export const updateUserProfile = async (user: User) => {
 	try {
-		await setDoc(
-			doc(db, 'users', user.uid),
-			{
-				uid: user.uid,
-				photoURL: user.photoURL,
-				displayName: user.displayName,
-				email: user.email,
-			},
-			{ merge: true }
-		);
+		const authUser = auth.currentUser;
+		if (authUser === null) return;
 
-		return '';
-	} catch (error) {
-		const err = error as FirebaseError;
-		return getFirebaseErr(err.message);
-	}
-};
-
-export const updateProfileData = async (
-	user: User,
-	data: {
-		displayName?: string | null | undefined;
-		photoURL?: string | null | undefined;
-	}
-) => {
-	try {
-		const resp = await updateProfile(user, data);
+		await updateProfile(authUser, { ...user });
+		await updateDoc(doc(db, 'users', user.uid), {
+			uid: user.uid,
+			email: user.email,
+			photoURL: user.photoURL,
+			displayName: user.displayName,
+			updatedAt: serverTimestamp(),
+		});
 
 		return {
-			resp,
-			errorMessage: 'Updated !',
+			errorMessage: '',
 		};
 	} catch (error) {
 		const err = error as FirebaseError;
 		return {
-			resp: null,
-			errorMessage: `Cannot update user profile !\n${getFirebaseErr(err.message)}`,
+			errorMessage: getFirebaseErr(err.message),
+		};
+	}
+};
+
+export const setUserProfile = async (user: User) => {
+	try {
+		await setDoc(doc(db, 'users', user.uid), {
+			uid: user.uid,
+			email: user.email,
+			photoURL: user.photoURL,
+			displayName: user.displayName,
+			updatedAt: serverTimestamp(),
+		});
+
+		return {
+			errorMessage: '',
+		};
+	} catch (error) {
+		const err = error as FirebaseError;
+		return {
+			errorMessage: getFirebaseErr(err.message),
 		};
 	}
 };

@@ -1,7 +1,7 @@
 import { useStore } from 'store';
 import { useCollectionQuery } from 'hooks';
-import { db, SubjectDetailType } from 'shared';
-import { standardizeCollectionData } from 'utils';
+import { filterScoreList, standardizeCollectionData } from 'utils';
+import { db, SubjectDetailType, SubjectListFilterType } from 'shared';
 import { AddButton } from './AddButton';
 import { SubjectCard } from './SubjectCard';
 import { Title } from '../main/sections/Title';
@@ -10,7 +10,8 @@ import { SubjectAverage } from './SubjectAverage';
 import { ScoreSubjectAddNew } from './ScoreSubjectAddNew';
 import { AddIcon, FlatLoading, HashtagIcon, IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { collection, orderBy, query } from 'firebase/firestore';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { SearchBar } from 'components/shared';
 
 export const ScoreSectionBar = () => {
 	const currentUser = useStore((s) => s.currentUser);
@@ -22,10 +23,15 @@ export const ScoreSectionBar = () => {
 
 	const [addNewSSOpen, setAddNewSSOpen] = useState(false);
 	const [addNewOpen, setAddNewOpen] = useState(false);
-	const [filter, setFilter] = useState({
+	const [searchOpts, setSearchOpts] = useState({
+		isSearch: false,
+		value: '',
+	});
+	const [filter, setFilter] = useState<SubjectListFilterType>({
 		hasVital: false,
 		hasSpecial: false,
 		hasIgnored: false,
+		searchPattern: '',
 	});
 
 	const subjects = useMemo(() => {
@@ -33,26 +39,12 @@ export const ScoreSectionBar = () => {
 		return resp.map((subject) => ({ isShow: true, subject }));
 	}, [data]);
 
-	const subjectList = useMemo(() => {
-		if (!filter.hasVital && !filter.hasSpecial && !filter.hasIgnored) {
-			subjects.forEach((_) => (_.isShow = true));
-			return subjects;
-		}
-
-		const list = subjects.filter((item) => {
-			if (
-				(filter.hasIgnored && item.subject.isIgnored) ||
-				(filter.hasSpecial && item.subject.isSpecial) ||
-				(filter.hasVital && item.subject.isVital)
-			) {
-				item.isShow = true;
-			} else item.isShow = false;
-
-			return item.isShow;
-		});
-
-		return list;
-	}, [filter, subjects]);
+	useEffect(() => {
+		setFilter((s) => ({
+			...s,
+			searchPattern: searchOpts.isSearch ? searchOpts.value : '',
+		}));
+	}, [searchOpts]);
 
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
@@ -94,33 +86,42 @@ export const ScoreSectionBar = () => {
 					/>
 				</div>
 			</div>
+			<div className='w-full flexcenter px-4'>
+				<SearchBar
+					setSearchOpts={setSearchOpts}
+					onChange={(e) => {
+						const searchValue = e.currentTarget.value.trim();
+
+						if (searchValue.length === 0)
+							setSearchOpts({
+								isSearch: false,
+								value: '',
+							});
+						else
+							setSearchOpts({
+								isSearch: true,
+								value: searchValue,
+							});
+					}}
+				/>
+			</div>
 
 			{loading ? (
 				<div className='flexcenter w-full h-[10rem]'>
 					<FlatLoading />
 				</div>
 			) : (
-				<>
-					<div className='font-semibold text-[3rem] text-white text-center italic p-4 mt-4'>
-						{subjectList.length} record{subjectList.length > 2 ? 's' : ''} found
+				<div className='mx-auto mt-4 p-4 max-w-[100rem] w-full rounded-[2rem]'>
+					<div className='flex flex-wrap justify-center items-start w-full'>
+						{filterScoreList(subjects, filter).map((item) => (
+							<SubjectCard key={item.id} isShow={item.isShow} subject={item} />
+						))}
 					</div>
-
-					<div className='mx-auto mt-4 p-4 max-w-[100rem] w-full rounded-[2rem]'>
-						<div className='flex flex-wrap justify-center items-start w-full'>
-							{subjects.map((item) => (
-								<SubjectCard key={item.subject.id} isShow={item.isShow} subject={item.subject} />
-							))}
-						</div>
-					</div>
-				</>
+				</div>
 			)}
 
-			{addNewOpen && (
-				<SubjectAddNew subjects={subjects.map((_) => _.subject)} onClickHandle={() => setAddNewOpen(false)} />
-			)}
-			{addNewSSOpen && (
-				<ScoreSubjectAddNew subjects={subjects.map((_) => _.subject)} onClick={() => setAddNewSSOpen(false)} />
-			)}
+			{addNewOpen && <SubjectAddNew subjects={subjects} onClickHandle={() => setAddNewOpen(false)} />}
+			{addNewSSOpen && <ScoreSubjectAddNew subjects={subjects} onClick={() => setAddNewSSOpen(false)} />}
 		</div>
 	);
 };

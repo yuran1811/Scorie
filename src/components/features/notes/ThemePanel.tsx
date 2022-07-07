@@ -13,7 +13,7 @@ export const ThemePanel: FC<ThemePanelProps & DivProps> = ({ themeSelected, clas
 	<div
 		className={`${
 			className || ''
-		} absolute bottom-[-10rem] left-0 p-2 flexcenter flex-wrap bg-slate-800 rounded-[1.6rem]`}
+		} absolute bottom-[-3.5rem] left-0 right-0 p-2 flexcenter flex-wrap bg-slate-800 rounded-[1.6rem]`}
 	>
 		{Object.entries(themes).map(([key, { bg, color }]) => (
 			<div

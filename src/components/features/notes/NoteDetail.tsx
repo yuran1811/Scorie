@@ -1,5 +1,6 @@
 import { useStore } from 'store';
 import { NoteDetailType } from 'shared';
+import { shallowObjectCompare } from 'utils';
 import { deleteNote, editNote, validateNoteOption } from 'services';
 import { ErrorMessage } from 'components/interfaces';
 import { Input, TextArea, TimeContainer } from 'components/shared';
@@ -46,34 +47,19 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
 			if (checkNoteOpts.type === 'errors') return;
 
-			if (note.title === data.title.trim() && note.data === data.data.trim()) {
-				const optKeys = Object.entries(noteOptions);
-				const noteKeys = Object.entries(note);
-
-				let isSame = true;
-
-				optKeys.forEach(([key, val], idx) => {
-					noteKeys.forEach(([key2, val2], idx2) => {
-						if (key === key2) {
-							if (val === val2) {
-								noteKeys.splice(idx2, 1);
-							} else {
-								isSame = false;
-							}
-						}
-					});
-				});
-
-				if (isSame) {
-					setOpenDetail(false);
-					return;
-				}
+			if (
+				note.title === data.title.trim() &&
+				note.data === data.data.trim() &&
+				shallowObjectCompare(noteOptions, { isDone, isInProgress, isArchived, isPinned })
+			) {
+				setOpenDetail(false);
+				return;
 			}
 
 			const noteToEdit = {
+				...noteOptions,
 				title: data.title.trim(),
 				data: data.data.trim(),
-				...noteOptions,
 			} as NoteDetailType;
 
 			editNote(currentUser.uid, id, noteToEdit)
@@ -172,18 +158,13 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 					defaultValue={title}
 					formHandle={{
 						...register('title', {
-							required: true,
-							pattern: /[\w\d]+/,
-							validate: (value) => value.trim().length !== 0,
+							validate: {
+								isValid: (v) => /[\w\d\s]*/.test(v.trim()) || 'Invalid title',
+							},
 						}),
 					}}
 				/>
-				{errors?.title && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.title.type === 'required' ? 'Please fill this field' : "Invalid title's name"}
-					/>
-				)}
+				{errors?.title && <ErrorMessage extraStyle='text-[3rem]' content={errors.title.message || ''} />}
 
 				<TextArea
 					className='!text-[3rem] mobile:!text-[3.6rem] !max-w-full tablet:!max-w-[65rem] text-left px-6 !h-full'

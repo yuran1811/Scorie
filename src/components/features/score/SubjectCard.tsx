@@ -2,7 +2,7 @@ import { useStore } from 'store';
 import { useDocumentQuery } from 'hooks';
 import { MAX_SCORE_RECENT_LTH } from '../../../constants';
 import { getAverageScore, getAverageScoreString } from 'utils';
-import { db, DivProps, ScoreDetailType, SubjectDetailType } from 'shared';
+import { db, DivProps, ScoreDetailType, SubjectDetailType, SubjectListType } from 'shared';
 import { SubjectDetail } from './SubjectDetail';
 import { LoadingCard } from 'components/shared';
 import { IgnoreIcon, ImportantIcon, StarIcon, ThreeDotsFade } from 'components/icons';

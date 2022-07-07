@@ -1,15 +1,22 @@
 import { InputProps } from 'shared';
-import { FC, RefObject, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useRef, useState } from 'react';
 
 interface SearchBarProps {
-	inputRef: RefObject<HTMLInputElement>;
+	setSearchOpts: Dispatch<
+		SetStateAction<{
+			isSearch: boolean;
+			value: string;
+		}>
+	>;
 }
 
-export const SearchBar: FC<SearchBarProps & InputProps> = ({ inputRef, onChange }) => {
+export const SearchBar: FC<SearchBarProps & InputProps> = ({ setSearchOpts, onChange }) => {
 	const [isActive, setActive] = useState(false);
 
+	const inputRef = useRef<HTMLInputElement>(null);
+
 	return (
-		<div className='flexcenter relative w-[80%] h-[6rem]'>
+		<div className='flexcenter relative w-[80%] h-[6rem] mb-8'>
 			<div className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]'>
 				<input
 					ref={inputRef}
@@ -26,6 +33,7 @@ export const SearchBar: FC<SearchBarProps & InputProps> = ({ inputRef, onChange 
 					}}
 					type='text'
 					onChange={onChange}
+					onBlur={() => setActive(false)}
 					onClick={(e) => e.stopPropagation()}
 				/>
 				<button
@@ -35,7 +43,13 @@ export const SearchBar: FC<SearchBarProps & InputProps> = ({ inputRef, onChange 
 					}`}
 					style={{ background: 'none' }}
 					onClick={() => {
-						if (isActive && inputRef !== null && inputRef?.current) inputRef.current.value = '';
+						if (isActive && inputRef !== null && inputRef?.current) {
+							inputRef.current.value = '';
+							setSearchOpts({
+								isSearch: false,
+								value: '',
+							});
+						}
 						setActive((s) => !s);
 					}}
 				/>

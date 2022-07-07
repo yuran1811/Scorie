@@ -1,10 +1,28 @@
 import { SETTINGS_DEFAULT } from '../constants';
-import { ScoreDetailType } from 'shared';
+import { ScoreDetailType, SubjectListFilterType, SubjectListType } from 'shared';
 
 export interface AverageScoreType {
 	total: number;
 	count: number;
 }
+
+export const filterScoreList = (list: SubjectListType[] | null, filter: SubjectListFilterType | null) => {
+	if (list === null || filter === null) return [];
+
+	return list
+		.map((_) => ({ ..._.subject, isShow: _.isShow }))
+		.filter((_) => {
+			if (!filter?.searchPattern || !filter.searchPattern.length) return true;
+			return _.name.toLowerCase().includes(filter.searchPattern.toLowerCase());
+		})
+		.filter((_) => {
+			if (!filter.hasIgnored && !filter.hasSpecial && !filter.hasVital) return true;
+			if (filter.hasSpecial && _.isSpecial) return true;
+			if (filter.hasVital && _.isVital) return true;
+			if (filter.hasIgnored && _.isIgnored) return true;
+			return false;
+		});
+};
 
 export const getAverageScore = (scores: ScoreDetailType[], initialValue?: AverageScoreType) => {
 	const result = scores.reduce((prevValue, score) => {

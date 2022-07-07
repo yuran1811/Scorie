@@ -1,5 +1,5 @@
 import { useStore } from 'store';
-import { DivProps, SubjectDetailType } from 'shared';
+import { DivProps, SubjectListType } from 'shared';
 import { addNewSubject, validateSubjectOption } from 'services';
 import { ErrorMessage } from 'components/interfaces';
 import { IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
@@ -12,7 +12,7 @@ interface Inputs {
 }
 
 interface ScoreAddNewProps {
-	subjects: SubjectDetailType[];
+	subjects: SubjectListType[];
 	onClickHandle: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -50,7 +50,7 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
 			});
 
 			if (currentUser && currentUser?.uid) {
-				const notUnique = subjects.find((_) => _.name === subject);
+				const notUnique = subjects.find((_) => _.subject.name === subject);
 				if (notUnique) return;
 
 				addNewSubject(currentUser.uid, {
@@ -99,20 +99,15 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
 					defaultValue=''
 					formHandle={{
 						...register('subject', {
-							required: true,
-							pattern: /[\w\d]+/,
-							validate: (value) => value.trim().length !== 0,
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Subject cannot be empty',
+								isValid: (v) => /[\w\d\s]+/.test(v.trim()) || 'Invalid subject',
+							},
 						}),
 					}}
 				/>
-				{errors?.subject && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={
-							errors?.subject.type === 'required' ? 'Please fill this field' : "Invalid subject's name"
-						}
-					/>
-				)}
+				{errors?.subject && <ErrorMessage extraStyle='text-[3rem]' content={errors.subject.message || ''} />}
 
 				{status.type === 'errors' && <ErrorMessage extraStyle='text-[3rem]' content={status.message} />}
 

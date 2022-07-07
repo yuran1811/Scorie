@@ -1,10 +1,9 @@
 import { useStore } from 'store';
-import { editNote, validateNoteOption } from 'services';
-import { getNoteStyle, shallowObjectCompare } from 'utils';
+import { editNote } from 'services';
 import { NoteItemProps } from 'shared';
+import { getNoteStyle, shallowObjectCompare } from 'utils';
 import { NoteDetail } from './NoteDetail';
 import { ThemePanel } from './ThemePanel';
-import { ClickAway } from 'components/shared';
 import { ArchiveIcon, DoneIcon, NodeShareIcon, PaletteIcon, PinIcon, ProgressIcon } from 'components/icons';
 import { FC, useEffect, useState } from 'react';
 
@@ -77,7 +76,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 
 				<div
 					className={`isAnimated group-hover:delay-300 tablet:group-hover:delay-[0ms] relative flexcenter flex-wrap w-full max-h-0 mt-12 tablet:mt-6 p-3 bg-slate-800 rounded-[3.5rem] opacity-0 group-hover:opacity-100 group-hover:max-h-[12rem] ${
-						openTheme ? 'opacity-100' : ''
+						openTheme ? 'opacity-100 max-h-[12rem]' : 'overflow-hidden'
 					}`}
 					onClick={(e) => {
 						e.preventDefault();
@@ -85,13 +84,13 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 					}}
 				>
 					<div onClick={() => setOpenTheme((s) => !s)}>
-						<ClickAway
+						{/* <ClickAway
 							className={`${openTheme ? 'z-[9]' : 'hidden z-[-1]'}`}
 							onClick={(e) => {
 								e.stopPropagation();
 								setOpenTheme(false);
 							}}
-						/>
+						/> */}
 						<ThemePanel
 							themeSelected={theme}
 							setNewTheme={setNewTheme}
@@ -105,7 +104,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 						/>
 					</div>
 					<div className='flexcenter relative'>
-						<div className='absolute left-[1.3rem] animate-ping bg-sky-300 w-[2.6rem] h-[2.6rem] rounded-[50%]'></div>
+						<div className='absolute left-[1.3rem] animate-ping bg-sky-300 w-[2.6rem] h-[2.6rem] rounded-[50%]' />
 						<NodeShareIcon
 							{...toolProps}
 							className={`translate-x-[-2rem] delay-[20ms] ${toolClass} ${
@@ -118,7 +117,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 						className={`translate-x-[-0.6rem] delay-[0ms] ${toolClass} ${
 							openTheme && '!translate-x-0 !opacity-100'
 						}`}
-						fill={!noteOpts.isPinned ? 'white' : '#f87171'}
+						fill={!isPinned ? 'white' : '#f87171'}
 						onClick={() => setNoteOpts((s) => ({ ...s, isPinned: !s.isPinned }))}
 					/>
 					<DoneIcon
@@ -126,7 +125,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 						className={`translate-x-[0.6rem] delay-[12ms] ${toolClass} ${
 							openTheme && '!translate-x-0 !opacity-100'
 						}`}
-						fill={!noteOpts.isDone ? 'white' : '#eab308'}
+						fill={!isDone ? 'white' : '#eab308'}
 						onClick={() =>
 							setNoteOpts((s) => ({
 								...s,
@@ -140,13 +139,12 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 						className={`translate-x-[2rem] delay-[12ms] ${toolClass} ${
 							openTheme && '!translate-x-0 !opacity-100'
 						}`}
-						fill={!noteOpts.isInProgress ? 'white' : '#cbd5e1'}
+						fill={!isInProgress ? 'white' : '#cbd5e1'}
 						onClick={() =>
 							setNoteOpts((s) => ({
 								...s,
 								isInProgress: !s.isInProgress,
 								isDone: !s.isInProgress ? false : s.isDone,
-								s,
 							}))
 						}
 					/>
@@ -155,7 +153,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 						className={`translate-x-[3rem] delay-[12ms] ${toolClass} ${
 							openTheme && '!translate-x-0 !opacity-100'
 						}`}
-						fill={!noteOpts.isArchived ? 'white' : '#94a3b8'}
+						fill={!isArchived ? 'white' : '#94a3b8'}
 						onClick={() => setNoteOpts((s) => ({ ...s, isArchived: !s.isArchived }))}
 					/>
 				</div>

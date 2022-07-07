@@ -1,15 +1,15 @@
 import { auth } from 'shared';
 import { useStore } from 'store';
 import { getFirebaseErr } from 'utils';
-import { LogOutIcon, ThreeDotsFade } from 'components/icons';
+import { updateUserProfile } from 'services';
 import { Button, Input } from 'components/shared';
 import { ErrorMessage } from 'components/interfaces';
+import { LogOutIcon, ThreeDotsFade } from 'components/icons';
 import { NotVerifyEmail } from '../../auth/NotVerifyEmail';
 import { sendPasswordResetEmail, signOut } from 'firebase/auth';
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useCallback } from 'react';
-import { updateProfileData } from 'services';
+import { FirebaseError } from 'firebase/app';
 
 interface Inputs {
 	displayName: string;
@@ -39,11 +39,13 @@ export const AccountInfo: FC = () => {
 			const { displayName, photoURL } = data;
 
 			setLoading(true);
-			await updateProfileData(currentUser, { displayName: displayName.trim() });
+			await updateUserProfile({ ...currentUser, displayName: displayName.trim() });
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
-			setErrMsg('Error');
+
+			const err = error as FirebaseError;
+			setErrMsg(err.message);
 		}
 	}, []);
 
@@ -83,24 +85,18 @@ export const AccountInfo: FC = () => {
 								className='!text-[4rem]'
 								name='displayName'
 								placeholder='Profile name'
-								defaultValue={currentUser.displayName || 'Guest'}
 								formHandle={{
 									...register('displayName', {
-										required: true,
-										pattern: /[\w\d\s]+/,
-										validate: (value) => value.trim().length !== 0,
+										required: 'Please fill in this field',
+										validate: {
+											notEmpty: (v) => v.trim().length !== 0 || 'Username cannot be empty',
+											isValid: (v) => /[\w\d\s]+/.test(v.trim()) || 'Invalid username',
+										},
 									}),
 								}}
 							/>
 							{errors?.displayName && (
-								<ErrorMessage
-									extraStyle='text-[3rem]'
-									content={
-										errors?.displayName.type === 'required'
-											? 'Please fill this field'
-											: 'Not an email'
-									}
-								/>
+								<ErrorMessage extraStyle='text-[3rem]' content={errors.displayName.message || ''} />
 							)}
 
 							<Button type='submit' className='!text-[3.5rem]' content='Update profile' />

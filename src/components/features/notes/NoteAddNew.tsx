@@ -111,18 +111,13 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 					defaultValue=''
 					formHandle={{
 						...register('title', {
-							required: true,
-							pattern: /[\w\d]+/,
-							validate: (value) => value.trim().length !== 0,
+							validate: {
+								isValid: (v) => /[\w\d\s]*/.test(v.trim()) || 'Invalid title',
+							},
 						}),
 					}}
 				/>
-				{errors?.title && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.title.type === 'required' ? 'Please fill this field' : "Invalid title's name"}
-					/>
-				)}
+				{errors?.title && <ErrorMessage extraStyle='text-[3rem]' content={errors.title.message || ''} />}
 
 				<TextArea defaultValue='' className='font-normal' formHandle={{ ...register('data') }} />
 

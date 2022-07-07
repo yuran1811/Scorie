@@ -1,7 +1,7 @@
 import { useStore } from 'store';
 import { getNoteList } from 'utils';
-import { db, NoteListType } from 'shared';
 import { useCollectionQuery } from 'hooks';
+import { db, NoteListFilterType, NoteListType } from 'shared';
 import { Title } from '../main/sections/Title';
 import { NoteAddNew } from './NoteAddNew';
 import { NoteSection } from './NoteSection';
@@ -15,9 +15,9 @@ import {
 	NoteIcon,
 	ProgressIcon,
 } from 'components/icons';
-import { collection } from 'firebase/firestore';
-import { useEffect, useRef, useState } from 'react';
 import { SearchBar } from 'components/shared';
+import { useEffect, useState } from 'react';
+import { collection } from 'firebase/firestore';
 
 export const NoteSectionBar = () => {
 	const currentUser = useStore((s) => s.currentUser);
@@ -27,13 +27,15 @@ export const NoteSectionBar = () => {
 		collection(db, 'users', currentUser?.uid as string, 'notes')
 	);
 
-	const inputRef = useRef<HTMLInputElement>(null);
-
 	const [viewMode, setViewMode] = useState('grid');
 	const [addNewOpen, setAddNewOpen] = useState(false);
 	const [noteList, setNoteList] = useState<NoteListType[]>([]);
 	const [idxListState, setIdxListState] = useState<string[]>([]);
-	const [filter, setFilter] = useState({
+	const [searchOpts, setSearchOpts] = useState({
+		isSearch: false,
+		value: '',
+	});
+	const [filter, setFilter] = useState<NoteListFilterType>({
 		hasArchived: false,
 		hasDone: false,
 		hasInProgress: false,
@@ -48,6 +50,13 @@ export const NoteSectionBar = () => {
 		if (rawData?.idxList) setIdxListState(rawData.idxList as string[]);
 		if (rawData?.noteList) setNoteList(rawData.noteList as NoteListType[]);
 	}, [data, loading, error]);
+
+	useEffect(() => {
+		setFilter((s) => ({
+			...s,
+			searchPattern: searchOpts.isSearch ? searchOpts.value : '',
+		}));
+	}, [searchOpts]);
 
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
@@ -100,14 +109,34 @@ export const NoteSectionBar = () => {
 					</div>
 				</div>
 			</div>
-			{/* <div className='w-full flexcenter px-4'>
-				<SearchBar inputRef={inputRef} />
-			</div> */}
+			<div className='w-full flexcenter px-4'>
+				<SearchBar
+					setSearchOpts={setSearchOpts}
+					onChange={(e) => {
+						const searchValue = e.currentTarget.value.trim();
+
+						if (searchValue.length === 0)
+							setSearchOpts({
+								isSearch: false,
+								value: '',
+							});
+						else
+							setSearchOpts({
+								isSearch: true,
+								value: searchValue,
+							});
+					}}
+				/>
+			</div>
 
 			{loading && (
 				<div className='flexcenter w-full h-[10rem]'>
 					<FlatLoading />
 				</div>
+			)}
+
+			{!loading && noteList !== null && noteList.length === 0 && (
+				<div className='w-full p-8 m-4 font-bold text-[5rem] text-center'>No note</div>
 			)}
 
 			{!loading && noteList !== null && noteList.length !== 0 && (

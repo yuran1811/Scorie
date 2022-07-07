@@ -22,6 +22,18 @@ export interface SubjectDetailType {
 	updatedAt?: Timestamp;
 }
 
+export interface SubjectListType {
+	isShow: boolean;
+	subject: SubjectDetailType;
+}
+
+export interface SubjectListFilterType {
+	hasVital: boolean;
+	hasSpecial: boolean;
+	hasIgnored: boolean;
+	searchPattern?: string;
+}
+
 export interface ScoreDetailProps {
 	id: string;
 	setActive: Dispatch<SetStateAction<boolean>>;

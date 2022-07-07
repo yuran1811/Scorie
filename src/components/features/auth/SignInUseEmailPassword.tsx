@@ -32,18 +32,16 @@ const SignInUseEmailPassWord = () => {
 		const { email, password } = data;
 
 		setLoading(true);
-
 		signInWithEmailAndPassword(auth, email.trim(), password.trim())
-			.then((userCredential) => {
-				setLoading(false);
-				return userCredential;
-			})
 			.then((userCredential) => {
 				const user = userCredential.user;
 				setCurrentUser(user);
 			})
 			.catch((error) => {
 				setErrMsg(getFirebaseErr(error.message));
+			})
+			.finally(() => {
+				setLoading(false);
 			});
 	}, []);
 
@@ -77,34 +75,36 @@ const SignInUseEmailPassWord = () => {
 							defaultValue=''
 							formHandle={{
 								...register('email', {
-									required: true,
-									pattern: /\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/,
-									validate: (value) => value.trim().length !== 0,
+									required: 'Please fill in this field',
+									validate: {
+										notEmpty: (v) => v.trim().length !== 0 || 'Email cannot be empty',
+										isValid: (v) =>
+											/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v.trim()) ||
+											'Invalid email',
+									},
 								}),
 							}}
 						/>
 						{errors?.email && (
-							<ErrorMessage
-								extraStyle='text-[3rem]'
-								content={errors?.email.type === 'required' ? 'Please fill this field' : 'Not an email'}
-							/>
+							<ErrorMessage extraStyle='text-[3rem]' content={errors.email.message || ''} />
 						)}
 
 						<Input
 							name='password'
 							placeholder='Password'
 							defaultValue=''
-							formHandle={{ ...register('password', { required: true, pattern: /[\w\d]{6,}/ }) }}
+							formHandle={{
+								...register('password', {
+									required: 'Please fill in this field',
+									validate: {
+										notEmpty: (v) => v.trim().length !== 0 || 'Password cannot be empty',
+										isValid: (v) => /^[\w\d]{6,}$/.test(v.trim()) || 'At least 6 characters',
+									},
+								}),
+							}}
 						/>
 						{errors?.password && (
-							<ErrorMessage
-								extraStyle='text-[3rem]'
-								content={
-									errors?.password.type === 'required'
-										? 'Please fill this field'
-										: 'At least 6 characters'
-								}
-							/>
+							<ErrorMessage extraStyle='text-[3rem]' content={errors.password.message || ''} />
 						)}
 
 						{errMsg && <ErrorMessage extraStyle='text-[3rem]' content={errMsg} />}

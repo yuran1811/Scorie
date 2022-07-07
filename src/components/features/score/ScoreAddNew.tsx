@@ -73,54 +73,45 @@ export const ScoreAddNew: FC<ScoreAddNewProps & DivProps> = ({
 					defaultValue=''
 					formHandle={{
 						...register('score', {
-							required: true,
-							pattern: /(\d+)(\.\d+)?/,
-							validate: (value) => value.trim().length !== 0,
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Score cannot be empty',
+								isValid: (v) => /^(\d+)(\.\d+)?$/.test(v.trim()) || 'Invalid score',
+							},
 						}),
 					}}
 				/>
-				{errors?.score && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.score.type === 'required' ? 'Please fill this field' : 'Invalid score'}
-					/>
-				)}
+				{errors?.score && <ErrorMessage extraStyle='text-[3rem]' content={errors.score.message || ''} />}
 
 				<Input
 					placeholder='Base'
 					defaultValue=''
 					formHandle={{
 						...register('base', {
-							required: true,
-							pattern: /\d+/,
-							validate: (value) => value.trim().length !== 0,
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Base cannot be empty',
+								isValid: (v) => /^\d+$/.test(v.trim()) || 'Invalid base',
+							},
 						}),
 					}}
 				/>
-				{errors?.base && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.base.type === 'required' ? 'Please fill this field' : 'Invalid base'}
-					/>
-				)}
+				{errors?.base && <ErrorMessage extraStyle='text-[3rem]' content={errors.base.message || ''} />}
 
 				<Input
 					placeholder='Type'
 					defaultValue=''
 					formHandle={{
 						...register('type', {
-							required: true,
-							pattern: /[\w\d\s]+/,
-							validate: (value) => value.trim().length !== 0,
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Type cannot be empty',
+								isValid: (v) => /[\w\d\s]+/.test(v.trim()) || 'Invalid type',
+							},
 						}),
 					}}
 				/>
-				{errors?.type && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.type.type === 'required' ? 'Please fill this field' : 'Invalid type'}
-					/>
-				)}
+				{errors?.type && <ErrorMessage extraStyle='text-[3rem]' content={errors.type.message || ''} />}
 
 				<Button className='!text-[3.6rem]' type='submit' content='Add' />
 			</form>

@@ -1,5 +1,5 @@
 import { useStore } from 'store';
-import { DivProps, SubjectDetailType } from 'shared';
+import { DivProps, SubjectListType } from 'shared';
 import { addNewScore, addNewSubject } from 'services';
 import { IgnoreIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
@@ -15,7 +15,7 @@ interface Inputs {
 }
 
 interface ScoreSubjectAddNewProps {
-	subjects: SubjectDetailType[];
+	subjects: SubjectListType[];
 }
 
 export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onClick, subjects }) => {
@@ -36,7 +36,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
 
 			const { base, score: value, type, subject } = data;
 
-			const validSubject = subjects.find((_) => _.name === subject.trim());
+			const validSubject = subjects.find((_) => _.subject.name === subject.trim());
 			if (!validSubject) {
 				addNewSubject(currentUser.uid, {
 					name: subject.trim(),
@@ -56,8 +56,8 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
 					});
 				});
 			} else {
-				addNewScore(currentUser.uid, validSubject.id, {
-					id: +validSubject.scores[validSubject.scores.length - 1].id + 1 + '',
+				addNewScore(currentUser.uid, validSubject.subject.id, {
+					id: +validSubject.subject.scores[validSubject.subject.scores.length - 1].id + 1 + '',
 					isIgnored: scoreOptions.isIgnored,
 					type: type.trim(),
 					base: +base.trim(),
@@ -92,62 +92,60 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
 					defaultValue=''
 					formHandle={{
 						...register('subject', {
-							required: true,
-							pattern: /[\w\d]+/,
-							validate: (value) => value.trim().length !== 0,
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Subject cannot be empty',
+								isValid: (v) => /[\w\d\s]+/.test(v.trim()) || 'Invalid subject',
+							},
 						}),
 					}}
 				/>
-				{errors?.subject && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.subject.type === 'required' ? 'Please fill this field' : 'Invalid subject'}
-					/>
-				)}
+				{errors?.subject && <ErrorMessage extraStyle='text-[3rem]' content={errors.subject.message || ''} />}
 
 				<Input
 					placeholder='Score'
 					defaultValue=''
 					formHandle={{
-						...register('score', { required: true, pattern: /(\d+)(\.\d+)?/ }),
+						...register('score', {
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Score cannot be empty',
+								isValid: (v) => /^(\d+)(\.\d+)?$/.test(v.trim()) || 'Invalid score',
+							},
+						}),
 					}}
 				/>
-				{errors?.score && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.score.type === 'required' ? 'Please fill this field' : 'Invalid score'}
-					/>
-				)}
+				{errors?.score && <ErrorMessage extraStyle='text-[3rem]' content={errors.score.message || ''} />}
 
 				<Input
 					placeholder='Base'
 					defaultValue=''
-					formHandle={{ ...register('base', { required: true, pattern: /\d+/ }) }}
+					formHandle={{
+						...register('base', {
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Base cannot be empty',
+								isValid: (v) => /^\d+$/.test(v.trim()) || 'Invalid base',
+							},
+						}),
+					}}
 				/>
-				{errors?.base && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.base.type === 'required' ? 'Please fill this field' : 'Invalid base'}
-					/>
-				)}
+				{errors?.base && <ErrorMessage extraStyle='text-[3rem]' content={errors.base.message || ''} />}
 
 				<Input
 					placeholder='Type'
 					defaultValue=''
 					formHandle={{
 						...register('type', {
-							required: true,
-							pattern: /[\w\d\s]+/,
-							validate: (value) => value.trim().length !== 0,
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Type cannot be empty',
+								isValid: (v) => /[\w\d\s]+/.test(v.trim()) || 'Invalid type',
+							},
 						}),
 					}}
 				/>
-				{errors?.type && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.type.type === 'required' ? 'Please fill this field' : 'Invalid type'}
-					/>
-				)}
+				{errors?.type && <ErrorMessage extraStyle='text-[3rem]' content={errors.type.message || ''} />}
 
 				<Button className='!text-[3.6rem]' type='submit' content='Add' />
 			</form>

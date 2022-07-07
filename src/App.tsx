@@ -2,7 +2,7 @@ import { auth } from 'shared';
 import { useStore } from 'store';
 import { HomePage } from 'pages';
 import { publicRoutes } from 'routes';
-import { updateUserProfile } from 'services';
+import { setUserProfile } from 'services';
 import { ErrorContent } from 'components/shared';
 import MainLayout from 'components/layouts/MainLayout';
 import { Outlet, Route, Routes } from 'react-router-dom';
@@ -20,8 +20,10 @@ const App: FC = () => {
 				return;
 			}
 
+			console.log('Auth changed');
+
 			setCurrentUser(user);
-			updateUserProfile(user);
+			setUserProfile(user);
 		});
 
 		return () => unregisterAuth();

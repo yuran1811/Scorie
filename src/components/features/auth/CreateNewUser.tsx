@@ -2,7 +2,7 @@ import { useStore } from 'store';
 import { ThreeDotsFade } from 'components/icons';
 import { Button, Input } from 'components/shared';
 import { ErrorMessage } from 'components/interfaces';
-import { createNewUserEmailMethod, sendVerifyEmail, updateProfileData } from 'services';
+import { createNewUserEmailMethod, sendVerifyEmail, updateUserProfile } from 'services';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -39,7 +39,7 @@ export const CreateNewUser: FC = ({ children }) => {
 			if (!resp || !resp?.user) return;
 			const { user } = resp;
 
-			await updateProfileData(user, { displayName: displayName.trim() });
+			await updateUserProfile({ ...user, displayName: displayName.trim() });
 			setCurrentUser(user);
 
 			await sendVerifyEmail(user);
@@ -71,17 +71,16 @@ export const CreateNewUser: FC = ({ children }) => {
 					defaultValue=''
 					formHandle={{
 						...register('displayName', {
-							required: true,
-							pattern: /[\w\d\s]+/,
-							validate: (value) => value.trim().length !== 0,
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Username cannot be empty',
+								isValid: (v) => /[\w\d\s]+/.test(v.trim()) || 'Invalid username',
+							},
 						}),
 					}}
 				/>
 				{errors?.displayName && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.displayName.type === 'required' ? 'Please fill this field' : 'Invalid name'}
-					/>
+					<ErrorMessage extraStyle='text-[3rem]' content={errors.displayName.message || ''} />
 				)}
 
 				<Input
@@ -90,53 +89,45 @@ export const CreateNewUser: FC = ({ children }) => {
 					defaultValue=''
 					formHandle={{
 						...register('email', {
-							required: true,
-							pattern: /\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/,
-							validate: (value) => value.trim().length !== 0,
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Email cannot be empty',
+								isValid: (v) =>
+									/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v.trim()) || 'Invalid email',
+							},
 						}),
 					}}
 				/>
-				{errors?.email && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={errors?.email.type === 'required' ? 'Please fill this field' : 'Not an email'}
-					/>
-				)}
+				{errors?.email && <ErrorMessage extraStyle='text-[3rem]' content={errors.email.message || ''} />}
 
 				<Input
 					name='password'
 					placeholder='Password'
 					defaultValue=''
-					formHandle={{ ...register('password', { required: true, pattern: /[\w\d]{6,}/ }) }}
+					formHandle={{
+						...register('password', {
+							required: 'Please fill in this field',
+							validate: {
+								notEmpty: (v) => v.trim().length !== 0 || 'Password cannot be empty',
+								isValid: (v) => /^[\w\d]{6,}$/.test(v.trim()) || 'At least 6 characters',
+							},
+						}),
+					}}
 				/>
-				{errors?.password && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={
-							errors?.password.type === 'required' ? 'Please fill this field' : 'At least 6 characters'
-						}
-					/>
-				)}
+				{errors?.password && <ErrorMessage extraStyle='text-[3rem]' content={errors.password.message || ''} />}
 
 				<Input
 					placeholder='Confirm password'
 					defaultValue=''
 					formHandle={{
 						...register('confirmPassword', {
-							required: true,
-							validate: (value) => value === password.current || 'The passwords do not match',
+							required: 'Please fill in this field',
+							validate: (v) => v === password.current || 'The password do not match',
 						}),
 					}}
 				/>
 				{errors?.confirmPassword && (
-					<ErrorMessage
-						extraStyle='text-[3rem]'
-						content={
-							errors?.confirmPassword.type === 'required'
-								? 'Please fill this field'
-								: errors.confirmPassword.message || ''
-						}
-					/>
+					<ErrorMessage extraStyle='text-[3rem]' content={errors.confirmPassword.message || ''} />
 				)}
 
 				{errMsg && <ErrorMessage extraStyle='text-[3rem]' content={errMsg} />}

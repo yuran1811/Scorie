@@ -34,6 +34,7 @@ export interface NoteListFilterType {
 	hasArchived: boolean;
 	hasDone: boolean;
 	hasInProgress: boolean;
+	searchPattern?: string;
 }
 
 export interface NoteSectionProps {

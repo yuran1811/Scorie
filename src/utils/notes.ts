@@ -12,6 +12,13 @@ export const filterSectionList = (list: NoteListType[] | null, filter: NoteListF
 			return (_.isPinned && group === 'pinned') || (!_.isPinned && group === 'other');
 		})
 		.filter((_) => {
+			if (!filter?.searchPattern || !filter.searchPattern.length) return true;
+			return (
+				_.title.toLowerCase().includes(filter.searchPattern.toLowerCase()) ||
+				_.data.toLowerCase().includes(filter.searchPattern.toLowerCase())
+			);
+		})
+		.filter((_) => {
 			if (!filter.hasDone && !filter.hasInProgress && !filter.hasArchived) return !_.isArchived;
 			if (filter.hasDone && _.isDone) return true;
 			if (filter.hasArchived && _.isArchived) return true;

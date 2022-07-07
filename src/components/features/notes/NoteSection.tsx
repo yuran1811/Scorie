@@ -75,8 +75,8 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
 	});
 
 	return (
-		<div className='max-w-[100rem] w-full mx-auto my-12'>
-			<div className='w-[20rem] mx-auto mb-8 font-semibold tablet:text-[5rem] text-[4rem] text-center border-b-[0.2rem] border-indigo-100'>
+		<div className='max-w-[100rem] w-full mx-auto my-12 pb-12'>
+			<div className='w-[20rem] mx-auto mb-8 font-semibold tablet:text-[4.5rem] text-[3.5rem] text-center border-b-[0.2rem] border-indigo-100'>
 				Pinned
 			</div>
 			<ReactSortable
@@ -94,7 +94,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
 				))}
 			</ReactSortable>
 
-			<div className='w-[20rem] mx-auto mt-[7rem] mb-8 font-semibold tablet:text-[5rem] text-[4rem] text-center border-b-[0.2rem] border-indigo-100'>
+			<div className='w-[20rem] mx-auto mt-[7rem] mb-8 font-semibold tablet:text-[4.5rem] text-[3.5rem] text-center border-b-[0.2rem] border-indigo-100'>
 				Others
 			</div>
 			<ReactSortable
@@ -107,7 +107,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
 			>
 				{filterSectionList(otherList, filter).map((item) => (
 					<div key={item.id}>
-						<NoteItem viewMode={viewMode} key={item.id} isShow={item.isShow} note={item} />
+						<NoteItem viewMode={viewMode} isShow={item.isShow} note={item} />
 					</div>
 				))}
 			</ReactSortable>

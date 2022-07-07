@@ -36,12 +36,17 @@ export const SettingInfo: FC = () => {
 						defaultValue={settings.numberFormat}
 						formHandle={{
 							...register('numberFormat', {
-								required: true,
-								pattern: /\d+/,
+								required: 'Please fill in this field',
+								validate: {
+									notEmpty: (v) => v.toString().trim().length !== 0 || 'Cannot be empty',
+									isNumber: (v) => /^\d+$/.test(v.toString().trim()) || 'Not a number',
+								},
 							}),
 						}}
 					/>
-					{errors?.numberFormat && <ErrorMessage extraStyle='text-[3rem]' content='Invalid number' />}
+					{errors?.numberFormat && (
+						<ErrorMessage extraStyle='text-[3rem]' content={errors.numberFormat.message || ''} />
+					)}
 
 					<Button className='!text-[3.5rem]' content='Change' onClick={handleSubmit(onSubmit)} />
 				</form>
