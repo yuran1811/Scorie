@@ -1,32 +1,39 @@
-import { SETTINGS_DEFAULT, SETTINGS_DEFAULT_TYPE } from '../constants';
+import { QuoteStoreType, QUOTES_STORED_DEFAULT, SettingsType, SETTINGS_DEFAULT, SubjectDetailType } from 'shared';
+import { devtools, persist } from 'zustand/middleware';
 import { User } from 'firebase/auth';
 import create from 'zustand';
-import { persist } from 'zustand/middleware';
-import { NoteDetailType } from 'shared';
 
 interface StoreType {
 	currentUser: User | null | undefined;
 	setCurrentUser: (user: User | null) => void;
 
-	settings: SETTINGS_DEFAULT_TYPE;
-	setSettings: (opts: SETTINGS_DEFAULT_TYPE) => void;
+	settings: SettingsType;
+	setSettings: (opts: SettingsType) => void;
 
-	notes: NoteDetailType[];
-	setNotes: (notes: NoteDetailType[]) => void;
+	quotes: QuoteStoreType;
+	setQuotes: (data: QuoteStoreType) => void;
+
+	scores: SubjectDetailType[];
+	setScores: (data: SubjectDetailType[]) => void;
 }
 
 export const useStore = create<StoreType>()(
-	persist(
-		(set, get) => ({
-			currentUser: undefined,
-			setCurrentUser: (user) => set({ currentUser: user }),
+	devtools(
+		persist(
+			(set, get) => ({
+				currentUser: undefined,
+				setCurrentUser: (user) => set({ currentUser: user }),
 
-			settings: { ...SETTINGS_DEFAULT },
-			setSettings: (opts) => set({ settings: { ...opts } }),
+				settings: { ...SETTINGS_DEFAULT },
+				setSettings: (opts) => set({ settings: { ...opts } }),
 
-			notes: [],
-			setNotes: (data) => set({ notes: [...data] }),
-		}),
-		{ name: 'local_user_data' }
+				quotes: { ...QUOTES_STORED_DEFAULT },
+				setQuotes: (data) => set({ quotes: data }),
+
+				scores: [],
+				setScores: (data) => set({ scores: [...data] }),
+			}),
+			{ name: 'local_user_data' }
+		)
 	)
 );

@@ -27,6 +27,7 @@ export const AccountInfo: FC = () => {
 	const [errMsg, setErrMsg] = useState('');
 
 	const {
+		reset,
 		register,
 		handleSubmit,
 		formState: { errors },
@@ -40,6 +41,10 @@ export const AccountInfo: FC = () => {
 
 			setLoading(true);
 			await updateUserProfile({ ...currentUser, displayName: displayName.trim() });
+			reset({
+				displayName,
+				photoURL,
+			});
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
@@ -85,6 +90,7 @@ export const AccountInfo: FC = () => {
 								className='!text-[4rem]'
 								name='displayName'
 								placeholder='Profile name'
+								defaultValue={currentUser?.displayName || 'Guest'}
 								formHandle={{
 									...register('displayName', {
 										required: 'Please fill in this field',

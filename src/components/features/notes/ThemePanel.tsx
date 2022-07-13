@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction } from 'react';
-import { DivProps } from 'shared';
 import { noteThemes } from 'utils';
+import { DivProps } from 'shared';
 
 const themes = { ...noteThemes };
 
@@ -9,11 +9,17 @@ interface ThemePanelProps {
 	setNewTheme: Dispatch<SetStateAction<string>>;
 }
 
-export const ThemePanel: FC<ThemePanelProps & DivProps> = ({ themeSelected, className, setNewTheme }) => (
+export const ThemePanel: FC<ThemePanelProps & DivProps> = ({
+	themeSelected,
+	className,
+	setNewTheme,
+	...otherProps
+}) => (
 	<div
+		{...otherProps}
 		className={`${
 			className || ''
-		} absolute bottom-[-3.5rem] left-0 right-0 p-2 flexcenter flex-wrap bg-slate-800 rounded-[1.6rem]`}
+		} isAnimated origin-top absolute bottom-[-3.5rem] left-0 right-0 p-2 flexcenter flex-wrap bg-slate-800 rounded-[1.6rem]`}
 	>
 		{Object.entries(themes).map(([key, { bg, color }]) => (
 			<div

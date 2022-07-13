@@ -6,6 +6,7 @@ import { NoteDetail } from './NoteDetail';
 import { ThemePanel } from './ThemePanel';
 import { ArchiveIcon, DoneIcon, NodeShareIcon, PaletteIcon, PinIcon, ProgressIcon } from 'components/icons';
 import { FC, useEffect, useState } from 'react';
+import Tippy from '@tippyjs/react/headless';
 
 const toolClass = 'isAnimated m-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100';
 const toolProps = { width: '30', height: '30', fill: 'white' };
@@ -83,26 +84,32 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 						e.stopPropagation();
 					}}
 				>
-					<div onClick={() => setOpenTheme((s) => !s)}>
-						{/* <ClickAway
-							className={`${openTheme ? 'z-[9]' : 'hidden z-[-1]'}`}
-							onClick={(e) => {
-								e.stopPropagation();
-								setOpenTheme(false);
-							}}
-						/> */}
-						<ThemePanel
-							themeSelected={theme}
-							setNewTheme={setNewTheme}
-							className={`${openTheme ? '!flex z-10' : '!hidden z-[-1]'} isAnimated origin-top`}
-						/>
-						<PaletteIcon
-							{...toolProps}
-							className={`${toolClass} ${
-								openTheme && '!translate-x-0 !opacity-100'
-							} translate-x-[-3rem] delay-[35ms]`}
-						/>
+					<div>
+						<Tippy
+							interactive
+							visible={openTheme}
+							placement='bottom-end'
+							onClickOutside={() => setOpenTheme(false)}
+							render={(attrs) => (
+								<ThemePanel
+									{...attrs}
+									themeSelected={theme}
+									setNewTheme={setNewTheme}
+									className={openTheme ? 'z-10' : '!hidden z-[-1]'}
+								/>
+							)}
+						>
+							<div onClick={() => setOpenTheme((s) => !s)}>
+								<PaletteIcon
+									{...toolProps}
+									className={`${toolClass} ${
+										openTheme && '!translate-x-0 !opacity-100'
+									} translate-x-[-3rem] delay-[35ms]`}
+								/>
+							</div>
+						</Tippy>
 					</div>
+
 					<div className='flexcenter relative'>
 						<div className='absolute left-[1.3rem] animate-ping bg-sky-300 w-[2.6rem] h-[2.6rem] rounded-[50%]' />
 						<NodeShareIcon
@@ -118,7 +125,13 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 							openTheme && '!translate-x-0 !opacity-100'
 						}`}
 						fill={!isPinned ? 'white' : '#f87171'}
-						onClick={() => setNoteOpts((s) => ({ ...s, isPinned: !s.isPinned }))}
+						onClick={() =>
+							setNoteOpts((s) => ({
+								...s,
+								isPinned: !s.isPinned,
+								isArchived: !s.isPinned ? false : s.isArchived,
+							}))
+						}
 					/>
 					<DoneIcon
 						{...toolProps}
@@ -148,14 +161,35 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 							}))
 						}
 					/>
-					<ArchiveIcon
-						{...toolProps}
-						className={`translate-x-[3rem] delay-[12ms] ${toolClass} ${
-							openTheme && '!translate-x-0 !opacity-100'
-						}`}
-						fill={!isArchived ? 'white' : '#94a3b8'}
-						onClick={() => setNoteOpts((s) => ({ ...s, isArchived: !s.isArchived }))}
-					/>
+
+					<div>
+						<Tippy
+							delay={500}
+							placement='bottom-end'
+							render={(attrs) => (
+								<div {...attrs} className='p-4 text-[2rem] text-white bg-slate-600 rounded-[1rem]'>
+									Archived
+								</div>
+							)}
+						>
+							<div>
+								<ArchiveIcon
+									{...toolProps}
+									className={`translate-x-[3rem] delay-[12ms] ${toolClass} ${
+										openTheme && '!translate-x-0 !opacity-100'
+									}`}
+									fill={!isArchived ? 'white' : '#94a3b8'}
+									onClick={() =>
+										setNoteOpts((s) => ({
+											...s,
+											isArchived: !s.isArchived,
+											isPinned: !s.isArchived ? false : s.isPinned,
+										}))
+									}
+								/>
+							</div>
+						</Tippy>
+					</div>
 				</div>
 			</div>
 

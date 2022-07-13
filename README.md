@@ -16,14 +16,13 @@
 -   Zustand
 -   Typescript
 -   TailwindCSS
--   Libs: SwiperJS, react-hook-form, react-select, react-sortablejs, ...
+-   Libs: SwiperJS, react-hook-form, react-sortablejs, framer-motion, ...
 
 [![OSCS Status](https://www.oscs1024.com/platform/badge/yuran1811/Scorie.svg?size=small)](https://www.oscs1024.com/project/yuran1811/Scorie?ref=badge_small)
 
 ### Todo
 
 -   Confirm modal component on delete action
--   Search component for notes, scores
--   Share notes to others
 -   Message
+-   Share notes to others
 -   Push notification (PWA)

@@ -11,9 +11,13 @@ export const useDocumentQuery = (key: string, document: DocumentReference<Docume
 	useEffect(() => {
 		const unsubscribe = onSnapshot(
 			document,
+			{ includeMetadataChanges: true },
 			(snapshot) => {
 				setLoading(false);
 				setData(snapshot);
+				setError(false);
+
+				CACHE[key] = snapshot;
 			},
 			(err) => {
 				console.log(err);

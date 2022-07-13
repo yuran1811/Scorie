@@ -1,6 +1,4 @@
 import { ToolIcon } from 'components/icons/ToolIcon';
-import { SwiperSlide } from 'swiper/react';
-import { SectionSwiper } from '../main/sections/SectionSwiper';
 import { Title } from '../main/sections/Title';
 import { ToolCard } from './ToolCard';
 

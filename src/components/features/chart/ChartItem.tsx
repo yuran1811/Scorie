@@ -1,4 +1,5 @@
-import {
+import { FC } from 'react';
+/* import {
 	CategoryScale,
 	Chart as ChartJS,
 	Legend,
@@ -8,9 +9,8 @@ import {
 	Title,
 	Tooltip,
 } from 'chart.js';
-import { FC } from 'react';
-import { Line } from 'react-chartjs-2';
 import { fakeChartJSData } from 'services';
+import { Line } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -42,10 +42,11 @@ export const options = {
 			},
 		},
 	},
-};
+}; */
 
 export const ChartItem: FC = () => (
 	<div className='w-[90%] max-w-[60rem] my-12 p-4 bg-white'>
-		<Line options={options} data={fakeChartJSData} />
+		ChartJS
+		{/* <Line options={options} data={fakeChartJSData} /> */}
 	</div>
 );

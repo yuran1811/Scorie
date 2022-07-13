@@ -4,7 +4,7 @@ import { useCollectionQuery } from 'hooks';
 import { db, NoteListFilterType, NoteListType } from 'shared';
 import { Title } from '../main/sections/Title';
 import { NoteAddNew } from './NoteAddNew';
-import { NoteSection } from './NoteSection';
+import NoteSection from './NoteSection';
 import {
 	AddIcon,
 	ArchiveIcon,

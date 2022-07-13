@@ -7,7 +7,7 @@ interface ToolsContainerProps {
 	setOpened: Dispatch<SetStateAction<boolean>>;
 }
 
-export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, setOpened }) => {
+export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, setOpened, ...otherPropss }) => {
 	const [notificationActive, setNotificationActive] = useState(false);
 
 	const notificationHandle = useCallback(() => {
@@ -31,6 +31,7 @@ export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, setOpened })
 
 	return (
 		<div
+			{...otherPropss}
 			className={`${
 				showMore ? 'flex' : 'hidden'
 			} flex-col items-center justify-start absolute right-[1rem] top-[9rem] bg-ctbg rounded-[1.5rem] border-indigo-200 border-l-[0.5rem] border-b-[0.5rem]`}

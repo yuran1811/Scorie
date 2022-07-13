@@ -1,22 +1,7 @@
-import { HTMLProps } from 'react';
-
 export * from './docs';
+export * from './elements';
 export * from './notes';
+export * from './quotes';
+export * from './routes';
 export * from './scores';
-
-export type DivProps = HTMLProps<HTMLDivElement>;
-export type InputProps = HTMLProps<HTMLInputElement>;
-export type ButtonProps = HTMLProps<HTMLButtonElement>;
-export type AnchorProps = HTMLProps<HTMLAnchorElement>;
-
-export type FeatureRoutesType = {
-	path: string;
-	color: string;
-	title: string;
-	content: string;
-}[];
-
-export type RoutesType = {
-	path: string;
-	component: any;
-}[];
+export * from './settings';

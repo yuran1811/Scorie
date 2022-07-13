@@ -8,12 +8,13 @@ import { Title } from '../main/sections/Title';
 import { SubjectAddNew } from './SubjectAddNew';
 import { SubjectAverage } from './SubjectAverage';
 import { ScoreSubjectAddNew } from './ScoreSubjectAddNew';
+import { SearchBar } from 'components/shared';
 import { AddIcon, FlatLoading, HashtagIcon, IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { useEffect, useMemo, useState } from 'react';
-import { SearchBar } from 'components/shared';
 
 export const ScoreSectionBar = () => {
+	const setScores = useStore((s) => s.setScores);
 	const currentUser = useStore((s) => s.currentUser);
 
 	const { data, loading } = useCollectionQuery(
@@ -36,7 +37,11 @@ export const ScoreSectionBar = () => {
 
 	const subjects = useMemo(() => {
 		const resp = standardizeCollectionData(data) as SubjectDetailType[];
-		return resp.map((subject) => ({ isShow: true, subject }));
+		setScores(resp);
+
+		const subjectsToUse = resp.map((subject) => ({ isShow: true, subject }));
+
+		return subjectsToUse;
 	}, [data]);
 
 	useEffect(() => {

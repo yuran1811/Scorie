@@ -20,6 +20,10 @@ import { Dispatch, FC, SetStateAction, useCallback, useEffect, useMemo, useState
 import { createPortal } from 'react-dom';
 
 interface SubjectDetailProps {
+	style: {
+		color: string;
+		background: string;
+	};
 	subject: SubjectDetailType | undefined;
 	scores: ScoreDetailType[];
 	averageScore: string | number;
@@ -27,7 +31,14 @@ interface SubjectDetailProps {
 	setOpenDetail: Dispatch<SetStateAction<boolean>>;
 }
 
-export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, averageScore, loading, setOpenDetail }) => {
+export const SubjectDetail: FC<SubjectDetailProps> = ({
+	style,
+	subject,
+	scores,
+	averageScore,
+	loading,
+	setOpenDetail,
+}) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const [saveErr, setSaveErr] = useState('');
@@ -147,7 +158,13 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ subject, scores, average
 						<div className='text-[5rem] text-center text-teal-700 w-full line-clamp-1'>
 							{subject?.name || ''}
 						</div>
-						<div className='text-[10rem] text-center text-red-600 w-full line-clamp-1'>{averageScore}</div>
+
+						<div
+							className='text-[10rem] text-center line-clamp-1 px-6 my-4 rounded-[1rem]'
+							style={{ ...style }}
+						>
+							{averageScore}
+						</div>
 
 						<div className='flex items-center justify-between flex-wrap w-full py-8 text-slate-800 bg-violet-200'>
 							<div className='font-bold text-[4rem] text-center smallmb:text-left w-full smallmb:w-auto px-6 line-clamp-1'>

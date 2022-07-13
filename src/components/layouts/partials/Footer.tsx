@@ -1,4 +1,4 @@
-import { GH_LINK } from '../../../constants';
+import { GH_LINK } from 'shared';
 import { HighlightLink } from 'components/interfaces';
 import { FC } from 'react';
 

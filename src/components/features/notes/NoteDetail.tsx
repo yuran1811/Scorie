@@ -24,7 +24,7 @@ interface NoteDetailProps {
 }
 
 export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail }) => {
-	const { id, isPinned, isArchived, isDone, isInProgress, title, data, createdAt, updatedAt } = note;
+	const { id, isPinned, isArchived, isDone, isInProgress, title, data, updatedAt } = note;
 
 	const currentUser = useStore((s) => s.currentUser);
 
@@ -97,14 +97,26 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 						fill={!noteOptions.isPinned ? 'white' : '#f87171'}
 						width='40'
 						height='40'
-						onClick={() => setNoteOptions((s) => ({ ...s, isPinned: !s.isPinned }))}
+						onClick={() =>
+							setNoteOptions((s) => ({
+								...s,
+								isPinned: !s.isPinned,
+								isArchived: !s.isPinned ? false : s.isArchived,
+							}))
+						}
 					/>
 					<ArchiveIcon
 						className='scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6'
 						fill={!noteOptions.isArchived ? 'white' : '#94a3b8'}
 						width='40'
 						height='40'
-						onClick={() => setNoteOptions((s) => ({ ...s, isArchived: !s.isArchived }))}
+						onClick={() =>
+							setNoteOptions((s) => ({
+								...s,
+								isArchived: !s.isArchived,
+								isPinned: !s.isArchived ? false : s.isPinned,
+							}))
+						}
 					/>
 					<DoneIcon
 						className='scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6'

@@ -1,10 +1,10 @@
-import { SETTINGS_DEFAULT_TYPE } from '../../../../constants';
+import { useStore } from 'store';
+import { SettingsType } from 'shared';
 import { DownloadIcon } from 'components/icons';
 import { Button, Input } from 'components/shared';
 import { ErrorMessage } from 'components/interfaces';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FC, useCallback } from 'react';
-import { useStore } from 'store';
 
 export const SettingInfo: FC = () => {
 	const settings = useStore((s) => s.settings);
@@ -14,9 +14,9 @@ export const SettingInfo: FC = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<SETTINGS_DEFAULT_TYPE>({ mode: 'onChange' });
+	} = useForm<SettingsType>({ mode: 'onChange' });
 
-	const onSubmit: SubmitHandler<SETTINGS_DEFAULT_TYPE> = useCallback((data) => {
+	const onSubmit: SubmitHandler<SettingsType> = useCallback((data) => {
 		setSettings({ ...data });
 	}, []);
 

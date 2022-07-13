@@ -11,4 +11,10 @@ if (process.env.NODE_ENV === 'production') getAnalytics(firebaseApp);
 export const auth = getAuth(firebaseApp);
 export const db = getFirestore(firebaseApp);
 
-// enableIndexedDbPersistence(db, { forceOwnership: false });
+enableIndexedDbPersistence(db, { forceOwnership: false }).catch((err) => {
+	if (err.code === 'failed-precondition') {
+		console.log('Persistance failed');
+	} else if (err.code === 'unimplemented') {
+		console.log('Persistance not availabel');
+	}
+});

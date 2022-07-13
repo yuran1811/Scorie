@@ -37,6 +37,7 @@ export * from './PaletteIcon';
 export * from './PinIcon';
 export * from './PlusIcon';
 export * from './ProgressIcon';
+export * from './QuoteIcon';
 export * from './ReactIcon';
 export * from './SearchIcon';
 export * from './SettingIcon';

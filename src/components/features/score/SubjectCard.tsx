@@ -1,8 +1,7 @@
 import { useStore } from 'store';
 import { useDocumentQuery } from 'hooks';
-import { MAX_SCORE_RECENT_LTH } from '../../../constants';
-import { getAverageScore, getAverageScoreString } from 'utils';
-import { db, DivProps, ScoreDetailType, SubjectDetailType, SubjectListType } from 'shared';
+import { getAverageScore, getAverageScoreString, averageScore as averageScoreStyle } from 'utils';
+import { db, DivProps, ScoreDetailType, SubjectDetailType, MAX_SCORE_RECENT_LTH } from 'shared';
 import { SubjectDetail } from './SubjectDetail';
 import { LoadingCard } from 'components/shared';
 import { IgnoreIcon, ImportantIcon, StarIcon, ThreeDotsFade } from 'components/icons';
@@ -72,7 +71,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject: 
 				<div
 					className={`${
 						!isShow ? '!hidden' : ''
-					} overflow-hidden cursor-pointer tablet:max-w-[25rem] max-h-[32rem] w-full m-6 p-4 rounded-[2.5rem] font-bold text-center text-rose-600 bg-violet-200`}
+					} overflow-hidden cursor-pointer tablet:max-w-[25rem] w-full m-6 p-4 rounded-[2.5rem] font-bold text-center text-rose-600 bg-violet-200`}
 					onClick={() => setOpenDetail((s) => !s)}
 				>
 					<div className='flexcenter p-4'>
@@ -100,7 +99,12 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject: 
 						<div className='font-bold text-[3.5rem] text-center text-teal-700 w-full line-clamp-1'>
 							{subject?.name || ''}
 						</div>
-						<div className='font-bold text-[6rem] text-center text-red-600 w-full line-clamp-1'>
+						<div
+							className='font-bold text-[6rem] text-center line-clamp-1 px-6 my-4 rounded-[1rem]'
+							style={{
+								...averageScoreStyle[averageScoreStyle.check(+averageScore)],
+							}}
+						>
 							{averageScore}
 						</div>
 
@@ -142,6 +146,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject: 
 
 			{openDetail && (
 				<SubjectDetail
+					style={{ ...averageScoreStyle[averageScoreStyle.check(+averageScore)] }}
 					scores={scores}
 					subject={subject}
 					loading={loading}

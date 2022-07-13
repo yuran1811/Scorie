@@ -1,5 +1,4 @@
-import { SETTINGS_DEFAULT } from '../constants';
-import { ScoreDetailType, SubjectListFilterType, SubjectListType } from 'shared';
+import { SETTINGS_DEFAULT, ScoreDetailType, SubjectListFilterType, SubjectListType } from 'shared';
 
 export interface AverageScoreType {
 	total: number;

@@ -1,6 +1,6 @@
 import { useStore } from 'store';
 import { LogInRequired } from 'components/features/auth/LogInRequired';
-import { ChartSectionBar } from '../components/features/chart/ChartSectionBar';
+import { ChartSectionBar } from 'components/features/chart/ChartSectionBar';
 import { FC } from 'react';
 
 export const ChartPage: FC = () => {

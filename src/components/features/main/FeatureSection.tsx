@@ -1,5 +1,4 @@
 import { useStore } from 'store';
-import { featureRoutes } from 'routes';
 import { FeatureCard } from './FeatureCard';
 import { WelcomBanner } from './WelcomBanner';
 import { NotVerifyEmail } from '../auth/NotVerifyEmail';

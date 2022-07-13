@@ -1,7 +1,7 @@
-import { averageScore, getAverageScoreString } from 'utils';
-import { DivProps, SubjectDetailType } from 'shared';
-import { FC, useMemo } from 'react';
 import { useStore } from 'store';
+import { DivProps, SubjectDetailType } from 'shared';
+import { averageScore, getAverageScoreString } from 'utils';
+import { FC, useMemo } from 'react';
 
 export interface SubjectAverageType {
 	averageScore: number;
@@ -60,7 +60,7 @@ export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({ subjects })
 		return averageScore;
 	}, [subjects]);
 
-	const color = useMemo(() => {
+	const { background, color } = useMemo(() => {
 		return !subjectAverageScore.count
 			? averageScore.normal
 			: averageScore[averageScore.check(subjectAverageScore.total / subjectAverageScore.count)];

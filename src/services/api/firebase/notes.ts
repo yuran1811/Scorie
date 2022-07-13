@@ -27,12 +27,6 @@ export const validateNoteOption = (opt: {
 			message: 'Note cannot be both done and in progress',
 		};
 
-	// if (opt.isArchived && opt.isPinned)
-	// 	return {
-	// 		type: 'errors',
-	// 		message: 'Note cannot be both pinned and archived',
-	// 	};
-
 	return {
 		type: 'ok',
 		message: 'Alright',

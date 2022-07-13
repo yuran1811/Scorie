@@ -1,11 +1,12 @@
-export * from './checkNetworkStatus';
 export * from './dayjsUsage';
-export * from './getFirebaseErr';
-export * from './getStyles';
+export * from './firebase';
+export * from './network';
 export * from './notes';
 export * from './notifications';
+export * from './quotes';
 export * from './scores';
 export * from './standardize';
+export * from './styles';
 
 interface CmpObject extends Object {
 	[key: string]: any;

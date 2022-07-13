@@ -1,10 +1,12 @@
-import { disableNetwork } from 'firebase/firestore';
+import { disableNetwork, enableNetwork } from 'firebase/firestore';
 import { db } from 'shared';
 
 export const checkNetworkStatus = async () => {
 	try {
 		const online = await fetch('/1pixel.png');
 		console.log('App is running in online mode');
+
+		await enableNetwork(db);
 
 		return online.status >= 200 && online.status < 300;
 	} catch (err) {

@@ -4,7 +4,7 @@ import { filterSectionList } from 'utils';
 import { NoteListType, NoteSectionProps } from 'shared';
 import { NoteItem } from './NoteItem';
 import { ReactSortable } from 'react-sortablejs';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, memo, useCallback, useEffect, useState } from 'react';
 
 const sortableConfig = {
 	animation: 200,
@@ -114,3 +114,5 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
 		</div>
 	);
 };
+
+export default memo(NoteSection);

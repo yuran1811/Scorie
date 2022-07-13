@@ -1,6 +1,6 @@
 import { NoteDetailType, NoteListFilterType, NoteListType } from 'shared';
 import { standardizeCollectionData } from './standardize';
-import { noteThemes } from './getStyles';
+import { noteThemes } from './styles';
 
 export const filterSectionList = (list: NoteListType[] | null, filter: NoteListFilterType | null, group?: string) => {
 	if (list === null || filter === null) return [];

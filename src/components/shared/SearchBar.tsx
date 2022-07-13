@@ -32,9 +32,17 @@ export const SearchBar: FC<SearchBarProps & InputProps> = ({ setSearchOpts, onCh
 							'width 0.4s 0.1s ease-in-out, border-radius 0.4s 0.2s ease-in-out, padding 0.2s 0.4s',
 					}}
 					type='text'
+					disabled={!isActive}
 					onChange={onChange}
-					onBlur={() => setActive(false)}
-					onClick={(e) => e.stopPropagation()}
+					onBlur={(e) => {
+						e.currentTarget.value = '';
+
+						setActive(false);
+						setSearchOpts({
+							isSearch: false,
+							value: '',
+						});
+					}}
 				/>
 				<button
 					className={`isAnimated bg-none cursor-pointer absolute w-[5rem] h-[5rem] top-0 bottom-0 right-0 border-none before:content-[""] before:w-[0.4rem] before:h-[2.5rem] before:bg-white before:absolute before:bottom-[-1.6rem] before:right-[-0.6rem] before:rotate-[-45deg] before:isAnimated after:isAnimated ${

@@ -1,9 +1,9 @@
+import { MenuProvider } from 'contexts';
 import { MenuIcon } from 'components/icons';
 import { Panel } from 'components/features/panel';
-import { MenuProvider } from 'contexts';
+import { ExtraTools } from 'components/features/extras';
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
-import { ExtraTools } from 'components/features/extras';
 
 export const Header: FC = () => (
 	<header className='z-20 flexcenter !justify-between sticky top-0 w-full h-[8rem] bg-ctbg'>

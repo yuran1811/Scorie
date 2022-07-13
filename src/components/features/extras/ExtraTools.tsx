@@ -1,22 +1,31 @@
+import { Avatar, ModalBox, ModalBoxHeader } from 'components/shared';
 import { ToolsContainer } from './ToolsContainer';
-import { Avatar, ClickAway, ModalBox, ModalBoxHeader } from 'components/shared';
 import { FC, useState } from 'react';
+import Tippy from '@tippyjs/react';
 
-export const ExtraTools: FC = ({}) => {
+export const ExtraTools: FC = () => {
 	const [showMore, setShowMore] = useState(false);
 	const [isOpened, setOpened] = useState(false);
 
 	return (
 		<>
-			<div className='flex items-center justify-end w-[9.5rem] h-[5.5rem]'>
-				<ClickAway className={`${showMore ? 'z-0' : 'hidden z-[-1]'}`} onClick={() => setShowMore(false)} />
-				<Avatar
-					className='cursor-pointer absolute right-0 mx-8'
-					imgUrl=''
-					radius='5.5rem'
-					onClick={() => setShowMore((a) => !a)}
-				/>
-				<ToolsContainer showMore={showMore} setOpened={setOpened} />
+			<div>
+				<Tippy
+					interactive
+					visible={showMore}
+					placement='bottom-end'
+					onClickOutside={() => setShowMore(false)}
+					render={(attrs) => <ToolsContainer {...attrs} showMore={showMore} setOpened={setOpened} />}
+				>
+					<div className='flex items-center justify-end w-[9.5rem] h-[5.5rem]'>
+						<Avatar
+							className='cursor-pointer absolute right-0 mx-8'
+							imgUrl=''
+							radius='5.5rem'
+							onClick={() => setShowMore((a) => !a)}
+						/>
+					</div>
+				</Tippy>
 			</div>
 
 			{isOpened && (
