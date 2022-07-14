@@ -111,6 +111,10 @@ export const ScoreSectionBar = () => {
 				/>
 			</div>
 
+			{!loading && subjects !== null && subjects.length === 0 && (
+				<div className='w-full p-8 m-4 font-bold text-[5rem] text-center'>No subject</div>
+			)}
+
 			{loading ? (
 				<div className='flexcenter w-full h-[10rem]'>
 					<FlatLoading />

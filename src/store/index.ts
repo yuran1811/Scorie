@@ -1,4 +1,12 @@
-import { QuoteStoreType, QUOTES_STORED_DEFAULT, SettingsType, SETTINGS_DEFAULT, SubjectDetailType } from 'shared';
+import {
+	QUOTES_STORED_DEFAULT,
+	SETTINGS_DEFAULT,
+	STORE_NAME,
+	QuoteStoreType,
+	SettingsType,
+	SubjectDetailType,
+	NoteDetailType,
+} from 'shared';
 import { devtools, persist } from 'zustand/middleware';
 import { User } from 'firebase/auth';
 import create from 'zustand';
@@ -15,6 +23,9 @@ interface StoreType {
 
 	scores: SubjectDetailType[];
 	setScores: (data: SubjectDetailType[]) => void;
+
+	notes: NoteDetailType[];
+	setNotes: (data: NoteDetailType[]) => void;
 }
 
 export const useStore = create<StoreType>()(
@@ -32,8 +43,11 @@ export const useStore = create<StoreType>()(
 
 				scores: [],
 				setScores: (data) => set({ scores: [...data] }),
+
+				notes: [],
+				setNotes: (data) => set({ notes: [...data] }),
 			}),
-			{ name: 'local_user_data' }
+			{ name: STORE_NAME }
 		)
 	)
 );

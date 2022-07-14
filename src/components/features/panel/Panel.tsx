@@ -1,7 +1,8 @@
 import { useStore } from 'store';
 import { DivProps } from 'shared';
-import { useMenu } from 'contexts';
+import { usePanel } from 'contexts';
 import DocContainer from './doc/DocContainer';
+import DataContainer from './data/DataContainer';
 import AccountContainer from './account/AccountContainer';
 import SettingContainer from './setting/SettingContainer';
 import { Avatar, Overlay } from 'components/shared';
@@ -10,15 +11,28 @@ import { FC } from 'react';
 export const Panel: FC<DivProps> = ({ className }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
-	const { active, setActive } = useMenu();
+	const { active, setActive } = usePanel();
 
 	return (
 		<>
-			{active && <Overlay onClick={() => setActive && setActive(false)} />}
+			{active.isMenu && (
+				<Overlay
+					onClick={() =>
+						setActive &&
+						setActive({
+							isMenu: false,
+							isAccount: false,
+							isData: false,
+							isDoc: false,
+							isSetting: false,
+						})
+					}
+				/>
+			)}
 
 			<div
 				className={`${className || ''} ${
-					active ? 'translate-x-0' : 'translate-x-[-200%]'
+					active.isMenu ? 'translate-x-0' : 'translate-x-[-200%]'
 				} isAnimated fullscreen px-12 py-20 tablet:max-w-[50rem] bg-ctcolor text-ctbg`}
 			>
 				<div className='z-[2] flexcenter w-full tablet:px-6 pt-14 m-auto'>
@@ -36,6 +50,7 @@ export const Panel: FC<DivProps> = ({ className }) => {
 
 				<div className='z-[1] flexcentercol !justify-start w-full h-[80%] pb-12 my-4 text-[4rem] scrollY'>
 					<AccountContainer />
+					<DataContainer />
 					<SettingContainer />
 					<DocContainer />
 				</div>

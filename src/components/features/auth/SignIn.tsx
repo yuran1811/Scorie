@@ -32,7 +32,7 @@ export const SignIn: FC = () => {
 		<>
 			<div className='flex flex-1 flex-col items-center gap-4 mt-20 mb-16'>
 				<LogInButton
-					extraStyle='bg-slate-900 text-white'
+					className='bg-slate-900 text-white'
 					disabled={loading}
 					onClick={() => handleSignIn(new GoogleAuthProvider())}
 				>
@@ -41,7 +41,7 @@ export const SignIn: FC = () => {
 				</LogInButton>
 
 				<LogInButton
-					extraStyle='bg-blue-600 text-white'
+					className='bg-blue-600 text-white'
 					disabled={loading}
 					onClick={() => handleSignIn(new FacebookAuthProvider())}
 				>
@@ -53,12 +53,12 @@ export const SignIn: FC = () => {
 			{isAlertOpened && (
 				<ModalBox onClick={() => setIsAlertOpened(false)}>
 					<ModalBoxHeader onClick={() => setIsAlertOpened(false)} />
-					
+
 					<ErrorMessage
-						extraStyle='text-[3rem] px-8 pb-10'
+						className='text-[3rem] px-8 pb-10'
 						content='We cannot sign in to your account. Please try again !'
 					/>
-					<ErrorMessage extraStyle='text-[3rem] px-8 pb-10' content={error} />
+					<ErrorMessage className='text-[3rem] px-8 pb-10' content={error} />
 				</ModalBox>
 			)}
 		</>

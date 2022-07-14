@@ -18,18 +18,20 @@ export const averageScore = {
 	},
 };
 
-export const noteThemes: {
+export const appThemes: {
 	[key: string]: {
 		bg: string;
 		color: string;
+		primary?: string;
+		secondary?: string;
 	};
 } = {
-	default: { bg: '#0f172a', color: 'white' },
-	red: { bg: '#5c2b29', color: '#fee2e2' },
-	teal: { bg: '#2d555e', color: '#ccfbf1' },
-	blue: { bg: '#1e3a5f', color: '#bfdbfe' },
-	purple: { bg: '#42275e', color: '#e9d5ff' },
-	fuchsia: { bg: '#701a75', color: '#f5d0fe' },
-	pink: { bg: '#5b2245', color: '#fbcfe8' },
-	rose: { bg: '#9f1239', color: '#fecdd3' },
+	default: { bg: '#0f172a', color: 'white', secondary: '#475569' },
+	red: { bg: '#5c2b29', color: '#fee2e2', secondary: '#f87171' },
+	teal: { bg: '#2d555e', color: '#ccfbf1', secondary: '#2dd4bf' },
+	blue: { bg: '#1e3a5f', color: '#bfdbfe', secondary: '#0d9488' },
+	purple: { bg: '#42275e', color: '#e9d5ff', secondary: '#a855f7' },
+	fuchsia: { bg: '#701a75', color: '#f5d0fe', secondary: '#d946ef' },
+	pink: { bg: '#5b2245', color: '#fbcfe8', secondary: '#ec4899' },
+	rose: { bg: '#9f1239', color: '#fecdd3', secondary: '#fb7185' },
 };

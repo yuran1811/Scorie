@@ -1,5 +1,5 @@
 import { useStore } from 'store';
-import { averageScore, getAverageScore } from 'utils';
+import { getChartData } from 'utils';
 import { Title } from '../main/sections/Title';
 import { ArrowRightIcon, ChartIcon } from 'components/icons';
 import { Button } from 'components/shared';
@@ -16,24 +16,7 @@ export const ChartSectionBar: FC = () => {
 	const chartSeriesData: ApexAxisChartSeries = [
 		{
 			name: 'Average',
-			data: scores.map((score) => {
-				const average = getAverageScore(score.scores);
-				const value = !average.count ? 0 : (average.total / average.count).toFixed(settings.numberFormat);
-
-				return {
-					x: score.name,
-					y: value,
-					fillColor: averageScore[averageScore.check(+value)].color,
-					goals: [
-						{
-							name: 'Expected',
-							value: 9,
-							strokeHeight: 5,
-							strokeColor: '#775DD0',
-						},
-					],
-				};
-			}),
+			data: getChartData(scores, settings.numberFormat),
 		},
 	];
 	const chartOptionsData: ApexCharts.ApexOptions = {

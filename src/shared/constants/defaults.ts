@@ -1,3 +1,5 @@
+export const STORE_NAME = 'local_user_data';
+
 export const SETTINGS_DEFAULT = {
 	numberFormat: 2,
 };

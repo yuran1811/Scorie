@@ -1,6 +1,6 @@
 import { NoteDetailType, NoteListFilterType, NoteListType } from 'shared';
 import { standardizeCollectionData } from './standardize';
-import { noteThemes } from './styles';
+import { appThemes } from './styles';
 
 export const filterSectionList = (list: NoteListType[] | null, filter: NoteListFilterType | null, group?: string) => {
 	if (list === null || filter === null) return [];
@@ -43,6 +43,6 @@ export const getNoteList = (data: any) => {
 };
 
 export const getNoteStyle = (theme: string) => ({
-	backgroundColor: noteThemes[theme]?.bg ? noteThemes[theme].bg : noteThemes.default.bg,
-	color: noteThemes[theme]?.color ? noteThemes[theme].color : noteThemes.default.color,
+	backgroundColor: appThemes[theme]?.bg ? appThemes[theme].bg : appThemes.default.bg,
+	color: appThemes[theme]?.color ? appThemes[theme].color : appThemes.default.color,
 });

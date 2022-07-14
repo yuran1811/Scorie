@@ -113,7 +113,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
 						}),
 					}}
 				/>
-				{errors?.score && <ErrorMessage extraStyle='text-[3rem]' content={errors.score.message || ''} />}
+				{errors?.score && <ErrorMessage className='text-[3rem]' content={errors.score.message || ''} />}
 
 				<Input
 					placeholder='Base'
@@ -128,7 +128,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
 						}),
 					}}
 				/>
-				{errors?.base && <ErrorMessage extraStyle='text-[3rem]' content={errors.base.message || ''} />}
+				{errors?.base && <ErrorMessage className='text-[3rem]' content={errors.base.message || ''} />}
 
 				<Input
 					placeholder='Type'
@@ -143,7 +143,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
 						}),
 					}}
 				/>
-				{errors?.type && <ErrorMessage extraStyle='text-[3rem]' content={errors.type.message || ''} />}
+				{errors?.type && <ErrorMessage className='text-[3rem]' content={errors.type.message || ''} />}
 
 				<Button type='submit' content='Update' />
 			</form>

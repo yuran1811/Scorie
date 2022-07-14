@@ -1,16 +1,16 @@
 import { DivProps } from 'shared';
-import { usePanel } from 'contexts';
+import { DataInfo } from './DataInfo';
 import { BackIcon } from 'components/icons';
-import { SettingInfo } from './SettingInfo';
+import { usePanel } from 'contexts';
 import { FC } from 'react';
 
-const SettingPanel: FC<DivProps> = ({ className }) => {
+const DataPanel: FC<DivProps> = ({ className }) => {
 	const { active, setActive } = usePanel();
 
 	return (
 		<div
 			className={`${className || ''} ${
-				active.isSetting ? 'translate-y-0' : 'translate-y-[200%]'
+				active.isData ? 'translate-y-0' : 'translate-y-[200%]'
 			} z-20 isAnimated fullscreen px-12 py-20 tablet:max-w-[50rem] bg-ctcolor text-ctbg`}
 		>
 			<BackIcon
@@ -18,14 +18,14 @@ const SettingPanel: FC<DivProps> = ({ className }) => {
 					setActive &&
 					setActive((s) => ({
 						...s,
-						isSetting: false,
+						isData: false,
 					}))
 				}
 			/>
 
-			<SettingInfo />
+			<DataInfo />
 		</div>
 	);
 };
 
-export default SettingPanel;
+export default DataPanel;

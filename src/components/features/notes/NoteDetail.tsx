@@ -158,7 +158,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 			</div>
 
 			{status.type === 'errors' && (
-				<ErrorMessage extraStyle='p-6 text-[3rem] tablet:text-[4rem]' content={status.message} />
+				<ErrorMessage className='p-6 text-[3rem] tablet:text-[4rem]' content={status.message} />
 			)}
 
 			<div className='flexcentercol px-8 pb-8 h-[calc(100%-14rem)] tablet:h-[calc(100%-12rem)]'>
@@ -176,7 +176,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 						}),
 					}}
 				/>
-				{errors?.title && <ErrorMessage extraStyle='text-[3rem]' content={errors.title.message || ''} />}
+				{errors?.title && <ErrorMessage className='text-[3rem]' content={errors.title.message || ''} />}
 
 				<TextArea
 					className='!text-[3rem] mobile:!text-[3.6rem] !max-w-full tablet:!max-w-[65rem] text-left px-6 !h-full'

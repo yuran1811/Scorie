@@ -1,8 +1,8 @@
 import { Dispatch, FC, SetStateAction } from 'react';
-import { noteThemes } from 'utils';
+import { appThemes } from 'utils';
 import { DivProps } from 'shared';
 
-const themes = { ...noteThemes };
+const themes = { ...appThemes };
 
 interface ThemePanelProps {
 	themeSelected?: string;

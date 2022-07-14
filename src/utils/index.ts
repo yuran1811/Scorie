@@ -1,3 +1,5 @@
+export * from './backupData';
+export * from './chart';
 export * from './dayjsUsage';
 export * from './firebase';
 export * from './network';
@@ -42,4 +44,14 @@ export const shallowObjectCompare = (a: CmpObject, b: CmpObject) => {
 	for (let key of keys1) if (a[key] !== b[key]) return false;
 
 	return true;
+};
+
+export const copyToClipboard = (data: string) => {
+	navigator.clipboard.writeText(data);
+};
+
+export const randomInArray = (arr: any[]) => {
+	const idx = (min = 0, max = arr.length - 1) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+	return arr[idx()];
 };

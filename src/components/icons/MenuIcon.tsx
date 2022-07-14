@@ -1,6 +1,6 @@
-import { useMenu } from 'contexts';
-import { FC, useCallback } from 'react';
+import { usePanel } from 'contexts';
 import { DivProps } from 'shared';
+import { FC } from 'react';
 
 const beforeStyle = (active: boolean) =>
 	`before:transition-all before:content-[""] before:absolute before:w-full before:h-[0.5rem] before:top-[1.2rem] before:left-0 ${
@@ -16,11 +16,15 @@ interface MenuIconProps {}
 export const MenuIcon: FC<MenuIconProps & DivProps> = (props) => {
 	const { className, ...otherProps } = props;
 
-	const { active, setActive } = useMenu();
+	const { active, setActive } = usePanel();
 
-	const onClickHandle = useCallback(() => {
-		setActive && setActive((active) => !active);
-	}, []);
+	const onClickHandle = () => {
+		setActive &&
+			setActive((s) => ({
+				...s,
+				isMenu: !s.isMenu,
+			}));
+	};
 
 	return (
 		<div
@@ -28,8 +32,8 @@ export const MenuIcon: FC<MenuIconProps & DivProps> = (props) => {
 			className={`${
 				className || ''
 			} cursor-pointer flexcenter min-w-[4rem] min-h-[4rem] w-[4rem] h-[4rem] transition-all flexcentercol relative ${beforeStyle(
-				active
-			)} ${afterStyle(active)}`}
+				active.isMenu
+			)} ${afterStyle(active.isMenu)}`}
 			onClick={onClickHandle}
 		/>
 	);

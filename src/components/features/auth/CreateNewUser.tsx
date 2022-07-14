@@ -80,7 +80,7 @@ export const CreateNewUser: FC = ({ children }) => {
 					}}
 				/>
 				{errors?.displayName && (
-					<ErrorMessage extraStyle='text-[3rem]' content={errors.displayName.message || ''} />
+					<ErrorMessage className='text-[3rem]'>{errors.displayName.message || ''}</ErrorMessage>
 				)}
 
 				<Input
@@ -98,7 +98,7 @@ export const CreateNewUser: FC = ({ children }) => {
 						}),
 					}}
 				/>
-				{errors?.email && <ErrorMessage extraStyle='text-[3rem]' content={errors.email.message || ''} />}
+				{errors?.email && <ErrorMessage className='text-[3rem]' content={errors.email.message || ''} />}
 
 				<Input
 					name='password'
@@ -114,7 +114,7 @@ export const CreateNewUser: FC = ({ children }) => {
 						}),
 					}}
 				/>
-				{errors?.password && <ErrorMessage extraStyle='text-[3rem]' content={errors.password.message || ''} />}
+				{errors?.password && <ErrorMessage className='text-[3rem]' content={errors.password.message || ''} />}
 
 				<Input
 					placeholder='Confirm password'
@@ -127,10 +127,10 @@ export const CreateNewUser: FC = ({ children }) => {
 					}}
 				/>
 				{errors?.confirmPassword && (
-					<ErrorMessage extraStyle='text-[3rem]' content={errors.confirmPassword.message || ''} />
+					<ErrorMessage className='text-[3rem]' content={errors.confirmPassword.message || ''} />
 				)}
 
-				{errMsg && <ErrorMessage extraStyle='text-[3rem]' content={errMsg} />}
+				{errMsg && <ErrorMessage className='text-[3rem]' content={errMsg} />}
 
 				<Button className='!text-[3rem]' type='submit' content='Create' />
 			</form>

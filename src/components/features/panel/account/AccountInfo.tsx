@@ -33,7 +33,7 @@ export const AccountInfo: FC = () => {
 		formState: { errors },
 	} = useForm<Inputs>();
 
-	const onSubmit: SubmitHandler<Inputs> = useCallback(async (data) => {
+	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		try {
 			if (!currentUser) return;
 
@@ -52,7 +52,7 @@ export const AccountInfo: FC = () => {
 			const err = error as FirebaseError;
 			setErrMsg(err.message);
 		}
-	}, []);
+	};
 
 	useEffect(() => {
 		setMessageExpired(false);
@@ -102,12 +102,12 @@ export const AccountInfo: FC = () => {
 								}}
 							/>
 							{errors?.displayName && (
-								<ErrorMessage extraStyle='text-[3rem]' content={errors.displayName.message || ''} />
+								<ErrorMessage className='text-[3rem]' content={errors.displayName.message || ''} />
 							)}
 
 							<Button type='submit' className='!text-[3.5rem]' content='Update profile' />
 						</form>
-						{errMsg && <ErrorMessage extraStyle='text-[3rem]' content={errMsg} />}
+						{errMsg && <ErrorMessage className='text-[3rem]' content={errMsg} />}
 
 						<Button
 							className='!text-[3.5rem]'

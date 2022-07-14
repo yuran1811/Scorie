@@ -85,9 +85,7 @@ const SignInUseEmailPassWord = () => {
 								}),
 							}}
 						/>
-						{errors?.email && (
-							<ErrorMessage extraStyle='text-[3rem]' content={errors.email.message || ''} />
-						)}
+						{errors?.email && <ErrorMessage className='text-[3rem]' content={errors.email.message || ''} />}
 
 						<Input
 							name='password'
@@ -104,10 +102,10 @@ const SignInUseEmailPassWord = () => {
 							}}
 						/>
 						{errors?.password && (
-							<ErrorMessage extraStyle='text-[3rem]' content={errors.password.message || ''} />
+							<ErrorMessage className='text-[3rem]' content={errors.password.message || ''} />
 						)}
 
-						{errMsg && <ErrorMessage extraStyle='text-[3rem]' content={errMsg} />}
+						{errMsg && <ErrorMessage className='text-[3rem]' content={errMsg} />}
 
 						<Button className='!text-[3rem]' type='submit' content='Log in'>
 							<LogInIcon className='mr-6' width='40' height='40' />

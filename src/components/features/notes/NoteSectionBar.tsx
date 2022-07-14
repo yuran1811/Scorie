@@ -5,21 +5,25 @@ import { db, NoteListFilterType, NoteListType } from 'shared';
 import { Title } from '../main/sections/Title';
 import { NoteAddNew } from './NoteAddNew';
 import NoteSection from './NoteSection';
+import NoteImport from './NoteImport';
 import {
 	AddIcon,
 	ArchiveIcon,
 	DoneIcon,
 	FlatLoading,
+	ImportIcon,
 	ListAllIcon,
 	ListIcon,
 	NoteIcon,
 	ProgressIcon,
 } from 'components/icons';
 import { SearchBar } from 'components/shared';
-import { useEffect, useState } from 'react';
 import { collection } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import Tippy from '@tippyjs/react';
 
 export const NoteSectionBar = () => {
+	const setNotes = useStore((s) => s.setNotes);
 	const currentUser = useStore((s) => s.currentUser);
 
 	const { data, loading, error } = useCollectionQuery(
@@ -28,6 +32,7 @@ export const NoteSectionBar = () => {
 	);
 
 	const [viewMode, setViewMode] = useState('grid');
+	const [showImport, setShowImport] = useState(false);
 	const [addNewOpen, setAddNewOpen] = useState(false);
 	const [noteList, setNoteList] = useState<NoteListType[]>([]);
 	const [idxListState, setIdxListState] = useState<string[]>([]);
@@ -57,6 +62,15 @@ export const NoteSectionBar = () => {
 			searchPattern: searchOpts.isSearch ? searchOpts.value : '',
 		}));
 	}, [searchOpts]);
+
+	useEffect(() => {
+		setNotes &&
+			setNotes(
+				noteList.map((_) => ({
+					..._.note,
+				}))
+			);
+	}, [noteList, setNotes]);
 
 	return (
 		<div className='w-full my-[2rem] mb-[7rem]'>
@@ -92,6 +106,27 @@ export const NoteSectionBar = () => {
 						height='40'
 						onClick={() => setAddNewOpen(true)}
 					/>
+
+					<div className='relative'>
+						<Tippy
+							interactive
+							visible={showImport}
+							placement='bottom-end'
+							onClickOutside={() => setShowImport(false)}
+							render={(attrs) => (
+								<NoteImport {...attrs} showImport={showImport} setShowImport={setShowImport} />
+							)}
+						>
+							<div onClick={() => setShowImport(true)}>
+								<ImportIcon
+									className='cursor-pointer mx-5 my-4'
+									fill={'white'}
+									width='40'
+									height='40'
+								/>
+							</div>
+						</Tippy>
+					</div>
 
 					<div className='block tablet:hidden'>
 						<ListIcon

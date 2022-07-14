@@ -1,7 +1,7 @@
 import { useStore } from 'store';
 import { editNote } from 'services';
 import { NoteItemProps } from 'shared';
-import { getNoteStyle, shallowObjectCompare } from 'utils';
+import { copyToClipboard, getNoteStyle, shallowObjectCompare } from 'utils';
 import { NoteDetail } from './NoteDetail';
 import { ThemePanel } from './ThemePanel';
 import { ArchiveIcon, DoneIcon, NodeShareIcon, PaletteIcon, PinIcon, ProgressIcon } from 'components/icons';
@@ -110,7 +110,9 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 						</Tippy>
 					</div>
 
-					<div className='flexcenter relative'>
+					<div className='flexcenter relative' onClick={() => {
+						copyToClipboard(JSON.stringify(note))
+					}}>
 						<div className='absolute left-[1.3rem] animate-ping bg-sky-300 w-[2.6rem] h-[2.6rem] rounded-[50%]' />
 						<NodeShareIcon
 							{...toolProps}

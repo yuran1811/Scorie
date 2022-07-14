@@ -10,6 +10,7 @@ import MainLayout from 'components/layouts/MainLayout';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { FC, useEffect } from 'react';
+// import IconCollection from 'components/icons/IconCollection';
 
 const App: FC = () => {
 	const quotes = useStore((s) => s.quotes);
@@ -54,6 +55,8 @@ const App: FC = () => {
 				<Route path='*' element={<ErrorContent />} />
 			</Routes>
 			<Outlet />
+
+			{/* <IconCollection /> */}
 		</MainLayout>
 	);
 };

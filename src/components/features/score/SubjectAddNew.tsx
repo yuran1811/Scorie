@@ -107,9 +107,9 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
 						}),
 					}}
 				/>
-				{errors?.subject && <ErrorMessage extraStyle='text-[3rem]' content={errors.subject.message || ''} />}
+				{errors?.subject && <ErrorMessage className='text-[3rem]' content={errors.subject.message || ''} />}
 
-				{status.type === 'errors' && <ErrorMessage extraStyle='text-[3rem]' content={status.message} />}
+				{status.type === 'errors' && <ErrorMessage className='text-[3rem]' content={status.message} />}
 
 				<Button className='!text-[3.6rem]' type='submit' content='Add' />
 			</form>
