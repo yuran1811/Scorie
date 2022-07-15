@@ -1,4 +1,5 @@
 import { toast as ReactToast } from 'react-toastify';
+import { ToastDefaultConfig } from 'shared';
 
 const isLocalhost = Boolean(
 	window.location.hostname === 'localhost' ||
@@ -25,14 +26,21 @@ export function register(toast: typeof ReactToast, config?: Config) {
 
 			window.addEventListener('online', () => {
 				if (!isAppOnline) {
-					toast('🦄 The connectivity is back, sync in progress...');
+					toast('🦄 The connectivity is back, sync in progress...', {
+						...ToastDefaultConfig,
+						autoClose: 4000,
+					});
 					isAppOnline = true;
 				}
 			});
 
 			window.addEventListener('offline', () => {
 				toast.warn(
-					'The app is running offline, any changes mades during this time will be synced as soon as the connectivity is back'
+					'The app is running offline, any changes mades during this time will be synced as soon as the connectivity is back',
+					{
+						...ToastDefaultConfig,
+						autoClose: 6000,
+					}
 				);
 				isAppOnline = false;
 			});
@@ -68,13 +76,19 @@ function registerValidSW(swUrl: string, toast: typeof ReactToast, config?: Confi
 				installingWorker.onstatechange = () => {
 					if (installingWorker.state === 'installed') {
 						if (navigator.serviceWorker.controller) {
-							toast.info('🔄 New content is available! Refresh to get the latest changes.');
+							toast.info('🔄 New content is available! Refresh to get the latest changes.', {
+								...ToastDefaultConfig,
+								autoClose: 4000,
+							});
 
 							if (config && config.onUpdate) {
 								config.onUpdate(registration);
 							}
 						} else {
-							toast('🚀 Content is cached for offline use.');
+							toast('🚀 Content is cached for offline use.', {
+								...ToastDefaultConfig,
+								autoClose: 4000,
+							});
 
 							if (config && config.onSuccess) {
 								config.onSuccess(registration);
@@ -107,7 +121,10 @@ function checkValidServiceWorker(swUrl: string, toast: typeof ReactToast, config
 			}
 		})
 		.catch(() => {
-			toast('No internet connection found. App is running in offline mode.');
+			toast('No internet connection found. App is running in offline mode.', {
+				...ToastDefaultConfig,
+				autoClose: 4000,
+			});
 		});
 }
 

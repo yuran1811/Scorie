@@ -22,4 +22,5 @@
 
 ### Todo
 
+-   Confirm box on delete actions
 -   Push notification (PWA)
