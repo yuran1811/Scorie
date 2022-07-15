@@ -13,11 +13,13 @@ const reVerifyEmail = (canResend: boolean, setCanResend: Dispatch<SetStateAction
 		.then(() => {
 			toast.success('Email verification sent !', {
 				...ToastDefaultConfig,
+				position: 'top-center',
 			});
 		})
 		.catch((err) => {
 			toast.error('Cannot send email verification !', {
 				...ToastDefaultConfig,
+				position: 'top-center',
 			});
 			console.log(getFirebaseErr(err.message));
 		})

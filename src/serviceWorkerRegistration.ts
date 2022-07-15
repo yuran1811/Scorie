@@ -26,9 +26,10 @@ export function register(toast: typeof ReactToast, config?: Config) {
 
 			window.addEventListener('online', () => {
 				if (!isAppOnline) {
-					toast('🦄 The connectivity is back, sync in progress...', {
+					toast.info('The connectivity is back, sync in progress...', {
 						...ToastDefaultConfig,
 						autoClose: 4000,
+						position: 'top-center',
 					});
 					isAppOnline = true;
 				}
@@ -40,6 +41,7 @@ export function register(toast: typeof ReactToast, config?: Config) {
 					{
 						...ToastDefaultConfig,
 						autoClose: 6000,
+						position: 'top-center',
 					}
 				);
 				isAppOnline = false;
@@ -76,18 +78,20 @@ function registerValidSW(swUrl: string, toast: typeof ReactToast, config?: Confi
 				installingWorker.onstatechange = () => {
 					if (installingWorker.state === 'installed') {
 						if (navigator.serviceWorker.controller) {
-							toast.info('🔄 New content is available! Refresh to get the latest changes.', {
+							toast.info('New content is available! Refresh to get the latest changes.', {
 								...ToastDefaultConfig,
 								autoClose: 4000,
+								position: 'top-center',
 							});
 
 							if (config && config.onUpdate) {
 								config.onUpdate(registration);
 							}
 						} else {
-							toast('🚀 Content is cached for offline use.', {
+							toast.info('🚀 Content is cached for offline use.', {
 								...ToastDefaultConfig,
 								autoClose: 4000,
+								position: 'top-center',
 							});
 
 							if (config && config.onSuccess) {
@@ -121,9 +125,10 @@ function checkValidServiceWorker(swUrl: string, toast: typeof ReactToast, config
 			}
 		})
 		.catch(() => {
-			toast('No internet connection found. App is running in offline mode.', {
+			toast.warn('No internet connection found. App is running in offline mode.', {
 				...ToastDefaultConfig,
 				autoClose: 4000,
+				position: 'top-center',
 			});
 		});
 }

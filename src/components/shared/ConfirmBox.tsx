@@ -1,23 +1,53 @@
-import { Overlay } from './Overlay';
-import { DivProps } from 'shared';
-import React, { FC } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { createPortal } from 'react-dom';
+import { DivProps } from 'shared';
+import { Button } from './Button';
 
-export const ConfirmBox: FC<DivProps> = ({ children, onClick }) => {
+interface ConfirmBoxProps {
+	content?: string;
+	actionWhenConfirm: () => Promise<any>;
+	setConfirm: Dispatch<SetStateAction<boolean>>;
+}
+
+export const ConfirmBox: FC<ConfirmBoxProps & DivProps> = ({
+	className,
+	content,
+	setConfirm,
+	actionWhenConfirm,
+	...otherProps
+}) => {
 	return createPortal(
-		<div className='z-[100] flexcenter fullscreen'>
-			<Overlay zIdx='1' background='bg-slate-700' onClick={onClick} />
-
-			<div className='z-[2] absolute top-[12rem] max-w-[80%] text-[5rem] text-white'>
-				<div
-					className={`${
-						'' || ''
-					} max-h-[calc(100vh-15rem)] font-bold text-center text-rose-600 bg-indigo-300 scrollY rounded-[3rem]`}
-				>
-					{children}
+		<div
+			{...otherProps}
+			className={`${
+				className || ''
+			} isAnimated origin-top absolute bottom-0 left-0 right-0 p-2 flexcenter flex-wrap bg-ctcolor`}
+			onClick={(e) => e.stopPropagation()}
+		>
+			<div>
+				<div className='font-bold text-[3rem] tablet:text-[3.4rem] text-center text-ctbg p-4 mb-4'>
+					{content || 'Confirm action ?'}
+				</div>
+				<div className='flexcenter flex-wrap'>
+					<Button
+						className='!text-[3rem]'
+						content='Cancel'
+						onClick={() => {
+							setConfirm(false);
+						}}
+					/>
+					<Button
+						className='!text-[3rem]'
+						content='Confirm'
+						onClick={() => {
+							actionWhenConfirm().finally(() => {
+								setConfirm(false);
+							});
+						}}
+					/>
 				</div>
 			</div>
 		</div>,
-		document.getElementById('modal-container') as HTMLElement
+		document.getElementById('confirm-container') as HTMLElement
 	);
 };

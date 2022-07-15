@@ -1,13 +1,15 @@
 import { useStore } from 'store';
-import { NoteDetailType } from 'shared';
+import { NoteDetailType, ToastDefaultConfig } from 'shared';
 import { shallowObjectCompare } from 'utils';
 import { deleteNote, editNote, validateNoteOption } from 'services';
 import { ErrorMessage } from 'components/interfaces';
-import { Input, TextArea, TimeContainer } from 'components/shared';
+import { ConfirmBox, Input, TextArea, TimeContainer } from 'components/shared';
 import { ArchiveIcon, CloseIcon, DoneIcon, PinIcon, ProgressIcon, TrashIcon } from 'components/icons';
 import { Dispatch, FC, SetStateAction, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { createPortal } from 'react-dom';
+import { toast } from 'react-toastify';
+import Tippy from '@tippyjs/react/headless';
 
 interface Inputs {
 	title: string;
@@ -28,6 +30,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
 	const currentUser = useStore((s) => s.currentUser);
 
+	const [showConfirm, setShowConfirm] = useState(false);
 	const [status, setStatus] = useState({ type: 'ok', message: '' });
 	const [noteOptions, setNoteOptions] = useState({ isDone, isInProgress, isArchived, isPinned });
 
@@ -64,6 +67,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
 			editNote(currentUser.uid, id, noteToEdit)
 				.then(() => {
+					toast.success('Successfully !', { ...ToastDefaultConfig, autoClose: 800 });
 					setStatus({ type: 'ok', message: 'Update successfully' });
 					setOpenDetail(false);
 				})
@@ -73,20 +77,20 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 		},
 		[note, noteOptions]
 	);
-	const removeNote = useCallback(() => {
-		if (!currentUser || !currentUser?.uid || !id) return;
-		deleteNote(currentUser.uid, id);
-	}, [note]);
+	const removeNote = () => {
+		if (!currentUser || !currentUser?.uid || !id)
+			return new Promise((res, rej) => {
+				rej('Failed');
+			});
+		return deleteNote(currentUser.uid, id);
+	};
 
-	const onSubmit: SubmitHandler<Inputs> = useCallback(
-		(data: any) => {
-			updateNote({ ...data });
-		},
-		[note, noteOptions]
-	);
+	const onSubmit: SubmitHandler<Inputs> = (data: any) => {
+		updateNote({ ...data });
+	};
 
 	return createPortal(
-		<form className='z-20 fullscreen text-center scrollY' style={noteStyle} onSubmit={handleSubmit(onSubmit)}>
+		<form className='fullscreen text-center scrollY' style={noteStyle} onSubmit={handleSubmit(onSubmit)}>
 			<div
 				className='sticky top-0 left-0 right-0 flex items-center justify-between p-8'
 				style={{ backgroundColor: noteStyle.backgroundColor }}
@@ -144,12 +148,31 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 							}))
 						}
 					/>
-					<TrashIcon
-						className='scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6'
-						width='35'
-						height='35'
-						onClick={() => removeNote()}
-					/>
+
+					<div className='custom-tippy'>
+						<Tippy
+							interactive
+							visible={showConfirm}
+							placement='bottom-end'
+							render={(attrs) => (
+								<ConfirmBox
+									{...attrs}
+									className={showConfirm ? '' : '!hidden z-[-1]'}
+									content={'This action will delete this note. Continue ?'}
+									setConfirm={setShowConfirm}
+									actionWhenConfirm={removeNote}
+								/>
+							)}
+						>
+							<div onClick={() => setShowConfirm((s) => !s)}>
+								<TrashIcon
+									className='scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6'
+									width='35'
+									height='35'
+								/>
+							</div>
+						</Tippy>
+					</div>
 				</div>
 
 				<button type='submit'>

@@ -12,7 +12,7 @@ const MainLayout: FC = ({ children }) => {
 
 	return (
 		<AppStatusProvider>
-			<div className='relative fullsize overflow-x-hidden text-[3rem] text-white bg-ctbg'>
+			<div className='z-[0] relative fullsize overflow-x-hidden text-[3rem] text-white bg-ctbg'>
 				<Header />
 				<div>
 					{settings.showStartUpLogo && <AnimateLogo />}
@@ -20,9 +20,13 @@ const MainLayout: FC = ({ children }) => {
 				</div>
 				<Footer />
 			</div>
-			<div id='modal-container'>
+
+			<div className='z-[2] relative' id='modal-container'>
 				<AppStatusPopup />
 			</div>
+
+			<div className='z-[3] relative' id='confirm-container'></div>
+
 			<ToastContainer theme='dark' />
 		</AppStatusProvider>
 	);

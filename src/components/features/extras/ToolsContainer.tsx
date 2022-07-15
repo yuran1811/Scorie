@@ -34,8 +34,8 @@ export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, ...otherProp
 			toast.error('Please enable notification on this site to use notification feature !', {
 				...ToastDefaultConfig,
 				toastId: 'unenable-noti',
-				position: 'top-center',
 				autoClose: 5000,
+				position: 'top-center',
 			});
 			// setStatus &&
 			// 	setStatus((s) => ({

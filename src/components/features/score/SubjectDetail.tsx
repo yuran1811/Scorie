@@ -14,10 +14,11 @@ import {
 	StarIcon,
 	TrashIcon,
 } from 'components/icons';
-import { Input, TimeContainer, Tooltip } from 'components/shared';
+import { ConfirmBox, Input, TimeContainer, Tooltip } from 'components/shared';
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { toast } from 'react-toastify';
+import Tippy from '@tippyjs/react/headless';
 
 interface SubjectDetailProps {
 	style: {
@@ -35,11 +36,12 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 
 	const toastId = useRef<any>(null);
 
-	const [saveErr, setSaveErr] = useState({ content: '', counter: 0 });
-	const [expectedAverage, setExpectedAverage] = useState(subject?.expectedAverage || '');
 	const [viewMode, setViewMode] = useState('all');
 	const [timeoutId, setTimeoutId] = useState<any>();
 	const [addNewOpen, setAddNewOpen] = useState(false);
+	const [showConfirm, setShowConfirm] = useState(false);
+	const [saveErr, setSaveErr] = useState({ content: '', counter: 0 });
+	const [expectedAverage, setExpectedAverage] = useState(subject?.expectedAverage || '');
 	const [scoreOptions, setScoreOptions] = useState({
 		isIgnored: subject?.isIgnored || false,
 		isSpecial: subject?.isSpecial || false,
@@ -83,6 +85,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 			expectedAverage: +expectedAverage,
 		})
 			.then(() => {
+				toast.success('Successfully !', { ...ToastDefaultConfig, autoClose: 800 });
 				setSaveErr({ content: '', counter: saveErr.counter + 1 });
 				setOpenDetail(false);
 			})
@@ -99,8 +102,11 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 	}, [subject, scores, scoreOptions, expectedAverage]);
 
 	const removeSubjectRecord = () => {
-		if (!currentUser || !currentUser?.uid || !subject?.id) return;
-		deleteSubject(currentUser.uid, subject.id);
+		if (!currentUser || !currentUser?.uid || !subject?.id)
+			return new Promise((res, rej) => {
+				rej('Failed');
+			});
+		return deleteSubject(currentUser.uid, subject.id);
 	};
 
 	const typeList = useMemo<string[]>(() => {
@@ -135,7 +141,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 
 	return createPortal(
 		<>
-			<div className='z-20 fullscreen font-bold text-center text-rose-600 bg-violet-200 scrollY'>
+			<div className='fullscreen font-bold text-center text-rose-600 bg-violet-200 scrollY'>
 				<div className='sticky top-0 left-0 right-0 flex items-center justify-between p-8 bg-violet-200'>
 					<div className='flexcenter flex-wrap w-full mobile:pl-24'>
 						<StarIcon
@@ -159,12 +165,33 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 							height='40'
 							onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
 						/>
-						<TrashIcon
-							className='scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5 text-slate-500'
-							width='35'
-							height='35'
-							onClick={() => removeSubjectRecord()}
-						/>
+
+						<div className='custom-tippy'>
+							<Tippy
+								interactive
+								visible={showConfirm}
+								placement='bottom-end'
+								render={(attrs) => (
+									<ConfirmBox
+										{...attrs}
+										className={showConfirm ? '' : '!hidden z-[-1]'}
+										content={
+											'This action will delete this subjects (include all score records). Continue ?'
+										}
+										setConfirm={setShowConfirm}
+										actionWhenConfirm={removeSubjectRecord}
+									/>
+								)}
+							>
+								<div onClick={() => setShowConfirm((s) => !s)}>
+									<TrashIcon
+										className='scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5 text-slate-500'
+										width='35'
+										height='35'
+									/>
+								</div>
+							</Tippy>
+						</div>
 					</div>
 
 					<CloseIcon

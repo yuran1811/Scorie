@@ -1,12 +1,14 @@
 import { useStore } from 'store';
 import { editSubject } from 'services';
-import { DivProps, ScoreDetailType, SubjectDetailType } from 'shared';
+import { DivProps, ScoreDetailType, SubjectDetailType, ToastDefaultConfig } from 'shared';
 import { ErrorMessage } from 'components/interfaces';
 import { IgnoreIcon, TrashIcon } from 'components/icons';
-import { Button, Input, ModalBox, ModalBoxHeader, TimeContainer } from 'components/shared';
+import { Button, ConfirmBox, Input, ModalBox, ModalBoxHeader, TimeContainer } from 'components/shared';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FC, useCallback, useState } from 'react';
 import { Timestamp } from 'firebase/firestore';
+import { toast } from 'react-toastify';
+import Tippy from '@tippyjs/react/headless';
 
 interface Inputs {
 	score: string;
@@ -23,6 +25,7 @@ interface ScoreDetailProps {
 export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, score, scores, onClick }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
+	const [showConfirm, setShowConfirm] = useState(false);
 	const [scoreOptions, setScoreOptions] = useState({
 		isIgnored: score && score?.isIgnored ? score.isIgnored : false,
 	});
@@ -34,14 +37,17 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
 	} = useForm<Inputs>();
 
 	const removeScoreRecord = useCallback(() => {
-		if (!currentUser || !currentUser?.uid || !subject?.id || !subject?.scores) return;
+		if (!currentUser || !currentUser?.uid || !subject?.id || !subject?.scores)
+			return new Promise((res, rej) => {
+				rej('Failed');
+			});
 
 		const scoreIdx = scores.findIndex((_) => _.id === score.id);
 		const newscores = [...scores];
 
 		newscores.splice(scoreIdx, 1);
 
-		editSubject(currentUser.uid, subject.id, { scores: [...newscores] });
+		return editSubject(currentUser.uid, subject.id, { scores: [...newscores] });
 	}, []);
 
 	const onSubmit: SubmitHandler<Inputs> = useCallback(
@@ -66,7 +72,9 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
 
 			newscores.splice(scoreIdx, 1, scoreToEdit);
 
-			editSubject(currentUser.uid, subject.id, { scores: [...newscores] });
+			editSubject(currentUser.uid, subject.id, { scores: [...newscores] }).then(() =>
+				toast.success('Successfully !', { ...ToastDefaultConfig, autoClose: 800 })
+			);
 		},
 		[scoreOptions]
 	);
@@ -81,12 +89,30 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
 					height='40'
 					onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
 				/>
-				<TrashIcon
-					className='cursor-pointer m-[0.6rem] mx-4 mobile:m-5 text-slate-500'
-					width='40'
-					height='40'
-					onClick={() => removeScoreRecord()}
-				/>
+				<div className='custom-tippy'>
+					<Tippy
+						interactive
+						visible={showConfirm}
+						placement='bottom-end'
+						render={(attrs) => (
+							<ConfirmBox
+								{...attrs}
+								className={showConfirm ? '' : '!hidden z-[-1]'}
+								content={'This action will delete this score record. Continue ?'}
+								setConfirm={setShowConfirm}
+								actionWhenConfirm={removeScoreRecord}
+							/>
+						)}
+					>
+						<div onClick={() => setShowConfirm((s) => !s)}>
+							<TrashIcon
+								className='cursor-pointer m-[0.6rem] mx-4 mobile:m-5 text-slate-500'
+								width='40'
+								height='40'
+							/>
+						</div>
+					</Tippy>
+				</div>
 			</ModalBoxHeader>
 
 			<TimeContainer
