@@ -17,7 +17,7 @@ import {
 	NoteIcon,
 	ProgressIcon,
 } from 'components/icons';
-import { SearchBar } from 'components/shared';
+import { SearchBar, Tooltip } from 'components/shared';
 import { collection } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import Tippy from '@tippyjs/react';
@@ -77,35 +77,65 @@ export const NoteSectionBar = () => {
 			<div className='w-full flexcenter flex-wrap px-4'>
 				<Title Icon={NoteIcon} content='Notes' />
 				<div className='flexcenter flex-wrap px-6 py-8'>
-					<DoneIcon
-						className='cursor-pointer mx-5 my-4'
-						fill={!filter.hasDone ? 'white' : '#fcd34d'}
-						width='40'
-						height='40'
-						onClick={() => setFilter((f) => ({ ...f, hasDone: !f.hasDone }))}
-					/>
-					<ProgressIcon
-						className='cursor-pointer mx-5 my-4'
-						fill={!filter.hasInProgress ? 'white' : '#38bdf8'}
-						width='40'
-						height='40'
-						onClick={() => setFilter((f) => ({ ...f, hasInProgress: !f.hasInProgress }))}
-					/>
-					<ArchiveIcon
-						className='cursor-pointer mx-5 my-4'
-						fill={!filter.hasArchived ? 'white' : '#94a3b8'}
-						width='40'
-						height='40'
-						onClick={() => setFilter((f) => ({ ...f, hasArchived: !f.hasArchived }))}
-					/>
+					<Tooltip
+						content='Filter done note'
+						options={{
+							delay: 400,
+						}}
+					>
+						<DoneIcon
+							className='cursor-pointer mx-5 my-4'
+							fill={!filter.hasDone ? 'white' : '#fcd34d'}
+							width='40'
+							height='40'
+							onClick={() => setFilter((f) => ({ ...f, hasDone: !f.hasDone }))}
+						/>
+					</Tooltip>
 
-					<AddIcon
-						className='cursor-pointer mx-5 my-4'
-						fill={'white'}
-						width='40'
-						height='40'
-						onClick={() => setAddNewOpen(true)}
-					/>
+					<Tooltip
+						content='Filter in progress note'
+						options={{
+							delay: 400,
+						}}
+					>
+						<ProgressIcon
+							className='cursor-pointer mx-5 my-4'
+							fill={!filter.hasInProgress ? 'white' : '#38bdf8'}
+							width='40'
+							height='40'
+							onClick={() => setFilter((f) => ({ ...f, hasInProgress: !f.hasInProgress }))}
+						/>
+					</Tooltip>
+
+					<Tooltip
+						content='Archived note'
+						options={{
+							delay: 400,
+						}}
+					>
+						<ArchiveIcon
+							className='cursor-pointer mx-5 my-4'
+							fill={!filter.hasArchived ? 'white' : '#94a3b8'}
+							width='40'
+							height='40'
+							onClick={() => setFilter((f) => ({ ...f, hasArchived: !f.hasArchived }))}
+						/>
+					</Tooltip>
+
+					<Tooltip
+						content='Add note manually'
+						options={{
+							delay: 400,
+						}}
+					>
+						<AddIcon
+							className='cursor-pointer mx-5 my-4'
+							fill={'white'}
+							width='40'
+							height='40'
+							onClick={() => setAddNewOpen(true)}
+						/>
+					</Tooltip>
 
 					<div className='relative'>
 						<Tippy
@@ -118,12 +148,19 @@ export const NoteSectionBar = () => {
 							)}
 						>
 							<div onClick={() => setShowImport(true)}>
-								<ImportIcon
-									className='cursor-pointer mx-5 my-4'
-									fill={'white'}
-									width='40'
-									height='40'
-								/>
+								<Tooltip
+									content='Import note'
+									options={{
+										delay: 400,
+									}}
+								>
+									<ImportIcon
+										className='cursor-pointer mx-5 my-4'
+										fill={'white'}
+										width='40'
+										height='40'
+									/>
+								</Tooltip>
 							</div>
 						</Tippy>
 					</div>

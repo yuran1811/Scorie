@@ -14,7 +14,7 @@ export const DataInfo: FC = () => {
 		if (!currentUser || !currentUser?.uid) return;
 
 		const { scores, notes } = JSON.parse(e.target.result) as BackupDataType;
-		if (scores) Promise.allSettled(scores.map((score) => addNewSubject(currentUser.uid, { ...score })));
+		if (scores) Promise.allSettled(scores.map(({ id, ...score }) => addNewSubject(currentUser.uid, { ...score })));
 		if (notes) Promise.allSettled(notes.map((note) => addNewNote(currentUser.uid, { ...note })));
 	};
 

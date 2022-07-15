@@ -1,5 +1,6 @@
 import { InputProps } from 'shared';
 import { Dispatch, FC, SetStateAction, useRef, useState } from 'react';
+import { Tooltip } from '.';
 
 interface SearchBarProps {
 	setSearchOpts: Dispatch<
@@ -44,23 +45,30 @@ export const SearchBar: FC<SearchBarProps & InputProps> = ({ setSearchOpts, onCh
 						});
 					}}
 				/>
-				<button
-					className={`isAnimated bg-none cursor-pointer absolute w-[5rem] h-[5rem] top-0 bottom-0 right-0 border-none before:content-[""] before:w-[0.4rem] before:h-[2.5rem] before:bg-white before:absolute before:bottom-[-1.6rem] before:right-[-0.6rem] before:rotate-[-45deg] before:isAnimated after:isAnimated ${
-						isActive &&
-						`!w-[6rem] !h-[6rem] before:content-[""] before:w-[0.4rem] before:h-[3.4rem] before:bg-white before:absolute before:bottom-[1.2rem] before:right-[2.8rem] after:content-[""] after:w-[0.4rem] after:h-[3.4rem] after:bg-white after:absolute after:bottom-[1.2rem] after:right-[2.8rem] after:rotate-45`
-					}`}
-					style={{ background: 'none' }}
-					onClick={() => {
-						if (isActive && inputRef !== null && inputRef?.current) {
-							inputRef.current.value = '';
-							setSearchOpts({
-								isSearch: false,
-								value: '',
-							});
-						}
-						setActive((s) => !s);
+				<Tooltip
+					content='Tap to search'
+					options={{
+						delay: 400,
 					}}
-				/>
+				>
+					<button
+						className={`isAnimated bg-none cursor-pointer absolute w-[5rem] h-[5rem] top-0 bottom-0 right-0 border-none before:content-[""] before:w-[0.4rem] before:h-[2.5rem] before:bg-white before:absolute before:bottom-[-1.6rem] before:right-[-0.6rem] before:rotate-[-45deg] before:isAnimated after:isAnimated ${
+							isActive &&
+							`!w-[6rem] !h-[6rem] before:content-[""] before:w-[0.4rem] before:h-[3.4rem] before:bg-white before:absolute before:bottom-[1.2rem] before:right-[2.8rem] after:content-[""] after:w-[0.4rem] after:h-[3.4rem] after:bg-white after:absolute after:bottom-[1.2rem] after:right-[2.8rem] after:rotate-45`
+						}`}
+						style={{ background: 'none' }}
+						onClick={() => {
+							if (isActive && inputRef !== null && inputRef?.current) {
+								inputRef.current.value = '';
+								setSearchOpts({
+									isSearch: false,
+									value: '',
+								});
+							}
+							setActive((s) => !s);
+						}}
+					/>
+				</Tooltip>
 			</div>
 		</div>
 	);

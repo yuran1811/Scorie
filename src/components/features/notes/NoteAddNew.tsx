@@ -33,31 +33,28 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 		formState: { errors },
 	} = useForm<Inputs>();
 
-	const onSubmit: SubmitHandler<Inputs> = useCallback(
-		(data) => {
-			const checkNoteOpts = validateNoteOption({ ...noteOptions });
+	const onSubmit: SubmitHandler<Inputs> = (data) => {
+		const checkNoteOpts = validateNoteOption({ ...noteOptions });
 
-			if (checkNoteOpts.type === 'errors') {
-				setStatus({ ...checkNoteOpts });
-				return;
-			}
-
+		if (checkNoteOpts.type === 'errors') {
 			setStatus({ ...checkNoteOpts });
-			onClickHandle(false);
+			return;
+		}
 
-			if (currentUser && currentUser?.uid) {
-				const noteToAdd = {
-					...noteOptions,
-					title: data.title.trim(),
-					data: data.data.trim(),
-					theme: 'default',
-				} as NoteDetailType;
+		setStatus({ ...checkNoteOpts });
+		onClickHandle(false);
 
-				addNewNote(currentUser.uid, noteToAdd);
-			}
-		},
-		[noteOptions]
-	);
+		if (currentUser && currentUser?.uid) {
+			const noteToAdd = {
+				...noteOptions,
+				title: data.title.trim(),
+				data: data.data.trim(),
+				theme: 'default',
+			} as NoteDetailType;
+
+			addNewNote(currentUser.uid, noteToAdd);
+		}
+	};
 
 	return (
 		<ModalBox onClick={() => onClickHandle(false)}>

@@ -7,7 +7,6 @@ import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile, U
 export const sendVerifyEmail = async (user: User) => {
 	try {
 		await sendEmailVerification(user);
-
 		return 'Email verification sent !';
 	} catch (error) {
 		const err = error as FirebaseError;

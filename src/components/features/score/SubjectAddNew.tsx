@@ -1,11 +1,12 @@
 import { useStore } from 'store';
-import { DivProps, SubjectListType } from 'shared';
+import { DivProps, SubjectListType, ToastDefaultConfig } from 'shared';
 import { addNewSubject, validateSubjectOption } from 'services';
 import { ErrorMessage } from 'components/interfaces';
 import { IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
-import { Dispatch, FC, SetStateAction, useCallback, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 interface Inputs {
 	subject: string;
@@ -18,6 +19,8 @@ interface ScoreAddNewProps {
 
 export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onClickHandle }) => {
 	const currentUser = useStore((s) => s.currentUser);
+
+	const toastId = useRef<any>(null);
 
 	const [status, setStatus] = useState({ type: 'ok', message: '' });
 	const [subjectOptions, setSubjectOptions] = useState({
@@ -60,8 +63,23 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
 				});
 			}
 		},
-		[subjectOptions]
+		[subjectOptions, subjects]
 	);
+
+	useEffect(() => {
+		if (status.message.length)
+			toastId.current = toast.error(status.message, {
+				...ToastDefaultConfig,
+				toastId: status.message,
+				autoClose: false,
+				closeButton: false,
+				draggable: false,
+			});
+
+		return () => {
+			toast.update(toastId.current, { autoClose: 1 });
+		};
+	}, [status]);
 
 	return (
 		<ModalBox onClick={() => onClickHandle(false)}>
@@ -108,8 +126,6 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
 					}}
 				/>
 				{errors?.subject && <ErrorMessage className='text-[3rem]' content={errors.subject.message || ''} />}
-
-				{status.type === 'errors' && <ErrorMessage className='text-[3rem]' content={status.message} />}
 
 				<Button className='!text-[3.6rem]' type='submit' content='Add' />
 			</form>

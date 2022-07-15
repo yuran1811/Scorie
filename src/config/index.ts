@@ -18,5 +18,5 @@ export const routes = {
 	subjects: 'subjects',
 	notes: 'notes',
 	analytics: 'analytics',
-	tools: 'tools'
+	tools: 'tools',
 };

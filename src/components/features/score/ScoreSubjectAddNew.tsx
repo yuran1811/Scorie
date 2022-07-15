@@ -43,17 +43,15 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
 					isSpecial: false,
 					isVital: false,
 					isIgnored: false,
-					scores: [],
-				}).then(({ data }) => {
-					if (!data) return;
-
-					addNewScore(currentUser.uid, data.id, {
-						id: '1',
-						isIgnored: scoreOptions.isIgnored,
-						type: type.trim(),
-						base: +base.trim(),
-						value: +value.trim(),
-					});
+					scores: [
+						{
+							id: '1',
+							isIgnored: scoreOptions.isIgnored,
+							type: type.trim(),
+							base: +base.trim(),
+							value: +value.trim(),
+						},
+					],
 				});
 			} else {
 				addNewScore(currentUser.uid, validSubject.subject.id, {

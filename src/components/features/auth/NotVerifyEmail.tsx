@@ -1,7 +1,8 @@
-import { auth } from 'shared';
+import { auth, ToastDefaultConfig } from 'shared';
 import { getFirebaseErr } from 'utils';
 import { sendEmailVerification } from 'firebase/auth';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const reVerifyEmail = (canResend: boolean, setCanResend: Dispatch<SetStateAction<boolean>>) => {
 	if (!canResend || !auth.currentUser) return;
@@ -10,10 +11,14 @@ const reVerifyEmail = (canResend: boolean, setCanResend: Dispatch<SetStateAction
 
 	sendEmailVerification(auth.currentUser)
 		.then(() => {
-			console.log('Email verification sent !');
+			toast.success('Email verification sent !', {
+				...ToastDefaultConfig,
+			});
 		})
 		.catch((err) => {
-			console.log('Cannot send email verification !');
+			toast.error('Cannot send email verification !', {
+				...ToastDefaultConfig,
+			});
 			console.log(getFirebaseErr(err.message));
 		})
 		.finally(() => {

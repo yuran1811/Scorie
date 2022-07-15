@@ -1,6 +1,6 @@
 import { useStore } from 'store';
 import { shallowObjectCompare } from 'utils';
-import { ScoreDetailType, SubjectDetailType } from 'shared';
+import { ScoreDetailType, SubjectDetailType, ToastDefaultConfig } from 'shared';
 import { deleteSubject, editSubject, validateSubjectOption } from 'services';
 import { ScoreContainer } from './ScoreContainer';
 import { ScoreAddNew } from './ScoreAddNew';
@@ -14,10 +14,10 @@ import {
 	StarIcon,
 	TrashIcon,
 } from 'components/icons';
-import { ErrorMessage } from 'components/interfaces';
-import { Input, TimeContainer } from 'components/shared';
-import { Dispatch, FC, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react';
+import { Input, TimeContainer, Tooltip } from 'components/shared';
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { toast } from 'react-toastify';
 
 interface SubjectDetailProps {
 	style: {
@@ -33,7 +33,9 @@ interface SubjectDetailProps {
 export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, averageScore, setOpenDetail }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
-	const [saveErr, setSaveErr] = useState('');
+	const toastId = useRef<any>(null);
+
+	const [saveErr, setSaveErr] = useState({ content: '', counter: 0 });
 	const [expectedAverage, setExpectedAverage] = useState(subject?.expectedAverage || '');
 	const [viewMode, setViewMode] = useState('all');
 	const [timeoutId, setTimeoutId] = useState<any>();
@@ -49,7 +51,10 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 
 		const isError = validateSubjectOption({ ...scoreOptions });
 		if (isError) {
-			setSaveErr('Subject cannot be both ignored and vital (or special)');
+			setSaveErr({
+				content: 'Subject cannot be both ignored and vital (or special)',
+				counter: saveErr.counter + 1,
+			});
 			return;
 		}
 
@@ -67,7 +72,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 				}
 			)
 		) {
-			setSaveErr('');
+			setSaveErr({ content: '', counter: saveErr.counter + 1 });
 			setOpenDetail(false);
 			return;
 		}
@@ -78,11 +83,11 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 			expectedAverage: +expectedAverage,
 		})
 			.then(() => {
-				setSaveErr('');
+				setSaveErr({ content: '', counter: saveErr.counter + 1 });
 				setOpenDetail(false);
 			})
 			.catch(() => {
-				setSaveErr('Fail to update');
+				setSaveErr({ content: 'Fail to update', counter: saveErr.counter + 1 });
 				clearTimeout(timeoutId);
 
 				setTimeoutId(
@@ -91,7 +96,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 					}, 2000)
 				);
 			});
-	}, [subject, scoreOptions, expectedAverage]);
+	}, [subject, scores, scoreOptions, expectedAverage]);
 
 	const removeSubjectRecord = () => {
 		if (!currentUser || !currentUser?.uid || !subject?.id) return;
@@ -110,12 +115,23 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 	}, [scores]);
 
 	useEffect(() => {
-		return () => clearTimeout(timeoutId);
-	});
+		if (!saveErr.content.length) return;
+
+		toastId.current = toast.error(saveErr.content, {
+			...ToastDefaultConfig,
+			toastId: saveErr.content,
+			autoClose: false,
+			closeButton: false,
+			draggable: false,
+		});
+	}, [saveErr]);
 
 	useEffect(() => {
-		console.log('expectedAverage: ', expectedAverage);
-	}, [expectedAverage]);
+		return () => {
+			clearTimeout(timeoutId);
+			toast.update(toastId.current, { autoClose: 1 });
+		};
+	});
 
 	return createPortal(
 		<>
@@ -161,10 +177,6 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 					/>
 				</div>
 
-				{saveErr && (
-					<ErrorMessage className='px-6 py-4 mb-4 text-[3rem] mobile:text-[3.5rem]' content={saveErr} />
-				)}
-
 				<TimeContainer obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }} />
 
 				<div className='flexcentercol px-8 py-8'>
@@ -198,26 +210,48 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 							Recents
 						</div>
 						<div className='flex items-start justify-center smallmb:justify-end w-full smallmb:w-auto'>
-							<AddIcon
-								className={`cursor-pointer mx-5`}
-								width='50'
-								height='50'
-								onClick={() => setAddNewOpen(true)}
-							/>
+							<Tooltip
+								content='Add new score'
+								options={{
+									delay: 400,
+								}}
+							>
+								<AddIcon
+									className={`cursor-pointer mx-5`}
+									width='50'
+									height='50'
+									onClick={() => setAddNewOpen(true)}
+								/>
+							</Tooltip>
 							{addNewOpen && <ScoreAddNew subject={subject} onClick={() => setAddNewOpen(false)} />}
 
-							<ListIcon
-								className={`${viewMode === 'group' ? 'block' : 'hidden'} cursor-pointer mx-5`}
-								width='50'
-								height='50'
-								onClick={() => setViewMode('all')}
-							/>
-							<ListAllIcon
-								className={`${viewMode === 'all' ? 'block' : 'hidden'} cursor-pointer mx-5`}
-								width='50'
-								height='50'
-								onClick={() => setViewMode('group')}
-							/>
+							<Tooltip
+								content='Grid view'
+								options={{
+									delay: 400,
+								}}
+							>
+								<ListIcon
+									className={`${viewMode === 'group' ? 'block' : 'hidden'} cursor-pointer mx-5`}
+									width='50'
+									height='50'
+									onClick={() => setViewMode('all')}
+								/>
+							</Tooltip>
+
+							<Tooltip
+								content='Show all'
+								options={{
+									delay: 400,
+								}}
+							>
+								<ListAllIcon
+									className={`${viewMode === 'all' ? 'block' : 'hidden'} cursor-pointer mx-5`}
+									width='50'
+									height='50'
+									onClick={() => setViewMode('group')}
+								/>
+							</Tooltip>
 						</div>
 					</div>
 					<div className='flexcenter flex-wrap w-full pb-6'>

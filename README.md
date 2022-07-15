@@ -22,7 +22,4 @@
 
 ### Todo
 
--   Confirm modal component on delete action
--   Message
--   Share notes to others
 -   Push notification (PWA)

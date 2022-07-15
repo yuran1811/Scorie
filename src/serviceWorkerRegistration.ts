@@ -1,3 +1,5 @@
+import { toast as ReactToast } from 'react-toastify';
+
 const isLocalhost = Boolean(
 	window.location.hostname === 'localhost' ||
 		// [::1] is the IPv6 localhost address.
@@ -11,7 +13,7 @@ interface Config {
 	onUpdate?: (registration: ServiceWorkerRegistration) => void;
 }
 
-export function register(config?: Config) {
+export function register(toast: typeof ReactToast, config?: Config) {
 	if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
 		const publicUrl = new URL(process.env.PUBLIC_URL || '/Scorie', window.location.href);
 
@@ -19,18 +21,31 @@ export function register(config?: Config) {
 
 		window.addEventListener('load', () => {
 			const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+			let isAppOnline = navigator.onLine;
+
+			window.addEventListener('online', () => {
+				if (!isAppOnline) {
+					toast('🦄 The connectivity is back, sync in progress...');
+					isAppOnline = true;
+				}
+			});
+
+			window.addEventListener('offline', () => {
+				toast.warn(
+					'The app is running offline, any changes mades during this time will be synced as soon as the connectivity is back'
+				);
+				isAppOnline = false;
+			});
 
 			if (isLocalhost) {
-				checkValidServiceWorker(swUrl, config);
+				checkValidServiceWorker(swUrl, toast, config);
 
 				navigator.serviceWorker.ready.then(() => {
-					console.log(
-						'This web app is being served cache-first by a service worker. More: https://cra.link/PWA'
-					);
+					console.log('This web app is being served cache-first by a service worker');
 				});
 			} else {
 				// Is not localhost. Just register service worker
-				registerValidSW(swUrl, config);
+				registerValidSW(swUrl, toast, config);
 			}
 		});
 	}
@@ -42,7 +57,7 @@ function pushNotificationHandle(registration: ServiceWorkerRegistration) {
 	});
 }
 
-function registerValidSW(swUrl: string, config?: Config) {
+function registerValidSW(swUrl: string, toast: typeof ReactToast, config?: Config) {
 	navigator.serviceWorker
 		.register(swUrl)
 		.then((registration) => {
@@ -53,15 +68,13 @@ function registerValidSW(swUrl: string, config?: Config) {
 				installingWorker.onstatechange = () => {
 					if (installingWorker.state === 'installed') {
 						if (navigator.serviceWorker.controller) {
-							console.log(
-								'New content is available and will be used when all tabs for this page are closed. More: https://cra.link/PWA.'
-							);
+							toast.info('🔄 New content is available! Refresh to get the latest changes.');
 
 							if (config && config.onUpdate) {
 								config.onUpdate(registration);
 							}
 						} else {
-							console.log('Content is cached for offline use.');
+							toast('🚀 Content is cached for offline use.');
 
 							if (config && config.onSuccess) {
 								config.onSuccess(registration);
@@ -78,7 +91,7 @@ function registerValidSW(swUrl: string, config?: Config) {
 		});
 }
 
-function checkValidServiceWorker(swUrl: string, config?: Config) {
+function checkValidServiceWorker(swUrl: string, toast: typeof ReactToast, config?: Config) {
 	fetch(swUrl, { headers: { 'Service-Worker': 'script' } })
 		.then((response) => {
 			const contentType = response.headers.get('content-type');
@@ -90,11 +103,11 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
 					});
 				});
 			} else {
-				registerValidSW(swUrl, config);
+				registerValidSW(swUrl, toast, config);
 			}
 		})
 		.catch(() => {
-			console.log('No internet connection found. App is running in offline mode.');
+			toast('No internet connection found. App is running in offline mode.');
 		});
 }
 
@@ -105,7 +118,7 @@ export function unregister() {
 				registration.unregister();
 			})
 			.catch((error) => {
-				console.error(error.message);
+				console.error('[Unregister SW Error] : ', error.message);
 			});
 	}
 }

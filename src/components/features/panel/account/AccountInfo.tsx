@@ -7,7 +7,7 @@ import { ErrorMessage } from 'components/interfaces';
 import { LogOutIcon, ThreeDotsFade } from 'components/icons';
 import { NotVerifyEmail } from '../../auth/NotVerifyEmail';
 import { sendPasswordResetEmail, signOut } from 'firebase/auth';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FirebaseError } from 'firebase/app';
 

@@ -2,7 +2,6 @@ export * from './backupData';
 export * from './chart';
 export * from './dayjsUsage';
 export * from './firebase';
-export * from './network';
 export * from './notes';
 export * from './notifications';
 export * from './quotes';

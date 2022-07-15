@@ -1,7 +1,7 @@
-import { getFirebaseErr } from 'utils';
-import { db, ScoreDetailType, SubjectDetailType } from 'shared';
-import { addDoc, collection, deleteDoc, doc, getDoc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
 import { FirebaseError } from 'firebase/app';
+import { addDoc, collection, deleteDoc, doc, getDoc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
+import { db, ScoreDetailType, SubjectDetailType } from 'shared';
+import { getFirebaseErr } from 'utils';
 
 export const validateSubjectOption = (opt: { isIgnored: boolean; isSpecial: boolean; isVital: boolean }) =>
 	opt.isIgnored && (opt.isSpecial || opt.isVital);
@@ -9,7 +9,6 @@ export const validateSubjectOption = (opt: { isIgnored: boolean; isSpecial: bool
 export const addNewScore = async (userId: string, subjectId: string, data: ScoreDetailType) => {
 	try {
 		const subjectRaw = await getDoc(doc(db, 'users', userId, 'subjects', subjectId));
-
 		const subjectData = subjectRaw?.data() as SubjectDetailType;
 
 		if (!subjectData)
@@ -65,11 +64,11 @@ export const addNewSubject = async (userId: string, data: any) => {
 export const editScore = async (userId: string, subjectId: string, data: ScoreDetailType) => {
 	try {
 		const subjectRaw = await getDoc(doc(db, 'users', userId, 'subjects', subjectId));
-
 		if (!subjectRaw || !subjectRaw?.data()) return '';
-		const subjectData = { ...subjectRaw?.data() } as SubjectDetailType;
 
+		const subjectData = { ...subjectRaw?.data() } as SubjectDetailType;
 		if (!subjectData || !subjectData?.scores) return '';
+
 		const scoreIndex = subjectData.scores.findIndex((_) => _.id === data.id);
 
 		if (scoreIndex > -1) subjectData.scores.splice(scoreIndex, 1);

@@ -19,9 +19,16 @@ export const useQuotes = (page: number, isFetch: boolean) => {
 
 		setLoading(true);
 		getQuotes(page, { signal: controller.signal })
-			.then((data) => {
-				const quotes = data as QuoteListType;
-				setData(quotes);
+			.then((resp) => {
+				const { data, err } = resp;
+
+				if (err || !data) {
+					setData(data || null);
+					setError(!!err);
+					return;
+				}
+
+				setData(data);
 				setError(false);
 			})
 			.catch((err) => {

@@ -28,10 +28,15 @@ export const appThemes: {
 } = {
 	default: { bg: '#0f172a', color: 'white', secondary: '#475569' },
 	red: { bg: '#5c2b29', color: '#fee2e2', secondary: '#f87171' },
-	teal: { bg: '#2d555e', color: '#ccfbf1', secondary: '#2dd4bf' },
-	blue: { bg: '#1e3a5f', color: '#bfdbfe', secondary: '#0d9488' },
+	teal: { bg: '#2d555e', color: '#ccfbf1', secondary: '#a2bfc1' },
+	blue: { bg: '#1e3a5f', color: '#bfdbfe', secondary: '#7e97b9' },
 	purple: { bg: '#42275e', color: '#e9d5ff', secondary: '#a855f7' },
-	fuchsia: { bg: '#701a75', color: '#f5d0fe', secondary: '#d946ef' },
+	fuchsia: { bg: '#701a75', color: '#f5d0fe', secondary: '#c026d3' },
 	pink: { bg: '#5b2245', color: '#fbcfe8', secondary: '#ec4899' },
 	rose: { bg: '#9f1239', color: '#fecdd3', secondary: '#fb7185' },
 };
+
+export const getThemeStyle = (theme: string) => ({
+	backgroundColor: appThemes[theme]?.bg ? appThemes[theme].bg : appThemes.default.bg,
+	color: appThemes[theme]?.color ? appThemes[theme].color : appThemes.default.color,
+});

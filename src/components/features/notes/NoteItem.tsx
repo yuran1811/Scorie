@@ -1,19 +1,21 @@
 import { useStore } from 'store';
 import { editNote } from 'services';
-import { NoteItemProps } from 'shared';
-import { copyToClipboard, getNoteStyle, shallowObjectCompare } from 'utils';
+import { NoteItemProps, ToastDefaultConfig } from 'shared';
+import { copyToClipboard, getThemeStyle, shallowObjectCompare } from 'utils';
 import { NoteDetail } from './NoteDetail';
 import { ThemePanel } from './ThemePanel';
+import { Tooltip } from 'components/shared';
 import { ArchiveIcon, DoneIcon, NodeShareIcon, PaletteIcon, PinIcon, ProgressIcon } from 'components/icons';
 import { FC, useEffect, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
+import { toast } from 'react-toastify';
 
 const toolClass = 'isAnimated m-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100';
 const toolProps = { width: '30', height: '30', fill: 'white' };
 
 export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 	const { id, title, data, isPinned, isArchived, isDone, isInProgress, theme } = note;
-	const noteStyle = getNoteStyle(theme);
+	const noteStyle = getThemeStyle(theme);
 
 	const currentUser = useStore((s) => s.currentUser);
 
@@ -22,9 +24,14 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 	const [newTheme, setNewTheme] = useState(theme || 'default');
 	const [noteOpts, setNoteOpts] = useState({ isDone, isInProgress, isArchived, isPinned });
 
+	const shareNotify = () =>
+		toast.success('Copy to clipboard !', {
+			...ToastDefaultConfig,
+			toastId: 'copy-success',
+		});
+
 	useEffect(() => {
 		if (!currentUser || !currentUser?.uid || !id) return;
-
 		if (note.theme !== newTheme) editNote(currentUser.uid, id, { theme: newTheme });
 	}, [newTheme]);
 
@@ -84,7 +91,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 						e.stopPropagation();
 					}}
 				>
-					<div>
+					<div className='custom-tippy'>
 						<Tippy
 							interactive
 							visible={openTheme}
@@ -100,98 +107,143 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 							)}
 						>
 							<div onClick={() => setOpenTheme((s) => !s)}>
-								<PaletteIcon
-									{...toolProps}
-									className={`${toolClass} ${
-										openTheme && '!translate-x-0 !opacity-100'
-									} translate-x-[-3rem] delay-[35ms]`}
-								/>
+								<Tooltip
+									content='Change theme'
+									options={{
+										delay: 400,
+									}}
+								>
+									<PaletteIcon
+										{...toolProps}
+										className={`${toolClass} ${
+											openTheme && '!translate-x-0 !opacity-100'
+										} translate-x-[-3rem] delay-[35ms]`}
+									/>
+								</Tooltip>
 							</div>
 						</Tippy>
 					</div>
 
-					<div className='flexcenter relative' onClick={() => {
-						copyToClipboard(JSON.stringify(note))
-					}}>
-						<div className='absolute left-[1.3rem] animate-ping bg-sky-300 w-[2.6rem] h-[2.6rem] rounded-[50%]' />
-						<NodeShareIcon
+					<Tooltip
+						content='Share'
+						options={{
+							delay: 400,
+						}}
+					>
+						<div
+							className='flexcenter relative'
+							onClick={() => {
+								copyToClipboard(
+									JSON.stringify({
+										title: note.title,
+										data: note.data,
+										theme: note.theme,
+										isPinned: note.isPinned,
+										isArchived: note.isArchived,
+										isDone: note.isDone,
+										isInProgress: note.isInProgress,
+									})
+								);
+								shareNotify();
+							}}
+						>
+							<div className='absolute left-[1.3rem] animate-ping bg-sky-300 w-[2.6rem] h-[2.6rem] rounded-[50%]' />
+							<NodeShareIcon
+								{...toolProps}
+								className={`translate-x-[-2rem] delay-[20ms] ${toolClass} ${
+									openTheme && '!translate-x-0 !opacity-100'
+								}`}
+							/>
+						</div>
+					</Tooltip>
+
+					<Tooltip
+						content='Pin note'
+						options={{
+							delay: 400,
+						}}
+					>
+						<PinIcon
 							{...toolProps}
-							className={`translate-x-[-2rem] delay-[20ms] ${toolClass} ${
+							className={`translate-x-[-0.6rem] delay-[0ms] ${toolClass} ${
 								openTheme && '!translate-x-0 !opacity-100'
 							}`}
+							fill={!isPinned ? 'white' : '#f87171'}
+							onClick={() =>
+								setNoteOpts((s) => ({
+									...s,
+									isPinned: !s.isPinned,
+									isArchived: !s.isPinned ? false : s.isArchived,
+								}))
+							}
 						/>
-					</div>
-					<PinIcon
-						{...toolProps}
-						className={`translate-x-[-0.6rem] delay-[0ms] ${toolClass} ${
-							openTheme && '!translate-x-0 !opacity-100'
-						}`}
-						fill={!isPinned ? 'white' : '#f87171'}
-						onClick={() =>
-							setNoteOpts((s) => ({
-								...s,
-								isPinned: !s.isPinned,
-								isArchived: !s.isPinned ? false : s.isArchived,
-							}))
-						}
-					/>
-					<DoneIcon
-						{...toolProps}
-						className={`translate-x-[0.6rem] delay-[12ms] ${toolClass} ${
-							openTheme && '!translate-x-0 !opacity-100'
-						}`}
-						fill={!isDone ? 'white' : '#eab308'}
-						onClick={() =>
-							setNoteOpts((s) => ({
-								...s,
-								isDone: !s.isDone,
-								isInProgress: !s.isDone ? false : s.isInProgress,
-							}))
-						}
-					/>
-					<ProgressIcon
-						{...toolProps}
-						className={`translate-x-[2rem] delay-[12ms] ${toolClass} ${
-							openTheme && '!translate-x-0 !opacity-100'
-						}`}
-						fill={!isInProgress ? 'white' : '#cbd5e1'}
-						onClick={() =>
-							setNoteOpts((s) => ({
-								...s,
-								isInProgress: !s.isInProgress,
-								isDone: !s.isInProgress ? false : s.isDone,
-							}))
-						}
-					/>
+					</Tooltip>
 
-					<div>
-						<Tippy
-							delay={500}
-							placement='bottom-end'
-							render={(attrs) => (
-								<div {...attrs} className='p-4 text-[2rem] text-white bg-slate-600 rounded-[1rem]'>
-									Archived
-								</div>
-							)}
-						>
-							<div>
-								<ArchiveIcon
-									{...toolProps}
-									className={`translate-x-[3rem] delay-[12ms] ${toolClass} ${
-										openTheme && '!translate-x-0 !opacity-100'
-									}`}
-									fill={!isArchived ? 'white' : '#94a3b8'}
-									onClick={() =>
-										setNoteOpts((s) => ({
-											...s,
-											isArchived: !s.isArchived,
-											isPinned: !s.isArchived ? false : s.isPinned,
-										}))
-									}
-								/>
-							</div>
-						</Tippy>
-					</div>
+					<Tooltip
+						content='Is done'
+						options={{
+							delay: 400,
+						}}
+					>
+						<DoneIcon
+							{...toolProps}
+							className={`translate-x-[0.6rem] delay-[12ms] ${toolClass} ${
+								openTheme && '!translate-x-0 !opacity-100'
+							}`}
+							fill={!isDone ? 'white' : '#eab308'}
+							onClick={() =>
+								setNoteOpts((s) => ({
+									...s,
+									isDone: !s.isDone,
+									isInProgress: !s.isDone ? false : s.isInProgress,
+								}))
+							}
+						/>
+					</Tooltip>
+
+					<Tooltip
+						content='Is in progress'
+						options={{
+							delay: 400,
+						}}
+					>
+						<ProgressIcon
+							{...toolProps}
+							className={`translate-x-[2rem] delay-[12ms] ${toolClass} ${
+								openTheme && '!translate-x-0 !opacity-100'
+							}`}
+							fill={!isInProgress ? 'white' : '#cbd5e1'}
+							onClick={() =>
+								setNoteOpts((s) => ({
+									...s,
+									isInProgress: !s.isInProgress,
+									isDone: !s.isInProgress ? false : s.isDone,
+								}))
+							}
+						/>
+					</Tooltip>
+
+					<Tooltip
+						content='Archive'
+						options={{
+							delay: 400,
+						}}
+					>
+						<ArchiveIcon
+							{...toolProps}
+							className={`translate-x-[3rem] delay-[12ms] ${toolClass} ${
+								openTheme && '!translate-x-0 !opacity-100'
+							}`}
+							fill={!isArchived ? 'white' : '#94a3b8'}
+							onClick={() =>
+								setNoteOpts((s) => ({
+									...s,
+									isArchived: !s.isArchived,
+									isPinned: !s.isArchived ? false : s.isPinned,
+								}))
+							}
+						/>
+					</Tooltip>
 				</div>
 			</div>
 

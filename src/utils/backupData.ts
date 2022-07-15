@@ -22,8 +22,8 @@ export const createDownloadBackupData = () => {
 	} = JSON.parse(rawData);
 
 	const backupData = JSON.stringify({
-		scores: data.scores,
-		notes: data.notes,
+		scores: data.scores.map(({ id, createdAt, updatedAt, isIgnored, ..._ }) => _),
+		notes: data.notes.map(({ id, createdAt, updatedAt, ..._ }) => _),
 	});
 
 	return `data:text/json;charset=utf-8,${encodeURIComponent(backupData)}`;

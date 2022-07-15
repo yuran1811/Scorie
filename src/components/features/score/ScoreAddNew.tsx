@@ -4,8 +4,8 @@ import { DivProps, SubjectDetailType } from 'shared';
 import { IgnoreIcon } from 'components/icons';
 import { ErrorMessage } from 'components/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from 'components/shared';
-import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { FC, useState } from 'react';
 
 interface Inputs {
 	score: string;
@@ -17,11 +17,7 @@ interface ScoreAddNewProps {
 	subject: SubjectDetailType | undefined;
 }
 
-export const ScoreAddNew: FC<ScoreAddNewProps & DivProps> = ({
-	subject,
-
-	onClick,
-}) => {
+export const ScoreAddNew: FC<ScoreAddNewProps & DivProps> = ({ subject, onClick }) => {
 	const currentUser = useStore((s) => s.currentUser);
 
 	const [scoreOptions, setScoreOptions] = useState({ isIgnored: false });

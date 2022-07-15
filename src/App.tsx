@@ -18,16 +18,7 @@ const App: FC = () => {
 	const currentUser = useStore((s) => s.currentUser);
 	const setCurrentUser = useStore((s) => s.setCurrentUser);
 
-	const { data, error, loading, controller } = useQuotes(quotes.numPage, !quotes.numPage || quotes.isFetch);
-
-	useEffect(() => {
-		if (error) return;
-
-		const { canUpdate, mergeData } = mergeQuoteData(quotes, data);
-		canUpdate && setQuotes(mergeData);
-
-		return () => controller.abort();
-	}, [data, error, loading]);
+	const { data, error, loading } = useQuotes(quotes.numPage, !quotes.numPage || quotes.isFetch);
 
 	useEffect(() => {
 		const unregisterAuth = onAuthStateChanged(auth, (user) => {
@@ -42,6 +33,16 @@ const App: FC = () => {
 
 		return () => unregisterAuth();
 	}, []);
+
+	useEffect(() => {
+		if (error) {
+			setQuotes({ ...quotes, isFetch: false, loading: false });
+			return;
+		}
+
+		const { canUpdate, mergeData } = mergeQuoteData(quotes, data);
+		canUpdate && setQuotes(mergeData);
+	}, [data, error, loading]);
 
 	return (
 		<MainLayout>

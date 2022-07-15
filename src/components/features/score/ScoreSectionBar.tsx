@@ -8,7 +8,7 @@ import { Title } from '../main/sections/Title';
 import { SubjectAddNew } from './SubjectAddNew';
 import { SubjectAverage } from './SubjectAverage';
 import { ScoreSubjectAddNew } from './ScoreSubjectAddNew';
-import { SearchBar } from 'components/shared';
+import { SearchBar, Tooltip } from 'components/shared';
 import { AddIcon, FlatLoading, HashtagIcon, IgnoreIcon, ImportantIcon, StarIcon } from 'components/icons';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { useEffect, useMemo, useState } from 'react';
@@ -60,35 +60,65 @@ export const ScoreSectionBar = () => {
 			<div className='w-full flexcenter flex-wrap px-4'>
 				<Title Icon={HashtagIcon} content='Score' />
 				<div className='flexcenter flex-wrap px-6 py-8'>
-					<StarIcon
-						className='cursor-pointer mx-5 my-4'
-						fill={!filter.hasSpecial ? 'white' : '#fcd34d'}
-						width='40'
-						height='40'
-						onClick={() => setFilter((f) => ({ ...f, hasSpecial: !f.hasSpecial }))}
-					/>
-					<ImportantIcon
-						className='cursor-pointer mx-5 my-4'
-						fill={!filter.hasVital ? 'white' : '#38bdf8'}
-						width='40'
-						height='40'
-						onClick={() => setFilter((f) => ({ ...f, hasVital: !f.hasVital }))}
-					/>
-					<IgnoreIcon
-						className='cursor-pointer mx-5 my-4'
-						fill={!filter.hasIgnored ? 'white' : '#0891b2'}
-						width='40'
-						height='40'
-						onClick={() => setFilter((f) => ({ ...f, hasIgnored: !f.hasIgnored }))}
-					/>
+					<Tooltip
+						content='Special subject'
+						options={{
+							delay: 400,
+						}}
+					>
+						<StarIcon
+							className='cursor-pointer mx-5 my-4'
+							fill={!filter.hasSpecial ? 'white' : '#fcd34d'}
+							width='40'
+							height='40'
+							onClick={() => setFilter((f) => ({ ...f, hasSpecial: !f.hasSpecial }))}
+						/>
+					</Tooltip>
 
-					<AddIcon
-						className='cursor-pointer mx-5 my-4'
-						fill={'white'}
-						width='40'
-						height='40'
-						onClick={() => setAddNewOpen(true)}
-					/>
+					<Tooltip
+						content='Important subject'
+						options={{
+							delay: 400,
+						}}
+					>
+						<ImportantIcon
+							className='cursor-pointer mx-5 my-4'
+							fill={!filter.hasVital ? 'white' : '#38bdf8'}
+							width='40'
+							height='40'
+							onClick={() => setFilter((f) => ({ ...f, hasVital: !f.hasVital }))}
+						/>
+					</Tooltip>
+
+					<Tooltip
+						content='Ignored subject'
+						options={{
+							delay: 400,
+						}}
+					>
+						<IgnoreIcon
+							className='cursor-pointer mx-5 my-4'
+							fill={!filter.hasIgnored ? 'white' : '#0891b2'}
+							width='40'
+							height='40'
+							onClick={() => setFilter((f) => ({ ...f, hasIgnored: !f.hasIgnored }))}
+						/>
+					</Tooltip>
+
+					<Tooltip
+						content='Add new subject'
+						options={{
+							delay: 400,
+						}}
+					>
+						<AddIcon
+							className='cursor-pointer mx-5 my-4'
+							fill={'white'}
+							width='40'
+							height='40'
+							onClick={() => setAddNewOpen(true)}
+						/>
+					</Tooltip>
 				</div>
 			</div>
 			<div className='w-full flexcenter px-4'>

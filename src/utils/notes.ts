@@ -5,7 +5,7 @@ import { appThemes } from './styles';
 export const filterSectionList = (list: NoteListType[] | null, filter: NoteListFilterType | null, group?: string) => {
 	if (list === null || filter === null) return [];
 
-	return list
+	return [...list]
 		.map((_) => ({ ..._.note, isShow: _.isShow }))
 		.filter((_) => {
 			if (!group) return true;
@@ -41,8 +41,3 @@ export const getNoteList = (data: any) => {
 
 	return { idxList: idxList?.idxList ? idxList.idxList : [], noteList };
 };
-
-export const getNoteStyle = (theme: string) => ({
-	backgroundColor: appThemes[theme]?.bg ? appThemes[theme].bg : appThemes.default.bg,
-	color: appThemes[theme]?.color ? appThemes[theme].color : appThemes.default.color,
-});

@@ -8,7 +8,7 @@ export interface AverageScoreType {
 export const filterScoreList = (list: SubjectListType[] | null, filter: SubjectListFilterType | null) => {
 	if (list === null || filter === null) return [];
 
-	return list
+	return [...list]
 		.map((_) => ({ ..._.subject, isShow: _.isShow }))
 		.filter((_) => {
 			if (!filter?.searchPattern || !filter.searchPattern.length) return true;

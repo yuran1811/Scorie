@@ -1,3 +1,4 @@
+import { Tooltip } from 'components/shared';
 import { FC } from 'react';
 import { DivProps } from 'shared';
 
@@ -6,12 +7,14 @@ const afterStyle = `after:content-[""] after:absolute after:left-6 after:right-[
 const hoverStyle = `cursor-pointer hover:translate-x-[-0.5rem] transition-all`;
 
 export const BackIcon: FC<DivProps> = ({ className, onClick }) => (
-	<div
-		className={`${
-			className || ''
-		} text-ctbg flexcenter !justify-start relative my-[0.6rem] mx-auto w-[5.6rem] h-[5.6rem] ${beforeStyle} ${afterStyle} ${hoverStyle}`}
-		onClick={onClick}
-	>
-		<span className='w-full h-[0.8rem] rounded-[1rem] bg-current' />
-	</div>
+	<Tooltip content='Back'>
+		<div
+			className={`${
+				className || ''
+			} text-ctbg flexcenter !justify-start relative my-[0.6rem] mx-auto w-[5.6rem] h-[5.6rem] ${beforeStyle} ${afterStyle} ${hoverStyle}`}
+			onClick={onClick}
+		>
+			<span className='w-full h-[0.8rem] rounded-[1rem] bg-current' />
+		</div>
+	</Tooltip>
 );

@@ -1,15 +1,5 @@
-import {
-	addDoc,
-	collection,
-	deleteDoc,
-	doc,
-	getDoc,
-	serverTimestamp,
-	setDoc,
-	Timestamp,
-	updateDoc,
-} from 'firebase/firestore';
 import { FirebaseError } from 'firebase/app';
+import { addDoc, collection, deleteDoc, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { db, NoteDetailType } from 'shared';
 import { getFirebaseErr } from 'utils';
 
@@ -35,9 +25,9 @@ export const validateNoteOption = (opt: {
 
 export const updateIdxList = async (userId: string, data: string[]) => {
 	try {
-		await updateDoc(noteIndexListRef(userId), {
+		await setDoc(noteIndexListRef(userId), {
 			idxList: [...data],
-			updatedAt: Timestamp.fromDate(new Date()),
+			updatedAt: serverTimestamp(),
 		});
 		return '';
 	} catch (error) {
@@ -48,21 +38,25 @@ export const updateIdxList = async (userId: string, data: string[]) => {
 
 export const addNewNote = async (userId: string, data: NoteDetailType) => {
 	try {
+		const { id, ...dataToAdd } = data;
+
 		const resp = await addDoc(collection(db, 'users', userId, 'notes'), {
-			...data,
-			createdAt: Timestamp.fromDate(new Date()),
-			updatedAt: Timestamp.fromDate(new Date()),
+			...dataToAdd,
+			createdAt: serverTimestamp(),
+			updatedAt: serverTimestamp(),
 		});
 
-		if (resp && resp?.id) {
+		if (resp && resp?.id && resp.id) {
 			const ref = noteIndexListRef(userId);
-			if (!resp.id || !ref) return '';
 
 			const listData = await getDoc(ref);
 			const list = listData?.data() as NoteDetailType;
+			const lastList = list && list?.idxList ? list.idxList : [];
 
-			if (list && list?.idxList) await updateIdxList(userId, [resp.id, ...list.idxList]);
-			else await setDoc(ref, { idxList: [resp.id], updatedAt: serverTimestamp() });
+			await updateIdxList(userId, [resp.id, ...lastList]);
+
+			// if (list && list?.idxList) await updateIdxList(userId, [resp.id, ...list.idxList]);
+			// else await setDoc(ref, { idxList: [resp.id], updatedAt: serverTimestamp() });
 		}
 
 		return {
