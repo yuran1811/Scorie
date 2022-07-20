@@ -1,32 +1,32 @@
-import { NoteDetailType, STORE_NAME, SubjectDetailType } from 'shared';
+import { NoteDetailType, STORE_NAME, SubjectDetailType } from '@/shared';
 
 export interface BackupDataType {
-	scores: SubjectDetailType[];
-	notes: NoteDetailType[];
+  scores: SubjectDetailType[];
+  notes: NoteDetailType[];
 }
 
 export const getStoredData = () => {
-	const localData = localStorage.getItem(STORE_NAME) || '';
+  const localData = localStorage.getItem(STORE_NAME) || '';
 
-	return localData;
+  return localData;
 };
 
 export const createDownloadBackupData = () => {
-	const rawData = getStoredData();
-	if (!rawData.length) return '#data-is-unavailable';
+  const rawData = getStoredData();
+  if (!rawData.length) return '#data-is-unavailable';
 
-	const {
-		state: data,
-	}: {
-		state: BackupDataType;
-	} = JSON.parse(rawData);
+  const {
+    state: data,
+  }: {
+    state: BackupDataType;
+  } = JSON.parse(rawData);
 
-	const backupData = JSON.stringify({
-		scores: data.scores.map(({ id, createdAt, updatedAt, isIgnored, ..._ }) => _),
-		notes: data.notes.map(({ id, createdAt, updatedAt, ..._ }) => _),
-	});
+  const backupData = JSON.stringify({
+    scores: data.scores.map(({ id, createdAt, updatedAt, isIgnored, ..._ }) => _),
+    notes: data.notes.map(({ id, createdAt, updatedAt, ..._ }) => _),
+  });
 
-	return `data:text/json;charset=utf-8,${encodeURIComponent(backupData)}`;
+  return `data:text/json;charset=utf-8,${encodeURIComponent(backupData)}`;
 };
 
 export const importBackupData = () => {};

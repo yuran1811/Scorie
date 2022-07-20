@@ -23,8 +23,8 @@ const HOST_URL: string = '/scorie'; // instead of '/'
 
 ## Chart lib
 
--   react-apexcharts apexcharts (highly recommend)
--   @ant-design/charts chart.js react-chartjs-2 react-google-charts
+- react-apexcharts apexcharts (highly recommend)
+- @ant-design/charts chart.js react-chartjs-2 react-google-charts
 
 ```
 -	apexcharts : ^3.35.3,
@@ -38,32 +38,32 @@ const HOST_URL: string = '/scorie'; // instead of '/'
 ```css
 div[id^='reactgooglegraph'] svg,
 div[data-chart-source-type~='G2Plot'] svg {
-	@apply !rounded-[2rem];
+  @apply !rounded-[2rem];
 }
 div[id^='reactgooglegraph'] text,
 div[data-chart-source-type~='G2Plot'] text {
-	@apply !text-[1.8rem];
+  @apply !text-[1.8rem];
 }
 div[id^='reactgooglegraph'] {
-	@apply !mx-auto;
+  @apply !mx-auto;
 }
 .g2-tooltip,
 .g2-tooltip-list-item {
-	@apply !text-[1.6rem];
+  @apply !text-[1.6rem];
 }
 .g2-tooltip-list-item {
-	@apply !py-3;
+  @apply !py-3;
 }
 .g2-tooltip-title {
-	@apply !text-[2.5rem] !text-center !py-2;
+  @apply !text-[2.5rem] !text-center !py-2;
 }
 .g2-tooltip-marker {
-	@apply !scale-150 !text-left;
+  @apply !scale-150 !text-left;
 }
 .g2-tooltip-name {
-	@apply !font-semibold !text-[1.8rem];
+  @apply !font-semibold !text-[1.8rem];
 }
 .g2-tooltip-value {
-	@apply !text-[1.8rem];
+  @apply !text-[1.8rem];
 }
 ```

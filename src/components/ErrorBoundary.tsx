@@ -2,39 +2,39 @@ import { Component, ErrorInfo, ReactNode } from 'react';
 import { ErrorContent } from './shared';
 
 interface Props {
-	children?: ReactNode;
+  children?: ReactNode;
 }
 
 interface State {
-	hasError: boolean;
+  hasError: boolean;
 }
 
 class ErrorBoundary extends Component<Props, State> {
-	public state: State;
+  public state: State;
 
-	constructor(props: Props) {
-		super(props);
-		this.state = { hasError: false };
-	}
+  constructor(props: Props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-	public static getDerivedStateFromError(_: Error): State {
-		return { hasError: true };
-	}
+  public static getDerivedStateFromError(_: Error): State {
+    return { hasError: true };
+  }
 
-	public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-		console.error('Uncaught error:', error, errorInfo);
-	}
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Uncaught error:', error, errorInfo);
+  }
 
-	public render() {
-		if (this.state.hasError)
-			return (
-				<div className='bg-ctbg fullscreen'>
-					<ErrorContent errorBoundaries={true} />;
-				</div>
-			);
+  public render() {
+    if (this.state.hasError)
+      return (
+        <div className="bg-ctbg fullscreen">
+          <ErrorContent errorBoundaries={true} />;
+        </div>
+      );
 
-		return this.props.children;
-	}
+    return this.props.children;
+  }
 }
 
 export default ErrorBoundary;

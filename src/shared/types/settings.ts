@@ -1,4 +1,4 @@
 export interface SettingsType {
-	numberFormat: number;
-	showStartUpLogo: boolean;
+  numberFormat: number;
+  showStartUpLogo: boolean;
 }

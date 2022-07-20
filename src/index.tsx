@@ -1,21 +1,20 @@
-import App from './App';
-import ErrorBoundary from 'components/ErrorBoundary';
-import { register } from './serviceWorkerRegistration';
-import { BrowserRouter } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { render } from 'react-dom';
+import App from '@/App';
+import { updateSW } from '@/services';
+import ErrorBoundary from '@cpns/ErrorBoundary';
+import '@styles/index.css';
 import { StrictMode } from 'react';
-import './styles/index.css';
+import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 render(
-	<StrictMode>
-		<BrowserRouter>
-			<ErrorBoundary>
-				<App />
-			</ErrorBoundary>
-		</BrowserRouter>
-	</StrictMode>,
-	document.getElementById('root') as HTMLElement
+  <StrictMode>
+    <BrowserRouter>
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    </BrowserRouter>
+  </StrictMode>,
+  document.getElementById('root') as HTMLElement
 );
 
-register(toast);
+updateSW();

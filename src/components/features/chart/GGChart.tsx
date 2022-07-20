@@ -1,5 +1,5 @@
 // import { Chart } from 'react-google-charts';
-// import { fakeGGChartData } from 'services';
+// import { fakeGGChartData } from '@/services';
 
 // export const options = {
 // 	title: 'Company Performance',
@@ -8,8 +8,8 @@
 // };
 
 export const GGChart = () => (
-	<div className='w-[90%] max-w-[60rem] my-12'>
-		React Google Chart
-		{/* <Chart chartType='LineChart' legendToggle data={fakeGGChartData} options={options} height={400} /> */}
-	</div>
+  <div className="w-[90%] max-w-[60rem] my-12">
+    React Google Chart
+    {/* <Chart chartType='LineChart' legendToggle data={fakeGGChartData} options={options} height={400} /> */}
+  </div>
 );

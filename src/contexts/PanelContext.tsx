@@ -1,39 +1,39 @@
 import { createContext, Dispatch, FC, SetStateAction, useContext, useState } from 'react';
 
 interface PanelContextProps {
-	isMenu: boolean;
-	isAccount: boolean;
-	isData: boolean;
-	isSetting: boolean;
-	isDoc: boolean;
+  isMenu: boolean;
+  isAccount: boolean;
+  isData: boolean;
+  isSetting: boolean;
+  isDoc: boolean;
 }
 
 interface PanelProviderProps {
-	active: PanelContextProps;
-	setActive: Dispatch<SetStateAction<PanelContextProps>> | null;
+  active: PanelContextProps;
+  setActive: Dispatch<SetStateAction<PanelContextProps>> | null;
 }
 
 export const PanelContext = createContext<PanelProviderProps>({
-	active: {
-		isMenu: false,
-		isAccount: false,
-		isData: false,
-		isSetting: false,
-		isDoc: false,
-	},
-	setActive: null,
+  active: {
+    isMenu: false,
+    isAccount: false,
+    isData: false,
+    isSetting: false,
+    isDoc: false,
+  },
+  setActive: null,
 });
 
 export const PanelProvider: FC = ({ children }) => {
-	const [active, setActive] = useState({
-		isMenu: false,
-		isAccount: false,
-		isData: false,
-		isSetting: false,
-		isDoc: false,
-	});
+  const [active, setActive] = useState({
+    isMenu: false,
+    isAccount: false,
+    isData: false,
+    isSetting: false,
+    isDoc: false,
+  });
 
-	return <PanelContext.Provider value={{ active, setActive }}>{children}</PanelContext.Provider>;
+  return <PanelContext.Provider value={{ active, setActive }}>{children}</PanelContext.Provider>;
 };
 
 export const usePanel = () => useContext(PanelContext);

@@ -1,22 +1,22 @@
 export const axiosConfig = {
-	baseURL: process.env.REACT_APP_API_URL,
-	headers: { 'content-type': 'application/json' },
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: { 'content-type': 'application/json' },
 };
 
 export const firebaseConfig = {
-	apiKey: process.env.REACT_APP_API_KEY as string,
-	appId: process.env.REACT_APP_APPID as string,
-	authDomain: process.env.REACT_APP_AUTHORIZED_DOMAIN as string,
-	databaseURL: process.env.REACT_APP_DATABASEURL as string,
-	measurementId: process.env.REACT_APP_MEASUREMENTID as string,
-	messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID as string,
-	projectId: process.env.REACT_APP_PROJECTID as string,
-	storageBucket: process.env.REACT_APP_STORAGEBUCKET as string,
+  apiKey: import.meta.env.VITE_API_KEY as string,
+  appId: import.meta.env.VITE_APPID as string,
+  authDomain: import.meta.env.VITE_AUTHORIZED_DOMAIN as string,
+  databaseURL: import.meta.env.VITE_DATABASEURL as string,
+  measurementId: import.meta.env.VITE_MEASUREMENTID as string,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID as string,
+  projectId: import.meta.env.VITE_PROJECTID as string,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET as string,
 };
 
 export const routes = {
-	subjects: 'subjects',
-	notes: 'notes',
-	analytics: 'analytics',
-	tools: 'tools',
+  subjects: 'subjects',
+  notes: 'notes',
+  analytics: 'analytics',
+  tools: 'tools',
 };

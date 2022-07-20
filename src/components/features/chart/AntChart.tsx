@@ -1,5 +1,5 @@
 import { FC } from 'react';
-/* import { fakeAntChartData } from 'services';
+/* import { fakeAntChartData } from '@/services';
 import { Line } from '@ant-design/plots';
 
 const config = {
@@ -61,41 +61,41 @@ const config = {
  */
 
 export const AntChart: FC = () => {
-	// const [data, setData] = useState<any[]>([]);
-	// const [chartSize, setChartSize] = useState({
-	// 	width: getSize(),
-	// 	height: getSize(),
-	// });
+  // const [data, setData] = useState<any[]>([]);
+  // const [chartSize, setChartSize] = useState({
+  // 	width: getSize(),
+  // 	height: getSize(),
+  // });
 
-	// const resizeHandle = (e: UIEvent) => {
-	// 	setChartSize({
-	// 		width: getSize(),
-	// 		height: getSize(),
-	// 	});
-	// };
+  // const resizeHandle = (e: UIEvent) => {
+  // 	setChartSize({
+  // 		width: getSize(),
+  // 		height: getSize(),
+  // 	});
+  // };
 
-	// useEffect(() => {
-	// 	(() => {
-	// 		setData(fakeAntChartData);
-	// 		// fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
-	// 		// 	.then((response) => response.json())
-	// 		// 	.then((json) => setData(json))
-	// 		// 	.catch((error) => {
-	// 		// 		console.log('fetch data failed', error);
-	// 		// 	});
-	// 	})();
+  // useEffect(() => {
+  // 	(() => {
+  // 		setData(fakeAntChartData);
+  // 		// fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
+  // 		// 	.then((response) => response.json())
+  // 		// 	.then((json) => setData(json))
+  // 		// 	.catch((error) => {
+  // 		// 		console.log('fetch data failed', error);
+  // 		// 	});
+  // 	})();
 
-	// 	// window.addEventListener('resize', resizeHandle);
+  // 	// window.addEventListener('resize', resizeHandle);
 
-	// 	return () => {
-	// 		// window.removeEventListener('resize', resizeHandle);
-	// 	};
-	// }, []);
+  // 	return () => {
+  // 		// window.removeEventListener('resize', resizeHandle);
+  // 	};
+  // }, []);
 
-	return (
-		<div className='w-[90%] max-w-[60rem] my-12'>
-			Ant Chart
-			{/* <Line
+  return (
+    <div className="w-[90%] max-w-[60rem] my-12">
+      Ant Chart
+      {/* <Line
 				{...config}
 				// width={chartSize.width}
 				// height={chartSize.height}
@@ -104,6 +104,6 @@ export const AntChart: FC = () => {
 				renderer='svg'
 				legend={false}
 			/> */}
-		</div>
-	);
+    </div>
+  );
 };

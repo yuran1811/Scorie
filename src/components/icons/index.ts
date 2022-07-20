@@ -27,6 +27,7 @@ export * from './InfoIcon';
 export * from './ListAllIcon';
 export * from './ListIcon';
 export * from './Loading';
+export * from './Locales';
 export * from './LogInIcon';
 export * from './LogOutIcon';
 export * from './MenuIcon';

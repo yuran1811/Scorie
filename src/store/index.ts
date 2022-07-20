@@ -1,53 +1,59 @@
 import {
-	QUOTES_STORED_DEFAULT,
-	SETTINGS_DEFAULT,
-	STORE_NAME,
-	QuoteStoreType,
-	SettingsType,
-	SubjectDetailType,
-	NoteDetailType,
-} from 'shared';
-import { devtools, persist } from 'zustand/middleware';
+  NoteDetailType,
+  QuoteStoreType,
+  QUOTES_STORED_DEFAULT,
+  SettingsType,
+  SETTINGS_DEFAULT,
+  STORE_NAME,
+  SubjectDetailType,
+} from '@/shared';
 import { User } from 'firebase/auth';
 import create from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 
 interface StoreType {
-	currentUser: User | null | undefined;
-	setCurrentUser: (user: User | null) => void;
+  currentUser: User | null | undefined;
+  setCurrentUser: (user: User | null) => void;
 
-	settings: SettingsType;
-	setSettings: (opts: SettingsType) => void;
+  settings: SettingsType;
+  setSettings: (opts: SettingsType) => void;
 
-	quotes: QuoteStoreType;
-	setQuotes: (data: QuoteStoreType) => void;
+  quotes: QuoteStoreType;
+  setQuotes: (data: QuoteStoreType) => void;
 
-	scores: SubjectDetailType[];
-	setScores: (data: SubjectDetailType[]) => void;
+  scores: SubjectDetailType[];
+  setScores: (data: SubjectDetailType[]) => void;
 
-	notes: NoteDetailType[];
-	setNotes: (data: NoteDetailType[]) => void;
+  notes: NoteDetailType[];
+  setNotes: (data: NoteDetailType[]) => void;
+
+  locale: string;
+  setLocale: (data: string) => void;
 }
 
 export const useStore = create<StoreType>()(
-	devtools(
-		persist(
-			(set, get) => ({
-				currentUser: undefined,
-				setCurrentUser: (user) => set({ currentUser: user }),
+  devtools(
+    persist(
+      (set, get) => ({
+        currentUser: undefined,
+        setCurrentUser: (user) => set({ currentUser: user }),
 
-				settings: { ...SETTINGS_DEFAULT },
-				setSettings: (opts) => set({ settings: { ...opts } }),
+        settings: { ...SETTINGS_DEFAULT },
+        setSettings: (settings) => set({ settings: { ...settings } }),
 
-				quotes: { ...QUOTES_STORED_DEFAULT },
-				setQuotes: (data) => set({ quotes: data }),
+        quotes: { ...QUOTES_STORED_DEFAULT },
+        setQuotes: (quotes) => set({ quotes }),
 
-				scores: [],
-				setScores: (data) => set({ scores: [...data] }),
+        scores: [],
+        setScores: (scores) => set({ scores: [...scores] }),
 
-				notes: [],
-				setNotes: (data) => set({ notes: [...data] }),
-			}),
-			{ name: STORE_NAME }
-		)
-	)
+        notes: [],
+        setNotes: (notes) => set({ notes: [...notes] }),
+
+        locale: 'vi',
+        setLocale: (locale: string) => set({ locale }),
+      }),
+      { name: STORE_NAME }
+    )
+  )
 );

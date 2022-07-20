@@ -1,7 +1,7 @@
-import { firebaseConfig } from 'config';
-import { getAuth } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '@/config';
 import { getAnalytics } from 'firebase/analytics';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 import { enableIndexedDbPersistence, getFirestore } from 'firebase/firestore';
 
 export const firebaseApp = initializeApp(firebaseConfig);
@@ -12,9 +12,9 @@ export const auth = getAuth(firebaseApp);
 export const db = getFirestore(firebaseApp);
 
 enableIndexedDbPersistence(db, { forceOwnership: false }).catch((err) => {
-	if (err.code === 'failed-precondition') {
-		console.log('Persistance failed');
-	} else if (err.code === 'unimplemented') {
-		console.log('Persistance not availabel');
-	}
+  if (err.code === 'failed-precondition') {
+    console.log('Persistance failed');
+  } else if (err.code === 'unimplemented') {
+    console.log('Persistance not availabel');
+  }
 });
