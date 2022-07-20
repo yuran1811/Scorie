@@ -1,4 +1,4 @@
-# Scorie
+# Scorie (CRA Version)
 
 ## An application which helps you manage your scores at school
 
