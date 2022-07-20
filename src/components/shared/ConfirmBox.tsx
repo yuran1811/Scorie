@@ -29,7 +29,7 @@ export const ConfirmBox: FC<ConfirmBoxProps & DivProps> = ({
     >
       <div>
         <div className="font-bold text-[3rem] tablet:text-[3.4rem] text-center text-ctbg p-4 mb-4">
-          {t(content || 'Confirm action ?')}
+          {t(content || 'default confirm')}
         </div>
         <div className="flexcenter flex-wrap">
           <Button

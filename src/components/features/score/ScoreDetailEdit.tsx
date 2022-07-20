@@ -111,7 +111,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
               <ConfirmBox
                 {...attrs}
                 className={showConfirm ? '' : '!hidden z-[-1]'}
-                content={'This action will delete this score record. Continue ?'}
+                content={'confirm delete score'}
                 setConfirm={setShowConfirm}
                 actionWhenConfirm={removeScoreRecord}
               />
@@ -190,7 +190,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
           <ErrorMessage className="text-[3rem]" content={errors.type.message || ''} />
         )}
 
-        <Button type="submit" content="Update" />
+        <Button className="!text-[3.2rem]" type="submit" content="Update" />
       </form>
     </ModalBox>
   );

@@ -129,7 +129,7 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
           <ErrorMessage className="text-[3rem]" content={errors.subject.message || ''} />
         )}
 
-        <Button className="!text-[3.6rem]" type="submit" content="Add" />
+        <Button className="!text-[3.2rem]" type="submit" content="Add" />
       </form>
     </ModalBox>
   );

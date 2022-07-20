@@ -3,6 +3,7 @@ import { useStore } from '@/store';
 import { averageScore as averageScoreStyle, getAverageScore, getAverageScoreString } from '@/utils';
 import { IgnoreIcon, ImportantIcon, StarIcon } from '@cpns/icons';
 import { SubjectDetail } from './SubjectDetail';
+import { useTranslation } from 'react-i18next';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
 import { A11y } from 'swiper';
@@ -25,6 +26,8 @@ const swiperOptions: SwiperProps = {
 
 export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }) => {
   const settings = useStore((s) => s.settings);
+
+  const { t } = useTranslation();
 
   const [scores, setScores] = useState<ScoreDetailType[]>([] as ScoreDetailType[]);
   const [openDetail, setOpenDetail] = useState<boolean>(false);
@@ -87,7 +90,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
 
           {scores.length !== 0 && (
             <div className="font-bold text-[3rem] text-slate-800 text-left w-full px-8 line-clamp-1">
-              Recents
+              {t('recent')}
             </div>
           )}
 

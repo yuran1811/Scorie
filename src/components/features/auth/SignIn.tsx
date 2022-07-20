@@ -62,10 +62,7 @@ export const SignIn: FC = () => {
         <ModalBox onClick={() => setIsAlertOpened(false)}>
           <ModalBoxHeader onClick={() => setIsAlertOpened(false)} />
 
-          <ErrorMessage
-            className="text-[3rem] px-8 pb-10"
-            content="We cannot sign in to your account. Please try again !"
-          />
+          <ErrorMessage className="text-[3rem] px-8 pb-10" content="cannot sign in" />
           <ErrorMessage className="text-[3rem] px-8 pb-10" content={error} />
         </ModalBox>
       )}

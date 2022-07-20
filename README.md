@@ -4,6 +4,7 @@
 
 ### Features
 
+- Multi locales
 - PWA available (can be used offline and add to homescreen)
 - Login with Google, Facebook, Email / Password
 - Plenty of features : scores, notes, ...(drag and drop, create / read / update / delete)
@@ -23,3 +24,6 @@
 ### Todo
 
 - Push notification (PWA)
+- Translate:
+  - Toast
+  - Error

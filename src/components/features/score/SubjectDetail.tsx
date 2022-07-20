@@ -28,6 +28,7 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 interface SubjectDetailProps {
   style: {
@@ -48,6 +49,8 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
   setOpenDetail,
 }) => {
   const currentUser = useStore((s) => s.currentUser);
+
+  const { t } = useTranslation();
 
   const toastId = useRef<any>(null);
 
@@ -190,9 +193,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
                   <ConfirmBox
                     {...attrs}
                     className={showConfirm ? '' : '!hidden z-[-1]'}
-                    content={
-                      'This action will delete this subjects (include all score records). Continue ?'
-                    }
+                    content={'confirm delete subject'}
                     setConfirm={setShowConfirm}
                     actionWhenConfirm={removeSubjectRecord}
                   />
@@ -234,7 +235,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
           </div>
 
           <div className="flexcenter flex-wrap mt-6 mb-12">
-            <span className="text-[3rem] text-indigo-800 p-4 mr-4">Expected Score </span>
+            <span className="text-[3rem] text-indigo-800 p-4 mr-4">{t('expected score')} </span>
             <div className="flex-1">
               <Input
                 className="w-[15rem]"
@@ -249,7 +250,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
 
           <div className="flex items-center justify-between flex-wrap w-full py-8 text-slate-800 bg-violet-200">
             <div className="font-bold text-[4rem] text-center smallmb:text-left w-full smallmb:w-auto px-6 line-clamp-1">
-              Recents
+              {t('recent')}
             </div>
             <div className="flex items-start justify-center smallmb:justify-end w-full smallmb:w-auto">
               <Tooltip

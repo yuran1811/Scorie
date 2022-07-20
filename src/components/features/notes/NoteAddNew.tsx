@@ -6,6 +6,7 @@ import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader, TextArea } from '@cpns/shared';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
   title: string;
@@ -18,6 +19,8 @@ interface NoteAddNewProps {
 
 export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) => {
   const currentUser = useStore((s) => s.currentUser);
+
+  const { t } = useTranslation();
 
   const [status, setStatus] = useState({ type: 'ok', message: '' });
   const [noteOptions, setNoteOptions] = useState({
@@ -101,7 +104,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
         />
       )}
 
-      <div className="w-full text-[4rem] text-indigo-900 line-clamp-1">New note</div>
+      <div className="w-full text-[4rem] text-indigo-900 line-clamp-1">{t('new note')}</div>
       <form
         className="flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1"
         onSubmit={handleSubmit(onSubmit)}
@@ -123,7 +126,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 
         <TextArea defaultValue="" className="font-normal" formHandle={{ ...register('data') }} />
 
-        <Button className="!text-[3.6rem]" type="submit" content="Add" />
+        <Button className="!text-[3.2rem]" type="submit" content="Add" />
       </form>
     </ModalBox>
   );

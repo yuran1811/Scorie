@@ -26,6 +26,39 @@ export default {
     en: 'Tap to search',
   },
 
+  'new record': {
+    vi: 'Bản ghi mới',
+    en: 'New record',
+  },
+  'add new score': {
+    vi: 'Thêm điểm mới',
+    en: 'Add new score',
+  },
+  'add new subject': {
+    vi: 'Thêm môn học mới',
+    en: 'Add new subject',
+  },
+  'show all': {
+    vi: 'Hiện tất cả',
+    en: 'Show all',
+  },
+  'grid view': {
+    vi: 'Chế độ xem lưới',
+    en: 'Grid view',
+  },
+  'special subject': {
+    vi: 'Môn học chuyên',
+    en: 'Special subject',
+  },
+  'important subject': {
+    vi: 'Môn học quan trọng',
+    en: 'Important subject',
+  },
+  'ignored subject': {
+    vi: 'Môn học không quan trọng',
+    en: 'Ignored subject',
+  },
+
   'next quote': {
     vi: 'Quote kế tiếp',
     en: 'Next quote',
@@ -62,6 +95,10 @@ export default {
   'import note': {
     vi: 'Nhập dữ liệu ghi chú',
     en: 'Import note',
+  },
+  'new note': {
+    vi: 'Note mới',
+    en: 'New note',
   },
   'change theme': {
     vi: 'Đổi màu',

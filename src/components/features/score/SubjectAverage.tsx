@@ -2,6 +2,7 @@ import { DivProps, SubjectDetailType } from '@/shared';
 import { useStore } from '@/store';
 import { averageScore, getAverageScoreString } from '@/utils';
 import { FC, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface SubjectAverageType {
   averageScore: number;
@@ -23,6 +24,8 @@ export interface SubjectAverageProps {
 
 export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({ subjects }) => {
   const settings = useStore((s) => s.settings);
+
+  const { t } = useTranslation();
 
   const subjectAverageScore = useMemo(() => {
     const averageScore = subjects.reduce(
@@ -76,7 +79,7 @@ export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({ subjects })
             {getAverageScoreString(subjectAverageScore, settings.numberFormat)}
           </div>
           <div className="w-full text-[4rem] capitalize" style={{ color }}>
-            {averageScore.check(subjectAverageScore.total / subjectAverageScore.count)}
+            {t(averageScore.check(subjectAverageScore.total / subjectAverageScore.count))}
           </div>
         </>
       )}

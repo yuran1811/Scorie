@@ -162,7 +162,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
                 <ConfirmBox
                   {...attrs}
                   className={showConfirm ? '' : '!hidden z-[-1]'}
-                  content={'This action will delete this note. Continue ?'}
+                  content={'confirm delete note'}
                   setConfirm={setShowConfirm}
                   actionWhenConfirm={removeNote}
                 />

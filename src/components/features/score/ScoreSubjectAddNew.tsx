@@ -6,6 +6,7 @@ import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from '@cpns/shared';
 import { FC, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
   subject: string;
@@ -23,6 +24,8 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
   subjects,
 }) => {
   const currentUser = useStore((s) => s.currentUser);
+
+  const { t } = useTranslation();
 
   const [scoreOptions, setScoreOptions] = useState({ isIgnored: false });
 
@@ -83,7 +86,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
         />
       </ModalBoxHeader>
 
-      <div className="w-full text-[4rem] text-indigo-900 line-clamp-1">New record</div>
+      <div className="w-full text-[4rem] text-indigo-900 line-clamp-1">{t('new record')}</div>
       <form
         className="flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1"
         onSubmit={handleSubmit(onSubmit)}
@@ -156,7 +159,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
           <ErrorMessage className="text-[3rem]" content={errors.type.message || ''} />
         )}
 
-        <Button className="!text-[3.6rem]" type="submit" content="Add" />
+        <Button className="!text-[3.2rem]" type="submit" content="Add" />
       </form>
     </ModalBox>
   );

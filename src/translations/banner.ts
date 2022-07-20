@@ -7,6 +7,6 @@ export default {
   },
   guest: {
     vi: 'Ẩn sĩ',
-    en: 'Scorie Guest',
+    en: 'Guest',
   },
 } as TranslationType;

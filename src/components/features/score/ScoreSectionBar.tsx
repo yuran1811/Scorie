@@ -19,10 +19,13 @@ import { SubjectAverage } from './SubjectAverage';
 import { SubjectCard } from './SubjectCard';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const ScoreSectionBar = () => {
   const setScores = useStore((s) => s.setScores);
   const currentUser = useStore((s) => s.currentUser);
+
+  const { t } = useTranslation();
 
   const { data, loading } = useCollectionQuery(
     'users_subjects',
@@ -152,7 +155,7 @@ export const ScoreSectionBar = () => {
       </div>
 
       {!loading && subjects !== null && subjects.length === 0 && (
-        <div className="w-full p-8 m-4 font-bold text-[5rem] text-center">No subject</div>
+        <div className="w-full p-8 m-4 font-bold text-[5rem] text-center">{t('no subject')}</div>
       )}
 
       {loading ? (

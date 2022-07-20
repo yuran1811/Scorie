@@ -21,10 +21,13 @@ import NoteSection from './NoteSection';
 import Tippy from '@tippyjs/react';
 import { collection } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const NoteSectionBar = () => {
   const setNotes = useStore((s) => s.setNotes);
   const currentUser = useStore((s) => s.currentUser);
+
+  const { t } = useTranslation();
 
   const { data, loading, error } = useCollectionQuery(
     'users_notes',
@@ -208,7 +211,7 @@ export const NoteSectionBar = () => {
       )}
 
       {!loading && noteList !== null && noteList.length === 0 && (
-        <div className="w-full p-8 m-4 font-bold text-[5rem] text-center">No note</div>
+        <div className="w-full p-8 m-4 font-bold text-[5rem] text-center">{t('no note')}</div>
       )}
 
       {!loading && noteList !== null && noteList.length !== 0 && (

@@ -6,10 +6,13 @@ import { Title } from '../main/sections/Title';
 import { ApexBarChart } from './ApexChart';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const ChartSectionBar: FC = () => {
   const scores = useStore((s) => s.scores);
   const settings = useStore((s) => s.settings);
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -46,7 +49,7 @@ export const ChartSectionBar: FC = () => {
     return (
       <div className="flexcentercol relative w-full tablet:w-[70%] h-[30rem] mx-auto text-[4rem] mobile:text-[5rem] text-white">
         <div className="font-semibold text-center p-6">
-          Add scores and the chart will be shown !
+          {t('add scores and the chart will be shown')}
         </div>
         <Button
           content="Add scores"
