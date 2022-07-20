@@ -1,4 +1,4 @@
-# Scorie
+# Scorie (Official)
 
 ## An application which helps you manage your scores at school
 
