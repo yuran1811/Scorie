@@ -6,10 +6,13 @@ import DocContainer from './doc/DocContainer';
 import DataContainer from './data/DataContainer';
 import AccountContainer from './account/AccountContainer';
 import SettingContainer from './setting/SettingContainer';
+import { useTranslation } from 'react-i18next';
 import { FC } from 'react';
 
 export const Panel: FC<DivProps> = ({ className }) => {
   const currentUser = useStore((s) => s.currentUser);
+
+  const { t } = useTranslation();
 
   const { active, setActive } = usePanel();
 
@@ -44,7 +47,7 @@ export const Panel: FC<DivProps> = ({ className }) => {
             />
           )}
           <div className="font-bold mx-6 text-[4.5rem] text-center mobile:text-left line-clamp-1">
-            {currentUser?.displayName ? currentUser.displayName : 'Guest'}
+            {currentUser?.displayName ? currentUser.displayName : t('guest')}
           </div>
         </div>
 

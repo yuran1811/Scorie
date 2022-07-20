@@ -2,6 +2,7 @@ import { DivProps } from '@/shared';
 import { Button } from './Button';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next';
 
 interface ConfirmBoxProps {
   content?: string;
@@ -16,6 +17,8 @@ export const ConfirmBox: FC<ConfirmBoxProps & DivProps> = ({
   actionWhenConfirm,
   ...otherProps
 }) => {
+  const { t } = useTranslation();
+
   return createPortal(
     <div
       {...otherProps}
@@ -26,7 +29,7 @@ export const ConfirmBox: FC<ConfirmBoxProps & DivProps> = ({
     >
       <div>
         <div className="font-bold text-[3rem] tablet:text-[3.4rem] text-center text-ctbg p-4 mb-4">
-          {content || 'Confirm action ?'}
+          {t(content || 'Confirm action ?')}
         </div>
         <div className="flexcenter flex-wrap">
           <Button

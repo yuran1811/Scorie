@@ -11,11 +11,14 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const SignIn: FC = () => {
   const [isAlertOpened, setIsAlertOpened] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const { t } = useTranslation();
 
   const handleSignIn = (provider: AuthProvider) => {
     setLoading(true);
@@ -42,7 +45,7 @@ export const SignIn: FC = () => {
           onClick={() => handleSignIn(new GoogleAuthProvider())}
         >
           <GoogleIcon width="35" height="35" />
-          <span className="font-semibold px-4">Sign in with Google</span>
+          <span className="font-semibold px-4">{t('sign in with')} Google</span>
         </LogInButton>
 
         <LogInButton
@@ -51,7 +54,7 @@ export const SignIn: FC = () => {
           onClick={() => handleSignIn(new FacebookAuthProvider())}
         >
           <FacebookIcon width="35" height="35" />
-          <span className="font-semibold px-4">Sign in with Facebook</span>
+          <span className="font-semibold px-4">{t('sign in with')} Facebook</span>
         </LogInButton>
       </div>
 

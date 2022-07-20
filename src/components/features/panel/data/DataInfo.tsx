@@ -34,7 +34,7 @@ export const DataInfo: FC = () => {
     <div className="flexcentercol !justify-start mt-[2rem] p-3 pb-8 w-full h-[80%] overflow-x-hidden overflow-y-auto">
       <div className="flexcenter w-full">
         <a href={backupData} download={backupData ? 'scorie_backup.json' : ''}>
-          <Button className="!text-[3rem]" content={t('get backup data')}>
+          <Button className="!text-[3rem]" content="Get backup data">
             <DownloadIcon className="m-4" width="50" height="50" />
           </Button>
         </a>
@@ -45,7 +45,13 @@ export const DataInfo: FC = () => {
           <div className="font-semibold text-[2.8rem] text-center p-4">
             {t('import data from backup file')}
           </div>
-          <Input className="cursor-pointer" type="file" accept=".json" onChange={handleChange} />
+          <Input
+            className="cursor-pointer"
+            type="file"
+            accept=".json"
+            title="log in"
+            onChange={handleChange}
+          />
         </div>
       </div>
     </div>

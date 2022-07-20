@@ -68,7 +68,7 @@ export const SettingInfo: FC = () => {
           }
         >
           {t(settings.showStartUpLogo ? 'show startup logo' : 'hide startup logo')}
-          <div className="!font-normal !text-[2.3rem] text-center">Click to change</div>
+          <div className="!font-normal !text-[2.3rem] text-center">{t('click to change')}</div>
         </div>
       </div>
     </div>

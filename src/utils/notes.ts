@@ -6,7 +6,7 @@ export const filterSectionList = (
   list: NoteListType[] | null,
   filter: NoteListFilterType | null,
   group?: string
-) => {
+): any[] => {
   if (list === null || filter === null) return [];
 
   return [...list]

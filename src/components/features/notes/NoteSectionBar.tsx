@@ -75,7 +75,7 @@ export const NoteSectionBar = () => {
   return (
     <div className="w-full my-[2rem] mb-[7rem]">
       <div className="w-full flexcenter flex-wrap px-4">
-        <Title Icon={NoteIcon} content="Notes" />
+        <Title Icon={NoteIcon} content="Note" />
         <div className="flexcenter flex-wrap px-6 py-8">
           <Tooltip
             content="Filter done note"

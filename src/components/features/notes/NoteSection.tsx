@@ -5,6 +5,7 @@ import { filterSectionList } from '@/utils';
 import { NoteItem } from './NoteItem';
 import { FC, memo, useCallback, useEffect, useState } from 'react';
 import { ReactSortable } from 'react-sortablejs';
+import { useTranslation } from 'react-i18next';
 
 const sortableConfig = {
   animation: 200,
@@ -17,6 +18,8 @@ const sortableConfig = {
 
 export const NoteSection: FC<NoteSectionProps> = (props) => {
   const { viewMode, filter, notes, orderList } = props;
+
+  const { t } = useTranslation();
 
   const currentUser = useStore((s) => s.currentUser);
 
@@ -77,7 +80,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
   return (
     <div className="max-w-[100rem] w-full mx-auto my-12 pb-12">
       <div className="w-[20rem] mx-auto mb-8 font-semibold tablet:text-[4.5rem] text-[3.5rem] text-center border-b-[0.2rem] border-indigo-100">
-        Pinned
+        {t('pinned')}
       </div>
       <ReactSortable
         {...sortableConfig}
@@ -95,7 +98,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
       </ReactSortable>
 
       <div className="w-[20rem] mx-auto mt-[7rem] mb-8 font-semibold tablet:text-[4.5rem] text-[3.5rem] text-center border-b-[0.2rem] border-indigo-100">
-        Others
+        {t('others')}
       </div>
       <ReactSortable
         {...sortableConfig}

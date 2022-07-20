@@ -6,7 +6,7 @@ export default {
     en: 'Welcome',
   },
   guest: {
-    vi: 'Scorier',
-    en: 'Scorier',
+    vi: 'Ẩn sĩ',
+    en: 'Scorie Guest',
   },
 } as TranslationType;

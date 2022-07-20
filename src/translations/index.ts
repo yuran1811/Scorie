@@ -1,8 +1,14 @@
 import BannerTranslation from './banner';
 import PanelTranslation from './panel';
-import UtilitiesTranslation from './panel';
+import TooltipTranslation from './tooltip';
+import UtilitiesTranslation from './utilities';
 
-const TRANSLATIONS = [BannerTranslation, PanelTranslation, UtilitiesTranslation];
+const TRANSLATIONS = [
+  BannerTranslation,
+  PanelTranslation,
+  TooltipTranslation,
+  UtilitiesTranslation,
+];
 
 const getTranslations = (lang: string) => {
   const translations = {} as {
@@ -15,7 +21,7 @@ const getTranslations = (lang: string) => {
     })
   );
 
-  console.log(translations);
+  // console.log(translations);
 
   return translations;
 };

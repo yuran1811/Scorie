@@ -2,8 +2,14 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import dns from 'dns';
+
+dns.setDefaultResultOrder('verbatim');
 
 export default defineConfig({
+  server: {
+    port: 1811,
+  },
   plugins: [
     react(),
     tsconfigPaths(),

@@ -33,7 +33,7 @@ export const FeatureSection: FC = () => {
           title="Note"
           onClick={() => navigate('/notes')}
         >
-          <div className="py-4 px-6 mobile:p-8">Ideal place to keep your mind on</div>
+          <div className="py-4 px-6 mobile:p-8">{t('ideal place to keep your mind on')}</div>
         </FeatureCard>
 
         <FeatureCard
@@ -41,7 +41,7 @@ export const FeatureSection: FC = () => {
           title="Score"
           onClick={() => navigate('/subjects')}
         >
-          <div className="py-4 px-6 mobile:p-8">Manage all your score records</div>
+          <div className="py-4 px-6 mobile:p-8">{t('manage all your score records')}</div>
         </FeatureCard>
 
         <FeatureCard
@@ -49,7 +49,7 @@ export const FeatureSection: FC = () => {
           title="Analytics"
           onClick={() => navigate('/analytics')}
         >
-          <div className="py-4 px-6 mobile:p-8">Variant useful charts</div>
+          <div className="py-4 px-6 mobile:p-8">{t('variant useful charts')}</div>
         </FeatureCard>
 
         <FeatureCard
@@ -57,7 +57,9 @@ export const FeatureSection: FC = () => {
           title="Tools"
           onClick={() => navigate('/tools')}
         >
-          <div className="py-4 px-6 mobile:p-8">Helpful tools make school life be better</div>
+          <div className="py-4 px-6 mobile:p-8">
+            {t('helpful tools make school life be better')}
+          </div>
         </FeatureCard>
 
         {/* {featureRoutes.map(({ path, color, content, title }) => (

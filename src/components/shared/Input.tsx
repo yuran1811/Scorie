@@ -1,5 +1,6 @@
 import { InputProps } from '@/shared';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface CustomInputProps {
   formHandle?: any;
@@ -13,15 +14,30 @@ export const Input: FC<CustomInputProps & InputProps> = ({
   hasWrapper,
   formHandle,
   className,
+  placeholder,
   ...otherProps
-}) => (
-  <>
-    {!!hasWrapper ? (
-      <div className="flexcenter w-full">
-        <input {...otherProps} {...formHandle} className={`${className || ''} ${inputClass}`} />
-      </div>
-    ) : (
-      <input {...otherProps} {...formHandle} className={`${className || ''} ${inputClass}`} />
-    )}
-  </>
-);
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      {!!hasWrapper ? (
+        <div className="flexcenter w-full">
+          <input
+            {...otherProps}
+            {...formHandle}
+            placeholder={t(placeholder?.toLowerCase() || '')}
+            className={`${className || ''} ${inputClass}`}
+          />
+        </div>
+      ) : (
+        <input
+          {...otherProps}
+          {...formHandle}
+          placeholder={t(placeholder?.toLowerCase() || '')}
+          className={`${className || ''} ${inputClass}`}
+        />
+      )}
+    </>
+  );
+};
