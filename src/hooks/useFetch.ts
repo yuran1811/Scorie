@@ -1,4 +1,4 @@
-import axiosAPI from '@shared/axios';
+import getAxiosInst from '@shared/axios';
 import { useEffect, useState } from 'react';
 
 export const useFetch = <T>(url: string) => {
@@ -12,7 +12,7 @@ export const useFetch = <T>(url: string) => {
     (async () => {
       try {
         setLoading(true);
-        const { data } = await axiosAPI.get(url, { signal: controller.signal });
+        const { data } = await getAxiosInst().get(url, { signal: controller.signal });
         setData(data);
       } catch (e) {
         setErr(e);

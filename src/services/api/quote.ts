@@ -1,6 +1,6 @@
 import { QuoteType } from '@/hooks';
 import { QuoteListType } from '@/shared';
-import axiosAPI from '@shared/axios';
+import getAxiosInst from '@shared/axios';
 import { AxiosError, AxiosRequestConfig } from 'axios';
 
 const { root, tags, maxLength } = {
@@ -26,7 +26,7 @@ const { root, tags, maxLength } = {
 
 export const getRandomQuote = async (config?: AxiosRequestConfig) => {
   try {
-    const data: QuoteType = await axiosAPI.get(
+    const data: QuoteType = await getAxiosInst().get(
       `${root}/random?tags=${tags.join('|')}&maxLength=${maxLength}`
     );
     return data;
@@ -39,7 +39,7 @@ export const getRandomQuote = async (config?: AxiosRequestConfig) => {
 
 export const getQuotes = async (page: number, config?: AxiosRequestConfig) => {
   try {
-    const data = await axiosAPI.get<any, QuoteListType>(
+    const data = await getAxiosInst().get<any, QuoteListType>(
       `${root}/quotes?tags=${tags.join('|')}&maxLength=${maxLength}&page=${page + 1}`
     );
     return { data, err: '' };
