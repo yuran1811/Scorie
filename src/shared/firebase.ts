@@ -4,9 +4,8 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { enableIndexedDbPersistence, getFirestore } from 'firebase/firestore';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-import { Dispatch, SetStateAction } from 'react';
 
-const { webPushCertificate, ...firebaseConfig } = FIREBASE_CONFIG;
+const { webPushCertificate, cloudMessagingServerKey, ...firebaseConfig } = FIREBASE_CONFIG;
 
 export const firebaseApp = initializeApp(firebaseConfig);
 

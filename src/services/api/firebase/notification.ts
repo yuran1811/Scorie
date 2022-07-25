@@ -2,7 +2,7 @@ import { firebaseConfig } from '@/config';
 import getAxiosInst from '@shared/axios';
 import { DEPLOY_URL, HOST_URL } from '@shared/constants';
 
-const { webPushCertificate } = firebaseConfig;
+const { cloudMessagingServerKey } = firebaseConfig;
 
 export const sendNotification = ({
   FCMToken,
@@ -17,7 +17,7 @@ export const sendNotification = ({
 }) => {
   getAxiosInst({
     headers: {
-      Authorization: `key=${webPushCertificate}`,
+      Authorization: `key=${cloudMessagingServerKey}`,
       'content-type': 'application/json',
     },
   }).post('https://fcm.googleapis.com/fcm/send', {
