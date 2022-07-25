@@ -13,7 +13,7 @@ export const ModalBoxHeader: FC<DivProps> = ({ className, onClick, children }) =
     </div>
 
     <CloseIcon
-      className="cursor-pointer absolute right-3 tablet:right-6 top-[50%] translate-y-[-50%] mx-4"
+      className="cursor-pointer absolute right-3 tablet:right-6 top-1/2 -translate-y-1/2 mx-4"
       width="50"
       height="50"
       onClick={onClick}

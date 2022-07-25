@@ -1,4 +1,4 @@
-import { axiosConfig } from '@/config';
+import { axiosConfig as AxiosDefaultConfig } from '@/config';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { auth } from './firebase';
 
@@ -30,9 +30,13 @@ const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   return Promise.reject(error);
 };
 
-const axiosAPI = axios.create(axiosConfig);
+const getAxiosInst = (axiosConfig?: AxiosRequestConfig) => {
+  const newAxios = axios.create(axiosConfig || AxiosDefaultConfig);
 
-axiosAPI.interceptors.request.use(onRequest, onRequestError);
-axiosAPI.interceptors.response.use(onResponse, onResponseError);
+  newAxios.interceptors.request.use(onRequest, onRequestError);
+  newAxios.interceptors.response.use(onResponse, onResponseError);
 
-export default axiosAPI;
+  return newAxios;
+};
+
+export default getAxiosInst;

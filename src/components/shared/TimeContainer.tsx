@@ -18,7 +18,7 @@ export const TimeContainer: FC<TimeContainerProps & DivProps> = ({ obj, classNam
     <div
       className={`${
         className || ''
-      } flexcentercol font-bold text-[2.6rem] mobile:text-[3rem] text-ctbg px-5`}
+      } flexcentercol font-bold text-[2.5rem] mobile:text-[3rem] text-ctbg px-5`}
       {...props}
     >
       {obj?.createdAt && (

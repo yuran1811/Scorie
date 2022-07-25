@@ -7,9 +7,7 @@ import dns from 'dns';
 dns.setDefaultResultOrder('verbatim');
 
 export default defineConfig({
-  server: {
-    port: 1811,
-  },
+  server: { port: 1811 },
   plugins: [
     react(),
     tsconfigPaths(),

@@ -65,7 +65,7 @@ export const SelectInput = (props: InputProps<Option, false>) => (
 export const SelectMenu = ({ children, ...otherProps }: MenuProps<Option, false>) => (
   <components.Menu
     {...otherProps}
-    className="!relative !top-[50%] !max-w-[25rem] !overflow-y-auto px-4 py-4 !rounded-[2.5rem]"
+    className="!relative !top-1/2 !max-w-[25rem] !overflow-y-auto px-4 py-4 !rounded-[2.5rem]"
   >
     {children}
   </components.Menu>
@@ -123,7 +123,7 @@ export const SelectIndicatorSeparator = ({
     <span
       {...innerProps}
       style={{ display: 'none' }}
-      className="w-[1rem] h-[1rem] rounded-[50%] bg-white"
+      className="w-[1rem] h-[1rem] rounded-full bg-white"
     />
   );
 };

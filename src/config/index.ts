@@ -12,6 +12,7 @@ export const firebaseConfig = {
   messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID as string,
   projectId: import.meta.env.VITE_PROJECTID as string,
   storageBucket: import.meta.env.VITE_STORAGEBUCKET as string,
+  webPushCertificate: import.meta.env.VITE_WEB_PUSH_CERTIFICATE as string,
 };
 
 export const routes = {

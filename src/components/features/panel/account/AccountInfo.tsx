@@ -72,7 +72,7 @@ export const AccountInfo: FC = () => {
   return (
     <>
       {!currentUser?.emailVerified ? (
-        <div className="w-full h-[80%] scrollY">
+        <div className="w-full h-4/5 scrollY">
           <NotVerifyEmail />
         </div>
       ) : (
@@ -85,7 +85,7 @@ export const AccountInfo: FC = () => {
           <div
             className={`${
               loading ? '!hidden' : ''
-            }  flexcentercol !justify-start mt-[0.6rem] h-[80%] p-3 pb-16 scrollY`}
+            }  flexcentercol !justify-start mt-[0.6rem] h-4/5 p-3 pb-16 scrollY`}
           >
             <form className="mb-12" onSubmit={handleSubmit(onSubmit)}>
               <Input
@@ -155,7 +155,7 @@ export const AccountInfo: FC = () => {
               <ErrorMessage content={changePWMes.message} />
             )}
             {!messageExpired && changePWMes.type === 'success' && (
-              <div className="text-[3.2rem] text-center w-full">{changePWMes.message}</div>
+              <div className="text-[3rem] text-center w-full">{changePWMes.message}</div>
             )}
           </div>
         </>

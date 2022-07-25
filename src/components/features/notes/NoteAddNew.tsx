@@ -99,7 +99,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 
       {status.type === 'errors' && (
         <ErrorMessage
-          className="mx-auto py-5 w-[80%] text-[3rem] text-center"
+          className="mx-auto py-5 w-4/5 text-[3rem] text-center"
           content={status.message}
         />
       )}
@@ -126,7 +126,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 
         <TextArea defaultValue="" className="font-normal" formHandle={{ ...register('data') }} />
 
-        <Button className="!text-[3.2rem]" type="submit" content="Add" />
+        <Button className="!text-[3rem]" type="submit" content="Add" />
       </form>
     </ModalBox>
   );

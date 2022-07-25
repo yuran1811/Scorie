@@ -3,9 +3,19 @@ import { NotUseFilterIcon } from './NotUseFilter';
 import { UseFilterIcon } from './UseFilterIcon';
 
 interface FilterIconProps {
-	isUsed: boolean;
+  isUsed: boolean;
 }
 
-export const FilterIcon: FC<FilterIconProps & SVGProps<SVGSVGElement>> = ({ fill, isUsed, ...props }) => (
-	<>{isUsed ? <UseFilterIcon fill={fill} {...props} /> : <NotUseFilterIcon fill={fill} {...props} />}</>
+export const FilterIcon: FC<FilterIconProps & SVGProps<SVGSVGElement>> = ({
+  fill,
+  isUsed,
+  ...props
+}) => (
+  <>
+    {isUsed ? (
+      <UseFilterIcon fill={fill} {...props} />
+    ) : (
+      <NotUseFilterIcon fill={fill} {...props} />
+    )}
+  </>
 );

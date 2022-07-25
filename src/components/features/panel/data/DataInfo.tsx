@@ -31,7 +31,7 @@ export const DataInfo: FC = () => {
   };
 
   return (
-    <div className="flexcentercol !justify-start mt-[2rem] p-3 pb-8 w-full h-[80%] overflow-x-hidden overflow-y-auto">
+    <div className="flexcentercol !justify-start mt-[2rem] p-3 pb-8 w-full h-4/5 overflow-x-hidden overflow-y-auto">
       <div className="flexcenter w-full">
         <a href={backupData} download={backupData ? 'scorie_backup.json' : ''}>
           <Button className="!text-[3rem]" content="Get backup data">
@@ -42,7 +42,7 @@ export const DataInfo: FC = () => {
 
       <div className="flexcenter w-full mt-12">
         <div>
-          <div className="font-semibold text-[2.8rem] text-center p-4">
+          <div className="font-semibold text-[2.5rem] text-center p-4">
             {t('import data from backup file')}
           </div>
           <Input

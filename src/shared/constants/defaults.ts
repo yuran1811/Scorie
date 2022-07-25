@@ -19,7 +19,7 @@ export const QUOTES_STORED_DEFAULT = {
 export const MAX_SCORE_RECENT_LTH = 4;
 
 export const ToastDefaultConfig: ToastOptions = {
-  className: 'text-[2.4rem] text-center',
+  className: 'text-[2.5rem] text-center',
   autoClose: 1500,
   closeOnClick: true,
   draggable: true,

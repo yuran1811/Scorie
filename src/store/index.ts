@@ -29,6 +29,9 @@ interface StoreType {
 
   locale: string;
   setLocale: (data: string) => void;
+
+  FCMToken: string;
+  setFCMToken: (token: string) => void;
 }
 
 export const useStore = create<StoreType>()(
@@ -52,6 +55,9 @@ export const useStore = create<StoreType>()(
 
         locale: 'vi',
         setLocale: (locale: string) => set({ locale }),
+
+        FCMToken: '',
+        setFCMToken: (FCMToken: string) => set({ FCMToken }),
       }),
       { name: STORE_NAME }
     )

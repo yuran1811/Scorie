@@ -17,11 +17,11 @@ export const SearchBar: FC<SearchBarProps & InputProps> = ({ setSearchOpts, onCh
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="flexcenter relative w-[80%] h-[6rem] mb-8">
-      <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+    <div className="flexcenter relative w-4/5 h-[6rem] mb-8">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <input
           ref={inputRef}
-          className={`outline-none border-[0.4rem] border-solid border-white text-[3rem]
+          className={`outline-none border-4 border-solid border-white text-[3rem]
 					${
             isActive
               ? 'w-[28rem] tablet:w-[36rem] h-[6rem] rounded-none py-[0.8rem] pl-[2rem] pr-[5.5rem]'

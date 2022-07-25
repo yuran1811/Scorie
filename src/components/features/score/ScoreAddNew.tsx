@@ -118,7 +118,7 @@ export const ScoreAddNew: FC<ScoreAddNewProps & DivProps> = ({ subject, onClick 
           <ErrorMessage className="text-[3rem]" content={errors.type.message || ''} />
         )}
 
-        <Button className="!text-[3.2rem]" type="submit" content="Add" />
+        <Button className="!text-[3rem]" type="submit" content="Add" />
       </form>
     </ModalBox>
   );

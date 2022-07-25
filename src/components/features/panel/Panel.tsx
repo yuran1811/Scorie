@@ -51,7 +51,7 @@ export const Panel: FC<DivProps> = ({ className }) => {
           </div>
         </div>
 
-        <div className="z-[1] flexcentercol !justify-start w-full h-[80%] pb-12 my-4 text-[4rem] scrollY">
+        <div className="z-[1] flexcentercol !justify-start w-full h-4/5 pb-12 my-4 text-[4rem] scrollY">
           <AccountContainer />
           <DataContainer />
           <SettingContainer />

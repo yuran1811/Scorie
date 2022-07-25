@@ -7,6 +7,6 @@ export const DocItemContent: FC = ({ children }) => (
       e.stopPropagation();
     }}
   >
-    <ul className="list-disc list-inside text-[2.6rem]">{children}</ul>
+    <ul className="list-disc list-inside text-[2.5rem]">{children}</ul>
   </div>
 );

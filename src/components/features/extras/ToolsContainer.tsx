@@ -1,10 +1,11 @@
-import i18next from 'i18next';
-import { useAppStatus } from '@/contexts';
-import { ToastDefaultConfig } from '@/shared';
+import { sendNotification } from '@/services';
+import { getFCMToken, onMessageListener, ToastDefaultConfig } from '@/shared';
 import { useStore } from '@/store';
-import { getNotification } from '@/utils';
+import { getFirebaseErr, getNotification } from '@/utils';
 import { CloudCheckIcon, EnLocale, NotificationIcon, ViLocale } from '@cpns/icons';
 import { Tooltip } from '@cpns/shared';
+import { MessagePayload } from 'firebase/messaging';
+import i18next from 'i18next';
 import { FC, useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -15,10 +16,10 @@ interface ToolsContainerProps {
 export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, ...otherPropss }) => {
   const locale = useStore((s) => s.locale);
   const setLocale = useStore((s) => s.setLocale);
+  const FCMToken = useStore((s) => s.FCMToken);
+  const setFCMToken = useStore((s) => s.setFCMToken);
 
   const [notificationActive, setNotificationActive] = useState(false);
-
-  const { setStatus } = useAppStatus();
 
   const changeLanguage = (lang: string) => {
     i18next.changeLanguage(lang);
@@ -35,7 +36,34 @@ export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, ...otherProp
 
     if (permission === 'granted') {
       setNotificationActive(true);
-      getNotification('Allowed Scorie to send notification !', { body: 'Created by Scorie' });
+
+      getFCMToken()
+        .then((token) => {
+          token && setFCMToken(token);
+          setTimeout(() => {
+            sendNotification({
+              FCMToken,
+              title: 'You have allowed Scorie to send notification !',
+              body: 'Created by Scorie',
+            });
+          }, 500);
+        })
+        .catch((err) => {
+          console.log(getFirebaseErr(err));
+        });
+
+      onMessageListener()
+        .then((payload) => {
+          if (!payload) return;
+
+          const { notification } = payload as MessagePayload;
+          if (!notification) return;
+
+          const { body, image, title } = notification;
+
+          getNotification(title || '', { body, image } as NotificationOptions);
+        })
+        .catch((err) => console.log('failed: ', err));
     }
 
     if (permission === 'denied') {
@@ -47,19 +75,6 @@ export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, ...otherProp
         autoClose: 5000,
         position: 'top-center',
       });
-      // setStatus &&
-      // 	setStatus((s) => ({
-      // 		...s,
-      // 		type: 'error',
-      // 		openModal: true,
-      // 		Content: (
-      // 			<div className='flexcentercol px-6 pb-7'>
-      // 				<div className='w-[80%] text-[3rem] text-indigo-900 text-center mobile:px-8 pb-8'>
-      // 					Please enable notification on this site to use notification feature
-      // 				</div>
-      // 			</div>
-      // 		),
-      // 	}));
     }
   };
 

@@ -3,9 +3,15 @@ import { AZDownIcon } from './AZDown';
 import { AZUpIcon } from './AZUp';
 
 interface AZIconProps {
-	dirMode: string;
+  dirMode: string;
 }
 
 export const AZIcon: FC<AZIconProps & SVGProps<SVGSVGElement>> = ({ fill, dirMode, ...props }) => (
-	<>{dirMode === 'desc' ? <AZDownIcon fill={fill} {...props} /> : <AZUpIcon fill={fill} {...props} />}</>
+  <>
+    {dirMode === 'desc' ? (
+      <AZDownIcon fill={fill} {...props} />
+    ) : (
+      <AZUpIcon fill={fill} {...props} />
+    )}
+  </>
 );

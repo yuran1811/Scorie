@@ -23,7 +23,10 @@
 
 ### Todo
 
-- Push notification (PWA)
 - Translate:
   - Toast
   - Error
+
+### References
+
+- [**_Push Notification with FCM_**](https://blog.logrocket.com/push-notifications-react-firebase/)

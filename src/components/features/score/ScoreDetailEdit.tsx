@@ -190,7 +190,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
           <ErrorMessage className="text-[3rem]" content={errors.type.message || ''} />
         )}
 
-        <Button className="!text-[3.2rem]" type="submit" content="Update" />
+        <Button className="!text-[3rem]" type="submit" content="Update" />
       </form>
     </ModalBox>
   );

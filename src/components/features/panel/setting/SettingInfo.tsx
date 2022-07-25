@@ -23,11 +23,11 @@ export const SettingInfo: FC = () => {
   };
 
   return (
-    <div className="flexcentercol !justify-start mt-8 p-3 pb-8 w-full h-[80%] overflow-x-hidden overflow-y-auto">
+    <div className="flexcentercol !justify-start mt-8 p-3 pb-8 w-full h-4/5 overflow-x-hidden overflow-y-auto">
       <div className="w-full">
         <div>
           <form className="mt-8 flexcentercol" onSubmit={handleSubmit(onSubmit)}>
-            <span className="font-bold text-[3.8rem] text-center">
+            <span className="font-bold text-[3.5rem] text-center">
               {t('score format')} (9.xxxx)
             </span>
             <div className="flexcenter flex-wrap">
@@ -59,7 +59,7 @@ export const SettingInfo: FC = () => {
         </div>
 
         <div
-          className="cursor-pointer font-bold !text-[3.8rem] text-center mt-12"
+          className="cursor-pointer font-bold !text-[3.5rem] text-center mt-12"
           onClick={() =>
             setSettings({
               ...settings,
@@ -68,7 +68,7 @@ export const SettingInfo: FC = () => {
           }
         >
           {t(settings.showStartUpLogo ? 'show startup logo' : 'hide startup logo')}
-          <div className="!font-normal !text-[2.3rem] text-center">{t('click to change')}</div>
+          <div className="!font-normal !text-[2.5rem] text-center">{t('click to change')}</div>
         </div>
       </div>
     </div>

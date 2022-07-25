@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { DivProps } from '@/shared';
 
-const dotStyle = `w-[1.6rem] h-[1.6rem] rounded-[50%] bg-current animate-threeDots`;
+const dotStyle = `w-[1.6rem] h-[1.6rem] rounded-full bg-current animate-threeDots`;
 
 export const ThreeDotsFade: FC<DivProps> = ({ className }) => (
   <div

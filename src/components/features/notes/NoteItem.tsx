@@ -62,7 +62,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
       <div
         className={`isAnimated cursor-pointer relative flexcentercol ${
           viewMode === 'list' ? 'w-full' : 'w-[20rem]'
-        } tablet:w-[24rem] max-h-[35rem] m-2 p-4 border-transparent hover:border-white border-[0.3rem] rounded-[2rem] group ${
+        } tablet:w-[24rem] max-h-[35rem] m-2 p-4 border-transparent hover:border-white border-[3px] rounded-[2rem] group ${
           !isShow && '!hidden'
         }`}
         style={noteStyle}
@@ -75,7 +75,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
         </div>
 
         <div className="w-full h-full overflow-y-hidden line-clamp-3">
-          <div className="font-bold text-center text-[2.4rem] tablet:text-[2.8rem] w-full line-clamp-1 p-2">
+          <div className="font-bold text-center text-[2.4rem] tablet:text-[2.5rem] w-full line-clamp-1 p-2">
             {title}
           </div>
           {data?.split &&
@@ -154,7 +154,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
                 shareNotify();
               }}
             >
-              <div className="absolute left-[1.3rem] animate-ping bg-sky-300 w-[2.6rem] h-[2.6rem] rounded-[50%]" />
+              <div className="absolute left-[1.3rem] animate-ping bg-sky-300 w-[2.6rem] h-[2.6rem] rounded-full" />
               <NodeShareIcon
                 {...toolProps}
                 className={`translate-x-[-2rem] delay-[20ms] ${toolClass} ${

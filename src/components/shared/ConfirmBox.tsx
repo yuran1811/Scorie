@@ -28,7 +28,7 @@ export const ConfirmBox: FC<ConfirmBoxProps & DivProps> = ({
       onClick={(e) => e.stopPropagation()}
     >
       <div>
-        <div className="font-bold text-[3rem] tablet:text-[3.4rem] text-center text-ctbg p-4 mb-4">
+        <div className="font-bold text-[3rem] tablet:text-[3.5rem] text-center text-ctbg p-4 mb-4">
           {t(content || 'default confirm')}
         </div>
         <div className="flexcenter flex-wrap">

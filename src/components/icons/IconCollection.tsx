@@ -12,6 +12,7 @@ import {
   DoubleCheckIcon,
   DownloadIcon,
   EditIcon,
+  EnLocale,
   GlobalIcon,
   GroupIcon,
   HashtagIcon,
@@ -40,9 +41,8 @@ import {
   ToolIcon,
   TrashIcon,
   UserIcon,
-  YinYangIcon,
-  EnLocale,
   ViLocale,
+  YinYangIcon,
 } from './index';
 
 const IconCollection = () => {

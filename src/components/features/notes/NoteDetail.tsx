@@ -208,7 +208,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         )}
 
         <TextArea
-          className="!text-[3rem] mobile:!text-[3.6rem] !max-w-full tablet:!max-w-[65rem] text-left px-6 !h-full"
+          className="!text-[3rem] mobile:!text-[3.5rem] !max-w-full tablet:!max-w-[65rem] text-left px-6 !h-full"
           style={noteStyle}
           defaultValue={data}
           formHandle={{ ...register('data') }}

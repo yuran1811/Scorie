@@ -1,2 +1,2 @@
-export * from './FlatLoading'
-export * from './ThreeDotsFade'
+export * from './FlatLoading';
+export * from './ThreeDotsFade';

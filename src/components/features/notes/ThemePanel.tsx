@@ -25,7 +25,7 @@ export const ThemePanel: FC<ThemePanelProps & DivProps> = ({
       <div
         key={key}
         style={{ color, backgroundColor: bg }}
-        className={`cursor-pointer w-[2.8rem] h-[2.8rem] m-2 rounded-[50%] border-[0.2rem] ${
+        className={`cursor-pointer w-[2.8rem] h-[2.8rem] m-2 rounded-full border-2 ${
           themeSelected === key ? 'border-red-400' : 'border-white'
         }`}
         onClick={() => setNewTheme(key)}
