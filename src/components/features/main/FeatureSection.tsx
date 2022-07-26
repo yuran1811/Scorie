@@ -1,10 +1,11 @@
 import { useStore } from '@/store';
+import { FC, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { NotVerifyEmail } from '../auth/NotVerifyEmail';
+import { TestimonialContainer } from '../testimonial/TestimonialContainer';
 import { FeatureCard } from './FeatureCard';
 import { WelcomBanner } from './WelcomBanner';
-import { FC, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
 export const FeatureSection: FC = () => {
   const currentUser = useStore((s) => s.currentUser);
@@ -61,18 +62,9 @@ export const FeatureSection: FC = () => {
             {t('helpful tools make school life be better')}
           </div>
         </FeatureCard>
-
-        {/* {featureRoutes.map(({ path, color, content, title }) => (
-					<FeatureCard
-						key={path}
-						className={`${color || ''}`}
-						title={title}
-						// onClick={() => navigate(`/${path}`)}
-					>
-						<div className='py-4 px-6 mobile:p-8'>{content}</div>
-					</FeatureCard>
-				))} */}
       </div>
+
+      <TestimonialContainer />
     </>
   );
 };

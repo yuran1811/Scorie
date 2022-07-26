@@ -47,7 +47,7 @@ export const ChartSectionBar: FC = () => {
 
   if (!scores.length)
     return (
-      <div className="flexcentercol relative w-full tablet:w-[70%] h-[30rem] mx-auto text-[4rem] mobile:text-[5rem] text-white">
+      <div className="flexcentercol !justify-start relative w-full tablet:w-[70%] mx-auto text-[4rem] mobile:text-[5rem] text-white">
         <div className="font-semibold text-center p-6">
           {t('add scores and the chart will be shown')}
         </div>

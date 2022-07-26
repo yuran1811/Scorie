@@ -13,12 +13,17 @@ import {
   DownloadIcon,
   EditIcon,
   EnLocale,
+  FacebookIcon,
+  FBMessengerIcon,
   GlobalIcon,
+  GoogleIcon,
   GroupIcon,
   HashtagIcon,
   IgnoreIcon,
   ImportantIcon,
   ImportIcon,
+  InfoIcon,
+  InstagramIcon,
   ListAllIcon,
   ListIcon,
   LogInIcon,
@@ -27,6 +32,7 @@ import {
   MessageIcon,
   NodeShareIcon,
   NoteIcon,
+  NotificationIcon,
   PaletteIcon,
   PinIcon,
   PlusIcon,
@@ -40,58 +46,67 @@ import {
   TagIcon,
   ToolIcon,
   TrashIcon,
+  UpvoteIcon,
   UserIcon,
   ViLocale,
   YinYangIcon,
+  
 } from './index';
 
 const IconCollection = () => {
   return (
     <div className="w-full flex flex-wrap items-start justify-center">
-      <AddIcon width="30" height="30" />
-      <AddressBookIcon width="30" height="30" />
-      <ArchiveIcon width="30" height="30" />
-      <BookIcon width="30" height="30" />
-      <BookmarkIcon width="30" height="30" />
-      <BulbIcon width="30" height="30" />
-      <ChartIcon width="30" height="30" />
-      <CloseIcon width="30" height="30" />
-      <DangerIcon width="30" height="30" />
-      <DoneIcon width="30" height="30" />
-      <DoubleCheckIcon width="30" height="30" />
-      <DownloadIcon width="30" height="30" />
-      <EditIcon width="30" height="30" />
-      <GlobalIcon width="30" height="30" />
-      <GroupIcon width="30" height="30" />
-      <HashtagIcon width="30" height="30" />
-      <IgnoreIcon width="30" height="30" />
-      <ImportantIcon width="30" height="30" />
-      <ImportIcon width="30" height="30" />
-      <ListAllIcon width="30" height="30" />
-      <ListIcon width="30" height="30" />
-      <LogInIcon width="30" height="30" />
-      <LogOutIcon width="30" height="30" />
-      <MenuIcon width="30" height="30" />
-      <MessageIcon width="30" height="30" />
-      <NodeShareIcon width="30" height="30" />
-      <NoteIcon width="30" height="30" />
-      <PaletteIcon width="30" height="30" />
-      <PinIcon width="30" height="30" />
-      <PlusIcon width="30" height="30" />
-      <ProgressIcon width="30" height="30" />
-      <QuoteIcon width="30" height="30" />
-      <ReactIcon width="30" height="30" />
-      <SearchIcon width="30" height="30" />
-      <SettingIcon width="30" height="30" />
-      <ShareIcon width="30" height="30" />
-      <StarIcon width="30" height="30" />
-      <TagIcon width="30" height="30" />
-      <ToolIcon width="30" height="30" />
-      <TrashIcon width="30" height="30" />
-      <UserIcon width="30" height="30" />
-      <YinYangIcon width="30" height="30" />
-      <EnLocale width="30" height="30" />
-      <ViLocale width="30" height="30" />
+      <AddIcon className="icon-test" width="30" height="30" />
+      <AddressBookIcon className="icon-test" width="30" height="30" />
+      <ArchiveIcon className="icon-test" width="30" height="30" />
+      <BookIcon className="icon-test" width="30" height="30" />
+      <BookmarkIcon className="icon-test" width="30" height="30" />
+      <BulbIcon className="icon-test" width="30" height="30" />
+      <ChartIcon className="icon-test" width="30" height="30" />
+      <CloseIcon className="icon-test" width="30" height="30" />
+      <DangerIcon className="icon-test" width="30" height="30" />
+      <DoneIcon className="icon-test" width="30" height="30" />
+      <DoubleCheckIcon className="icon-test" width="30" height="30" />
+      <DownloadIcon className="icon-test" width="30" height="30" />
+      <EditIcon className="icon-test" width="30" height="30" />
+      <GlobalIcon className="icon-test" width="30" height="30" />
+      <GroupIcon className="icon-test" width="30" height="30" />
+      <HashtagIcon className="icon-test" width="30" height="30" />
+      <IgnoreIcon className="icon-test" width="30" height="30" />
+      <ImportantIcon className="icon-test" width="30" height="30" />
+      <ImportIcon className="icon-test" width="30" height="30" />
+      <ListAllIcon className="icon-test" width="30" height="30" />
+      <ListIcon className="icon-test" width="30" height="30" />
+      <LogInIcon className="icon-test" width="30" height="30" />
+      <LogOutIcon className="icon-test" width="30" height="30" />
+      <MenuIcon className="icon-test" width="30" height="30" />
+      <MessageIcon className="icon-test" width="30" height="30" />
+      <NodeShareIcon className="icon-test" width="30" height="30" />
+      <NoteIcon className="icon-test" width="30" height="30" />
+      <PaletteIcon className="icon-test" width="30" height="30" />
+      <PinIcon className="icon-test" width="30" height="30" />
+      <PlusIcon className="icon-test" width="30" height="30" />
+      <ProgressIcon className="icon-test" width="30" height="30" />
+      <QuoteIcon className="icon-test" width="30" height="30" />
+      <ReactIcon className="icon-test" width="30" height="30" />
+      <SearchIcon className="icon-test" width="30" height="30" />
+      <SettingIcon className="icon-test" width="30" height="30" />
+      <ShareIcon className="icon-test" width="30" height="30" />
+      <StarIcon className="icon-test" width="30" height="30" />
+      <TagIcon className="icon-test" width="30" height="30" />
+      <ToolIcon className="icon-test" width="30" height="30" />
+      <TrashIcon className="icon-test" width="30" height="30" />
+      <UserIcon className="icon-test" width="30" height="30" />
+      <YinYangIcon className="icon-test" width="30" height="30" />
+      <EnLocale className="icon-test" width="30" height="30" />
+      <ViLocale className="icon-test" width="30" height="30" />
+      <UpvoteIcon className="icon-test" width="30" height="30" />
+      <NotificationIcon active className="icon-test" width="30" height="30" />
+      <InstagramIcon className="icon-test" width="30" height="30" />
+      <GoogleIcon className="icon-test" width="30" height="30" />
+      <InfoIcon className="icon-test" width="30" height="30" />
+      <FBMessengerIcon className="icon-test" width="30" height="30" />
+      <FacebookIcon className="icon-test" width="30" height="30" />
     </div>
   );
 };

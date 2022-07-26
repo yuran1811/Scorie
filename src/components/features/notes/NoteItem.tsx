@@ -16,6 +16,7 @@ import { ThemePanel } from './ThemePanel';
 import Tippy from '@tippyjs/react/headless';
 import { FC, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const toolClass = 'isAnimated m-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100';
 const toolProps = { width: '30', height: '30', fill: 'white' };
@@ -26,13 +27,15 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 
   const currentUser = useStore((s) => s.currentUser);
 
+  const { t } = useTranslation();
+
   const [openTheme, setOpenTheme] = useState(false);
   const [openDetail, setOpenDetail] = useState<boolean>(false);
   const [newTheme, setNewTheme] = useState(theme || 'default');
   const [noteOpts, setNoteOpts] = useState({ isDone, isInProgress, isArchived, isPinned });
 
   const shareNotify = () =>
-    toast.success('Copy to clipboard !', {
+    toast.success(t('copy to clipboard'), {
       ...ToastDefaultConfig,
       toastId: 'copy-success',
     });

@@ -1,5 +1,6 @@
 import { ToastDefaultConfig } from '@/shared';
 import { toast } from 'react-toastify';
+import { t } from 'i18next';
 import { registerSW } from 'virtual:pwa-register';
 
 window.addEventListener('load', () => {
@@ -7,7 +8,7 @@ window.addEventListener('load', () => {
 
   window.addEventListener('online', () => {
     if (!isAppOnline) {
-      toast.info('The connectivity is back, sync in progress...', {
+      toast.info(t('the connectivity is back, sync in progress'), {
         ...ToastDefaultConfig,
         autoClose: 4000,
         position: 'top-center',
@@ -31,7 +32,7 @@ window.addEventListener('load', () => {
 
 export const updateSW = registerSW({
   onNeedRefresh() {
-    toast.info('New content is available! Refresh to get the latest changes.', {
+    toast.info(t('new content is available'), {
       ...ToastDefaultConfig,
       autoClose: 4000,
       position: 'top-center',
@@ -41,14 +42,14 @@ export const updateSW = registerSW({
     });
   },
   onOfflineReady() {
-    toast.info('🚀 Content is cached for offline use.', {
+    toast.info(t('content is cached'), {
       ...ToastDefaultConfig,
       autoClose: 4000,
       position: 'top-center',
     });
   },
   onRegisterError(error) {
-    toast.error('Cannot regist service workers. Please try again!', {
+    toast.error(t('cannot regist sw'), {
       ...ToastDefaultConfig,
       autoClose: 4000,
       position: 'top-center',

@@ -19,7 +19,7 @@ export const TextArea: FC<TextAreaProps & DivProps> = ({
       {...formHandle}
       className={`${
         className || ''
-      } text-[3.5rem] text-white bg-ctbg w-full max-w-[32rem] my-[0.5rem] px-[2rem] py-[1rem] outline-none border-[0.5rem] border-solid border-transparent rounded-[2.5rem] isAnimated focus:border-current`}
+      } text-[3rem] text-white bg-ctbg w-full max-w-[32rem] my-[0.5rem] px-[2rem] py-[1rem] outline-none border-[0.5rem] border-solid border-transparent rounded-[2.5rem] transition-colors focus:border-current`}
       placeholder={t('content')}
     />
   );

@@ -7,6 +7,7 @@ import { Tooltip } from '@cpns/shared';
 import { MessagePayload } from 'firebase/messaging';
 import i18next from 'i18next';
 import { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 interface ToolsContainerProps {
@@ -19,6 +20,8 @@ export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, ...otherProp
   const FCMToken = useStore((s) => s.FCMToken);
   const setFCMToken = useStore((s) => s.setFCMToken);
 
+  const { t } = useTranslation();
+
   const [notificationActive, setNotificationActive] = useState(false);
 
   const changeLanguage = (lang: string) => {
@@ -26,54 +29,63 @@ export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, ...otherProp
     setLocale(lang);
   };
 
+  const notificationAction = () => {
+    setNotificationActive(true);
+
+    getFCMToken()
+      .then((token) => {
+        token && setFCMToken(token);
+        setTimeout(() => {
+          sendNotification({
+            FCMToken,
+            title: t('you have allowed scorie to send notification'),
+            body: t('created by scorie'),
+          });
+        }, 500);
+      })
+      .catch((err) => {
+        console.log(getFirebaseErr(err));
+      });
+
+    onMessageListener()
+      .then((payload) => {
+        if (!payload) return;
+
+        const { notification } = payload as MessagePayload;
+        if (!notification) return;
+
+        const { body, image, title } = notification;
+
+        getNotification(title || '', { body, image } as NotificationOptions);
+      })
+      .catch((err) => console.log('failed: ', err));
+  };
+
   const notificationHandle = () => {
     if (!('Notification' in window)) {
-      alert('This browser does not support desktop notification');
+      toast.warn(t('this browser does not support desktop notification'), {
+        ...ToastDefaultConfig,
+        toastId: 'notsupport-noti',
+        autoClose: 4000,
+        position: 'top-center',
+      });
       return;
     }
 
-    const { permission } = Notification;
+    const { permission, requestPermission } = Notification;
 
-    if (permission === 'granted') {
-      setNotificationActive(true);
-
-      getFCMToken()
-        .then((token) => {
-          token && setFCMToken(token);
-          setTimeout(() => {
-            sendNotification({
-              FCMToken,
-              title: 'You have allowed Scorie to send notification !',
-              body: 'Created by Scorie',
-            });
-          }, 500);
-        })
-        .catch((err) => {
-          console.log(getFirebaseErr(err));
-        });
-
-      onMessageListener()
-        .then((payload) => {
-          if (!payload) return;
-
-          const { notification } = payload as MessagePayload;
-          if (!notification) return;
-
-          const { body, image, title } = notification;
-
-          getNotification(title || '', { body, image } as NotificationOptions);
-        })
-        .catch((err) => console.log('failed: ', err));
-    }
-
-    if (permission === 'denied') {
-      setNotificationActive(false);
-
-      toast.error('Please enable notification on this site to use notification feature !', {
-        ...ToastDefaultConfig,
-        toastId: 'unenable-noti',
-        autoClose: 5000,
-        position: 'top-center',
+    if (permission === 'granted') notificationAction();
+    else {
+      requestPermission().then((result) => {
+        if (result === 'granted') notificationAction();
+        else {
+          toast.error(t('please enable notification on this site to use notification feature'), {
+            ...ToastDefaultConfig,
+            toastId: 'unenable-noti',
+            autoClose: 5000,
+            position: 'top-center',
+          });
+        }
       });
     }
   };

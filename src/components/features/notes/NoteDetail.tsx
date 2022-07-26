@@ -9,6 +9,7 @@ import Tippy from '@tippyjs/react/headless';
 import { Dispatch, FC, SetStateAction, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 interface Inputs {
@@ -29,6 +30,8 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
   const { id, isPinned, isArchived, isDone, isInProgress, title, data, updatedAt } = note;
 
   const currentUser = useStore((s) => s.currentUser);
+
+  const { t } = useTranslation();
 
   const [showConfirm, setShowConfirm] = useState(false);
   const [status, setStatus] = useState({ type: 'ok', message: '' });
@@ -67,7 +70,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
       editNote(currentUser.uid, id, noteToEdit)
         .then(() => {
-          toast.success('Successfully !', { ...ToastDefaultConfig, autoClose: 800 });
+          toast.success(t('successfully'), { ...ToastDefaultConfig, autoClose: 800 });
           setStatus({ type: 'ok', message: 'Update successfully' });
           setOpenDetail(false);
         })
@@ -162,7 +165,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
                 <ConfirmBox
                   {...attrs}
                   className={showConfirm ? '' : '!hidden z-[-1]'}
-                  content={'confirm delete note'}
+                  content='confirm delete note'
                   setConfirm={setShowConfirm}
                   actionWhenConfirm={removeNote}
                 />

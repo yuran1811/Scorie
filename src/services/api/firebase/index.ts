@@ -1,3 +1,4 @@
+export * from './feedback';
 export * from './notes';
 export * from './notification';
 export * from './scores';

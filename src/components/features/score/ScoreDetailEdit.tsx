@@ -8,6 +8,7 @@ import Tippy from '@tippyjs/react/headless';
 import { Timestamp } from 'firebase/firestore';
 import { FC, useCallback, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 interface Inputs {
@@ -29,6 +30,8 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
   onClick,
 }) => {
   const currentUser = useStore((s) => s.currentUser);
+
+  const { t } = useTranslation();
 
   const [showConfirm, setShowConfirm] = useState(false);
   const [scoreOptions, setScoreOptions] = useState({
@@ -86,7 +89,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
       newscores.splice(scoreIdx, 1, scoreToEdit);
 
       editSubject(currentUser.uid, subject.id, { scores: [...newscores] }).then(() =>
-        toast.success('Successfully !', { ...ToastDefaultConfig, autoClose: 800 })
+        toast.success(t('successfully'), { ...ToastDefaultConfig, autoClose: 800 })
       );
     },
     [scoreOptions]

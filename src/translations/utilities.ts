@@ -17,6 +17,14 @@ const confirmTranslation = {
     vi: 'Xác nhận ?',
     en: 'Confirm action ?',
   },
+  'delete action': {
+    vi: 'Hành động xóa',
+    en: 'Delete action',
+  },
+  'this will delete your feedback': {
+    vi: 'Xác nhận xóa phản hồi ứng dụng',
+    en: 'This will delete your feedback',
+  },
 };
 
 const scoreLevelTranslation = {
@@ -57,7 +65,42 @@ const errorTranslation = {
   },
 };
 
+const workerTranslation = {
+  'the connectivity is back, sync in progress': {
+    vi: 'Kết nối mạng đã trở lại, đang đồng bộ...',
+    en: 'The connectivity is back, sync in progress...',
+  },
+  'new content is available': {
+    vi: 'App được cập nhật rồi nhé! Xóa bộ đệm và tải lại trang (hoặc Ctrl + F5) thôi nào!',
+    en: 'New content is available! Hard reload (or Ctrl + F5) to get the latest changes!',
+  },
+  'content is cached': {
+    vi: '🚀 Ứng dụng đã sẵn sàng để sử dụng offline rồi đó',
+    en: '🚀 Content is cached for offline use.',
+  },
+  'cannot regist sw': {
+    vi: 'Không thể đăng kí service workers để tải về ứng dụng. Vui lòng tải lại trang!',
+    en: 'Cannot regist service workers. Reload and try again!',
+  },
+};
+
+const testimonialTranslation = {
+  'what our customers are saying about us': {
+    vi: 'Người dùng nói gì về chúng tôi',
+    en: 'What our customers are saying about us',
+  },
+};
+
 const statusTranslation = {
+  successfully: {
+    vi: 'Hoàn tất !',
+    en: 'Successfully !',
+  },
+  'copy to clipboard': {
+    vi: 'Note có thể đem đi share được rồi !',
+    en: 'Copy to clipboard !',
+  },
+
   'no note': {
     vi: 'Không có note nào ở đây hết',
     en: 'No note',
@@ -103,11 +146,33 @@ const statusTranslation = {
   },
 };
 
+const notificationTranslation = {
+  'created by scorie': {
+    vi: 'Được tạo bởi Scorie',
+    en: 'Created by Scorie',
+  },
+  'you have allowed scorie to send notification': {
+    vi: 'Bạn đã cấp quyền gửi thông báo cho Scorie',
+    en: 'You have allowed Scorie to send notification !',
+  },
+  'this browser does not support desktop notification': {
+    vi: 'Trình duyệt không hỗ trợ tính năng thông báo',
+    en: 'This browser does not support desktop notification',
+  },
+  'please enable notification on this site to use notification feature': {
+    vi: 'Vui lòng cho phép quyền thông báo để nhận tin tức mới nhất từ Scorie !',
+    en: 'Please enable notification on this site to use notification feature !',
+  },
+};
+
 export default {
   ...confirmTranslation,
-  ...scoreLevelTranslation,
   ...errorTranslation,
+  ...notificationTranslation,
+  ...scoreLevelTranslation,
   ...statusTranslation,
+  ...workerTranslation,
+  ...testimonialTranslation,
 
   'sign in with': {
     vi: 'Đăng nhập với',
@@ -145,6 +210,10 @@ export default {
     vi: 'Đổi',
     en: 'Change',
   },
+  send: {
+    vi: 'Gửi',
+    en: 'Send',
+  },
   'change password': {
     vi: 'Đổi mật khẩu',
     en: 'Change password',
@@ -161,6 +230,10 @@ export default {
   content: {
     vi: 'Nội dung',
     en: 'Content',
+  },
+  job: {
+    vi: 'Nghề nghiệp của bạn',
+    en: 'Job',
   },
   name: {
     vi: 'Tên của bạn',
@@ -228,6 +301,10 @@ export default {
   'add scores and the chart will be shown': {
     vi: 'Thêm điểm thì mới coi được biểu đồ nha !',
     en: 'Add scores and the chart will be shown !',
+  },
+  'add scores': {
+    vi: 'Thêm điểm ngay',
+    en: 'Add scores now',
   },
 
   'ideal place to keep your mind on': {

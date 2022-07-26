@@ -103,7 +103,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
       expectedAverage: +expectedAverage,
     })
       .then(() => {
-        toast.success('Successfully !', { ...ToastDefaultConfig, autoClose: 800 });
+        toast.success(t('successfully'), { ...ToastDefaultConfig, autoClose: 800 });
         setSaveErr({ content: '', counter: saveErr.counter + 1 });
         setOpenDetail(false);
       })

@@ -4,10 +4,10 @@
 
 ### Features
 
-- Multi locales
-- PWA available (can be used offline and add to homescreen)
+- Multi locales (vi, en, and more in the future)
+- PWA available (can be used offline and add to homescreen, receive notifications)
 - Login with Google, Facebook, Email / Password
-- Plenty of features : scores, notes, ...(drag and drop, create / read / update / delete)
+- Plenty of features : scores, notes, ...(drag and drop, create / read / update / delete, share, ...)
 - Analytics feature and other awesome tools will help improving your school life
 
 ### Technologies
@@ -22,10 +22,6 @@
 [![OSCS Status](https://www.oscs1024.com/platform/badge/yuran1811/Scorie.svg?size=small)](https://www.oscs1024.com/project/yuran1811/Scorie?ref=badge_small)
 
 ### Todo
-
-- Translate:
-  - Toast
-  - Error
 
 ### References
 

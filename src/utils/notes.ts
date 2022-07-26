@@ -1,6 +1,5 @@
 import { NoteDetailType, NoteListFilterType, NoteListType } from '@/shared';
 import { standardizeCollectionData } from './standardize';
-import { appThemes } from './styles';
 
 export const filterSectionList = (
   list: NoteListType[] | null,
