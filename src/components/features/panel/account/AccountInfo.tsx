@@ -72,20 +72,20 @@ export const AccountInfo: FC = () => {
   return (
     <>
       {!currentUser?.emailVerified ? (
-        <div className="w-full h-4/5 scrollY">
+        <div className="scrollY h-4/5 w-full">
           <NotVerifyEmail />
         </div>
       ) : (
         <>
           {loading && (
-            <div className="w-full flexcenter p-6 h-[10rem]">
+            <div className="flexcenter h-[10rem] w-full p-6">
               <ThreeDotsFade />
             </div>
           )}
           <div
             className={`${
               loading ? '!hidden' : ''
-            }  flexcentercol !justify-start mt-[0.6rem] h-4/5 p-3 pb-16 scrollY`}
+            }  flexcentercol scrollY mt-[0.6rem] h-4/5 !justify-start p-3 pb-16`}
           >
             <form className="mb-12" onSubmit={handleSubmit(onSubmit)}>
               <Input
@@ -133,7 +133,7 @@ export const AccountInfo: FC = () => {
                     .then(() => {
                       setChangePWMes({
                         type: 'success',
-                        message: 'Password reset email sent!',
+                        message: 'Password reset email sent',
                         timer: 5,
                       });
                     })
@@ -155,7 +155,7 @@ export const AccountInfo: FC = () => {
               <ErrorMessage content={changePWMes.message} />
             )}
             {!messageExpired && changePWMes.type === 'success' && (
-              <div className="text-[3rem] text-center w-full">{changePWMes.message}</div>
+              <div className="w-full text-center text-[3rem]">{changePWMes.message}</div>
             )}
           </div>
         </>

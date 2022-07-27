@@ -6,14 +6,19 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 export const Header: FC = () => (
-  <header className="z-20 flexcenter !justify-between sticky top-0 w-full h-[8rem] bg-ctbg">
+  <header className="flexcenter sticky top-0 z-20 h-[8rem] w-full !justify-between bg-ctbg">
     <PanelProvider>
-      <MenuIcon className="mx-10 z-20" />
+      <MenuIcon className="z-20 mx-10" />
       <Panel className="z-[19]" />
     </PanelProvider>
 
     <Link to="/">
-      <div className="font-bold text-[4rem] mobile:text-[4.6rem] text-center">Scorie</div>
+      <div
+        className="text-center text-[4rem] font-bold mobile:text-[4.6rem]"
+        onClick={() => document.querySelector('#root > div')?.scroll(0, 0)}
+      >
+        Scorie
+      </div>
     </Link>
 
     <ExtraTools />

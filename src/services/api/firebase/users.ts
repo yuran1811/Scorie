@@ -7,7 +7,7 @@ import {
   updateProfile,
   User,
 } from 'firebase/auth';
-import { doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 
 export const sendVerifyEmail = async (user: User) => {
   try {
@@ -32,6 +32,23 @@ export const createNewUserEmailMethod = async (email: string, password: string) 
     return {
       resp: null,
       errorMessage: `Cannot create user !\n${getFirebaseErr(err.message)}`,
+    };
+  }
+};
+
+export const getUserProfile = async (userId: string) => {
+  try {
+    const resp = await getDoc(doc(db, 'users', userId));
+
+    return {
+      data: resp,
+      errorMessage: '',
+    };
+  } catch (error) {
+    const err = error as FirebaseError;
+    return {
+      data: null,
+      errorMessage: getFirebaseErr(err.message),
     };
   }
 };

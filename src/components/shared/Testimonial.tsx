@@ -1,14 +1,18 @@
-import { upvoteFeedback } from '@/services';
+import { getUserProfile, upvoteFeedback } from '@/services';
 import { useStore } from '@/store';
 import { UpvoteIcon } from '@cpns/icons';
 import { TestimonialProps } from '@shared/types';
-import { FC, useMemo } from 'react';
+import { User } from 'firebase/auth';
+import { FC, useEffect, useState } from 'react';
 import { Avatar } from './Avatar';
+import { Tooltip } from './Tooltip';
 
 export const Testimonial: FC<{ data: TestimonialProps }> = ({
   data: { content, name, id, votes, job = '' },
 }) => {
   const currentUser = useStore((s) => s.currentUser);
+
+  const [testimonialImg, setTestimonialImg] = useState('');
 
   const voteStatus = () => {
     if (!currentUser || !currentUser?.uid) return false;
@@ -19,6 +23,14 @@ export const Testimonial: FC<{ data: TestimonialProps }> = ({
     if (!id || !currentUser || !currentUser?.uid) return;
     upvoteFeedback(id, currentUser.uid, !voteStatus());
   };
+
+  useEffect(() => {
+    if (!id) return;
+    getUserProfile(id).then((rawUser) => {
+      const user = rawUser.data?.data() as User;
+      user && user?.photoURL && setTestimonialImg(user.photoURL);
+    });
+  }, []);
 
   return (
     <div className="relative flex flex-col min-w-[25rem] max-w-xl mx-4 my-6 shadow-lg">
@@ -48,11 +60,7 @@ export const Testimonial: FC<{ data: TestimonialProps }> = ({
         </p>
       </div>
       <div className="flex flex-col items-center justify-center p-8 rounded-b-lg bg-violet-400 text-gray-900">
-        <Avatar
-          className="mb-2 -mt-20 bg-center bg-cover rounded-full bg-gray-700"
-          imgUrl=""
-          radius="6rem"
-        />
+        <Avatar className="mb-2 -mt-20" imgUrl={testimonialImg} radius="6rem" />
         <p className="font-semibold leading-tight px-20 w-full text-center">{name}</p>
         <p className="text-[2rem] uppercase px-20 w-full text-center">{job}</p>
       </div>
@@ -60,13 +68,16 @@ export const Testimonial: FC<{ data: TestimonialProps }> = ({
         <div className="absolute -top-6 -right-6 w-12 h-12 rounded-full bg-violet-800 text-[2rem] text-center">
           {votes?.length ? (votes.length > 99 ? '99+' : votes.length) : 0}
         </div>
-        <UpvoteIcon
-          active={voteStatus()}
-          width="40"
-          height="40"
-          fill="#5b21b6"
-          onClick={() => upvoteHandle()}
-        />
+
+        <Tooltip content="Upvote">
+          <UpvoteIcon
+            active={voteStatus()}
+            width="40"
+            height="40"
+            fill="#5b21b6"
+            onClick={() => upvoteHandle()}
+          />{' '}
+        </Tooltip>
       </div>
     </div>
   );

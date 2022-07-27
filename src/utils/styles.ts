@@ -36,6 +36,19 @@ export const appThemes: {
   rose: { bg: '#9f1239', color: '#fecdd3', secondary: '#fb7185' },
 };
 
+export const changeLogStyle: {
+  [key: string]: {
+    bg: string;
+    color: string;
+    primary?: string;
+    secondary?: string;
+  };
+} = {
+  feature: { bg: '#c4b5fd', color: '#5b21b6' },
+  bug: { bg: '#fda4af', color: '#9f1239' },
+  update: { bg: '#6ee7b7', color: '#065f46' },
+};
+
 export const getThemeStyle = (theme: string) => ({
   backgroundColor: appThemes[theme]?.bg ? appThemes[theme].bg : appThemes.default.bg,
   color: appThemes[theme]?.color ? appThemes[theme].color : appThemes.default.color,

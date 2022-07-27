@@ -19,20 +19,20 @@ export const SettingInfo: FC = () => {
   } = useForm<SettingsType>({ mode: 'onChange' });
 
   const onSubmit: SubmitHandler<SettingsType> = (data) => {
-    setSettings({ ...data });
+    setSettings({ ...settings, ...data });
   };
 
   return (
-    <div className="flexcentercol !justify-start mt-8 p-3 pb-8 w-full h-4/5 overflow-x-hidden overflow-y-auto">
+    <div className="flexcentercol mt-8 h-4/5 w-full !justify-start overflow-y-auto overflow-x-hidden p-3 pb-8">
       <div className="w-full">
         <div>
-          <form className="mt-8 flexcentercol" onSubmit={handleSubmit(onSubmit)}>
-            <span className="font-bold text-[3.5rem] text-center">
+          <form className="flexcentercol mt-8" onSubmit={handleSubmit(onSubmit)}>
+            <span className="text-center text-[3.5rem] font-bold">
               {t('score format')} (9.xxxx)
             </span>
             <div className="flexcenter flex-wrap">
               <Input
-                className="flex-1 mx-4"
+                className="mx-4 flex-1"
                 placeholder="Type a number"
                 defaultValue={settings.numberFormat}
                 formHandle={{
@@ -59,7 +59,7 @@ export const SettingInfo: FC = () => {
         </div>
 
         <div
-          className="cursor-pointer font-bold !text-[3.5rem] text-center mt-12"
+          className="mt-12 cursor-pointer text-center !text-[3.5rem] font-bold"
           onClick={() =>
             setSettings({
               ...settings,
@@ -68,7 +68,7 @@ export const SettingInfo: FC = () => {
           }
         >
           {t(settings.showStartUpLogo ? 'show startup logo' : 'hide startup logo')}
-          <div className="!font-normal !text-[2.5rem] text-center">{t('click to change')}</div>
+          <div className="text-center !text-[2.5rem] !font-normal">{t('click to change')}</div>
         </div>
       </div>
     </div>

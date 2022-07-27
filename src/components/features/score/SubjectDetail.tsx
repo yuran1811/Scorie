@@ -141,7 +141,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
   useEffect(() => {
     if (!saveErr.content.length) return;
 
-    toastId.current = toast.error(saveErr.content, {
+    toastId.current = toast.error(t(saveErr.content.toLowerCase()), {
       ...ToastDefaultConfig,
       toastId: saveErr.content,
       autoClose: false,
@@ -159,25 +159,25 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
 
   return createPortal(
     <>
-      <div className="fullscreen font-bold text-center text-rose-600 bg-violet-200 scrollY">
-        <div className="sticky top-0 left-0 right-0 flex items-center justify-between p-8 bg-violet-200">
-          <div className="flexcenter flex-wrap w-full mobile:pl-24">
+      <div className="fullscreen scrollY bg-violet-200 text-center font-bold text-rose-600">
+        <div className="sticky top-0 left-0 right-0 flex items-center justify-between bg-violet-200 p-8">
+          <div className="flexcenter w-full flex-wrap mobile:pl-24">
             <StarIcon
-              className="scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5"
+              className="m-[0.6rem] scale-75 cursor-pointer mobile:m-5 mobile:scale-100"
               fill={!scoreOptions.isSpecial ? 'white' : '#d97706'}
               width="40"
               height="40"
               onClick={() => setScoreOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
             />
             <ImportantIcon
-              className="scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5"
+              className="m-[0.6rem] scale-75 cursor-pointer mobile:m-5 mobile:scale-100"
               fill={!scoreOptions.isVital ? 'white' : '#57534e'}
               width="40"
               height="40"
               onClick={() => setScoreOptions((s) => ({ ...s, isVital: !s.isVital }))}
             />
             <IgnoreIcon
-              className="scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5"
+              className="m-[0.6rem] scale-75 cursor-pointer mobile:m-5 mobile:scale-100"
               fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
               width="40"
               height="40"
@@ -192,8 +192,8 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
                 render={(attrs) => (
                   <ConfirmBox
                     {...attrs}
-                    className={showConfirm ? '' : '!hidden z-[-1]'}
-                    content={'confirm delete subject'}
+                    className={showConfirm ? '' : 'z-[-1] !hidden'}
+                    content="confirm delete subject"
                     setConfirm={setShowConfirm}
                     actionWhenConfirm={removeSubjectRecord}
                   />
@@ -201,7 +201,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
               >
                 <div onClick={() => setShowConfirm((s) => !s)}>
                   <TrashIcon
-                    className="scale-75 mobile:scale-100 cursor-pointer m-[0.6rem] mobile:m-5 text-slate-500"
+                    className="m-[0.6rem] scale-75 cursor-pointer text-slate-500 mobile:m-5 mobile:scale-100"
                     width="35"
                     height="35"
                   />
@@ -211,7 +211,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
           </div>
 
           <CloseIcon
-            className="cursor-pointer mx-4"
+            className="mx-4 cursor-pointer"
             width="50"
             height="50"
             onClick={() => {
@@ -223,19 +223,19 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
         <TimeContainer obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }} />
 
         <div className="flexcentercol px-8 py-8">
-          <div className="text-[5rem] text-center text-teal-700 w-full line-clamp-1">
+          <div className="w-full text-center text-[5rem] text-teal-700 line-clamp-1">
             {subject?.name || ''}
           </div>
 
           <div
-            className="text-[10rem] text-center line-clamp-1 px-6 my-4 rounded-[1rem]"
+            className="my-4 rounded-[1rem] px-6 text-center text-[10rem] line-clamp-1"
             style={{ ...style }}
           >
             {averageScore}
           </div>
 
-          <div className="flexcenter flex-wrap mt-6 mb-12">
-            <span className="text-[3rem] text-indigo-800 p-4 mr-4">{t('expected score')} </span>
+          <div className="flexcenter mt-6 mb-12 flex-wrap">
+            <span className="mr-4 p-4 text-[3rem] text-indigo-800">{t('expected score')} </span>
             <div className="flex-1">
               <Input
                 className="w-[15rem]"
@@ -248,11 +248,11 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center justify-between flex-wrap w-full py-8 text-slate-800 bg-violet-200">
-            <div className="font-bold text-[4rem] text-center smallmb:text-left w-full smallmb:w-auto px-6 line-clamp-1">
+          <div className="flex w-full flex-wrap items-center justify-between bg-violet-200 py-8 text-slate-800">
+            <div className="w-full px-6 text-center text-[4rem] font-bold line-clamp-1 smallmb:w-auto smallmb:text-left">
               {t('recent')}
             </div>
-            <div className="flex items-start justify-center smallmb:justify-end w-full smallmb:w-auto">
+            <div className="flex w-full items-start justify-center smallmb:w-auto smallmb:justify-end">
               <Tooltip
                 content="Add new score"
                 options={{
@@ -260,7 +260,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
                 }}
               >
                 <AddIcon
-                  className={`cursor-pointer mx-5`}
+                  className={`mx-5 cursor-pointer`}
                   width="50"
                   height="50"
                   onClick={() => setAddNewOpen(true)}
@@ -275,7 +275,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
                 }}
               >
                 <ListIcon
-                  className={`${viewMode === 'group' ? 'block' : 'hidden'} cursor-pointer mx-5`}
+                  className={`${viewMode === 'group' ? 'block' : 'hidden'} mx-5 cursor-pointer`}
                   width="50"
                   height="50"
                   onClick={() => setViewMode('all')}
@@ -289,7 +289,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
                 }}
               >
                 <ListAllIcon
-                  className={`${viewMode === 'all' ? 'block' : 'hidden'} cursor-pointer mx-5`}
+                  className={`${viewMode === 'all' ? 'block' : 'hidden'} mx-5 cursor-pointer`}
                   width="50"
                   height="50"
                   onClick={() => setViewMode('group')}
@@ -297,7 +297,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
               </Tooltip>
             </div>
           </div>
-          <div className="flexcenter flex-wrap w-full pb-6">
+          <div className="flexcenter w-full flex-wrap pb-6">
             <ScoreContainer
               viewMode={viewMode}
               typeList={typeList}

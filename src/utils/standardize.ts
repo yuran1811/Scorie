@@ -1,7 +1,18 @@
+import {
+  ChangeLogProps,
+  NoteDetailType,
+  ScoreDetailType,
+  SubjectDetailType,
+  TestimonialProps,
+} from '@/shared';
 import { DocumentData, QuerySnapshot } from 'firebase/firestore';
-import { NoteDetailType, ScoreDetailType, SubjectDetailType, TestimonialProps } from '@/shared';
 
-type standardizeFuncType = SubjectDetailType | ScoreDetailType | NoteDetailType | TestimonialProps;
+type standardizeFuncType =
+  | SubjectDetailType
+  | ScoreDetailType
+  | NoteDetailType
+  | TestimonialProps
+  | ChangeLogProps;
 
 export const standardizeCollectionData = (data: QuerySnapshot<DocumentData> | null) => {
   if (data === null || !data?.docs) return [] as standardizeFuncType[];

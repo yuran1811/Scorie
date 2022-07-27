@@ -1,4 +1,5 @@
 export * from './backupData';
+export * from './changelog';
 export * from './chart';
 export * from './dayjsUsage';
 export * from './firebase';

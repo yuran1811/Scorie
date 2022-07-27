@@ -15,9 +15,10 @@ interface Inputs {
 
 interface TestimonialAddNewProps {
   data: TestimonialProps | null;
+  votes: TestimonialProps[];
 }
 
-export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data }) => {
+export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) => {
   const currentUser = useStore((s) => s.currentUser);
 
   const { t } = useTranslation();
@@ -40,7 +41,12 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data }) => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (currentUser && currentUser?.uid) {
-      if (!data.content.length && !data.job.length && !data.name.length) {
+      if (
+        !data.content.length &&
+        !data.job.length &&
+        !data.name.length &&
+        votes.find((vote) => vote.id === currentUser.uid)
+      ) {
         setOpenModal(true);
         return;
       }

@@ -28,7 +28,7 @@ class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError)
       return (
-        <div className="bg-ctbg fullscreen">
+        <div className="fullscreen bg-ctbg">
           <ErrorContent errorBoundaries={true} />;
         </div>
       );

@@ -1,3 +1,4 @@
+export * from './changelog';
 export * from './docs';
 export * from './elements';
 export * from './notes';

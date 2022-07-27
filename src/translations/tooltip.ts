@@ -1,6 +1,27 @@
 import { TranslationType } from '@shared/types';
 
 export default {
+  'mark as read': {
+    vi: 'Đấnh dấu là đã đọc',
+    en: 'Mark as read',
+  },
+  'mark as unread': {
+    vi: 'Đấnh dấu là chưa đọc',
+    en: 'Mark as unread',
+  },
+
+  upvote: {
+    vi: 'Bình chọn',
+    en: 'Upvote',
+  },
+  'report bugs': {
+    vi: 'Báo cáo lỗi',
+    en: 'Report bugs',
+  },
+  'change logs': {
+    vi: 'Sự đổi mới',
+    en: 'Change logs',
+  },
   back: {
     vi: 'Quay về',
     en: 'Back',

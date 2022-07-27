@@ -40,13 +40,16 @@ export const TestimonialContainer = () => {
         job={`CEO & Founder Scorie`}
       />
       <div className="container flexcentercol !justify-start mx-auto md:flex-wrap md:flex-row md:!justify-center md:px-10">
-        {testimonials.map((testimonial) => (
-          <Testimonial key={testimonial.id} data={testimonial} />
-        ))}
+        {testimonials
+          .sort((a, b) => b.votes.length - a.votes.length)
+          .map((testimonial) => (
+            <Testimonial key={testimonial.id} data={testimonial} />
+          ))}
       </div>
 
       {!!currentUser && currentUser?.uid && (
         <TestimonialAddNew
+          votes={testimonials}
           data={testimonials.find((item) => item.id === currentUser.uid) || null}
         />
       )}

@@ -1,6 +1,6 @@
 {
   "name": "scorie",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "yuran1811",
   "description": "For your better school life",
   "license": "MIT",
@@ -42,6 +42,7 @@
     "@vitejs/plugin-react": "^2.0.0",
     "autoprefixer": "^10.4.7",
     "postcss": "^8.4.14",
+    "prettier-plugin-tailwindcss": "^0.1.13",
     "tailwindcss": "^3.1.2",
     "tailwindcss-scoped-groups": "^2.0.0",
     "typescript": "^4.7.3",

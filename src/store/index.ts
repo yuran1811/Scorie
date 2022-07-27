@@ -1,4 +1,5 @@
 import {
+  ChangeLogProps,
   NoteDetailType,
   QuoteStoreType,
   QUOTES_STORED_DEFAULT,
@@ -32,6 +33,12 @@ interface StoreType {
 
   FCMToken: string;
   setFCMToken: (token: string) => void;
+
+  changeLogs: ChangeLogProps[];
+  setChangeLogs: (changeLogs: ChangeLogProps[]) => void;
+
+  changeLogsRead: { [version: string]: boolean };
+  setChangeLogsRead: (version: string, read: boolean) => void;
 }
 
 export const useStore = create<StoreType>()(
@@ -58,6 +65,13 @@ export const useStore = create<StoreType>()(
 
         FCMToken: '',
         setFCMToken: (FCMToken: string) => set({ FCMToken }),
+
+        changeLogs: [],
+        setChangeLogs: (changeLogs: ChangeLogProps[]) => set({ changeLogs }),
+
+        changeLogsRead: {},
+        setChangeLogsRead: (version: string, read: boolean) =>
+          set((s) => ({ changeLogsRead: { ...s.changeLogsRead, [version]: read } })),
       }),
       { name: STORE_NAME }
     )

@@ -22,6 +22,7 @@ export * from './HashtagIcon';
 export * from './IgnoreIcon';
 export * from './ImportantIcon';
 export * from './ImportIcon';
+export * from './InboxIcon';
 export * from './InfoIcon';
 export * from './ListAllIcon';
 export * from './ListIcon';

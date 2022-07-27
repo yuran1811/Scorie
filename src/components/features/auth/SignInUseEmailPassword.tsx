@@ -60,13 +60,13 @@ const SignInUseEmailPassWord = () => {
       ) : (
         <>
           {loading && (
-            <div className="w-full flexcenter p-6 h-[10rem]">
+            <div className="flexcenter h-[10rem] w-full p-6">
               <ThreeDotsFade />
             </div>
           )}
 
           <form
-            className={`${loading ? '!hidden' : ''} flexcentercol !justify-start mt-6`}
+            className={`${loading ? '!hidden' : ''} flexcentercol mt-6 !justify-start`}
             onSubmit={handleSubmit(onSubmit)}
           >
             <Input

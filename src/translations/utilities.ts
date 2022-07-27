@@ -65,6 +65,61 @@ const errorTranslation = {
   },
 };
 
+const formValidateTranslation = {
+  'please fill in this field': {
+    vi: 'Vui lòng điền vào trường này',
+    en: 'Please fill in this field',
+  },
+  'username cannot be empty': {
+    vi: 'Tên người dùng không được để trống',
+    en: 'Username cannot be empty',
+  },
+  'email cannot be empty': {
+    vi: 'Email không được để trống',
+    en: 'Email cannot be empty',
+  },
+  'password cannot be empty': {
+    vi: 'Mật khẩu không được để trống',
+    en: 'Password cannot be empty',
+  },
+  'invalid username': {
+    vi: 'Tên người dùng không hợp lệ (chỉ được chứa chữ cái, số, và một số kí tự khác',
+    en: 'Invalid username (include "a-z, A-Z, 0-9, and others valid characters")',
+  },
+  'invalid email': {
+    vi: 'Email không hợp lệ',
+    en: 'Invalid email',
+  },
+  'invalid subject': {
+    vi: 'Tên môn học không hợp lệ (chỉ được chứa chữ cái, số, và một số kí tự khác',
+    en: 'Invalid subject (include "a-z, A-Z, 0-9, and others valid characters")',
+  },
+  'invalid score': {
+    vi: 'Điểm phải là một số (9 hoặc 9.xxx)',
+    en: 'Invalid score (must be a number)',
+  },
+  'invalid base': {
+    vi: 'Hệ cơ số phải là một số',
+    en: 'Invalid base (must be a number)',
+  },
+  'invalid type': {
+    vi: 'Thể loại của điểm không hợp lệ (chỉ được chứa chữ cái, số, và một số kí tự khác',
+    en: 'Invalid type (include "a-z, A-Z, 0-9, and others valid characters")',
+  },
+  'not a number': {
+    vi: 'Vui lòng điền số vào',
+    en: 'Not a number',
+  },
+  'at least 6 characters': {
+    vi: 'Mật khẩu phải có ít nhất 6 kí tự',
+    en: 'At least 6 characters',
+  },
+  'the password do not match': {
+    vi: 'Mật khẩu không trùng khớp',
+    en: 'The password do not match',
+  },
+};
+
 const workerTranslation = {
   'the connectivity is back, sync in progress': {
     vi: 'Kết nối mạng đã trở lại, đang đồng bộ...',
@@ -82,6 +137,11 @@ const workerTranslation = {
     vi: 'Không thể đăng kí service workers để tải về ứng dụng. Vui lòng tải lại trang!',
     en: 'Cannot regist service workers. Reload and try again!',
   },
+  'the app is running offline, any changes mades during this time will be synced as soon as the connectivity is back':
+    {
+      vi: 'Ứng dụng đang hoạt động ngoại tuyến, bất kì sự thay đổi dữ liệu nào trong suốt quá trình này đều sẽ được đồng bộ sớm nhất có thể khi trở lại trực tuyến',
+      en: 'The app is running offline, any changes mades during this time will be synced as soon as the connectivity is back',
+    },
 };
 
 const testimonialTranslation = {
@@ -114,6 +174,14 @@ const statusTranslation = {
     vi: 'Vui lòng đăng nhập để dùng tính năng này nhóe',
     en: 'Please log in to use this feature',
   },
+  'subject cannot be both ignored and vital (or special)': {
+    vi: 'Môn học không thể vừa bị bỏ qua và vừa quan trọng (hoặc chuyên / đặc biệt)',
+    en: 'Subject cannot be both ignored and vital (or special)',
+  },
+  'fail to update': {
+    vi: 'Lỗi trong quá trình cập nhật',
+    en: 'Fail to update',
+  },
 
   'email verification sent': {
     vi: 'Đã gửi mail xác thực !',
@@ -122,6 +190,10 @@ const statusTranslation = {
   'cannot send email verification': {
     vi: 'Không thể gửi mail xác thực !',
     en: 'Cannot send email verification !',
+  },
+  'password reset email sent': {
+    vi: 'Đã gửi mail đổi mật khẩu !',
+    en: 'Password reset email sent !',
   },
 
   'please verify your email before using this app': {
@@ -168,11 +240,12 @@ const notificationTranslation = {
 export default {
   ...confirmTranslation,
   ...errorTranslation,
+  ...formValidateTranslation,
   ...notificationTranslation,
   ...scoreLevelTranslation,
   ...statusTranslation,
-  ...workerTranslation,
   ...testimonialTranslation,
+  ...workerTranslation,
 
   'sign in with': {
     vi: 'Đăng nhập với',
@@ -251,6 +324,14 @@ export default {
     vi: 'Xác nhận mật khẩu',
     en: 'Confirm password',
   },
+  'type a number': {
+    vi: 'Điền số',
+    en: 'Type a number',
+  },
+  'profile name': {
+    vi: 'Tên người dùng',
+    en: 'Profile name',
+  },
 
   note: {
     vi: 'Ghi chú',
@@ -296,6 +377,11 @@ export default {
   'expected score': {
     vi: 'Điểm cần',
     en: 'Expected score',
+  },
+
+  'report bugs': {
+    vi: 'Báo cáo lỗi',
+    en: 'Report bugs',
   },
 
   'add scores and the chart will be shown': {

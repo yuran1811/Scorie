@@ -40,7 +40,7 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
       if (validateSubjectOption(subjectOptions)) {
         setStatus({
           type: 'errors',
-          message: 'Subject cannot be both ignored and vital | special',
+          message: 'Subject cannot be both ignored and vital (or special)',
         });
 
         return;
@@ -85,21 +85,21 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
     <ModalBox onClick={() => onClickHandle(false)}>
       <ModalBoxHeader onClick={() => onClickHandle(false)}>
         <StarIcon
-          className="cursor-pointer m-[0.6rem] mx-4 mobile:m-5"
+          className="m-[0.6rem] mx-4 cursor-pointer mobile:m-5"
           fill={!subjectOptions.isSpecial ? 'white' : '#d97706'}
           width="40"
           height="40"
           onClick={() => setSubjectOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
         />
         <ImportantIcon
-          className="cursor-pointer m-[0.6rem] mx-4 mobile:m-5"
+          className="m-[0.6rem] mx-4 cursor-pointer mobile:m-5"
           fill={!subjectOptions.isVital ? 'white' : '#57534e'}
           width="40"
           height="40"
           onClick={() => setSubjectOptions((s) => ({ ...s, isVital: !s.isVital }))}
         />
         <IgnoreIcon
-          className="cursor-pointer m-[0.6rem] mx-4 mobile:m-5"
+          className="m-[0.6rem] mx-4 cursor-pointer mobile:m-5"
           fill={!subjectOptions.isIgnored ? 'white' : '#0891b2'}
           width="40"
           height="40"
@@ -109,7 +109,7 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
 
       <div className="w-full text-[4rem] text-indigo-900 line-clamp-1">New subject</div>
       <form
-        className="flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1"
+        className="flexcentercol w-full p-8 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
