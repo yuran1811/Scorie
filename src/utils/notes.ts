@@ -31,16 +31,22 @@ export const filterSectionList = (
 };
 
 export const getNoteList = (data: any) => {
-  if (data === null) return { idxList: [], noteList: [] };
+  if (data === null) return { idxList: { id: '', list: [] }, noteList: [] };
 
   const resp = standardizeCollectionData(data) as NoteDetailType[];
-  if (!resp.length) return { idxList: [], noteList: [] };
+  if (!resp.length) return { idxList: { id: '', list: [] }, noteList: [] };
 
   const noteList = [...resp.map((note) => ({ note: { ...note }, isShow: true, id: note.id }))];
-  const idxListIndex = resp.findIndex((_) => _?.idxList);
+  const idxListIndex = resp.findIndex((_) => !!_?.idxList);
 
-  const idxList = resp[idxListIndex];
-  noteList.splice(idxListIndex, 1);
+  let idxList;
+  if (idxListIndex !== -1) {
+    idxList = resp[idxListIndex];
+    noteList.splice(idxListIndex, 1);
+  }
 
-  return { idxList: idxList?.idxList ? idxList.idxList : [], noteList };
+  return {
+    idxList: !!idxList ? { id: idxList.id, list: idxList?.idxList || [] } : { id: '', list: [] },
+    noteList,
+  };
 };

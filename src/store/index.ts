@@ -28,6 +28,9 @@ interface StoreType {
   notes: NoteDetailType[];
   setNotes: (data: NoteDetailType[]) => void;
 
+  noteIdxList: { id: string; list: string[] };
+  setNoteIdxList: (noteIdxList: { id: string; list: string[] }) => void;
+
   locale: string;
   setLocale: (data: string) => void;
 
@@ -60,17 +63,20 @@ export const useStore = create<StoreType>()(
         notes: [],
         setNotes: (notes) => set({ notes: [...notes] }),
 
+        noteIdxList: { id: '', list: [] },
+        setNoteIdxList: (noteIdxList) => set({ noteIdxList }),
+
         locale: 'vi',
-        setLocale: (locale: string) => set({ locale }),
+        setLocale: (locale) => set({ locale }),
 
         FCMToken: '',
-        setFCMToken: (FCMToken: string) => set({ FCMToken }),
+        setFCMToken: (FCMToken) => set({ FCMToken }),
 
         changeLogs: [],
-        setChangeLogs: (changeLogs: ChangeLogProps[]) => set({ changeLogs }),
+        setChangeLogs: (changeLogs) => set({ changeLogs }),
 
         changeLogsRead: {},
-        setChangeLogsRead: (version: string, read: boolean) =>
+        setChangeLogsRead: (version, read) =>
           set((s) => ({ changeLogsRead: { ...s.changeLogsRead, [version]: read } })),
       }),
       { name: STORE_NAME }

@@ -25,6 +25,8 @@ export const ReportAddNew: FC<DivProps> = ({ onClick }) => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    if (!data.title.trim().length || !data.content.trim().length) return;
+
     if (currentUser && currentUser?.uid) {
       const reportToAdd = {
         title: data.title.trim(),

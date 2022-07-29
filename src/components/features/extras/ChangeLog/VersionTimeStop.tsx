@@ -12,6 +12,7 @@ interface VersionTimeStopProps {
 export const VersionTimeStop: FC<VersionTimeStopProps> = ({
   data: { content, time, title, type, version },
 }) => {
+  const currentUser = useStore((s) => s.currentUser);
   const changeLogsRead = useStore((s) => s.changeLogsRead);
   const setChangeLogsRead = useStore((s) => s.setChangeLogsRead);
 
@@ -38,7 +39,7 @@ export const VersionTimeStop: FC<VersionTimeStopProps> = ({
               {title}
             </span>
 
-            <div className="absolute -right-16 cursor-pointer">
+            <div className={`${currentUser && currentUser?.uid ? '' : '!hidden'} absolute -right-16 cursor-pointer`}>
               <Tooltip content={!!changeLogsRead[version] ? 'Mark as unread' : 'Mark as read'}>
                 <div onClick={() => setChangeLogsRead(version, !changeLogsRead[version])}>
                   <DoubleCheckIcon active={!!changeLogsRead[version]} height="30" width="30" />

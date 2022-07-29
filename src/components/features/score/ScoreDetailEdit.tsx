@@ -145,6 +145,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
         <Input
           placeholder="Score"
           defaultValue={score?.value || ''}
+          inputMode="decimal"
           formHandle={{
             ...register('score', {
               required: 'Please fill in this field',
@@ -162,6 +163,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
         <Input
           placeholder="Base"
           defaultValue={score?.base || ''}
+          inputMode="decimal"
           formHandle={{
             ...register('base', {
               required: 'Please fill in this field',

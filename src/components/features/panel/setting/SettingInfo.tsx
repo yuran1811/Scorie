@@ -35,6 +35,7 @@ export const SettingInfo: FC = () => {
                 className="mx-4 flex-1"
                 placeholder="Type a number"
                 defaultValue={settings.numberFormat}
+                inputMode="numeric"
                 formHandle={{
                   ...register('numberFormat', {
                     required: 'Please fill in this field',

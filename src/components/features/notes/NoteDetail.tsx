@@ -30,6 +30,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
   const { id, isPinned, isArchived, isDone, isInProgress, title, data, updatedAt } = note;
 
   const currentUser = useStore((s) => s.currentUser);
+  const noteIdxList = useStore((s) => s.noteIdxList);
 
   const { t } = useTranslation();
 
@@ -81,11 +82,8 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
     [note, noteOptions]
   );
   const removeNote = () => {
-    if (!currentUser || !currentUser?.uid || !id)
-      return new Promise((res, rej) => {
-        rej('Failed');
-      });
-    return deleteNote(currentUser.uid, id);
+    if (!currentUser || !currentUser?.uid || !id) return new Promise((res, rej) => rej('Failed'));
+    return deleteNote(currentUser.uid, id, noteIdxList.id);
   };
 
   const onSubmit: SubmitHandler<Inputs> = (data: any) => {
@@ -94,7 +92,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
   return createPortal(
     <form
-      className="fullscreen text-center scrollY"
+      className="fullscreen scrollY text-center"
       style={noteStyle}
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -102,9 +100,9 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         className="sticky top-0 left-0 right-0 flex items-center justify-between p-8"
         style={{ backgroundColor: noteStyle.backgroundColor }}
       >
-        <div className="flexcenter flex-wrap w-full mobile:pl-24">
+        <div className="flexcenter w-full flex-wrap mobile:pl-24">
           <PinIcon
-            className="scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6"
+            className="mx-3 scale-75 cursor-pointer tablet:mx-6 tablet:scale-100"
             fill={!noteOptions.isPinned ? 'white' : '#f87171'}
             width="40"
             height="40"
@@ -117,7 +115,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             }
           />
           <ArchiveIcon
-            className="scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6"
+            className="mx-3 scale-75 cursor-pointer tablet:mx-6 tablet:scale-100"
             fill={!noteOptions.isArchived ? 'white' : '#94a3b8'}
             width="40"
             height="40"
@@ -130,7 +128,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             }
           />
           <DoneIcon
-            className="scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6"
+            className="mx-3 scale-75 cursor-pointer tablet:mx-6 tablet:scale-100"
             fill={!noteOptions.isDone ? 'white' : '#d97706'}
             width="40"
             height="40"
@@ -143,7 +141,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             }
           />
           <ProgressIcon
-            className="scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6"
+            className="mx-3 scale-75 cursor-pointer tablet:mx-6 tablet:scale-100"
             fill={!noteOptions.isInProgress ? 'white' : '#9ca3af'}
             width="40"
             height="40"
@@ -164,8 +162,8 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
               render={(attrs) => (
                 <ConfirmBox
                   {...attrs}
-                  className={showConfirm ? '' : '!hidden z-[-1]'}
-                  content='confirm delete note'
+                  className={showConfirm ? '' : 'z-[-1] !hidden'}
+                  content="confirm delete note"
                   setConfirm={setShowConfirm}
                   actionWhenConfirm={removeNote}
                 />
@@ -173,7 +171,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             >
               <div onClick={() => setShowConfirm((s) => !s)}>
                 <TrashIcon
-                  className="scale-75 tablet:scale-100 cursor-pointer mx-3 tablet:mx-6"
+                  className="mx-3 scale-75 cursor-pointer tablet:mx-6 tablet:scale-100"
                   width="35"
                   height="35"
                 />
@@ -183,7 +181,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         </div>
 
         <button type="submit">
-          <CloseIcon className="cursor-pointer mx-4 text-rose-600" width="40" height="40" />
+          <CloseIcon className="mx-4 cursor-pointer text-rose-600" width="40" height="40" />
         </button>
       </div>
 
@@ -191,11 +189,11 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         <ErrorMessage className="p-6 text-[3rem] tablet:text-[4rem]" content={status.message} />
       )}
 
-      <div className="flexcentercol px-8 pb-8 h-[calc(100%-14rem)] tablet:h-[calc(100%-12rem)]">
+      <div className="flexcentercol h-[calc(100%-14rem)] px-8 pb-8 tablet:h-[calc(100%-12rem)]">
         <TimeContainer obj={{ updatedAt }} style={noteStyle} />
 
         <Input
-          className="!font-bold !text-[3.5rem] mobile:!text-[4.5rem] text-center !max-w-full tablet:!max-w-[65rem]"
+          className="!max-w-full text-center !text-[3.5rem] !font-bold mobile:!text-[4.5rem] tablet:!max-w-[65rem]"
           style={noteStyle}
           defaultValue={title}
           formHandle={{
@@ -211,7 +209,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         )}
 
         <TextArea
-          className="!text-[3rem] mobile:!text-[3.5rem] !max-w-full tablet:!max-w-[65rem] text-left px-6 !h-full"
+          className="!h-full !max-w-full px-6 text-left !text-[3rem] mobile:!text-[3.5rem] tablet:!max-w-[65rem]"
           style={noteStyle}
           defaultValue={data}
           formHandle={{ ...register('data') }}

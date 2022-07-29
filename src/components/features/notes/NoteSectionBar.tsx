@@ -14,18 +14,19 @@ import {
   ProgressIcon,
 } from '@cpns/icons';
 import { SearchBar, Tooltip } from '@cpns/shared';
-import { Title } from '../main/sections/Title';
-import { NoteAddNew } from './NoteAddNew';
-import NoteImport from './NoteImport';
-import NoteSection from './NoteSection';
 import Tippy from '@tippyjs/react';
 import { collection } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Title } from '../main/sections/Title';
+import { NoteAddNew } from './NoteAddNew';
+import NoteImport from './NoteImport';
+import NoteSection from './NoteSection';
 
 export const NoteSectionBar = () => {
   const setNotes = useStore((s) => s.setNotes);
   const currentUser = useStore((s) => s.currentUser);
+  const setNoteIdxList = useStore((s) => s.setNoteIdxList);
 
   const { t } = useTranslation();
 
@@ -38,7 +39,6 @@ export const NoteSectionBar = () => {
   const [showImport, setShowImport] = useState(false);
   const [addNewOpen, setAddNewOpen] = useState(false);
   const [noteList, setNoteList] = useState<NoteListType[]>([]);
-  const [idxListState, setIdxListState] = useState<string[]>([]);
   const [searchOpts, setSearchOpts] = useState({
     isSearch: false,
     value: '',
@@ -55,29 +55,21 @@ export const NoteSectionBar = () => {
     const rawData = getNoteList(data);
     if (!rawData) return;
 
-    if (rawData?.idxList) setIdxListState(rawData.idxList as string[]);
+    if (rawData?.idxList) setNoteIdxList(rawData.idxList);
     if (rawData?.noteList) setNoteList(rawData.noteList as NoteListType[]);
   }, [data, loading, error]);
 
   useEffect(() => {
-    setFilter((s) => ({
-      ...s,
-      searchPattern: searchOpts.isSearch ? searchOpts.value : '',
-    }));
+    setFilter((s) => ({ ...s, searchPattern: searchOpts.isSearch ? searchOpts.value : '' }));
   }, [searchOpts]);
 
   useEffect(() => {
-    setNotes &&
-      setNotes(
-        noteList.map((_) => ({
-          ..._.note,
-        }))
-      );
-  }, [noteList, setNotes]);
+    setNotes(noteList.map((_) => ({ ..._.note })));
+  }, [noteList]);
 
   return (
-    <div className="w-full my-[2rem] mb-[7rem]">
-      <div className="w-full flexcenter flex-wrap px-4">
+    <div className="my-[2rem] mb-[7rem] w-full">
+      <div className="flexcenter w-full flex-wrap px-4">
         <Title Icon={NoteIcon} content="Note" />
         <div className="flexcenter flex-wrap px-6 py-8">
           <Tooltip
@@ -87,7 +79,7 @@ export const NoteSectionBar = () => {
             }}
           >
             <DoneIcon
-              className="cursor-pointer mx-5 my-4"
+              className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasDone ? 'white' : '#fcd34d'}
               width="40"
               height="40"
@@ -102,7 +94,7 @@ export const NoteSectionBar = () => {
             }}
           >
             <ProgressIcon
-              className="cursor-pointer mx-5 my-4"
+              className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasInProgress ? 'white' : '#38bdf8'}
               width="40"
               height="40"
@@ -117,7 +109,7 @@ export const NoteSectionBar = () => {
             }}
           >
             <ArchiveIcon
-              className="cursor-pointer mx-5 my-4"
+              className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasArchived ? 'white' : '#94a3b8'}
               width="40"
               height="40"
@@ -132,7 +124,7 @@ export const NoteSectionBar = () => {
             }}
           >
             <AddIcon
-              className="cursor-pointer mx-5 my-4"
+              className="mx-5 my-4 cursor-pointer"
               fill={'white'}
               width="40"
               height="40"
@@ -158,7 +150,7 @@ export const NoteSectionBar = () => {
                   }}
                 >
                   <ImportIcon
-                    className="cursor-pointer mx-5 my-4"
+                    className="mx-5 my-4 cursor-pointer"
                     fill={'white'}
                     width="40"
                     height="40"
@@ -170,13 +162,13 @@ export const NoteSectionBar = () => {
 
           <div className="block tablet:hidden">
             <ListIcon
-              className={`${viewMode === 'list' ? 'block' : 'hidden'} cursor-pointer mx-5 my-4`}
+              className={`${viewMode === 'list' ? 'block' : 'hidden'} mx-5 my-4 cursor-pointer`}
               width="40"
               height="40"
               onClick={() => setViewMode('grid')}
             />
             <ListAllIcon
-              className={`${viewMode === 'grid' ? 'block' : 'hidden'} cursor-pointer mx-5 my-4`}
+              className={`${viewMode === 'grid' ? 'block' : 'hidden'} mx-5 my-4 cursor-pointer`}
               width="40"
               height="40"
               onClick={() => setViewMode('list')}
@@ -184,7 +176,7 @@ export const NoteSectionBar = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flexcenter px-4">
+      <div className="flexcenter w-full px-4">
         <SearchBar
           setSearchOpts={setSearchOpts}
           onChange={(e) => {
@@ -205,22 +197,17 @@ export const NoteSectionBar = () => {
       </div>
 
       {loading && (
-        <div className="flexcenter w-full h-[10rem]">
+        <div className="flexcenter h-[10rem] w-full">
           <FlatLoading />
         </div>
       )}
 
-      {!loading && noteList !== null && noteList.length === 0 && (
-        <div className="w-full p-8 m-4 font-bold text-[5rem] text-center">{t('no note')}</div>
+      {!loading && !!noteList && !noteList.length && (
+        <div className="m-4 w-full p-8 text-center text-[5rem] font-bold">{t('no note')}</div>
       )}
 
-      {!loading && noteList !== null && noteList.length !== 0 && (
-        <NoteSection
-          viewMode={viewMode}
-          filter={filter}
-          notes={noteList}
-          orderList={idxListState}
-        />
+      {!loading && !!noteList && !!noteList.length && (
+        <NoteSection viewMode={viewMode} filter={filter} notes={noteList} />
       )}
 
       {addNewOpen && <NoteAddNew onClickHandle={setAddNewOpen} />}

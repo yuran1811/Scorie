@@ -1,4 +1,4 @@
-import { addNewNote } from '@/services';
+import { addNewNote, updateIdxList } from '@/services';
 import { NoteDetailType } from '@/shared';
 import { useStore } from '@/store';
 import { AddIcon } from '@cpns/icons';
@@ -23,7 +23,9 @@ function isNoteData(obj: any): obj is NoteDetailType {
 }
 
 const NoteImport: FC<NoteImportProps> = ({ showImport, setShowImport }) => {
+  const noteIdxList = useStore((s) => s.noteIdxList);
   const currentUser = useStore((s) => s.currentUser);
+
   const [isError, setError] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
@@ -35,7 +37,11 @@ const NoteImport: FC<NoteImportProps> = ({ showImport, setShowImport }) => {
 
       if (isNoteData(data)) {
         setError(false);
-        await addNewNote(currentUser.uid, { ...data });
+        const { data: resp } = await addNewNote(currentUser.uid, { ...data });
+
+        if (resp && resp?.id && resp.id) {
+          await updateIdxList(currentUser.uid, [resp.id, ...noteIdxList]);
+        }
       } else {
         setError(true);
       }
@@ -55,11 +61,11 @@ const NoteImport: FC<NoteImportProps> = ({ showImport, setShowImport }) => {
     <div
       className={`${!showImport ? '!hidden' : 'z-10'} ${
         isError ? 'bg-rose-400' : 'bg-indigo-200'
-      } flexcenter flex-wrap absolute bottom-[-9rem] right-0 p-2 pr-4 min-w-[10rem] w-[70vw] max-w-[40rem] rounded-[3rem]`}
+      } flexcenter absolute bottom-[-9rem] right-0 w-[70vw] min-w-[10rem] max-w-[40rem] flex-wrap rounded-[3rem] p-2 pr-4`}
     >
       <div className="flex-1">
         <Input
-          className="focus:!border-indigo-400 mx-2"
+          className="mx-2 focus:!border-indigo-400"
           onChange={(e) => setInputValue(e.currentTarget.value)}
         />
       </div>

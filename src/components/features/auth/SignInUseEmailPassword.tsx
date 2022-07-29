@@ -73,6 +73,7 @@ const SignInUseEmailPassWord = () => {
               name="email"
               placeholder="Email"
               defaultValue=""
+              inputMode="email"
               formHandle={{
                 ...register('email', {
                   required: 'Please fill in this field',

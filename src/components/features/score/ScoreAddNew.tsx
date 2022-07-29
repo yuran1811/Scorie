@@ -54,7 +54,7 @@ export const ScoreAddNew: FC<ScoreAddNewProps & DivProps> = ({ subject, onClick 
     <ModalBox onClick={onClick}>
       <ModalBoxHeader onClick={onClick}>
         <IgnoreIcon
-          className="cursor-pointer mx-5"
+          className="mx-5 cursor-pointer"
           fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
           width="40"
           height="40"
@@ -64,12 +64,13 @@ export const ScoreAddNew: FC<ScoreAddNewProps & DivProps> = ({ subject, onClick 
 
       <div className="w-full text-[4rem] text-indigo-900 line-clamp-1">{t('new record')}</div>
       <form
-        className="flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1"
+        className="flexcentercol w-full p-8 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
           placeholder="Score"
           defaultValue=""
+          inputMode="decimal"
           formHandle={{
             ...register('score', {
               required: 'Please fill in this field',
@@ -87,6 +88,7 @@ export const ScoreAddNew: FC<ScoreAddNewProps & DivProps> = ({ subject, onClick 
         <Input
           placeholder="Base"
           defaultValue=""
+          inputMode="decimal"
           formHandle={{
             ...register('base', {
               required: 'Please fill in this field',

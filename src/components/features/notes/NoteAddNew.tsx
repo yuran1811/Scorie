@@ -1,4 +1,4 @@
-import { addNewNote, validateNoteOption } from '@/services';
+import { addNewNote, updateIdxList, validateNoteOption } from '@/services';
 import { DivProps, NoteDetailType } from '@/shared';
 import { useStore } from '@/store';
 import { DoneIcon, PinIcon, ProgressIcon } from '@cpns/icons';
@@ -19,6 +19,7 @@ interface NoteAddNewProps {
 
 export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) => {
   const currentUser = useStore((s) => s.currentUser);
+  const noteIdxList = useStore((s) => s.noteIdxList);
 
   const { t } = useTranslation();
 
@@ -36,7 +37,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const checkNoteOpts = validateNoteOption({ ...noteOptions });
 
     if (checkNoteOpts.type === 'errors') {
@@ -55,7 +56,10 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
         theme: 'default',
       } as NoteDetailType;
 
-      addNewNote(currentUser.uid, noteToAdd);
+      const { data: resp } = await addNewNote(currentUser.uid, noteToAdd);
+      if (resp && resp?.id) {
+        await updateIdxList(currentUser.uid, [resp.id, ...noteIdxList.list], noteIdxList.id);
+      }
     }
   };
 
@@ -63,14 +67,14 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
     <ModalBox onClick={() => onClickHandle(false)}>
       <ModalBoxHeader onClick={() => onClickHandle(false)}>
         <PinIcon
-          className="cursor-pointer mx-5"
+          className="mx-5 cursor-pointer"
           fill={!noteOptions.isPinned ? 'white' : '#f87171'}
           width="40"
           height="40"
           onClick={() => setNoteOptions((s) => ({ ...s, isPinned: !s.isPinned }))}
         />
         <DoneIcon
-          className="cursor-pointer mx-5"
+          className="mx-5 cursor-pointer"
           fill={!noteOptions.isDone ? 'white' : '#d97706'}
           width="40"
           height="40"
@@ -83,7 +87,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
           }
         />
         <ProgressIcon
-          className="cursor-pointer mx-5"
+          className="mx-5 cursor-pointer"
           fill={!noteOptions.isInProgress ? 'white' : '#57534e'}
           width="40"
           height="40"
@@ -99,14 +103,14 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 
       {status.type === 'errors' && (
         <ErrorMessage
-          className="mx-auto py-5 w-4/5 text-[3rem] text-center"
+          className="mx-auto w-4/5 py-5 text-center text-[3rem]"
           content={status.message}
         />
       )}
 
       <div className="w-full text-[4rem] text-indigo-900 line-clamp-1">{t('new note')}</div>
       <form
-        className="flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1"
+        className="flexcentercol w-full p-8 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input

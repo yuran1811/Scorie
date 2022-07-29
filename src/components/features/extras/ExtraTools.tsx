@@ -13,13 +13,13 @@ import { ToolsContainer } from './ToolsContainer';
 const toastConfig: ToastOptions = {
   ...ToastDefaultConfig,
   autoClose: 2000,
-  hideProgressBar: true,
-  position: 'top-right',
+  position: 'top-center',
   progress: 1,
   toastId: 'change_logs_status',
 };
 
 export const ExtraTools: FC = () => {
+  const currentUser = useStore((s) => s.currentUser);
   const changeLogs = useStore((s) => s.changeLogs);
   const changeLogsRead = useStore((s) => s.changeLogsRead);
   const setChangeLogs = useStore((s) => s.setChangeLogs);
@@ -39,6 +39,8 @@ export const ExtraTools: FC = () => {
   }, [data, loading, error]);
 
   useEffect(() => {
+    if (!currentUser || !currentUser?.uid) return;
+
     const unreadLog = changeLogs.filter((log) => !changeLogsRead[log.version]);
 
     if (unreadLog.length) {
@@ -63,7 +65,7 @@ export const ExtraTools: FC = () => {
           progress: 0,
         });
     }
-  }, [changeLogs, changeLogsRead]);
+  }, [changeLogs, changeLogsRead, currentUser]);
 
   return (
     <div className="custom-tippy">

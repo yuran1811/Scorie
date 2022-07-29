@@ -15,7 +15,11 @@ export const addNewFeedback = async (userId: string, data: TestimonialProps) => 
   try {
     if (!data.content.length && !data.job.length && !data.name.length)
       await deleteDoc(doc(db, 'testimonials', userId));
-    else await setDoc(doc(db, 'testimonials', userId), { ...data, updatedAt: serverTimestamp() });
+    else
+      await setDoc(doc(db, 'testimonials', userId), {
+        ...data,
+        updatedAt: serverTimestamp() || new Date(),
+      });
     return '';
   } catch (error) {
     return (error as FirebaseError).message;
@@ -26,7 +30,7 @@ export const upvoteFeedback = async (feedbackId: string, userId: string, isVoted
   try {
     await updateDoc(doc(db, 'testimonials', feedbackId), {
       votes: isVoted ? arrayUnion(userId) : arrayRemove(userId),
-      updatedAt: serverTimestamp(),
+      updatedAt: serverTimestamp() || new Date(),
     });
     return '';
   } catch (error) {

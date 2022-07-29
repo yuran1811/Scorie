@@ -17,7 +17,9 @@ const sortableConfig = {
 };
 
 export const NoteSection: FC<NoteSectionProps> = (props) => {
-  const { viewMode, filter, notes, orderList } = props;
+  const { viewMode, filter, notes } = props;
+
+  const noteIdxList = useStore((s) => s.noteIdxList);
 
   const { t } = useTranslation();
 
@@ -32,45 +34,55 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
     clearTimeout(timeoutId);
     setCanUpdate(false);
     return true;
-  }, []);
+  }, [timeoutId]);
 
   const onEndHandle = useCallback(() => {
     clearTimeout(timeoutId);
     setTimeoutId(
       setTimeout(() => {
         setCanUpdate(true);
-      }, 2200)
+      }, 300)
     );
     return true;
-  }, []);
+  }, [timeoutId]);
 
   useEffect(() => {
-    if (!orderList || !notes) return;
+    if (!noteIdxList || !notes) return;
+    if (!noteIdxList.list.length) {
+      setOtherList([...notes]);
+      return;
+    }
 
     const listToUse: NoteListType[] = [];
-    orderList.forEach((_) => {
+    noteIdxList.list.forEach((_) => {
       const noteItem = notes.find((item) => item.id === _);
       if (!noteItem) return;
 
       listToUse.push(noteItem);
     });
-    if (!listToUse.length) return;
-
     const pinnedList = listToUse.filter((_) => _.note.isPinned);
     const otherList = listToUse.filter((_) => !_.note.isPinned);
 
-    setPinnedList([...pinnedList]);
-    setOtherList([...otherList]);
-  }, [orderList, notes]);
+    const notesUnorder = notes.filter((note) => !listToUse.find((item) => item.id === note.id));
+    const pinnedListUnorder = notesUnorder.filter((_) => _.note.isPinned);
+    const otherListUnorder = notesUnorder.filter((_) => !_.note.isPinned);
+
+    setPinnedList([...pinnedList, ...pinnedListUnorder]);
+    setOtherList([...otherList, ...otherListUnorder]);
+  }, [noteIdxList, notes]);
 
   useEffect(() => {
     if (!canUpdate || notes === null || !pinnedList || !otherList) return;
     if (!currentUser || !currentUser?.uid) return;
 
     const idxListToUpdate = [...pinnedList.map((_) => _.id), ...otherList.map((_) => _.id)];
-    if (idxListToUpdate.every((_, idx) => _ === orderList[idx])) return;
+    if (idxListToUpdate.every((_, idx) => _ === noteIdxList.list[idx])) return;
 
-    updateIdxList(currentUser.uid, [...pinnedList.map((_) => _.id), ...otherList.map((_) => _.id)]);
+    updateIdxList(
+      currentUser.uid,
+      [...pinnedList.map((_) => _.id), ...otherList.map((_) => _.id)],
+      noteIdxList.id
+    );
   }, [pinnedList, otherList, canUpdate]);
 
   useEffect(() => {
@@ -78,8 +90,8 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
   });
 
   return (
-    <div className="max-w-[100rem] w-full mx-auto my-12 pb-12">
-      <div className="w-[20rem] mx-auto mb-8 font-semibold tablet:text-[4.5rem] text-[3.5rem] text-center border-b-[0.2rem] border-indigo-100">
+    <div className="mx-auto my-12 w-full max-w-[100rem] pb-12">
+      <div className="mx-auto mb-8 w-[20rem] border-b-[0.2rem] border-indigo-100 text-center text-[3.5rem] font-semibold tablet:text-[4.5rem]">
         {t('pinned')}
       </div>
       <ReactSortable
@@ -97,7 +109,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
         ))}
       </ReactSortable>
 
-      <div className="w-[20rem] mx-auto mt-[7rem] mb-8 font-semibold tablet:text-[4.5rem] text-[3.5rem] text-center border-b-[0.2rem] border-indigo-100">
+      <div className="mx-auto mt-[7rem] mb-8 w-[20rem] border-b-[0.2rem] border-indigo-100 text-center text-[3.5rem] font-semibold tablet:text-[4.5rem]">
         {t('others')}
       </div>
       <ReactSortable

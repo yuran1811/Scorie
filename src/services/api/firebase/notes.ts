@@ -3,16 +3,15 @@ import { getFirebaseErr } from '@/utils';
 import { FirebaseError } from 'firebase/app';
 import {
   addDoc,
+  arrayRemove,
   collection,
   deleteDoc,
   doc,
   getDoc,
   serverTimestamp,
   setDoc,
+  updateDoc,
 } from 'firebase/firestore';
-
-export const noteIndexListRef = (userId: string) =>
-  doc(db, 'users', userId, 'notes', 'note_index_list');
 
 export const validateNoteOption = (opt: {
   [key: string]: boolean;
@@ -32,16 +31,21 @@ export const validateNoteOption = (opt: {
   };
 };
 
-export const updateIdxList = async (userId: string, data: string[]) => {
+export const updateIdxList = async (userId: string, data: string[], idxListId: string) => {
   try {
-    await setDoc(noteIndexListRef(userId), {
-      idxList: [...data],
-      updatedAt: serverTimestamp(),
-    });
-    return '';
+    const noteIdxRef = doc(db, 'users', userId, 'notes', 'note_index_list');
+    const resp = await setDoc(
+      noteIdxRef,
+      {
+        idxList: [...data],
+        updatedAt: serverTimestamp() || new Date(),
+      },
+      { merge: true }
+    );
+    return { resp, err: '' };
   } catch (error) {
     const err = error as FirebaseError;
-    return getFirebaseErr(err.message);
+    return { resp: null, err: getFirebaseErr(err.message) };
   }
 };
 
@@ -51,46 +55,28 @@ export const addNewNote = async (userId: string, data: NoteDetailType) => {
 
     const resp = await addDoc(collection(db, 'users', userId, 'notes'), {
       ...dataToAdd,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
+      createdAt: serverTimestamp() || new Date(),
+      updatedAt: serverTimestamp() || new Date(),
     });
-
-    if (resp && resp?.id && resp.id) {
-      const ref = noteIndexListRef(userId);
-
-      const listData = await getDoc(ref);
-      const list = listData?.data() as NoteDetailType;
-      const lastList = list && list?.idxList ? list.idxList : [];
-
-      await updateIdxList(userId, [resp.id, ...lastList]);
-
-      // if (list && list?.idxList) await updateIdxList(userId, [resp.id, ...list.idxList]);
-      // else await setDoc(ref, { idxList: [resp.id], updatedAt: serverTimestamp() });
-    }
 
     return {
       data: resp,
       errorMessage: '',
     };
   } catch (error) {
-    const err = error as FirebaseError;
     return {
       data: null,
-      errorMessage: getFirebaseErr(err.message),
+      errorMessage: getFirebaseErr((error as FirebaseError).message),
     };
   }
 };
 
 export const editNote = async (userId: string, noteId: string, data: any) => {
   try {
-    await setDoc(
-      doc(db, 'users', userId, 'notes', noteId),
-      {
-        ...data,
-        updatedAt: serverTimestamp(),
-      },
-      { merge: true }
-    );
+    await updateDoc(doc(db, 'users', userId, 'notes', noteId), {
+      ...data,
+      updatedAt: serverTimestamp() || new Date(),
+    });
     return '';
   } catch (error) {
     const err = error as FirebaseError;
@@ -98,9 +84,17 @@ export const editNote = async (userId: string, noteId: string, data: any) => {
   }
 };
 
-export const deleteNote = async (userId: string, noteId: string) => {
+export const deleteNote = async (userId: string, noteId: string, idxListId: string) => {
   try {
     await deleteDoc(doc(db, 'users', userId, 'notes', noteId));
+    await setDoc(
+      doc(db, 'users', userId, 'notes', 'note_index_list'),
+      {
+        idxList: arrayRemove(noteId),
+        updatedAt: serverTimestamp() || new Date(),
+      },
+      { merge: true }
+    );
     return '';
   } catch (error) {
     const err = error as FirebaseError;

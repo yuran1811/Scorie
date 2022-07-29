@@ -239,6 +239,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
             <div className="flex-1">
               <Input
                 className="w-[15rem]"
+                inputMode="decimal"
                 value={expectedAverage}
                 onChange={(e) => {
                   if (!Number(e.currentTarget.value)) setExpectedAverage('');

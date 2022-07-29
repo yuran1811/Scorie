@@ -41,7 +41,6 @@ export interface NoteSectionProps {
   viewMode: string;
   filter: NoteListFilterType;
   notes: NoteListType[];
-  orderList: string[];
 }
 
 export interface NoteItemProps {

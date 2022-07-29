@@ -87,6 +87,7 @@ export const CreateNewUser: FC = ({ children }) => {
           name="email"
           placeholder="Email"
           defaultValue=""
+          inputMode="email"
           formHandle={{
             ...register('email', {
               required: 'Please fill in this field',

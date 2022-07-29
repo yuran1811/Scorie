@@ -56,8 +56,8 @@ export const addNewSubject = async (userId: string, data: any) => {
   try {
     const resp = await addDoc(collection(db, 'users', userId, 'subjects'), {
       ...data,
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
+      createdAt: serverTimestamp() || new Date(),
+      updatedAt: serverTimestamp() || new Date(),
     });
 
     return {
@@ -102,7 +102,7 @@ export const editSubject = async (userId: string, subjectId: string, data: any) 
   try {
     await updateDoc(doc(db, 'users', userId, 'subjects', subjectId), {
       ...data,
-      updatedAt: serverTimestamp(),
+      updatedAt: serverTimestamp() || new Date(),
     });
     return '';
   } catch (error) {

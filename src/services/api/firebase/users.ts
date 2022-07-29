@@ -64,7 +64,7 @@ export const updateUserProfile = async (user: User) => {
       email: user.email,
       photoURL: user.photoURL,
       displayName: user.displayName,
-      updatedAt: serverTimestamp(),
+      updatedAt: serverTimestamp() || new Date(),
     });
 
     return {
@@ -85,7 +85,7 @@ export const setUserProfile = async (user: User) => {
       email: user.email,
       photoURL: user.photoURL,
       displayName: user.displayName,
-      updatedAt: serverTimestamp(),
+      updatedAt: serverTimestamp() || new Date(),
     });
 
     return {

@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
     if (!isAppOnline) {
       toast.info(t('the connectivity is back, sync in progress'), {
         ...ToastDefaultConfig,
-        autoClose: 4000,
+        autoClose: 4500,
         position: 'top-center',
       });
       isAppOnline = true;
@@ -24,6 +24,7 @@ window.addEventListener('load', () => {
       ),
       {
         ...ToastDefaultConfig,
+        autoClose: false,
         position: 'top-center',
       }
     );

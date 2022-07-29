@@ -15,7 +15,13 @@ export const Header: FC = () => (
     <Link to="/">
       <div
         className="text-center text-[4rem] font-bold mobile:text-[4.6rem]"
-        onClick={() => document.querySelector('#root > div')?.scroll(0, 0)}
+        onClick={() =>
+          document.querySelector('#root > div')?.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          })
+        }
       >
         Scorie
       </div>
