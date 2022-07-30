@@ -14,7 +14,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: { enabled: true },
-      includeAssets: ['favicon.ico', 'logo192.png', 'logo512.png', 'vite.svg'],
+      includeAssets: ['favicon.ico', 'logo192.png', 'logo512.png', 'vite.svg', 'QRCode.png'],
       manifest: {
         name: 'Scorie',
         short_name: 'Scorie',
