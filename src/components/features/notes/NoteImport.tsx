@@ -39,8 +39,8 @@ const NoteImport: FC<NoteImportProps> = ({ showImport, setShowImport }) => {
         setError(false);
         const { data: resp } = await addNewNote(currentUser.uid, { ...data });
 
-        if (resp && resp?.id && resp.id) {
-          await updateIdxList(currentUser.uid, [resp.id, ...noteIdxList]);
+        if (resp && resp?.id) {
+          await updateIdxList(currentUser.uid, [resp.id, ...noteIdxList.list], noteIdxList.id);
         }
       } else {
         setError(true);
