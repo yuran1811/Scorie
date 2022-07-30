@@ -20,7 +20,7 @@ export const ScoreContainer: FC<ScoreContainerProps> = ({
       <>
         {subject &&
           subject.scores.map((score) => (
-            <div key={score.id} className="bg-indigo-900 rounded-[2rem] m-6">
+            <div key={score.id} className="m-6 rounded-[2rem] bg-indigo-900">
               <ScoreDetail score={score} subject={subject} scores={scores} />
             </div>
           ))}
@@ -30,16 +30,16 @@ export const ScoreContainer: FC<ScoreContainerProps> = ({
     {viewMode === 'group' && (
       <>
         {typeList.map((_) => (
-          <div key={_} className="w-full mt-6 mb-16">
-            <div className="w-full ml-6 text-left text-[4rem] indent-[3rem] border-l-[1rem] border-current">
+          <div key={_} className="mt-6 mb-16 w-full">
+            <div className="ml-6 w-full border-l-[1rem] border-current text-left indent-[3rem] text-[4rem]">
               {_}
             </div>
-            <div className="w-full ml-6 flexcenter !justify-start flex-wrap">
+            <div className="flexcenter ml-6 w-full flex-wrap !justify-start">
               {subject &&
                 subject.scores
                   .filter((score) => score.type === _)
                   .map((score) => (
-                    <div key={score.id} className="bg-indigo-900 rounded-[2rem] m-6">
+                    <div key={score.id} className="m-6 rounded-[2rem] bg-indigo-900">
                       <ScoreDetail score={score} subject={subject} scores={scores} />
                     </div>
                   ))}

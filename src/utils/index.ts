@@ -5,6 +5,7 @@ export * from './dayjsUsage';
 export * from './firebase';
 export * from './notes';
 export * from './notifications';
+export * from './pwaFunctions';
 export * from './quotes';
 export * from './scores';
 export * from './standardize';

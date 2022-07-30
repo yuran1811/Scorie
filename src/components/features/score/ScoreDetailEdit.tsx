@@ -99,7 +99,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
     <ModalBox onClick={onClick}>
       <ModalBoxHeader onClick={onClick}>
         <IgnoreIcon
-          className="cursor-pointer m-[0.6rem] mx-4 mobile:m-5"
+          className="m-[0.6rem] mx-4 cursor-pointer mobile:m-5"
           fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
           width="40"
           height="40"
@@ -113,7 +113,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
             render={(attrs) => (
               <ConfirmBox
                 {...attrs}
-                className={showConfirm ? '' : '!hidden z-[-1]'}
+                className={showConfirm ? '' : 'z-[-1] !hidden'}
                 content={'confirm delete score'}
                 setConfirm={setShowConfirm}
                 actionWhenConfirm={removeScoreRecord}
@@ -122,7 +122,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
           >
             <div onClick={() => setShowConfirm((s) => !s)}>
               <TrashIcon
-                className="cursor-pointer m-[0.6rem] mx-4 mobile:m-5 text-slate-500"
+                className="m-[0.6rem] mx-4 cursor-pointer text-slate-500 mobile:m-5"
                 width="40"
                 height="40"
               />
@@ -139,7 +139,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
       />
 
       <form
-        className="flexcentercol p-8 font-bold text-[5rem] text-center text-teal-700 w-full line-clamp-1"
+        className="flexcentercol w-full p-8 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input

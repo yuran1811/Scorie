@@ -5,7 +5,7 @@ import { FC } from 'react';
 
 export const PrevQuoteButton: FC<ButtonProps> = ({ onClick }) => (
   <Tooltip content="Previous quote">
-    <button className="right-[10rem] group" onClick={onClick}>
+    <button className="group right-[10rem]" onClick={onClick}>
       <ArrowLeftIcon
         className="isAnimated group-hover:translate-x-[-0.6rem]"
         width="40"
@@ -17,7 +17,7 @@ export const PrevQuoteButton: FC<ButtonProps> = ({ onClick }) => (
 
 export const NextQuoteButton: FC<ButtonProps> = ({ onClick }) => (
   <Tooltip content="Next quote">
-    <button className="right-[5rem] group" onClick={onClick}>
+    <button className="group right-[5rem]" onClick={onClick}>
       <ArrowRightIcon
         className="isAnimated group-hover:translate-x-[0.6rem]"
         width="40"
@@ -29,7 +29,7 @@ export const NextQuoteButton: FC<ButtonProps> = ({ onClick }) => (
 
 export const FetchQuoteButton: FC<ButtonProps> = ({ onClick }) => (
   <Tooltip content="Get new quotes">
-    <button className="right-[5rem] group" onClick={onClick}>
+    <button className="group right-[5rem]" onClick={onClick}>
       <AddIcon className="isAnimated group-hover:translate-x-[0.6rem]" width="40" height="40" />
     </button>
   </Tooltip>

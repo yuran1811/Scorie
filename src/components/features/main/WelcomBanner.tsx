@@ -7,11 +7,11 @@ export const WelcomBanner: FC = ({ children }) => {
 
   return (
     <div className="flexcentercol w-full pt-8">
-      <div className="w-full font-bold text-[4.5rem] tablet:text-[5rem] text-center tablet:px-2">
+      <div className="w-full text-center text-[4.5rem] font-bold tablet:px-2 tablet:text-[5rem]">
         {t('welcome')}, {children}!
       </div>
 
-      <div className="w-full my-8">
+      <div className="my-8 w-full">
         <BlockQuote />
       </div>
     </div>

@@ -51,7 +51,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
       <div
         className={`${
           !isShow ? '!hidden' : ''
-        } overflow-hidden cursor-pointer tablet:max-w-[25rem] w-full m-6 p-4 rounded-[2.5rem] font-bold text-center text-rose-600 bg-violet-200`}
+        } m-6 w-full cursor-pointer overflow-hidden rounded-[2.5rem] bg-violet-200 p-4 text-center font-bold text-rose-600 tablet:max-w-[25rem]`}
         onClick={() => setOpenDetail((s) => !s)}
       >
         <div className="flexcenter p-4">
@@ -76,11 +76,11 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
         </div>
 
         <div className="flexcentercol">
-          <div className="font-bold text-[3.5rem] text-center text-teal-700 w-full line-clamp-1">
+          <div className="w-full text-center text-[3.5rem] font-bold text-teal-700 line-clamp-1">
             {subject?.name || ''}
           </div>
           <div
-            className="font-bold text-[6rem] text-center line-clamp-1 px-6 my-4 rounded-[1rem]"
+            className="my-4 rounded-[1rem] px-6 text-center text-[6rem] font-bold line-clamp-1"
             style={{
               ...averageScoreStyle[averageScoreStyle.check(+averageScore)],
             }}
@@ -89,7 +89,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
           </div>
 
           {scores.length !== 0 && (
-            <div className="font-bold text-[3rem] text-slate-800 text-left w-full px-8 line-clamp-1">
+            <div className="w-full px-8 text-left text-[3rem] font-bold text-slate-800 line-clamp-1">
               {t('recent')}
             </div>
           )}
@@ -97,24 +97,24 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
           {scores.length ? (
             <ReactSwiper
               {...swiperOptions}
-              className="flex flex-row items-center w-full text-sky-700"
+              className="flex w-full flex-row items-center text-sky-700"
             >
               {scores
                 .slice(-MAX_SCORE_RECENT_LTH)
                 .reverse()
                 .map((_) => (
                   <SwiperSlide key={_.id}>
-                    <div className="w-[7rem] h-[6rem] p-3 text-center">{_.value}</div>
+                    <div className="h-[6rem] w-[7rem] p-3 text-center">{_.value}</div>
                   </SwiperSlide>
                 ))}
               {scores.length > MAX_SCORE_RECENT_LTH && (
                 <SwiperSlide>
-                  <div className="w-[7rem] h-[6rem] p-3 text-center">...</div>
+                  <div className="h-[6rem] w-[7rem] p-3 text-center">...</div>
                 </SwiperSlide>
               )}
             </ReactSwiper>
           ) : (
-            <div className="font-semibold text-[3rem] text-slate-800 text-center w-full px-8 line-clamp-1">
+            <div className="w-full px-8 text-center text-[3rem] font-semibold text-slate-800 line-clamp-1">
               No record
             </div>
           )}

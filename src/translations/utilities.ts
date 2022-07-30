@@ -223,6 +223,10 @@ const notificationTranslation = {
     vi: 'Được tạo bởi Scorie',
     en: 'Created by Scorie',
   },
+  'message from scorie': {
+    vi: 'Tin nhắn từ Scorie',
+    en: 'Message from Scorie',
+  },
   'you have allowed scorie to send notification': {
     vi: 'Bạn đã cấp quyền gửi thông báo cho Scorie',
     en: 'You have allowed Scorie to send notification !',
@@ -234,6 +238,18 @@ const notificationTranslation = {
   'please enable notification on this site to use notification feature': {
     vi: 'Vui lòng cho phép quyền thông báo để nhận tin tức mới nhất từ Scorie !',
     en: 'Please enable notification on this site to use notification feature !',
+  },
+  'have a nice day, friends': {
+    vi: 'Chúc các bạn một ngày tốt lành !',
+    en: 'Have a nice day, Friends !',
+  },
+  'cannot regist push service': {
+    vi: 'Không dùng được tính năng thông báo mất rồi',
+    en: 'Cannot regist push service',
+  },
+  'cannot receive notification from server': {
+    vi: 'Ây da, không nhận được thông báo từ hệ thống rồi',
+    en: 'Cannot receive notification from server',
   },
 };
 
@@ -294,6 +310,22 @@ export default {
   'click to change': {
     vi: 'Nhấp để đổi',
     en: 'Click to change',
+  },
+  open: {
+    vi: 'Mở',
+    en: 'Open',
+  },
+  minimize: {
+    vi: 'Thu nhỏ',
+    en: 'Minimize',
+  },
+  maximize: {
+    vi: 'Phóng to',
+    en: 'Maximize',
+  },
+  share: {
+    vi: 'Chia sẻ',
+    en: 'Share',
   },
 
   title: {

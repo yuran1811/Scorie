@@ -2,11 +2,11 @@ import { TranslationType } from '@shared/types';
 
 export default {
   'mark as read': {
-    vi: 'Đấnh dấu là đã đọc',
+    vi: 'Đánh dấu là đã đọc',
     en: 'Mark as read',
   },
   'mark as unread': {
-    vi: 'Đấnh dấu là chưa đọc',
+    vi: 'Đánh dấu là chưa đọc',
     en: 'Mark as unread',
   },
 

@@ -22,6 +22,7 @@ import {
   IgnoreIcon,
   ImportantIcon,
   ImportIcon,
+  InboxIcon,
   InfoIcon,
   InstagramIcon,
   ListAllIcon,
@@ -37,6 +38,7 @@ import {
   PinIcon,
   PlusIcon,
   ProgressIcon,
+  QRIcon,
   QuoteIcon,
   ReactIcon,
   SearchIcon,
@@ -50,12 +52,11 @@ import {
   UserIcon,
   ViLocale,
   YinYangIcon,
-  
 } from './index';
 
 const IconCollection = () => {
   return (
-    <div className="w-full flex flex-wrap items-start justify-center">
+    <div className="container mx-auto flex w-full flex-wrap items-start justify-center gap-4">
       <AddIcon className="icon-test" width="30" height="30" />
       <AddressBookIcon className="icon-test" width="30" height="30" />
       <ArchiveIcon className="icon-test" width="30" height="30" />
@@ -69,12 +70,19 @@ const IconCollection = () => {
       <DoubleCheckIcon className="icon-test" width="30" height="30" />
       <DownloadIcon className="icon-test" width="30" height="30" />
       <EditIcon className="icon-test" width="30" height="30" />
+      <EnLocale className="icon-test" width="30" height="30" />
+      <FacebookIcon className="icon-test" width="30" height="30" />
+      <FBMessengerIcon className="icon-test" width="30" height="30" />
       <GlobalIcon className="icon-test" width="30" height="30" />
+      <GoogleIcon className="icon-test" width="30" height="30" />
       <GroupIcon className="icon-test" width="30" height="30" />
       <HashtagIcon className="icon-test" width="30" height="30" />
       <IgnoreIcon className="icon-test" width="30" height="30" />
       <ImportantIcon className="icon-test" width="30" height="30" />
       <ImportIcon className="icon-test" width="30" height="30" />
+      <InboxIcon className="icon-test" width="30" height="30" />
+      <InfoIcon className="icon-test" width="30" height="30" />
+      <InstagramIcon className="icon-test" width="30" height="30" />
       <ListAllIcon className="icon-test" width="30" height="30" />
       <ListIcon className="icon-test" width="30" height="30" />
       <LogInIcon className="icon-test" width="30" height="30" />
@@ -83,10 +91,12 @@ const IconCollection = () => {
       <MessageIcon className="icon-test" width="30" height="30" />
       <NodeShareIcon className="icon-test" width="30" height="30" />
       <NoteIcon className="icon-test" width="30" height="30" />
+      <NotificationIcon active className="icon-test" width="30" height="30" />
       <PaletteIcon className="icon-test" width="30" height="30" />
       <PinIcon className="icon-test" width="30" height="30" />
       <PlusIcon className="icon-test" width="30" height="30" />
       <ProgressIcon className="icon-test" width="30" height="30" />
+      <QRIcon className="icon-test" width="30" height="30" />
       <QuoteIcon className="icon-test" width="30" height="30" />
       <ReactIcon className="icon-test" width="30" height="30" />
       <SearchIcon className="icon-test" width="30" height="30" />
@@ -96,17 +106,10 @@ const IconCollection = () => {
       <TagIcon className="icon-test" width="30" height="30" />
       <ToolIcon className="icon-test" width="30" height="30" />
       <TrashIcon className="icon-test" width="30" height="30" />
-      <UserIcon className="icon-test" width="30" height="30" />
-      <YinYangIcon className="icon-test" width="30" height="30" />
-      <EnLocale className="icon-test" width="30" height="30" />
-      <ViLocale className="icon-test" width="30" height="30" />
       <UpvoteIcon className="icon-test" width="30" height="30" />
-      <NotificationIcon active className="icon-test" width="30" height="30" />
-      <InstagramIcon className="icon-test" width="30" height="30" />
-      <GoogleIcon className="icon-test" width="30" height="30" />
-      <InfoIcon className="icon-test" width="30" height="30" />
-      <FBMessengerIcon className="icon-test" width="30" height="30" />
-      <FacebookIcon className="icon-test" width="30" height="30" />
+      <UserIcon className="icon-test" width="30" height="30" />
+      <ViLocale className="icon-test" width="30" height="30" />
+      <YinYangIcon className="icon-test" width="30" height="30" />
     </div>
   );
 };

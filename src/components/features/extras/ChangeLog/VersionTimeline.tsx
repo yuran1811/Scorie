@@ -9,7 +9,7 @@ export const VersionTimeline: FC<DivProps> = ({ onClick }) => {
   const changeLogs = useStore((s) => s.changeLogs);
 
   return createPortal(
-    <div className="fullscreen flexcenter z-[20] !justify-start">
+    <div className="fullscreen flexcenter z-20 !justify-start">
       <Overlay zIdx="z-[-1]" onClick={onClick} />
 
       <div className="scrollY relative m-auto max-h-[80vh] max-w-[50rem] rounded-3xl border-4 border-violet-400 bg-gray-800 p-8 text-gray-100">

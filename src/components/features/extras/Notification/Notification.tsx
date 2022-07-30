@@ -1,4 +1,3 @@
-import { sendNotification } from '@/services';
 import { getFCMToken, onMessageListener, ToastDefaultConfig } from '@/shared';
 import { useStore } from '@/store';
 import { getFirebaseErr, getNotification } from '@/utils';
@@ -22,16 +21,23 @@ export const NotificationWrapper = () => {
     getFCMToken()
       .then((token) => {
         token && setFCMToken(token);
-        setTimeout(() => {
-          sendNotification({
-            FCMToken,
-            title: t('you have allowed scorie to send notification'),
-            body: t('created by scorie'),
-          });
-        }, 500);
+
+        getNotification(t('you have allowed scorie to send notification'), {
+          body: t('created by scorie'),
+        } as NotificationOptions);
+
+        // setTimeout(() => {
+        //   sendNotification({
+        //     FCMToken,
+        //     title: t('you have allowed scorie to send notification'),
+        //     body: t('created by scorie'),
+        //   });
+        // }, 500);
       })
       .catch((err) => {
-        console.log(getFirebaseErr(err));
+        getNotification(t('cannot regist push service'), {
+          body: `Bugs description: ${getFirebaseErr(err)}`,
+        } as NotificationOptions);
       });
 
     onMessageListener()
@@ -45,7 +51,11 @@ export const NotificationWrapper = () => {
 
         getNotification(title || '', { body, image } as NotificationOptions);
       })
-      .catch((err) => console.log('failed: ', err));
+      .catch((err) => {
+        getNotification(t('cannot receive notification from server'), {
+          body: `Bugs description: ${getFirebaseErr(err)}`,
+        } as NotificationOptions);
+      });
   };
 
   const notificationHandle = () => {
@@ -63,17 +73,21 @@ export const NotificationWrapper = () => {
 
     if (permission === 'granted') notificationAction();
     else {
-      requestPermission().then((result) => {
-        if (result === 'granted') notificationAction();
-        else {
-          toast.error(t('please enable notification on this site to use notification feature'), {
-            ...ToastDefaultConfig,
-            toastId: 'unenable-noti',
-            autoClose: 5000,
-            position: 'top-center',
-          });
-        }
-      });
+      requestPermission()
+        .then((result) => {
+          if (result === 'granted') notificationAction();
+          else {
+            toast.error(t('please enable notification on this site to use notification feature'), {
+              ...ToastDefaultConfig,
+              toastId: 'unenable-noti',
+              autoClose: 5000,
+              position: 'top-center',
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -82,8 +96,8 @@ export const NotificationWrapper = () => {
     setNotificationActive(permission === 'granted');
 
     permission === 'granted' &&
-      getNotification('Have a nice day, friends !', {
-        body: `Message from Scorie`,
+      getNotification(t('have a nice day, friends'), {
+        body: t(`message from scorie`),
       });
   }, []);
 

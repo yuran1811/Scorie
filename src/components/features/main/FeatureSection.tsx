@@ -28,7 +28,7 @@ export const FeatureSection: FC = () => {
         <WelcomBanner>{currentUser?.displayName || t('guest')}</WelcomBanner>
       )}
 
-      <div className="flexcenter flex-wrap w-full pt-8">
+      <div className="flexcenter my-12 w-full flex-wrap py-8">
         <FeatureCard
           className="bg-gradient-to-tl from-[#5f2c82] to-[#49a09d]"
           title="Note"

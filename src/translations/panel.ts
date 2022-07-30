@@ -12,6 +12,14 @@ const dataTranslation = {
     vi: 'Dữ liệu',
     en: 'Data',
   },
+  import: {
+    vi: 'Nhập dữ liệu',
+    en: 'Import',
+  },
+  export: {
+    vi: 'Xuất dữ liệu',
+    en: 'Export',
+  },
   'get backup data': {
     vi: 'Tải về dữ liệu',
     en: 'Get backup data',

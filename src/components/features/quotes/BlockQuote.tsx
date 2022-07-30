@@ -22,7 +22,7 @@ export const BlockQuote: FC<DivProps> = () => {
         <BlockQuoteSkeleton />
       ) : (
         <blockquote
-          className="relative mx-auto max-w-[68rem] p-12 rounded-[2rem]"
+          className="relative mx-auto max-w-[68rem] rounded-[2rem] p-12"
           style={{
             background: bg,
           }}
@@ -41,9 +41,9 @@ export const BlockQuote: FC<DivProps> = () => {
           </div>
 
           <div className="flex flex-wrap items-center justify-between">
-            <footer className="mt-2 p-8 w-[calc(100%-10rem)]">
+            <footer className="mt-2 w-[calc(100%-10rem)] p-8">
               <p
-                className="font-semibold text-[1.8rem] tablet:text-[2.4rem]"
+                className="text-[1.8rem] font-semibold tablet:text-[2.4rem]"
                 style={{ color: secondary }}
               >
                 {data[quoteIdx]?.author || ''}

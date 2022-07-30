@@ -51,6 +51,13 @@ export default defineConfig({
             url: '/scores',
             icons: [{ src: 'logo192.png', type: 'image/png', sizes: '192x192' }],
           },
+          {
+            name: 'Analytics Feature',
+            short_name: 'Analytics',
+            description: 'Full analytics features',
+            url: '/analytics',
+            icons: [{ src: 'logo192.png', type: 'image/png', sizes: '192x192' }],
+          },
         ],
       },
     }),

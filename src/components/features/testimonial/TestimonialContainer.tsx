@@ -1,7 +1,7 @@
 import { useCollectionQuery } from '@/hooks';
 import { useStore } from '@/store';
 import { getTestimonials } from '@/utils/testimonials';
-import { FeatureTestimonial, Testimonial } from '@cpns/shared';
+import { Button, FeatureTestimonial, Testimonial } from '@cpns/shared';
 import { db } from '@shared/firebase';
 import { TestimonialProps } from '@shared/types';
 import { collection, orderBy, query } from 'firebase/firestore';
@@ -20,6 +20,7 @@ export const TestimonialContainer = () => {
   );
 
   const [testimonials, setTestimonials] = useState<TestimonialProps[]>([]);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     if (loading || error || data === null) return;
@@ -27,9 +28,9 @@ export const TestimonialContainer = () => {
   }, [data, loading, error]);
 
   return (
-    <section className="my-16 py-8 bg-gray-800 text-gray-100 rounded-3xl">
-      <div className="container flex flex-col items-center mx-auto p-10">
-        <h1 className="p-2 text-[3.5rem] font-semibold leading-none text-center">
+    <section className="my-16 rounded-3xl bg-gray-800 py-8 text-gray-100">
+      <div className="container mx-auto flex flex-col items-center p-10">
+        <h1 className="p-2 text-center text-[3.5rem] font-semibold leading-none">
           {t('what our customers are saying about us')}
         </h1>
       </div>
@@ -39,7 +40,7 @@ export const TestimonialContainer = () => {
         name="Yuran"
         job={`CEO & Founder Scorie`}
       />
-      <div className="container flexcentercol !justify-start mx-auto md:flex-wrap md:flex-row md:!justify-center md:px-10">
+      <div className="flexcentercol container mx-auto !justify-start md:flex-row md:flex-wrap md:!justify-center md:px-10">
         {testimonials
           .sort((a, b) => b.votes.length - a.votes.length)
           .map((testimonial) => (
@@ -47,7 +48,13 @@ export const TestimonialContainer = () => {
           ))}
       </div>
 
-      {!!currentUser && currentUser?.uid && (
+      <Button
+        className="mt-24 border-gray-900 bg-violet-400 !text-[3rem] text-gray-900 hover:border-violet-400 hover:bg-gray-900 hover:text-violet-400"
+        content={openModal ? 'Minimize' : 'Open'}
+        onClick={() => setOpenModal((s) => !s)}
+      />
+
+      {!!currentUser && currentUser?.uid && openModal && (
         <TestimonialAddNew
           votes={testimonials}
           data={testimonials.find((item) => item.id === currentUser.uid) || null}

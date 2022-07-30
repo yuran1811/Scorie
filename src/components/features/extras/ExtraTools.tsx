@@ -25,6 +25,7 @@ export const ExtraTools: FC = () => {
   const setChangeLogs = useStore((s) => s.setChangeLogs);
 
   const [showMore, setShowMore] = useState(false);
+  const [showLogWarn, setShowLogWarn] = useState(false);
 
   const toastId = useRef<Id | null>(null);
 
@@ -34,12 +35,13 @@ export const ExtraTools: FC = () => {
   );
 
   useEffect(() => {
+    setShowLogWarn(!loading);
     if (loading || error || data === null) return;
     setChangeLogs(getChangeLogs(data));
   }, [data, loading, error]);
 
   useEffect(() => {
-    if (!currentUser || !currentUser?.uid) return;
+    if (!currentUser || !currentUser?.uid || !showLogWarn) return;
 
     const unreadLog = changeLogs.filter((log) => !changeLogsRead[log.version]);
 
@@ -65,7 +67,7 @@ export const ExtraTools: FC = () => {
           progress: 0,
         });
     }
-  }, [changeLogs, changeLogsRead, currentUser]);
+  }, [changeLogs, changeLogsRead, currentUser, showLogWarn]);
 
   return (
     <div className="custom-tippy">

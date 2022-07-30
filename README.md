@@ -23,7 +23,8 @@
 
 ### Todo
 
-- the note idx list cannot setDoc merge -> convert to addDoc and updateDoc
+- Not vital:
+  - Setting panel: config the max recent score records to show
 
 ### References
 

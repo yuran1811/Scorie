@@ -8,14 +8,14 @@ export const FeatureCard: FC<DivProps> = ({ title, className, children, ...other
   return (
     <div
       {...otherProps}
-      className={`${className || ''} cursor-pointer w-[25rem] h-[25rem] rounded-[2rem] m-6 scrollY`}
+      className={`${className || ''} scrollY m-6 h-[25rem] w-[25rem] cursor-pointer rounded-[2rem]`}
     >
       {title && (
-        <div className="sticky top-0 left-0 pt-6 px-6 pb-2 font-bold text-[4rem] text-center text-white bg-inherit line-clamp-1">
+        <div className="sticky top-0 left-0 bg-inherit px-6 pt-6 pb-2 text-center text-[4rem] font-bold text-white line-clamp-1">
           {t(title.toLowerCase())}
         </div>
       )}
-      <div className="font-bold text-[2.5rem] text-center text-white">{children}</div>
+      <div className="text-center text-[2.5rem] font-bold text-white">{children}</div>
     </div>
   );
 };

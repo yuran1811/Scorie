@@ -4,12 +4,12 @@
 - @ant-design/charts chart.js react-chartjs-2 react-google-charts
 
 ```
--	apexcharts : ^3.35.3,
--	react-apexcharts : ^1.4.0,
--   @ant-design/charts : ^1.3.6
--   chart.js : ^3.8.0
--   react-chartjs-2 : ^4.2.0
--   react-google-charts : ^4.0.0
+- apexcharts : ^3.35.3,
+- react-apexcharts : ^1.4.0,
+- @ant-design/charts : ^1.3.6
+- chart.js : ^3.8.0
+- react-chartjs-2 : ^4.2.0
+- react-google-charts : ^4.0.0
 ```
 
 ```css
@@ -32,13 +32,13 @@ div[id^='reactgooglegraph'] {
   @apply !py-3;
 }
 .g2-tooltip-title {
-  @apply !text-[2.5rem] !text-center !py-2;
+  @apply !py-2 !text-center !text-[2.5rem];
 }
 .g2-tooltip-marker {
   @apply !scale-150 !text-left;
 }
 .g2-tooltip-name {
-  @apply !font-semibold !text-[1.8rem];
+  @apply !text-[1.8rem] !font-semibold;
 }
 .g2-tooltip-value {
   @apply !text-[1.8rem];

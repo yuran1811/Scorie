@@ -5,7 +5,7 @@ import ChangeLang from './ChangeLang/ChangeLang';
 import { ChangeLog } from './ChangeLog/ChangeLog';
 import { NotificationWrapper } from './Notification/Notification';
 import { Report } from './Report/Report';
-import { SyncStatus } from './SyncStatus/SyncStatus';
+import { ShareContainer } from './Share/ShareContainer';
 
 interface ToolsContainerProps {
   showMore: boolean;
@@ -21,9 +21,13 @@ export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, ...otherProp
         showMore ? 'flex' : 'hidden'
       } absolute right-[1rem] top-[9rem] flex-col items-center justify-start rounded-[1.5rem] border-l-[0.5rem] border-b-[0.5rem] border-indigo-200 bg-ctbg`}
     >
-      {/* <Tooltip content="Turn on/off notification">
+      <Tooltip content="Turn on/off notification">
         <NotificationWrapper />
-      </Tooltip> */}
+      </Tooltip>
+
+      <Tooltip content="Change logs">
+        <ChangeLog />
+      </Tooltip>
 
       {currentUser && currentUser?.uid && (
         <Tooltip content="Report bugs">
@@ -31,8 +35,8 @@ export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, ...otherProp
         </Tooltip>
       )}
 
-      <Tooltip content="Change logs">
-        <ChangeLog />
+      <Tooltip content="Share">
+        <ShareContainer />
       </Tooltip>
 
       {/* <Tooltip content="Sync status">

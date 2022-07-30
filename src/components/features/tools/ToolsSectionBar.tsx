@@ -4,13 +4,13 @@ import { ToolCard } from './ToolCard';
 
 export const ToolsSectionBar = () => {
   return (
-    <div className="w-full my-[2rem] mb-[7rem]">
-      <div className="w-full flexcenter flex-wrap px-4">
+    <div className="my-[2rem] mb-[7rem] w-full">
+      <div className="flexcenter w-full flex-wrap px-4">
         <Title Icon={ToolIcon} content="Tools" />
       </div>
 
-      <div className="mx-auto mt-4 p-4 max-w-[100rem] w-full rounded-[2rem]">
-        <div className="flex flex-wrap justify-center items-start w-full">
+      <div className="mx-auto mt-4 w-full max-w-[100rem] rounded-[2rem] p-4">
+        <div className="flex w-full flex-wrap items-start justify-center">
           <ToolCard data={{ id: 1, name: 'Tool Card ' + 1 }} />
         </div>
       </div>

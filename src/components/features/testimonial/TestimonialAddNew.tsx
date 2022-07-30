@@ -64,7 +64,7 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
 
   return (
     <form
-      className="flexcentercol mx-auto mt-24 p-8 font-bold text-[5rem] text-center text-teal-700 w-max max-w-[80%] line-clamp-1"
+      className="flexcentercol mx-auto w-max max-w-[80%] p-8 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
@@ -97,12 +97,12 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
 
       <TextArea
         defaultValue={data ? data.content : ''}
-        className="font-normal min-h-[10rem] max-h-[50rem] bg-gray-900 focus:border-violet-400"
+        className="max-h-[50rem] min-h-[10rem] bg-gray-900 font-normal focus:border-violet-400"
         formHandle={{ ...register('content') }}
       />
 
       <Button
-        className="!text-[3rem] bg-violet-400 text-gray-900 border-gray-900 hover:bg-gray-900 hover:text-violet-400 hover:border-violet-400"
+        className="border-gray-900 bg-violet-400 !text-[3rem] text-gray-900 hover:border-violet-400 hover:bg-gray-900 hover:text-violet-400"
         type="submit"
         content="Send"
       />
@@ -113,7 +113,7 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
           onClick={() => deleteHandle()}
           cancelHandle={() => setOpenModal(false)}
         >
-          <p className="text-[3rem] p-4">{t('this will delete your feedback')}</p>
+          <p className="p-4 text-[3rem]">{t('this will delete your feedback')}</p>
         </ModalUI>
       )}
     </form>

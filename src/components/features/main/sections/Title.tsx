@@ -11,9 +11,9 @@ export const Title: FC<TitleProps & DivProps> = ({ Icon, content }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="tablet:max-w-[24rem] w-full flex items-center justify-center bg-indigo-400 px-[2rem] py-[0.5rem] rounded-[1.8rem] overflow-x-hidden">
-      <Icon className="text-white min-w-[3.5rem]" width="35" height="30" />
-      <span className="font-bold text-[3.5rem] text-left ml-[1rem] line-clamp-1">
+    <div className="flex w-full items-center justify-center overflow-x-hidden rounded-[1.8rem] bg-indigo-400 px-[2rem] py-[0.5rem] tablet:max-w-[24rem]">
+      <Icon className="min-w-[3.5rem] text-white" width="35" height="30" />
+      <span className="ml-[1rem] text-left text-[3.5rem] font-bold line-clamp-1">
         {t(content.toLowerCase())}
       </span>
     </div>

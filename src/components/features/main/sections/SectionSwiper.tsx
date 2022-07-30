@@ -22,7 +22,7 @@ const swiperOptions: SwiperProps = {
 };
 
 export const SectionSwiper: FC<SectionSwiperProps> = ({ children, breakpoints }) => (
-  <ReactSwiper {...swiperOptions} breakpoints={breakpoints} className="flex items-center w-full">
+  <ReactSwiper {...swiperOptions} breakpoints={breakpoints} className="flex w-full items-center">
     {children}
   </ReactSwiper>
 );

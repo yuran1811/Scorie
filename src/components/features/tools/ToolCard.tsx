@@ -7,10 +7,13 @@ interface ToolCardProps {
 
 export const ToolCard: FC<ToolCardProps> = ({ data: { id, name } }) => {
   return (
-    <div className="tablet:max-w-[30rem] w-full h-[30rem] p-4 rounded-[1.5rem] font-bold text-center text-white bg-black">
-      <div className="p-6 mb-8">{name}</div>
-      <div className="flexcenter">
-        <YinYangIcon className="animate-spin" width="120" height="120" />
+    <div className="h-[30rem] w-full rounded-[1.5rem] bg-black p-4 text-center font-bold text-white tablet:max-w-[30rem]">
+      <div className="flexcenter mb-8 p-6">
+        <div>{name}</div>
+        <YinYangIcon className="ml-4 animate-spin" width="25" height="25" />
+      </div>
+      <div className="flexcentercol">
+        <div className="morphShape !h-64 !w-64" />
       </div>
     </div>
   );
