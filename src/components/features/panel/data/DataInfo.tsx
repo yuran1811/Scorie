@@ -21,7 +21,6 @@ export const DataInfo: FC = () => {
   const handleChange = (e: any) => setOpenModal(!!e.target.files && !!e.target.files.length);
   const onReaderLoad = useCallback(
     (e: any) => {
-      console.log('reader load');
       if (!currentUser || !currentUser?.uid) return;
 
       setLoading(true);
@@ -41,7 +40,6 @@ export const DataInfo: FC = () => {
     [currentUser]
   );
   const saveToDB = useCallback(() => {
-    console.log(inputRef.current);
     if (!inputRef.current || !inputRef.current?.files) return;
 
     const reader = new FileReader();

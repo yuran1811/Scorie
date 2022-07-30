@@ -3,8 +3,11 @@ import { createContext, Dispatch, FC, SetStateAction, useContext, useState } fro
 interface AppStatusType {
   type: string;
   message: string;
-  Content?: any;
   openModal: boolean;
+  badges: {
+    changeLog: number;
+  };
+  Content?: any;
 }
 
 interface AppStatusProviderProps {
@@ -12,13 +15,22 @@ interface AppStatusProviderProps {
   setStatus: Dispatch<SetStateAction<AppStatusType>> | null;
 }
 
+const DEFAULT_STATUS: AppStatusType = {
+  type: '',
+  message: '',
+  openModal: false,
+  badges: {
+    changeLog: 0,
+  },
+};
+
 export const AppStatusContext = createContext<AppStatusProviderProps>({
-  status: { type: '', message: '', openModal: false },
+  status: { ...DEFAULT_STATUS },
   setStatus: null,
 });
 
 export const AppStatusProvider: FC = ({ children }) => {
-  const [status, setStatus] = useState({ type: '', message: '', openModal: false });
+  const [status, setStatus] = useState({ ...DEFAULT_STATUS });
 
   return (
     <AppStatusContext.Provider value={{ status, setStatus }}>{children}</AppStatusContext.Provider>

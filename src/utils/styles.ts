@@ -31,7 +31,7 @@ export const appThemes: {
   teal: { bg: '#2d555e', color: '#ccfbf1', secondary: '#a2bfc1' },
   blue: { bg: '#1e3a5f', color: '#bfdbfe', secondary: '#7e97b9' },
   purple: { bg: '#42275e', color: '#e9d5ff', secondary: '#a855f7' },
-  fuchsia: { bg: '#701a75', color: '#f5d0fe', secondary: '#c026d3' },
+  fuchsia: { bg: '#701a75', color: '#f5d0fe', secondary: '#f5d0fe' },
   pink: { bg: '#5b2245', color: '#fbcfe8', secondary: '#ec4899' },
   rose: { bg: '#9f1239', color: '#fecdd3', secondary: '#fb7185' },
 };

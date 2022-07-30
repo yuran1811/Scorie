@@ -23,9 +23,7 @@ export const BlockQuote: FC<DivProps> = () => {
       ) : (
         <blockquote
           className="relative mx-auto max-w-[68rem] rounded-[2rem] p-12"
-          style={{
-            background: bg,
-          }}
+          style={{ background: bg }}
         >
           <QuoteIcon
             className="absolute top-[2rem] left-[2rem]"
@@ -35,7 +33,7 @@ export const BlockQuote: FC<DivProps> = () => {
           />
 
           <div className="relative p-8">
-            <p className="text-[2.2rem] tablet:text-[3rem]" style={{ color }}>
+            <p className="mt-10 indent-12 text-[2.2rem] tablet:text-[3rem]" style={{ color }}>
               {data[quoteIdx]?.content || ''}
             </p>
           </div>
@@ -54,11 +52,7 @@ export const BlockQuote: FC<DivProps> = () => {
               <PrevQuoteButton
                 onClick={() => {
                   if (loading) return;
-
-                  setQuotes({
-                    ...quotes,
-                    quoteIdx: quoteIdx - +(quoteIdx > 0),
-                  });
+                  setQuotes({ ...quotes, quoteIdx: quoteIdx - +(quoteIdx > 0) });
                 }}
               />
             )}
@@ -67,11 +61,7 @@ export const BlockQuote: FC<DivProps> = () => {
               <NextQuoteButton
                 onClick={() => {
                   if (loading) return;
-
-                  setQuotes({
-                    ...quotes,
-                    quoteIdx: quoteIdx + +(quoteIdx + 1 < data.length),
-                  });
+                  setQuotes({ ...quotes, quoteIdx: quoteIdx + +(quoteIdx + 1 < data.length) });
                 }}
               />
             )}

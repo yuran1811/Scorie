@@ -1,5 +1,6 @@
 export * from './AppStatusPopup';
 export * from './Avatar';
+export * from './Badge';
 export * from './Button';
 export * from './ConfirmBox';
 export * from './CustomReactSelect';

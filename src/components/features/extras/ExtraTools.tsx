@@ -1,7 +1,8 @@
+import { useAppStatus } from '@/contexts';
 import { useCollectionQuery } from '@/hooks';
 import { useStore } from '@/store';
 import { getChangeLogs } from '@/utils';
-import { Avatar } from '@cpns/shared';
+import { Avatar, Badge } from '@cpns/shared';
 import { ToastDefaultConfig } from '@shared/constants';
 import { db } from '@shared/firebase';
 import Tippy from '@tippyjs/react';
@@ -16,6 +17,7 @@ const toastConfig: ToastOptions = {
   position: 'top-center',
   progress: 1,
   toastId: 'change_logs_status',
+  hideProgressBar: true,
 };
 
 export const ExtraTools: FC = () => {
@@ -23,6 +25,8 @@ export const ExtraTools: FC = () => {
   const changeLogs = useStore((s) => s.changeLogs);
   const changeLogsRead = useStore((s) => s.changeLogsRead);
   const setChangeLogs = useStore((s) => s.setChangeLogs);
+
+  const { status, setStatus } = useAppStatus();
 
   const [showMore, setShowMore] = useState(false);
   const [showLogWarn, setShowLogWarn] = useState(false);
@@ -44,6 +48,8 @@ export const ExtraTools: FC = () => {
     if (!currentUser || !currentUser?.uid || !showLogWarn) return;
 
     const unreadLog = changeLogs.filter((log) => !changeLogsRead[log.version]);
+
+    setStatus && setStatus({ ...status, badges: { changeLog: unreadLog.length } });
 
     if (unreadLog.length) {
       toastId.current = toast.info(
@@ -78,13 +84,14 @@ export const ExtraTools: FC = () => {
         onClickOutside={() => setShowMore(false)}
         render={(attrs) => <ToolsContainer {...attrs} showMore={showMore} />}
       >
-        <div className="flex h-[5.5rem] w-[9.5rem] items-center justify-end">
+        <div className="relative flex h-[5.5rem] w-[9.5rem] items-center justify-end">
           <Avatar
             className="absolute right-0 mx-8 cursor-pointer"
             imgUrl=""
             radius="5.5rem"
             onClick={() => setShowMore((a) => !a)}
           />
+          <Badge>{status.badges.changeLog}</Badge>
         </div>
       </Tippy>
     </div>
