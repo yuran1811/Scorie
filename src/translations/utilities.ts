@@ -63,6 +63,10 @@ const errorTranslation = {
     vi: 'Có gì đó sai sai rồi á!',
     en: 'Something went wrong!',
   },
+  'wrong password': {
+    vi: 'Sai mật khẩu',
+    en: 'Wrong password',
+  },
 };
 
 const formValidateTranslation = {

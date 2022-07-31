@@ -1,9 +1,10 @@
 import { InputProps } from '@/shared';
 import { FC } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-interface CustomInputProps {
-  formHandle?: any;
+export interface CustomInputProps {
+  formHandle?: UseFormRegisterReturn;
   hasWrapper?: boolean;
 }
 

@@ -12,6 +12,7 @@ export * from './ModalBox';
 export * from './ModalBoxHeader';
 export * from './ModalUI';
 export * from './Overlay';
+export * from './RevealPasswordInput';
 export * from './SearchBar';
 export * from './Testimonial';
 export * from './TextArea';

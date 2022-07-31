@@ -15,6 +15,7 @@ export * from './DoubleCheckIcon';
 export * from './DownloadIcon';
 export * from './EditIcon';
 export * from './Ellipsis/EllipsisIcon';
+export * from './EyeIcon';
 export * from './Filters';
 export * from './GlobalIcon';
 export * from './GroupIcon';

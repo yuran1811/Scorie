@@ -15,6 +15,7 @@ export default defineConfig({
       devOptions: { enabled: true },
       registerType: 'autoUpdate',
       workbox: { globPatterns: ['**/*.{js,css,html,ico,png,svg}'] },
+      includeAssets: ['**/*.{js,css,html,ico,png,svg}'],
       manifest: {
         name: 'Scorie',
         short_name: 'Scorie',

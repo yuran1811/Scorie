@@ -3,7 +3,7 @@ import { useStore } from '@/store';
 import { getFirebaseErr } from '@/utils';
 import { ArrowLeftIcon, ArrowRightIcon, LogInIcon, ThreeDotsFade } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { Button, Input } from '@cpns/shared';
+import { Button, Input, RevealPasswordInput } from '@cpns/shared';
 import { CreateNewUser } from './CreateNewUser';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useCallback, useEffect, useState } from 'react';
@@ -23,6 +23,7 @@ const SignInUseEmailPassWord = () => {
 
   const {
     watch,
+    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -70,6 +71,7 @@ const SignInUseEmailPassWord = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <Input
+              className="!h-[68px] border-0 !bg-[#121726] !px-16 !text-[2.4rem] !tracking-widest"
               name="email"
               placeholder="Email"
               defaultValue=""
@@ -88,10 +90,27 @@ const SignInUseEmailPassWord = () => {
             />
             {errors?.email && <ErrorMessage content={errors.email.message || ''} />}
 
-            <Input
+            {/* <Input
               name="password"
               placeholder="Password"
               defaultValue=""
+              formHandle={{
+                ...register('password', {
+                  required: 'Please fill in this field',
+                  validate: {
+                    notEmpty: (v) => v.trim().length !== 0 || 'Password cannot be empty',
+                    isValid: (v) => /^[\w\d]{6,}$/.test(v.trim()) || 'At least 6 characters',
+                  },
+                }),
+              }}
+            /> */}
+            <RevealPasswordInput
+              className="max-w-[32rem]"
+              name="password"
+              placeholder="Password"
+              defaultValue=""
+              inputValue={watch('password')}
+              changeValue={reset}
               formHandle={{
                 ...register('password', {
                   required: 'Please fill in this field',
