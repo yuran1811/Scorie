@@ -1,13 +1,13 @@
-import { useStore } from '@/store';
-import { DivProps } from '@/shared';
 import { usePanel } from '@/contexts';
+import { DivProps } from '@/shared';
+import { useStore } from '@/store';
 import { Avatar, Overlay } from '@cpns/shared';
-import DocContainer from './doc/DocContainer';
-import DataContainer from './data/DataContainer';
-import AccountContainer from './account/AccountContainer';
-import SettingContainer from './setting/SettingContainer';
-import { useTranslation } from 'react-i18next';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import AccountContainer from './account/AccountContainer';
+import DataContainer from './data/DataContainer';
+import DocContainer from './doc/DocContainer';
+import SettingContainer from './setting/SettingContainer';
 
 export const Panel: FC<DivProps> = ({ className }) => {
   const currentUser = useStore((s) => s.currentUser);
@@ -38,7 +38,7 @@ export const Panel: FC<DivProps> = ({ className }) => {
           active.isMenu ? 'translate-x-0' : 'translate-x-[-200%]'
         } isAnimated fullscreen bg-ctcolor px-12 py-20 text-ctbg tablet:max-w-[50rem]`}
       >
-        <div className="flexcenter z-[2] m-auto w-full pt-14 tablet:px-6">
+        <div className="flexcenter z-[2] m-auto mb-12 w-full pt-14 tablet:px-6">
           {currentUser && (
             <Avatar
               className="hidden cursor-pointer mobile:block"
@@ -46,12 +46,12 @@ export const Panel: FC<DivProps> = ({ className }) => {
               radius="7rem"
             />
           )}
-          <div className="mx-6 text-center text-[4.5rem] font-bold line-clamp-1 mobile:text-left">
+          <div className="mx-6 w-max max-w-full text-center text-[4.5rem] font-bold line-clamp-1">
             {currentUser?.displayName ? currentUser.displayName : t('guest')}
           </div>
         </div>
 
-        <div className="flexcentercol scrollY z-[1] mt-24 h-4/5 w-full !justify-start gap-6 space-y-12 pb-24 text-[4rem]">
+        <div className="flexcentercol scrollY z-[1] h-4/5 w-full !justify-start gap-6 space-y-12 pb-24 text-[4rem]">
           <AccountContainer />
           <DataContainer />
           <SettingContainer />

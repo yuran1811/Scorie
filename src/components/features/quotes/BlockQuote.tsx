@@ -31,7 +31,6 @@ export const BlockQuote: FC<DivProps> = () => {
             height="50"
             fill={secondary}
           />
-
           <div className="relative p-6 sm:p-8">
             <p
               className="mt-10 indent-8 text-[2.2rem] tablet:text-[2.8rem] sm:indent-12"
@@ -40,46 +39,47 @@ export const BlockQuote: FC<DivProps> = () => {
               {data[quoteIdx]?.content || ''}
             </p>
           </div>
-
-          <div className="flex flex-wrap items-center justify-between">
-            <footer className="w-[calc(100%-10rem)] px-8">
+          <div className="flex flex-col flex-wrap items-center justify-center smallmb:flex-row smallmb:justify-between">
+            <footer className="w-full px-0 pb-6 smallmb:w-[calc(100%-10rem)] smallmb:px-8 smallmb:py-0">
               <p
-                className="text-[1.8rem] font-semibold tablet:text-[2.4rem]"
+                className="text-center text-[1.8rem] font-semibold smallmb:text-left tablet:text-[2.4rem]"
                 style={{ color: secondary }}
               >
                 {data[quoteIdx]?.author || ''}
               </p>
             </footer>
 
-            {quoteIdx > 0 && (
-              <PrevQuoteButton
-                onClick={() => {
-                  if (loading) return;
-                  setQuotes({ ...quotes, quoteIdx: quoteIdx - +(quoteIdx > 0) });
-                }}
-              />
-            )}
+            <div className="flexcenter">
+              {quoteIdx > 0 && (
+                <PrevQuoteButton
+                  onClick={() => {
+                    if (loading) return;
+                    setQuotes({ ...quotes, quoteIdx: quoteIdx - +(quoteIdx > 0) });
+                  }}
+                />
+              )}
 
-            {quoteIdx + 1 < data.length && (
-              <NextQuoteButton
-                onClick={() => {
-                  if (loading) return;
-                  setQuotes({ ...quotes, quoteIdx: quoteIdx + +(quoteIdx + 1 < data.length) });
-                }}
-              />
-            )}
+              {quoteIdx + 1 < data.length && (
+                <NextQuoteButton
+                  onClick={() => {
+                    if (loading) return;
+                    setQuotes({ ...quotes, quoteIdx: quoteIdx + +(quoteIdx + 1 < data.length) });
+                  }}
+                />
+              )}
 
-            {quoteIdx === data.length - 1 && (
-              <FetchQuoteButton
-                onClick={() => {
-                  setQuotes({
-                    ...quotes,
-                    isFetch: quoteIdx >= data.length - 1,
-                    numPage: numPage + +(quoteIdx >= data.length - 1),
-                  });
-                }}
-              />
-            )}
+              {quoteIdx === data.length - 1 && (
+                <FetchQuoteButton
+                  onClick={() => {
+                    setQuotes({
+                      ...quotes,
+                      isFetch: quoteIdx >= data.length - 1,
+                      numPage: numPage + +(quoteIdx >= data.length - 1),
+                    });
+                  }}
+                />
+              )}
+            </div>
           </div>
         </blockquote>
       )}
