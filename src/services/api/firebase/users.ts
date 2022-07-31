@@ -22,7 +22,6 @@ export const sendVerifyEmail = async (user: User) => {
 export const createNewUserEmailMethod = async (email: string, password: string) => {
   try {
     const resp = await createUserWithEmailAndPassword(auth, email.trim(), password.trim());
-
     return {
       resp,
       errorMessage: 'Create user successfully !',
@@ -39,7 +38,6 @@ export const createNewUserEmailMethod = async (email: string, password: string) 
 export const getUserProfile = async (userId: string) => {
   try {
     const resp = await getDoc(doc(db, 'users', userId));
-
     return {
       data: resp,
       errorMessage: '',

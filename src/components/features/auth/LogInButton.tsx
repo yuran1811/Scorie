@@ -7,7 +7,7 @@ export const LogInButton: FC<ButtonProps> = ({ className, children, disabled, on
     onClick={onClick}
     className={`${
       className || 'bg-white text-black'
-    } cursor-pointer text-[3rem] flex items-center gap-3 min-w-[25rem] my-2 px-6 py-3 rounded-[2rem] transition duration-300 hover:brightness-90 disabled:!cursor-default disabled:!brightness-75`}
+    } my-2 flex min-w-[25rem] cursor-pointer items-center gap-3 rounded-[2rem] px-6 py-3 text-[3rem] transition duration-300 hover:brightness-90 disabled:!cursor-default disabled:!brightness-75`}
   >
     {children}
   </button>

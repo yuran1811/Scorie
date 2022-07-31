@@ -79,7 +79,7 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
           }),
         }}
       />
-      {errors?.name && <ErrorMessage className="text-[3rem]" content={errors.name.message || ''} />}
+      {errors?.name && <ErrorMessage content={errors.name.message || ''} />}
 
       <Input
         className="bg-gray-900 focus:border-violet-400"
@@ -93,7 +93,7 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
           }),
         }}
       />
-      {errors?.job && <ErrorMessage className="text-[3rem]" content={errors.job.message || ''} />}
+      {errors?.job && <ErrorMessage content={errors.job.message || ''} />}
 
       <TextArea
         defaultValue={data ? data.content : ''}

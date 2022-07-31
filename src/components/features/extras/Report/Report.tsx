@@ -14,7 +14,7 @@ export const Report = () => {
         onClick={() => setOpenModal((s) => !s)}
       />
 
-      {openModal && <ReportAddNew onClick={() => setOpenModal(false)} />}
+      {openModal && <ReportAddNew clickHandle={() => setOpenModal(false)} />}
     </>
   );
 };

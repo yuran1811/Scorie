@@ -2,10 +2,10 @@ import DocBar from './DocBar';
 import DocPanel from './DocPanel';
 
 const DocContainer = () => (
-	<div className='flexcenter w-full p-2 m-4'>
-		<DocBar className='cursor-pointer flexcenter w-full p-2 m-4' />
-		<DocPanel />
-	</div>
+  <div className="flexcenter w-full">
+    <DocBar className="flexcenter w-full cursor-pointer" />
+    <DocPanel />
+  </div>
 );
 
 export default DocContainer;

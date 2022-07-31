@@ -25,10 +25,10 @@ export const DocItem: FC<DocItemProps> = ({ data: docItem }) => {
       <div
         className={`${
           active ? 'sticky top-0 left-0' : ''
-        } flex items-center justify-start w-full p-6 mb-8 rounded-[2rem] text-[3.5rem] text-white bg-ctbg`}
+        } mb-8 flex w-full items-center justify-start rounded-[2rem] bg-ctbg p-6 text-[3.5rem] text-white`}
       >
         {!active ? <ArrowRightIcon {...ArrowIconConfig} /> : <ArrowDownIcon {...ArrowIconConfig} />}
-        <span className="font-semibold w-full line-clamp-1">{t(docItem.title.toLowerCase())}</span>
+        <span className="w-full font-semibold line-clamp-1">{t(docItem.title.toLowerCase())}</span>
       </div>
 
       {active && (

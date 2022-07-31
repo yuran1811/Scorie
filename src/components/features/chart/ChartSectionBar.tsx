@@ -18,7 +18,7 @@ export const ChartSectionBar: FC = () => {
 
   const chartSeriesData: ApexAxisChartSeries = [
     {
-      name: 'Average',
+      name: t('average score short'),
       data: getChartData(scores, settings.numberFormat),
     },
   ];
@@ -38,7 +38,7 @@ export const ChartSectionBar: FC = () => {
     legend: {
       show: true,
       showForSingleSeries: true,
-      customLegendItems: ['Average Score', 'Expected'],
+      customLegendItems: [t('average score'), t('expected')],
       markers: {
         fillColors: ['#00E396', '#775DD0'],
       },
@@ -47,14 +47,14 @@ export const ChartSectionBar: FC = () => {
 
   if (!scores.length)
     return (
-      <div className="flexcentercol !justify-start relative w-full tablet:w-[70%] mx-auto text-[4rem] mobile:text-[5rem] text-white">
-        <div className="font-semibold text-center p-6">
+      <div className="flexcentercol relative mx-auto w-full !justify-start text-[4rem] text-white mobile:text-[5rem] tablet:w-[70%]">
+        <div className="p-6 text-center font-semibold">
           {t('add scores and the chart will be shown')}
         </div>
         <Button
           content="Add scores"
           before={false}
-          className="!bg-gradient-to-br from-indigo-500 to-indigo-800 !text-white group"
+          className="group !bg-gradient-to-br from-indigo-500 to-indigo-800 !text-white"
           onClick={() => navigate('/subjects')}
         >
           <ArrowRightIcon className="isAnimated group-hover:translate-x-4" width="50" height="50" />
@@ -63,12 +63,12 @@ export const ChartSectionBar: FC = () => {
     );
 
   return (
-    <div className="w-full my-[2rem] mb-[7rem]">
-      <div className="w-full flexcenter flex-wrap px-4">
+    <div className="my-[2rem] mb-[7rem] w-full">
+      <div className="flexcenter w-full flex-wrap px-4">
         <Title Icon={ChartIcon} content="Analytics" />
       </div>
 
-      <div className="w-full mx-auto my-8 flex items-start justify-center">
+      <div className="mx-auto my-8 flex w-full items-start justify-center">
         <ApexBarChart
           data={{
             series: chartSeriesData,

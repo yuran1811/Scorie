@@ -13,7 +13,11 @@ interface Inputs {
   content: string;
 }
 
-export const ReportAddNew: FC<DivProps> = ({ onClick }) => {
+export const ReportAddNew: FC<
+  DivProps & {
+    clickHandle: CallableFunction;
+  }
+> = ({ clickHandle }) => {
   const currentUser = useStore((s) => s.currentUser);
 
   const { t } = useTranslation();
@@ -33,13 +37,15 @@ export const ReportAddNew: FC<DivProps> = ({ onClick }) => {
         content: data.content.trim(),
       };
 
-      addNewReport(currentUser.uid, reportToAdd);
+      addNewReport(currentUser.uid, reportToAdd).finally(() => {
+        clickHandle();
+      });
     }
   };
 
   return createPortal(
     <div className="fullscreen flexcenter z-[20] !justify-start">
-      <Overlay zIdx="z-[-1]" onClick={onClick} />
+      <Overlay zIdx="z-[-1]" onClick={() => clickHandle()} />
 
       <form
         className="flexcentercol mx-auto max-h-[90vh] w-max max-w-[80%] rounded-[2rem] bg-gray-900 p-8 px-12 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
@@ -59,9 +65,7 @@ export const ReportAddNew: FC<DivProps> = ({ onClick }) => {
             }),
           }}
         />
-        {errors?.title && (
-          <ErrorMessage className="text-[3rem]" content={errors.title.message || ''} />
-        )}
+        {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
         <TextArea
           defaultValue=""

@@ -91,7 +91,9 @@ export const ExtraTools: FC = () => {
             radius="5.5rem"
             onClick={() => setShowMore((a) => !a)}
           />
-          <Badge>{status.badges.changeLog}</Badge>
+          <Badge className="scale-75" showIndicator={false}>
+            {status.badges.changeLog}
+          </Badge>
         </div>
       </Tippy>
     </div>

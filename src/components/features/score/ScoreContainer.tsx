@@ -20,7 +20,7 @@ export const ScoreContainer: FC<ScoreContainerProps> = ({
       <>
         {subject &&
           subject.scores.map((score) => (
-            <div key={score.id} className="m-6 rounded-[2rem] bg-indigo-900">
+            <div key={score.id} className="m-3 rounded-[2rem] bg-indigo-900 sm:m-6">
               <ScoreDetail score={score} subject={subject} scores={scores} />
             </div>
           ))}
@@ -39,7 +39,7 @@ export const ScoreContainer: FC<ScoreContainerProps> = ({
                 subject.scores
                   .filter((score) => score.type === _)
                   .map((score) => (
-                    <div key={score.id} className="m-6 rounded-[2rem] bg-indigo-900">
+                    <div key={score.id} className="m-3 rounded-[2rem] bg-indigo-900 sm:m-6">
                       <ScoreDetail score={score} subject={subject} scores={scores} />
                     </div>
                   ))}

@@ -63,11 +63,11 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
   return (
     <>
       <div
-        className={`isAnimated cursor-pointer relative flexcentercol ${
-          viewMode === 'list' ? 'w-full' : 'w-[20rem]'
-        } tablet:w-[24rem] max-h-[35rem] m-2 p-4 border-transparent hover:border-white border-[3px] rounded-[2rem] group ${
+        className={`isAnimated flexcentercol relative cursor-pointer ${
+          viewMode === 'list' ? 'mx-auto w-[calc(100%-4rem)]' : 'w-[20rem]'
+        } ${
           !isShow && '!hidden'
-        }`}
+        } group max-h-[35rem] rounded-[2rem] border-[3px] border-transparent p-4 hover:border-white tablet:w-[24rem]`}
         style={noteStyle}
         onClick={() => setOpenDetail(true)}
       >
@@ -77,15 +77,13 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
           {isInProgress && <ProgressIcon className="mx-4" width="30" height="30" fill="#cbd5e1" />}
         </div>
 
-        <div className="w-full h-full overflow-y-hidden line-clamp-3">
-          <div className="font-bold text-center text-[2.4rem] tablet:text-[2.5rem] w-full line-clamp-1 p-2">
-            {title}
-          </div>
+        <div className="h-full w-full overflow-hidden">
+          <div className="w-full p-2 text-center text-[2.2rem] font-bold line-clamp-3">{title}</div>
           {data?.split &&
             data.split('\n').map((datum, idx) => (
               <p
                 key={datum + idx}
-                className="text-[2rem] tablet:text-[2.4rem] text-current p-2 bg-transparent !select-none resize-none"
+                className="!select-none resize-none bg-transparent p-2 text-[2rem] text-current tablet:text-[2.2rem]"
               >
                 {datum}
               </p>
@@ -93,8 +91,8 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
         </div>
 
         <div
-          className={`isAnimated group-hover:delay-300 tablet:group-hover:delay-[0ms] relative flexcenter flex-wrap w-full max-h-0 mt-12 tablet:mt-6 p-3 bg-slate-800 rounded-[3.5rem] opacity-0 group-hover:opacity-100 group-hover:max-h-[12rem] ${
-            openTheme ? 'opacity-100 max-h-[12rem]' : 'overflow-hidden'
+          className={`isAnimated flexcenter relative mt-12 max-h-0 w-full flex-wrap rounded-[3.5rem] bg-slate-800 p-3 opacity-0 group-hover:max-h-[12rem] group-hover:opacity-100 group-hover:delay-300 tablet:mt-6 tablet:group-hover:delay-[0ms] ${
+            openTheme ? 'max-h-[12rem] opacity-100' : 'overflow-hidden'
           }`}
           onClick={(e) => {
             e.preventDefault();
@@ -112,7 +110,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
                   {...attrs}
                   themeSelected={theme}
                   setNewTheme={setNewTheme}
-                  className={openTheme ? 'z-10' : '!hidden z-[-1]'}
+                  className={openTheme ? 'z-10' : 'z-[-1] !hidden'}
                 />
               )}
             >
@@ -157,7 +155,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
                 shareNotify();
               }}
             >
-              <div className="absolute left-[1.3rem] animate-ping bg-sky-300 w-[2.6rem] h-[2.6rem] rounded-full" />
+              <div className="absolute left-[1.3rem] h-[2.6rem] w-[2.6rem] animate-ping rounded-full bg-sky-300" />
               <NodeShareIcon
                 {...toolProps}
                 className={`translate-x-[-2rem] delay-[20ms] ${toolClass} ${

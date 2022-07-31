@@ -5,6 +5,5 @@ import { FC } from 'react';
 
 export const ChartPage: FC = () => {
   const currentUser = useStore((s) => s.currentUser);
-
-  return <>{currentUser === null ? <LogInRequired /> : <ChartSectionBar />}</>;
+  return currentUser === null ? <LogInRequired /> : <ChartSectionBar />;
 };

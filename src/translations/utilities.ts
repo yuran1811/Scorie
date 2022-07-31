@@ -83,7 +83,7 @@ const formValidateTranslation = {
     en: 'Password cannot be empty',
   },
   'invalid username': {
-    vi: 'Tên người dùng không hợp lệ (chỉ được chứa chữ cái, số, và một số kí tự khác',
+    vi: 'Tên người dùng không hợp lệ (chỉ được chứa chữ cái, số, và một số kí tự khác)',
     en: 'Invalid username (include "a-z, A-Z, 0-9, and others valid characters")',
   },
   'invalid email': {
@@ -91,7 +91,7 @@ const formValidateTranslation = {
     en: 'Invalid email',
   },
   'invalid subject': {
-    vi: 'Tên môn học không hợp lệ (chỉ được chứa chữ cái, số, và một số kí tự khác',
+    vi: 'Tên môn học không hợp lệ (chỉ được chứa chữ cái, số, và một số kí tự khác)',
     en: 'Invalid subject (include "a-z, A-Z, 0-9, and others valid characters")',
   },
   'invalid score': {
@@ -103,7 +103,7 @@ const formValidateTranslation = {
     en: 'Invalid base (must be a number)',
   },
   'invalid type': {
-    vi: 'Thể loại của điểm không hợp lệ (chỉ được chứa chữ cái, số, và một số kí tự khác',
+    vi: 'Thể loại của điểm không hợp lệ (chỉ được chứa chữ cái, số, và một số kí tự khác)',
     en: 'Invalid type (include "a-z, A-Z, 0-9, and others valid characters")',
   },
   'not a number': {
@@ -253,6 +253,21 @@ const notificationTranslation = {
   },
 };
 
+const chartTranslation = {
+  expected: {
+    vi: 'Điểm cần',
+    en: 'Expected',
+  },
+  'average score': {
+    vi: 'Điểm trung bình',
+    en: 'Average score',
+  },
+  'average score short': {
+    vi: 'Điểm TB',
+    en: 'Average score',
+  },
+};
+
 export default {
   ...confirmTranslation,
   ...errorTranslation,
@@ -262,6 +277,7 @@ export default {
   ...statusTranslation,
   ...testimonialTranslation,
   ...workerTranslation,
+  ...chartTranslation,
 
   'sign in with': {
     vi: 'Đăng nhập với',

@@ -11,7 +11,7 @@ const DataPanel: FC<DivProps> = ({ className }) => {
     <div
       className={`${className || ''} ${
         active.isData ? 'translate-y-0' : 'translate-y-[200%]'
-      } z-20 isAnimated fullscreen px-12 py-20 tablet:max-w-[50rem] bg-ctcolor text-ctbg`}
+      } isAnimated fullscreen z-20 bg-ctcolor px-12 py-20 text-ctbg tablet:max-w-[50rem]`}
     >
       <BackIcon
         onClick={() =>

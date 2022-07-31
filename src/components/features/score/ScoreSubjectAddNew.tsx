@@ -104,9 +104,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
             }),
           }}
         />
-        {errors?.subject && (
-          <ErrorMessage className="text-[3rem]" content={errors.subject.message || ''} />
-        )}
+        {errors?.subject && <ErrorMessage content={errors.subject.message || ''} />}
 
         <Input
           placeholder="Score"
@@ -122,9 +120,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
             }),
           }}
         />
-        {errors?.score && (
-          <ErrorMessage className="text-[3rem]" content={errors.score.message || ''} />
-        )}
+        {errors?.score && <ErrorMessage content={errors.score.message || ''} />}
 
         <Input
           placeholder="Base"
@@ -140,9 +136,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
             }),
           }}
         />
-        {errors?.base && (
-          <ErrorMessage className="text-[3rem]" content={errors.base.message || ''} />
-        )}
+        {errors?.base && <ErrorMessage content={errors.base.message || ''} />}
 
         <Input
           placeholder="Type"
@@ -157,9 +151,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
             }),
           }}
         />
-        {errors?.type && (
-          <ErrorMessage className="text-[3rem]" content={errors.type.message || ''} />
-        )}
+        {errors?.type && <ErrorMessage content={errors.type.message || ''} />}
 
         <Button className="!text-[3rem]" type="submit" content="Add" />
       </form>

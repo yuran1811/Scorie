@@ -20,8 +20,8 @@ const DocBar: FC<DivProps> = (props) => {
         }))
       }
     >
-      <BookIcon className="text-ctbg cursor-pointer" width="40" height="40" />
-      <div className="font-bold ml-6 line-clamp-1">{t('document')}</div>
+      <BookIcon className="cursor-pointer text-ctbg" width="40" height="40" />
+      <div className="ml-6 font-bold line-clamp-1">{t('document')}</div>
     </div>
   );
 };

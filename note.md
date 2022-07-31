@@ -4,8 +4,8 @@
 - @ant-design/charts chart.js react-chartjs-2 react-google-charts
 
 ```
-- apexcharts : ^3.35.3,
-- react-apexcharts : ^1.4.0,
+- apexcharts : ^3.35.3
+- react-apexcharts : ^1.4.0
 - @ant-design/charts : ^1.3.6
 - chart.js : ^3.8.0
 - react-chartjs-2 : ^4.2.0

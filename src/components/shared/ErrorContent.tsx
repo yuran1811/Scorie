@@ -14,10 +14,10 @@ export const ErrorContent: FC<ErrorContentProps> = ({ errorBoundaries = false })
 
   return (
     <div className="p-[5rem]">
-      <ErrorText className="text-[7rem] tablet:text-[15rem] mobile:line-clamp-1">
+      <ErrorText className="text-[7rem] mobile:line-clamp-1 tablet:text-[15rem]">
         {t('oops')}
       </ErrorText>
-      <ErrorText className="text-[4rem] tablet:text-[5rem] line-clamp-3">
+      <ErrorText className="text-[4rem] line-clamp-3 tablet:text-[5rem]">
         {t('something went wrong')}
       </ErrorText>
 

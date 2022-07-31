@@ -21,8 +21,6 @@ const getTranslations = (lang: string) => {
     })
   );
 
-  // console.log(translations);
-
   return translations;
 };
 

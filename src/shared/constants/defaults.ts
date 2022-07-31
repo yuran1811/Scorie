@@ -16,7 +16,7 @@ export const QUOTES_STORED_DEFAULT = {
   quoteIdx: 0,
 };
 
-export const MAX_SCORE_RECENT_LTH = 4;
+export const MAX_SCORE_RECENT_LTH = 5;
 
 export const ToastDefaultConfig: ToastOptions = {
   className: 'text-[2.5rem] text-center',

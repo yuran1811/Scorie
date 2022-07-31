@@ -25,7 +25,7 @@ export const fakeDocData: DocDataType[] = [
   {
     id: 'doc-3',
     title: 'Score',
-    data: [],
+    data: ['Score management'],
     lastUpdate: '1/1/2022',
   },
   {

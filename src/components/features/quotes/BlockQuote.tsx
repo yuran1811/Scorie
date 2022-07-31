@@ -26,20 +26,23 @@ export const BlockQuote: FC<DivProps> = () => {
           style={{ background: bg }}
         >
           <QuoteIcon
-            className="absolute top-[2rem] left-[2rem]"
-            width="80"
-            height="80"
+            className="absolute top-8 left-8 sm:top-12 sm:left-12 sm:scale-125"
+            width="50"
+            height="50"
             fill={secondary}
           />
 
-          <div className="relative p-8">
-            <p className="mt-10 indent-12 text-[2.2rem] tablet:text-[3rem]" style={{ color }}>
+          <div className="relative p-6 sm:p-8">
+            <p
+              className="mt-10 indent-8 text-[2.2rem] tablet:text-[2.8rem] sm:indent-12"
+              style={{ color }}
+            >
               {data[quoteIdx]?.content || ''}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center justify-between">
-            <footer className="mt-2 w-[calc(100%-10rem)] p-8">
+            <footer className="w-[calc(100%-10rem)] px-8">
               <p
                 className="text-[1.8rem] font-semibold tablet:text-[2.4rem]"
                 style={{ color: secondary }}

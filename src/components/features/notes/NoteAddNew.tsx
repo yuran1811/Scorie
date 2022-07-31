@@ -102,10 +102,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
       </ModalBoxHeader>
 
       {status.type === 'errors' && (
-        <ErrorMessage
-          className="mx-auto w-4/5 py-5 text-center text-[3rem]"
-          content={status.message}
-        />
+        <ErrorMessage className="mx-auto w-4/5 py-5 text-center" content={status.message} />
       )}
 
       <div className="w-full text-[4rem] text-indigo-900 line-clamp-1">{t('new note')}</div>
@@ -124,9 +121,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
             }),
           }}
         />
-        {errors?.title && (
-          <ErrorMessage className="text-[3rem]" content={errors.title.message || ''} />
-        )}
+        {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
         <TextArea defaultValue="" className="font-normal" formHandle={{ ...register('data') }} />
 

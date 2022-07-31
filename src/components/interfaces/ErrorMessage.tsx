@@ -14,7 +14,9 @@ export const ErrorMessage: FC<ErrorMessageProps & DivProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className={`my-4 text-center font-semibold text-rose-600 ${className || ''}`}>
+    <div
+      className={`my-4 text-center text-[2.6rem] font-semibold text-rose-600 ${className || ''}`}
+    >
       {children || t(content?.toLowerCase() || '')}
     </div>
   );

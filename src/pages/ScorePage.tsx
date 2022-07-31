@@ -5,6 +5,5 @@ import { FC } from 'react';
 
 export const ScorePage: FC = () => {
   const currentUser = useStore((s) => s.currentUser);
-
-  return <>{currentUser === null ? <LogInRequired /> : <ScoreSectionBar />}</>;
+  return currentUser === null ? <LogInRequired /> : <ScoreSectionBar />;
 };

@@ -12,9 +12,9 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     VitePWA({
-      registerType: 'autoUpdate',
       devOptions: { enabled: true },
-      includeAssets: ['favicon.ico', 'logo192.png', 'logo512.png', 'vite.svg', 'QRCode.png'],
+      registerType: 'autoUpdate',
+      workbox: { globPatterns: ['**/*.{js,css,html,ico,png,svg}'] },
       manifest: {
         name: 'Scorie',
         short_name: 'Scorie',

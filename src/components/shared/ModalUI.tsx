@@ -32,7 +32,7 @@ export const ModalUI: FC<ModalUIProps & DivProps> = ({
 
         {children}
 
-        <div className="mt-8 flex flex-col justify-end gap-5 sm:flex-row text-[2.5rem]">
+        <div className="mt-8 flex flex-col justify-end gap-5 text-[2.5rem] sm:flex-row">
           <div
             className="cursor-pointer rounded-[2rem] border-2 border-transparent px-8 py-4 transition-colors hover:border-violet-400"
             onClick={() => cancelHandle()}

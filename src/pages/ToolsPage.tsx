@@ -5,6 +5,5 @@ import { FC } from 'react';
 
 export const ToolsPage: FC = () => {
   const currentUser = useStore((s) => s.currentUser);
-
-  return <>{currentUser === null ? <LogInRequired /> : <ToolsSectionBar />}</>;
+  return currentUser === null ? <LogInRequired /> : <ToolsSectionBar />;
 };

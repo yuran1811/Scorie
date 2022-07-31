@@ -10,6 +10,7 @@ export * from './quotes';
 export * from './scores';
 export * from './standardize';
 export * from './styles';
+export * from './testimonials';
 
 interface CmpObject extends Object {
   [key: string]: any;

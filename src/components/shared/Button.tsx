@@ -22,7 +22,7 @@ export const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> =
       {...props}
       className={`${
         className || ''
-      } flexcenter flex-wrap mx-auto my-[1.5rem] px-[2.5rem] py-[0.6rem] font-semibold text-[4rem] text-center text-ctbg bg-ctcolor border-ctbg border-4 rounded-[3rem] hover:bg-ctbg hover:text-white active:bg-ctbg active:text-white transition-all disabled:brightness-50`}
+      } flexcenter mx-auto my-[1.5rem] flex-wrap rounded-[3rem] border-4 border-ctbg bg-ctcolor px-[2.5rem] py-[0.6rem] text-center text-[4rem] font-semibold text-ctbg transition-all hover:bg-ctbg hover:text-white active:bg-ctbg active:text-white disabled:brightness-50`}
     >
       {before && children}
 

@@ -24,11 +24,11 @@ export const ConfirmBox: FC<ConfirmBoxProps & DivProps> = ({
       {...otherProps}
       className={`${
         className || ''
-      } isAnimated origin-top absolute bottom-0 left-0 right-0 p-2 flexcenter flex-wrap bg-ctcolor`}
+      } isAnimated flexcenter absolute bottom-0 left-0 right-0 origin-top flex-wrap bg-ctcolor p-2`}
       onClick={(e) => e.stopPropagation()}
     >
       <div>
-        <div className="font-bold text-[3rem] tablet:text-[3.5rem] text-center text-ctbg p-4 mb-4">
+        <div className="mb-4 p-4 text-center text-[3rem] font-bold text-ctbg tablet:text-[3.5rem]">
           {t(content || 'default confirm')}
         </div>
         <div className="flexcenter flex-wrap">

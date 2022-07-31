@@ -1,6 +1,6 @@
 import { useCollectionQuery } from '@/hooks';
 import { useStore } from '@/store';
-import { getTestimonials } from '@/utils/testimonials';
+import { getTestimonials } from '@/utils';
 import { Button, FeatureTestimonial, Testimonial } from '@cpns/shared';
 import { db } from '@shared/firebase';
 import { TestimonialProps } from '@shared/types';
@@ -28,7 +28,7 @@ export const TestimonialContainer = () => {
   }, [data, loading, error]);
 
   return (
-    <section className="my-16 rounded-3xl bg-gray-800 py-8 text-gray-100">
+    <section className="-mx-10 my-16 rounded-3xl bg-gray-800 py-8 text-gray-100 sm:mx-0">
       <div className="container mx-auto flex flex-col items-center p-10">
         <h1 className="p-2 text-center text-[3.5rem] font-semibold leading-none">
           {t('what our customers are saying about us')}
@@ -48,11 +48,13 @@ export const TestimonialContainer = () => {
           ))}
       </div>
 
-      <Button
-        className="mt-24 border-gray-900 bg-violet-400 !text-[3rem] text-gray-900 hover:border-violet-400 hover:bg-gray-900 hover:text-violet-400"
-        content={openModal ? 'Minimize' : 'Open'}
-        onClick={() => setOpenModal((s) => !s)}
-      />
+      {!!currentUser && currentUser?.uid && (
+        <Button
+          className="mt-24 border-gray-900 bg-violet-400 !text-[3rem] text-gray-900 hover:border-violet-400 hover:bg-gray-900 hover:text-violet-400"
+          content={openModal ? 'Minimize' : 'Open'}
+          onClick={() => setOpenModal((s) => !s)}
+        />
+      )}
 
       {!!currentUser && currentUser?.uid && openModal && (
         <TestimonialAddNew

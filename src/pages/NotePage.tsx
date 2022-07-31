@@ -5,6 +5,5 @@ import { FC } from 'react';
 
 export const NotePage: FC = () => {
   const currentUser = useStore((s) => s.currentUser);
-
-  return <>{currentUser === null ? <LogInRequired /> : <NoteSectionBar />}</>;
+  return currentUser === null ? <LogInRequired /> : <NoteSectionBar />;
 };

@@ -14,11 +14,14 @@ export const db = getFirestore(firebaseApp);
 export const messaging = getMessaging(firebaseApp);
 
 process.env.NODE_ENV === 'production' && getAnalytics(firebaseApp);
+
 enableIndexedDbPersistence(db, { forceOwnership: false }).catch((err) => {
   if (err.code === 'failed-precondition') {
     console.log('Persistance failed');
-  } else if (err.code === 'unimplemented') {
-    console.log('Persistance not availabel');
+  }
+
+  if (err.code === 'unimplemented') {
+    console.log('Persistance not available');
   }
 });
 

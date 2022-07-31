@@ -38,17 +38,17 @@ export const NotVerifyEmail: FC = () => {
   );
 
   return (
-    <div className="p-4 mobile:p-10 m-6">
-      <div className="font-semibold text-[4rem] text-center">
+    <div className="m-6 p-4 mobile:p-10">
+      <div className="text-center text-[4rem] font-semibold">
         {t('please verify your email before using this app')}
       </div>
-      <div className="text-[3rem] text-center w-full mobile:w-4/5 mx-auto mt-10">
+      <div className="mx-auto mt-10 w-full text-center text-[3rem] mobile:w-4/5">
         {t("we've sent you a verify link via email")}
       </div>
-      <div className="text-[3rem] text-center w-full mobile:w-4/5 mx-auto mt-10">
+      <div className="mx-auto mt-10 w-full text-center text-[3rem] mobile:w-4/5">
         {t('please check all your mails carefully (our mail can be in spam by many reasons)')}
       </div>
-      <div className="text-[3rem] text-center w-full mobile:w-4/5 mx-auto mt-10">
+      <div className="mx-auto mt-10 w-full text-center text-[3rem] mobile:w-4/5">
         {t("or if you can't find any")},{' '}
         <span
           className="cursor-pointer font-semibold underline"

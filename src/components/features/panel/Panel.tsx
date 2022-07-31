@@ -36,22 +36,22 @@ export const Panel: FC<DivProps> = ({ className }) => {
       <div
         className={`${className || ''} ${
           active.isMenu ? 'translate-x-0' : 'translate-x-[-200%]'
-        } isAnimated fullscreen px-12 py-20 tablet:max-w-[50rem] bg-ctcolor text-ctbg`}
+        } isAnimated fullscreen bg-ctcolor px-12 py-20 text-ctbg tablet:max-w-[50rem]`}
       >
-        <div className="z-[2] flexcenter w-full tablet:px-6 pt-14 m-auto">
+        <div className="flexcenter z-[2] m-auto w-full pt-14 tablet:px-6">
           {currentUser && (
             <Avatar
-              className="mobile:block hidden cursor-pointer"
+              className="hidden cursor-pointer mobile:block"
               imgUrl={currentUser?.photoURL ? currentUser.photoURL : ''}
               radius="7rem"
             />
           )}
-          <div className="font-bold mx-6 text-[4.5rem] text-center mobile:text-left line-clamp-1">
+          <div className="mx-6 text-center text-[4.5rem] font-bold line-clamp-1 mobile:text-left">
             {currentUser?.displayName ? currentUser.displayName : t('guest')}
           </div>
         </div>
 
-        <div className="z-[1] flexcentercol !justify-start w-full h-4/5 pb-12 my-4 text-[4rem] scrollY">
+        <div className="flexcentercol scrollY z-[1] my-12 h-4/5 w-full !justify-start gap-6 space-y-10 pb-24 text-[4rem]">
           <AccountContainer />
           <DataContainer />
           <SettingContainer />

@@ -52,14 +52,14 @@ export const DataInfo: FC = () => {
       <div className="flexcenter w-full">
         <a href={backupData} download={backupData ? 'scorie_backup.json' : ''}>
           <Button className="!text-[3rem]" content="Get backup data">
-            <DownloadIcon className="m-4" width="50" height="50" />
+            <DownloadIcon className="m-4" width="40" height="40" />
           </Button>
         </a>
       </div>
 
       <div className="flexcenter mt-12 w-full">
         <div>
-          <div className="p-4 text-center text-[2.5rem] font-semibold">
+          <div className="p-4 text-center text-[3rem] font-semibold">
             {t('import data from backup file')}
           </div>
 

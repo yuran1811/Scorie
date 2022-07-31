@@ -18,11 +18,7 @@ export const NotificationWrapper = () => {
   const notificationAction = () => {
     setNotificationActive(true);
 
-    getNotification(t('you have allowed scorie to send notification'), {
-      body: t('created by scorie'),
-    } as NotificationOptions);
-
-    /* getFCMToken()
+    getFCMToken()
       .then((token) => {
         token && setFCMToken(token);
 
@@ -59,11 +55,11 @@ export const NotificationWrapper = () => {
         getNotification(t('cannot receive notification from server'), {
           body: `Bugs description: ${getFirebaseErr(err)}`,
         } as NotificationOptions);
-      }); */
+      });
   };
 
   const notificationHandle = () => {
-    if (!('Notification' in window)) {
+    if (!('Notification' in window) || !('requestPermission' in Notification)) {
       toast.warn(t('this browser does not support desktop notification'), {
         ...ToastDefaultConfig,
         toastId: 'notsupport-noti',
@@ -74,8 +70,6 @@ export const NotificationWrapper = () => {
     }
 
     const { permission, requestPermission } = Notification;
-
-    requestPermission();
 
     if (permission === 'granted') notificationAction();
     else {

@@ -8,8 +8,8 @@ export const LogInRequired: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flexcentercol relative w-full tablet:w-[70%] h-[30rem] mx-auto text-[4rem] mobile:text-[5rem] text-white">
-      <div className="font-semibold text-center p-6">{t('log in required')}</div>
+    <div className="flexcentercol relative mx-auto h-[30rem] w-full text-[4rem] text-white mobile:text-[5rem] tablet:w-[70%]">
+      <div className="p-6 text-center font-semibold">{t('log in required')}</div>
       <BackIcon className="!text-white" onClick={() => navigate(-1)} />
     </div>
   );

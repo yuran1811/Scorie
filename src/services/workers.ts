@@ -1,6 +1,6 @@
 import { ToastDefaultConfig } from '@/shared';
-import { toast } from 'react-toastify';
 import { t } from 'i18next';
+import { toast } from 'react-toastify';
 import { registerSW } from 'virtual:pwa-register';
 
 window.addEventListener('load', () => {

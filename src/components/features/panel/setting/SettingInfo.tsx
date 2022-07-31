@@ -54,9 +54,7 @@ export const SettingInfo: FC = () => {
             </div>
           </form>
 
-          {errors?.numberFormat && (
-            <ErrorMessage className="text-[3rem]" content={errors.numberFormat.message || ''} />
-          )}
+          {errors?.numberFormat && <ErrorMessage content={errors.numberFormat.message || ''} />}
         </div>
 
         <div

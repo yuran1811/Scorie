@@ -185,15 +185,13 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         </button>
       </div>
 
-      {status.type === 'errors' && (
-        <ErrorMessage className="p-6 text-[3rem] tablet:text-[4rem]" content={status.message} />
-      )}
+      {status.type === 'errors' && <ErrorMessage className="p-6" content={status.message} />}
 
       <div className="flexcentercol h-[calc(100%-14rem)] px-8 pb-8 tablet:h-[calc(100%-12rem)]">
         <TimeContainer obj={{ updatedAt }} style={noteStyle} />
 
         <Input
-          className="!max-w-full text-center !text-[3.5rem] !font-bold mobile:!text-[4.5rem] tablet:!max-w-[65rem]"
+          className="!max-w-full text-center !text-[3rem] !font-bold mobile:!text-[3.5rem] tablet:!max-w-[65rem]"
           style={noteStyle}
           defaultValue={title}
           formHandle={{
@@ -204,12 +202,10 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             }),
           }}
         />
-        {errors?.title && (
-          <ErrorMessage className="text-[3rem]" content={errors.title.message || ''} />
-        )}
+        {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
         <TextArea
-          className="!h-full !max-w-full px-6 text-left !text-[3rem] mobile:!text-[3.5rem] tablet:!max-w-[65rem]"
+          className="!h-full !max-w-full px-6 text-left !text-[2.6rem] mobile:!text-[3rem] tablet:!max-w-[65rem]"
           style={noteStyle}
           defaultValue={data}
           formHandle={{ ...register('data') }}

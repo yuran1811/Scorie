@@ -93,7 +93,7 @@ export const AntChart: FC = () => {
   // }, []);
 
   return (
-    <div className="w-[90%] max-w-[60rem] my-12">
+    <div className="my-12 w-[90%] max-w-[60rem]">
       Ant Chart
       {/* <Line
 				{...config}

@@ -103,13 +103,11 @@ export const AccountInfo: FC = () => {
                   }),
                 }}
               />
-              {errors?.displayName && (
-                <ErrorMessage className="text-[3rem]" content={errors.displayName.message || ''} />
-              )}
+              {errors?.displayName && <ErrorMessage content={errors.displayName.message || ''} />}
 
               <Button type="submit" className="!text-[3.5rem]" content="Update profile" />
             </form>
-            {errMsg && <ErrorMessage className="text-[3rem]" content={errMsg} />}
+            {errMsg && <ErrorMessage content={errMsg} />}
 
             <Button
               className="!text-[3.5rem]"
