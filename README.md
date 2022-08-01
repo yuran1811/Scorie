@@ -7,7 +7,7 @@
 - Multi locales (vi, en, and more in the future)
 - PWA available (can be used offline and add to homescreen, receive notifications)
 - Login with Google, Facebook, Email / Password
-- Plenty of features : scores, notes, ...(drag and drop, create / read / update / delete, share, ...)
+- Plenty of features : quotes, scores, notes, ...(drag and drop, create / read / update / delete, share, ...)
 - Analytics feature and other awesome tools will help improving your school life
 
 ### Technologies

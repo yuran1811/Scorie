@@ -12,13 +12,7 @@ const AccountBar: FC<DivProps> = (props) => {
   return (
     <div
       {...props}
-      onClick={() =>
-        setActive &&
-        setActive((s) => ({
-          ...s,
-          isAccount: !active.isAccount,
-        }))
-      }
+      onClick={() => setActive && setActive((s) => ({ ...s, isAccount: !active.isAccount }))}
     >
       <UserIcon className="cursor-pointer text-ctbg" width="40" height="40" />
       <div className="ml-6 font-bold line-clamp-1">{t('account')}</div>

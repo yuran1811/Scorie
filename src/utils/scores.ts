@@ -28,6 +28,9 @@ export const filterScoreList = (
       if (filter.hasVital && _.isVital) return true;
       if (filter.hasIgnored && _.isIgnored) return true;
       return false;
+    })
+    .sort((a, b) => {
+      return a < b ? -1 : a === b ? 0 : 1;
     });
 };
 

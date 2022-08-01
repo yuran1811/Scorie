@@ -57,30 +57,28 @@ export const DataInfo: FC = () => {
         </a>
       </div>
 
-      <div className="flexcenter mt-12 w-full">
-        <div>
-          <div className="p-4 text-center text-[3rem] font-semibold">
-            {t('import data from backup file')}
-          </div>
-
-          <input
-            ref={inputRef}
-            className={`${inputClass} cursor-pointer`}
-            type="file"
-            accept=".json"
-            title="log in"
-            onChange={handleChange}
-          />
-
-          {openModal && !loading && (
-            <Button className="!text-[3rem]" content="Import" onClick={() => saveToDB()} />
-          )}
-          {loading && (
-            <div className="flexcenter my-6">
-              <ThreeDotsFade />
-            </div>
-          )}
+      <div className="flexcentercol mt-12 w-full">
+        <div className="p-4 text-center text-[3rem] font-semibold">
+          {t('import data from backup file')}
         </div>
+
+        <input
+          ref={inputRef}
+          className={`${inputClass} cursor-pointer`}
+          type="file"
+          accept=".json"
+          title="log in"
+          onChange={handleChange}
+        />
+
+        {openModal && !loading && (
+          <Button className="!text-[3rem]" content="Import" onClick={() => saveToDB()} />
+        )}
+        {loading && (
+          <div className="flexcenter my-6">
+            <ThreeDotsFade />
+          </div>
+        )}
       </div>
     </div>
   );

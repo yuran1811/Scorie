@@ -25,37 +25,28 @@ export const SettingInfo: FC = () => {
   return (
     <div className="flexcentercol mt-8 h-4/5 w-full !justify-start overflow-y-auto overflow-x-hidden p-3 pb-8">
       <div className="w-full">
-        <div>
-          <form className="flexcentercol mt-8" onSubmit={handleSubmit(onSubmit)}>
-            <span className="text-center text-[3.5rem] font-bold">
-              {t('score format')} (9.xxxx)
-            </span>
-            <div className="flexcenter flex-wrap">
-              <Input
-                className="mx-4 flex-1"
-                placeholder="Type a number"
-                defaultValue={settings.numberFormat}
-                inputMode="numeric"
-                formHandle={{
-                  ...register('numberFormat', {
-                    required: 'Please fill in this field',
-                    validate: {
-                      notEmpty: (v) => v.toString().trim().length !== 0 || 'Cannot be empty',
-                      isNumber: (v) => /^\d+$/.test(v.toString().trim()) || 'Not a number',
-                    },
-                  }),
-                }}
-              />
-              <Button
-                className="!text-[3.5rem]"
-                content="Change"
-                onClick={handleSubmit(onSubmit)}
-              />
-            </div>
-          </form>
-
+        <form className="flexcentercol mt-8" onSubmit={handleSubmit(onSubmit)}>
+          <span className="text-center text-[3.5rem] font-bold">{t('score format')} (9.xxxx)</span>
+          <div className="flexcenter w-4/5 flex-wrap">
+            <Input
+              className="mx-4 flex-1"
+              placeholder="Type a number"
+              defaultValue={settings.numberFormat}
+              inputMode="numeric"
+              formHandle={{
+                ...register('numberFormat', {
+                  required: 'Please fill in this field',
+                  validate: {
+                    notEmpty: (v) => v.toString().trim().length !== 0 || 'Cannot be empty',
+                    isNumber: (v) => /^\d+$/.test(v.toString().trim()) || 'Not a number',
+                  },
+                }),
+              }}
+            />
+            <Button className="!text-[3rem]" content="Change" onClick={handleSubmit(onSubmit)} />
+          </div>
           {errors?.numberFormat && <ErrorMessage content={errors.numberFormat.message || ''} />}
-        </div>
+        </form>
 
         <div
           className="mt-12 cursor-pointer text-center !text-[3.5rem] font-bold"

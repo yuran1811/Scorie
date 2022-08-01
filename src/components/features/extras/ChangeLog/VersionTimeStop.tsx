@@ -24,7 +24,7 @@ export const VersionTimeStop: FC<VersionTimeStopProps> = ({
       <div className="flex-1 space-y-2">
         <div className="flex flex-col items-start justify-start text-gray-400">
           <div
-            className="group relative my-1 flex items-center rounded-full border-4 px-6 py-2"
+            className="group relative my-1 mx-auto flex items-center rounded-full border-4 px-6 py-2 smallmb:m-0"
             style={{
               backgroundColor: changeLogStyle[type]?.color || '#a78bfa',
               borderColor: changeLogStyle[type]?.bg || '#374151',
@@ -32,14 +32,21 @@ export const VersionTimeStop: FC<VersionTimeStopProps> = ({
           >
             <span
               aria-hidden="true"
-              className="mr-4 h-8 w-8 rounded-full"
+              className="h-8 w-8 rounded-full smallmb:mr-4"
               style={{ backgroundColor: changeLogStyle[type]?.bg || '#374151' }}
             />
-            <span className="pr-2" style={{ color: changeLogStyle[type]?.bg || '#374151' }}>
+            <span
+              className="hidden pr-2 smallmb:block"
+              style={{ color: changeLogStyle[type]?.bg || '#374151' }}
+            >
               {title}
             </span>
 
-            <div className={`${currentUser && currentUser?.uid ? '' : '!hidden'} absolute -right-16 cursor-pointer`}>
+            <div
+              className={`${
+                currentUser && currentUser?.uid ? '' : '!hidden'
+              } absolute -right-16 cursor-pointer`}
+            >
               <Tooltip content={!!changeLogsRead[version] ? 'Mark as unread' : 'Mark as read'}>
                 <div onClick={() => setChangeLogsRead(version, !changeLogsRead[version])}>
                   <DoubleCheckIcon active={!!changeLogsRead[version]} height="30" width="30" />
@@ -48,10 +55,10 @@ export const VersionTimeStop: FC<VersionTimeStopProps> = ({
             </div>
           </div>
 
-          <div>{formatDate(time.seconds * 1000)}</div>
+          <div className="text-[2.2rem] tracking-normal">{formatDate(time.seconds * 1000)}</div>
         </div>
         <div className="flexcentercol !justify-start text-[2.2rem]">
-          <div className="w-full indent-8">{content}</div>
+          <div className="w-full tracking-wide smallmb:indent-8">{content}</div>
         </div>
       </div>
     </li>

@@ -18,3 +18,4 @@ export * from './Testimonial';
 export * from './TextArea';
 export * from './TimeContainer';
 export * from './Tooltip';
+export * from './Divider';

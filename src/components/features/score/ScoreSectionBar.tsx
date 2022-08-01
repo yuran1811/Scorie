@@ -29,10 +29,7 @@ export const ScoreSectionBar = () => {
 
   const { data, loading } = useCollectionQuery(
     'users_subjects',
-    query(
-      collection(db, 'users', currentUser?.uid as string, 'subjects'),
-      orderBy('updatedAt', 'desc')
-    )
+    collection(db, 'users', currentUser?.uid as string, 'subjects')
   );
 
   const [addNewSSOpen, setAddNewSSOpen] = useState(false);
@@ -65,12 +62,12 @@ export const ScoreSectionBar = () => {
   }, [searchOpts]);
 
   return (
-    <div className="w-full my-[2rem] mb-[7rem]">
+    <div className="my-[2rem] mb-[7rem] w-full">
       <AddButton onClick={() => setAddNewSSOpen(true)} />
 
       <SubjectAverage subjects={subjects.map((_) => _.subject)} />
 
-      <div className="w-full flexcenter flex-wrap px-4">
+      <div className="flexcenter w-full flex-wrap px-4">
         <Title Icon={HashtagIcon} content="Score" />
         <div className="flexcenter flex-wrap px-6 py-8">
           <Tooltip
@@ -80,7 +77,7 @@ export const ScoreSectionBar = () => {
             }}
           >
             <StarIcon
-              className="cursor-pointer mx-5 my-4"
+              className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasSpecial ? 'white' : '#fcd34d'}
               width="40"
               height="40"
@@ -95,7 +92,7 @@ export const ScoreSectionBar = () => {
             }}
           >
             <ImportantIcon
-              className="cursor-pointer mx-5 my-4"
+              className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasVital ? 'white' : '#38bdf8'}
               width="40"
               height="40"
@@ -110,7 +107,7 @@ export const ScoreSectionBar = () => {
             }}
           >
             <IgnoreIcon
-              className="cursor-pointer mx-5 my-4"
+              className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasIgnored ? 'white' : '#0891b2'}
               width="40"
               height="40"
@@ -125,7 +122,7 @@ export const ScoreSectionBar = () => {
             }}
           >
             <AddIcon
-              className="cursor-pointer mx-5 my-4"
+              className="mx-5 my-4 cursor-pointer"
               fill={'white'}
               width="40"
               height="40"
@@ -134,7 +131,7 @@ export const ScoreSectionBar = () => {
           </Tooltip>
         </div>
       </div>
-      <div className="w-full flexcenter px-4">
+      <div className="flexcenter w-full px-4">
         <SearchBar
           setSearchOpts={setSearchOpts}
           onChange={(e) => {
@@ -155,16 +152,16 @@ export const ScoreSectionBar = () => {
       </div>
 
       {!loading && subjects !== null && subjects.length === 0 && (
-        <div className="w-full p-8 m-4 font-bold text-[5rem] text-center">{t('no subject')}</div>
+        <div className="m-4 w-full p-8 text-center text-[5rem] font-bold">{t('no subject')}</div>
       )}
 
       {loading ? (
-        <div className="flexcenter w-full h-[10rem]">
+        <div className="flexcenter h-[10rem] w-full">
           <FlatLoading />
         </div>
       ) : (
-        <div className="mx-auto mt-4 p-4 max-w-[100rem] w-full rounded-[2rem]">
-          <div className="flex flex-wrap justify-center items-start w-full">
+        <div className="mx-auto mt-4 w-full max-w-[100rem] rounded-[2rem] p-4">
+          <div className="flex w-full flex-wrap items-start justify-center">
             {filterScoreList(subjects, filter).map((item) => (
               <SubjectCard key={item.id} isShow={item.isShow} subject={item} />
             ))}

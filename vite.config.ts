@@ -15,7 +15,7 @@ export default defineConfig({
       devOptions: { enabled: true },
       registerType: 'autoUpdate',
       workbox: { globPatterns: ['**/*.{js,css,html,ico,png,svg}'] },
-      includeAssets: ['**/*.{js,css,html,ico,png,svg}', 'QRCode.png'],
+      includeAssets: ['**/*.{js,css,html,ico,png,svg}'],
       manifest: {
         name: 'Scorie',
         short_name: 'Scorie',
@@ -36,7 +36,6 @@ export default defineConfig({
           },
           { src: 'logo192.png', type: 'image/png', sizes: '192x192' },
           { src: 'logo512.png', type: 'image/png', sizes: '512x512' },
-          { src: 'QRCode.png', type: 'image/png' },
         ],
         shortcuts: [
           {

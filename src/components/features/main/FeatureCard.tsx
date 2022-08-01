@@ -15,7 +15,9 @@ export const FeatureCard: FC<DivProps> = ({ title, className, children, ...other
           {t(title.toLowerCase())}
         </div>
       )}
-      <div className="text-center text-[2.5rem] font-bold text-white">{children}</div>
+      <div className="scrollY top-32 h-[calc(100%-8rem)] text-center text-[2.5rem] font-bold text-white">
+        {children}
+      </div>
     </div>
   );
 };

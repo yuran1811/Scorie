@@ -48,10 +48,12 @@ export const ReportAddNew: FC<
       <Overlay zIdx="z-[-1]" onClick={() => clickHandle()} />
 
       <form
-        className="flexcentercol mx-auto max-h-[90vh] w-max max-w-[80%] rounded-[2rem] bg-gray-900 p-8 px-12 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
+        className="flexcentercol mx-auto max-h-[70vh] w-max max-w-[80%] rounded-[2rem] bg-gray-900 p-8 px-12 text-center text-[5rem] font-bold text-teal-700 line-clamp-1 mobile:max-h-[90vh]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="text-violet-400">{t('report bugs')}</div>
+        <div className="text-[3rem] text-violet-400 smallmb:text-[4rem] mobile:text-[5rem]">
+          {t('report bugs')}
+        </div>
 
         <Input
           className="bg-gray-800 focus:border-violet-400"

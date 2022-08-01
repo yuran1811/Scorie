@@ -5,6 +5,14 @@ const accountTranslation = {
     vi: 'Tài khoản',
     en: 'Account',
   },
+  'have no account': {
+    vi: 'Không có tài khoản ?',
+    en: 'Have no account ?',
+  },
+  'already have account': {
+    vi: 'Đã có tài khoản ?',
+    en: 'Already have account ?',
+  },
 };
 
 const dataTranslation = {

@@ -4,6 +4,7 @@ import { useStore } from '@/store';
 import { SignIn } from '@cpns/features/auth/SignIn';
 import SignInUseEmailPassWord from '@cpns/features/auth/SignInUseEmailPassword';
 import { BackIcon } from '@cpns/icons';
+import { Divider } from '@cpns/shared';
 import { FC } from 'react';
 import { AccountInfo } from './AccountInfo';
 
@@ -31,8 +32,9 @@ const AccountPanel: FC<DivProps> = ({ className }) => {
       {currentUser ? (
         <AccountInfo />
       ) : (
-        <div className="h-4/5 w-full overflow-y-auto overflow-x-hidden">
+        <div className="h-4/5 w-full space-y-12 overflow-y-auto overflow-x-hidden">
           <SignInUseEmailPassWord />
+          <Divider />
           <SignIn />
         </div>
       )}

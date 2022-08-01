@@ -3,11 +3,12 @@ import { useStore } from '@/store';
 import { getFirebaseErr } from '@/utils';
 import { ArrowLeftIcon, ArrowRightIcon, LogInIcon, ThreeDotsFade } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { Button, Input, RevealPasswordInput } from '@cpns/shared';
+import { Button, Divider, Input, RevealPasswordInput } from '@cpns/shared';
 import { CreateNewUser } from './CreateNewUser';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
   email: string;
@@ -16,6 +17,8 @@ interface Inputs {
 
 const SignInUseEmailPassWord = () => {
   const setCurrentUser = useStore((s) => s.setCurrentUser);
+
+  const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState('');
@@ -54,6 +57,7 @@ const SignInUseEmailPassWord = () => {
     <>
       {isNew ? (
         <CreateNewUser>
+          <Divider className="!max-w-[40rem]">{t('already have account')}</Divider>
           <Button className="!text-[3rem]" content="Log in" onClick={() => setNew(false)}>
             <ArrowLeftIcon className="mr-6" width="40" height="40" />
           </Button>
@@ -129,6 +133,8 @@ const SignInUseEmailPassWord = () => {
               <LogInIcon className="mr-6" width="40" height="40" />
             </Button>
           </form>
+
+          <Divider className="!max-w-[35rem]">{t('have no account')}</Divider>
 
           <Button
             before={false}

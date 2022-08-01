@@ -42,7 +42,7 @@ export const BlockQuote: FC<DivProps> = () => {
           <div className="flex flex-col flex-wrap items-center justify-center smallmb:flex-row smallmb:justify-between">
             <footer className="w-full px-0 pb-6 smallmb:w-[calc(100%-10rem)] smallmb:px-8 smallmb:py-0">
               <p
-                className="text-center text-[1.8rem] font-semibold smallmb:text-left tablet:text-[2.4rem]"
+                className="text-center text-[2rem] font-semibold smallmb:text-left tablet:text-[2.5rem]"
                 style={{ color: secondary }}
               >
                 {data[quoteIdx]?.author || ''}

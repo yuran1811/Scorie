@@ -347,6 +347,10 @@ export default {
     vi: 'Chia sẻ',
     en: 'Share',
   },
+  or: {
+    vi: 'hoặc',
+    en: 'or',
+  },
 
   title: {
     vi: 'Tiêu đề',

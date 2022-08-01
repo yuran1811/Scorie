@@ -14,7 +14,7 @@ export const Header: FC = () => (
 
     <Link to="/">
       <div
-        className="text-center text-[4rem] font-bold mobile:text-[4.6rem]"
+        className="text-center text-[4rem] font-bold mobile:text-[4.5rem]"
         onClick={() =>
           document.querySelector('#root > div')?.scroll({
             top: 0,
