@@ -14,6 +14,10 @@ export default {
     vi: 'Bình chọn',
     en: 'Upvote',
   },
+  shuffle: {
+    vi: 'Ngẫu nhiên',
+    en: 'Shuffle',
+  },
   'report bugs': {
     vi: 'Báo cáo lỗi',
     en: 'Report bugs',

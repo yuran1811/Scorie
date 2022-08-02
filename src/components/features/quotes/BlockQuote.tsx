@@ -1,10 +1,12 @@
 import { DivProps } from '@/shared';
 import { useStore } from '@/store';
 import { appThemes, randomInArray } from '@/utils';
-import { QuoteIcon } from '@cpns/icons';
+import { QuoteIcon, ShuffleIcon } from '@cpns/icons';
 import { BlockQuoteSkeleton } from './BlockQuoteSkeleton';
 import { FetchQuoteButton, NextQuoteButton, PrevQuoteButton } from './QuoteButton';
+import __ from 'lodash';
 import { FC } from 'react';
+import { Tooltip } from '@cpns/shared';
 
 export const BlockQuote: FC<DivProps> = () => {
   const quotes = useStore((s) => s.quotes);
@@ -12,7 +14,8 @@ export const BlockQuote: FC<DivProps> = () => {
 
   const { data, loading, numPage, quoteIdx, isFetch } = quotes;
 
-  const { bg, color, secondary } = randomInArray(Object.entries(appThemes))[1];
+  const { item } = randomInArray(Object.entries(appThemes));
+  const { bg, color, secondary } = item[1];
 
   if (!data.length) return <></>;
 
@@ -80,6 +83,16 @@ export const BlockQuote: FC<DivProps> = () => {
                 />
               )}
             </div>
+          </div>
+
+          <div className="absolute top-12 right-20 cursor-pointer">
+            <Tooltip content="Shuffle">
+              <ShuffleIcon
+                width="45"
+                height="45"
+                onClick={() => setQuotes({ ...quotes, quoteIdx: Math.floor(Math.random() * quotes.data.length) })}
+              />
+            </Tooltip>
           </div>
         </blockquote>
       )}

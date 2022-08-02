@@ -44,7 +44,7 @@ export const ReportAddNew: FC<
   };
 
   return createPortal(
-    <div className="fullscreen flexcenter z-[20] !justify-start">
+    <div className="fullscreen flexcenter z-20 !justify-start">
       <Overlay zIdx="z-[-1]" onClick={() => clickHandle()} />
 
       <form

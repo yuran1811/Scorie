@@ -351,6 +351,10 @@ export default {
     vi: 'hoặc',
     en: 'or',
   },
+  amount: {
+    vi: 'Số lượng',
+    en: 'Amount',
+  },
 
   title: {
     vi: 'Tiêu đề',

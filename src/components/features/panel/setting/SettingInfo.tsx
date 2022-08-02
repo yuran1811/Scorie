@@ -5,6 +5,7 @@ import { ErrorMessage } from '@cpns/interfaces';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { successToast } from '@/utils';
 
 export const SettingInfo: FC = () => {
   const settings = useStore((s) => s.settings);
@@ -20,6 +21,7 @@ export const SettingInfo: FC = () => {
 
   const onSubmit: SubmitHandler<SettingsType> = (data) => {
     setSettings({ ...settings, ...data });
+    successToast()
   };
 
   return (

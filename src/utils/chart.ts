@@ -26,6 +26,7 @@ export const getChartData = (scores: SubjectDetailType[], numberFormat: number) 
       y: value,
       fillColor: averageScore[averageScore.check(valueToCheck)].color,
       goals,
+      average,
     };
   });
 };

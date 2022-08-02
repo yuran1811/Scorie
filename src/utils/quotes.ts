@@ -1,11 +1,13 @@
 import { QuoteListType, QuoteStoreType } from '@/shared';
+import __ from 'lodash';
 
 export const mergeQuoteData = (oldData: QuoteStoreType, newData: QuoteListType | null) => {
   if (!newData || !newData?.results) return { canUpdate: false, mergeData: oldData };
 
-  const idSet = Array.from(
-    new Set([...oldData.data.map((_) => _._id), ...newData.results.map((_) => _._id)])
+  const idSet = __.uniq(
+    __.flattenDeep([__.map(oldData.data, '_id'), __.map(newData.results, '_id')])
   );
+
   const dataToMerge =
     oldData.numPage !== newData.page ? [...oldData.data, ...newData.results] : oldData.data;
 

@@ -1,7 +1,7 @@
 import { deleteNote, editNote, validateNoteOption } from '@/services';
-import { NoteDetailType, ToastDefaultConfig } from '@/shared';
+import { NoteDetailType } from '@/shared';
 import { useStore } from '@/store';
-import { shallowObjectCompare } from '@/utils';
+import { shallowObjectCompare, successToast } from '@/utils';
 import { ArchiveIcon, CloseIcon, DoneIcon, PinIcon, ProgressIcon, TrashIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
 import { ConfirmBox, Input, TextArea, TimeContainer } from '@cpns/shared';
@@ -9,8 +9,6 @@ import Tippy from '@tippyjs/react/headless';
 import { Dispatch, FC, SetStateAction, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 
 interface Inputs {
   title: string;
@@ -31,8 +29,6 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
   const currentUser = useStore((s) => s.currentUser);
   const noteIdxList = useStore((s) => s.noteIdxList);
-
-  const { t } = useTranslation();
 
   const [showConfirm, setShowConfirm] = useState(false);
   const [status, setStatus] = useState({ type: 'ok', message: '' });
@@ -71,7 +67,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
       editNote(currentUser.uid, id, noteToEdit)
         .then(() => {
-          toast.success(t('successfully'), { ...ToastDefaultConfig, autoClose: 800 });
+          successToast();
           setStatus({ type: 'ok', message: 'Update successfully' });
           setOpenDetail(false);
         })

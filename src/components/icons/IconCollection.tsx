@@ -2,6 +2,10 @@ import {
   AddIcon,
   AddressBookIcon,
   ArchiveIcon,
+  ArrowDownIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowUpIcon,
   BookIcon,
   BookmarkIcon,
   BulbIcon,
@@ -29,7 +33,6 @@ import {
   ListIcon,
   LogInIcon,
   LogOutIcon,
-  MenuIcon,
   MessageIcon,
   NodeShareIcon,
   NoteIcon,
@@ -44,6 +47,7 @@ import {
   SearchIcon,
   SettingIcon,
   ShareIcon,
+  ShuffleIcon,
   StarIcon,
   TagIcon,
   ToolIcon,
@@ -51,12 +55,16 @@ import {
   UpvoteIcon,
   UserIcon,
   ViLocale,
-  YinYangIcon,
-} from './index';
+  YinYangIcon
+} from '.';
 
-const IconCollection = () => {
+export const IconCollection = () => {
   return (
     <div className="container mx-auto flex w-full flex-wrap items-start justify-center gap-4">
+      <ArrowLeftIcon className="icon-test" width="30" height="30" />
+      <ArrowRightIcon className="icon-test" width="30" height="30" />
+      <ArrowUpIcon className="icon-test" width="30" height="30" />
+      <ArrowDownIcon className="icon-test" width="30" height="30" />
       <AddIcon className="icon-test" width="30" height="30" />
       <AddressBookIcon className="icon-test" width="30" height="30" />
       <ArchiveIcon className="icon-test" width="30" height="30" />
@@ -87,7 +95,7 @@ const IconCollection = () => {
       <ListIcon className="icon-test" width="30" height="30" />
       <LogInIcon className="icon-test" width="30" height="30" />
       <LogOutIcon className="icon-test" width="30" height="30" />
-      <MenuIcon className="icon-test" width="30" height="30" />
+      {/* <MenuIcon className="icon-test" width="30" height="30" /> */}
       <MessageIcon className="icon-test" width="30" height="30" />
       <NodeShareIcon className="icon-test" width="30" height="30" />
       <NoteIcon className="icon-test" width="30" height="30" />
@@ -102,6 +110,7 @@ const IconCollection = () => {
       <SearchIcon className="icon-test" width="30" height="30" />
       <SettingIcon className="icon-test" width="30" height="30" />
       <ShareIcon className="icon-test" width="30" height="30" />
+      <ShuffleIcon className="icon-test" width="30" height="30" />
       <StarIcon className="icon-test" width="30" height="30" />
       <TagIcon className="icon-test" width="30" height="30" />
       <ToolIcon className="icon-test" width="30" height="30" />
@@ -113,5 +122,3 @@ const IconCollection = () => {
     </div>
   );
 };
-
-export default IconCollection;

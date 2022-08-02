@@ -1,7 +1,7 @@
 import { updateUserProfile } from '@/services';
 import { auth } from '@/shared';
 import { useStore } from '@/store';
-import { getFirebaseErr } from '@/utils';
+import { getFirebaseErr, successToast } from '@/utils';
 import { NotVerifyEmail } from '@cpns/features/auth/NotVerifyEmail';
 import { LogOutIcon, ThreeDotsFade } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
@@ -37,17 +37,16 @@ export const AccountInfo: FC = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      if (!currentUser) return;
-
       const { displayName, photoURL } = data;
+
+      if (!currentUser || displayName === currentUser?.displayName) return;
 
       setLoading(true);
       await updateUserProfile({ ...currentUser, displayName: displayName.trim() });
-      reset({
-        displayName,
-        photoURL,
-      });
+      reset({ displayName, photoURL });
       setLoading(false);
+
+      successToast();
     } catch (error) {
       setLoading(false);
 

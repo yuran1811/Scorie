@@ -13,7 +13,7 @@ const sortableConfig = {
   swapThreshold: 0.3,
   sort: true,
   delayOnTouchOnly: true,
-  className: 'flex flex-wrap justify-center items-start gap-4',
+  className: 'flex flex-wrap justify-center items-start gap-2 mobile:gap-4',
 };
 
 export const NoteSection: FC<NoteSectionProps> = (props) => {
@@ -90,7 +90,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
   });
 
   return (
-    <div className="mx-auto my-12 w-[calc(100%-4rem)] max-w-[100rem] pb-12">
+    <div className="mx-auto my-12 max-w-[100rem] pb-12 mobile:w-[calc(100%-4rem)]">
       <div className="mx-auto mb-8 w-[20rem] border-b-[0.2rem] border-indigo-100 text-center text-[3.5rem] font-semibold tablet:text-[4.5rem]">
         {t('pinned')}
       </div>

@@ -11,10 +11,10 @@ export const BackIcon: FC<DivProps> = ({ className, onClick }) => (
     <div
       className={`${
         className || ''
-      } text-ctbg flexcenter !justify-start relative my-[0.6rem] mx-auto w-[5.6rem] h-[5.6rem] ${beforeStyle} ${afterStyle} ${hoverStyle}`}
+      } flexcenter relative my-[0.6rem] mx-auto h-[5.6rem] w-[5.6rem] !justify-start text-ctbg ${beforeStyle} ${afterStyle} ${hoverStyle}`}
       onClick={onClick}
     >
-      <span className="w-full h-[0.8rem] rounded-[1rem] bg-current" />
+      <span className="h-[0.8rem] w-full rounded-[1rem] bg-current" />
     </div>
   </Tooltip>
 );

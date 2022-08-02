@@ -1,7 +1,7 @@
 import { deleteSubject, editSubject, validateSubjectOption } from '@/services';
 import { ScoreDetailType, SubjectDetailType, ToastDefaultConfig } from '@/shared';
 import { useStore } from '@/store';
-import { shallowObjectCompare } from '@/utils';
+import { shallowObjectCompare, successToast } from '@/utils';
 import {
   AddIcon,
   CloseIcon,
@@ -103,7 +103,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
       expectedAverage: +expectedAverage,
     })
       .then(() => {
-        toast.success(t('successfully'), { ...ToastDefaultConfig, autoClose: 800 });
+        successToast();
         setSaveErr({ content: '', counter: saveErr.counter + 1 });
         setOpenDetail(false);
       })

@@ -33,7 +33,7 @@ export const SearchBar: FC<SearchBarProps & InputProps> = ({ setSearchOpts, onCh
               'width 0.4s 0.1s ease-in-out, border-radius 0.4s 0.2s ease-in-out, padding 0.2s 0.4s',
           }}
           type="text"
-          inputMode='search'
+          inputMode="search"
           disabled={!isActive}
           onChange={onChange}
           onBlur={(e) => {

@@ -15,7 +15,7 @@ export const HighlightLink: FC<HighlightLinkProps & AnchorProps> = ({
   animate = false,
 }) => (
   <a
-    className={`relative text-ctlinkcolor font-semibold ${underline} after:transition-all after:duration-300 after:ease-in-out after:origin-center ${
+    className={`text-ctlinkcolor relative font-semibold ${underline} after:origin-center after:transition-all after:duration-300 after:ease-in-out ${
       animate ? 'after:scale-x-0 hover:after:scale-x-100' : ''
     }`}
     href={url || '/'}

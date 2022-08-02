@@ -1,11 +1,11 @@
 // import { Chart } from 'react-google-charts';
 // import { fakeGGChartData } from '@/services';
 
-// export const options = {
-// 	title: 'Company Performance',
-// 	curveType: 'function',
-// 	legend: { position: 'bottom' },
-// };
+const options = {
+  title: 'Company Performance',
+  curveType: 'function',
+  legend: { position: 'bottom' },
+};
 
 export const GGChart = () => (
   <div className="my-12 w-[90%] max-w-[60rem]">

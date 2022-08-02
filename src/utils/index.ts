@@ -1,6 +1,7 @@
 export * from './backupData';
 export * from './changelog';
 export * from './chart';
+export * from './commonToast';
 export * from './dayjsUsage';
 export * from './firebase';
 export * from './notes';
@@ -54,7 +55,8 @@ export const copyToClipboard = (data: string) => {
 };
 
 export const randomInArray = (arr: any[]) => {
-  const idx = (min = 0, max = arr.length - 1) => Math.floor(Math.random() * (max - min + 1)) + min;
+  const getIdx = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
+  const idx = getIdx(0, arr.length);
 
-  return arr[idx()];
+  return { idx, item: arr[idx] };
 };

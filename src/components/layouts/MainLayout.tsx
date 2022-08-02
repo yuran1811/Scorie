@@ -27,6 +27,8 @@ const MainLayout: FC = ({ children }) => {
 
       <div className="relative z-[3]" id="confirm-container"></div>
 
+      <div className="relative z-[10000]" id="over-tippy-container"></div>
+
       <ToastContainer theme="dark" newestOnTop />
     </AppStatusProvider>
   );
