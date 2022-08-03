@@ -8,18 +8,18 @@ import {
   HashtagIcon,
   IgnoreIcon,
   ImportantIcon,
-  StarIcon,
+  StarIcon
 } from '@cpns/icons';
 import { SearchBar, Tooltip } from '@cpns/shared';
+import { collection } from 'firebase/firestore';
+import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Title } from '../main/sections/Title';
 import { AddButton } from './AddButton';
 import { ScoreSubjectAddNew } from './ScoreSubjectAddNew';
 import { SubjectAddNew } from './SubjectAddNew';
 import { SubjectAverage } from './SubjectAverage';
 import { SubjectCard } from './SubjectCard';
-import { collection, orderBy, query } from 'firebase/firestore';
-import { useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 export const ScoreSectionBar = () => {
   const setScores = useStore((s) => s.setScores);

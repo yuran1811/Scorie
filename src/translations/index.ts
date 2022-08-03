@@ -2,12 +2,14 @@ import BannerTranslation from './banner';
 import PanelTranslation from './panel';
 import TooltipTranslation from './tooltip';
 import UtilitiesTranslation from './utilities';
+import TourTranslation from './tour';
 
 const TRANSLATIONS = [
   BannerTranslation,
   PanelTranslation,
   TooltipTranslation,
   UtilitiesTranslation,
+  TourTranslation,
 ];
 
 const getTranslations = (lang: string) => {

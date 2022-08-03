@@ -1,16 +1,18 @@
 import {
-  ChangeLogProps,
-  NoteDetailType,
   QuoteStoreType,
   QUOTES_STORED_DEFAULT,
   SettingsType,
   SETTINGS_DEFAULT,
-  STORE_NAME,
   SubjectDetailType,
 } from '@/shared';
 import { User } from 'firebase/auth';
+import __ from 'lodash';
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+
+export * from './changeLogStore';
+export * from './noteStore';
+export * from './tourStore';
 
 interface StoreType {
   currentUser: User | null | undefined;
@@ -25,24 +27,15 @@ interface StoreType {
   scores: SubjectDetailType[];
   setScores: (data: SubjectDetailType[]) => void;
 
-  notes: NoteDetailType[];
-  setNotes: (data: NoteDetailType[]) => void;
-
-  noteIdxList: { id: string; list: string[] };
-  setNoteIdxList: (noteIdxList: { id: string; list: string[] }) => void;
-
   locale: string;
   setLocale: (data: string) => void;
 
   FCMToken: string;
   setFCMToken: (token: string) => void;
-
-  changeLogs: ChangeLogProps[];
-  setChangeLogs: (changeLogs: ChangeLogProps[]) => void;
-
-  changeLogsRead: { [version: string]: boolean };
-  setChangeLogsRead: (version: string, read: boolean) => void;
 }
+
+export const GENERAL_STORE_NAME = __.kebabCase('General Store');
+export const GENERAL_STORE_VERSION = 0.01;
 
 export const useStore = create<StoreType>()(
   devtools(
@@ -60,26 +53,16 @@ export const useStore = create<StoreType>()(
         scores: [],
         setScores: (scores) => set({ scores: [...scores] }),
 
-        notes: [],
-        setNotes: (notes) => set({ notes: [...notes] }),
-
-        noteIdxList: { id: '', list: [] },
-        setNoteIdxList: (noteIdxList) => set({ noteIdxList }),
-
         locale: 'vi',
         setLocale: (locale) => set({ locale }),
 
         FCMToken: '',
         setFCMToken: (FCMToken) => set({ FCMToken }),
-
-        changeLogs: [],
-        setChangeLogs: (changeLogs) => set({ changeLogs }),
-
-        changeLogsRead: {},
-        setChangeLogsRead: (version, read) =>
-          set((s) => ({ changeLogsRead: { ...s.changeLogsRead, [version]: read } })),
       }),
-      { name: STORE_NAME }
+      {
+        name: GENERAL_STORE_NAME,
+        version: GENERAL_STORE_VERSION,
+      }
     )
   )
 );

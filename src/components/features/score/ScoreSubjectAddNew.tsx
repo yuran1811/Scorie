@@ -4,7 +4,7 @@ import { useStore } from '@/store';
 import { IgnoreIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from '@cpns/shared';
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -32,6 +32,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
   const {
     reset,
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
@@ -73,6 +74,15 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
     },
     [scoreOptions, subjects]
   );
+
+  useEffect(() => {
+    return () => {
+      unregister('subject');
+      unregister('score');
+      unregister('base');
+      unregister('type');
+    };
+  }, []);
 
   return (
     <ModalBox onClick={onClick}>

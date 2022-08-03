@@ -3,7 +3,7 @@ import { useStore } from '@/store';
 import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input, Overlay, TextArea } from '@cpns/shared';
 import { DivProps } from '@shared/types';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -24,6 +24,7 @@ export const ReportAddNew: FC<
 
   const {
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
@@ -42,6 +43,13 @@ export const ReportAddNew: FC<
       });
     }
   };
+
+  useEffect(() => {
+    return () => {
+      unregister('title');
+      unregister('content');
+    };
+  }, []);
 
   return createPortal(
     <div className="fullscreen flexcenter z-20 !justify-start">

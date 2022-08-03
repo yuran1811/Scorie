@@ -1,12 +1,27 @@
 import { DivProps } from '@/shared';
 import { useStore } from '@/store';
-import { appThemes, randomInArray } from '@/utils';
+import { appThemes, getStepId, randomInArray } from '@/utils';
 import { QuoteIcon, ShuffleIcon } from '@cpns/icons';
+import { Tooltip } from '@cpns/shared';
+import { StepType } from '@reactour/tour';
+import { FC } from 'react';
 import { BlockQuoteSkeleton } from './BlockQuoteSkeleton';
 import { FetchQuoteButton, NextQuoteButton, PrevQuoteButton } from './QuoteButton';
-import __ from 'lodash';
-import { FC } from 'react';
-import { Tooltip } from '@cpns/shared';
+import { BlockQuoteTour } from './Tour/BlockQuoteTour';
+import { ButtonTour } from './Tour/ButtonTour';
+
+export const quoteSteps: StepType[] = [
+  {
+    selector: '[data-tour="quote-step-1"]',
+    content: <BlockQuoteTour />,
+    position: 'bottom',
+  },
+  {
+    selector: '[data-tour="quote-step-2"]',
+    content: <ButtonTour />,
+    position: 'left',
+  },
+];
 
 export const BlockQuote: FC<DivProps> = () => {
   const quotes = useStore((s) => s.quotes);
@@ -17,6 +32,8 @@ export const BlockQuote: FC<DivProps> = () => {
   const { item } = randomInArray(Object.entries(appThemes));
   const { bg, color, secondary } = item[1];
 
+  const step = getStepId('quote-step');
+
   if (!data.length) return <></>;
 
   return (
@@ -25,6 +42,7 @@ export const BlockQuote: FC<DivProps> = () => {
         <BlockQuoteSkeleton />
       ) : (
         <blockquote
+          data-tour={step(1)}
           className="relative mx-auto max-w-[68rem] rounded-[2rem] p-12"
           style={{ background: bg }}
         >
@@ -85,12 +103,14 @@ export const BlockQuote: FC<DivProps> = () => {
             </div>
           </div>
 
-          <div className="absolute top-12 right-20 cursor-pointer">
+          <div data-tour={step(2)} className="absolute top-12 right-20 cursor-pointer">
             <Tooltip content="Shuffle">
               <ShuffleIcon
                 width="45"
                 height="45"
-                onClick={() => setQuotes({ ...quotes, quoteIdx: Math.floor(Math.random() * quotes.data.length) })}
+                onClick={() =>
+                  setQuotes({ ...quotes, quoteIdx: Math.floor(Math.random() * quotes.data.length) })
+                }
               />
             </Tooltip>
           </div>

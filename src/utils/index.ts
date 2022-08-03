@@ -60,3 +60,11 @@ export const randomInArray = (arr: any[]) => {
 
   return { idx, item: arr[idx] };
 };
+
+export const getStepId = (prefix: string) => {
+  let idx = 0;
+  return (pattern?: string | number) => {
+    if (typeof pattern === 'number') idx = pattern;
+    return `${!!prefix.length ? prefix : 'reactour-step'}-${pattern || ++idx}`;
+  };
+};

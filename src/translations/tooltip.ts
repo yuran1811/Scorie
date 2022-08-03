@@ -10,6 +10,10 @@ export default {
     en: 'Mark as unread',
   },
 
+  guide: {
+    vi: 'Hướng dẫn',
+    en: 'Guide',
+  },
   upvote: {
     vi: 'Bình chọn',
     en: 'Upvote',

@@ -31,9 +31,17 @@ export const AccountInfo: FC = () => {
   const {
     reset,
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
+  const unregistAll = () => {
+    unregister('displayName');
+    unregister('photoURL');
+
+    return true;
+  };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
@@ -68,9 +76,15 @@ export const AccountInfo: FC = () => {
       );
   }, [changePWMes]);
 
+  useEffect(() => {
+    return () => {
+      unregistAll();
+    };
+  }, []);
+
   return (
     <>
-      {!currentUser?.emailVerified ? (
+      {!currentUser?.emailVerified && unregistAll() ? (
         <div className="scrollY h-4/5 w-full">
           <NotVerifyEmail />
         </div>
@@ -112,7 +126,7 @@ export const AccountInfo: FC = () => {
               className="!text-[3.5rem]"
               before={false}
               content="Log out"
-              onClick={() => signOut(auth)}
+              onClick={() => unregistAll() && signOut(auth)}
             >
               <LogOutIcon className="ml-6" width="40" height="40" />
             </Button>

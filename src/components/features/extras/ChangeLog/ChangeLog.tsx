@@ -10,7 +10,7 @@ export const ChangeLog = () => {
   const { status } = useAppStatus();
 
   return (
-    <div>
+    <>
       <div className="relative">
         <MessageIcon
           className="my-4 mx-6 cursor-pointer"
@@ -22,6 +22,6 @@ export const ChangeLog = () => {
       </div>
 
       {openModal && <VersionTimeline onClick={() => setOpenModal(false)} />}
-    </div>
+    </>
   );
 };

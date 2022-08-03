@@ -1,12 +1,12 @@
 import { deleteNote, editNote, validateNoteOption } from '@/services';
 import { NoteDetailType } from '@/shared';
-import { useStore } from '@/store';
+import { useNoteStore, useStore } from '@/store';
 import { shallowObjectCompare, successToast } from '@/utils';
 import { ArchiveIcon, CloseIcon, DoneIcon, PinIcon, ProgressIcon, TrashIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
 import { ConfirmBox, Input, TextArea, TimeContainer } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
-import { Dispatch, FC, SetStateAction, useCallback, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -28,7 +28,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
   const { id, isPinned, isArchived, isDone, isInProgress, title, data, updatedAt } = note;
 
   const currentUser = useStore((s) => s.currentUser);
-  const noteIdxList = useStore((s) => s.noteIdxList);
+  const noteIdxList = useNoteStore((s) => s.noteIdxList);
 
   const [showConfirm, setShowConfirm] = useState(false);
   const [status, setStatus] = useState({ type: 'ok', message: '' });
@@ -36,6 +36,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
   const {
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
@@ -85,6 +86,13 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
   const onSubmit: SubmitHandler<Inputs> = (data: any) => {
     updateNote({ ...data });
   };
+
+  useEffect(() => {
+    return () => {
+      unregister('title');
+      unregister('data');
+    };
+  }, []);
 
   return createPortal(
     <form

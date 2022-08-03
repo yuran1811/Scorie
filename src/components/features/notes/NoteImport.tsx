@@ -1,6 +1,6 @@
 import { addNewNote, updateIdxList } from '@/services';
 import { NoteDetailType } from '@/shared';
-import { useStore } from '@/store';
+import { useNoteStore, useStore } from '@/store';
 import { AddIcon } from '@cpns/icons';
 import { Input } from '@cpns/shared';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
@@ -23,7 +23,7 @@ function isNoteData(obj: any): obj is NoteDetailType {
 }
 
 const NoteImport: FC<NoteImportProps> = ({ showImport, setShowImport }) => {
-  const noteIdxList = useStore((s) => s.noteIdxList);
+  const noteIdxList = useNoteStore((s) => s.noteIdxList);
   const currentUser = useStore((s) => s.currentUser);
 
   const [isError, setError] = useState(false);

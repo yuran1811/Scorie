@@ -1,11 +1,11 @@
 import { updateIdxList } from '@/services';
 import { NoteListType, NoteSectionProps } from '@/shared';
-import { useStore } from '@/store';
+import { useNoteStore, useStore } from '@/store';
 import { filterSectionList } from '@/utils';
-import { NoteItem } from './NoteItem';
 import { FC, memo, useCallback, useEffect, useState } from 'react';
-import { ReactSortable } from 'react-sortablejs';
 import { useTranslation } from 'react-i18next';
+import { ReactSortable } from 'react-sortablejs';
+import { NoteItem } from './NoteItem';
 
 const sortableConfig = {
   animation: 200,
@@ -19,11 +19,10 @@ const sortableConfig = {
 export const NoteSection: FC<NoteSectionProps> = (props) => {
   const { viewMode, filter, notes } = props;
 
-  const noteIdxList = useStore((s) => s.noteIdxList);
+  const currentUser = useStore((s) => s.currentUser);
+  const noteIdxList = useNoteStore((s) => s.noteIdxList);
 
   const { t } = useTranslation();
-
-  const currentUser = useStore((s) => s.currentUser);
 
   const [canUpdate, setCanUpdate] = useState(false);
   const [timeoutId, setTimeoutId] = useState<any>();

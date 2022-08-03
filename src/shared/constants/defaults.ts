@@ -1,8 +1,6 @@
 import { SettingsType } from '@shared/types';
 import { ToastOptions } from 'react-toastify';
 
-export const STORE_NAME = 'local_user_data';
-
 export const SETTINGS_DEFAULT: SettingsType = {
   numberFormat: 2,
   showStartUpLogo: true,

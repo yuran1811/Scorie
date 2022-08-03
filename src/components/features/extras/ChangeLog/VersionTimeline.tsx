@@ -1,4 +1,4 @@
-import { useStore } from '@/store';
+import { useChangeLogStore } from '@/store';
 import { Overlay } from '@cpns/shared';
 import { DivProps } from '@shared/types';
 import { FC } from 'react';
@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 import { VersionTimeStop } from './VersionTimeStop';
 
 export const VersionTimeline: FC<DivProps> = ({ onClick }) => {
-  const changeLogs = useStore((s) => s.changeLogs);
+  const changeLogs = useChangeLogStore((s) => s.changeLogs);
 
   return createPortal(
     <div className="fullscreen flexcenter z-20 !justify-start">

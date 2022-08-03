@@ -3,7 +3,7 @@ import { SettingsType } from '@/shared';
 import { Button, Input } from '@cpns/shared';
 import { ErrorMessage } from '@cpns/interfaces';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { successToast } from '@/utils';
 
@@ -15,14 +15,21 @@ export const SettingInfo: FC = () => {
 
   const {
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<SettingsType>({ mode: 'onChange' });
 
   const onSubmit: SubmitHandler<SettingsType> = (data) => {
     setSettings({ ...settings, ...data });
-    successToast()
+    successToast();
   };
+
+  useEffect(() => {
+    return () => {
+      unregister('numberFormat');
+    };
+  }, []);
 
   return (
     <div className="flexcentercol mt-8 h-4/5 w-full !justify-start overflow-y-auto overflow-x-hidden p-3 pb-8">

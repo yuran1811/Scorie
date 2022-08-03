@@ -31,6 +31,7 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
 
   const {
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
@@ -80,6 +81,12 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
       toast.update(toastId.current, { autoClose: 1 });
     };
   }, [status]);
+
+  useEffect(() => {
+    return () => {
+      unregister('subject');
+    };
+  }, []);
 
   return (
     <ModalBox onClick={() => onClickHandle(false)}>

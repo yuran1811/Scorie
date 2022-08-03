@@ -1,6 +1,6 @@
 import { useAppStatus } from '@/contexts';
 import { useCollectionQuery } from '@/hooks';
-import { useStore } from '@/store';
+import { useChangeLogStore, useStore } from '@/store';
 import { getChangeLogs } from '@/utils';
 import { Avatar, Badge } from '@cpns/shared';
 import { ToastDefaultConfig } from '@shared/constants';
@@ -22,9 +22,9 @@ const toastConfig: ToastOptions = {
 
 export const ExtraTools: FC = () => {
   const currentUser = useStore((s) => s.currentUser);
-  const changeLogs = useStore((s) => s.changeLogs);
-  const changeLogsRead = useStore((s) => s.changeLogsRead);
-  const setChangeLogs = useStore((s) => s.setChangeLogs);
+  const changeLogs = useChangeLogStore((s) => s.changeLogs);
+  const changeLogsRead = useChangeLogStore((s) => s.changeLogsRead);
+  const setChangeLogs = useChangeLogStore((s) => s.setChangeLogs);
 
   const { status, setStatus } = useAppStatus();
 

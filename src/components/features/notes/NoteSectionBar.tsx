@@ -1,6 +1,6 @@
 import { useCollectionQuery } from '@/hooks';
 import { db, NoteListFilterType, NoteListType } from '@/shared';
-import { useStore } from '@/store';
+import { useNoteStore, useStore } from '@/store';
 import { getNoteList } from '@/utils';
 import {
   AddIcon,
@@ -24,9 +24,9 @@ import NoteImport from './NoteImport';
 import NoteSection from './NoteSection';
 
 export const NoteSectionBar = () => {
-  const setNotes = useStore((s) => s.setNotes);
   const currentUser = useStore((s) => s.currentUser);
-  const setNoteIdxList = useStore((s) => s.setNoteIdxList);
+  const setNotes = useNoteStore((s) => s.setNotes);
+  const setNoteIdxList = useNoteStore((s) => s.setNoteIdxList);
 
   const { t } = useTranslation();
 

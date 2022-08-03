@@ -1,10 +1,10 @@
 import { addNewNote, updateIdxList, validateNoteOption } from '@/services';
 import { DivProps, NoteDetailType } from '@/shared';
-import { useStore } from '@/store';
+import { useNoteStore, useStore } from '@/store';
 import { DoneIcon, PinIcon, ProgressIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader, TextArea } from '@cpns/shared';
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -19,7 +19,7 @@ interface NoteAddNewProps {
 
 export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) => {
   const currentUser = useStore((s) => s.currentUser);
-  const noteIdxList = useStore((s) => s.noteIdxList);
+  const noteIdxList = useNoteStore((s) => s.noteIdxList);
 
   const { t } = useTranslation();
 
@@ -33,6 +33,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 
   const {
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
@@ -62,6 +63,13 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
       }
     }
   };
+
+  useEffect(() => {
+    return () => {
+      unregister('title');
+      unregister('data');
+    };
+  }, []);
 
   return (
     <ModalBox onClick={() => onClickHandle(false)}>

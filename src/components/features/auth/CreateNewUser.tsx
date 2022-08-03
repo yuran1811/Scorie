@@ -24,9 +24,19 @@ export const CreateNewUser: FC = ({ children }) => {
   const {
     watch,
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<CreateNewInputs>();
+
+  const unregistAll = () => {
+    unregister('displayName');
+    unregister('email');
+    unregister('password');
+    unregister('confirmPassword');
+
+    return true;
+  };
 
   const onSubmit: SubmitHandler<CreateNewInputs> = useCallback(async (data) => {
     try {
@@ -53,9 +63,15 @@ export const CreateNewUser: FC = ({ children }) => {
     password.current = watch('password', '');
   }, [watch('password')]);
 
+  useEffect(() => {
+    return () => {
+      unregistAll();
+    };
+  }, []);
+
   return (
     <>
-      {loading && (
+      {loading && unregistAll() && (
         <div className="flexcenter h-[10rem] w-full p-6">
           <ThreeDotsFade />
         </div>

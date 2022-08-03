@@ -1,4 +1,4 @@
-import { useStore } from '@/store';
+import { useChangeLogStore, useStore } from '@/store';
 import { changeLogStyle, formatDate } from '@/utils';
 import { DoubleCheckIcon } from '@cpns/icons';
 import { Tooltip } from '@cpns/shared';
@@ -13,8 +13,8 @@ export const VersionTimeStop: FC<VersionTimeStopProps> = ({
   data: { content, time, title, type, version },
 }) => {
   const currentUser = useStore((s) => s.currentUser);
-  const changeLogsRead = useStore((s) => s.changeLogsRead);
-  const setChangeLogsRead = useStore((s) => s.setChangeLogsRead);
+  const changeLogsRead = useChangeLogStore((s) => s.changeLogsRead);
+  const setChangeLogsRead = useChangeLogStore((s) => s.setChangeLogsRead);
 
   return (
     <li className="relative flex items-start space-x-3 text-[2.5rem] before:absolute before:top-12 before:-bottom-8 before:left-14 before:h-full before:w-2 before:bg-gray-700">

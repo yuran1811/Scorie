@@ -1,6 +1,6 @@
 {
   "name": "scorie",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "yuran1811",
   "description": "For your better school life",
   "license": "MIT",
@@ -11,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@reactour/tour": "^2.13.0",
     "@tippyjs/react": "^4.2.6",
     "apexcharts": "^3.35.3",
     "axios": "^0.25.0",

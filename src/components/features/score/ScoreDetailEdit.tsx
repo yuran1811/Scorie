@@ -7,7 +7,7 @@ import { ErrorMessage } from '@cpns/interfaces';
 import { Button, ConfirmBox, Input, ModalBox, ModalBoxHeader, TimeContainer } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
 import { Timestamp } from 'firebase/firestore';
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface Inputs {
@@ -37,6 +37,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
 
   const {
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
@@ -91,6 +92,14 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
     },
     [scoreOptions]
   );
+
+  useEffect(() => {
+    return () => {
+      unregister('score');
+      unregister('base');
+      unregister('type');
+    };
+  }, []);
 
   return (
     <ModalBox onClick={onClick}>

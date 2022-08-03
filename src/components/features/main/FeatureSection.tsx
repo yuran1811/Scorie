@@ -1,4 +1,5 @@
 import { useStore } from '@/store';
+import { StepType } from '@reactour/tour';
 import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +7,14 @@ import { NotVerifyEmail } from '../auth/NotVerifyEmail';
 import { TestimonialContainer } from '../testimonial/TestimonialContainer';
 import { FeatureCard } from './FeatureCard';
 import { WelcomBanner } from './WelcomBanner';
+
+export const mainSteps: StepType[] = [
+  {
+    selector: 'body',
+    content: <h2 className="tourTitle">Hello, Scorier</h2>,
+    position: 'center',
+  },
+];
 
 export const FeatureSection: FC = () => {
   const currentUser = useStore((s) => s.currentUser);

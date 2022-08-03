@@ -3,7 +3,7 @@ import { useStore } from '@/store';
 import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input, ModalUI, TextArea } from '@cpns/shared';
 import { TestimonialProps } from '@shared/types';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -27,6 +27,7 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
 
   const {
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
@@ -61,6 +62,14 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
       addNewFeedback(currentUser.uid, feedbackToAdd);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      unregister('content');
+      unregister('name');
+      unregister('job');
+    };
+  }, []);
 
   return (
     <form
