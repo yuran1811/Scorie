@@ -2,11 +2,12 @@ import { addNewNote, updateIdxList } from '@/services';
 import { NoteDetailType } from '@/shared';
 import { useNoteStore, useStore } from '@/store';
 import { AddIcon } from '@cpns/icons';
-import { Input } from '@cpns/shared';
+import { Input, Overlay } from '@cpns/shared';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { useTranslation } from 'react-i18next';
 
 interface NoteImportProps {
-  showImport: boolean;
   setShowImport: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -22,7 +23,9 @@ function isNoteData(obj: any): obj is NoteDetailType {
   );
 }
 
-const NoteImport: FC<NoteImportProps> = ({ showImport, setShowImport }) => {
+const NoteImport: FC<NoteImportProps> = ({ setShowImport }) => {
+  const { t } = useTranslation();
+
   const noteIdxList = useNoteStore((s) => s.noteIdxList);
   const currentUser = useStore((s) => s.currentUser);
 
@@ -57,22 +60,32 @@ const NoteImport: FC<NoteImportProps> = ({ showImport, setShowImport }) => {
     setError(false);
   }, [inputValue]);
 
-  return (
-    <div
-      className={`${!showImport ? '!hidden' : 'z-10'} ${
-        isError ? 'bg-rose-400' : 'bg-indigo-200'
-      } flexcenter absolute bottom-[-9rem] right-0 w-[70vw] min-w-[10rem] max-w-[40rem] flex-wrap rounded-[3rem] p-2 pr-4`}
-    >
-      <div className="flex-1">
-        <Input
-          className="mx-2 focus:!border-indigo-400"
-          onChange={(e) => setInputValue(e.currentTarget.value)}
-        />
+  return createPortal(
+    <div className="fullscreen flexcenter">
+      <Overlay zIdx="z-[1]" onClick={() => setShowImport(false)} />
+
+      <div className="absolute z-[2]">
+        <div className="m-6 p-2 text-center text-[4rem] text-white">
+          {t('paste your shared content here')}
+        </div>
+        <div
+          className={`${
+            isError ? 'bg-rose-400' : 'bg-indigo-200'
+          } flexcenter h-[10rem] flex-wrap rounded-[3rem] py-2 px-6`}
+        >
+          <div className="flex-1">
+            <Input
+              className="mx-2 !max-w-full focus:!border-indigo-400"
+              onChange={(e) => setInputValue(e.currentTarget.value)}
+            />
+          </div>
+          <div className="cursor-pointer pl-4" onClick={onClickHandle}>
+            <AddIcon width="50" height="50" fill="#4338ca" />
+          </div>
+        </div>
       </div>
-      <div className="cursor-pointer" onClick={onClickHandle}>
-        <AddIcon width="50" height="50" fill="#4338ca" />
-      </div>
-    </div>
+    </div>,
+    document.getElementById('modal-container') as HTMLElement
   );
 };
 

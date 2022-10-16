@@ -453,6 +453,11 @@ export default {
     en: 'Add scores now',
   },
 
+  'paste your shared content here': {
+    vi:'Dán nội dung chia sẻ tại đây!',
+    en: 'Paste your shared content here!'
+  },
+
   'ideal place to keep your mind on': {
     vi: 'Quá nhiều ý tưởng trong đầu? Giữ chúng tại đây!',
     en: 'Ideal place to keep your mind on',

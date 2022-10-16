@@ -11,10 +11,9 @@ import {
   ListAllIcon,
   ListIcon,
   NoteIcon,
-  ProgressIcon,
+  ProgressIcon
 } from '@cpns/icons';
 import { SearchBar, Tooltip } from '@cpns/shared';
-import Tippy from '@tippyjs/react';
 import { collection } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -133,31 +132,22 @@ export const NoteSectionBar = () => {
           </Tooltip>
 
           <div className="relative">
-            <Tippy
-              interactive
-              visible={showImport}
-              placement="bottom-end"
-              onClickOutside={() => setShowImport(false)}
-              render={(attrs) => (
-                <NoteImport {...attrs} showImport={showImport} setShowImport={setShowImport} />
-              )}
-            >
-              <div onClick={() => setShowImport(true)}>
-                <Tooltip
-                  content="Import note"
-                  options={{
-                    delay: 400,
-                  }}
-                >
-                  <ImportIcon
-                    className="mx-5 my-4 cursor-pointer"
-                    fill={'white'}
-                    width="40"
-                    height="40"
-                  />
-                </Tooltip>
-              </div>
-            </Tippy>
+            {showImport && <NoteImport setShowImport={setShowImport} />}
+            <div onClick={() => setShowImport(true)}>
+              <Tooltip
+                content="Import note"
+                options={{
+                  delay: 400,
+                }}
+              >
+                <ImportIcon
+                  className="mx-5 my-4 cursor-pointer"
+                  fill={'white'}
+                  width="40"
+                  height="40"
+                />
+              </Tooltip>
+            </div>
           </div>
 
           <div className="block tablet:hidden">
