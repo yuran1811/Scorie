@@ -1,5 +1,5 @@
 import { updateUserProfile } from '@/services';
-import { auth } from '@/shared';
+import { auth, BASE_URL } from '@/shared';
 import { useStore } from '@/store';
 import { getFirebaseErr, successToast } from '@/utils';
 import { NotVerifyEmail } from '@cpns/features/auth/NotVerifyEmail';
@@ -126,7 +126,10 @@ export const AccountInfo: FC = () => {
               className="!text-[3.5rem]"
               before={false}
               content="Log out"
-              onClick={() => unregistAll() && signOut(auth)}
+              onClick={() => {
+                unregistAll() && signOut(auth);
+                window.location.href = BASE_URL;
+              }}
             >
               <LogOutIcon className="ml-6" width="40" height="40" />
             </Button>

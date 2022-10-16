@@ -1,6 +1,6 @@
 import { firebaseConfig } from '@/config';
 import getAxiosInst from '@shared/axios';
-import { DEPLOY_URL, HOST_URL } from '@shared/constants';
+import { BASE_URL } from '@shared/constants';
 
 const { cloudMessagingServerKey } = firebaseConfig;
 
@@ -25,7 +25,7 @@ export const sendNotification = ({
       title,
       body,
       icon,
-      click_action: process.env.NODE_ENV === 'production' ? DEPLOY_URL : HOST_URL,
+      click_action: BASE_URL,
     },
     to: FCMToken,
   });

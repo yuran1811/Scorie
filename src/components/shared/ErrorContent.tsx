@@ -28,7 +28,7 @@ export const ErrorContent: FC<ErrorContentProps> = ({ errorBoundaries = false })
             navigate('/');
             window.location.reload();
           } else navigate(-1);
-        }}
+        }} 
       />
     </div>
   );

@@ -49,7 +49,7 @@ export default defineConfig({
             name: 'Score Feature',
             short_name: 'Score',
             description: 'Full score features',
-            url: '/scores',
+            url: '/subjects',
             icons: [{ src: 'logo192.png', type: 'image/png', sizes: '192x192' }],
           },
           {
@@ -57,6 +57,13 @@ export default defineConfig({
             short_name: 'Analytics',
             description: 'Full analytics features',
             url: '/analytics',
+            icons: [{ src: 'logo192.png', type: 'image/png', sizes: '192x192' }],
+          },
+          {
+            name: 'Tools Feature',
+            short_name: 'Tools',
+            description: 'Full tools features',
+            url: '/tools',
             icons: [{ src: 'logo192.png', type: 'image/png', sizes: '192x192' }],
           },
         ],

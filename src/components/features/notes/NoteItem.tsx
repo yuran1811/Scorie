@@ -8,7 +8,7 @@ import {
   NodeShareIcon,
   PaletteIcon,
   PinIcon,
-  ProgressIcon
+  ProgressIcon,
 } from '@cpns/icons';
 import { Tooltip } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
@@ -59,7 +59,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
           viewMode === 'list' ? 'mx-auto w-full mobile:max-w-[calc(100%-4rem)]' : 'w-[20rem]'
         } ${
           !isShow && '!hidden'
-        } isAnimated flexcentercol group relative max-h-[35rem] cursor-pointer rounded-[2rem] border-[3px] border-transparent p-4 hover:border-white mobile:!mx-0 mobile:!max-w-none 
+        } isAnimated flexcentercol group relative cursor-pointer rounded-[2rem] border-[3px] border-transparent p-4 hover:border-white mobile:!mx-0 mobile:!max-w-none
         tablet:w-[24rem]`}
         style={noteStyle}
         onClick={() => setOpenDetail(true)}
@@ -70,17 +70,20 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
           {isInProgress && <ProgressIcon className="mx-4" width="30" height="30" fill="#cbd5e1" />}
         </div>
 
-        <div className="h-full w-full overflow-hidden">
+        <div className="max-h-[25rem] w-full overflow-hidden">
           <div className="w-full p-2 text-center text-[2.2rem] font-bold line-clamp-3">{title}</div>
-          {data?.split &&
-            data.split('\n').map((datum, idx) => (
-              <p
-                key={datum + idx}
-                className="!select-none resize-none bg-transparent p-2 text-[2rem] text-current tablet:text-[2.2rem]"
-              >
-                {datum}
-              </p>
-            ))}
+          {data?.split && (
+            <div>
+              {data.split('\n').map((datum, idx) => (
+                <p
+                  key={datum + idx}
+                  className="!select-none resize-none bg-transparent p-2 text-[2rem] text-current tablet:text-[2.2rem]"
+                >
+                  {datum}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
 
         <div

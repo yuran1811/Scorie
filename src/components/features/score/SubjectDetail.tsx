@@ -222,89 +222,90 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
 
         <TimeContainer obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }} />
 
-        <div className="flexcentercol px-8 py-8">
-          <div className="w-full text-center text-[5rem] text-teal-700 line-clamp-1">
-            {subject?.name || ''}
+        <div className="flexcentercol gap-6 px-8 py-8 md:!flex-row md:!items-start md:!justify-around">
+          <div className="pt-4 md:sticky md:top-[10.5rem]">
+            <div className="w-full text-center text-[5rem] text-teal-700 line-clamp-1">
+              {subject?.name || ''}
+            </div>
+            <div
+              className="my-4 rounded-[1rem] px-6 text-center text-[10rem] line-clamp-1"
+              style={{ ...style }}
+            >
+              {averageScore}
+            </div>
+            <div className="flexcenter mt-6 mb-12 flex-wrap">
+              <span className="mr-4 p-4 text-[3rem] text-indigo-800">{t('expected score')} </span>
+              <div className="flex-1">
+                <Input
+                  className="w-[15rem]"
+                  inputMode="decimal"
+                  value={expectedAverage}
+                  onChange={(e) => {
+                    if (!Number(e.currentTarget.value)) setExpectedAverage('');
+                    else setExpectedAverage(e.currentTarget.value);
+                  }}
+                />
+              </div>
+            </div>
           </div>
-
-          <div
-            className="my-4 rounded-[1rem] px-6 text-center text-[10rem] line-clamp-1"
-            style={{ ...style }}
-          >
-            {averageScore}
-          </div>
-
-          <div className="flexcenter mt-6 mb-12 flex-wrap">
-            <span className="mr-4 p-4 text-[3rem] text-indigo-800">{t('expected score')} </span>
-            <div className="flex-1">
-              <Input
-                className="w-[15rem]"
-                inputMode="decimal"
-                value={expectedAverage}
-                onChange={(e) => {
-                  if (!Number(e.currentTarget.value)) setExpectedAverage('');
-                  else setExpectedAverage(e.currentTarget.value);
-                }}
+          <div>
+            <div className="flex w-full flex-wrap items-center justify-between bg-violet-200 py-8 text-slate-800 md:sticky md:top-[10.5rem]">
+              <div className="w-full px-6 text-center text-[4rem] font-bold line-clamp-1 smallmb:w-auto smallmb:text-left">
+                {t('recent')}
+              </div>
+              <div className="flex w-full items-start justify-center smallmb:w-auto smallmb:justify-end">
+                <Tooltip
+                  content="Add new score"
+                  options={{
+                    delay: 400,
+                  }}
+                >
+                  <AddIcon
+                    className={`mx-5 cursor-pointer`}
+                    width="50"
+                    height="50"
+                    onClick={() => setAddNewOpen(true)}
+                  />
+                </Tooltip>
+                {addNewOpen && (
+                  <ScoreAddNew subject={subject} onClick={() => setAddNewOpen(false)} />
+                )}
+                <Tooltip
+                  content="Grid view"
+                  options={{
+                    delay: 400,
+                  }}
+                >
+                  <ListIcon
+                    className={`${viewMode === 'group' ? 'block' : 'hidden'} mx-5 cursor-pointer`}
+                    width="50"
+                    height="50"
+                    onClick={() => setViewMode('all')}
+                  />
+                </Tooltip>
+                <Tooltip
+                  content="Show all"
+                  options={{
+                    delay: 400,
+                  }}
+                >
+                  <ListAllIcon
+                    className={`${viewMode === 'all' ? 'block' : 'hidden'} mx-5 cursor-pointer`}
+                    width="50"
+                    height="50"
+                    onClick={() => setViewMode('group')}
+                  />
+                </Tooltip>
+              </div>
+            </div>
+            <div className="flexcenter w-full flex-wrap overflow-y-auto pb-6">
+              <ScoreContainer
+                viewMode={viewMode}
+                typeList={typeList}
+                subject={subject}
+                scores={scores}
               />
             </div>
-          </div>
-
-          <div className="flex w-full flex-wrap items-center justify-between bg-violet-200 py-8 text-slate-800">
-            <div className="w-full px-6 text-center text-[4rem] font-bold line-clamp-1 smallmb:w-auto smallmb:text-left">
-              {t('recent')}
-            </div>
-            <div className="flex w-full items-start justify-center smallmb:w-auto smallmb:justify-end">
-              <Tooltip
-                content="Add new score"
-                options={{
-                  delay: 400,
-                }}
-              >
-                <AddIcon
-                  className={`mx-5 cursor-pointer`}
-                  width="50"
-                  height="50"
-                  onClick={() => setAddNewOpen(true)}
-                />
-              </Tooltip>
-              {addNewOpen && <ScoreAddNew subject={subject} onClick={() => setAddNewOpen(false)} />}
-
-              <Tooltip
-                content="Grid view"
-                options={{
-                  delay: 400,
-                }}
-              >
-                <ListIcon
-                  className={`${viewMode === 'group' ? 'block' : 'hidden'} mx-5 cursor-pointer`}
-                  width="50"
-                  height="50"
-                  onClick={() => setViewMode('all')}
-                />
-              </Tooltip>
-
-              <Tooltip
-                content="Show all"
-                options={{
-                  delay: 400,
-                }}
-              >
-                <ListAllIcon
-                  className={`${viewMode === 'all' ? 'block' : 'hidden'} mx-5 cursor-pointer`}
-                  width="50"
-                  height="50"
-                  onClick={() => setViewMode('group')}
-                />
-              </Tooltip>
-            </div>
-          </div>
-          <div className="flexcenter w-full flex-wrap pb-6">
-            <ScoreContainer
-              viewMode={viewMode}
-              typeList={typeList}
-              subject={subject}
-              scores={scores}
-            />
           </div>
         </div>
       </div>
