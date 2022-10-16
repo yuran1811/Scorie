@@ -33,8 +33,8 @@ const AccountPanel: FC<DivProps> = ({ className }) => {
         <AccountInfo />
       ) : (
         <div className="h-4/5 w-full space-y-12 overflow-y-auto overflow-x-hidden">
-          <SignInUseEmailPassWord />
-          <Divider />
+          {/* <SignInUseEmailPassWord />
+          <Divider /> */}
           <SignIn />
         </div>
       )}
