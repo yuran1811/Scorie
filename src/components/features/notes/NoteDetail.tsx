@@ -210,7 +210,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
         <TextArea
-          className="!h-full !max-w-full !rounded-[0.8rem] px-6 text-left !text-[2.5rem] mobile:!text-[3rem]
+          className="!h-full !max-w-full !rounded-[0.8rem] !border-2 px-6 text-left !text-[2.5rem] mobile:!text-[3rem]
           tablet:!max-w-[100rem]"
           style={noteStyle}
           defaultValue={data}

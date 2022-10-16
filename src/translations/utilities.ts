@@ -454,8 +454,8 @@ export default {
   },
 
   'paste your shared content here': {
-    vi:'Dán nội dung chia sẻ tại đây!',
-    en: 'Paste your shared content here!'
+    vi: 'Dán nội dung được chia sẻ tại đây!',
+    en: 'Paste your shared content here!',
   },
 
   'ideal place to keep your mind on': {

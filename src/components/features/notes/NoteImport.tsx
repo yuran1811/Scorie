@@ -64,8 +64,8 @@ const NoteImport: FC<NoteImportProps> = ({ setShowImport }) => {
     <div className="fullscreen flexcenter">
       <Overlay zIdx="z-[1]" onClick={() => setShowImport(false)} />
 
-      <div className="absolute z-[2]">
-        <div className="m-6 p-2 text-center text-[4rem] text-white">
+      <div className="absolute z-[2] p-6">
+        <div className="m-6 p-2 text-center text-[3rem] font-bold text-violet-400 mobile:text-[4rem]">
           {t('paste your shared content here')}
         </div>
         <div
