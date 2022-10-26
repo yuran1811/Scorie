@@ -1,5 +1,5 @@
 import { updateUserProfile } from '@/services';
-import { auth, BASE_URL } from '@/shared';
+import { auth } from '@/shared';
 import { useStore } from '@/store';
 import { getFirebaseErr, successToast } from '@/utils';
 import { NotVerifyEmail } from '@cpns/features/auth/NotVerifyEmail';
@@ -31,7 +31,6 @@ export const AccountInfo: FC = () => {
   const {
     reset,
     register,
-    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ mode: 'onSubmit' });

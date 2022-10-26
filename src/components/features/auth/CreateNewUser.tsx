@@ -110,7 +110,7 @@ export const CreateNewUser: FC = ({ children }) => {
                 required: 'Please fill in this field',
                 validate: {
                   notEmpty: (v) => v.trim().length !== 0 || 'Password cannot be empty',
-                  isValid: (v) => /^[\w\d]{6,}$/.test(v.trim()) || 'At least 6 characters',
+                  isValid: (v) => /^[\w\d. ]{6,}$/.test(v.trim()) || 'At least 6 characters',
                 },
               }),
             }}
