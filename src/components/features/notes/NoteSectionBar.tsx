@@ -5,6 +5,7 @@ import { getNoteList } from '@/utils';
 import {
   AddIcon,
   ArchiveIcon,
+  BackIcon,
   DoneIcon,
   FlatLoading,
   ImportIcon,
@@ -17,6 +18,7 @@ import { SearchBar, Tooltip } from '@cpns/shared';
 import { collection } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { Title } from '../main/sections/Title';
 import { NoteAddNew } from './NoteAddNew';
 import NoteImport from './NoteImport';
@@ -26,6 +28,8 @@ export const NoteSectionBar = () => {
   const currentUser = useStore((s) => s.currentUser);
   const setNotes = useNoteStore((s) => s.setNotes);
   const setNoteIdxList = useNoteStore((s) => s.setNoteIdxList);
+
+  const navigate = useNavigate();
 
   const { t } = useTranslation();
 
@@ -68,7 +72,8 @@ export const NoteSectionBar = () => {
 
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
-      <div className="flexcenter w-full flex-wrap px-4">
+      <div className="flexcenter w-full flex-wrap gap-4 px-4">
+        <BackIcon className="text-white" onClick={() => navigate(-1)} />
         <Title Icon={NoteIcon} content="Note" />
         <div className="flexcenter flex-wrap px-6 py-8">
           <Tooltip

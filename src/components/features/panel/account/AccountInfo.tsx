@@ -5,10 +5,10 @@ import { getFirebaseErr, successToast } from '@/utils';
 import { NotVerifyEmail } from '@cpns/features/auth/NotVerifyEmail';
 import { LogOutIcon, ThreeDotsFade } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { Button } from '@cpns/shared';
+import { Button, Input } from '@cpns/shared';
 import { FirebaseError } from 'firebase/app';
 import { sendPasswordResetEmail, signOut } from 'firebase/auth';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -55,7 +55,7 @@ export const AccountInfo: FC = () => {
     }
   };
 
-  /* useEffect(() => {
+  useEffect(() => {
     setMessageExpired(false);
 
     clearTimeout(timeoutId);
@@ -66,7 +66,7 @@ export const AccountInfo: FC = () => {
           setMessageExpired(true);
         }, changePWMes.timer * 1000)
       );
-  }, [changePWMes]); */
+  }, [changePWMes]);
 
   return (
     <>
@@ -82,7 +82,7 @@ export const AccountInfo: FC = () => {
             </div>
           ) : (
             <div className={`flexcentercol scrollY mt-[0.6rem] h-4/5 !justify-start p-3 pb-16`}>
-              {/* <form className="mb-12" onSubmit={handleSubmit(onSubmit)}>
+              <form className="mb-14" onSubmit={handleSubmit(onSubmit)}>
                 <Input
                   className="!text-[4rem]"
                   name="displayName"
@@ -102,7 +102,7 @@ export const AccountInfo: FC = () => {
 
                 <Button type="submit" className="!text-[3.5rem]" content="Update profile" />
               </form>
-              {errMsg && <ErrorMessage content={errMsg} />} */}
+              {errMsg && <ErrorMessage content={errMsg} />}
 
               <Button
                 className="!text-[3.5rem]"
@@ -150,7 +150,9 @@ export const AccountInfo: FC = () => {
                 <ErrorMessage content={changePWMes.message} />
               )}
               {!messageExpired && changePWMes.type === 'success' && (
-                <div className="w-full text-center text-[3rem]">{changePWMes.message}</div>
+                <div className="mt-4 w-full border-4 border-current text-center text-[3rem] font-bold">
+                  {changePWMes.message}
+                </div>
               )}
             </div>
           )}

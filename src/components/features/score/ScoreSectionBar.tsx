@@ -4,16 +4,18 @@ import { useStore } from '@/store';
 import { filterScoreList, standardizeCollectionData } from '@/utils';
 import {
   AddIcon,
+  BackIcon,
   FlatLoading,
   HashtagIcon,
   IgnoreIcon,
   ImportantIcon,
-  StarIcon
+  StarIcon,
 } from '@cpns/icons';
 import { SearchBar, Tooltip } from '@cpns/shared';
 import { collection } from 'firebase/firestore';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { Title } from '../main/sections/Title';
 import { AddButton } from './AddButton';
 import { ScoreSubjectAddNew } from './ScoreSubjectAddNew';
@@ -24,6 +26,8 @@ import { SubjectCard } from './SubjectCard';
 export const ScoreSectionBar = () => {
   const setScores = useStore((s) => s.setScores);
   const currentUser = useStore((s) => s.currentUser);
+
+  const navigate = useNavigate();
 
   const { t } = useTranslation();
 
@@ -67,7 +71,8 @@ export const ScoreSectionBar = () => {
 
       <SubjectAverage subjects={subjects.map((_) => _.subject)} />
 
-      <div className="flexcenter w-full flex-wrap px-4">
+      <div className="flexcenter w-full flex-wrap gap-4 px-4">
+        <BackIcon className="text-white" onClick={() => navigate(-1)} />
         <Title Icon={HashtagIcon} content="Score" />
         <div className="flexcenter flex-wrap px-6 py-8">
           <Tooltip

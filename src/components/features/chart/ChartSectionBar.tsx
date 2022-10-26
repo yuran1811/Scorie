@@ -1,6 +1,6 @@
 import { useStore } from '@/store';
 import { getChartData } from '@/utils';
-import { ArrowRightIcon, ChartIcon } from '@cpns/icons';
+import { ArrowRightIcon, BackIcon, ChartIcon } from '@cpns/icons';
 import { Button } from '@cpns/shared';
 import { t as T } from 'i18next';
 import __ from 'lodash';
@@ -121,7 +121,8 @@ export const ChartSectionBar: FC = () => {
 
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
-      <div className="flexcenter w-full flex-wrap px-4">
+      <div className="flexcenter w-full flex-wrap gap-4 px-4">
+        <BackIcon className="text-white" onClick={() => navigate(-1)} />
         <Title Icon={ChartIcon} content="Analytics" />
       </div>
 

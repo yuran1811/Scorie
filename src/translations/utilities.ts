@@ -312,7 +312,7 @@ export default {
     en: 'Update',
   },
   'update profile': {
-    vi: 'Cập nhật tài khoản',
+    vi: 'Cập nhật thông tin',
     en: 'Update profile',
   },
   change: {
