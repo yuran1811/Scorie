@@ -5,10 +5,10 @@ import { getFirebaseErr, successToast } from '@/utils';
 import { NotVerifyEmail } from '@cpns/features/auth/NotVerifyEmail';
 import { LogOutIcon, ThreeDotsFade } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { Button, Input } from '@cpns/shared';
+import { Button } from '@cpns/shared';
 import { FirebaseError } from 'firebase/app';
 import { sendPasswordResetEmail, signOut } from 'firebase/auth';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -34,14 +34,7 @@ export const AccountInfo: FC = () => {
     unregister,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
-
-  const unregistAll = () => {
-    unregister('displayName');
-    unregister('photoURL');
-
-    return true;
-  };
+  } = useForm<Inputs>({ mode: 'onSubmit' });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
@@ -63,7 +56,7 @@ export const AccountInfo: FC = () => {
     }
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     setMessageExpired(false);
 
     clearTimeout(timeoutId);
@@ -74,104 +67,94 @@ export const AccountInfo: FC = () => {
           setMessageExpired(true);
         }, changePWMes.timer * 1000)
       );
-  }, [changePWMes]);
-
-  useEffect(() => {
-    return () => {
-      unregistAll();
-    };
-  }, []);
+  }, [changePWMes]); */
 
   return (
     <>
-      {!currentUser?.emailVerified && unregistAll() ? (
+      {!currentUser?.emailVerified ? (
         <div className="scrollY h-4/5 w-full">
           <NotVerifyEmail />
         </div>
       ) : (
         <>
-          {loading && (
+          {loading ? (
             <div className="flexcenter h-[10rem] w-full p-6">
               <ThreeDotsFade />
             </div>
-          )}
-          <div
-            className={`${
-              loading ? '!hidden' : ''
-            }  flexcentercol scrollY mt-[0.6rem] h-4/5 !justify-start p-3 pb-16`}
-          >
-            <form className="mb-12" onSubmit={handleSubmit(onSubmit)}>
-              <Input
-                className="!text-[4rem]"
-                name="displayName"
-                placeholder="Profile name"
-                defaultValue={currentUser?.displayName || t('guest')}
-                formHandle={{
-                  ...register('displayName', {
-                    required: 'Please fill in this field',
-                    validate: {
-                      notEmpty: (v) => v.trim().length !== 0 || 'Username cannot be empty',
-                      isValid: (v) => /[\w\d\s]+/.test(v.trim()) || 'Invalid username',
-                    },
-                  }),
+          ) : (
+            <div className={`flexcentercol scrollY mt-[0.6rem] h-4/5 !justify-start p-3 pb-16`}>
+              {/* <form className="mb-12" onSubmit={handleSubmit(onSubmit)}>
+                <Input
+                  className="!text-[4rem]"
+                  name="displayName"
+                  placeholder="Profile name"
+                  defaultValue={currentUser?.displayName || t('guest')}
+                  formHandle={{
+                    ...register('displayName', {
+                      required: 'Please fill in this field',
+                      validate: {
+                        notEmpty: (v) => v.trim().length !== 0 || 'Username cannot be empty',
+                        isValid: (v) => /[\w\d\s]+/.test(v.trim()) || 'Invalid username',
+                      },
+                    }),
+                  }}
+                />
+                {errors?.displayName && <ErrorMessage content={errors.displayName.message || ''} />}
+
+                <Button type="submit" className="!text-[3.5rem]" content="Update profile" />
+              </form>
+              {errMsg && <ErrorMessage content={errMsg} />} */}
+
+              <Button
+                className="!text-[3.5rem]"
+                before={false}
+                content="Log out"
+                onClick={() => {
+                  signOut(auth);
+                }}
+              >
+                <LogOutIcon className="ml-6" width="40" height="40" />
+              </Button>
+
+              <Button
+                className="!text-[3.5rem]"
+                content="Change password"
+                lineClamp="2"
+                disabled={!canChangePW}
+                onClick={() => {
+                  setCanChangePW(false);
+
+                  if (currentUser?.email) {
+                    sendPasswordResetEmail(auth, currentUser.email)
+                      .then(() => {
+                        setChangePWMes({
+                          type: 'success',
+                          message: 'Password reset email sent',
+                          timer: 5,
+                        });
+                      })
+                      .catch((error) => {
+                        setChangePWMes({
+                          type: 'error',
+                          message: getFirebaseErr(error.message),
+                          timer: 5,
+                        });
+                      })
+                      .finally(() => {
+                        setCanChangePW(true);
+                      });
+                  }
                 }}
               />
-              {errors?.displayName && <ErrorMessage content={errors.displayName.message || ''} />}
 
-              <Button type="submit" className="!text-[3.5rem]" content="Update profile" />
-            </form>
-            {errMsg && <ErrorMessage content={errMsg} />}
-
-            <Button
-              className="!text-[3.5rem]"
-              before={false}
-              content="Log out"
-              onClick={() => {
-                unregistAll() && signOut(auth);
-                window.location.href = BASE_URL;
-              }}
-            >
-              <LogOutIcon className="ml-6" width="40" height="40" />
-            </Button>
-
-            <Button
-              className="!text-[3.5rem]"
-              content="Change password"
-              lineClamp="2"
-              disabled={!canChangePW}
-              onClick={() => {
-                setCanChangePW(false);
-
-                if (currentUser?.email) {
-                  sendPasswordResetEmail(auth, currentUser.email)
-                    .then(() => {
-                      setChangePWMes({
-                        type: 'success',
-                        message: 'Password reset email sent',
-                        timer: 5,
-                      });
-                    })
-                    .catch((error) => {
-                      setChangePWMes({
-                        type: 'error',
-                        message: getFirebaseErr(error.message),
-                        timer: 5,
-                      });
-                    })
-                    .finally(() => {
-                      setCanChangePW(true);
-                    });
-                }
-              }}
-            />
-
-            {!messageExpired && changePWMes.type === 'error' && (
-              <ErrorMessage content={changePWMes.message} />
-            )}
-            {!messageExpired && changePWMes.type === 'success' && (
-              <div className="w-full text-center text-[3rem]">{changePWMes.message}</div>
-            )}
-          </div>
+              {!messageExpired && changePWMes.type === 'error' && (
+                <ErrorMessage content={changePWMes.message} />
+              )}
+              {!messageExpired && changePWMes.type === 'success' && (
+                <div className="w-full text-center text-[3rem]">{changePWMes.message}</div>
+              )}
+            </div>
+          )}
         </>
       )}
     </>

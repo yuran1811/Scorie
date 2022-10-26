@@ -1,4 +1,4 @@
-import { AppStatusProvider, useAppStatus } from '@/contexts';
+import { AppStatusProvider } from '@/contexts';
 import { useStore, useTourStore } from '@/store';
 import { AnimateLogo } from '@cpns/features/animations';
 import { Footer, Header } from '@cpns/layouts/partials';
@@ -23,6 +23,7 @@ const MainLayout: FC = ({ children }) => {
         <>
           {settings.showStartUpLogo && <AnimateLogo />}
           {children}
+          {/* {<PostPreview />} */}
         </>
         <Footer />
       </div>

@@ -8,7 +8,6 @@ export interface BackupDataType {
 
 export const getStoredData = () => {
   const localData = localStorage.getItem(GENERAL_STORE_NAME) || '';
-
   return localData;
 };
 

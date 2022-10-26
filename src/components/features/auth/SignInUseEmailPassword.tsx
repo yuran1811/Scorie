@@ -28,17 +28,9 @@ const SignInUseEmailPassWord = () => {
     watch,
     reset,
     register,
-    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-
-  const unregistAll = () => {
-    unregister('email');
-    unregister('password');
-
-    return true;
-  };
 
   const onSubmit: SubmitHandler<Inputs> = useCallback((data) => {
     const { email, password } = data;
@@ -60,12 +52,6 @@ const SignInUseEmailPassWord = () => {
   useEffect(() => {
     setErrMsg('');
   }, [watch('email'), watch('password')]);
-
-  useEffect(() => {
-    return () => {
-      unregistAll();
-    };
-  }, []);
 
   return (
     <>

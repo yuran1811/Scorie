@@ -6,6 +6,7 @@ export interface TestimonialProps {
   name: string;
   job: string;
   votes: string[];
+  downvotes?: string[];
   createdAt?: Timestamp;
   updatedAt?: Timestamp;
 }
