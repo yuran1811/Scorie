@@ -19,7 +19,7 @@ export const Header: FC = () => {
         <div
           className="text-center text-[4rem] font-bold mobile:text-[4.5rem]"
           onClick={() =>
-            pathname === '/' &&
+            // pathname === '/' &&
             document.querySelector('#root > div')?.scroll({ top: 0, left: 0, behavior: 'smooth' })
           }
         >

@@ -165,7 +165,7 @@ export const ScoreSectionBar = () => {
           <FlatLoading />
         </div>
       ) : (
-        <div className="mx-auto mt-4 w-full max-w-[100rem] rounded-[2rem] p-4">
+        <div className="mx-auto mt-4 w-full max-w-[200rem] rounded-[2rem] p-4">
           <div className="flex w-full flex-wrap items-start justify-center">
             {filterScoreList(subjects, filter).map((item) => (
               <SubjectCard key={item.id} isShow={item.isShow} subject={item} />

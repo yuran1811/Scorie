@@ -80,7 +80,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
             {subject?.name || ''}
           </div>
           <div
-            className="my-4 rounded-[1rem] px-6 text-center text-[6rem] font-bold line-clamp-1"
+            className="my-4 max-w-full rounded-[1rem] px-6 text-center text-[6rem] font-bold line-clamp-1"
             style={{
               ...averageScoreStyle[averageScoreStyle.check(+averageScore)],
             }}

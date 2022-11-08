@@ -58,7 +58,7 @@ export const ChartSectionBar: FC = () => {
 
   const navigate = useNavigate();
 
-  const dataToUse = getChartData(scores, settings.numberFormat);
+  const dataToUse: any = getChartData(scores, settings.numberFormat);
 
   const radarCategories = __.uniq(
     __.flattenDeep(scores.map((subject) => subject.scores.map((score) => Math.round(score.value))))
