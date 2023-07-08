@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { A11y, SwiperOptions } from 'swiper';
 import { Swiper as ReactSwiper, SwiperProps } from 'swiper/react';
 import 'swiper/css';
@@ -21,7 +21,7 @@ const swiperOptions: SwiperProps = {
   },
 };
 
-export const SectionSwiper: FC<SectionSwiperProps> = ({ children, breakpoints }) => (
+export const SectionSwiper: FC<SectionSwiperProps & PropsWithChildren> = ({ children, breakpoints }) => (
   <ReactSwiper {...swiperOptions} breakpoints={breakpoints} className="flex w-full items-center">
     {children}
   </ReactSwiper>

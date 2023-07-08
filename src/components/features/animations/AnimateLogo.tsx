@@ -79,7 +79,7 @@ export const AnimateLogoText = () => (
 
 export const AnimateLogo = () => (
   <motion.div
-    className="fullscreen flexcenter z-[100] w-full bg-slate-900"
+    className="fullscreen flexcenter z-[100] w-full bg-zinc-950/90 backdrop-blur-xl"
     initial={{ opacity: 0.95 }}
     animate={{
       opacity: 0,

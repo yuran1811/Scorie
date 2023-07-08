@@ -95,18 +95,14 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
   }, []);
 
   return createPortal(
-    <form
-      className="fullscreen scrollY text-center"
-      style={noteStyle}
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className="fullscreen scrollY text-center" style={noteStyle} onSubmit={handleSubmit(onSubmit)}>
       <div
-        className="sticky top-0 left-0 right-0 flex items-center justify-between p-8"
+        className="sticky left-0 right-0 top-0 flex items-center justify-between p-8"
         style={{ backgroundColor: noteStyle.backgroundColor }}
       >
-        <div className="flexcenter w-full flex-wrap mobile:pl-24">
+        <div className="flexcenter w-full flex-wrap lgmb:pl-24">
           <PinIcon
-            className="mx-3 scale-75 cursor-pointer tablet:mx-6 tablet:scale-100"
+            className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isPinned ? 'white' : '#f87171'}
             width="40"
             height="40"
@@ -119,7 +115,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             }
           />
           <ArchiveIcon
-            className="mx-3 scale-75 cursor-pointer tablet:mx-6 tablet:scale-100"
+            className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isArchived ? 'white' : '#94a3b8'}
             width="40"
             height="40"
@@ -132,7 +128,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             }
           />
           <DoneIcon
-            className="mx-3 scale-75 cursor-pointer tablet:mx-6 tablet:scale-100"
+            className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isDone ? 'white' : '#d97706'}
             width="40"
             height="40"
@@ -145,7 +141,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             }
           />
           <ProgressIcon
-            className="mx-3 scale-75 cursor-pointer tablet:mx-6 tablet:scale-100"
+            className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isInProgress ? 'white' : '#9ca3af'}
             width="40"
             height="40"
@@ -174,11 +170,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
               )}
             >
               <div onClick={() => setShowConfirm((s) => !s)}>
-                <TrashIcon
-                  className="mx-3 scale-75 cursor-pointer tablet:mx-6 tablet:scale-100"
-                  width="35"
-                  height="35"
-                />
+                <TrashIcon className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100" width="35" height="35" />
               </div>
             </Tippy>
           </div>
@@ -191,12 +183,11 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
       {status.type === 'errors' && <ErrorMessage className="p-6" content={status.message} />}
 
-      <div className="flexcentercol h-[calc(100%-14rem)] px-8 pb-8 tablet:h-[calc(100%-12rem)]">
+      <div className="flexcentercol h-[calc(100%-14rem)] px-8 pb-8 medtab:h-[calc(100%-12rem)]">
         <TimeContainer obj={{ updatedAt }} style={noteStyle} />
 
         <Input
-          className="!max-w-full !rounded-[0.8rem] !border-2 text-center !text-[3rem] !font-bold mobile:!text-[3.5rem]
-          tablet:!max-w-[100rem]"
+          className="!max-w-full !rounded-[0.8rem] !border-2 text-center !font-bold medtab:!max-w-[100rem]"
           style={noteStyle}
           defaultValue={title}
           formHandle={{
@@ -210,8 +201,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
         <TextArea
-          className="!h-full !max-w-full !rounded-[0.8rem] !border-2 px-6 text-left !text-[2.5rem] mobile:!text-[3rem]
-          tablet:!max-w-[100rem]"
+          className="!h-full !max-w-full !rounded-[0.8rem] !border-2 px-6 text-left medtab:!max-w-[100rem]"
           style={noteStyle}
           defaultValue={data}
           formHandle={{ ...register('data') }}

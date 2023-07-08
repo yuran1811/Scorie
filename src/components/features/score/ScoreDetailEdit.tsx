@@ -22,12 +22,7 @@ interface ScoreDetailProps {
   scores: ScoreDetailType[];
 }
 
-export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
-  subject,
-  score,
-  scores,
-  onClick,
-}) => {
+export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, score, scores, onClick }) => {
   const currentUser = useStore((s) => s.currentUser);
 
   const [showConfirm, setShowConfirm] = useState(false);
@@ -58,15 +53,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
 
   const onSubmit: SubmitHandler<Inputs> = useCallback(
     (data) => {
-      if (
-        !currentUser ||
-        !currentUser?.uid ||
-        !subject?.id ||
-        !scores.length ||
-        !score ||
-        !score?.id
-      )
-        return;
+      if (!currentUser || !currentUser?.uid || !subject?.id || !scores.length || !score || !score?.id) return;
 
       const { base, score: value, type } = data;
 
@@ -78,7 +65,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
         ...prevScore,
         id: score.id,
         isIgnored: scoreOptions.isIgnored,
-        type: type.trim(),
+        type: (type || '').trim(),
         base: +base.trim(),
         value: +value.trim(),
         updatedAt: Timestamp.fromDate(new Date()),
@@ -86,9 +73,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
 
       newscores.splice(scoreIdx, 1, scoreToEdit);
 
-      editSubject(currentUser.uid, subject.id, { scores: [...newscores] }).then(() =>
-        successToast()
-      );
+      editSubject(currentUser.uid, subject.id, { scores: [...newscores] }).then(() => successToast());
     },
     [scoreOptions]
   );
@@ -105,7 +90,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
     <ModalBox onClick={onClick}>
       <ModalBoxHeader onClick={onClick}>
         <IgnoreIcon
-          className="m-[0.6rem] mx-4 cursor-pointer mobile:m-5"
+          className="m-[0.6rem] mx-4 cursor-pointer lgmb:m-5"
           fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
           width="40"
           height="40"
@@ -127,11 +112,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
             )}
           >
             <div onClick={() => setShowConfirm((s) => !s)}>
-              <TrashIcon
-                className="m-[0.6rem] mx-4 cursor-pointer text-slate-500 mobile:m-5"
-                width="40"
-                height="40"
-              />
+              <TrashIcon className="m-[0.6rem] mx-4 cursor-pointer text-slate-500 lgmb:m-5" width="40" height="40" />
             </div>
           </Tippy>
         </div>
@@ -145,7 +126,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({
       />
 
       <form
-        className="flexcentercol w-full p-8 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
+        className="flexcentercol line-clamp-1 w-full p-8 text-center text-[5rem] font-bold text-teal-700"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input

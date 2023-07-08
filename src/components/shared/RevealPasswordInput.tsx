@@ -10,8 +10,7 @@ interface RevealPasswordInputProps extends CustomInputProps {
   changeValue: UseFormReset<any>;
 }
 
-const inputContainerClass =
-  'flexcenter absolute h-full w-full min-w-[33px] min-h-[33px] pr-[86px] pl-16 resize-none';
+const inputContainerClass = 'flexcenter absolute h-full w-full min-w-[33px] min-h-[33px] pr-[86px] pl-16 resize-none';
 const inputClass = 'w-full border-0 bg-transparent outline-none';
 
 export const RevealPasswordInput: FC<RevealPasswordInputProps & InputProps> = ({
@@ -54,7 +53,7 @@ export const RevealPasswordInput: FC<RevealPasswordInputProps & InputProps> = ({
       </div>
 
       <div
-        className="flexcenter absolute top-[18px] right-[2.3rem] min-h-[36px] min-w-[36px] cursor-pointer rounded-full"
+        className="flexcenter absolute right-[2.3rem] top-[18px] min-h-[36px] min-w-[36px] cursor-pointer rounded-full"
         onClick={() => setReveal((s) => !s)}
       >
         <EyeIcon width="36" height="36" reveal={reveal} />

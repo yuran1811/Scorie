@@ -65,13 +65,9 @@ const NoteImport: FC<NoteImportProps> = ({ setShowImport }) => {
       <Overlay zIdx="z-[1]" onClick={() => setShowImport(false)} />
 
       <div className="absolute z-[2] p-6">
-        <div className="m-6 p-2 text-center text-[3rem] font-bold text-violet-400 mobile:text-[4rem]">
-          {t('paste your shared content here')}
-        </div>
+        <div className="typo-med m-6 p-2 text-center font-bold text-violet-400">{t('paste your shared content here')}</div>
         <div
-          className={`${
-            isError ? 'bg-rose-400' : 'bg-indigo-200'
-          } flexcenter h-[10rem] flex-wrap rounded-[3rem] py-2 px-6`}
+          className={`${isError ? 'bg-rose-400' : 'bg-indigo-200'} flexcenter h-[10rem] flex-wrap rounded-[3rem] px-6 py-2`}
         >
           <div className="flex-1">
             <Input

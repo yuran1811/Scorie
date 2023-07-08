@@ -1,20 +1,21 @@
 # Scorie (Official)
 
-## An application which helps you manage your scores at school
+## An application makes your school-life much easier !
 
 ### Features
 
-- Multi locales (vi, en, and more in the future)
-- PWA available (can be used offline and add to homescreen, receive notifications)
+- Glassmorphism UI
+- Multi-locales (vi, en, and more in the future)
+- PWA available (can be used offline and added to homescreen, receive notifications)
 - Login with Google, Facebook, Email & Password
-- Plenty of features : quotes, scores, notes, ...(drag and drop, create / read / update / delete, share, ...)
+- Plenty of features : quotes, scores, notes, ... (drag and drop, create / read / update / delete, share, ...)
 - Analytics feature : Bar chart, Polar chart, Radar chart is out of the box
 - Other awesome tools : Predict the score, ...
 
 ### Technologies
 
 - Firebase
-- React, React Router
+- React (v18), React Router (v6)
 - Zustand
 - Typescript
 - TailwindCSS

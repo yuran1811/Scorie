@@ -18,8 +18,7 @@ export const getChartData = (scores: SubjectDetailType[], numberFormat: number) 
         strokeColor: '#775DD0',
       });
 
-    const valueToCheck =
-      +value > Number(expectedAverage) ? +value : (+value + Number(expectedAverage)) / 2.5;
+    const valueToCheck = +value > Number(expectedAverage) ? +value : (+value + Number(expectedAverage)) / 2.5;
 
     return {
       x: score.name,

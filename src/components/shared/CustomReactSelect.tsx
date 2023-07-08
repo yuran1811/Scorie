@@ -38,17 +38,11 @@ export const SelectControl = (props: ControlProps<Option, false>) => (
 );
 
 export const SelectValueContainer = (props: ValueContainerProps<Option, false>) => (
-  <components.ValueContainer
-    {...props}
-    className="!flex w-full !items-center !justify-start !p-0 !px-8 text-white"
-  />
+  <components.ValueContainer {...props} className="!flex w-full !items-center !justify-start !p-0 !px-8 text-white" />
 );
 
 export const SelectSingleValue = ({ children, ...otherProps }: SingleValueProps<Option, false>) => (
-  <components.SingleValue
-    {...otherProps}
-    className="absolute left-0 !w-full !p-0 !px-8 !text-center !text-white"
-  >
+  <components.SingleValue {...otherProps} className="absolute left-0 !w-full !p-0 !px-8 !text-center !text-white">
     {children}
   </components.SingleValue>
 );
@@ -72,10 +66,7 @@ export const SelectMenu = ({ children, ...otherProps }: MenuProps<Option, false>
 );
 
 export const SelectMenuList = ({ children, ...otherProps }: MenuListProps<Option, false>) => (
-  <components.MenuList
-    {...otherProps}
-    className="!flex !flex-wrap !items-center !justify-center !overflow-y-auto"
-  >
+  <components.MenuList {...otherProps} className="!flex !flex-wrap !items-center !justify-center !overflow-y-auto">
     {children}
   </components.MenuList>
 );
@@ -83,7 +74,7 @@ export const SelectMenuList = ({ children, ...otherProps }: MenuListProps<Option
 export const SelectOption = (props: OptionProps<Option, false>) => (
   <components.Option
     {...props}
-    className="!m-4 !h-[4.2rem] !w-[8rem] !cursor-pointer !rounded-[2rem] text-center !text-[2rem] line-clamp-1"
+    className="!m-4 line-clamp-1 !h-[4.2rem] !w-[8rem] !cursor-pointer !rounded-[2rem] text-center !text-[2rem]"
   />
 );
 
@@ -116,16 +107,8 @@ export const SelectClearIndicator = (props: CustomClearIndicatorProps) => {
   );
 };
 
-export const SelectIndicatorSeparator = ({
-  innerProps,
-}: IndicatorSeparatorProps<Option, false>) => {
-  return (
-    <span
-      {...innerProps}
-      style={{ display: 'none' }}
-      className="h-[1rem] w-[1rem] rounded-full bg-white"
-    />
-  );
+export const SelectIndicatorSeparator = ({ innerProps }: IndicatorSeparatorProps<Option, false>) => {
+  return <span {...innerProps} style={{ display: 'none' }} className="h-[1rem] w-[1rem] rounded-full bg-white" />;
 };
 
 export const SelectDropdownIndicator = (props: DropdownIndicatorProps<Option, false>) => (

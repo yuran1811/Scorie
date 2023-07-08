@@ -1,5 +1,5 @@
 import { customStyle } from '@/utils';
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const { underline } = customStyle;
@@ -12,7 +12,7 @@ interface HeaderLinkProps {
   url: string;
 }
 
-export const HeaderLink: FC<HeaderLinkProps> = ({ children, url }) => (
+export const HeaderLink: FC<HeaderLinkProps & PropsWithChildren> = ({ children, url }) => (
   <NavLink to={url} className={({ isActive }) => (isActive ? navLinkActive : navLinkDefault)}>
     {children}
   </NavLink>

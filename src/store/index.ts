@@ -7,7 +7,7 @@ import {
 } from '@/shared';
 import { User } from 'firebase/auth';
 import __ from 'lodash';
-import create from 'zustand';
+import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 export * from './changeLogStore';

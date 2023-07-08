@@ -1,7 +1,12 @@
 import { routes } from '@/config';
-import { ChartPage, NotePage, ScorePage, ToolsPage } from '@/pages';
 import { FeatureRoutesType, RoutesType } from '@/shared';
 import { ErrorContent } from '@cpns/shared';
+import { lazy } from 'react';
+
+const ChartPage = lazy(() => import('@/pages/ChartPage'));
+const NotePage = lazy(() => import('@/pages/NotePage'));
+const ScorePage = lazy(() => import('@/pages/ScorePage'));
+const ToolsPage = lazy(() => import('@/pages/ToolsPage'));
 
 export const featureRoutes: FeatureRoutesType = [
   {

@@ -1,6 +1,6 @@
 import { StepType } from '@reactour/tour';
 import __ from 'lodash';
-import create from 'zustand';
+import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 interface TourStatusType {

@@ -56,15 +56,13 @@ export const ReportAddNew: FC<
       <Overlay zIdx="z-[-1]" onClick={() => clickHandle()} />
 
       <form
-        className="flexcentercol mx-auto max-h-[70vh] w-max max-w-[80%] rounded-[2rem] bg-gray-900 p-8 px-12 text-center text-[5rem] font-bold text-teal-700 line-clamp-1 mobile:max-h-[90vh]"
+        className="flexcentercol typo-2xl mx-auto line-clamp-1 max-h-[70vh] w-max max-w-[80%] rounded-[2rem] border-2 border-violet-400/30 bg-gray-900/40 px-12 pt-8 text-center font-bold text-teal-700 backdrop-blur-xl lgmb:max-h-[90vh]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="text-[3rem] text-violet-400 smallmb:text-[4rem] mobile:text-[5rem]">
-          {t('report bugs')}
-        </div>
+        <div className="typo-lg text-violet-400">{t('report bugs')}</div>
 
         <Input
-          className="bg-gray-800 focus:border-violet-400"
+          className="border-violet-500/30 bg-gray-800/60 focus:border-violet-400"
           placeholder="Title"
           defaultValue=""
           formHandle={{
@@ -79,12 +77,12 @@ export const ReportAddNew: FC<
 
         <TextArea
           defaultValue=""
-          className="max-h-[50rem] min-h-[10rem] bg-gray-800 font-normal focus:border-violet-400"
+          className="max-h-[50rem] min-h-[10rem] border-violet-500/30 bg-gray-800/60 font-normal focus:border-violet-400"
           formHandle={{ ...register('content') }}
         />
 
         <Button
-          className="border-gray-900 bg-violet-400 !text-[3rem] text-gray-900 hover:border-violet-400 hover:bg-gray-900 hover:text-violet-400"
+          className="border-gray-900 bg-violet-400 text-gray-900 hover:border-violet-400 hover:bg-gray-900 hover:text-violet-400"
           type="submit"
           content="Send"
         />

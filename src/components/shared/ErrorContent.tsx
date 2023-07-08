@@ -14,13 +14,8 @@ export const ErrorContent: FC<ErrorContentProps> = ({ errorBoundaries = false })
 
   return (
     <div className="p-[5rem]">
-      <ErrorText className="text-[7rem] mobile:line-clamp-1 tablet:text-[15rem]">
-        {t('oops')}
-      </ErrorText>
-      <ErrorText className="text-[4rem] line-clamp-3 tablet:text-[5rem]">
-        {t('something went wrong')}
-      </ErrorText>
-
+      <ErrorText className="medtab:text-[15rem] text-[7rem] lgmb:line-clamp-1">{t('oops')}</ErrorText>
+      <ErrorText className="medtab:text-[5rem] line-clamp-3 text-[4rem]">{t('something went wrong')}</ErrorText>
       <BackIcon
         className="!text-indigo-300"
         onClick={() => {
@@ -28,7 +23,7 @@ export const ErrorContent: FC<ErrorContentProps> = ({ errorBoundaries = false })
             navigate('/');
             window.location.reload();
           } else navigate(-1);
-        }} 
+        }}
       />
     </div>
   );

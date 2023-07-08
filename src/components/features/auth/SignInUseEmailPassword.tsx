@@ -58,7 +58,7 @@ const SignInUseEmailPassWord = () => {
       {isNew ? (
         <CreateNewUser>
           <Divider className="!max-w-[40rem]">{t('already have account')}</Divider>
-          <Button className="!text-[3rem]" content="Log in" onClick={() => setNew(false)}>
+          <Button content="Log in" onClick={() => setNew(false)}>
             <ArrowLeftIcon className="mr-6" width="40" height="40" />
           </Button>
         </CreateNewUser>
@@ -75,7 +75,7 @@ const SignInUseEmailPassWord = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <Input
-              className="!h-[68px] border-0 !bg-[#121726] !px-16 !text-[2.4rem] !tracking-widest"
+              className="!h-[68px] border-0 !bg-[#121726] !px-16 !tracking-widest"
               name="email"
               placeholder="Email"
               defaultValue=""
@@ -85,9 +85,7 @@ const SignInUseEmailPassWord = () => {
                   required: 'Please fill in this field',
                   validate: {
                     notEmpty: (v) => v.trim().length !== 0 || 'Email cannot be empty',
-                    isValid: (v) =>
-                      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v.trim()) ||
-                      'Invalid email',
+                    isValid: (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v.trim()) || 'Invalid email',
                   },
                 }),
               }}
@@ -129,19 +127,14 @@ const SignInUseEmailPassWord = () => {
 
             {errMsg && <ErrorMessage content={errMsg} />}
 
-            <Button className="!text-[3rem]" type="submit" content="Log in">
+            <Button type="submit" content="Log in">
               <LogInIcon className="mr-6" width="40" height="40" />
             </Button>
           </form>
 
           <Divider className="!max-w-[35rem]">{t('have no account')}</Divider>
 
-          <Button
-            before={false}
-            className="!text-[3rem]"
-            content="Create new account"
-            onClick={() => setNew(true)}
-          >
+          <Button before={false} content="Create new account" onClick={() => setNew(true)}>
             <ArrowRightIcon className="ml-6" width="40" height="40" />
           </Button>
         </>

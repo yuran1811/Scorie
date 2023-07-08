@@ -4,11 +4,7 @@ interface UpvoteIconProps {
   active?: boolean;
 }
 
-export const UpvoteIcon: FC<UpvoteIconProps & SVGProps<SVGSVGElement>> = ({
-  fill,
-  active,
-  ...props
-}) => (
+export const UpvoteIcon: FC<UpvoteIconProps & SVGProps<SVGSVGElement>> = ({ fill, active = true, ...props }) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path
       fill={fill || 'currentColor'}

@@ -13,7 +13,7 @@ export const ChangeLog = () => {
     <>
       <div className="relative">
         <MessageIcon
-          className="my-4 mx-6 cursor-pointer"
+          className="mx-6 my-4 cursor-pointer"
           width="40"
           height="40"
           onClick={() => setOpenModal((s) => !s)}

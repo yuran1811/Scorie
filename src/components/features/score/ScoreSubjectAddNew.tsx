@@ -19,10 +19,7 @@ interface ScoreSubjectAddNewProps {
   subjects: SubjectListType[];
 }
 
-export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
-  onClick,
-  subjects,
-}) => {
+export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onClick, subjects }) => {
   const currentUser = useStore((s) => s.currentUser);
 
   const { t } = useTranslation();
@@ -96,9 +93,9 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({
         />
       </ModalBoxHeader>
 
-      <div className="w-full text-[4rem] text-indigo-900 line-clamp-1">{t('new record')}</div>
+      <div className="line-clamp-1 w-full text-[4rem] text-indigo-900">{t('new record')}</div>
       <form
-        className="flexcentercol w-full p-8 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
+        className="flexcentercol line-clamp-1 w-full p-8 text-center text-[5rem] font-bold text-teal-700"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input

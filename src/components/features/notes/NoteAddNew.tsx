@@ -109,13 +109,11 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
         />
       </ModalBoxHeader>
 
-      {status.type === 'errors' && (
-        <ErrorMessage className="mx-auto w-4/5 py-5 text-center" content={status.message} />
-      )}
+      {status.type === 'errors' && <ErrorMessage className="mx-auto w-4/5 py-5 text-center" content={status.message} />}
 
-      <div className="w-full text-[4rem] text-indigo-900 line-clamp-1">{t('new note')}</div>
+      <div className="typo-xl line-clamp-1 w-full text-indigo-900">{t('new note')}</div>
       <form
-        className="flexcentercol w-full p-8 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
+        className="flexcentercol typo-2xl line-clamp-1 w-full p-8 text-center font-bold text-teal-700"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
@@ -133,7 +131,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 
         <TextArea defaultValue="" className="font-normal" formHandle={{ ...register('data') }} />
 
-        <Button className="!text-[3rem]" type="submit" content="Add" />
+        <Button type="submit" content="Add" />
       </form>
     </ModalBox>
   );

@@ -7,12 +7,7 @@ export const Report = () => {
 
   return (
     <>
-      <InboxIcon
-        className="my-4 mx-6 cursor-pointer"
-        width="40"
-        height="40"
-        onClick={() => setOpenModal((s) => !s)}
-      />
+      <InboxIcon className="mx-6 my-4 cursor-pointer" width="40" height="40" onClick={() => setOpenModal((s) => !s)} />
 
       {openModal && <ReportAddNew clickHandle={() => setOpenModal(false)} />}
     </>

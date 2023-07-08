@@ -31,45 +31,39 @@ export const FeatureSection: FC = () => {
 
   return (
     <>
-      {!isVerify ? (
-        <NotVerifyEmail />
-      ) : (
-        <WelcomBanner>{currentUser?.displayName || t('guest')}</WelcomBanner>
-      )}
+      {!isVerify ? <NotVerifyEmail /> : <WelcomBanner>{currentUser?.displayName || t('guest')}</WelcomBanner>}
 
       <div className="flexcenter my-12 w-full flex-wrap py-8">
         <FeatureCard
-          className="bg-gradient-to-tl from-[#5f2c82] to-[#49a09d]"
+          className="bg-gradient-to-tl from-[#5f2c8296] to-[#49a09d96] backdrop-blur-sm"
           title="Note"
           onClick={() => navigate('/notes')}
         >
-          <div className="py-4 px-6 mobile:p-8">{t('ideal place to keep your mind on')}</div>
+          <div className="px-6 py-4 lgmb:p-8">{t('ideal place to keep your mind on')}</div>
         </FeatureCard>
 
         <FeatureCard
-          className="bg-gradient-to-tl from-[#e96443] to-[#904e95]"
+          className="bg-gradient-to-tl from-[#e9644396] to-[#904e9596] backdrop-blur-sm"
           title="Score"
           onClick={() => navigate('/subjects')}
         >
-          <div className="py-4 px-6 mobile:p-8">{t('manage all your score records')}</div>
+          <div className="px-6 py-4 lgmb:p-8">{t('manage all your score records')}</div>
         </FeatureCard>
 
         <FeatureCard
-          className="bg-gradient-to-tl from-[#FC466B] to-[#8056ca]"
+          className="bg-gradient-to-tl from-[#FC466B96] to-[#8056ca96] backdrop-blur-sm"
           title="Analytics"
           onClick={() => navigate('/analytics')}
         >
-          <div className="py-4 px-6 mobile:p-8">{t('variant useful charts')}</div>
+          <div className="px-6 py-4 lgmb:p-8">{t('variant useful charts')}</div>
         </FeatureCard>
 
         <FeatureCard
-          className="bg-gradient-to-tl from-[#71B280] to-[#56B4D3]"
+          className="bg-gradient-to-tl from-[#71B28096] to-[#56B4D396] backdrop-blur-sm"
           title="Tools"
           onClick={() => navigate('/tools')}
         >
-          <div className="py-4 px-6 mobile:p-8">
-            {t('helpful tools make school life be better')}
-          </div>
+          <div className="px-6 py-4 lgmb:p-8">{t('helpful tools make school life be better')}</div>
         </FeatureCard>
       </div>
 

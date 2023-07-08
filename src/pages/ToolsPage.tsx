@@ -7,3 +7,5 @@ export const ToolsPage: FC = () => {
   const currentUser = useStore((s) => s.currentUser);
   return currentUser === null ? <LogInRequired /> : <ToolsSectionBar />;
 };
+
+export default ToolsPage;

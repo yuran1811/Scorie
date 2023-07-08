@@ -3,7 +3,7 @@ import { useStore } from '@/store';
 import { ThreeDotsFade } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input } from '@cpns/shared';
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface CreateNewInputs {
@@ -13,7 +13,7 @@ interface CreateNewInputs {
   confirmPassword: string;
 }
 
-export const CreateNewUser: FC = ({ children }) => {
+export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
   const setCurrentUser = useStore((s) => s.setCurrentUser);
 
   const [loading, setLoading] = useState(false);
@@ -92,9 +92,7 @@ export const CreateNewUser: FC = ({ children }) => {
                 required: 'Please fill in this field',
                 validate: {
                   notEmpty: (v) => v.trim().length !== 0 || 'Email cannot be empty',
-                  isValid: (v) =>
-                    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v.trim()) ||
-                    'Invalid email',
+                  isValid: (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v.trim()) || 'Invalid email',
                 },
               }),
             }}
@@ -127,13 +125,11 @@ export const CreateNewUser: FC = ({ children }) => {
               }),
             }}
           />
-          {errors?.confirmPassword && (
-            <ErrorMessage content={errors.confirmPassword.message || ''} />
-          )}
+          {errors?.confirmPassword && <ErrorMessage content={errors.confirmPassword.message || ''} />}
 
           {errMsg && <ErrorMessage content={errMsg} />}
 
-          <Button className="!text-[3rem]" type="submit" content="Create" />
+          <Button type="submit" content="Create" />
         </form>
       )}
 

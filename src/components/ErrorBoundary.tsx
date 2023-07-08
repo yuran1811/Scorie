@@ -23,13 +23,14 @@ class ErrorBoundary extends Component<Props, State> {
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Uncaught error:', error, errorInfo);
+    this.setState({ hasError: true });
   }
 
-  public render() {
+  public render(): any {
     if (this.state.hasError)
       return (
         <div className="fullscreen bg-ctbg">
-          <ErrorContent errorBoundaries={true} />
+          <ErrorContent errorBoundaries />
         </div>
       );
 

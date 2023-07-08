@@ -13,7 +13,7 @@ const sortableConfig = {
   swapThreshold: 0.3,
   sort: true,
   delayOnTouchOnly: true,
-  className: 'flex flex-wrap justify-center items-start gap-2 mobile:gap-4',
+  className: 'flex flex-wrap justify-center items-start gap-2 lgmb:gap-4',
 };
 
 export const NoteSection: FC<NoteSectionProps> = (props) => {
@@ -77,11 +77,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
     const idxListToUpdate = [...pinnedList.map((_) => _.id), ...otherList.map((_) => _.id)];
     if (idxListToUpdate.every((_, idx) => _ === noteIdxList.list[idx])) return;
 
-    updateIdxList(
-      currentUser.uid,
-      [...pinnedList.map((_) => _.id), ...otherList.map((_) => _.id)],
-      noteIdxList.id
-    );
+    updateIdxList(currentUser.uid, [...pinnedList.map((_) => _.id), ...otherList.map((_) => _.id)], noteIdxList.id);
   }, [pinnedList, otherList, canUpdate]);
 
   useEffect(() => {
@@ -89,8 +85,8 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
   });
 
   return (
-    <div className="my-12 mx-auto max-w-[100rem] pb-12 mobile:w-[calc(100%-4rem)]">
-      <div className="mx-auto mb-8 w-[20rem] border-b-[0.2rem] border-indigo-100 text-center text-[3.5rem] font-semibold tablet:text-[4.5rem]">
+    <div className="mx-auto my-12 max-w-[100rem] pb-12 lgmb:w-[calc(100%-4rem)]">
+      <div className="typo-2xl mx-auto mb-8 w-[20rem] border-b-[0.2rem] border-indigo-100 text-center font-semibold ">
         {t('pinned')}
       </div>
       <ReactSortable
@@ -108,7 +104,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
         ))}
       </ReactSortable>
 
-      <div className="mx-auto mt-[7rem] mb-8 w-[20rem] border-b-[0.2rem] border-indigo-100 text-center text-[3.5rem] font-semibold tablet:text-[4.5rem]">
+      <div className="typo-2xl mx-auto mb-8 mt-[7rem] w-[20rem] border-b-[0.2rem] border-indigo-100 text-center font-semibold">
         {t('others')}
       </div>
       <ReactSortable

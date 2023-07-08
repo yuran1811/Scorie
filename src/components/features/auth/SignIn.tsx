@@ -4,12 +4,7 @@ import { FacebookIcon, GoogleIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
 import { ModalBox, ModalBoxHeader } from '@cpns/shared';
 import { LogInButton } from './LogInButton';
-import {
-  AuthProvider,
-  FacebookAuthProvider,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from 'firebase/auth';
+import { AuthProvider, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -38,14 +33,14 @@ export const SignIn: FC = () => {
 
   return (
     <>
-      <div className="flexcenter mb-16 flex-1 flex-row flex-wrap gap-4 midmb:flex-col">
+      <div className="flexcenter medmb:flex-col mb-16 flex-1 flex-row flex-wrap gap-4">
         <LogInButton
           className="bg-slate-900 text-white"
           disabled={loading}
           onClick={() => handleSignIn(new GoogleAuthProvider())}
         >
           <GoogleIcon width="35" height="35" />
-          <span className="hidden px-4 font-semibold midmb:block">{t('sign in with')} GG</span>
+          <span className="medmb:block hidden px-4 font-semibold">{t('sign in with')} GG</span>
         </LogInButton>
 
         <LogInButton
@@ -54,7 +49,7 @@ export const SignIn: FC = () => {
           onClick={() => handleSignIn(new FacebookAuthProvider())}
         >
           <FacebookIcon width="35" height="35" />
-          <span className="hidden px-4 font-semibold midmb:block">{t('sign in with')} FB</span>
+          <span className="medmb:block hidden px-4 font-semibold">{t('sign in with')} FB</span>
         </LogInButton>
       </div>
 

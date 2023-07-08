@@ -8,6 +8,7 @@ import { collection, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TestimonialAddNew } from './TestimonialAddNew';
+import { GradientUnderline } from '@cpns/interfaces';
 
 export const TestimonialContainer = () => {
   const currentUser = useStore((s) => s.currentUser);
@@ -28,19 +29,13 @@ export const TestimonialContainer = () => {
   }, [data, loading, error]);
 
   return (
-    <section className="-mx-10 my-16 rounded-3xl bg-gray-800 py-8 text-gray-100 sm:mx-0">
+    <section className="mx-auto my-16 max-w-[1024px] rounded-[3.2rem] bg-zinc-950/70 py-8 text-gray-100 backdrop-blur-[22px] medmb:rounded-[4.2rem] medtab:px-4">
       <div className="container mx-auto flex flex-col items-center p-10">
-        <h1 className="p-2 text-center text-[3.5rem] font-semibold leading-none">
-          {t('what our customers are saying about us')}
-        </h1>
+        <h1 className="typo-lg p-2 text-center font-bold leading-none">{t('what users think')}</h1>
+        <GradientUnderline className="mt-3 w-64" />
       </div>
-      <FeatureTestimonial
-        votes={[]}
-        content="Good product for everyone"
-        name="Yuran"
-        job={`CEO & Founder Scorie`}
-      />
-      <div className="flexcentercol container mx-auto !justify-start md:flex-row md:flex-wrap md:!justify-center md:px-10">
+      <FeatureTestimonial votes={[]} content="Good product for everyone" name="Yuran" job={`CEO & Founder Scorie`} />
+      <div className="flexcentercol container mx-auto !justify-start lgtab:flex-row lgtab:flex-wrap lgtab:!justify-center lgtab:px-10">
         {testimonials
           .sort((a, b) => b.votes.length - a.votes.length)
           .map((testimonial) => (
@@ -50,17 +45,14 @@ export const TestimonialContainer = () => {
 
       {!!currentUser && currentUser?.uid && (
         <Button
-          className="mt-24 border-gray-900 bg-violet-400 !text-[3rem] text-gray-900 hover:border-violet-400 hover:bg-gray-900 hover:text-violet-400"
+          className="mt-24 border-gray-900 bg-violet-400 text-gray-900 hover:border-violet-400 hover:bg-gray-900 hover:text-violet-400"
           content={openModal ? 'Minimize' : 'Open'}
           onClick={() => setOpenModal((s) => !s)}
         />
       )}
 
       {!!currentUser && currentUser?.uid && openModal && (
-        <TestimonialAddNew
-          votes={testimonials}
-          data={testimonials.find((item) => item.id === currentUser.uid) || null}
-        />
+        <TestimonialAddNew votes={testimonials} data={testimonials.find((item) => item.id === currentUser.uid) || null} />
       )}
     </section>
   );

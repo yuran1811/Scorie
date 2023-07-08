@@ -6,9 +6,8 @@ interface OverlayProps {
   background?: string;
 }
 
-export const Overlay: FC<OverlayProps & DivProps> = ({ zIdx, background, ...otherProps }) => (
-  <div
-    {...otherProps}
-    className={`fullscreen cursor-pointer ${zIdx || 'z-10'} ${background || 'bg-gray-800/90'} `}
-  />
-);
+export const Overlay: FC<OverlayProps & DivProps> = ({
+  zIdx = 'z-10',
+  background = 'bg-zinc-950/80',
+  ...otherProps
+}) => <div {...otherProps} className={`fullscreen cursor-pointer ${zIdx} ${background}`} />;

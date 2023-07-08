@@ -1,8 +1,8 @@
 import { axiosConfig as AxiosDefaultConfig } from '@/config';
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { auth } from './firebase';
 
-const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
+const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
   const currentUser = auth.currentUser;
 
   if (currentUser)

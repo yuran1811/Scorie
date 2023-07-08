@@ -8,9 +8,8 @@ import TRANSLATIONS from '@/translations';
 import { mergeQuoteData } from '@/utils';
 import { mainSteps } from '@cpns/features/main/FeatureSection';
 import { quoteSteps } from '@cpns/features/quotes/BlockQuote';
-import { FlatLoading } from '@cpns/icons';
 import MainLayout from '@cpns/layouts/MainLayout';
-import { ErrorContent } from '@cpns/shared';
+import { ErrorContent, FullScreenLoading } from '@cpns/shared';
 import { StepType, TourProps, TourProvider } from '@reactour/tour';
 import { onAuthStateChanged } from 'firebase/auth';
 import i18next from 'i18next';
@@ -19,7 +18,7 @@ import { initReactI18next } from 'react-i18next';
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 
 i18next.use(initReactI18next).init({
-  lng: 'vi',
+  lng: useStore.getState().locale || 'vi',
   fallbackLng: 'en',
   resources: {
     vi: { translation: TRANSLATIONS.vi },
@@ -83,7 +82,7 @@ const App: FC = () => {
   }, [data, error, loading]);
 
   return (
-    <Suspense fallback={<FlatLoading />}>
+    <Suspense fallback={<FullScreenLoading />}>
       <TourProvider
         scrollSmooth
         showCloseButton
@@ -98,7 +97,15 @@ const App: FC = () => {
             <Route path="/">
               <Route index element={<HomePage isLoading={currentUser} />} />
               {publicRoutes.map(({ component: Page, path }) => (
-                <Route key={path} path={path} element={<Page />} />
+                <Route
+                  key={path}
+                  path={path}
+                  element={
+                    <Suspense fallback={<FullScreenLoading />}>
+                      <Page />
+                    </Suspense>
+                  }
+                />
               ))}
             </Route>
             <Route path="*" element={<ErrorContent />} />

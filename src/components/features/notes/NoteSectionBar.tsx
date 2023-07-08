@@ -12,7 +12,7 @@ import {
   ListAllIcon,
   ListIcon,
   NoteIcon,
-  ProgressIcon
+  ProgressIcon,
 } from '@cpns/icons';
 import { SearchBar, Tooltip } from '@cpns/shared';
 import { collection } from 'firebase/firestore';
@@ -145,17 +145,12 @@ export const NoteSectionBar = () => {
                   delay: 400,
                 }}
               >
-                <ImportIcon
-                  className="mx-5 my-4 cursor-pointer"
-                  fill={'white'}
-                  width="40"
-                  height="40"
-                />
+                <ImportIcon className="mx-5 my-4 cursor-pointer" fill={'white'} width="40" height="40" />
               </Tooltip>
             </div>
           </div>
 
-          <div className="block tablet:hidden">
+          <div className="block medtab:hidden">
             <ListIcon
               className={`${viewMode === 'list' ? 'block' : 'hidden'} mx-5 my-4 cursor-pointer`}
               width="40"
@@ -171,8 +166,10 @@ export const NoteSectionBar = () => {
           </div>
         </div>
       </div>
+
       <div className="flexcenter w-full px-4">
         <SearchBar
+          isHide={!noteList.length}
           setSearchOpts={setSearchOpts}
           onChange={(e) => {
             const searchValue = e.currentTarget.value.trim();
@@ -198,12 +195,10 @@ export const NoteSectionBar = () => {
       )}
 
       {!loading && !!noteList && !noteList.length && (
-        <div className="m-4 w-full p-8 text-center text-[5rem] font-bold">{t('no note')}</div>
+        <div className="m-4 w-full p-8 text-center text-2xl font-bold">{t('no note')}</div>
       )}
 
-      {!loading && !!noteList && !!noteList.length && (
-        <NoteSection viewMode={viewMode} filter={filter} notes={noteList} />
-      )}
+      {!loading && !!noteList && !!noteList.length && <NoteSection viewMode={viewMode} filter={filter} notes={noteList} />}
 
       {addNewOpen && <NoteAddNew onClickHandle={setAddNewOpen} />}
     </div>

@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
-export const DocItemContent: FC = ({ children }) => (
+export const DocItemContent: FC<PropsWithChildren> = ({ children }) => (
   <div
-    className="top-[7rem] left-0 mb-16 w-full cursor-default rounded-[2rem] border-[0.5rem] border-ctbg p-6 mobile:w-[calc(100%-3rem)]"
+    className="left-0 top-[7rem] mb-16 w-full cursor-default rounded-[2rem] border-[0.5rem] border-ctbg p-6 lgmb:w-[calc(100%-3rem)]"
     onClick={(e) => {
       e.stopPropagation();
     }}

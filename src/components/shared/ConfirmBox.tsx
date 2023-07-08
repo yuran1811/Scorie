@@ -11,7 +11,7 @@ interface ConfirmBoxProps {
 }
 
 export const ConfirmBox: FC<ConfirmBoxProps & DivProps> = ({
-  className,
+  className = '',
   content,
   setConfirm,
   actionWhenConfirm,
@@ -22,13 +22,11 @@ export const ConfirmBox: FC<ConfirmBoxProps & DivProps> = ({
   return createPortal(
     <div
       {...otherProps}
-      className={`${
-        className || ''
-      } isAnimated flexcenter absolute bottom-0 left-0 right-0 origin-top flex-wrap bg-ctcolor p-2`}
+      className={`isAnimated flexcenter absolute bottom-0 left-0 right-0 origin-top flex-wrap bg-ctcolor/50 p-2 backdrop-blur-lg ${className}`}
       onClick={(e) => e.stopPropagation()}
     >
       <div>
-        <div className="mb-4 p-4 text-center text-[3rem] font-bold text-ctbg tablet:text-[3.5rem]">
+        <div className="medtab:text-[3.5rem] mb-4 p-4 text-center text-[3rem] font-bold text-ctbg">
           {t(content || 'default confirm')}
         </div>
         <div className="flexcenter flex-wrap">

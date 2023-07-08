@@ -15,11 +15,7 @@ export const createDownloadBackupData = () => {
   const rawData = getStoredData();
   if (!rawData.length) return '#data-is-unavailable';
 
-  const {
-    state: data,
-  }: {
-    state: BackupDataType;
-  } = JSON.parse(rawData);
+  const { state: data }: { state: BackupDataType } = JSON.parse(rawData);
 
   const backupData = JSON.stringify({
     scores: data?.scores?.map(({ id, createdAt, updatedAt, isIgnored, ..._ }) => _) || [],

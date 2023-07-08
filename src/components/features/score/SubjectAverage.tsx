@@ -70,7 +70,7 @@ export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({ subjects })
   }, [subjectAverageScore]);
 
   return (
-    <div className="flexcentercol pb-6 text-center text-[10rem] font-bold">
+    <div className="flexcentercol pb-6 text-center text-[9rem] font-bold">
       {!subjectAverageScore.count ? (
         ''
       ) : (

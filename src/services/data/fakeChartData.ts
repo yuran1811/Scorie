@@ -399,16 +399,7 @@ export const fakeGGChartData = [
   ['2007', 1030, 540],
 ];
 
-export const fakeChartJSColors = [
-  'red',
-  'orange',
-  'yellow',
-  'lime',
-  'green',
-  'teal',
-  'blue',
-  'purple',
-];
+export const fakeChartJSColors = ['red', 'orange', 'yellow', 'lime', 'green', 'teal', 'blue', 'purple'];
 export const fakeChartJSLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 export const fakeChartJSData = {
   labels: fakeChartJSLabels,

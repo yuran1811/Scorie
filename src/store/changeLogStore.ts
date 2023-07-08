@@ -1,6 +1,6 @@
 import { ChangeLogProps } from '@/shared';
 import __ from 'lodash';
-import create from 'zustand';
+import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 interface StoreType {

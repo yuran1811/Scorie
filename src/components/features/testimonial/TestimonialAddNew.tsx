@@ -73,11 +73,11 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
 
   return (
     <form
-      className="flexcentercol mx-auto w-max max-w-[80%] p-8 text-center text-[5rem] font-bold text-teal-700 line-clamp-1"
+      className="flexcentercol mx-auto line-clamp-1 w-max max-w-[90%] p-2 text-center text-[5rem] font-bold text-teal-700 medmb:p-8"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
-        className="bg-gray-900 focus:border-violet-400"
+        className="border-b-0 border-r-0 border-violet-600/30 bg-gray-900 focus:border-violet-400"
         placeholder="Name"
         defaultValue={data ? data.name : ''}
         formHandle={{
@@ -91,7 +91,7 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
       {errors?.name && <ErrorMessage content={errors.name.message || ''} />}
 
       <Input
-        className="bg-gray-900 focus:border-violet-400"
+        className="border-b-0 border-r-0 border-violet-600/30 bg-gray-900 focus:border-violet-400"
         placeholder="Job"
         defaultValue={data ? data.job : ''}
         formHandle={{
@@ -106,7 +106,7 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
 
       <TextArea
         defaultValue={data ? data.content : ''}
-        className="max-h-[50rem] min-h-[10rem] bg-gray-900 font-normal focus:border-violet-400"
+        className="max-h-[50rem] min-h-[10rem] border-b-0 border-r-0 border-violet-600/30 bg-gray-900 font-normal focus:border-violet-400"
         formHandle={{ ...register('content') }}
       />
 
@@ -117,11 +117,7 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
       />
 
       {openModal && (
-        <ModalUI
-          title={t('delete action')}
-          onClick={() => deleteHandle()}
-          cancelHandle={() => setOpenModal(false)}
-        >
+        <ModalUI title={t('delete action')} onClick={() => deleteHandle()} cancelHandle={() => setOpenModal(false)}>
           <p className="p-4 text-[3rem]">{t('this will delete your feedback')}</p>
         </ModalUI>
       )}

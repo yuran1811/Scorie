@@ -9,7 +9,7 @@ export const Header: FC = () => {
   const { pathname } = useLocation();
 
   return (
-    <header className="flexcenter sticky top-0 z-20 h-[8rem] w-full !justify-between bg-ctbg">
+    <header className="flexcenter fixed top-0 z-20 h-[--header-height-sm] w-full !justify-between bg-gradient-to-b from-ctbg/20 to-vintage1-5/20 backdrop-blur-2xl backdrop-brightness-50 medmb:h-[--header-height]">
       <PanelProvider>
         <MenuIcon className="z-20 mx-10" />
         <Panel className="z-[19]" />
@@ -17,10 +17,9 @@ export const Header: FC = () => {
 
       <Link to="/">
         <div
-          className="text-center text-[4rem] font-bold mobile:text-[4.5rem]"
+          className="typo-lg text-center font-bold"
           onClick={() =>
-            // pathname === '/' &&
-            document.querySelector('#root > div')?.scroll({ top: 0, left: 0, behavior: 'smooth' })
+            pathname === '/' && document.querySelector('#root > div')?.scroll({ top: 0, left: 0, behavior: 'smooth' })
           }
         >
           Scorie

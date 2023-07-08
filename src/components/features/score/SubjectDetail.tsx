@@ -2,30 +2,12 @@ import { deleteSubject, editSubject, validateSubjectOption } from '@/services';
 import { ScoreDetailType, SubjectDetailType, ToastDefaultConfig } from '@/shared';
 import { useStore } from '@/store';
 import { shallowObjectCompare, successToast } from '@/utils';
-import {
-  AddIcon,
-  CloseIcon,
-  IgnoreIcon,
-  ImportantIcon,
-  ListAllIcon,
-  ListIcon,
-  StarIcon,
-  TrashIcon,
-} from '@cpns/icons';
+import { AddIcon, CloseIcon, IgnoreIcon, ImportantIcon, ListAllIcon, ListIcon, StarIcon, TrashIcon } from '@cpns/icons';
 import { ConfirmBox, Input, TimeContainer, Tooltip } from '@cpns/shared';
 import { ScoreAddNew } from './ScoreAddNew';
 import { ScoreContainer } from './ScoreContainer';
 import Tippy from '@tippyjs/react/headless';
-import {
-  Dispatch,
-  FC,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
@@ -41,13 +23,7 @@ interface SubjectDetailProps {
   setOpenDetail: Dispatch<SetStateAction<boolean>>;
 }
 
-export const SubjectDetail: FC<SubjectDetailProps> = ({
-  style,
-  subject,
-  scores,
-  averageScore,
-  setOpenDetail,
-}) => {
+export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, averageScore, setOpenDetail }) => {
   const currentUser = useStore((s) => s.currentUser);
 
   const { t } = useTranslation();
@@ -160,24 +136,24 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
   return createPortal(
     <>
       <div className="fullscreen scrollY bg-violet-200 text-center font-bold text-rose-600">
-        <div className="sticky top-0 left-0 right-0 flex items-center justify-between bg-violet-200 p-8">
-          <div className="flexcenter w-full flex-wrap mobile:pl-24">
+        <div className="sticky left-0 right-0 top-0 flex items-center justify-between bg-violet-200 p-8">
+          <div className="flexcenter w-full flex-wrap lgmb:pl-24">
             <StarIcon
-              className="m-[0.6rem] scale-75 cursor-pointer mobile:m-5 mobile:scale-100"
+              className="m-[0.6rem] scale-75 cursor-pointer lgmb:m-5 lgmb:scale-100"
               fill={!scoreOptions.isSpecial ? 'white' : '#d97706'}
               width="40"
               height="40"
               onClick={() => setScoreOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
             />
             <ImportantIcon
-              className="m-[0.6rem] scale-75 cursor-pointer mobile:m-5 mobile:scale-100"
+              className="m-[0.6rem] scale-75 cursor-pointer lgmb:m-5 lgmb:scale-100"
               fill={!scoreOptions.isVital ? 'white' : '#57534e'}
               width="40"
               height="40"
               onClick={() => setScoreOptions((s) => ({ ...s, isVital: !s.isVital }))}
             />
             <IgnoreIcon
-              className="m-[0.6rem] scale-75 cursor-pointer mobile:m-5 mobile:scale-100"
+              className="m-[0.6rem] scale-75 cursor-pointer lgmb:m-5 lgmb:scale-100"
               fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
               width="40"
               height="40"
@@ -201,7 +177,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
               >
                 <div onClick={() => setShowConfirm((s) => !s)}>
                   <TrashIcon
-                    className="m-[0.6rem] scale-75 cursor-pointer text-slate-500 mobile:m-5 mobile:scale-100"
+                    className="m-[0.6rem] scale-75 cursor-pointer text-slate-500 lgmb:m-5 lgmb:scale-100"
                     width="35"
                     height="35"
                   />
@@ -222,18 +198,13 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
 
         <TimeContainer obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }} />
 
-        <div className="flexcentercol gap-6 px-8 py-8 md:!flex-row md:!items-start md:!justify-around">
-          <div className="pt-4 md:sticky md:top-[10.5rem]">
-            <div className="w-full text-center text-[5rem] text-teal-700 line-clamp-1">
-              {subject?.name || ''}
-            </div>
-            <div
-              className="my-4 rounded-[1rem] px-6 text-center text-[10rem] line-clamp-1"
-              style={{ ...style }}
-            >
+        <div className="flexcentercol gap-6 px-8 py-8 lgtab:!flex-row lgtab:!items-start lgtab:!justify-around">
+          <div className="pt-4 lgtab:sticky lgtab:top-[10.5rem]">
+            <div className="line-clamp-1 w-full text-center text-[5rem] text-teal-700">{subject?.name || ''}</div>
+            <div className="my-4 line-clamp-1 rounded-[1rem] px-6 text-center text-[10rem]" style={{ ...style }}>
               {averageScore}
             </div>
-            <div className="flexcenter mt-6 mb-12 flex-wrap">
+            <div className="flexcenter mb-12 mt-6 flex-wrap">
               <span className="mr-4 p-4 text-[3rem] text-indigo-800">{t('expected score')} </span>
               <div className="flex-1">
                 <Input
@@ -249,27 +220,20 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
             </div>
           </div>
           <div>
-            <div className="flex w-full flex-wrap items-center justify-between bg-violet-200 py-8 text-slate-800 md:sticky md:top-[10.5rem]">
-              <div className="w-full px-6 text-center text-[4rem] font-bold line-clamp-1 smallmb:w-auto smallmb:text-left">
+            <div className="flex w-full flex-wrap items-center justify-between bg-violet-200 py-8 text-slate-800 lgtab:sticky lgtab:top-[10.5rem]">
+              <div className="line-clamp-1 w-full px-6 text-center text-[4rem] font-bold smmb:w-auto smmb:text-left">
                 {t('recent')}
               </div>
-              <div className="flex w-full items-start justify-center smallmb:w-auto smallmb:justify-end">
+              <div className="flex w-full items-start justify-center smmb:w-auto smmb:justify-end">
                 <Tooltip
                   content="Add new score"
                   options={{
                     delay: 400,
                   }}
                 >
-                  <AddIcon
-                    className={`mx-5 cursor-pointer`}
-                    width="50"
-                    height="50"
-                    onClick={() => setAddNewOpen(true)}
-                  />
+                  <AddIcon className={`mx-5 cursor-pointer`} width="50" height="50" onClick={() => setAddNewOpen(true)} />
                 </Tooltip>
-                {addNewOpen && (
-                  <ScoreAddNew subject={subject} onClick={() => setAddNewOpen(false)} />
-                )}
+                {addNewOpen && <ScoreAddNew subject={subject} onClick={() => setAddNewOpen(false)} />}
                 <Tooltip
                   content="Grid view"
                   options={{
@@ -299,12 +263,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({
               </div>
             </div>
             <div className="flexcenter w-full flex-wrap overflow-y-auto pb-6">
-              <ScoreContainer
-                viewMode={viewMode}
-                typeList={typeList}
-                subject={subject}
-                scores={scores}
-              />
+              <ScoreContainer viewMode={viewMode} typeList={typeList} subject={subject} scores={scores} />
             </div>
           </div>
         </div>

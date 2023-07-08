@@ -51,7 +51,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
       <div
         className={`${
           !isShow ? '!hidden' : ''
-        } m-6 w-full cursor-pointer overflow-hidden rounded-[2.5rem] bg-violet-200 p-4 text-center font-bold text-rose-600 tablet:max-w-[25rem]`}
+        } medtab:max-w-[25rem] m-6 w-full cursor-pointer overflow-hidden rounded-[2.5rem] bg-violet-200 p-4 text-center font-bold text-rose-600`}
         onClick={() => setOpenDetail((s) => !s)}
       >
         <div className="flexcenter p-4">
@@ -76,11 +76,11 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
         </div>
 
         <div className="flexcentercol">
-          <div className="w-full text-center text-[3.5rem] font-bold text-teal-700 line-clamp-1">
+          <div className="line-clamp-1 w-full text-center text-[3.5rem] font-bold text-teal-700">
             {subject?.name || ''}
           </div>
           <div
-            className="my-4 max-w-full rounded-[1rem] px-6 text-center text-[6rem] font-bold line-clamp-1"
+            className="my-4 line-clamp-1 max-w-full rounded-[1rem] px-6 text-center text-[6rem] font-bold"
             style={{
               ...averageScoreStyle[averageScoreStyle.check(+averageScore)],
             }}
@@ -89,16 +89,11 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
           </div>
 
           {scores.length !== 0 && (
-            <div className="w-full px-8 text-left text-[3rem] font-bold text-slate-800 line-clamp-1">
-              {t('recent')}
-            </div>
+            <div className="line-clamp-1 w-full px-8 text-left text-[3rem] font-bold text-slate-800">{t('recent')}</div>
           )}
 
           {scores.length ? (
-            <ReactSwiper
-              {...swiperOptions}
-              className="flex w-full flex-row items-center text-sky-700"
-            >
+            <ReactSwiper {...swiperOptions} className="flex w-full flex-row items-center text-sky-700">
               {scores
                 .slice(-MAX_SCORE_RECENT_LTH)
                 .reverse()
@@ -114,7 +109,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
               )}
             </ReactSwiper>
           ) : (
-            <div className="w-full px-8 text-center text-[3rem] font-semibold text-slate-800 line-clamp-1">
+            <div className="line-clamp-1 w-full px-8 text-center text-[3rem] font-semibold text-slate-800">
               No record
             </div>
           )}

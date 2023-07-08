@@ -9,12 +9,12 @@ export const AddButton: FC<DivProps> = ({ onClick }) => (
     drag
     dragConstraints={{ top: 0, left: 0, right: 50, bottom: 70 }}
     dragElastic={1}
-    className="flexcenter fixed right-[5rem] bottom-[7rem] z-10 h-[7rem] w-[7rem] cursor-pointer rounded-full border-[0.5rem] border-indigo-200 bg-ctbg opacity-30 hover:opacity-100 active:opacity-100 mobile:opacity-100 tablet:bottom-[10rem] desktop:right-[10rem] desktop:bottom-[7rem]"
+    className="flexcenter lgdesk:bottom-[7rem] lgdesk:right-[10rem] medtab:bottom-[10rem] fixed bottom-[7rem] right-[5rem] z-10 h-[7rem] w-[7rem] cursor-pointer rounded-full border-[0.5rem] border-indigo-200/80 bg-ctbg/60 opacity-30 backdrop-blur-lg hover:opacity-100 active:opacity-100 lgmb:opacity-100"
     onClick={onClick}
   >
     <Tooltip content="Add new score" options={{ delay: 400 }}>
       <PlusIcon
-        className="relative top-[-1.5rem] right-[-0.8rem] z-[1] cursor-pointer text-white"
+        className="relative right-[-0.8rem] top-[-1.5rem] z-[1] cursor-pointer text-white"
         width="55"
         height="55"
       />

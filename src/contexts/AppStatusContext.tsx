@@ -1,4 +1,4 @@
-import { createContext, Dispatch, FC, SetStateAction, useContext, useState } from 'react';
+import { createContext, Dispatch, FC, PropsWithChildren, SetStateAction, useContext, useState } from 'react';
 
 interface AppStatusType {
   type: string;
@@ -29,12 +29,10 @@ export const AppStatusContext = createContext<AppStatusProviderProps>({
   setStatus: null,
 });
 
-export const AppStatusProvider: FC = ({ children }) => {
+export const AppStatusProvider: FC<PropsWithChildren> = ({ children }) => {
   const [status, setStatus] = useState({ ...DEFAULT_STATUS });
 
-  return (
-    <AppStatusContext.Provider value={{ status, setStatus }}>{children}</AppStatusContext.Provider>
-  );
+  return <AppStatusContext.Provider value={{ status, setStatus }}>{children}</AppStatusContext.Provider>;
 };
 
 export const useAppStatus = () => useContext(AppStatusContext);

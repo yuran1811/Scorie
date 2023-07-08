@@ -14,19 +14,9 @@ const ChangeLang = () => {
   return (
     <>
       {locale === 'en' ? (
-        <ViLocale
-          className="my-4 mx-6 cursor-pointer"
-          width="40"
-          height="40"
-          onClick={() => changeLanguage('vi')}
-        />
+        <ViLocale className="mx-6 my-4 cursor-pointer" width="40" height="40" onClick={() => changeLanguage('vi')} />
       ) : (
-        <EnLocale
-          className="my-4 mx-6 cursor-pointer"
-          width="40"
-          height="40"
-          onClick={() => changeLanguage('en')}
-        />
+        <EnLocale className="mx-6 my-4 cursor-pointer" width="40" height="40" onClick={() => changeLanguage('en')} />
       )}
     </>
   );

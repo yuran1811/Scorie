@@ -10,50 +10,40 @@ export const NotVerifyEmail: FC = () => {
 
   const { t } = useTranslation();
 
-  const reVerifyEmail = useCallback(
-    (canResend: boolean, setCanResend: Dispatch<SetStateAction<boolean>>) => {
-      if (!canResend || !auth.currentUser) return;
+  const reVerifyEmail = useCallback((canResend: boolean, setCanResend: Dispatch<SetStateAction<boolean>>) => {
+    if (!canResend || !auth.currentUser) return;
 
-      setCanResend(false);
+    setCanResend(false);
 
-      sendEmailVerification(auth.currentUser)
-        .then(() => {
-          toast.success(t('email verification sent'), {
-            ...ToastDefaultConfig,
-            position: 'top-center',
-          });
-        })
-        .catch((err) => {
-          toast.error(t('cannot send email verification'), {
-            ...ToastDefaultConfig,
-            position: 'top-center',
-          });
-          console.log(getFirebaseErr(err.message));
-        })
-        .finally(() => {
-          setCanResend(true);
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+        toast.success(t('email verification sent'), {
+          ...ToastDefaultConfig,
+          position: 'top-center',
         });
-    },
-    []
-  );
+      })
+      .catch((err) => {
+        toast.error(t('cannot send email verification'), {
+          ...ToastDefaultConfig,
+          position: 'top-center',
+        });
+        console.log(getFirebaseErr(err.message));
+      })
+      .finally(() => {
+        setCanResend(true);
+      });
+  }, []);
 
   return (
-    <div className="m-6 p-4 mobile:p-10">
-      <div className="text-center text-[4rem] font-semibold">
-        {t('please verify your email before using this app')}
-      </div>
-      <div className="mx-auto mt-10 w-full text-center text-[3rem] mobile:w-4/5">
-        {t("we've sent you a verify link via email")}
-      </div>
-      <div className="mx-auto mt-10 w-full text-center text-[3rem] mobile:w-4/5">
+    <div className="m-6 p-4 lgmb:p-10">
+      <div className="typo-med text-center font-semibold">{t('please verify your email before using this app')}</div>
+      <div className="typo mx-auto mt-10 w-full text-center lgmb:w-4/5">{t("we've sent you a verify link via email")}</div>
+      <div className="typo mx-auto mt-10 w-full text-center lgmb:w-4/5">
         {t('please check all your mails carefully (our mail can be in spam by many reasons)')}
       </div>
-      <div className="mx-auto mt-10 w-full text-center text-[3rem] mobile:w-4/5">
+      <div className="typo mx-auto mt-10 w-full text-center lgmb:w-4/5">
         {t("or if you can't find any")},{' '}
-        <span
-          className="cursor-pointer font-semibold underline"
-          onClick={() => reVerifyEmail(canResend, setCanResend)}
-        >
+        <span className="cursor-pointer font-semibold underline" onClick={() => reVerifyEmail(canResend, setCanResend)}>
           {t('click here and check your mail again')}
         </span>
       </div>

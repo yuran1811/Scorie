@@ -1,4 +1,4 @@
-import { createContext, Dispatch, FC, SetStateAction, useContext, useState } from 'react';
+import { createContext, Dispatch, FC, PropsWithChildren, SetStateAction, useContext, useState } from 'react';
 
 interface PanelContextProps {
   isMenu: boolean;
@@ -24,7 +24,7 @@ export const PanelContext = createContext<PanelProviderProps>({
   setActive: null,
 });
 
-export const PanelProvider: FC = ({ children }) => {
+export const PanelProvider: FC<PropsWithChildren> = ({ children }) => {
   const [active, setActive] = useState({
     isMenu: false,
     isAccount: false,

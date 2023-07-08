@@ -24,7 +24,7 @@ const { root, tags, maxLength } = {
   ],
 };
 
-export const getRandomQuote = async (config?: AxiosRequestConfig) => {
+export const getRandomQuote = async (config: AxiosRequestConfig = {}) => {
   try {
     const data: QuoteType = await getAxiosInst().get(
       `${root}/random?tags=${tags.join('|')}&maxLength=${maxLength}`
@@ -37,7 +37,7 @@ export const getRandomQuote = async (config?: AxiosRequestConfig) => {
   }
 };
 
-export const getQuotes = async (page: number, config?: AxiosRequestConfig) => {
+export const getQuotes = async (page: number, config: AxiosRequestConfig = {}) => {
   try {
     const data = await getAxiosInst().get<any, QuoteListType>(
       `${root}/quotes?tags=${tags.join('|')}&maxLength=${maxLength}&page=${page + 1}`

@@ -2,8 +2,8 @@ import { DivProps } from '@/shared';
 import { FeatureSection } from './FeatureSection';
 import { FC } from 'react';
 
-export const FeatureLayout: FC<DivProps> = ({ className }) => (
-  <div className={`${className || ''} isAnimated relative top-0 left-0 w-[100vw] px-12 py-4`}>
+export const FeatureLayout: FC<DivProps> = ({ className = '' }) => (
+  <div className={`isAnimated relative left-0 top-0 w-[100vw] px-6 py-4 medtab:px-12 ${className}`}>
     <FeatureSection />
   </div>
 );

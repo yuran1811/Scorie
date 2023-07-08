@@ -2,14 +2,7 @@ import { editNote } from '@/services';
 import { NoteItemProps } from '@/shared';
 import { useStore } from '@/store';
 import { copySuccessToast, copyToClipboard, getThemeStyle, shallowObjectCompare } from '@/utils';
-import {
-  ArchiveIcon,
-  DoneIcon,
-  NodeShareIcon,
-  PaletteIcon,
-  PinIcon,
-  ProgressIcon,
-} from '@cpns/icons';
+import { ArchiveIcon, DoneIcon, NodeShareIcon, PaletteIcon, PinIcon, ProgressIcon } from '@cpns/icons';
 import { Tooltip } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
 import { FC, useEffect, useState } from 'react';
@@ -55,12 +48,10 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
   return (
     <>
       <div
-        className={`${
-          viewMode === 'list' ? 'mx-auto w-full mobile:max-w-[calc(100%-4rem)]' : 'w-[20rem]'
-        } ${
+        className={`${viewMode === 'list' ? 'mx-auto w-full lgmb:max-w-[calc(100%-4rem)]' : 'w-[20rem]'} ${
           !isShow && '!hidden'
-        } isAnimated flexcentercol group relative cursor-pointer rounded-[2rem] border-[3px] border-transparent p-4 hover:border-white mobile:!mx-0 mobile:!max-w-none
-        tablet:w-[24rem]`}
+        } isAnimated flexcentercol group relative cursor-pointer rounded-[2rem] border-[3px] border-transparent p-4 hover:border-white lgmb:!mx-0 lgmb:!max-w-none
+        medtab:w-[24rem]`}
         style={noteStyle}
         onClick={() => setOpenDetail(true)}
       >
@@ -71,14 +62,11 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
         </div>
 
         <div className="max-h-[25rem] w-full overflow-hidden">
-          <div className="w-full p-2 text-center text-[2.2rem] font-bold line-clamp-3">{title}</div>
+          <div className="typo-sm line-clamp-3 w-full p-2 text-center font-bold">{title}</div>
           {data?.split && (
             <div>
               {data.split('\n').map((datum, idx) => (
-                <p
-                  key={datum + idx}
-                  className="!select-none resize-none bg-transparent p-2 text-[2rem] text-current tablet:text-[2.2rem]"
-                >
+                <p key={datum + idx} className="typo-sm !select-none resize-none bg-transparent p-2 text-current">
                   {datum}
                 </p>
               ))}
@@ -87,7 +75,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
         </div>
 
         <div
-          className={`isAnimated flexcenter relative mt-12 max-h-0 w-full flex-wrap rounded-[3.5rem] bg-slate-800 p-3 opacity-0 group-hover:max-h-[12rem] group-hover:opacity-100 group-hover:delay-300 tablet:mt-6 tablet:group-hover:delay-[0ms] ${
+          className={`isAnimated flexcenter relative mt-12 max-h-0 w-full flex-wrap rounded-[3.5rem] bg-slate-800 p-3 opacity-0 group-hover:max-h-[12rem] group-hover:opacity-100 group-hover:delay-300 medtab:mt-6 medtab:group-hover:delay-[0ms] ${
             openTheme ? 'max-h-[12rem] opacity-100' : 'overflow-hidden'
           }`}
           onClick={(e) => {
@@ -119,9 +107,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
                 >
                   <PaletteIcon
                     {...toolProps}
-                    className={`${toolClass} ${
-                      openTheme && '!translate-x-0 !opacity-100'
-                    } translate-x-[-3rem] delay-[35ms]`}
+                    className={`${toolClass} ${openTheme && '!translate-x-0 !opacity-100'} translate-x-[-3rem] delay-[35ms]`}
                   />
                 </Tooltip>
               </div>
@@ -154,9 +140,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
               <div className="absolute left-[1.3rem] h-[2.6rem] w-[2.6rem] animate-ping rounded-full bg-sky-300" />
               <NodeShareIcon
                 {...toolProps}
-                className={`translate-x-[-2rem] delay-[20ms] ${toolClass} ${
-                  openTheme && '!translate-x-0 !opacity-100'
-                }`}
+                className={`translate-x-[-2rem] delay-[20ms] ${toolClass} ${openTheme && '!translate-x-0 !opacity-100'}`}
               />
             </div>
           </Tooltip>
@@ -169,9 +153,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
           >
             <PinIcon
               {...toolProps}
-              className={`translate-x-[-0.6rem] delay-[0ms] ${toolClass} ${
-                openTheme && '!translate-x-0 !opacity-100'
-              }`}
+              className={`translate-x-[-0.6rem] delay-[0ms] ${toolClass} ${openTheme && '!translate-x-0 !opacity-100'}`}
               fill={!isPinned ? 'white' : '#f87171'}
               onClick={() =>
                 setNoteOpts((s) => ({
@@ -191,9 +173,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
           >
             <DoneIcon
               {...toolProps}
-              className={`translate-x-[0.6rem] delay-[12ms] ${toolClass} ${
-                openTheme && '!translate-x-0 !opacity-100'
-              }`}
+              className={`translate-x-[0.6rem] delay-[12ms] ${toolClass} ${openTheme && '!translate-x-0 !opacity-100'}`}
               fill={!isDone ? 'white' : '#eab308'}
               onClick={() =>
                 setNoteOpts((s) => ({
@@ -213,9 +193,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
           >
             <ProgressIcon
               {...toolProps}
-              className={`translate-x-[2rem] delay-[12ms] ${toolClass} ${
-                openTheme && '!translate-x-0 !opacity-100'
-              }`}
+              className={`translate-x-[2rem] delay-[12ms] ${toolClass} ${openTheme && '!translate-x-0 !opacity-100'}`}
               fill={!isInProgress ? 'white' : '#cbd5e1'}
               onClick={() =>
                 setNoteOpts((s) => ({
@@ -235,9 +213,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
           >
             <ArchiveIcon
               {...toolProps}
-              className={`translate-x-[3rem] delay-[12ms] ${toolClass} ${
-                openTheme && '!translate-x-0 !opacity-100'
-              }`}
+              className={`translate-x-[3rem] delay-[12ms] ${toolClass} ${openTheme && '!translate-x-0 !opacity-100'}`}
               fill={!isArchived ? 'white' : '#94a3b8'}
               onClick={() =>
                 setNoteOpts((s) => ({

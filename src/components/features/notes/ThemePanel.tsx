@@ -11,15 +11,13 @@ interface ThemePanelProps {
 
 export const ThemePanel: FC<ThemePanelProps & DivProps> = ({
   themeSelected,
-  className,
+  className = '',
   setNewTheme,
   ...otherProps
 }) => (
   <div
     {...otherProps}
-    className={`${
-      className || ''
-    } isAnimated origin-top absolute bottom-[-3.5rem] left-0 right-0 p-2 flexcenter flex-wrap bg-slate-800 rounded-[1.6rem]`}
+    className={`isAnimated origin-top absolute bottom-[-3.5rem] left-0 right-0 p-2 flexcenter flex-wrap bg-slate-800 rounded-[1.6rem] ${className}`}
   >
     {Object.entries(themes).map(([key, { bg, color }]) => (
       <div

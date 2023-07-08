@@ -1,19 +1,11 @@
-import {
-  SETTINGS_DEFAULT,
-  ScoreDetailType,
-  SubjectListFilterType,
-  SubjectListType,
-} from '@/shared';
+import { SETTINGS_DEFAULT, ScoreDetailType, SubjectListFilterType, SubjectListType } from '@/shared';
 
 export interface AverageScoreType {
   total: number;
   count: number;
 }
 
-export const filterScoreList = (
-  list: SubjectListType[] | null,
-  filter: SubjectListFilterType | null
-) => {
+export const filterScoreList = (list: SubjectListType[] | null, filter: SubjectListFilterType | null) => {
   if (list === null || filter === null) return [];
 
   return [...list]

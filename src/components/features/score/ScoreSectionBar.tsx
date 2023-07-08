@@ -2,15 +2,7 @@ import { useCollectionQuery } from '@/hooks';
 import { db, SubjectDetailType, SubjectListFilterType } from '@/shared';
 import { useStore } from '@/store';
 import { filterScoreList, standardizeCollectionData } from '@/utils';
-import {
-  AddIcon,
-  BackIcon,
-  FlatLoading,
-  HashtagIcon,
-  IgnoreIcon,
-  ImportantIcon,
-  StarIcon,
-} from '@cpns/icons';
+import { AddIcon, BackIcon, FlatLoading, HashtagIcon, IgnoreIcon, ImportantIcon, StarIcon } from '@cpns/icons';
 import { SearchBar, Tooltip } from '@cpns/shared';
 import { collection } from 'firebase/firestore';
 import { useEffect, useMemo, useState } from 'react';
@@ -105,12 +97,7 @@ export const ScoreSectionBar = () => {
             />
           </Tooltip>
 
-          <Tooltip
-            content="Ignored subject"
-            options={{
-              delay: 400,
-            }}
-          >
+          <Tooltip content="Ignored subject" options={{ delay: 400 }}>
             <IgnoreIcon
               className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasIgnored ? 'white' : '#0891b2'}
@@ -120,12 +107,7 @@ export const ScoreSectionBar = () => {
             />
           </Tooltip>
 
-          <Tooltip
-            content="Add new subject"
-            options={{
-              delay: 400,
-            }}
-          >
+          <Tooltip content="Add new subject" options={{ delay: 400 }}>
             <AddIcon
               className="mx-5 my-4 cursor-pointer"
               fill={'white'}
@@ -138,6 +120,7 @@ export const ScoreSectionBar = () => {
       </div>
       <div className="flexcenter w-full px-4">
         <SearchBar
+          isHide={!subjects.length}
           setSearchOpts={setSearchOpts}
           onChange={(e) => {
             const searchValue = e.currentTarget.value.trim();
@@ -174,12 +157,8 @@ export const ScoreSectionBar = () => {
         </div>
       )}
 
-      {addNewOpen && (
-        <SubjectAddNew subjects={subjects} onClickHandle={() => setAddNewOpen(false)} />
-      )}
-      {addNewSSOpen && (
-        <ScoreSubjectAddNew subjects={subjects} onClick={() => setAddNewSSOpen(false)} />
-      )}
+      {addNewOpen && <SubjectAddNew subjects={subjects} onClickHandle={() => setAddNewOpen(false)} />}
+      {addNewSSOpen && <ScoreSubjectAddNew subjects={subjects} onClick={() => setAddNewSSOpen(false)} />}
     </div>
   );
 };

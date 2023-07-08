@@ -67,6 +67,10 @@ const errorTranslation = {
     vi: 'Sai mật khẩu',
     en: 'Wrong password',
   },
+  'an error has occured': {
+    vi: 'Có lỗi gì đó rồi',
+    en: 'An error has occured',
+  },
 };
 
 const formValidateTranslation = {
@@ -149,9 +153,9 @@ const workerTranslation = {
 };
 
 const testimonialTranslation = {
-  'what our customers are saying about us': {
-    vi: 'Người dùng nói gì về chúng tôi',
-    en: 'What our customers are saying about us',
+  'what users think': {
+    vi: 'Người dùng nghĩ gì',
+    en: 'What users think',
   },
 };
 
@@ -269,6 +273,18 @@ const chartTranslation = {
   'average score short': {
     vi: 'Điểm TB',
     en: 'Average score',
+  },
+  'bar chart': {
+    vi: 'Biểu đồ cột',
+    en: 'Bar Chart',
+  },
+  'polar chart': {
+    vi: 'Biểu đồ cực',
+    en: 'Polar Chart',
+  },
+  'radar chart': {
+    vi: 'Biểu đồ radar',
+    en: 'Radar Chart',
   },
 };
 

@@ -9,7 +9,7 @@ interface ButtonProps {
 
 export const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
-  className,
+  className = '',
   before = true,
   content = 'Button',
   lineClamp = 'none',
@@ -20,14 +20,10 @@ export const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> =
   return (
     <button
       {...props}
-      className={`${
-        className || ''
-      } flexcenter mx-auto my-[1.5rem] flex-wrap rounded-[3rem] border-4 border-ctbg bg-ctcolor px-[2.5rem] py-[0.6rem] text-center text-[4rem] font-semibold text-ctbg transition-all hover:bg-ctbg hover:text-white active:bg-ctbg active:text-white disabled:brightness-50`}
+      className={`typo flexcenter mx-auto my-[1.5rem] flex-wrap rounded-[3rem] border-4 border-ctbg bg-ctcolor/50 px-[2.5rem] py-[0.6rem] text-center font-semibold text-ctbg backdrop-blur-lg transition-all hover:bg-ctbg/50 hover:text-white active:bg-ctbg/50 active:text-white disabled:brightness-50 ${className}`}
     >
       {before && children}
-
       <span className={`line-clamp-${lineClamp}`}>{t(content.toLowerCase())}</span>
-
       {!before && children}
     </button>
   );

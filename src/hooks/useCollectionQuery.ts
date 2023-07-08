@@ -1,10 +1,4 @@
-import {
-  CollectionReference,
-  DocumentData,
-  onSnapshot,
-  Query,
-  QuerySnapshot,
-} from 'firebase/firestore';
+import { CollectionReference, DocumentData, onSnapshot, Query, QuerySnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
 const CACHE: { [key: string]: any } = {};

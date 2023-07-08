@@ -8,18 +8,18 @@ import { Divider } from '@cpns/shared';
 import { FC } from 'react';
 import { AccountInfo } from './AccountInfo';
 
-const AccountPanel: FC<DivProps> = ({ className }) => {
+const AccountPanel: FC<DivProps> = ({ className = '' }) => {
   const currentUser = useStore((s) => s.currentUser);
 
   const { active, setActive } = usePanel();
 
   return (
     <div
-      className={`${className || ''} ${
+      className={`${
         active.isAccount ? 'translate-y-0' : 'translate-y-[-200%]'
-      } isAnimated fullscreen z-20 bg-ctcolor px-12 pt-28 pb-14 text-ctbg tablet:max-w-[50rem]`}
+      } isAnimated fullscreen medtab:max-w-[50rem] z-20 bg-vintage1-1/90 px-12 pb-14 pt-28 text-ctbg backdrop-blur-2xl ${className}`}
     >
-      <BackIcon onClick={() => setActive && setActive((s) => ({ ...s, isAccount: false }))} />
+      <BackIcon className={className} onClick={() => setActive && setActive((s) => ({ ...s, isAccount: false }))} />
 
       {currentUser ? (
         <AccountInfo />

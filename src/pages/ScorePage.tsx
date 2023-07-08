@@ -7,3 +7,5 @@ export const ScorePage: FC = () => {
   const currentUser = useStore((s) => s.currentUser);
   return currentUser === null ? <LogInRequired /> : <ScoreSectionBar />;
 };
+
+export default ScorePage;

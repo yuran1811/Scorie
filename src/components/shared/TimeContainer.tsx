@@ -11,16 +11,11 @@ interface TimeContainerProps {
   };
 }
 
-export const TimeContainer: FC<TimeContainerProps & DivProps> = ({ obj, className, ...props }) => {
+export const TimeContainer: FC<TimeContainerProps & DivProps> = ({ obj, className = '', ...props }) => {
   const { t } = useTranslation();
 
   return (
-    <div
-      className={`${
-        className || ''
-      } flexcentercol px-5 text-[2.5rem] font-bold text-ctbg mobile:text-[3rem]`}
-      {...props}
-    >
+    <div className={`flexcentercol px-5 text-[2.5rem] font-bold text-ctbg lgmb:text-[3rem] ${className}`} {...props}>
       {obj?.createdAt && (
         <div className="">
           {t('create')}: {formatDate(obj.createdAt.seconds * 1000)}

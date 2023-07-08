@@ -52,10 +52,9 @@ export const ExtraTools: FC = () => {
     setStatus && setStatus({ ...status, badges: { changeLog: unreadLog.length } });
 
     if (unreadLog.length) {
-      toastId.current = toast.info(
-        `${unreadLog.length} unread log${unreadLog.length > 1 ? 's' : ''}`,
-        { ...toastConfig }
-      );
+      toastId.current = toast.info(`${unreadLog.length} unread log${unreadLog.length > 1 ? 's' : ''}`, {
+        ...toastConfig,
+      });
       toastId.current &&
         toast.update(toastId.current, {
           type: toast.TYPE.INFO,
@@ -86,9 +85,9 @@ export const ExtraTools: FC = () => {
       >
         <div className="relative flex h-[5.5rem] w-[9.5rem] items-center justify-end">
           <Avatar
-            className="absolute right-0 mx-8 cursor-pointer"
+            className="absolute right-0 mx-8 cursor-pointer medmb:scale-125"
             imgUrl=""
-            radius="5.5rem"
+            radius="4rem"
             onClick={() => setShowMore((a) => !a)}
           />
           <Badge className="scale-75" showIndicator={false}>

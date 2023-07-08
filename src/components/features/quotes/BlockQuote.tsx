@@ -43,76 +43,67 @@ export const BlockQuote: FC<DivProps> = () => {
       ) : (
         <blockquote
           data-tour={step(1)}
-          className="relative mx-auto max-w-[68rem] rounded-[2rem] p-12"
-          style={{ background: bg }}
+          className="relative mx-auto w-full rounded-[2rem] p-4 backdrop-blur-md lgmb:max-w-[68rem] lgmb:p-12 lgmb:pb-8"
+          style={{ backgroundColor: `${bg}75`, color: `${color}` }}
         >
           <QuoteIcon
-            className="absolute top-8 left-8 sm:top-12 sm:left-12 sm:scale-125"
-            width="50"
-            height="50"
+            className="absolute block lgmb:left-8 lgmb:top-8 lgmb:scale-125 lgtab:left-12 lgtab:top-12 lgtab:scale-150"
+            width="40"
+            height="40"
             fill={secondary}
           />
-          <div className="relative p-6 sm:p-8">
-            <p
-              className="mt-10 indent-8 text-[2.2rem] tablet:text-[2.8rem] sm:indent-12"
-              style={{ color }}
-            >
+
+          <div className="flexcentercol relative mt-10 gap-4 p-6 lgmb:p-8">
+            <p className="indent-8 text-[1.9rem] lgmb:indent-12 lgmb:text-[2.4rem]" style={{ color }}>
               {data[quoteIdx]?.content || ''}
             </p>
-          </div>
-          <div className="flex flex-col flex-wrap items-center justify-center smallmb:flex-row smallmb:justify-between">
-            <footer className="w-full px-0 pb-6 smallmb:w-[calc(100%-10rem)] smallmb:px-8 smallmb:py-0">
-              <p
-                className="text-center text-[2rem] font-semibold smallmb:text-left tablet:text-[2.5rem]"
-                style={{ color: secondary }}
-              >
-                {data[quoteIdx]?.author || ''}
-              </p>
-            </footer>
 
-            <div className="flexcenter">
-              {quoteIdx > 0 && (
-                <PrevQuoteButton
-                  onClick={() => {
-                    if (loading) return;
-                    setQuotes({ ...quotes, quoteIdx: quoteIdx - +(quoteIdx > 0) });
-                  }}
-                />
-              )}
-
-              {quoteIdx + 1 < data.length && (
-                <NextQuoteButton
-                  onClick={() => {
-                    if (loading) return;
-                    setQuotes({ ...quotes, quoteIdx: quoteIdx + +(quoteIdx + 1 < data.length) });
-                  }}
-                />
-              )}
-
-              {quoteIdx === data.length - 1 && (
-                <FetchQuoteButton
-                  onClick={() => {
-                    setQuotes({
-                      ...quotes,
-                      isFetch: quoteIdx >= data.length - 1,
-                      numPage: numPage + +(quoteIdx >= data.length - 1),
-                    });
-                  }}
-                />
-              )}
-            </div>
+            <p className="text-center text-[2rem] font-semibold italic lgmb:text-[2.5rem]" style={{ color: `${color}90` }}>
+              {`- ${data[quoteIdx]?.author} -` || ''}
+            </p>
           </div>
 
-          <div data-tour={step(2)} className="absolute top-12 right-20 cursor-pointer">
-            <Tooltip content="Shuffle">
-              <ShuffleIcon
-                width="45"
-                height="45"
-                onClick={() =>
-                  setQuotes({ ...quotes, quoteIdx: Math.floor(Math.random() * quotes.data.length) })
-                }
+          <div
+            className="flexcenter absolute -bottom-[7rem] left-1/2 w-[80%] -translate-x-1/2 !justify-around gap-4 rounded-[2rem] border-2 bg-zinc-800 p-4 lgmb:-bottom-12 lgmb:w-[40%]"
+            style={{ backgroundColor: bg }}
+          >
+            <PrevQuoteButton
+              disabled={!(quoteIdx > 0)}
+              onClick={() => {
+                if (loading) return;
+                setQuotes({ ...quotes, quoteIdx: quoteIdx - +(quoteIdx > 0) });
+              }}
+            />
+
+            <NextQuoteButton
+              disabled={!(quoteIdx + 1 < data.length)}
+              onClick={() => {
+                if (loading) return;
+                setQuotes({ ...quotes, quoteIdx: quoteIdx + +(quoteIdx + 1 < data.length) });
+              }}
+            />
+
+            {quoteIdx === data.length - 1 && (
+              <FetchQuoteButton
+                onClick={() => {
+                  setQuotes({
+                    ...quotes,
+                    isFetch: quoteIdx >= data.length - 1,
+                    numPage: numPage + +(quoteIdx >= data.length - 1),
+                  });
+                }}
               />
-            </Tooltip>
+            )}
+
+            <div data-tour={step(2)} className="cursor-pointer">
+              <Tooltip content="Shuffle">
+                <ShuffleIcon
+                  width="35"
+                  height="35"
+                  onClick={() => setQuotes({ ...quotes, quoteIdx: Math.floor(Math.random() * quotes.data.length) })}
+                />
+              </Tooltip>
+            </div>
           </div>
         </blockquote>
       )}

@@ -146,9 +146,7 @@ export const AccountInfo: FC = () => {
                 }}
               />
 
-              {!messageExpired && changePWMes.type === 'error' && (
-                <ErrorMessage content={changePWMes.message} />
-              )}
+              {!messageExpired && changePWMes.type === 'error' && <ErrorMessage content={changePWMes.message} />}
               {!messageExpired && changePWMes.type === 'success' && (
                 <div className="mt-4 w-full border-4 border-current text-center text-[3rem] font-bold">
                   {changePWMes.message}

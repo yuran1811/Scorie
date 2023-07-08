@@ -9,13 +9,13 @@ export interface CustomInputProps {
 }
 
 export const inputClass =
-  'text-[3rem] text-white bg-ctbg w-full min-w-[12rem] max-w-[32rem] my-[0.5rem] px-[1.8rem] py-[0.5rem] outline-none border-[0.5rem] border-solid border-transparent rounded-[2.4rem] isAnimated focus:border-current';
+  'typo isAnimated my-[0.5rem] w-full min-w-[12rem] max-w-[32rem] rounded-[2.4rem] border-[0.5rem] border-solid border-transparent bg-ctbg px-[1.8rem] py-[0.5rem] text-white outline-none focus:border-current';
 
 export const Input: FC<CustomInputProps & InputProps> = ({
   hasWrapper,
   formHandle,
-  className,
-  placeholder,
+  className = '',
+  placeholder = '',
   ...otherProps
 }) => {
   const { t } = useTranslation();
@@ -27,16 +27,16 @@ export const Input: FC<CustomInputProps & InputProps> = ({
           <input
             {...otherProps}
             {...formHandle}
-            placeholder={t(placeholder?.toLowerCase() || '')}
-            className={`${className || ''} ${inputClass}`}
+            placeholder={t(placeholder?.toLowerCase())}
+            className={`${inputClass} ${className}`}
           />
         </div>
       ) : (
         <input
           {...otherProps}
           {...formHandle}
-          placeholder={t(placeholder?.toLowerCase() || '')}
-          className={`${className || ''} ${inputClass}`}
+          placeholder={t(placeholder?.toLowerCase())}
+          className={`${inputClass} ${className}`}
         />
       )}
     </>
