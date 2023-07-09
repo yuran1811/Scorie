@@ -18,7 +18,14 @@ export const SettingInfo: FC = () => {
     unregister,
     handleSubmit,
     formState: { errors },
-  } = useForm<SettingsType>({ mode: 'onChange' });
+  } = useForm<SettingsType>({
+    mode: 'onChange',
+    values: {
+      numberFormat: settings.numberFormat,
+      maxRecentScoreNum: settings.maxRecentScoreNum,
+      showStartUpLogo: settings.showStartUpLogo,
+    },
+  });
 
   const onSubmit: SubmitHandler<SettingsType> = (data) => {
     setSettings({ ...settings, ...data });
@@ -35,10 +42,10 @@ export const SettingInfo: FC = () => {
     <div className="flexcentercol mt-8 h-4/5 w-full !justify-start overflow-y-auto overflow-x-hidden p-3 pb-8">
       <div className="w-full">
         <form className="flexcentercol mt-8" onSubmit={handleSubmit(onSubmit)}>
-          <span className="text-center text-[3.5rem] font-bold">{t('score format')} (9.xxxx)</span>
+          <span className="typo text-center font-bold">{t('score format')} (9.xxxx)</span>
           <div className="flexcenter w-4/5 flex-wrap">
             <Input
-              className="mx-4 flex-1"
+              className="mx-4 !max-w-xs flex-1"
               placeholder="Type a number"
               defaultValue={settings.numberFormat}
               inputMode="numeric"
@@ -52,13 +59,34 @@ export const SettingInfo: FC = () => {
                 }),
               }}
             />
-            <Button className="!text-[3rem]" content="Change" onClick={handleSubmit(onSubmit)} />
           </div>
           {errors?.numberFormat && <ErrorMessage content={errors.numberFormat.message || ''} />}
+
+          <span className="typo text-center font-bold">{t('num recent score record')}</span>
+          <div className="flexcenter w-4/5 flex-wrap">
+            <Input
+              className="mx-4 !max-w-xs flex-1"
+              placeholder="Type a number"
+              defaultValue={settings.maxRecentScoreNum}
+              inputMode="numeric"
+              formHandle={{
+                ...register('maxRecentScoreNum', {
+                  required: 'Please fill in this field',
+                  validate: {
+                    notEmpty: (v) => v.toString().trim().length !== 0 || 'Cannot be empty',
+                    isNumber: (v) => /^\d+$/.test(v.toString().trim()) || 'Not a number',
+                  },
+                }),
+              }}
+            />
+          </div>
+          {errors?.numberFormat && <ErrorMessage content={errors.numberFormat.message || ''} />}
+
+          <Button className="itypo-2sm" content="Change" onClick={handleSubmit(onSubmit)} />
         </form>
 
         <div
-          className="mt-12 cursor-pointer text-center !text-[3.5rem] font-bold"
+          className="typo mt-12 cursor-pointer text-center font-bold"
           onClick={() =>
             setSettings({
               ...settings,
@@ -67,7 +95,7 @@ export const SettingInfo: FC = () => {
           }
         >
           {t(settings.showStartUpLogo ? 'show startup logo' : 'hide startup logo')}
-          <div className="text-center !text-[2.5rem] !font-normal">{t('click to change')}</div>
+          <div className="typo-sm text-center !font-normal">{t('click to change')}</div>
         </div>
       </div>
     </div>

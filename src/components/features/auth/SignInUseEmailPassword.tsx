@@ -58,8 +58,8 @@ const SignInUseEmailPassWord = () => {
       {isNew ? (
         <CreateNewUser>
           <Divider className="!max-w-[40rem]">{t('already have account')}</Divider>
-          <Button content="Log in" onClick={() => setNew(false)}>
-            <ArrowLeftIcon className="mr-6" width="40" height="40" />
+          <Button className="itypo-sm" content="Log in" onClick={() => setNew(false)}>
+            <ArrowLeftIcon className="mr-6" width="32" height="32" />
           </Button>
         </CreateNewUser>
       ) : (
@@ -75,7 +75,7 @@ const SignInUseEmailPassWord = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <Input
-              className="!h-[68px] border-0 !bg-[#121726] !px-16 !tracking-widest"
+              className="itypo-3sm !h-[68px] !border-0 !bg-[#121726] !px-16 !tracking-wider"
               name="email"
               placeholder="Email"
               defaultValue=""
@@ -127,15 +127,15 @@ const SignInUseEmailPassWord = () => {
 
             {errMsg && <ErrorMessage content={errMsg} />}
 
-            <Button type="submit" content="Log in">
-              <LogInIcon className="mr-6" width="40" height="40" />
+            <Button className="itypo-sm" type="submit" content="Log in">
+              <LogInIcon className="mr-6" width="32" height="32" />
             </Button>
           </form>
 
           <Divider className="!max-w-[35rem]">{t('have no account')}</Divider>
 
-          <Button before={false} content="Create new account" onClick={() => setNew(true)}>
-            <ArrowRightIcon className="ml-6" width="40" height="40" />
+          <Button className="itypo-sm" before={false} content="Create new account" onClick={() => setNew(true)}>
+            <ArrowRightIcon className="ml-6" width="32" height="32" />
           </Button>
         </>
       )}

@@ -2,7 +2,8 @@ import { updateIdxList } from '@/services';
 import { NoteListType, NoteSectionProps } from '@/shared';
 import { useNoteStore, useStore } from '@/store';
 import { filterSectionList } from '@/utils';
-import { FC, memo, useCallback, useEffect, useState } from 'react';
+import { GradientUnderline } from '@cpns/interfaces';
+import { FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactSortable } from 'react-sortablejs';
 import { NoteItem } from './NoteItem';
@@ -28,6 +29,9 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
   const [timeoutId, setTimeoutId] = useState<any>();
   const [pinnedList, setPinnedList] = useState<NoteListType[]>([]);
   const [otherList, setOtherList] = useState<NoteListType[]>([]);
+
+  const filterPinnedList = filterSectionList(pinnedList, filter);
+  const filterOtherList = filterSectionList(otherList, filter);
 
   const onMoveHandle = useCallback(() => {
     clearTimeout(timeoutId);
@@ -86,8 +90,9 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
 
   return (
     <div className="mx-auto my-12 max-w-[100rem] pb-12 lgmb:w-[calc(100%-4rem)]">
-      <div className="typo-2xl mx-auto mb-8 w-[20rem] border-b-[0.2rem] border-indigo-100 text-center font-semibold ">
+      <div className="typo-2xl mx-auto mb-8 w-max text-center font-semibold">
         {t('pinned')}
+        <GradientUnderline />
       </div>
       <ReactSortable
         {...sortableConfig}
@@ -97,15 +102,20 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
         onMove={onMoveHandle}
         onEnd={onEndHandle}
       >
-        {filterSectionList(pinnedList, filter).map((item) => (
-          <div key={item.id}>
-            <NoteItem viewMode={viewMode} isShow={item.isShow} note={item} />
-          </div>
-        ))}
+        {!filterPinnedList.length ? (
+          <div className="typo-med m-4 w-full p-8 text-center font-bold">{t('no note')}</div>
+        ) : (
+          filterPinnedList.map((item) => (
+            <div key={item.id}>
+              <NoteItem viewMode={viewMode} isShow={item.isShow} note={item} />
+            </div>
+          ))
+        )}
       </ReactSortable>
 
-      <div className="typo-2xl mx-auto mb-8 mt-[7rem] w-[20rem] border-b-[0.2rem] border-indigo-100 text-center font-semibold">
+      <div className="typo-2xl mx-auto mb-8 mt-[7rem] w-max text-center font-semibold">
         {t('others')}
+        <GradientUnderline />
       </div>
       <ReactSortable
         {...sortableConfig}
@@ -115,11 +125,15 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
         onMove={onMoveHandle}
         onEnd={onEndHandle}
       >
-        {filterSectionList(otherList, filter).map((item) => (
-          <div key={item.id}>
-            <NoteItem viewMode={viewMode} isShow={item.isShow} note={item} />
-          </div>
-        ))}
+        {!filterOtherList.length ? (
+          <div className="typo-med m-4 w-full p-8 text-center font-bold">{t('no note')}</div>
+        ) : (
+          filterOtherList.map((item) => (
+            <div key={item.id}>
+              <NoteItem viewMode={viewMode} isShow={item.isShow} note={item} />
+            </div>
+          ))
+        )}
       </ReactSortable>
     </div>
   );

@@ -12,8 +12,8 @@ export const TourGuide = () => {
     <>
       <BookIcon
         className="mx-6 my-4 cursor-pointer"
-        width="40"
-        height="40"
+        width="32"
+        height="32"
         onClick={() => {
           setIsOpen(true);
           setCurrentStep(0);

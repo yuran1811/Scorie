@@ -48,25 +48,28 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
   return (
     <>
       <div
-        className={`${viewMode === 'list' ? 'mx-auto w-full lgmb:max-w-[calc(100%-4rem)]' : 'w-[20rem]'} ${
+        className={`${viewMode === 'list' ? 'mx-auto w-[95vw] medtab:max-w-[calc(100%-2rem)]' : 'w-[20rem]'} ${
           !isShow && '!hidden'
-        } isAnimated flexcentercol group relative cursor-pointer rounded-[2rem] border-[3px] border-transparent p-4 hover:border-white lgmb:!mx-0 lgmb:!max-w-none
-        medtab:w-[24rem]`}
+        } isAnimated flexcentercol group relative cursor-pointer rounded-[2rem] border-[3px] border-transparent hover:border-white medtab:!mx-0 medtab:w-[24rem]
+        medtab:!max-w-none`}
         style={noteStyle}
         onClick={() => setOpenDetail(true)}
       >
-        <div className="flexcenter">
+        <div className="flexcenter pt-4">
           {isPinned && <PinIcon className="mx-5" width="30" height="30" fill="#f87171" />}
           {isDone && <DoneIcon className="mx-4" width="30" height="30" fill="#eab308" />}
           {isInProgress && <ProgressIcon className="mx-4" width="30" height="30" fill="#cbd5e1" />}
         </div>
 
-        <div className="max-h-[25rem] w-full overflow-hidden">
-          <div className="typo-sm line-clamp-3 w-full p-2 text-center font-bold">{title}</div>
+        <div className="max-h-[45rem] w-full overflow-hidden p-4">
+          <div className="typo-sm line-clamp-3 w-full whitespace-normal break-words p-2 text-center font-bold">{title}</div>
           {data?.split && (
-            <div>
+            <div className="w-full">
               {data.split('\n').map((datum, idx) => (
-                <p key={datum + idx} className="typo-sm !select-none resize-none bg-transparent p-2 text-current">
+                <p
+                  key={datum + idx}
+                  className="typo-sm !select-none whitespace-normal break-words bg-transparent p-2 text-current"
+                >
                   {datum}
                 </p>
               ))}
@@ -75,7 +78,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
         </div>
 
         <div
-          className={`isAnimated flexcenter relative mt-12 max-h-0 w-full flex-wrap rounded-[3.5rem] bg-slate-800 p-3 opacity-0 group-hover:max-h-[12rem] group-hover:opacity-100 group-hover:delay-300 medtab:mt-6 medtab:group-hover:delay-[0ms] ${
+          className={`isAnimated flexcenter relative mt-12 max-h-0 w-full flex-wrap gap-4 rounded-b-[2rem] bg-slate-800 p-3 opacity-0 group-hover:max-h-[12rem] group-hover:opacity-100 group-hover:delay-300 medtab:mt-6 medtab:group-hover:delay-[0ms] ${
             openTheme ? 'max-h-[12rem] opacity-100' : 'overflow-hidden'
           }`}
           onClick={(e) => {
@@ -114,12 +117,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
             </Tippy>
           </div>
 
-          <Tooltip
-            content="Share"
-            options={{
-              delay: 400,
-            }}
-          >
+          <Tooltip content="Share" options={{ delay: 400 }}>
             <div
               className="flexcenter relative"
               onClick={() => {
@@ -144,13 +142,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
               />
             </div>
           </Tooltip>
-
-          <Tooltip
-            content="Pin note"
-            options={{
-              delay: 400,
-            }}
-          >
+          <Tooltip content="Pin note" options={{ delay: 400 }}>
             <PinIcon
               {...toolProps}
               className={`translate-x-[-0.6rem] delay-[0ms] ${toolClass} ${openTheme && '!translate-x-0 !opacity-100'}`}
@@ -164,13 +156,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
               }
             />
           </Tooltip>
-
-          <Tooltip
-            content="Is done"
-            options={{
-              delay: 400,
-            }}
-          >
+          <Tooltip content="Is done" options={{ delay: 400 }}>
             <DoneIcon
               {...toolProps}
               className={`translate-x-[0.6rem] delay-[12ms] ${toolClass} ${openTheme && '!translate-x-0 !opacity-100'}`}
@@ -184,13 +170,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
               }
             />
           </Tooltip>
-
-          <Tooltip
-            content="Is in progress"
-            options={{
-              delay: 400,
-            }}
-          >
+          <Tooltip content="Is in progress" options={{ delay: 400 }}>
             <ProgressIcon
               {...toolProps}
               className={`translate-x-[2rem] delay-[12ms] ${toolClass} ${openTheme && '!translate-x-0 !opacity-100'}`}
@@ -204,13 +184,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
               }
             />
           </Tooltip>
-
-          <Tooltip
-            content="Archive"
-            options={{
-              delay: 400,
-            }}
-          >
+          <Tooltip content="Archive" options={{ delay: 400 }}>
             <ArchiveIcon
               {...toolProps}
               className={`translate-x-[3rem] delay-[12ms] ${toolClass} ${openTheme && '!translate-x-0 !opacity-100'}`}

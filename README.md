@@ -8,7 +8,7 @@
 - Multi-locales (vi, en, and more in the future)
 - PWA available (can be used offline and added to homescreen, receive notifications)
 - Login with Google, Facebook, Email & Password
-- Plenty of features : quotes, scores, notes, ... (drag and drop, create / read / update / delete, share, ...)
+- Plenty of features : quotes, scores, notes, ... (drag and drop notes, create / read / update / delete, share, ...)
 - Analytics feature : Bar chart, Polar chart, Radar chart is out of the box
 - Other awesome tools : Predict the score, ...
 

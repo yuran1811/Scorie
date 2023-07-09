@@ -20,14 +20,14 @@ export const SearchBar: FC<SearchBarProps & InputProps> = ({ isHide = false, set
   return isHide ? (
     <></>
   ) : (
-    <div className="flexcenter relative mb-8 h-[6rem] w-4/5">
+    <div className="flexcenter relative my-4 mb-8 h-[6rem] w-4/5">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <input
           ref={inputRef}
-          className={`border-4 border-solid border-white text-[3rem] outline-none
+          className={`typo-sm border-4 border-solid border-white outline-none
 					${
             isActive
-              ? 'medtab:w-[36rem] h-[6rem] w-[28rem] rounded-none py-[0.8rem] pl-[2rem] pr-[5.5rem]'
+              ? 'h-[6rem] w-[100vw] rounded-none py-[0.8rem] pl-[2rem] pr-[5.5rem] medmb:w-[36rem]'
               : 'h-[5rem] w-[5rem] rounded-[5rem]'
           }`}
           style={{

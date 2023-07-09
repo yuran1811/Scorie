@@ -33,7 +33,7 @@ export interface CustomClearIndicatorProps extends ClearIndicatorProps<Option, f
 export const SelectControl = (props: ControlProps<Option, false>) => (
   <components.Control
     {...props}
-    className="!my-[0.5rem] !flex !w-full !max-w-[25rem] !items-center !justify-start !rounded-[2.5rem] !border-none !bg-ctbg !text-[3rem] !shadow-none !outline-none"
+    className="itypo !my-[0.5rem] !flex !w-full !max-w-[25rem] !items-center !justify-start !rounded-[2.5rem] !border-none !bg-ctbg !shadow-none !outline-none"
   />
 );
 
@@ -52,7 +52,7 @@ export const SelectInput = (props: InputProps<Option, false>) => (
     {...props}
     placeholder="Type"
     className="!block !w-full !p-0 !px-8"
-    inputClassName="!z-[-1] absolute left-0 right-0 !text-center !text-[3rem] !text-white !bg-ctbg !focus:bg-indigo-700"
+    inputClassName="!z-[-1] absolute left-0 right-0 !text-center itypo !text-white !bg-ctbg !focus:bg-indigo-700"
   />
 );
 
@@ -74,7 +74,7 @@ export const SelectMenuList = ({ children, ...otherProps }: MenuListProps<Option
 export const SelectOption = (props: OptionProps<Option, false>) => (
   <components.Option
     {...props}
-    className="!m-4 line-clamp-1 !h-[4.2rem] !w-[8rem] !cursor-pointer !rounded-[2rem] text-center !text-[2rem]"
+    className="itypo-2sm !m-4 line-clamp-1 !h-[4.2rem] !w-[8rem] !cursor-pointer !rounded-[2rem] text-center"
   />
 );
 

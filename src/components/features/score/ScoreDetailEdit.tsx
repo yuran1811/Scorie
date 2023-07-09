@@ -1,10 +1,10 @@
 import { editSubject } from '@/services';
-import { DivProps, ScoreDetailType, SubjectDetailType, ToastDefaultConfig } from '@/shared';
+import { DivProps, ScoreDetailType, SubjectDetailType } from '@/shared';
 import { useStore } from '@/store';
 import { successToast } from '@/utils';
 import { IgnoreIcon, TrashIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { Button, ConfirmBox, Input, ModalBox, ModalBoxHeader, TimeContainer } from '@cpns/shared';
+import { Button, ConfirmBox, FullScreenLoading, Input, ModalBox, ModalBoxHeader, TimeContainer } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
 import { Timestamp } from 'firebase/firestore';
 import { FC, useCallback, useEffect, useState } from 'react';
@@ -25,6 +25,7 @@ interface ScoreDetailProps {
 export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, score, scores, onClick }) => {
   const currentUser = useStore((s) => s.currentUser);
 
+  const [loading, setloading] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [scoreOptions, setScoreOptions] = useState({
     isIgnored: score && score?.isIgnored ? score.isIgnored : false,
@@ -35,7 +36,13 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
     unregister,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    values: {
+      base: '' + (score?.base || 1),
+      score: '' + (score?.value || 0),
+      type: score?.type || '',
+    },
+  });
 
   const removeScoreRecord = useCallback(() => {
     if (!currentUser || !currentUser?.uid || !subject?.id || !subject?.scores)
@@ -73,9 +80,12 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
 
       newscores.splice(scoreIdx, 1, scoreToEdit);
 
-      editSubject(currentUser.uid, subject.id, { scores: [...newscores] }).then(() => successToast());
+      setloading(true);
+      editSubject(currentUser.uid, subject.id, { scores: [...newscores] })
+        .then(() => successToast())
+        .finally(() => setloading(false));
     },
-    [scoreOptions]
+    [currentUser, scores, scoreOptions]
   );
 
   useEffect(() => {
@@ -92,8 +102,8 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
         <IgnoreIcon
           className="m-[0.6rem] mx-4 cursor-pointer lgmb:m-5"
           fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
-          width="40"
-          height="40"
+          width="32"
+          height="32"
           onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
         />
         <div className="custom-tippy">
@@ -112,21 +122,16 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
             )}
           >
             <div onClick={() => setShowConfirm((s) => !s)}>
-              <TrashIcon className="m-[0.6rem] mx-4 cursor-pointer text-slate-500 lgmb:m-5" width="40" height="40" />
+              <TrashIcon className="m-[0.6rem] mx-4 cursor-pointer text-slate-500 lgmb:m-5" width="32" height="32" />
             </div>
           </Tippy>
         </div>
       </ModalBoxHeader>
 
-      <TimeContainer
-        obj={{
-          createdAt: score?.createdAt,
-          updatedAt: score?.updatedAt,
-        }}
-      />
+      <TimeContainer className="text-ctcolor" obj={{ createdAt: score?.createdAt, updatedAt: score?.updatedAt }} />
 
       <form
-        className="flexcentercol line-clamp-1 w-full p-8 text-center text-[5rem] font-bold text-teal-700"
+        className="flexcentercol typo-3xl line-clamp-1 w-full p-8 text-center font-bold text-ctcolor"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
@@ -176,8 +181,10 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
         />
         {errors?.type && <ErrorMessage content={errors.type.message || ''} />}
 
-        <Button className="!text-[3rem]" type="submit" content="Update" />
+        <Button type="submit" content="Update" />
       </form>
+
+      {loading && <FullScreenLoading />}
     </ModalBox>
   );
 };

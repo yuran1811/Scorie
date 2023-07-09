@@ -4,7 +4,7 @@ import { useStore } from '@/store';
 import { getFirebaseErr, successToast } from '@/utils';
 import { NotVerifyEmail } from '@cpns/features/auth/NotVerifyEmail';
 import { LogOutIcon, ThreeDotsFade } from '@cpns/icons';
-import { ErrorMessage } from '@cpns/interfaces';
+import { ErrorMessage, GradientUnderline } from '@cpns/interfaces';
 import { Button, Input } from '@cpns/shared';
 import { FirebaseError } from 'firebase/app';
 import { sendPasswordResetEmail, signOut } from 'firebase/auth';
@@ -82,9 +82,9 @@ export const AccountInfo: FC = () => {
             </div>
           ) : (
             <div className={`flexcentercol scrollY mt-[0.6rem] h-4/5 !justify-start p-3 pb-16`}>
-              <form className="mb-14" onSubmit={handleSubmit(onSubmit)}>
+              <form className="mb-2" onSubmit={handleSubmit(onSubmit)}>
                 <Input
-                  className="!text-[4rem]"
+                  className="!max-w-sm"
                   name="displayName"
                   placeholder="Profile name"
                   defaultValue={currentUser?.displayName || t('guest')}
@@ -100,23 +100,25 @@ export const AccountInfo: FC = () => {
                 />
                 {errors?.displayName && <ErrorMessage content={errors.displayName.message || ''} />}
 
-                <Button type="submit" className="!text-[3.5rem]" content="Update profile" />
+                <Button className="itypo-2sm" type="submit" content="Update profile" />
+
+                <GradientUnderline />
               </form>
               {errMsg && <ErrorMessage content={errMsg} />}
 
               <Button
-                className="!text-[3.5rem]"
+                className="itypo-2sm"
                 before={false}
                 content="Log out"
                 onClick={() => {
                   signOut(auth);
                 }}
               >
-                <LogOutIcon className="ml-6" width="40" height="40" />
+                <LogOutIcon className="ml-6" width="32" height="32" />
               </Button>
 
               <Button
-                className="!text-[3.5rem]"
+                className="itypo-2sm"
                 content="Change password"
                 lineClamp="2"
                 disabled={!canChangePW}
@@ -148,9 +150,7 @@ export const AccountInfo: FC = () => {
 
               {!messageExpired && changePWMes.type === 'error' && <ErrorMessage content={changePWMes.message} />}
               {!messageExpired && changePWMes.type === 'success' && (
-                <div className="mt-4 w-full border-4 border-current text-center text-[3rem] font-bold">
-                  {changePWMes.message}
-                </div>
+                <div className="typo mt-4 w-full border-4 border-current text-center font-bold">{changePWMes.message}</div>
               )}
             </div>
           )}

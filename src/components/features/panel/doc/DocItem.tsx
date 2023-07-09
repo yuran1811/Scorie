@@ -24,11 +24,11 @@ export const DocItem: FC<DocItemProps> = ({ data: docItem }) => {
     <div className="flexcentercol" onClick={() => setActive((a) => !a)}>
       <div
         className={`${
-          active ? 'sticky top-0 left-0' : ''
-        } mb-8 flex w-full items-center justify-start rounded-[2rem] bg-ctbg p-6 text-[3.5rem] text-white`}
+          active ? 'sticky left-0 top-0' : ''
+        } typo-xl mb-8 flex w-full items-center justify-start rounded-[2rem] bg-ctbg p-6 text-white`}
       >
         {!active ? <ArrowRightIcon {...ArrowIconConfig} /> : <ArrowDownIcon {...ArrowIconConfig} />}
-        <span className="w-full font-semibold line-clamp-1">{t(docItem.title.toLowerCase())}</span>
+        <span className="line-clamp-1 w-full font-semibold">{t(docItem.title.toLowerCase())}</span>
       </div>
 
       {active && (

@@ -70,7 +70,7 @@ export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({ subjects })
   }, [subjectAverageScore]);
 
   return (
-    <div className="flexcentercol pb-6 text-center text-[9rem] font-bold">
+    <div className="flexcentercol pb-6 text-center text-[6.5rem] font-bold medmb:text-[7rem] medtab:text-[8.5rem]">
       {!subjectAverageScore.count ? (
         ''
       ) : (
@@ -78,7 +78,7 @@ export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({ subjects })
           <div className="w-full" style={{ color }}>
             {getAverageScoreString(subjectAverageScore, settings.numberFormat)}
           </div>
-          <div className="w-full text-[4rem] capitalize" style={{ color }}>
+          <div className="typo-3xl w-full capitalize" style={{ color }}>
             {t(averageScore.check(subjectAverageScore.total / subjectAverageScore.count))}
           </div>
         </>

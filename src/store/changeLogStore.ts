@@ -22,8 +22,7 @@ export const useChangeLogStore = create<StoreType>()(
         setChangeLogs: (changeLogs) => set({ changeLogs }),
 
         changeLogsRead: {},
-        setChangeLogsRead: (version, read) =>
-          set((s) => ({ changeLogsRead: { ...s.changeLogsRead, [version]: read } })),
+        setChangeLogsRead: (version, read) => set((s) => ({ changeLogsRead: { ...s.changeLogsRead, [version]: read } })),
       }),
       {
         name: CHANGE_LOG_STORE_NAME,

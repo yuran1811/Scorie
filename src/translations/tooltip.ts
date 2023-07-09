@@ -63,6 +63,10 @@ export default {
     vi: 'Thêm điểm mới',
     en: 'Add new score',
   },
+  'new subject': {
+    vi: 'Môn học mới',
+    en: 'New subject',
+  },
   'add new subject': {
     vi: 'Thêm môn học mới',
     en: 'Add new subject',
@@ -126,7 +130,7 @@ export default {
     en: 'Import note',
   },
   'new note': {
-    vi: 'Note mới',
+    vi: 'Ghi chú mới',
     en: 'New note',
   },
   'change theme': {

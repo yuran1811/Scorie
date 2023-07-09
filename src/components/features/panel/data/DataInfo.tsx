@@ -51,16 +51,14 @@ export const DataInfo: FC = () => {
     <div className="flexcentercol mt-[2rem] h-4/5 w-full !justify-start overflow-y-auto overflow-x-hidden p-3 pb-8">
       <div className="flexcenter w-full">
         <a href={backupData} download={backupData ? 'scorie_backup.json' : ''}>
-          <Button className="!text-[3rem]" content="Get backup data">
-            <DownloadIcon className="m-4" width="40" height="40" />
+          <Button className="itypo-2sm" content="Get backup data">
+            <DownloadIcon className="m-4" width="32" height="32" />
           </Button>
         </a>
       </div>
 
       <div className="flexcentercol mt-12 w-full">
-        <div className="p-4 text-center text-[3rem] font-semibold">
-          {t('import data from backup file')}
-        </div>
+        <div className="typo p-4 text-center font-semibold">{t('import data from backup file')}</div>
 
         <input
           ref={inputRef}
@@ -71,9 +69,7 @@ export const DataInfo: FC = () => {
           onChange={handleChange}
         />
 
-        {openModal && !loading && (
-          <Button className="!text-[3rem]" content="Import" onClick={() => saveToDB()} />
-        )}
+        {openModal && !loading && <Button content="Import" onClick={() => saveToDB()} />}
         {loading && (
           <div className="flexcenter my-6">
             <ThreeDotsFade />

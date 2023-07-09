@@ -3,6 +3,7 @@ import { ToolIcon } from '@cpns/icons/ToolIcon';
 import { useNavigate } from 'react-router-dom';
 import { Title } from '../main/sections/Title';
 import { ToolCard } from './ToolCard';
+import { scrollToTop } from '@/utils';
 
 export const ToolsSectionBar = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export const ToolsSectionBar = () => {
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="text-white" onClick={() => navigate(-1)} />
+        <BackIcon className="text-white" onClick={() => (navigate(-1), scrollToTop())} />
         <Title Icon={ToolIcon} content="Tools" />
       </div>
 

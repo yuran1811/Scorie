@@ -6,12 +6,11 @@ import { DocItem } from './DocItem';
 export const DocInfo: FC = () => (
   <div className="flexcentercol scrollY h-4/5 w-full !justify-start px-3 pb-8">
     <ul className="w-full">
-      <li className="my-8 space-y-8 rounded-3xl bg-slate-900 p-6 text-slate-50">
+      <li className="typo-med my-8 space-y-8 rounded-3xl bg-slate-900 p-6 text-slate-50">
         <div>
           <div className="mb-4 px-4 font-bold">Loading</div>
           <LoadingCollection />
         </div>
-
         <div>
           <div className="mb-4 px-4 font-bold">Icons</div>
           <IconCollection />

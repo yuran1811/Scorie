@@ -22,23 +22,21 @@ export const ConfirmBox: FC<ConfirmBoxProps & DivProps> = ({
   return createPortal(
     <div
       {...otherProps}
-      className={`isAnimated flexcenter absolute bottom-0 left-0 right-0 origin-top flex-wrap bg-ctcolor/50 p-2 backdrop-blur-lg ${className}`}
+      className={`isAnimated flexcenter absolute bottom-0 left-0 right-0 origin-top flex-wrap border-t border-ctcolor bg-ctbg/90 p-2 text-ctcolor ${className}`}
       onClick={(e) => e.stopPropagation()}
     >
       <div>
-        <div className="medtab:text-[3.5rem] mb-4 p-4 text-center text-[3rem] font-bold text-ctbg">
-          {t(content || 'default confirm')}
-        </div>
+        <div className="typo mb-4 p-4 text-center font-bold">{t(content || 'default confirm')}</div>
         <div className="flexcenter flex-wrap">
           <Button
-            className="!text-[3rem]"
+            className="itypo-sm"
             content="Cancel"
             onClick={() => {
               setConfirm(false);
             }}
           />
           <Button
-            className="!text-[3rem]"
+            className="itypo-sm"
             content="Confirm"
             onClick={() => {
               actionWhenConfirm().finally(() => {

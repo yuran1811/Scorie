@@ -64,10 +64,12 @@ const NoteImport: FC<NoteImportProps> = ({ setShowImport }) => {
     <div className="fullscreen flexcenter">
       <Overlay zIdx="z-[1]" onClick={() => setShowImport(false)} />
 
-      <div className="absolute z-[2] p-6">
-        <div className="typo-med m-6 p-2 text-center font-bold text-violet-400">{t('paste your shared content here')}</div>
+      <div className="absolute z-[2] m-4 text-violet-300">
+        <div className="typo-med m-6 p-2 text-center font-bold">{t('paste your shared content here')}</div>
         <div
-          className={`${isError ? 'bg-rose-400' : 'bg-indigo-200'} flexcenter h-[10rem] flex-wrap rounded-[3rem] px-6 py-2`}
+          className={`${
+            isError ? 'bg-rose-400' : 'bg-violet-600/80'
+          } flexcenter mx-auto h-[7rem] max-w-2xl rounded-[3.9rem] px-2`}
         >
           <div className="flex-1">
             <Input
@@ -75,8 +77,8 @@ const NoteImport: FC<NoteImportProps> = ({ setShowImport }) => {
               onChange={(e) => setInputValue(e.currentTarget.value)}
             />
           </div>
-          <div className="cursor-pointer pl-4" onClick={onClickHandle}>
-            <AddIcon width="50" height="50" fill="#4338ca" />
+          <div className="cursor-pointer px-4" onClick={onClickHandle}>
+            <AddIcon width="36" height="36" />
           </div>
         </div>
       </div>

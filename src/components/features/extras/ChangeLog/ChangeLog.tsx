@@ -13,9 +13,9 @@ export const ChangeLog = () => {
     <>
       <div className="relative">
         <MessageIcon
-          className="mx-6 my-4 cursor-pointer"
-          width="40"
-          height="40"
+          className="scale-typo mx-6 my-4 cursor-pointer"
+          width="32"
+          height="32"
           onClick={() => setOpenModal((s) => !s)}
         />
         <Badge className="!-top-4 !right-0 scale-90 bg-rose-600">{status.badges.changeLog}</Badge>

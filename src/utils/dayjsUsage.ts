@@ -5,9 +5,9 @@ export const formatDate = (timestamp: number) => {
   const date = new Date(timestamp);
   const formatter = dayjs(date);
 
-  if (dayjs().isSame(formatter, 'date')) return formatter.format('h:mm A');
-  if (dayjs().isSame(formatter, 'week')) return formatter.format('ddd h:mm A');
-  if (now.getFullYear() === date.getFullYear()) return formatter.format('MMM DD h:mm A');
+  if (dayjs().isSame(formatter, 'date')) return formatter.format('H:mm');
+  if (dayjs().isSame(formatter, 'week')) return formatter.format('ddd - H:mm');
+  // if (now.getFullYear() === date.getFullYear()) return formatter.format('DD/MM H:mm');
 
-  return formatter.format('DD MMM YYYY h:mm A');
+  return formatter.format('DD/MM/YYYY - H:mm');
 };

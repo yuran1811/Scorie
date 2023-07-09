@@ -6,6 +6,7 @@ import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input, ModalBox, ModalBoxHeader } from '@cpns/shared';
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 interface Inputs {
@@ -19,6 +20,8 @@ interface ScoreAddNewProps {
 
 export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onClickHandle }) => {
   const currentUser = useStore((s) => s.currentUser);
+
+  const { t } = useTranslation();
 
   const toastId = useRef<any>(null);
 
@@ -94,29 +97,29 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
         <StarIcon
           className="m-[0.6rem] mx-4 cursor-pointer lgmb:m-5"
           fill={!subjectOptions.isSpecial ? 'white' : '#d97706'}
-          width="40"
-          height="40"
+          width="32"
+          height="32"
           onClick={() => setSubjectOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
         />
         <ImportantIcon
           className="m-[0.6rem] mx-4 cursor-pointer lgmb:m-5"
-          fill={!subjectOptions.isVital ? 'white' : '#57534e'}
-          width="40"
-          height="40"
+          fill={!subjectOptions.isVital ? 'white' : '#94a3b8'}
+          width="32"
+          height="32"
           onClick={() => setSubjectOptions((s) => ({ ...s, isVital: !s.isVital }))}
         />
         <IgnoreIcon
           className="m-[0.6rem] mx-4 cursor-pointer lgmb:m-5"
           fill={!subjectOptions.isIgnored ? 'white' : '#0891b2'}
-          width="40"
-          height="40"
+          width="32"
+          height="32"
           onClick={() => setSubjectOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
         />
       </ModalBoxHeader>
 
-      <div className="line-clamp-1 w-full text-[4rem] text-indigo-900">New subject</div>
+      <div className="typo-med line-clamp-1 w-full">{t('new subject')}</div>
       <form
-        className="flexcentercol line-clamp-1 w-full p-8 text-center text-[5rem] font-bold text-teal-700"
+        className="flexcentercol typo-xl line-clamp-1 w-full p-8 text-center font-bold text-teal-700"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
@@ -134,7 +137,7 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
         />
         {errors?.subject && <ErrorMessage content={errors.subject.message || ''} />}
 
-        <Button className="!text-[3rem]" type="submit" content="Add" />
+        <Button type="submit" content="Add" />
       </form>
     </ModalBox>
   );

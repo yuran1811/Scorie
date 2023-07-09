@@ -62,10 +62,7 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
       )}
 
       {!loading && (
-        <form
-          className={`${loading ? '!hidden' : ''} flexcentercol mt-6 !justify-start`}
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className={`${loading ? '!hidden' : ''} flexcentercol mt-6 !justify-start`} onSubmit={handleSubmit(onSubmit)}>
           <Input
             name="displayName"
             placeholder="Name"
@@ -129,7 +126,7 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
 
           {errMsg && <ErrorMessage content={errMsg} />}
 
-          <Button type="submit" content="Create" />
+          <Button className="itypo-sm" type="submit" content="Create" />
         </form>
       )}
 

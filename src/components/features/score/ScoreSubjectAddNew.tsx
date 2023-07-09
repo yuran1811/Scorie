@@ -87,15 +87,15 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
         <IgnoreIcon
           className="mx-5 cursor-pointer"
           fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
-          width="40"
-          height="40"
+          width="32"
+          height="32"
           onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
         />
       </ModalBoxHeader>
 
-      <div className="line-clamp-1 w-full text-[4rem] text-indigo-900">{t('new record')}</div>
+      <div className="typo-med line-clamp-1 w-full text-ctcolor">{t('new record')}</div>
       <form
-        className="flexcentercol line-clamp-1 w-full p-8 text-center text-[5rem] font-bold text-teal-700"
+        className="flexcentercol typo-3xl line-clamp-1 w-full p-8 text-center font-bold text-ctcolor"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
@@ -160,7 +160,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
         />
         {errors?.type && <ErrorMessage content={errors.type.message || ''} />}
 
-        <Button className="!text-[3rem]" type="submit" content="Add" />
+        <Button type="submit" content="Add" />
       </form>
     </ModalBox>
   );

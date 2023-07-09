@@ -1,7 +1,7 @@
 import { useCollectionQuery } from '@/hooks';
 import { db, NoteListFilterType, NoteListType } from '@/shared';
 import { useNoteStore, useStore } from '@/store';
-import { getNoteList } from '@/utils';
+import { getNoteList, scrollToTop } from '@/utils';
 import {
   AddIcon,
   ArchiveIcon,
@@ -38,7 +38,7 @@ export const NoteSectionBar = () => {
     collection(db, 'users', currentUser?.uid as string, 'notes')
   );
 
-  const [viewMode, setViewMode] = useState('grid');
+  const [viewMode, setViewMode] = useState(window.innerWidth < 400 ? 'list' : 'grid');
   const [showImport, setShowImport] = useState(false);
   const [addNewOpen, setAddNewOpen] = useState(false);
   const [noteList, setNoteList] = useState<NoteListType[]>([]);
@@ -73,65 +73,42 @@ export const NoteSectionBar = () => {
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="text-white" onClick={() => navigate(-1)} />
+        <BackIcon className="scale-typo-sm text-white" onClick={() => (navigate(-1), scrollToTop())} />
         <Title Icon={NoteIcon} content="Note" />
-        <div className="flexcenter flex-wrap px-6 py-8">
-          <Tooltip
-            content="Filter done note"
-            options={{
-              delay: 400,
-            }}
-          >
+        <div className="flexcenter flex-wrap medmb:px-4 medmb:py-8">
+          <Tooltip content="Filter done note" options={{ delay: 400 }}>
             <DoneIcon
               className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasDone ? 'white' : '#fcd34d'}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasDone: !f.hasDone }))}
             />
           </Tooltip>
-
-          <Tooltip
-            content="Filter in progress note"
-            options={{
-              delay: 400,
-            }}
-          >
+          <Tooltip content="Filter in progress note" options={{ delay: 400 }}>
             <ProgressIcon
               className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasInProgress ? 'white' : '#38bdf8'}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasInProgress: !f.hasInProgress }))}
             />
           </Tooltip>
-
-          <Tooltip
-            content="Archived note"
-            options={{
-              delay: 400,
-            }}
-          >
+          <Tooltip content="Archived note" options={{ delay: 400 }}>
             <ArchiveIcon
               className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasArchived ? 'white' : '#94a3b8'}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasArchived: !f.hasArchived }))}
             />
           </Tooltip>
-
-          <Tooltip
-            content="Add note manually"
-            options={{
-              delay: 400,
-            }}
-          >
+          <Tooltip content="Add note manually" options={{ delay: 400 }}>
             <AddIcon
               className="mx-5 my-4 cursor-pointer"
               fill={'white'}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               onClick={() => setAddNewOpen(true)}
             />
           </Tooltip>
@@ -139,13 +116,8 @@ export const NoteSectionBar = () => {
           <div className="relative">
             {showImport && <NoteImport setShowImport={setShowImport} />}
             <div onClick={() => setShowImport(true)}>
-              <Tooltip
-                content="Import note"
-                options={{
-                  delay: 400,
-                }}
-              >
-                <ImportIcon className="mx-5 my-4 cursor-pointer" fill={'white'} width="40" height="40" />
+              <Tooltip content="Import note" options={{ delay: 400 }}>
+                <ImportIcon className="mx-5 my-4 cursor-pointer" fill={'white'} width="32" height="32" />
               </Tooltip>
             </div>
           </div>
@@ -153,14 +125,14 @@ export const NoteSectionBar = () => {
           <div className="block medtab:hidden">
             <ListIcon
               className={`${viewMode === 'list' ? 'block' : 'hidden'} mx-5 my-4 cursor-pointer`}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               onClick={() => setViewMode('grid')}
             />
             <ListAllIcon
               className={`${viewMode === 'grid' ? 'block' : 'hidden'} mx-5 my-4 cursor-pointer`}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               onClick={() => setViewMode('list')}
             />
           </div>
@@ -195,7 +167,7 @@ export const NoteSectionBar = () => {
       )}
 
       {!loading && !!noteList && !noteList.length && (
-        <div className="m-4 w-full p-8 text-center text-2xl font-bold">{t('no note')}</div>
+        <div className="typo-2xl m-4 w-full p-8 text-center font-bold">{t('no note')}</div>
       )}
 
       {!loading && !!noteList && !!noteList.length && <NoteSection viewMode={viewMode} filter={filter} notes={noteList} />}

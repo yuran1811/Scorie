@@ -14,8 +14,8 @@ export const ErrorContent: FC<ErrorContentProps> = ({ errorBoundaries = false })
 
   return (
     <div className="p-[5rem]">
-      <ErrorText className="medtab:text-[15rem] text-[7rem] lgmb:line-clamp-1">{t('oops')}</ErrorText>
-      <ErrorText className="medtab:text-[5rem] line-clamp-3 text-[4rem]">{t('something went wrong')}</ErrorText>
+      <ErrorText className="text-[7rem] lgmb:line-clamp-1 medtab:text-[15rem]">{t('oops')}</ErrorText>
+      <ErrorText className="line-clamp-3 text-[4rem] medtab:text-[5rem]">{t('something went wrong')}</ErrorText>
       <BackIcon
         className="!text-indigo-300"
         onClick={() => {

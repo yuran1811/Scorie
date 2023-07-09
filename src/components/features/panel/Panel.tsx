@@ -27,7 +27,7 @@ export const Panel: FC<DivProps> = ({ className = '' }) => {
       )}
 
       <div
-        className={`isAnimated fullscreen overflow-hidden bg-ctbg/10 px-12 py-20 text-ctcolor backdrop-blur-xl medtab:max-w-[50rem] ${
+        className={`isAnimated fullscreen overflow-hidden border-r-2 border-ctcolor bg-ctbg/60 px-12 py-20 text-ctcolor medtab:max-w-[50rem] ${
           active.isMenu ? 'translate-x-0' : 'translate-x-[-200%]'
         } ${className}`}
       >
@@ -40,7 +40,7 @@ export const Panel: FC<DivProps> = ({ className = '' }) => {
             />
           )}
 
-          <div className="mx-6 line-clamp-1 w-max max-w-full text-center text-[4rem] font-bold medtab:text-[4.3rem]">
+          <div className="typo-xl mx-6 line-clamp-1 w-max max-w-full p-4 text-center font-bold">
             {currentUser?.displayName ? currentUser.displayName : t('guest')}
           </div>
 
@@ -53,7 +53,7 @@ export const Panel: FC<DivProps> = ({ className = '' }) => {
           )}
         </div>
 
-        <div className="flexcentercol scrollY z-[1] h-3/5 w-full !justify-start gap-6 space-y-12 pb-24 text-[4rem] lgmb:h-4/5 lgmb:pb-14">
+        <div className="flexcentercol typo-2xl scrollY z-[1] h-3/5 w-full !justify-start gap-6 space-y-12 pb-24 lgmb:h-4/5 lgmb:pb-14">
           <AccountContainer />
           <DataContainer />
           <SettingContainer />

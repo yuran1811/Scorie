@@ -1,13 +1,13 @@
-import { DivProps, MAX_SCORE_RECENT_LTH, ScoreDetailType, SubjectDetailType } from '@/shared';
+import { DivProps, ScoreDetailType, SubjectDetailType } from '@/shared';
 import { useStore } from '@/store';
 import { averageScore as averageScoreStyle, getAverageScore, getAverageScoreString } from '@/utils';
 import { IgnoreIcon, ImportantIcon, StarIcon } from '@cpns/icons';
-import { SubjectDetail } from './SubjectDetail';
-import { useTranslation } from 'react-i18next';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { useTranslation } from 'react-i18next';
 import { A11y } from 'swiper';
 import 'swiper/css';
+import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { SubjectDetail } from './SubjectDetail';
 
 interface SubjectCardProps {
   isShow: boolean;
@@ -51,36 +51,19 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
       <div
         className={`${
           !isShow ? '!hidden' : ''
-        } medtab:max-w-[25rem] m-6 w-full cursor-pointer overflow-hidden rounded-[2.5rem] bg-violet-200 p-4 text-center font-bold text-rose-600`}
+        } m-6 w-full cursor-pointer overflow-hidden rounded-[2.5rem] bg-ctbg p-4 text-center font-bold text-ctcolor smtab:max-w-[25rem]`}
         onClick={() => setOpenDetail((s) => !s)}
       >
         <div className="flexcenter p-4">
-          <StarIcon
-            className="mx-4"
-            fill={subject && !subject.isSpecial ? 'white' : '#d97706'}
-            width="30"
-            height="30"
-          />
-          <ImportantIcon
-            className="mx-4"
-            fill={subject && !subject.isVital ? 'white' : '#57534e'}
-            width="30"
-            height="30"
-          />
-          <IgnoreIcon
-            className="mx-4"
-            fill={subject && !subject.isIgnored ? 'white' : '#0891b2'}
-            width="30"
-            height="30"
-          />
+          <StarIcon className="mx-4" fill={subject && !subject.isSpecial ? 'white' : '#d97706'} width="30" height="30" />
+          <ImportantIcon className="mx-4" fill={subject && !subject.isVital ? 'white' : '#94a3b8'} width="30" height="30" />
+          <IgnoreIcon className="mx-4" fill={subject && !subject.isIgnored ? 'white' : '#0891b2'} width="30" height="30" />
         </div>
 
         <div className="flexcentercol">
-          <div className="line-clamp-1 w-full text-center text-[3.5rem] font-bold text-teal-700">
-            {subject?.name || ''}
-          </div>
+          <div className="typo-lg line-clamp-1 w-full text-center font-bold text-ctcolor">{subject?.name || ''}</div>
           <div
-            className="my-4 line-clamp-1 max-w-full rounded-[1rem] px-6 text-center text-[6rem] font-bold"
+            className="my-4 line-clamp-1 max-w-full rounded-[1rem] border-4 border-violet-200 px-6 text-center text-[4.8rem] font-bold"
             style={{
               ...averageScoreStyle[averageScoreStyle.check(+averageScore)],
             }}
@@ -89,29 +72,27 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
           </div>
 
           {scores.length !== 0 && (
-            <div className="line-clamp-1 w-full px-8 text-left text-[3rem] font-bold text-slate-800">{t('recent')}</div>
+            <div className="typo-sm line-clamp-1 w-full px-4 text-left font-bold text-violet-200">{t('recent')}</div>
           )}
 
           {scores.length ? (
-            <ReactSwiper {...swiperOptions} className="flex w-full flex-row items-center text-sky-700">
+            <ReactSwiper {...swiperOptions} className="typo flex w-full flex-row items-center text-ctcolor">
               {scores
-                .slice(-MAX_SCORE_RECENT_LTH)
+                .slice(-settings.maxRecentScoreNum)
                 .reverse()
                 .map((_) => (
                   <SwiperSlide key={_.id}>
                     <div className="h-[6rem] w-[7rem] p-3 text-center">{_.value}</div>
                   </SwiperSlide>
                 ))}
-              {scores.length > MAX_SCORE_RECENT_LTH && (
+              {scores.length > settings.maxRecentScoreNum && (
                 <SwiperSlide>
                   <div className="h-[6rem] w-[7rem] p-3 text-center">...</div>
                 </SwiperSlide>
               )}
             </ReactSwiper>
           ) : (
-            <div className="line-clamp-1 w-full px-8 text-center text-[3rem] font-semibold text-slate-800">
-              No record
-            </div>
+            <div className="typo-3sm m-4 w-full p-8 text-center font-bold">{t('no record')}</div>
           )}
         </div>
       </div>

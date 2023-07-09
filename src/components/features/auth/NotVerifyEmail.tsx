@@ -35,13 +35,18 @@ export const NotVerifyEmail: FC = () => {
   }, []);
 
   return (
-    <div className="m-6 p-4 lgmb:p-10">
-      <div className="typo-med text-center font-semibold">{t('please verify your email before using this app')}</div>
-      <div className="typo mx-auto mt-10 w-full text-center lgmb:w-4/5">{t("we've sent you a verify link via email")}</div>
-      <div className="typo mx-auto mt-10 w-full text-center lgmb:w-4/5">
+    <div className="m-4 p-2">
+      <div className="typo text-center font-semibold">{t('please verify your email before using this app')}</div>
+      <div className="typo-2sm mx-auto mt-10 w-full text-center lgmb:w-4/5">
+        {t("we've sent you a verify link via email")}
+      </div>
+      <div className="typo-2sm mx-auto mt-10 w-full text-center lgmb:w-4/5">
+        {t('please refresh the app/page after verifying')}
+      </div>
+      <div className="typo-2sm mx-auto mt-10 w-full text-center lgmb:w-4/5">
         {t('please check all your mails carefully (our mail can be in spam by many reasons)')}
       </div>
-      <div className="typo mx-auto mt-10 w-full text-center lgmb:w-4/5">
+      <div className="typo-2sm mx-auto mt-10 w-full text-center lgmb:w-4/5">
         {t("or if you can't find any")},{' '}
         <span className="cursor-pointer font-semibold underline" onClick={() => reVerifyEmail(canResend, setCanResend)}>
           {t('click here and check your mail again')}

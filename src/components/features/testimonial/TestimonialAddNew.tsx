@@ -73,11 +73,11 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
 
   return (
     <form
-      className="flexcentercol mx-auto line-clamp-1 w-max max-w-[90%] p-2 text-center text-[5rem] font-bold text-teal-700 medmb:p-8"
+      className="flexcentercol mx-auto line-clamp-1 w-max max-w-[90%] p-2 text-center font-semibold text-teal-700 medmb:p-8"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
-        className="border-b-0 border-r-0 border-violet-600/30 bg-gray-900 focus:border-violet-400"
+        className="border-b-0 border-r-0"
         placeholder="Name"
         defaultValue={data ? data.name : ''}
         formHandle={{
@@ -91,7 +91,7 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
       {errors?.name && <ErrorMessage content={errors.name.message || ''} />}
 
       <Input
-        className="border-b-0 border-r-0 border-violet-600/30 bg-gray-900 focus:border-violet-400"
+        className="border-b-0 border-r-0"
         placeholder="Job"
         defaultValue={data ? data.job : ''}
         formHandle={{
@@ -106,19 +106,15 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
 
       <TextArea
         defaultValue={data ? data.content : ''}
-        className="max-h-[50rem] min-h-[10rem] border-b-0 border-r-0 border-violet-600/30 bg-gray-900 font-normal focus:border-violet-400"
+        bothClass="max-h-[50rem] min-h-[10rem] border-b-0 border-r-0 font-normal"
         formHandle={{ ...register('content') }}
       />
 
-      <Button
-        className="border-gray-900 bg-violet-400 !text-[3rem] text-gray-900 hover:border-violet-400 hover:bg-gray-900 hover:text-violet-400"
-        type="submit"
-        content="Send"
-      />
+      <Button type="submit" content="Send" />
 
       {openModal && (
         <ModalUI title={t('delete action')} onClick={() => deleteHandle()} cancelHandle={() => setOpenModal(false)}>
-          <p className="p-4 text-[3rem]">{t('this will delete your feedback')}</p>
+          <p className="typo-sm p-4">{t('this will delete your feedback')}</p>
         </ModalUI>
       )}
     </form>

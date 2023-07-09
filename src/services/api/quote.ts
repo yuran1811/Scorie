@@ -26,9 +26,7 @@ const { root, tags, maxLength } = {
 
 export const getRandomQuote = async (config: AxiosRequestConfig = {}) => {
   try {
-    const data: QuoteType = await getAxiosInst().get(
-      `${root}/random?tags=${tags.join('|')}&maxLength=${maxLength}`
-    );
+    const data: QuoteType = await getAxiosInst().get(`${root}/random?tags=${tags.join('|')}&maxLength=${maxLength}`);
     return data;
   } catch (error) {
     const err = error as AxiosError;

@@ -17,14 +17,14 @@ const AccountPanel: FC<DivProps> = ({ className = '' }) => {
     <div
       className={`${
         active.isAccount ? 'translate-y-0' : 'translate-y-[-200%]'
-      } isAnimated fullscreen medtab:max-w-[50rem] z-20 bg-vintage1-1/90 px-12 pb-14 pt-28 text-ctbg backdrop-blur-2xl ${className}`}
+      } isAnimated fullscreen z-20 bg-violet-800/95 px-12 pb-14 pt-28 text-ctcolor medtab:max-w-[50rem] ${className}`}
     >
-      <BackIcon className={className} onClick={() => setActive && setActive((s) => ({ ...s, isAccount: false }))} />
+      <BackIcon onClick={() => setActive && setActive((s) => ({ ...s, isAccount: false }))} />
 
       {currentUser ? (
         <AccountInfo />
       ) : (
-        <div className="h-4/5 w-full space-y-12 overflow-y-auto overflow-x-hidden">
+        <div className="h-4/5 w-full space-y-8 overflow-y-auto overflow-x-hidden">
           <SignInUseEmailPassWord />
           <Divider />
           <SignIn />

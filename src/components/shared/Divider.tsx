@@ -7,9 +7,11 @@ export const Divider: FC<DivProps> = ({ className = '', children }) => {
 
   return (
     <div
-      className={`flexcenter relative mx-auto w-full max-w-[17rem] text-center text-[3rem] font-semibold text-slate-900 before:absolute before:left-0 before:z-[-1] before:h-1 before:w-16 before:bg-slate-900 before:content-[""] after:absolute after:right-0 after:z-[-1] after:h-1 after:w-16 after:bg-slate-900 after:content-[""] ${className}`}
+      className={`flexcenter typo-sm relative mx-auto w-full max-w-[17rem] text-center font-semibold text-ctbg before:absolute before:left-0 before:right-0 before:z-[-1] before:h-[0.3rem] before:bg-ctbg before:content-[""]  ${className}`}
     >
-      <div className="w-max rounded-3xl bg-slate-900 px-4 text-white">{!!children ? children : t('or')}</div>
+      <div className="w-max rounded-3xl border-8 border-violet-800/95 bg-ctbg px-[1.2rem] py-2 text-white">
+        {!!children ? children : t('or')}
+      </div>
     </div>
   );
 };

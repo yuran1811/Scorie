@@ -7,7 +7,7 @@ export const ShareContainer = () => {
 
   return (
     <>
-      <ShareIcon className="mx-6 my-4 cursor-pointer" width="40" height="40" onClick={() => setOpenModal((s) => !s)} />
+      <ShareIcon className="mx-6 my-4 cursor-pointer" width="32" height="32" onClick={() => setOpenModal((s) => !s)} />
 
       {openModal && <QRCode onClick={() => setOpenModal(false)} />}
     </>

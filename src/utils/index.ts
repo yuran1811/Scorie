@@ -17,6 +17,8 @@ interface CmpObject extends Object {
   [key: string]: any;
 }
 
+export const scrollToTop = () => document.querySelector('#root > div')?.scroll({ top: 0, left: 0, behavior: 'smooth' });
+
 const isObject = (object: Object) => {
   return object != null && typeof object === 'object';
 };
@@ -32,8 +34,7 @@ export const deepObjectCompare = (a: CmpObject, b: CmpObject) => {
     const val2 = b[key];
 
     const areObjects = isObject(val1) && isObject(val2);
-    if ((areObjects && !deepObjectCompare(val1, val2)) || (!areObjects && val1 !== val2))
-      return false;
+    if ((areObjects && !deepObjectCompare(val1, val2)) || (!areObjects && val1 !== val2)) return false;
   }
 
   return true;

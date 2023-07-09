@@ -33,14 +33,14 @@ export const SignIn: FC = () => {
 
   return (
     <>
-      <div className="flexcenter medmb:flex-col mb-16 flex-1 flex-row flex-wrap gap-4">
+      <div className="flexcenter mb-16 flex-1 flex-row flex-wrap gap-4 medmb:flex-col">
         <LogInButton
           className="bg-slate-900 text-white"
           disabled={loading}
           onClick={() => handleSignIn(new GoogleAuthProvider())}
         >
           <GoogleIcon width="35" height="35" />
-          <span className="medmb:block hidden px-4 font-semibold">{t('sign in with')} GG</span>
+          <span className="hidden px-4 font-semibold medmb:block">{t('sign in with')} GG</span>
         </LogInButton>
 
         <LogInButton
@@ -49,7 +49,7 @@ export const SignIn: FC = () => {
           onClick={() => handleSignIn(new FacebookAuthProvider())}
         >
           <FacebookIcon width="35" height="35" />
-          <span className="medmb:block hidden px-4 font-semibold">{t('sign in with')} FB</span>
+          <span className="hidden px-4 font-semibold medmb:block">{t('sign in with')} FB</span>
         </LogInButton>
       </div>
 
@@ -57,7 +57,8 @@ export const SignIn: FC = () => {
         <ModalBox onClick={() => setIsAlertOpened(false)}>
           <ModalBoxHeader onClick={() => setIsAlertOpened(false)} />
 
-          <ErrorMessage className="px-8 pb-10" content="cannot sign in" />
+          <ErrorMessage className="px-8 pb-6" content="cannot sign in" />
+          <p className="typo-sm">Code:</p>
           <ErrorMessage className="px-8 pb-10" content={error} />
         </ModalBox>
       )}

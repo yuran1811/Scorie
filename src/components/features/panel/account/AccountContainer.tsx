@@ -5,7 +5,7 @@ import { DivProps } from '@shared/types';
 
 const AccountContainer: FC<DivProps> = ({ className }) => (
   <div className="flexcenter w-full">
-    <AccountBar className={`flexcenter w-full cursor-pointer ${className}`} />
+    <AccountBar className={`flexcenter w-full cursor-pointer gap-8 ${className}`} />
     <AccountPanel className={className} />
   </div>
 );

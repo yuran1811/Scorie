@@ -1,11 +1,12 @@
 import { ToastDefaultConfig } from '@shared/constants';
+import { t } from 'i18next';
 import { toast } from 'react-toastify';
 
 export const sharingHandle = async () => {
   const shareData = {
     url: 'https://scorie.vercel.app',
-    title: 'Scorie - A product of yuran1811',
-    text: 'Discover Scorie - A modern web app for better school life : ',
+    title: t('scorie - a product of yuran1811'),
+    text: t('discover scorie - a modern web app for better school life : '),
   };
 
   if (!('share' in navigator) || !navigator.canShare(shareData)) {

@@ -9,7 +9,7 @@ const hoverStyle = `cursor-pointer hover:translate-x-[-0.5rem] transition-all`;
 export const BackIcon: FC<DivProps> = ({ className = '', onClick }) => (
   <Tooltip content="Back">
     <div
-      className={`flexcenter relative mx-auto my-[0.6rem] h-[5.6rem] w-[5.6rem] !justify-start text-ctbg ${beforeStyle} ${afterStyle} ${hoverStyle} ${className}`}
+      className={`flexcenter relative mx-auto my-[0.6rem] h-[5.6rem] w-[5.6rem] !justify-start text-current ${beforeStyle} ${afterStyle} ${hoverStyle} ${className}`}
       onClick={onClick}
     >
       <span className="h-[0.8rem] w-full rounded-[1rem] bg-current" />

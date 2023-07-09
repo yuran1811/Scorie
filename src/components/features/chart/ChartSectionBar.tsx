@@ -1,5 +1,5 @@
 import { useStore } from '@/store';
-import { getChartData } from '@/utils';
+import { getChartData, scrollToTop } from '@/utils';
 import { ArrowRightIcon, BackIcon, ChartIcon, FlatLoading } from '@cpns/icons';
 import { Button } from '@cpns/shared';
 import { t as T } from 'i18next';
@@ -8,6 +8,7 @@ import { FC, Suspense, lazy, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Title } from '../main/sections/Title';
+import { GradientUnderline } from '@cpns/interfaces';
 
 const ApexChartWrapper = lazy(() => import('./ApexChart'));
 
@@ -112,7 +113,7 @@ export const ChartSectionBar: FC = () => {
   if (!scores.length)
     return (
       <div className="flexcentercol typo-med relative mx-auto w-full !justify-start text-white medtab:w-[70%]">
-        <div className="p-6 text-center font-semibold">{t('add scores and the chart will be shown')}</div>
+        <div className="typo-lg p-6 text-center font-semibold">{t('add scores and the chart will be shown')}</div>
         <Button
           content="Add scores"
           before={false}
@@ -127,15 +128,45 @@ export const ChartSectionBar: FC = () => {
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="text-white" onClick={() => navigate(-1)} />
+        <BackIcon className="text-white" onClick={() => (navigate(-1), scrollToTop())} />
         <Title Icon={ChartIcon} content="Analytics" />
-
-        <Button onClick={() => setChartUsed((s) => ({ ...s, bar: !s.bar }))} content="Bar" />
-        <Button onClick={() => setChartUsed((s) => ({ ...s, polar: !s.polar }))} content="Polar" />
-        <Button onClick={() => setChartUsed((s) => ({ ...s, radar: !s.radar }))} content="Radar" />
+        <div className="flexcenter flex-wrap gap-4 medmb:px-4 medmb:py-8">
+          <div className="flexcentercol relative">
+            <Button className="itypo-sm" onClick={() => setChartUsed((s) => ({ ...s, bar: !s.bar }))} content="bar chart" />
+            <div
+              className={`${
+                chartUsed.bar ? '!scale-100' : ''
+              } isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400`}
+            />
+          </div>
+          <div className="flexcentercol relative">
+            <Button
+              className="itypo-sm"
+              onClick={() => setChartUsed((s) => ({ ...s, polar: !s.polar }))}
+              content="polar chart"
+            />
+            <div
+              className={`${
+                chartUsed.polar ? '!scale-100' : ''
+              } isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400`}
+            />
+          </div>
+          <div className="flexcentercol relative">
+            <Button
+              className="itypo-sm"
+              onClick={() => setChartUsed((s) => ({ ...s, radar: !s.radar }))}
+              content="radar chart"
+            />
+            <div
+              className={`${
+                chartUsed.radar ? '!scale-100' : ''
+              } isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400`}
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="typo-4sm mx-auto my-8 flex w-full flex-col items-center justify-start">
+      <div className="typo-4sm mx-auto my-8 flex w-full flex-col items-center justify-start gap-20">
         {chartUsed.bar && (
           <Suspense fallback={<FlatLoading />}>
             <ApexChartWrapper data={{ series: srs.column, options: opts.column }} type="bar" />

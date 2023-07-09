@@ -15,7 +15,7 @@ export const TimeContainer: FC<TimeContainerProps & DivProps> = ({ obj, classNam
   const { t } = useTranslation();
 
   return (
-    <div className={`flexcentercol px-5 text-[2.5rem] font-bold text-ctbg lgmb:text-[3rem] ${className}`} {...props}>
+    <div className={`typo-2sm flexcentercol px-5 font-bold text-ctbg ${className}`} {...props}>
       {obj?.createdAt && (
         <div className="">
           {t('create')}: {formatDate(obj.createdAt.seconds * 1000)}

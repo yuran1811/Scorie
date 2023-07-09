@@ -77,15 +77,15 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
         <PinIcon
           className="mx-5 cursor-pointer"
           fill={!noteOptions.isPinned ? 'white' : '#f87171'}
-          width="40"
-          height="40"
+          width="32"
+          height="32"
           onClick={() => setNoteOptions((s) => ({ ...s, isPinned: !s.isPinned }))}
         />
         <DoneIcon
           className="mx-5 cursor-pointer"
           fill={!noteOptions.isDone ? 'white' : '#d97706'}
-          width="40"
-          height="40"
+          width="32"
+          height="32"
           onClick={() =>
             setNoteOptions((s) => ({
               ...s,
@@ -96,9 +96,9 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
         />
         <ProgressIcon
           className="mx-5 cursor-pointer"
-          fill={!noteOptions.isInProgress ? 'white' : '#57534e'}
-          width="40"
-          height="40"
+          fill={!noteOptions.isInProgress ? 'white' : '#94a3b8'}
+          width="32"
+          height="32"
           onClick={() =>
             setNoteOptions((s) => ({
               ...s,
@@ -111,7 +111,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 
       {status.type === 'errors' && <ErrorMessage className="mx-auto w-4/5 py-5 text-center" content={status.message} />}
 
-      <div className="typo-xl line-clamp-1 w-full text-indigo-900">{t('new note')}</div>
+      <div className="typo-xl line-clamp-1 w-full">{t('new note')}</div>
       <form
         className="flexcentercol typo-2xl line-clamp-1 w-full p-8 text-center font-bold text-teal-700"
         onSubmit={handleSubmit(onSubmit)}
@@ -129,7 +129,7 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
         />
         {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
-        <TextArea defaultValue="" className="font-normal" formHandle={{ ...register('data') }} />
+        <TextArea defaultValue="" bothClass="font-normal" formHandle={{ ...register('data') }} />
 
         <Button type="submit" content="Add" />
       </form>

@@ -19,9 +19,7 @@ window.addEventListener('load', () => {
 
   window.addEventListener('offline', () => {
     toast.warn(
-      t(
-        'the app is running offline, any changes mades during this time will be synced as soon as the connectivity is back'
-      ),
+      t('the app is running offline, any changes mades during this time will be synced as soon as the connectivity is back'),
       {
         ...ToastDefaultConfig,
         autoClose: false,

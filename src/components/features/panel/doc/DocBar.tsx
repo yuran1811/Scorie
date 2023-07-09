@@ -10,18 +10,9 @@ const DocBar: FC<DivProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div
-      {...props}
-      onClick={() =>
-        setActive &&
-        setActive((s) => ({
-          ...s,
-          isDoc: !active.isDoc,
-        }))
-      }
-    >
-      <BookIcon className="cursor-pointer text-ctbg" width="40" height="40" />
-      <div className="ml-6 font-bold line-clamp-1">{t('document')}</div>
+    <div {...props} onClick={() => setActive && setActive((s) => ({ ...s, isDoc: !active.isDoc }))}>
+      <BookIcon className="scale-typo cursor-pointer text-ctcolor" width="32" height="32" />
+      <div className="typo-med line-clamp-1 font-bold">{t('document')}</div>
     </div>
   );
 };

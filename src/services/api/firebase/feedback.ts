@@ -1,20 +1,11 @@
 import { db } from '@shared/firebase';
 import { TestimonialProps } from '@shared/types';
 import { FirebaseError } from 'firebase/app';
-import {
-  arrayRemove,
-  arrayUnion,
-  deleteDoc,
-  doc,
-  serverTimestamp,
-  setDoc,
-  updateDoc,
-} from 'firebase/firestore';
+import { arrayRemove, arrayUnion, deleteDoc, doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 
 export const addNewFeedback = async (userId: string, data: TestimonialProps) => {
   try {
-    if (!data.content.length && !data.job.length && !data.name.length)
-      await deleteDoc(doc(db, 'testimonials', userId));
+    if (!data.content.length && !data.job.length && !data.name.length) await deleteDoc(doc(db, 'testimonials', userId));
     else
       await setDoc(doc(db, 'testimonials', userId), {
         ...data,

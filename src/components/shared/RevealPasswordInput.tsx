@@ -26,12 +26,12 @@ export const RevealPasswordInput: FC<RevealPasswordInputProps & InputProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className="relative h-[68px] w-full max-w-[32rem] overflow-hidden rounded-[2rem]">
+    <div className="relative h-[68px] w-full max-w-[32rem] overflow-hidden rounded-[2.4rem]">
       <div className={`${inputContainerClass} bg-[#121726]`}>
         <input
           {...otherProps}
           {...formHandle}
-          className={`${inputClass} text-[2.4rem] tracking-widest text-[#575cba]`}
+          className={`placeholder:typo-3sm text-[2.8rem] tracking-widest text-[#575cba] placeholder:tracking-wider ${inputClass}`}
           type="password"
           placeholder={t(placeholder?.toLowerCase() || '')}
         />
@@ -45,7 +45,7 @@ export const RevealPasswordInput: FC<RevealPasswordInputProps & InputProps> = ({
         }}
       >
         <input
-          className={`${inputClass} text-[1.8rem] tracking-wider text-black`}
+          className={`typo-3sm tracking-wider text-black ${inputClass}`}
           type="text"
           value={inputValue}
           onChange={(e) => changeValue({ password: e.currentTarget.value })}

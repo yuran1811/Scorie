@@ -19,7 +19,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <AppStatusProvider>
       <div
-        className="fullsize after:fullscreen relative z-0 overflow-x-hidden text-[3rem] text-white after:z-[-1] after:bg-[#00000099] after:backdrop-blur-lg"
+        className="fullsize after:fullscreen typo relative z-0 overflow-x-hidden text-white after:z-[-1] after:bg-[#00000099] after:backdrop-blur-lg"
         style={{
           background: 'url(/bg.jpg) no-repeat fixed',
           backgroundClip: 'content-box',
@@ -28,7 +28,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
         }}
       >
         <Header />
-        <div className="relative left-0 top-0 h-[--header-height-sm] w-full medmb:h-[--header-height]" />
+        <div className="header-h relative left-0 top-0 w-full" />
         <>
           {children}
           {/* {<PostPreview />} */}
@@ -47,7 +47,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
       {false && !status.isRun && (
         <div className="fullscreen flexcenter z-[100] bg-slate-900/90">
           <button
-            className="text-center text-[5rem] font-bold text-white"
+            className="typo-3xl text-center font-bold text-white"
             onClick={() => {
               setStatus({ isRun: true });
               setCurrentStep(0);

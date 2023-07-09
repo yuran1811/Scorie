@@ -35,35 +35,35 @@ export const FeatureSection: FC = () => {
 
       <div className="flexcenter my-12 w-full flex-wrap py-8">
         <FeatureCard
-          className="bg-gradient-to-tl from-[#5f2c8296] to-[#49a09d96] backdrop-blur-sm"
+          className="bg-gradient-to-tl from-[#5f2c8296] to-[#49a09d96]"
           title="Note"
           onClick={() => navigate('/notes')}
         >
-          <div className="px-6 py-4 lgmb:p-8">{t('ideal place to keep your mind on')}</div>
+          <div className="p-2 medmb:px-6 medmb:py-4 lgmb:p-6">{t('ideal place to keep your mind on')}</div>
         </FeatureCard>
 
         <FeatureCard
-          className="bg-gradient-to-tl from-[#e9644396] to-[#904e9596] backdrop-blur-sm"
+          className="bg-gradient-to-tl from-[#e9644396] to-[#904e9596]"
           title="Score"
           onClick={() => navigate('/subjects')}
         >
-          <div className="px-6 py-4 lgmb:p-8">{t('manage all your score records')}</div>
+          <div className="p-2 medmb:px-6 medmb:py-4 lgmb:p-6">{t('manage all your score records')}</div>
         </FeatureCard>
 
         <FeatureCard
-          className="bg-gradient-to-tl from-[#FC466B96] to-[#8056ca96] backdrop-blur-sm"
+          className="bg-gradient-to-tl from-[#FC466B96] to-[#8056ca96]"
           title="Analytics"
           onClick={() => navigate('/analytics')}
         >
-          <div className="px-6 py-4 lgmb:p-8">{t('variant useful charts')}</div>
+          <div className="p-2 medmb:px-6 medmb:py-4 lgmb:p-6">{t('variant useful charts')}</div>
         </FeatureCard>
 
         <FeatureCard
-          className="bg-gradient-to-tl from-[#71B28096] to-[#56B4D396] backdrop-blur-sm"
+          className="bg-gradient-to-tl from-[#71B28096] to-[#56B4D396]"
           title="Tools"
           onClick={() => navigate('/tools')}
         >
-          <div className="px-6 py-4 lgmb:p-8">{t('helpful tools make school life be better')}</div>
+          <div className="p-2 medmb:px-6 medmb:py-4 lgmb:p-6">{t('helpful tools make school life be better')}</div>
         </FeatureCard>
       </div>
 

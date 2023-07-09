@@ -26,7 +26,7 @@ export const ScoreContainer: FC<ScoreContainerProps> = ({ viewMode, subject, typ
       <>
         {typeList.map((_) => (
           <div key={_} className="mb-16 mt-6 w-full">
-            <div className="ml-6 w-full border-l-[1rem] border-current text-left indent-[3rem] text-[4rem]">{_}</div>
+            <div className="typo-med ml-6 w-full border-l-4 border-current text-left indent-8">{_}</div>
             <div className="flexcenter ml-6 w-full flex-wrap !justify-start">
               {subject &&
                 subject.scores

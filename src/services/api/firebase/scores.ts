@@ -1,22 +1,10 @@
 import { db, ScoreDetailType, SubjectDetailType } from '@/shared';
 import { getFirebaseErr } from '@/utils';
 import { FirebaseError } from 'firebase/app';
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  serverTimestamp,
-  Timestamp,
-  updateDoc,
-} from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
 
-export const validateSubjectOption = (opt: {
-  isIgnored: boolean;
-  isSpecial: boolean;
-  isVital: boolean;
-}) => opt.isIgnored && (opt.isSpecial || opt.isVital);
+export const validateSubjectOption = (opt: { isIgnored: boolean; isSpecial: boolean; isVital: boolean }) =>
+  opt.isIgnored && (opt.isSpecial || opt.isVital);
 
 export const addNewScore = async (userId: string, subjectId: string, data: ScoreDetailType) => {
   try {

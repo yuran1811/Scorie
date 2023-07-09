@@ -1,12 +1,7 @@
 import { auth, db } from '@/shared';
 import { getFirebaseErr } from '@/utils';
 import { FirebaseError } from 'firebase/app';
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-  updateProfile,
-  User,
-} from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile, User } from 'firebase/auth';
 import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 
 export const sendVerifyEmail = async (user: User) => {

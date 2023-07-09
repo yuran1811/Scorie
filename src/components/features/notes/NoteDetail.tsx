@@ -4,7 +4,7 @@ import { useNoteStore, useStore } from '@/store';
 import { shallowObjectCompare, successToast } from '@/utils';
 import { ArchiveIcon, CloseIcon, DoneIcon, PinIcon, ProgressIcon, TrashIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { ConfirmBox, Input, TextArea, TimeContainer } from '@cpns/shared';
+import { ConfirmBox, FullScreenLoading, Input, TextArea, TimeContainer } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -30,6 +30,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
   const currentUser = useStore((s) => s.currentUser);
   const noteIdxList = useNoteStore((s) => s.noteIdxList);
 
+  const [loading, setLoading] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [status, setStatus] = useState({ type: 'ok', message: '' });
   const [noteOptions, setNoteOptions] = useState({ isDone, isInProgress, isArchived, isPinned });
@@ -39,7 +40,21 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
     unregister,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    values: {
+      title: note?.title || '',
+      data: note?.data || '',
+    },
+  });
+
+  const onSubmit: SubmitHandler<Inputs> = (data: any) => {
+    updateNote({ ...data });
+  };
+
+  const removeNote = () => {
+    if (!currentUser || !currentUser?.uid || !id) return new Promise((res, rej) => rej('Failed'));
+    return deleteNote(currentUser.uid, id, noteIdxList.id);
+  };
 
   const updateNote = useCallback(
     (data: any) => {
@@ -66,6 +81,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         data: data.data.trim(),
       } as NoteDetailType;
 
+      setLoading(true);
       editNote(currentUser.uid, id, noteToEdit)
         .then(() => {
           successToast();
@@ -74,18 +90,11 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         })
         .catch(() => {
           setStatus({ type: 'errors', message: 'Fail to update' });
-        });
+        })
+        .finally(() => setLoading(false));
     },
-    [note, noteOptions]
+    [currentUser, noteIdxList, note, noteOptions]
   );
-  const removeNote = () => {
-    if (!currentUser || !currentUser?.uid || !id) return new Promise((res, rej) => rej('Failed'));
-    return deleteNote(currentUser.uid, id, noteIdxList.id);
-  };
-
-  const onSubmit: SubmitHandler<Inputs> = (data: any) => {
-    updateNote({ ...data });
-  };
 
   useEffect(() => {
     return () => {
@@ -95,17 +104,18 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
   }, []);
 
   return createPortal(
-    <form className="fullscreen scrollY text-center" style={noteStyle} onSubmit={handleSubmit(onSubmit)}>
-      <div
-        className="sticky left-0 right-0 top-0 flex items-center justify-between p-8"
-        style={{ backgroundColor: noteStyle.backgroundColor }}
-      >
-        <div className="flexcenter w-full flex-wrap lgmb:pl-24">
+    <form
+      className="fullscreen scrollY flex flex-col items-center justify-between px-6 py-8 text-center medtab:px-16"
+      style={noteStyle}
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="flexcenter mb-4 w-full px-4" style={{ backgroundColor: noteStyle.backgroundColor }}>
+        <div className="flexcenter w-full flex-wrap">
           <PinIcon
             className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isPinned ? 'white' : '#f87171'}
-            width="40"
-            height="40"
+            width="32"
+            height="32"
             onClick={() =>
               setNoteOptions((s) => ({
                 ...s,
@@ -117,8 +127,8 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
           <ArchiveIcon
             className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isArchived ? 'white' : '#94a3b8'}
-            width="40"
-            height="40"
+            width="32"
+            height="32"
             onClick={() =>
               setNoteOptions((s) => ({
                 ...s,
@@ -130,8 +140,8 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
           <DoneIcon
             className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isDone ? 'white' : '#d97706'}
-            width="40"
-            height="40"
+            width="32"
+            height="32"
             onClick={() =>
               setNoteOptions((s) => ({
                 ...s,
@@ -143,8 +153,8 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
           <ProgressIcon
             className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isInProgress ? 'white' : '#9ca3af'}
-            width="40"
-            height="40"
+            width="32"
+            height="32"
             onClick={() =>
               setNoteOptions((s) => ({
                 ...s,
@@ -177,17 +187,17 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         </div>
 
         <button type="submit">
-          <CloseIcon className="mx-4 cursor-pointer text-rose-600" width="40" height="40" />
+          <CloseIcon className="mr-4 cursor-pointer text-rose-600" width="32" height="32" />
         </button>
       </div>
 
       {status.type === 'errors' && <ErrorMessage className="p-6" content={status.message} />}
 
-      <div className="flexcentercol h-[calc(100%-14rem)] px-8 pb-8 medtab:h-[calc(100%-12rem)]">
+      <div className="mx-auto flex h-full w-full max-w-[86rem] flex-col items-center justify-start text-left medmb:px-8 medmb:pb-8">
         <TimeContainer obj={{ updatedAt }} style={noteStyle} />
 
         <Input
-          className="!max-w-full !rounded-[0.8rem] !border-2 text-center !font-bold medtab:!max-w-[100rem]"
+          className="!max-w-full !rounded-[0] !border-0 !border-b-[1px] !p-0 !pl-4 !font-bold"
           style={noteStyle}
           defaultValue={title}
           formHandle={{
@@ -201,12 +211,16 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
         <TextArea
-          className="!h-full !max-w-full !rounded-[0.8rem] !border-2 px-6 text-left medtab:!max-w-[100rem]"
+          textareaClass="!pl-4 !border-l-[1px]"
+          bothClass="!m-0 !h-full !w-full !max-w-full !resize-none !rounded-[0] !border-0 !p-0"
           style={noteStyle}
           defaultValue={data}
           formHandle={{ ...register('data') }}
+          showIndicator={false}
         />
       </div>
+
+      {loading && <FullScreenLoading />}
     </form>,
     document.getElementById('modal-container') as HTMLElement
   );

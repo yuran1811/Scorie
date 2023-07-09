@@ -7,7 +7,7 @@ export const WelcomBanner: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <div className="flexcentercol mb-36 w-full space-y-16 pt-8">
-      <div className="typo-lg w-full text-center font-bold medtab:px-2">
+      <div className="typo-xl w-full text-center font-bold medtab:px-2">
         {t('welcome')}, {children}!
       </div>
 

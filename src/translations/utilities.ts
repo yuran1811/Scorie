@@ -145,11 +145,10 @@ const workerTranslation = {
     vi: 'Không thể đăng kí service workers để tải về ứng dụng. Vui lòng tải lại trang!',
     en: 'Cannot regist service workers. Reload and try again!',
   },
-  'the app is running offline, any changes mades during this time will be synced as soon as the connectivity is back':
-    {
-      vi: 'Ứng dụng đang hoạt động ngoại tuyến, bất kì sự thay đổi dữ liệu nào trong suốt quá trình này đều sẽ được đồng bộ sớm nhất có thể khi trở lại trực tuyến',
-      en: 'The app is running offline, any changes mades during this time will be synced as soon as the connectivity is back',
-    },
+  'the app is running offline, any changes mades during this time will be synced as soon as the connectivity is back': {
+    vi: 'Ứng dụng đang hoạt động ngoại tuyến, bất kì sự thay đổi dữ liệu nào trong suốt quá trình này đều sẽ được đồng bộ sớm nhất có thể khi trở lại trực tuyến',
+    en: 'The app is running offline, any changes mades during this time will be synced as soon as the connectivity is back',
+  },
 };
 
 const testimonialTranslation = {
@@ -174,8 +173,12 @@ const statusTranslation = {
     en: 'No note',
   },
   'no subject': {
-    vi: 'Không có môn học nào được lưu điểm cả',
+    vi: 'Không có môn học nào ở đây hết',
     en: 'No subject',
+  },
+  'no record': {
+    vi: 'Không có bản ghi nào ở đây hết',
+    en: 'No record',
   },
 
   'log in required': {
@@ -211,6 +214,10 @@ const statusTranslation = {
   "we've sent you a verify link via email": {
     vi: 'Chúng tôi đã gửi mail cho bạn đường dẫn để xác thực ứng dụng',
     en: "We've sent you a verify link via email",
+  },
+  'please refresh the app/page after verifying': {
+    vi: 'Hãy khởi động lại ứng dụng sau khi xác thực',
+    en: 'Please refresh the app/page after verifying',
   },
   'please check all your mails carefully (our mail can be in spam by many reasons)': {
     vi: 'Hãy kiểm tra thật kĩ gmail của bạn (vì một số lí do, mail của chúng tôi có thể đã bị đánh dấu là spam)',
@@ -282,9 +289,24 @@ const chartTranslation = {
     vi: 'Biểu đồ cực',
     en: 'Polar Chart',
   },
+  'polararea chart': {
+    vi: 'Biểu đồ cực',
+    en: 'Polar Chart',
+  },
   'radar chart': {
     vi: 'Biểu đồ radar',
     en: 'Radar Chart',
+  },
+};
+
+const pwaFunc = {
+  'scorie - a product of yuran1811': {
+    vi: 'Scorie - Một sản phẩm của yuran1811',
+    en: 'Scorie - A product of yuran1811',
+  },
+  'discover scorie - a modern web app for better school life : ': {
+    vi: 'Khám phá Scorie - Ứng dụng hiện đại & miễn phí tăng trải nghiệm học tập: ',
+    en: 'Discover Scorie - A modern & free web app for better school life : ',
   },
 };
 
@@ -298,6 +320,7 @@ export default {
   ...testimonialTranslation,
   ...workerTranslation,
   ...chartTranslation,
+  ...pwaFunc,
 
   'sign in with': {
     vi: 'Đăng nhập với',
@@ -328,7 +351,7 @@ export default {
     en: 'Update',
   },
   'update profile': {
-    vi: 'Cập nhật thông tin',
+    vi: 'Cập nhật hồ sơ',
     en: 'Update profile',
   },
   change: {
@@ -475,7 +498,7 @@ export default {
   },
 
   'ideal place to keep your mind on': {
-    vi: 'Quá nhiều ý tưởng trong đầu? Giữ chúng tại đây!',
+    vi: 'Quá nhiều ý tưởng? Lưu giữ ngay!',
     en: 'Ideal place to keep your mind on',
   },
   'manage all your score records': {
@@ -487,7 +510,7 @@ export default {
     en: 'Variant useful charts',
   },
   'helpful tools make school life be better': {
-    vi: 'Công cụ giúp ích cho bạn trong quá trình học tập',
+    vi: 'Công cụ giúp ích trong quá trình học tập',
     en: 'Helpful tools make school life be better',
   },
 } as TranslationType;

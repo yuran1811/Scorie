@@ -10,18 +10,9 @@ const DataBar: FC<DivProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <div
-      {...props}
-      onClick={() =>
-        setActive &&
-        setActive((s) => ({
-          ...s,
-          isData: !active.isData,
-        }))
-      }
-    >
-      <ProgressIcon className="cursor-pointer text-ctbg" width="40" height="40" />
-      <div className="ml-6 font-bold line-clamp-1">{t('data')}</div>
+    <div {...props} onClick={() => setActive && setActive((s) => ({ ...s, isData: !active.isData }))}>
+      <ProgressIcon className="scale-typo cursor-pointer text-ctcolor" width="32" height="32" />
+      <div className="typo-med line-clamp-1 font-bold">{t('data')}</div>
     </div>
   );
 };

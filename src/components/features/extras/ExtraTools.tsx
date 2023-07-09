@@ -85,9 +85,9 @@ export const ExtraTools: FC = () => {
       >
         <div className="relative flex h-[5.5rem] w-[9.5rem] items-center justify-end">
           <Avatar
-            className="absolute right-0 mx-8 cursor-pointer medmb:scale-125"
+            className="header-h-scale absolute right-0 mx-8 cursor-pointer"
             imgUrl=""
-            radius="4rem"
+            radius="3.5rem"
             onClick={() => setShowMore((a) => !a)}
           />
           <Badge className="scale-75" showIndicator={false}>

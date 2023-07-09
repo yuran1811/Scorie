@@ -1,7 +1,7 @@
 import { useCollectionQuery } from '@/hooks';
 import { db, SubjectDetailType, SubjectListFilterType } from '@/shared';
 import { useStore } from '@/store';
-import { filterScoreList, standardizeCollectionData } from '@/utils';
+import { filterScoreList, scrollToTop, standardizeCollectionData } from '@/utils';
 import { AddIcon, BackIcon, FlatLoading, HashtagIcon, IgnoreIcon, ImportantIcon, StarIcon } from '@cpns/icons';
 import { SearchBar, Tooltip } from '@cpns/shared';
 import { collection } from 'firebase/firestore';
@@ -50,6 +50,8 @@ export const ScoreSectionBar = () => {
     return subjectsToUse;
   }, [data]);
 
+  const subjectFilterList = filterScoreList(subjects, filter);
+
   useEffect(() => {
     setFilter((s) => ({
       ...s,
@@ -64,9 +66,9 @@ export const ScoreSectionBar = () => {
       <SubjectAverage subjects={subjects.map((_) => _.subject)} />
 
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="text-white" onClick={() => navigate(-1)} />
+        <BackIcon className="scale-typo-sm text-white" onClick={() => (navigate(-1), scrollToTop())} />
         <Title Icon={HashtagIcon} content="Score" />
-        <div className="flexcenter flex-wrap px-6 py-8">
+        <div className="flexcenter flex-wrap medmb:px-4 medmb:py-8">
           <Tooltip
             content="Special subject"
             options={{
@@ -76,8 +78,8 @@ export const ScoreSectionBar = () => {
             <StarIcon
               className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasSpecial ? 'white' : '#fcd34d'}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasSpecial: !f.hasSpecial }))}
             />
           </Tooltip>
@@ -91,8 +93,8 @@ export const ScoreSectionBar = () => {
             <ImportantIcon
               className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasVital ? 'white' : '#38bdf8'}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasVital: !f.hasVital }))}
             />
           </Tooltip>
@@ -101,8 +103,8 @@ export const ScoreSectionBar = () => {
             <IgnoreIcon
               className="mx-5 my-4 cursor-pointer"
               fill={!filter.hasIgnored ? 'white' : '#0891b2'}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasIgnored: !f.hasIgnored }))}
             />
           </Tooltip>
@@ -111,8 +113,8 @@ export const ScoreSectionBar = () => {
             <AddIcon
               className="mx-5 my-4 cursor-pointer"
               fill={'white'}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               onClick={() => setAddNewOpen(true)}
             />
           </Tooltip>
@@ -140,7 +142,7 @@ export const ScoreSectionBar = () => {
       </div>
 
       {!loading && subjects !== null && subjects.length === 0 && (
-        <div className="m-4 w-full p-8 text-center text-[5rem] font-bold">{t('no subject')}</div>
+        <div className="typo-3xl m-4 w-full p-8 text-center font-bold">{t('no subject')}</div>
       )}
 
       {loading ? (
@@ -150,9 +152,11 @@ export const ScoreSectionBar = () => {
       ) : (
         <div className="mx-auto mt-4 w-full max-w-[200rem] rounded-[2rem] p-4">
           <div className="flex w-full flex-wrap items-start justify-center">
-            {filterScoreList(subjects, filter).map((item) => (
-              <SubjectCard key={item.id} isShow={item.isShow} subject={item} />
-            ))}
+            {!subjectFilterList.length && subjects.length ? (
+              <div className="typo-med m-4 w-full p-8 text-center font-bold">{t('no subject')}</div>
+            ) : (
+              subjectFilterList.map((item) => <SubjectCard key={item.id} isShow={item.isShow} subject={item} />)
+            )}
           </div>
         </div>
       )}

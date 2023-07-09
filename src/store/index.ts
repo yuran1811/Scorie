@@ -1,10 +1,4 @@
-import {
-  QuoteStoreType,
-  QUOTES_STORED_DEFAULT,
-  SettingsType,
-  SETTINGS_DEFAULT,
-  SubjectDetailType,
-} from '@/shared';
+import { QuoteStoreType, QUOTES_STORED_DEFAULT, SettingsType, SETTINGS_DEFAULT, SubjectDetailType } from '@/shared';
 import { User } from 'firebase/auth';
 import __ from 'lodash';
 import { create } from 'zustand';

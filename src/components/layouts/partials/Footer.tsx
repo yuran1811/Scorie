@@ -3,7 +3,7 @@ import { GradientText, GradientUnderline, HighlightLink } from '@cpns/interfaces
 import { FC } from 'react';
 
 export const Footer: FC = () => (
-  <footer className="relative w-full px-[1rem] pb-[3rem] pt-[1rem] text-center text-[3rem] font-semibold">
+  <footer className="typo relative w-full px-[1rem] pb-[3rem] pt-[1rem] text-center font-semibold">
     Made by{' '}
     <HighlightLink url={GH_LINK} noUnderline>
       <GradientText>

@@ -53,7 +53,7 @@ export const AnimateLogoText = () => (
         <feFlood floodColor="#052b4a" result="flood" />
         <feComposite operator="in" in2="SourceAlpha" in="flood" result="shadow" />
         <feOffset dx="-4" dy="-4" in="SourceGraphic" result="offset-1" />
-        <feOffset dx="4" dy="4" in="shadow" result="offset-2" />{' '}
+        <feOffset dx="4" dy="4" in="shadow" result="offset-2" />
         <feMerge>
           <feMergeNode in="offset-2" />
           <feMergeNode in="offset-1" />
@@ -79,7 +79,7 @@ export const AnimateLogoText = () => (
 
 export const AnimateLogo = () => (
   <motion.div
-    className="fullscreen flexcenter z-[100] w-full bg-zinc-950/90 backdrop-blur-xl"
+    className="fullscreen flexcenter z-[100] w-full bg-zinc-950/90"
     initial={{ opacity: 0.95 }}
     animate={{
       opacity: 0,

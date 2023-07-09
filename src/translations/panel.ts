@@ -47,6 +47,10 @@ const settingTranslation = {
     vi: 'Định dạng điểm',
     en: 'Score format',
   },
+  'num recent score record': {
+    vi: 'Số bản ghi điểm gần đây',
+    en: 'Number of recent score record',
+  },
   'show startup logo': {
     vi: 'Hiện logo khi khởi động',
     en: 'Show startup logo',

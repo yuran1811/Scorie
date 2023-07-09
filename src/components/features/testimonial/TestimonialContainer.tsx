@@ -29,7 +29,7 @@ export const TestimonialContainer = () => {
   }, [data, loading, error]);
 
   return (
-    <section className="mx-auto my-16 max-w-[1024px] rounded-[3.2rem] bg-zinc-950/70 py-8 text-gray-100 backdrop-blur-[22px] medmb:rounded-[4.2rem] medtab:px-4">
+    <section className="mx-auto my-16 max-w-[1024px] rounded-[3.2rem] bg-zinc-950/80 py-8 text-gray-100 medmb:rounded-[4.2rem] medtab:px-4">
       <div className="container mx-auto flex flex-col items-center p-10">
         <h1 className="typo-lg p-2 text-center font-bold leading-none">{t('what users think')}</h1>
         <GradientUnderline className="mt-3 w-64" />
@@ -44,11 +44,7 @@ export const TestimonialContainer = () => {
       </div>
 
       {!!currentUser && currentUser?.uid && (
-        <Button
-          className="mt-24 border-gray-900 bg-violet-400 text-gray-900 hover:border-violet-400 hover:bg-gray-900 hover:text-violet-400"
-          content={openModal ? 'Minimize' : 'Open'}
-          onClick={() => setOpenModal((s) => !s)}
-        />
+        <Button className="mt-24" content={openModal ? 'Minimize' : 'Open'} onClick={() => setOpenModal((s) => !s)} />
       )}
 
       {!!currentUser && currentUser?.uid && openModal && (
