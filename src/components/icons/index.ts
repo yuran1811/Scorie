@@ -56,4 +56,4 @@ export * from './TrashIcon';
 export * from './UpvoteIcon';
 export * from './UserIcon';
 export * from './YinYangIcon';
-
+export * from './Socials2';

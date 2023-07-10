@@ -1,5 +1,6 @@
 import { useStore } from '@/store';
 import { EnLocale, ViLocale } from '@cpns/icons';
+import dayjs from 'dayjs';
 import i18next from 'i18next';
 
 const ChangeLang = () => {
@@ -8,6 +9,7 @@ const ChangeLang = () => {
 
   const changeLanguage = (lang: string) => {
     i18next.changeLanguage(lang);
+    dayjs.locale(lang);
     setLocale(lang);
   };
 

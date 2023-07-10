@@ -17,6 +17,8 @@ import { FC, Suspense, useEffect } from 'react';
 import { initReactI18next } from 'react-i18next';
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 
+import 'dayjs/locale/vi';
+
 i18next.use(initReactI18next).init({
   lng: useStore.getState().locale || 'vi',
   fallbackLng: 'en',

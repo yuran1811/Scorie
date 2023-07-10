@@ -10,7 +10,7 @@ export const ModalBox: FC<DivProps> = ({ className = '', onClick, children }) =>
 
       <div className="typo-3xl z-[2] max-w-[90%] medtab:max-w-[80%]">
         <div
-          className={`scrollY max-h-[calc(100vh-5rem)] rounded-[3rem] border-l-4 border-t-4 border-violet-400/70 bg-gray-900/40 text-center font-bold text-ctcolor medtab:max-h-[calc(100vh-15rem)] ${className}`}
+          className={`scrollY max-h-[calc(100vh-5rem)] rounded-[3rem] border-l-4 border-t-4 border-violet-400/70 bg-gray-900 text-center font-bold text-ctcolor medtab:max-h-[calc(100vh-15rem)] ${className}`}
         >
           {children}
         </div>

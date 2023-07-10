@@ -43,8 +43,8 @@ export const BlockQuote: FC<DivProps> = () => {
       ) : (
         <blockquote
           data-tour={step(1)}
-          className="relative mx-auto w-full rounded-[2rem] p-4 lgmb:max-w-[68rem] lgmb:p-12 lgmb:pb-8"
-          style={{ backgroundColor: `${bg}85`, color: `${color}` }}
+          className="relative mx-auto w-full rounded-[2rem] border-b-2 p-4 lgmb:max-w-[68rem] lgmb:p-12 lgmb:pb-8"
+          style={{ backgroundColor: `${bg}85`, color: `${color}`, borderColor: `${color}80` }}
         >
           <QuoteIcon
             className="absolute block lgmb:left-8 lgmb:top-8 lgmb:scale-125 lgtab:left-12 lgtab:top-12 lgtab:scale-150"
@@ -65,7 +65,7 @@ export const BlockQuote: FC<DivProps> = () => {
 
           <div
             className="flexcenter absolute -bottom-[7rem] left-1/2 w-[85%] min-w-[20.5rem] -translate-x-1/2 !justify-around gap-4 rounded-[2rem] border-2 bg-zinc-800 p-4 medmb:min-w-[23rem] lgmb:-bottom-16 lgmb:w-[40%]"
-            style={{ backgroundColor: bg }}
+            style={{ backgroundColor: bg, borderColor: `${color}80` }}
           >
             <PrevQuoteButton
               disabled={!(quoteIdx > 0)}

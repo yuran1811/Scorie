@@ -73,7 +73,7 @@ export const Testimonial: FC<{ data: TestimonialProps }> = ({ data: { content, n
 };
 
 export const FeatureTestimonial: FC<TestimonialProps> = ({ content, name, job = '' }) => (
-  <section className="mx-auto my-24 w-max max-w-[80%] rounded-[2rem] border-4 border-violet-700 bg-gray-700/10 p-4 text-gray-100 medmb:p-8">
+  <section className="mx-auto my-24 w-max max-w-[80%] rounded-[2rem] border-4 border-violet-700 bg-gray-800 p-4 text-gray-100 medmb:p-8">
     <div className="container relative mx-auto flex flex-col items-center space-y-6 p-2 medmb:p-4 lgtab:p-8">
       <div className="absolute -top-[6.5rem] mx-auto w-max">
         <svg

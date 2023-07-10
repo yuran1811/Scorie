@@ -19,13 +19,21 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <AppStatusProvider>
       <div
-        className="fullsize after:fullscreen typo relative z-0 overflow-x-hidden text-white after:z-[-1] after:bg-[#00000099] after:backdrop-blur-lg"
-        style={{
-          background: 'url(/bg.jpg) no-repeat fixed',
-          backgroundClip: 'content-box',
-          backgroundPosition: 'top left',
-          backgroundSize: 'cover',
-        }}
+        className={`fullsize typo relative z-0 overflow-x-hidden text-white ${
+          !settings.glassmorphismDesign
+            ? 'bg-[#1f0a48]'
+            : 'after:fullscreen after:z-[-1] after:bg-[#00000099] after:backdrop-blur-lg'
+        }`}
+        style={
+          !settings.glassmorphismDesign
+            ? {}
+            : {
+                background: 'url(/bg.jpg) no-repeat fixed',
+                backgroundClip: 'content-box',
+                backgroundPosition: 'top left',
+                backgroundSize: 'cover',
+              }
+        }
       >
         <Header />
         <div className="header-h relative left-0 top-0 w-full" />
@@ -45,7 +53,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
       <ToastContainer theme="dark" newestOnTop />
 
       {false && !status.isRun && (
-        <div className="fullscreen flexcenter z-[100] bg-slate-900/90">
+        <div className="fullscreen flexcenter z-[100] bg-slate-900">
           <button
             className="typo-3xl text-center font-bold text-white"
             onClick={() => {

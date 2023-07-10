@@ -1,7 +1,7 @@
 import { useStore } from '@/store';
 import { SettingsType } from '@/shared';
 import { Button, Input } from '@cpns/shared';
-import { ErrorMessage } from '@cpns/interfaces';
+import { ErrorMessage, GradientUnderline } from '@cpns/interfaces';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,8 +21,10 @@ export const SettingInfo: FC = () => {
   } = useForm<SettingsType>({
     mode: 'onChange',
     values: {
-      numberFormat: settings.numberFormat,
+      glassmorphismDesign: settings.glassmorphismDesign,
       maxRecentScoreNum: settings.maxRecentScoreNum,
+      numberFormat: settings.numberFormat,
+      showQuickSetting: settings.showQuickSetting,
       showStartUpLogo: settings.showStartUpLogo,
     },
   });
@@ -39,7 +41,7 @@ export const SettingInfo: FC = () => {
   }, []);
 
   return (
-    <div className="flexcentercol mt-8 h-4/5 w-full !justify-start overflow-y-auto overflow-x-hidden p-3 pb-8">
+    <div className="flexcentercol mt-8 h-4/5 w-full !justify-start overflow-y-auto overflow-x-hidden p-3 pb-4">
       <div className="w-full">
         <form className="flexcentercol mt-8" onSubmit={handleSubmit(onSubmit)}>
           <span className="typo text-center font-bold">{t('score format')} (9.xxxx)</span>
@@ -85,8 +87,10 @@ export const SettingInfo: FC = () => {
           <Button className="itypo-2sm" content="Change" onClick={handleSubmit(onSubmit)} />
         </form>
 
+        <GradientUnderline />
+
         <div
-          className="typo mt-12 cursor-pointer text-center font-bold"
+          className="typo mt-10 cursor-pointer text-center font-bold"
           onClick={() =>
             setSettings({
               ...settings,
@@ -95,6 +99,19 @@ export const SettingInfo: FC = () => {
           }
         >
           {t(settings.showStartUpLogo ? 'show startup logo' : 'hide startup logo')}
+          <div className="typo-sm text-center !font-normal">{t('click to change')}</div>
+        </div>
+
+        <div
+          className="typo mt-10 cursor-pointer text-center font-bold"
+          onClick={() =>
+            setSettings({
+              ...settings,
+              glassmorphismDesign: !settings.glassmorphismDesign,
+            })
+          }
+        >
+          {t(settings.glassmorphismDesign ? 'turn on blur effect' : 'turn off blur effect')}
           <div className="typo-sm text-center !font-normal">{t('click to change')}</div>
         </div>
       </div>

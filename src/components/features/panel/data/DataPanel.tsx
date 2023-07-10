@@ -11,7 +11,7 @@ const DataPanel: FC<DivProps> = ({ className = '' }) => {
     <div
       className={`${
         active.isData ? 'translate-y-0' : 'translate-y-[200%]'
-      } isAnimated fullscreen z-20 bg-violet-800/95 px-12 py-20 text-ctcolor medtab:max-w-[50rem] ${className}`}
+      } isAnimated fullscreen z-20 bg-violet-800 px-12 py-20 text-ctcolor medtab:max-w-[50rem] ${className}`}
     >
       <BackIcon onClick={() => setActive && setActive((s) => ({ ...s, isData: false }))} />
       <DataInfo />

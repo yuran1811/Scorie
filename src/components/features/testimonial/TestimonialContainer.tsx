@@ -12,6 +12,7 @@ import { GradientUnderline } from '@cpns/interfaces';
 
 export const TestimonialContainer = () => {
   const currentUser = useStore((s) => s.currentUser);
+  const settings = useStore((s) => s.settings);
 
   const { t } = useTranslation();
 
@@ -29,7 +30,11 @@ export const TestimonialContainer = () => {
   }, [data, loading, error]);
 
   return (
-    <section className="mx-auto my-16 max-w-[1024px] rounded-[3.2rem] bg-zinc-950/80 py-8 text-gray-100 medmb:rounded-[4.2rem] medtab:px-4">
+    <section
+      className={`mx-auto my-16 max-w-[1024px] rounded-[3.2rem] bg-zinc-950${
+        settings.glassmorphismDesign ? '/75' : ''
+      } py-8 text-gray-100 medmb:rounded-[4.2rem] medtab:px-4`}
+    >
       <div className="container mx-auto flex flex-col items-center p-10">
         <h1 className="typo-lg p-2 text-center font-bold leading-none">{t('what users think')}</h1>
         <GradientUnderline className="mt-3 w-64" />

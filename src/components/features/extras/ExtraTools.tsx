@@ -2,13 +2,13 @@ import { useAppStatus } from '@/contexts';
 import { useCollectionQuery } from '@/hooks';
 import { useChangeLogStore, useStore } from '@/store';
 import { getChangeLogs } from '@/utils';
-import { Avatar, Badge } from '@cpns/shared';
+import { Badge, Clock } from '@cpns/shared';
 import { ToastDefaultConfig } from '@shared/constants';
 import { db } from '@shared/firebase';
 import Tippy from '@tippyjs/react';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { FC, useEffect, useRef, useState } from 'react';
-import { Id, toast, ToastOptions } from 'react-toastify';
+import { Id, ToastOptions, toast } from 'react-toastify';
 import { ToolsContainer } from './ToolsContainer';
 
 const toastConfig: ToastOptions = {
@@ -83,13 +83,13 @@ export const ExtraTools: FC = () => {
         onClickOutside={() => setShowMore(false)}
         render={(attrs) => <ToolsContainer {...attrs} showMore={showMore} />}
       >
-        <div className="relative flex h-[5.5rem] w-[9.5rem] items-center justify-end">
-          <Avatar
-            className="header-h-scale absolute right-0 mx-8 cursor-pointer"
-            imgUrl=""
-            radius="3.5rem"
+        <div className="relative flex h-[5.5rem] w-[5.5rem] items-center justify-end">
+          <div
+            className="header-h-scale flexcenter absolute right-0 mx-8 h-[4rem] w-[4rem] cursor-pointer"
             onClick={() => setShowMore((a) => !a)}
-          />
+          >
+            <Clock type="vertical" />
+          </div>
           <Badge className="scale-75" showIndicator={false}>
             {status.badges.changeLog}
           </Badge>

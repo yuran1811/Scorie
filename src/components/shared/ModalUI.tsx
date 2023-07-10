@@ -18,7 +18,7 @@ export const ModalUI: FC<ModalUIProps & DivProps> = ({ children, title, titleIco
     <div className="flexcenter fullscreen z-[11]" onClick={() => cancelHandle()}>
       <Overlay />
 
-      <div className="z-20 flex max-w-4xl flex-col gap-4 rounded-[2rem] bg-gray-900/70 p-8 text-gray-100">
+      <div className="z-20 flex max-w-4xl flex-col gap-4 rounded-[2rem] bg-gray-900 p-8 text-gray-100">
         <h2 className="typo flex items-center gap-4 font-semibold leading-tight tracking-wide">
           {titleIcon || <NotificationIcon active width="30" height="30" />}
           {title}
@@ -34,7 +34,7 @@ export const ModalUI: FC<ModalUIProps & DivProps> = ({ children, title, titleIco
             {t('cancel')}
           </div>
           <div
-            className="cursor-pointer rounded-[2rem] border-4 border-transparent bg-violet-700/40 px-6 py-2 font-semibold text-violet-300 transition-colors hover:border-violet-400 hover:bg-violet-800/50"
+            className="cursor-pointer rounded-[2rem] border-4 border-transparent bg-violet-900 px-6 py-2 font-semibold text-violet-300 transition-colors hover:border-violet-400 hover:bg-violet-800"
             onClick={onClick}
           >
             {t('confirm')}

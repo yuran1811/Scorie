@@ -73,7 +73,7 @@ export const NoteSectionBar = () => {
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="scale-typo-sm text-white" onClick={() => (navigate(-1), scrollToTop())} />
+        <BackIcon className="scale-typo-sm text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={NoteIcon} content="Note" />
         <div className="flexcenter flex-wrap medmb:px-4 medmb:py-8">
           <Tooltip content="Filter done note" options={{ delay: 400 }}>

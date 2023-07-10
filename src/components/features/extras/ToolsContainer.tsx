@@ -19,7 +19,7 @@ export const ToolsContainer: FC<ToolsContainerProps> = ({ showMore, ...otherProp
       {...otherPropss}
       className={`${
         showMore ? 'flex' : 'hidden'
-      } typo-2sm absolute right-[1rem] top-[7rem] flex-col items-center justify-start rounded-[1.5rem] border-b-[0.5rem] border-l-[0.5rem] border-indigo-200/70 bg-ctbg/60`}
+      } typo-2sm absolute right-[1rem] top-[7rem] flex-col items-center justify-start rounded-[1.5rem] border-b-[0.5rem] border-l-[0.5rem] border-indigo-200/70 bg-ctbg`}
     >
       {/* <Tooltip content="Turn on/off notification">
         <NotificationWrapper />

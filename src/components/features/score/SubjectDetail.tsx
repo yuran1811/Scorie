@@ -50,6 +50,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
   });
 
   const {
+    getValues,
     register,
     unregister,
     handleSubmit,
@@ -79,10 +80,12 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
           isSpecial: subject.isSpecial,
           isVital: subject.isVital,
           expectedAverage: subject.expectedAverage,
+          subjectName: subject.name,
         },
         {
           ...scoreOptions,
           expectedAverage: +expectedAverage,
+          subjectName: getValues('name'),
         }
       )
     ) {
@@ -94,6 +97,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
     setLoading(true);
     editSubject(currentUser.uid, subject.id, {
       ...scoreOptions,
+      name: getValues('name'),
       scores: [...scores],
       expectedAverage: +expectedAverage,
     })

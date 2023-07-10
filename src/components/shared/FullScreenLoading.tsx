@@ -2,7 +2,7 @@ import { FlatLoading } from '@cpns/icons';
 import { FC } from 'react';
 
 export const FullScreenLoading: FC = () => (
-  <div className="flexcenter fullscreen z-40 bg-slate-900/70">
+  <div className="flexcenter fullscreen z-40 bg-zinc-950/90">
     <FlatLoading />
   </div>
 );

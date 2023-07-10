@@ -66,7 +66,7 @@ export const ScoreSectionBar = () => {
       <SubjectAverage subjects={subjects.map((_) => _.subject)} />
 
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="scale-typo-sm text-white" onClick={() => (navigate(-1), scrollToTop())} />
+        <BackIcon className="scale-typo-sm text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={HashtagIcon} content="Score" />
         <div className="flexcenter flex-wrap medmb:px-4 medmb:py-8">
           <Tooltip

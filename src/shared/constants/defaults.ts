@@ -1,11 +1,14 @@
 import { SettingsType } from '@shared/types';
 import { ToastOptions } from 'react-toastify';
 
-export const MAX_SCORE_RECENT_LTH = 5;
+const MAX_SCORE_RECENT_LTH = 5;
+const GLASSMORPHISM_DESIGN = false;
 
 export const SETTINGS_DEFAULT: SettingsType = {
-  numberFormat: 2,
+  glassmorphismDesign: GLASSMORPHISM_DESIGN,
   maxRecentScoreNum: MAX_SCORE_RECENT_LTH,
+  numberFormat: 2,
+  showQuickSetting: true,
   showStartUpLogo: true,
 };
 

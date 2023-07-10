@@ -90,7 +90,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
 
   return (
     <div className="mx-auto my-12 max-w-[100rem] pb-12 lgmb:w-[calc(100%-4rem)]">
-      <div className="typo-2xl mx-auto mb-8 w-max text-center font-semibold">
+      <div className="typo-lg mx-auto mb-8 w-max text-center font-semibold">
         {t('pinned')}
         <GradientUnderline />
       </div>
@@ -103,7 +103,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
         onEnd={onEndHandle}
       >
         {!filterPinnedList.length ? (
-          <div className="typo-med m-4 w-full p-8 text-center font-bold">{t('no note')}</div>
+          <div className="typo m-4 w-full p-8 text-center font-bold">{t('no note')}</div>
         ) : (
           filterPinnedList.map((item) => (
             <div key={item.id}>
@@ -113,7 +113,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
         )}
       </ReactSortable>
 
-      <div className="typo-2xl mx-auto mb-8 mt-[7rem] w-max text-center font-semibold">
+      <div className="typo-lg mx-auto mb-8 mt-[7rem] w-max text-center font-semibold">
         {t('others')}
         <GradientUnderline />
       </div>
@@ -126,7 +126,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
         onEnd={onEndHandle}
       >
         {!filterOtherList.length ? (
-          <div className="typo-med m-4 w-full p-8 text-center font-bold">{t('no note')}</div>
+          <div className="typo m-4 w-full p-8 text-center font-bold">{t('no note')}</div>
         ) : (
           filterOtherList.map((item) => (
             <div key={item.id}>

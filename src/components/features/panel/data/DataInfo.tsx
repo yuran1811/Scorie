@@ -52,7 +52,7 @@ export const DataInfo: FC = () => {
       <div className="flexcenter w-full">
         <a href={backupData} download={backupData ? 'scorie_backup.json' : ''}>
           <Button className="itypo-2sm" content="Get backup data">
-            <DownloadIcon className="m-4" width="32" height="32" />
+            <DownloadIcon className="m-4" width="24" height="24" />
           </Button>
         </a>
       </div>
@@ -62,7 +62,7 @@ export const DataInfo: FC = () => {
 
         <input
           ref={inputRef}
-          className={`${inputClass} cursor-pointer`}
+          className={`max-w-[24rem] cursor-pointer ${inputClass}`}
           type="file"
           accept=".json"
           title="log in"

@@ -17,6 +17,8 @@ interface CmpObject extends Object {
   [key: string]: any;
 }
 
+export const scrollToEle = (selector: string, opts?: any) =>
+  document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center', ...opts });
 export const scrollToTop = () => document.querySelector('#root > div')?.scroll({ top: 0, left: 0, behavior: 'smooth' });
 
 const isObject = (object: Object) => {

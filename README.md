@@ -14,12 +14,12 @@
 
 ### Technologies
 
-- Firebase
+- Firebase(v9)
 - React (v18), React Router (v6)
 - Zustand
 - Typescript
 - TailwindCSS
-- Libs: ApexChart, SwiperJS, react-hook-form, react-sortablejs, framer-motion, ...
+- Libs: ApexChart, SwiperJS (v9), react-hook-form, react-sortablejs, framer-motion, ...
 
 [![OSCS Status](https://www.oscs1024.com/platform/badge/yuran1811/Scorie.svg?size=small)](https://www.oscs1024.com/project/yuran1811/Scorie?ref=badge_small)
 

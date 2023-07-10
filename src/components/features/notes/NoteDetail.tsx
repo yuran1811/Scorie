@@ -187,7 +187,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         </div>
 
         <button type="submit">
-          <CloseIcon className="mr-4 cursor-pointer text-rose-600" width="32" height="32" />
+          <CloseIcon className="mr-4 cursor-pointer text-rose-500" width="32" height="32" />
         </button>
       </div>
 
@@ -197,7 +197,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         <TimeContainer obj={{ updatedAt }} style={noteStyle} />
 
         <Input
-          className="!max-w-full !rounded-[0] !border-0 !border-b-[1px] !p-0 !pl-4 !font-bold"
+          className="itypo-2sm !max-w-full !rounded-[0] !border-0 !border-b-[1px] !p-0 !pl-4 !font-bold"
           style={noteStyle}
           defaultValue={title}
           formHandle={{
@@ -211,7 +211,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
         <TextArea
-          textareaClass="!pl-4 !border-l-[1px]"
+          textareaClass="itypo-3sm !pl-4 !border-l-[1px]"
           bothClass="!m-0 !h-full !w-full !max-w-full !resize-none !rounded-[0] !border-0 !p-0"
           style={noteStyle}
           defaultValue={data}

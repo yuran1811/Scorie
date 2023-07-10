@@ -1,5 +1,7 @@
 export interface SettingsType {
-  numberFormat: number;
-  showStartUpLogo: boolean;
+  glassmorphismDesign: boolean;
   maxRecentScoreNum: number;
+  numberFormat: number;
+  showQuickSetting: boolean;
+  showStartUpLogo: boolean;
 }

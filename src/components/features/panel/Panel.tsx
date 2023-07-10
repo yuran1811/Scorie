@@ -4,6 +4,7 @@ import { useStore } from '@/store';
 import { Avatar, Overlay } from '@cpns/shared';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import About from './about/About';
 import AccountContainer from './account/AccountContainer';
 import DataContainer from './data/DataContainer';
 import DocContainer from './doc/DocContainer';
@@ -27,7 +28,7 @@ export const Panel: FC<DivProps> = ({ className = '' }) => {
       )}
 
       <div
-        className={`isAnimated fullscreen overflow-hidden border-r-2 border-ctcolor bg-ctbg/60 px-12 py-20 text-ctcolor medtab:max-w-[50rem] ${
+        className={`isAnimated fullscreen overflow-hidden border-ctcolor bg-ctbg px-12 py-20 text-ctcolor medtab:max-w-[48rem] medtab:border-r-2 ${
           active.isMenu ? 'translate-x-0' : 'translate-x-[-200%]'
         } ${className}`}
       >
@@ -54,6 +55,7 @@ export const Panel: FC<DivProps> = ({ className = '' }) => {
         </div>
 
         <div className="flexcentercol typo-2xl scrollY z-[1] h-3/5 w-full !justify-start gap-6 space-y-12 pb-24 lgmb:h-4/5 lgmb:pb-14">
+          <About />
           <AccountContainer />
           <DataContainer />
           <SettingContainer />

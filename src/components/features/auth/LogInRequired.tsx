@@ -11,7 +11,7 @@ export const LogInRequired: FC = () => {
   return (
     <div className="flexcentercol typo-2xl relative mx-auto h-[30rem] w-full text-white medtab:w-[70%]">
       <div className="p-6 text-center font-semibold">{t('log in required')}</div>
-      <BackIcon className="!text-white" onClick={() => (navigate(-1), scrollToTop())} />
+      <BackIcon className="!text-white" onClick={() => (navigate('/'), scrollToTop())} />
     </div>
   );
 };

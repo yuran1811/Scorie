@@ -62,13 +62,13 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
         </div>
 
         <div className="max-h-[45rem] w-full overflow-hidden p-4">
-          <div className="typo-sm line-clamp-3 w-full whitespace-normal break-words p-2 text-center font-bold">{title}</div>
+          <div className="typo-3sm line-clamp-3 w-full whitespace-normal break-words p-2 text-center font-bold">{title}</div>
           {data?.split && (
             <div className="w-full">
               {data.split('\n').map((datum, idx) => (
                 <p
                   key={datum + idx}
-                  className="typo-sm !select-none whitespace-normal break-words bg-transparent p-2 text-current"
+                  className="typo-4sm !select-none whitespace-normal break-words bg-transparent p-2 text-current"
                 >
                   {datum}
                 </p>

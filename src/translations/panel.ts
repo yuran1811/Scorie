@@ -29,7 +29,7 @@ const dataTranslation = {
     en: 'Export',
   },
   'get backup data': {
-    vi: 'Tải về dữ liệu',
+    vi: 'Tải dữ liệu',
     en: 'Get backup data',
   },
   'import data from backup file': {
@@ -58,6 +58,14 @@ const settingTranslation = {
   'hide startup logo': {
     vi: 'Ẩn logo khi khởi động',
     en: 'Hide startup logo',
+  },
+  'turn on blur effect': {
+    vi: 'Bật hiệu ứng mờ',
+    en: 'Turn on `Blur Effect`',
+  },
+  'turn off blur effect': {
+    vi: 'Tắt hiệu ứng mờ',
+    en: 'Turn off `Blur Effect`',
   },
 };
 

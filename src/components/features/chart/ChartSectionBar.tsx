@@ -8,7 +8,6 @@ import { FC, Suspense, lazy, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Title } from '../main/sections/Title';
-import { GradientUnderline } from '@cpns/interfaces';
 
 const ApexChartWrapper = lazy(() => import('./ApexChart'));
 
@@ -112,12 +111,12 @@ export const ChartSectionBar: FC = () => {
 
   if (!scores.length)
     return (
-      <div className="flexcentercol typo-med relative mx-auto w-full !justify-start text-white medtab:w-[70%]">
+      <div className="flexcentercol typo-med relative mx-auto my-12 w-full !justify-start py-20 text-white medtab:w-[70%]">
         <div className="typo-lg p-6 text-center font-semibold">{t('add scores and the chart will be shown')}</div>
         <Button
           content="Add scores"
           before={false}
-          className="group !bg-gradient-to-br from-indigo-500 to-indigo-800 !text-white"
+          className="group !bg-gradient-to-br from-violet-500 to-violet-800 !text-white"
           onClick={() => navigate('/subjects')}
         >
           <ArrowRightIcon className="isAnimated group-hover:translate-x-4" width="50" height="50" />
@@ -128,7 +127,7 @@ export const ChartSectionBar: FC = () => {
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="text-white" onClick={() => (navigate(-1), scrollToTop())} />
+        <BackIcon className="text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={ChartIcon} content="Analytics" />
         <div className="flexcenter flex-wrap gap-4 medmb:px-4 medmb:py-8">
           <div className="flexcentercol relative">

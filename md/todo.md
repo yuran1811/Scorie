@@ -4,7 +4,6 @@
 - [ ] Use [swr](https://swr.vercel.app/) for `data fetching` (hook)
 - [ ] Use [TanStack Query v5](https://tanstack.com/query/latest/docs/react/installation)
 
-- [ ] Add `change background`
 - [ ] Add more `colors` for chart
 - [ ] Organize records with `folder-style`
 - [ ] Add `pagination` for she subject records
