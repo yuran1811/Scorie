@@ -13,7 +13,7 @@ const SettingPanel: FC<DivProps> = ({ className = '' }) => {
         active.isSetting ? 'translate-y-0' : 'translate-y-[200%]'
       } isAnimated fullscreen z-20 bg-violet-800 px-12 py-20 text-ctcolor medtab:max-w-[50rem] ${className}`}
     >
-      <BackIcon onClick={() => setActive && setActive((s) => ({ ...s, isSetting: false }))} />
+      <BackIcon className="scale-75" onClick={() => setActive && setActive((s) => ({ ...s, isSetting: false }))} />
       <SettingInfo />
     </div>
   );

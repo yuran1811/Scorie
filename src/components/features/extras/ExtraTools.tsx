@@ -90,7 +90,7 @@ export const ExtraTools: FC = () => {
           >
             <Clock type="vertical" />
           </div>
-          <Badge className="scale-75" showIndicator={false}>
+          <Badge className="scale-50" showIndicator={false}>
             {status.badges.changeLog}
           </Badge>
         </div>

@@ -1,5 +1,4 @@
 import { AnchorProps } from '@/shared';
-import { customStyle } from '@/utils';
 import { FC } from 'react';
 
 interface HighlightLinkProps {
@@ -8,17 +7,15 @@ interface HighlightLinkProps {
   noUnderline?: boolean;
 }
 
-const { underline } = customStyle;
-
 export const HighlightLink: FC<HighlightLinkProps & AnchorProps> = ({
   children,
   url,
   animate = false,
-  noUnderline = false,
+  noUnderline = true,
 }) => (
   <a
     className={`text-ctlinkcolor relative font-semibold ${
-      noUnderline ? '' : underline
+      noUnderline ? '' : ''
     } after:origin-center after:transition-all after:duration-300 after:ease-in-out ${
       animate ? 'after:scale-x-0 hover:after:scale-x-100' : ''
     }`}

@@ -1,8 +1,8 @@
 import { DivProps } from '@/shared';
-import { Button } from './Button';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
+import { Button } from './Button';
 
 interface ConfirmBoxProps {
   content?: string;
@@ -29,14 +29,12 @@ export const ConfirmBox: FC<ConfirmBoxProps & DivProps> = ({
         <div className="typo mb-4 p-4 text-center font-bold">{t(content || 'default confirm')}</div>
         <div className="flexcenter mx-auto max-w-[32rem] flex-wrap">
           <Button
-            className="itypo-sm"
             content="Cancel"
             onClick={() => {
               setConfirm(false);
             }}
           />
           <Button
-            className="itypo-sm"
             content="Confirm"
             onClick={() => {
               actionWhenConfirm().finally(() => {

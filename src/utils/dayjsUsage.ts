@@ -1,9 +1,11 @@
 import dayjs from 'dayjs';
 
-export const formatDate = (timestamp: number) => {
+export const formatDate = (timestamp: number, format: string = '') => {
   const now = new Date();
   const date = new Date(timestamp);
   const formatter = dayjs(date);
+
+  if (format.length) return formatter.format(format);
 
   if (dayjs().isSame(formatter, 'date')) return formatter.format('H:mm');
   if (dayjs().isSame(formatter, 'week')) return formatter.format('ddd, H:mm');

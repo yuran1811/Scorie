@@ -180,7 +180,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
               )}
             >
               <div onClick={() => setShowConfirm((s) => !s)}>
-                <TrashIcon className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100" width="35" height="35" />
+                <TrashIcon className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100" width="30" height="30" />
               </div>
             </Tippy>
           </div>
@@ -193,11 +193,11 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
       {status.type === 'errors' && <ErrorMessage className="p-6" content={status.message} />}
 
-      <div className="mx-auto flex h-full w-full max-w-[86rem] flex-col items-center justify-start text-left medmb:px-8 medmb:pb-8">
-        <TimeContainer obj={{ updatedAt }} style={noteStyle} />
+      <div className="mx-auto flex h-full w-full max-w-[90rem] flex-col items-center justify-start text-left medmb:px-8 medmb:pb-8">
+        <TimeContainer className="itypo-3sm font-semibold" obj={{ updatedAt }} style={noteStyle} />
 
         <Input
-          className="itypo-2sm !max-w-full !rounded-[0] !border-0 !border-b-[1px] !p-0 !pl-4 !font-bold"
+          className="itypo-2sm mt-6 !max-w-full !rounded-[0] !border-0 !p-0 !font-bold"
           style={noteStyle}
           defaultValue={title}
           formHandle={{
@@ -211,7 +211,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
         <TextArea
-          textareaClass="itypo-3sm !pl-4 !border-l-[1px]"
+          textareaClass="itypo-3sm"
           bothClass="!m-0 !h-full !w-full !max-w-full !resize-none !rounded-[0] !border-0 !p-0"
           style={noteStyle}
           defaultValue={data}

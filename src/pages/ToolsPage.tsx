@@ -1,7 +1,8 @@
 import { useStore } from '@/store';
 import { LogInRequired } from '@cpns/features/auth/LogInRequired';
-import { ToolsSectionBar } from '@cpns/features/tools/ToolsSectionBar';
-import { FC } from 'react';
+import { FC, lazy } from 'react';
+
+const ToolsSectionBar = lazy(() => import('@cpns/features/tools/ToolsSectionBar'));
 
 export const ToolsPage: FC = () => {
   const currentUser = useStore((s) => s.currentUser);

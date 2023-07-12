@@ -27,6 +27,7 @@ interface SubjectDetailProps {
 
 interface Inputs {
   name: string;
+  maxScore: string;
 }
 
 export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, averageScore, setOpenDetail }) => {
@@ -58,6 +59,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
   } = useForm<Inputs>({
     values: {
       name: subject?.name || '',
+      maxScore: subject?.maxScore?.toString() || '10',
     },
   });
 
@@ -80,11 +82,13 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
           isSpecial: subject.isSpecial,
           isVital: subject.isVital,
           expectedAverage: subject.expectedAverage,
+          maxScore: subject.maxScore,
           subjectName: subject.name,
         },
         {
           ...scoreOptions,
           expectedAverage: +expectedAverage,
+          maxScore: +getValues('maxScore'),
           subjectName: getValues('name'),
         }
       )
@@ -98,6 +102,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
     editSubject(currentUser.uid, subject.id, {
       ...scoreOptions,
       name: getValues('name'),
+      maxScore: +getValues('maxScore'),
       scores: [...scores],
       expectedAverage: +expectedAverage,
     })
@@ -127,11 +132,13 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
     return deleteSubject(currentUser.uid, subject.id);
   };
 
-  const onSubmit: SubmitHandler<Inputs> = (data: any) => {
+  const onSubmit: SubmitHandler<Inputs> = ({ maxScore, ...data }: any) => {
     if (!currentUser || !currentUser?.uid || !subject?.id) return;
 
+    console.log('submit');
+
     setLoading(true);
-    editSubject(currentUser.uid, subject.id, { ...data })
+    editSubject(currentUser.uid, subject.id, { ...data, maxScore: +maxScore })
       .then(() => {
         successToast();
         setSaveErr({ content: '', counter: saveErr.counter + 1 });
@@ -223,8 +230,8 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
                 <div onClick={() => setShowConfirm((s) => !s)}>
                   <TrashIcon
                     className="m-[0.6rem] scale-75 cursor-pointer text-slate-500 lgmb:m-5 lgmb:scale-100"
-                    width="35"
-                    height="35"
+                    width="30"
+                    height="30"
                   />
                 </div>
               </Tippy>
@@ -233,22 +240,26 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 
           <CloseIcon
             className="mx-4 cursor-pointer text-rose-500"
-            width="50"
-            height="50"
+            width="32"
+            height="32"
             onClick={() => {
               updateSubjectData();
             }}
           />
         </div>
 
-        <TimeContainer className="text-ctcolor" obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }} />
+        <TimeContainer
+          className="itypo-3sm font-semibold text-ctcolor"
+          obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }}
+        />
 
         <div className="flexcentercol gap-6 px-8 py-8 text-ctcolor lgtab:!flex-row lgtab:!items-start lgtab:!justify-around">
           <div className="pt-4 lgtab:sticky lgtab:top-[9rem]">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="flexcentercol mb-12" onSubmit={handleSubmit(onSubmit)}>
               <Input
-                className="!max-w-[36rem] !rounded-none !border-0 !bg-transparent !p-0 text-center !text-[5rem] !font-bold"
+                className="itypo-5xl !max-w-[36rem] !rounded-none !border-0 !bg-transparent !p-0 text-center !font-bold"
                 defaultValue={subject?.name || ''}
+                inputMode="decimal"
                 formHandle={{
                   ...register('name', {
                     validate: {
@@ -258,32 +269,57 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
                 }}
               />
               {errors?.name && <ErrorMessage content={errors.name.message || ''} />}
+
+              <div className="mx-auto w-max">
+                <div className="flexcenter !justify-end gap-4">
+                  <label htmlFor="maxScore-id" className="typo-semism">
+                    {t('max score')}
+                  </label>
+                  <Input
+                    id="maxScore-id"
+                    className="!min-w-[7rem] !max-w-[10rem] !rounded-2xl"
+                    defaultValue={subject?.maxScore || '10'}
+                    inputMode="decimal"
+                    formHandle={{
+                      ...register('maxScore', {
+                        validate: {
+                          isValid: (v) => /^(\d+)(\.\d+)?$/.test(v.trim()) || 'Invalid score',
+                        },
+                      }),
+                    }}
+                  />
+                  {errors?.maxScore && <ErrorMessage content={errors.maxScore.message || ''} />}
+                </div>
+                <div className="flexcenter !justify-end gap-4">
+                  <label htmlFor="expected-score" className="typo-semism">
+                    {t('expected score')}
+                  </label>
+                  <div className="w-max">
+                    <Input
+                      id="expected-score"
+                      className="!min-w-[7rem] !max-w-[10rem] !rounded-2xl"
+                      inputMode="decimal"
+                      value={expectedAverage}
+                      onChange={(e) => {
+                        if (!Number(e.currentTarget.value)) setExpectedAverage('');
+                        else setExpectedAverage(e.currentTarget.value);
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
             </form>
 
             <div
-              className="mx-auto my-4 line-clamp-1 w-max max-w-full rounded-[1rem] px-6 text-center text-[8rem]"
+              className="mx-auto my-4 line-clamp-1 w-max max-w-full rounded-[1rem] px-6 text-center text-[7rem]"
               style={{ ...style }}
             >
               {averageScore}
             </div>
-            <div className="flexcenter mt-6 flex-wrap">
-              <span className="typo mr-4 p-4">{t('expected score')} </span>
-              <div className="w-max">
-                <Input
-                  className="!max-w-[8rem]"
-                  inputMode="decimal"
-                  value={expectedAverage}
-                  onChange={(e) => {
-                    if (!Number(e.currentTarget.value)) setExpectedAverage('');
-                    else setExpectedAverage(e.currentTarget.value);
-                  }}
-                />
-              </div>
-            </div>
           </div>
           <div>
             <div className="flex w-full flex-wrap items-center justify-between bg-ctbg py-6 medmb:px-6 lgtab:sticky lgtab:top-[9rem]">
-              <div className="typo-xl line-clamp-1 w-full px-6 text-center font-bold smmb:w-auto smmb:text-left">
+              <div className="typo-med line-clamp-1 w-full px-6 text-center font-bold smmb:w-auto smmb:text-left">
                 {t('recent')}
               </div>
               <div className="flex w-full items-start justify-center smmb:w-auto smmb:justify-end">

@@ -41,6 +41,10 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
     return averageScoreString;
   }, [scores, settings.numberFormat]);
 
+  const averScoreType = useMemo(() => {
+    return averageScoreStyle[averageScoreStyle.check(+averageScore, subject?.maxScore || 10)];
+  }, [averageScore, subject]);
+
   useEffect(() => {
     if (!subject?.scores) return;
     setScores([...subject.scores]);
@@ -64,9 +68,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
           <div className="typo-lg line-clamp-1 w-full text-center font-bold text-ctcolor">{subject?.name || ''}</div>
           <div
             className="my-4 line-clamp-1 max-w-full rounded-[1rem] border-4 border-violet-200 px-6 text-center text-[4.8rem] font-bold"
-            style={{
-              ...averageScoreStyle[averageScoreStyle.check(+averageScore)],
-            }}
+            style={{ ...averScoreType }}
           >
             {averageScore}
           </div>
@@ -99,7 +101,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
 
       {openDetail && (
         <SubjectDetail
-          style={{ ...averageScoreStyle[averageScoreStyle.check(+averageScore)] }}
+          style={{ ...averScoreType }}
           scores={scores}
           subject={subject}
           averageScore={averageScore}

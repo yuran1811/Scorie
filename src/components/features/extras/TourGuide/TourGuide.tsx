@@ -1,10 +1,8 @@
-import { useTourStore } from '@/store';
 import { BookIcon } from '@cpns/icons';
 import { useTour } from '@reactour/tour';
-import React from 'react';
 
 export const TourGuide = () => {
-  const { isRun } = useTourStore((s) => s.status);
+  // const { isRun } = useTourStore((s) => s.status);
 
   const { setIsOpen, setCurrentStep } = useTour();
 

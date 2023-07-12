@@ -17,14 +17,14 @@ export const VersionTimeline: FC<DivProps> = ({ onClick }) => {
     <div className="fullscreen flexcenter z-20 !justify-start">
       <Overlay zIdx="z-[-1]" onClick={onClick} />
 
-      <div className="typo-med scrollY relative m-auto max-h-[70vh] w-full max-w-[58rem] rounded-3xl border-4 border-violet-400/60 bg-gray-800 pb-8 text-gray-100">
+      <div className="typo-med scrollY relative m-auto max-h-[70vh] w-full max-w-[58rem] rounded-3xl border-4 border-violet-400/60 bg-gray-900 pb-8 text-gray-100">
         <div
           className="flexcenter typo-sm sticky top-0 z-20 cursor-pointer gap-4 bg-inherit px-8 py-4"
           onClick={() => {
             changeLogs.forEach((log) => setChangeLogsRead(log.version, !allRead));
           }}
         >
-          <DoubleCheckIcon active={!allRead} height="25" width="25" />
+          <DoubleCheckIcon active={!allRead} height="24" width="24" />
           <span>Mark all as {allRead && 'un'}read</span>
         </div>
 

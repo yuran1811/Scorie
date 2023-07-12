@@ -51,21 +51,24 @@ export const DataInfo: FC = () => {
     <div className="flexcentercol mt-[2rem] h-4/5 w-full !justify-start overflow-y-auto overflow-x-hidden p-3 pb-8">
       <div className="flexcenter w-full">
         <a href={backupData} download={backupData ? 'scorie_backup.json' : ''}>
-          <Button className="itypo-2sm" content="Get backup data">
+          <Button content="Get backup data">
             <DownloadIcon className="m-4" width="24" height="24" />
           </Button>
         </a>
       </div>
 
-      <div className="flexcentercol mt-12 w-full">
-        <div className="typo p-4 text-center font-semibold">{t('import data from backup file')}</div>
+      <div className="flexcentercol typo-sm mt-12 w-full">
+        <label className="cursor-pointer p-4 text-center font-semibold" htmlFor="file-input">
+          {t('import data from backup file')}
+        </label>
 
         <input
           ref={inputRef}
-          className={`max-w-[24rem] cursor-pointer ${inputClass}`}
+          id="file-input"
+          className={`!max-w-[24rem] cursor-pointer ${inputClass}`}
           type="file"
           accept=".json"
-          title="log in"
+          multiple
           onChange={handleChange}
         />
 

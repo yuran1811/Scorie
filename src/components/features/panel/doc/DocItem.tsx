@@ -10,8 +10,8 @@ interface DocItemProps {
 
 const ArrowIconConfig = {
   className: 'mx-4',
-  width: '36',
-  height: '36',
+  width: '24',
+  height: '24',
   fill: '#a5b4fc',
 };
 
@@ -25,7 +25,7 @@ export const DocItem: FC<DocItemProps> = ({ data: docItem }) => {
       <div
         className={`${
           active ? 'sticky left-0 top-0' : ''
-        } typo mb-8 flex w-full items-center justify-start rounded-[2rem] bg-ctbg p-6 text-white`}
+        } typo-sm mb-6 flex w-full items-center justify-start rounded-[1.4rem] bg-ctbg p-6 text-white`}
       >
         {!active ? <ArrowRightIcon {...ArrowIconConfig} /> : <ArrowDownIcon {...ArrowIconConfig} />}
         <span className="line-clamp-1 w-full font-semibold">{t(docItem.title.toLowerCase())}</span>

@@ -11,7 +11,7 @@ export const ToolsSectionBar = () => {
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="text-white" onClick={() => (navigate('/'), scrollToTop())} />
+        <BackIcon className="scale-75 text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={ToolIcon} content="Tools" />
       </div>
 
@@ -33,3 +33,5 @@ export const ToolsSectionBar = () => {
     </div>
   );
 };
+
+export default ToolsSectionBar;

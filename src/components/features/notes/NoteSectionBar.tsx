@@ -73,7 +73,7 @@ export const NoteSectionBar = () => {
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="scale-typo-sm text-white" onClick={() => (navigate('/'), scrollToTop())} />
+        <BackIcon className="scale-75 text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={NoteIcon} content="Note" />
         <div className="flexcenter flex-wrap medmb:px-4 medmb:py-8">
           <Tooltip content="Filter done note" options={{ delay: 400 }}>
@@ -141,6 +141,7 @@ export const NoteSectionBar = () => {
 
       <div className="flexcenter w-full px-4">
         <SearchBar
+          className="scale-[0.8]"
           isHide={!noteList.length}
           setSearchOpts={setSearchOpts}
           onChange={(e) => {
@@ -176,3 +177,5 @@ export const NoteSectionBar = () => {
     </div>
   );
 };
+
+export default NoteSectionBar;

@@ -78,7 +78,7 @@ export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({ subjects })
           <div className="w-full" style={{ color }}>
             {getAverageScoreString(subjectAverageScore, settings.numberFormat)}
           </div>
-          <div className="typo-3xl w-full capitalize" style={{ color }}>
+          <div className="typo-med w-full capitalize" style={{ color }}>
             {t(averageScore.check(subjectAverageScore.total / subjectAverageScore.count))}
           </div>
         </>

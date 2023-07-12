@@ -122,7 +122,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
             )}
           >
             <div onClick={() => setShowConfirm((s) => !s)}>
-              <TrashIcon className="m-[0.6rem] mx-4 cursor-pointer text-slate-500 lgmb:m-5" width="32" height="32" />
+              <TrashIcon className="m-[0.6rem] mx-4 cursor-pointer text-slate-500 lgmb:m-5" width="30" height="30" />
             </div>
           </Tippy>
         </div>

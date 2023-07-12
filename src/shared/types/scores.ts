@@ -18,6 +18,7 @@ export interface SubjectDetailType {
   isVital: boolean;
   isIgnored: boolean;
   scores: ScoreDetailType[];
+  maxScore?: number;
   expectedAverage?: number;
   createdAt?: Timestamp;
   updatedAt?: Timestamp;

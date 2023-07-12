@@ -106,8 +106,8 @@ export const NotificationWrapper = () => {
       <NotificationIcon
         className="mx-6 my-4 cursor-pointer"
         active={notificationActive}
-        width="32"
-        height="32"
+        width="30"
+        height="30"
         onClick={notificationHandle}
       />
     </>

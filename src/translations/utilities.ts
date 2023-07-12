@@ -297,6 +297,11 @@ const chartTranslation = {
     vi: 'Biểu đồ radar',
     en: 'Radar Chart',
   },
+
+  'click on the label to see the following chart': {
+    vi: 'Chọn tên biểu đồ để xem biểu đồ tương ứng',
+    en: 'Click on the label to see the following chart',
+  },
 };
 
 const pwaFunc = {
@@ -362,10 +367,6 @@ export default {
     vi: 'Gửi',
     en: 'Send',
   },
-  'change password': {
-    vi: 'Đổi mật khẩu',
-    en: 'Change password',
-  },
   'click to change': {
     vi: 'Nhấp để đổi',
     en: 'Click to change',
@@ -403,33 +404,17 @@ export default {
     vi: 'Nội dung',
     en: 'Content',
   },
-  job: {
-    vi: 'Nghề nghiệp của bạn',
-    en: 'Job',
-  },
   name: {
     vi: 'Tên của bạn',
     en: 'Name',
   },
-  email: {
-    vi: 'Địa chỉ mail',
-    en: 'Email',
-  },
-  password: {
-    vi: 'Mật khẩu',
-    en: 'Password',
-  },
-  'confirm password': {
-    vi: 'Xác nhận mật khẩu',
-    en: 'Confirm password',
+  job: {
+    vi: 'Nghề nghiệp của bạn',
+    en: 'Job',
   },
   'type a number': {
     vi: 'Điền số',
     en: 'Type a number',
-  },
-  'profile name': {
-    vi: 'Tên người dùng',
-    en: 'Profile name',
   },
 
   note: {
@@ -476,6 +461,10 @@ export default {
   'expected score': {
     vi: 'Điểm cần',
     en: 'Expected score',
+  },
+  'max score': {
+    vi: 'Thang điểm',
+    en: 'Grade scale',
   },
 
   'report bugs': {

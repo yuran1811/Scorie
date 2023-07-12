@@ -1,21 +1,29 @@
-import { FacebookIcon2, GithubIcon, InfoIcon, LinkedinIcon, YoutubeIcon } from '@cpns/icons';
+import { ArrowDownIcon, ArrowRightIcon, FacebookIcon2, GithubIcon, InfoIcon, LinkedinIcon, YoutubeIcon } from '@cpns/icons';
 import { HighlightLink } from '@cpns/interfaces';
 import { FACEBOOK_PROFILE, GH_LINK, LINKEDIN_PROFILE, YOUTUBE_PROFILE } from '@shared/constants';
 import { FC, useState } from 'react';
+
+const ArrowIconConfig = {
+  className: '',
+  width: '24',
+  height: '24',
+  fill: '#a5b4fc',
+};
 
 export const About: FC = () => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <div className="flexcentercol w-full">
-      <div className="flexcenter w-full cursor-pointer gap-8" onClick={() => setOpenModal((s) => !s)}>
+      <div className={`flexcenter w-full cursor-pointer gap-8`} onClick={() => setOpenModal((s) => !s)}>
         <InfoIcon className="scale-typo cursor-pointer text-ctcolor" width="32" height="32" />
         <div className="typo-med line-clamp-1 font-bold">About</div>
+        {!openModal ? <ArrowRightIcon {...ArrowIconConfig} /> : <ArrowDownIcon {...ArrowIconConfig} />}
       </div>
 
       {openModal && (
-        <div className="mt-16 w-full space-y-10" id="about-section">
-          <div className="typo-sm flexcentercol font-bold">
+        <div id="about-section" className="mt-16 w-full space-y-10 border-x border-b border-ctcolor">
+          <div className="flexcentercol scale-95 text-[2.2rem] font-bold smmb:scale-100 medmb:scale-105 medtab:scale-110">
             <div>This </div>
             <div className="relative h-[4rem] w-[20rem] overflow-y-hidden text-ctcolor">
               {[
@@ -24,7 +32,8 @@ export const About: FC = () => {
                 { content: 'easy-to-use', grad: '#b199f3,#e59ebc' },
               ].map((_, idx) => (
                 <span
-                  className="textGradient absolute left-0 right-12 text-center uppercase"
+                  key={`${_.content}-${idx}`}
+                  className={`textGradient absolute left-0 right-12 text-center uppercase`}
                   style={{
                     translate: idx ? '0 -7.5rem' : '',
                     animation: `upndown 3s infinite ${idx}s ease`,
@@ -34,13 +43,13 @@ export const About: FC = () => {
                   {_.content}
                 </span>
               ))}{' '}
-              <span className="absolute right-[44px]" style={{ animation: 'upndown-scale 3s infinite 1.5s ease' }}>
+              <span className="absolute right-[49px]" style={{ animation: 'upndown-scale 3s infinite 1.5s ease' }}>
                 app
               </span>
             </div>
             <div>will improve your</div>
             <div
-              className="textGradient animate-gdMoveVert uppercase"
+              className="textGradient typo-semism animate-gdMoveVert uppercase"
               style={{
                 backgroundSize: '400% 400%',
                 backgroundImage: 'linear-gradient(-135deg,#2cccff,#20e3b2,#ffcc70,#c850c0,#4158d0)',

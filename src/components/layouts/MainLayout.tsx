@@ -49,7 +49,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
         <AppStatusPopup />
       </div>
       <div className="relative z-[3]" id="confirm-container" />
-      <div className="relative z-[10000]" id="over-tippy-container" />
+      <div className="relative z-[1000]" id="over-tippy-container" />
       <ToastContainer theme="dark" newestOnTop />
 
       {false && !status.isRun && (

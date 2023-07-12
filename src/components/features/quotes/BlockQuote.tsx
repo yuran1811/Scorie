@@ -64,7 +64,7 @@ export const BlockQuote: FC<DivProps> = () => {
           </div>
 
           <div
-            className="flexcenter absolute -bottom-[7rem] left-1/2 w-[85%] min-w-[20.5rem] -translate-x-1/2 !justify-around gap-4 rounded-[2rem] border-2 bg-zinc-800 p-4 medmb:min-w-[23rem] lgmb:-bottom-16 lgmb:w-[40%]"
+            className="flexcenter absolute -bottom-[5.85rem] left-1/2 w-[82%] min-w-[20.5rem] -translate-x-1/2 !justify-around gap-4 rounded-b-[2rem] border-2 bg-zinc-800 p-4 medmb:min-w-[23rem] lgmb:-bottom-16 lgmb:w-[40%] medtab:rounded-[2rem]"
             style={{ backgroundColor: bg, borderColor: `${color}80` }}
           >
             <PrevQuoteButton

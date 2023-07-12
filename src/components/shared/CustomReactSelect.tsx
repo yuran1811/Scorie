@@ -1,4 +1,4 @@
-import { CloseIcon, TagIcon } from '@cpns/icons';
+/* import { CloseIcon, TagIcon } from '@cpns/icons';
 import { Dispatch, SetStateAction } from 'react';
 import {
   ClearIndicatorProps,
@@ -14,7 +14,7 @@ import {
   PlaceholderProps,
   SingleValueProps,
   ValueContainerProps,
-} from 'react-select';
+} from 'react-select'; */
 
 export interface Option {
   readonly label: string;
@@ -26,6 +26,7 @@ export interface SelectState {
   readonly value: Option;
 }
 
+/* 
 export interface CustomClearIndicatorProps extends ClearIndicatorProps<Option, false> {
   setSelectState: Dispatch<SetStateAction<SelectState>>;
 }
@@ -102,7 +103,7 @@ export const SelectClearIndicator = (props: CustomClearIndicatorProps) => {
       style={{ display: 'none', padding: '0 0.8rem' }}
       onClick={() => setSelectState((s) => ({ ...s, value: { label: '', value: '' } }))}
     >
-      <CloseIcon className="mx-4 cursor-pointer text-rose-400" width="35" height="35" />
+      <CloseIcon className="mx-4 cursor-pointer text-rose-400" width="32" height="32" />
     </div>
   );
 };
@@ -113,6 +114,7 @@ export const SelectIndicatorSeparator = ({ innerProps }: IndicatorSeparatorProps
 
 export const SelectDropdownIndicator = (props: DropdownIndicatorProps<Option, false>) => (
   <components.DropdownIndicator {...props}>
-    <TagIcon className="mx-4 cursor-pointer text-white" width="35" height="35" />
+    <TagIcon className="mx-4 cursor-pointer text-white" width="32" height="32" />
   </components.DropdownIndicator>
 );
+ */

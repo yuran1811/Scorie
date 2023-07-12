@@ -44,13 +44,13 @@ export const VersionTimeStop: FC<VersionTimeStopProps> = ({ data: { content, tim
             >
               <Tooltip content={!!changeLogsRead[version] ? 'Mark as unread' : 'Mark as read'}>
                 <div onClick={() => setChangeLogsRead(version, !changeLogsRead[version])}>
-                  <DoubleCheckIcon active={!!changeLogsRead[version]} height="30" width="30" />
+                  <DoubleCheckIcon active={!!changeLogsRead[version]} height="28" width="28" />
                 </div>
               </Tooltip>
             </div>
           </div>
 
-          <div className="typo-3sm">{formatDate(time.seconds * 1000)}</div>
+          <div className="typo-3sm">{formatDate(time.seconds * 1000, 'ddd, DD/MM/YYYY - H:mm')}</div>
         </div>
         <div className="flexcentercol typo-3sm !justify-start">
           <div className="w-full tracking-wide smmb:indent-8">{content}</div>

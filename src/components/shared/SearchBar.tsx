@@ -12,7 +12,7 @@ interface SearchBarProps {
   >;
 }
 
-export const SearchBar: FC<SearchBarProps & InputProps> = ({ isHide = false, setSearchOpts, onChange }) => {
+export const SearchBar: FC<SearchBarProps & InputProps> = ({ className = '', isHide = false, setSearchOpts, onChange }) => {
   const [isActive, setActive] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -20,7 +20,7 @@ export const SearchBar: FC<SearchBarProps & InputProps> = ({ isHide = false, set
   return isHide ? (
     <></>
   ) : (
-    <div className="flexcenter relative my-4 mb-8 h-[6rem] w-4/5">
+    <div className={`flexcenter relative my-4 mb-8 h-[6rem] w-4/5 ${className}`}>
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <input
           ref={inputRef}

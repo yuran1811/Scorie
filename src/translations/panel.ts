@@ -13,6 +13,26 @@ const accountTranslation = {
     vi: 'Đã có tài khoản ?',
     en: 'Already have account ?',
   },
+  'change password': {
+    vi: 'Đổi mật khẩu',
+    en: 'Change password',
+  },
+  email: {
+    vi: 'Địa chỉ mail',
+    en: 'Email',
+  },
+  password: {
+    vi: 'Mật khẩu',
+    en: 'Password',
+  },
+  'confirm password': {
+    vi: 'Xác nhận mật khẩu',
+    en: 'Confirm password',
+  },
+  'profile name': {
+    vi: 'Tên người dùng',
+    en: 'Profile name',
+  },
 };
 
 const dataTranslation = {

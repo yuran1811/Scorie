@@ -7,3 +7,5 @@ export const FeatureLayout: FC<DivProps> = ({ className = '' }) => (
     <FeatureSection />
   </div>
 );
+
+export default FeatureLayout;

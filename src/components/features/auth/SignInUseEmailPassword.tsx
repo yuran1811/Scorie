@@ -30,7 +30,12 @@ const SignInUseEmailPassWord = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   const onSubmit: SubmitHandler<Inputs> = useCallback((data) => {
     const { email, password } = data;
@@ -58,8 +63,8 @@ const SignInUseEmailPassWord = () => {
       {isNew ? (
         <CreateNewUser>
           <Divider className="!max-w-[40rem]">{t('already have account')}</Divider>
-          <Button className="itypo-sm" content="Log in" onClick={() => setNew(false)}>
-            <ArrowLeftIcon className="mr-6" width="32" height="32" />
+          <Button content="Log in" onClick={() => setNew(false)}>
+            <ArrowLeftIcon className="mr-6" width="24" height="24" />
           </Button>
         </CreateNewUser>
       ) : (
@@ -127,15 +132,15 @@ const SignInUseEmailPassWord = () => {
 
             {errMsg && <ErrorMessage content={errMsg} />}
 
-            <Button className="itypo-sm" type="submit" content="Log in">
-              <LogInIcon className="mr-6" width="32" height="32" />
+            <Button type="submit" content="Log in">
+              <LogInIcon className="mr-6" width="24" height="24" />
             </Button>
           </form>
 
           <Divider className="!max-w-[35rem]">{t('have no account')}</Divider>
 
-          <Button className="itypo-sm" before={false} content="Create new account" onClick={() => setNew(true)}>
-            <ArrowRightIcon className="ml-6" width="32" height="32" />
+          <Button before={false} content="Create new account" onClick={() => setNew(true)}>
+            <ArrowRightIcon className="ml-6" width="24" height="24" />
           </Button>
         </>
       )}

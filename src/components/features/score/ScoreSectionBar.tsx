@@ -66,7 +66,7 @@ export const ScoreSectionBar = () => {
       <SubjectAverage subjects={subjects.map((_) => _.subject)} />
 
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="scale-typo-sm text-white" onClick={() => (navigate('/'), scrollToTop())} />
+        <BackIcon className="scale-75 text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={HashtagIcon} content="Score" />
         <div className="flexcenter flex-wrap medmb:px-4 medmb:py-8">
           <Tooltip
@@ -122,6 +122,7 @@ export const ScoreSectionBar = () => {
       </div>
       <div className="flexcenter w-full px-4">
         <SearchBar
+          className="scale-[0.8]"
           isHide={!subjects.length}
           setSearchOpts={setSearchOpts}
           onChange={(e) => {
@@ -166,3 +167,5 @@ export const ScoreSectionBar = () => {
     </div>
   );
 };
+
+export default ScoreSectionBar;

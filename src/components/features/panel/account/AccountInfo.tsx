@@ -114,7 +114,7 @@ export const AccountInfo: FC = () => {
                   signOut(auth);
                 }}
               >
-                <LogOutIcon className="ml-6" width="32" height="32" />
+                <LogOutIcon className="ml-6" width="24" height="24" />
               </Button>
 
               <Button

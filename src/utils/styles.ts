@@ -9,11 +9,13 @@ export const averageScore = {
   normal: { color: '#cbd5e1', background: '#1e293b' },
   caution: { color: '#fbbf24', background: '#92400e' },
   danger: { color: '#ef4444', background: '#991b1b' },
-  check: (x: number) => {
-    if (x >= 9) return 'excellent';
-    if (x >= 8.5) return 'good';
-    if (x > 6.5) return 'normal';
-    if (x > 6) return 'caution';
+  check: (realScore: number, maxScore: number = 10) => {
+    const relativeScore = (realScore * 10) / maxScore;
+
+    if (relativeScore >= 9) return 'excellent';
+    if (relativeScore >= 8.5) return 'good';
+    if (relativeScore > 6.5) return 'normal';
+    if (relativeScore > 6) return 'caution';
     return 'danger';
   },
 };

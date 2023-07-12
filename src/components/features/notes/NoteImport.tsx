@@ -68,7 +68,7 @@ const NoteImport: FC<NoteImportProps> = ({ setShowImport }) => {
         <div className="typo-med m-6 p-2 text-center font-bold">{t('paste your shared content here')}</div>
         <div
           className={`${
-            isError ? 'bg-rose-400' : 'bg-violet-600/80'
+            isError ? 'bg-rose-400' : 'bg-violet-600/90'
           } flexcenter mx-auto h-[7rem] max-w-2xl rounded-[3.9rem] px-2`}
         >
           <div className="flex-1">

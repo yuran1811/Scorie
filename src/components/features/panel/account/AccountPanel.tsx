@@ -19,7 +19,7 @@ const AccountPanel: FC<DivProps> = ({ className = '' }) => {
         active.isAccount ? 'translate-y-0' : 'translate-y-[-200%]'
       } isAnimated fullscreen z-20 bg-violet-800 px-12 pb-14 pt-28 text-ctcolor medtab:max-w-[50rem] ${className}`}
     >
-      <BackIcon onClick={() => setActive && setActive((s) => ({ ...s, isAccount: false }))} />
+      <BackIcon className="scale-75" onClick={() => setActive && setActive((s) => ({ ...s, isAccount: false }))} />
 
       {currentUser ? (
         <AccountInfo />

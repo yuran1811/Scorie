@@ -39,7 +39,7 @@ export const SignIn: FC = () => {
           disabled={loading}
           onClick={() => handleSignIn(new GoogleAuthProvider())}
         >
-          <GoogleIcon width="35" height="35" />
+          <GoogleIcon width="32" height="32" />
           <span className="hidden px-4 font-semibold medmb:block">{t('sign in with')} GG</span>
         </LogInButton>
 
@@ -48,7 +48,7 @@ export const SignIn: FC = () => {
           disabled={loading}
           onClick={() => handleSignIn(new FacebookAuthProvider())}
         >
-          <FacebookIcon width="35" height="35" />
+          <FacebookIcon width="32" height="32" />
           <span className="hidden px-4 font-semibold medmb:block">{t('sign in with')} FB</span>
         </LogInButton>
       </div>

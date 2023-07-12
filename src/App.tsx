@@ -2,15 +2,13 @@ import { useQuotes } from '@/hooks';
 import { HomePage } from '@/pages';
 import { publicRoutes } from '@/routes';
 import { setUserProfile } from '@/services';
-import { auth } from '@/shared';
+import { TOUR_STEPS, auth, getDirOfStep } from '@/shared';
 import { useStore, useTourStore } from '@/store';
 import TRANSLATIONS from '@/translations';
 import { mergeQuoteData } from '@/utils';
-import { mainSteps } from '@cpns/features/main/FeatureSection';
-import { quoteSteps } from '@cpns/features/quotes/BlockQuote';
 import MainLayout from '@cpns/layouts/MainLayout';
 import { ErrorContent, FullScreenLoading } from '@cpns/shared';
-import { StepType, TourProps, TourProvider } from '@reactour/tour';
+import { TourProps, TourProvider } from '@reactour/tour';
 import { onAuthStateChanged } from 'firebase/auth';
 import i18next from 'i18next';
 import { FC, Suspense, useEffect } from 'react';
@@ -27,8 +25,6 @@ i18next.use(initReactI18next).init({
     en: { translation: TRANSLATIONS.en },
   },
 });
-
-const steps: StepType[] = [...mainSteps, ...quoteSteps];
 
 const tourStyles: Pick<TourProps, 'styles'> = {
   styles: {
@@ -50,10 +46,7 @@ const App: FC = () => {
   const { data, error, loading } = useQuotes(quotes.numPage, !quotes.numPage || quotes.isFetch);
 
   const setCurStep: any = (step: number) => {
-    if (mainSteps.length <= step && step < quoteSteps.length + mainSteps.length) {
-      navigate('/');
-    }
-
+    getDirOfStep(step, navigate);
     setCurrentStep(step);
   };
 
@@ -89,7 +82,7 @@ const App: FC = () => {
         scrollSmooth
         showCloseButton
         showNavigation
-        steps={steps}
+        steps={TOUR_STEPS}
         currentStep={currentStep}
         setCurrentStep={setCurStep}
         styles={tourStyles.styles}

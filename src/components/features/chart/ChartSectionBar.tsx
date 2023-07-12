@@ -119,7 +119,7 @@ export const ChartSectionBar: FC = () => {
           className="group !bg-gradient-to-br from-violet-500 to-violet-800 !text-white"
           onClick={() => navigate('/subjects')}
         >
-          <ArrowRightIcon className="isAnimated group-hover:translate-x-4" width="50" height="50" />
+          <ArrowRightIcon className="isAnimated group-hover:translate-x-2" width="24" height="24" />
         </Button>
       </div>
     );
@@ -127,11 +127,15 @@ export const ChartSectionBar: FC = () => {
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
-        <BackIcon className="text-white" onClick={() => (navigate('/'), scrollToTop())} />
+        <BackIcon className="scale-75 text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={ChartIcon} content="Analytics" />
         <div className="flexcenter flex-wrap gap-4 medmb:px-4 medmb:py-8">
           <div className="flexcentercol relative">
-            <Button className="itypo-sm" onClick={() => setChartUsed((s) => ({ ...s, bar: !s.bar }))} content="bar chart" />
+            <Button
+              className="!font-bold"
+              onClick={() => setChartUsed((s) => ({ ...s, bar: !s.bar }))}
+              content="bar chart"
+            />
             <div
               className={`${
                 chartUsed.bar ? '!scale-100' : ''
@@ -140,7 +144,7 @@ export const ChartSectionBar: FC = () => {
           </div>
           <div className="flexcentercol relative">
             <Button
-              className="itypo-sm"
+              className="!font-bold"
               onClick={() => setChartUsed((s) => ({ ...s, polar: !s.polar }))}
               content="polar chart"
             />
@@ -152,7 +156,7 @@ export const ChartSectionBar: FC = () => {
           </div>
           <div className="flexcentercol relative">
             <Button
-              className="itypo-sm"
+              className="!font-bold"
               onClick={() => setChartUsed((s) => ({ ...s, radar: !s.radar }))}
               content="radar chart"
             />
@@ -166,6 +170,12 @@ export const ChartSectionBar: FC = () => {
       </div>
 
       <div className="typo-4sm mx-auto my-8 flex w-full flex-col items-center justify-start gap-20">
+        {Object.values(chartUsed).every((_) => !_) && (
+          <div className="typo m-4 w-full p-4 text-center font-bold">
+            {t('click on the label to see the following chart')}
+          </div>
+        )}
+
         {chartUsed.bar && (
           <Suspense fallback={<FlatLoading />}>
             <ApexChartWrapper data={{ series: srs.column, options: opts.column }} type="bar" />
@@ -185,3 +195,5 @@ export const ChartSectionBar: FC = () => {
     </div>
   );
 };
+
+export default ChartSectionBar;

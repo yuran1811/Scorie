@@ -31,8 +31,8 @@ export const TestimonialContainer = () => {
 
   return (
     <section
-      className={`mx-auto my-16 max-w-[1024px] rounded-[3.2rem] bg-zinc-950${
-        settings.glassmorphismDesign ? '/75' : ''
+      className={`mx-auto my-16 max-w-[1024px] rounded-[3.2rem] ${
+        settings.glassmorphismDesign ? 'bg-zinc-950/75' : 'bg-zinc-900'
       } py-8 text-gray-100 medmb:rounded-[4.2rem] medtab:px-4`}
     >
       <div className="container mx-auto flex flex-col items-center p-10">

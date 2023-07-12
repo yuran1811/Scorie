@@ -8,7 +8,12 @@
 - [ ] Organize records with `folder-style`
 - [ ] Add `pagination` for she subject records
 - [ ] Add gradient bar `loading effect` under header
-- [ ] Add `quick setting` in homepage (weather + computer) + tips
-- [ ] Add `clock` info and clock show setting + Timer for learning/break/anything
+
+- `quick setting` in homepage (weather + computer) + tips
+- `clock` info and clock show setting + Timer for learning/break/anything
+- stay focus timer with water design
+- widget feature (weather, calendar, share notion template, clock)
+- widget with swiper in home
+- translate as flow launcher
 
 - [Glassmorphism UI](https://codepen.io/TurkAysenur/pen/ZEpxeYm?editors=1000)
