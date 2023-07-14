@@ -29,7 +29,7 @@ interface StoreType {
 }
 
 export const GENERAL_STORE_NAME = __.kebabCase('General Store');
-export const GENERAL_STORE_VERSION = 0.02;
+export const GENERAL_STORE_VERSION = 0.01;
 
 export const useStore = create<StoreType>()(
   devtools(

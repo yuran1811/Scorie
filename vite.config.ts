@@ -1,13 +1,17 @@
 import react from '@vitejs/plugin-react';
 import dns from 'dns';
-import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 dns.setDefaultResultOrder('verbatim');
 
 export default defineConfig({
   server: { port: 1811 },
+  test: {
+    name: 'scorie',
+    exclude: [...configDefaults.exclude],
+  },
   plugins: [
     react(),
     tsconfigPaths(),

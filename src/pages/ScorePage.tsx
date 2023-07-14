@@ -1,8 +1,7 @@
 import { useStore } from '@/store';
 import { LogInRequired } from '@cpns/features/auth/LogInRequired';
-import { FC, lazy } from 'react';
-
-const ScoreSectionBar = lazy(() => import('@cpns/features/score/ScoreSectionBar'));
+import ScoreSectionBar from '@cpns/features/score/ScoreSectionBar';
+import { FC } from 'react';
 
 export const ScorePage: FC = () => {
   const currentUser = useStore((s) => s.currentUser);

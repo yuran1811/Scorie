@@ -10,10 +10,9 @@
 - [ ] Add gradient bar `loading effect` under header
 
 - `quick setting` in homepage (weather + computer) + tips
-- `clock` info and clock show setting + Timer for learning/break/anything
+- `clock` info and clock show setting + Timer for learning/break/anything + [timezone](https://time.antfu.me/)
 - stay focus timer with water design
 - widget feature (weather, calendar, share notion template, clock)
 - widget with swiper in home
-- translate as flow launcher
 
 - [Glassmorphism UI](https://codepen.io/TurkAysenur/pen/ZEpxeYm?editors=1000)

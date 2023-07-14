@@ -24,6 +24,7 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
   const {
     watch,
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<CreateNewInputs>();
@@ -52,6 +53,15 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     password.current = watch('password', '');
   }, [watch('password')]);
+
+  useEffect(() => {
+    return () => {
+      unregister('confirmPassword');
+      unregister('displayName');
+      unregister('email');
+      unregister('password');
+    };
+  }, []);
 
   return (
     <>

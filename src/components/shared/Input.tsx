@@ -9,7 +9,7 @@ export interface CustomInputProps {
 }
 
 export const inputClass =
-  'typo-sm isAnimated my-[0.5rem] w-full min-w-[12rem] max-w-[32rem] rounded-[2.4rem] border-[0.3rem] border-solid border-violet-500/30 bg-gray-900 px-[1.8rem] py-[0.5rem] text-white outline-none focus:border-violet-400';
+  'typo-sm outline-none isAnimated my-[0.5rem] w-full min-w-[12rem] max-w-[32rem] rounded-[2.4rem] border-[0.3rem] border-solid border-violet-500/30 bg-gray-900 px-[1.8rem] py-[0.5rem] text-white outline-none focus:border-violet-400';
 
 export const Input: FC<CustomInputProps & InputProps> = ({
   hasWrapper,

@@ -1,7 +1,7 @@
 import { editNote } from '@/services';
 import { NoteItemProps } from '@/shared';
 import { useStore } from '@/store';
-import { copySuccessToast, copyToClipboard, getThemeStyle, shallowObjectCompare } from '@/utils';
+import { copySuccessToast, copyToClipboard, getThemeStyle, mdConvert, shallowObjectCompare } from '@/utils';
 import { ArchiveIcon, DoneIcon, NodeShareIcon, PaletteIcon, PinIcon, ProgressIcon } from '@cpns/icons';
 import { Tooltip } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
@@ -48,7 +48,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
   return (
     <>
       <div
-        className={`${viewMode === 'list' ? 'mx-auto w-[95vw] medtab:max-w-[calc(100%-2rem)]' : 'w-[20rem]'} ${
+        className={`${viewMode === 'list' ? 'mx-auto w-[95vw] medtab:w-[calc(100%-2rem)]' : 'w-[20rem]'} ${
           !isShow && '!hidden'
         } isAnimated flexcentercol group relative cursor-pointer rounded-[2rem] border-[3px] border-transparent hover:border-white medtab:!mx-0 medtab:w-[24rem]
         medtab:!max-w-none`}
@@ -63,7 +63,8 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 
         <div className="max-h-[45rem] w-full overflow-hidden p-4">
           <div className="typo-3sm line-clamp-3 w-full whitespace-normal break-words p-2 text-center font-bold">{title}</div>
-          {data?.split && (
+          <div className="typo-3sm mdformat prose w-full" dangerouslySetInnerHTML={{ __html: mdConvert.render(data) }} />
+          {/* {data?.split && (
             <div className="w-full">
               {data.split('\n').map((datum, idx) => (
                 <p
@@ -74,7 +75,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
                 </p>
               ))}
             </div>
-          )}
+          )} */}
         </div>
 
         <div
@@ -102,12 +103,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
               )}
             >
               <div onClick={() => setOpenTheme((s) => !s)}>
-                <Tooltip
-                  content="Change theme"
-                  options={{
-                    delay: 400,
-                  }}
-                >
+                <Tooltip content="Change theme" options={{ delay: 400 }}>
                   <PaletteIcon
                     {...toolProps}
                     className={`${toolClass} ${openTheme && '!translate-x-0 !opacity-100'} translate-x-[-3rem] delay-[35ms]`}

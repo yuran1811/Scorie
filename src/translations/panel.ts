@@ -33,6 +33,26 @@ const accountTranslation = {
     vi: 'Tên người dùng',
     en: 'Profile name',
   },
+  'update profile': {
+    vi: 'Cập nhật hồ sơ',
+    en: 'Update profile',
+  },
+  'sign in with': {
+    vi: 'Đăng nhập với',
+    en: 'Sign in with',
+  },
+  'log in': {
+    vi: 'Đăng nhập',
+    en: 'Log in',
+  },
+  'log out': {
+    vi: 'Đăng xuất',
+    en: 'Log out',
+  },
+  'create new account': {
+    vi: 'Tạo tài khoản',
+    en: 'Create new account',
+  },
 };
 
 const dataTranslation = {

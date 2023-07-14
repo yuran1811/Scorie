@@ -11,7 +11,7 @@ const DocPanel: FC<DivProps> = ({ className = '' }) => {
     <div
       className={`${
         active.isDoc ? 'translate-x-0' : 'translate-x-[-200%]'
-      } isAnimated fullscreen z-20 bg-violet-800 px-4 py-20 text-ctcolor lgmb:px-12 medtab:max-w-[50rem] ${className}`}
+      } isAnimated fullscreen z-20 bg-ctbg px-4 py-20 text-ctcolor lgmb:px-12 medtab:max-w-[50rem] ${className}`}
     >
       <BackIcon className="scale-75" onClick={() => setActive && setActive((s) => ({ ...s, isDoc: false }))} />
       <DocInfo />

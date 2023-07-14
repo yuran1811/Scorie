@@ -90,7 +90,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
 
   return (
     <div className="mx-auto my-12 max-w-[100rem] pb-12 lgmb:w-[calc(100%-4rem)]">
-      <div className="typo-lg mx-auto mb-8 w-max text-center font-semibold">
+      <div className="typo mx-auto mb-8 w-max text-center font-semibold">
         {t('pinned')}
         <GradientUnderline />
       </div>
@@ -113,7 +113,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
         )}
       </ReactSortable>
 
-      <div className="typo-lg mx-auto mb-8 mt-[7rem] w-max text-center font-semibold">
+      <div className="typo mx-auto mb-8 mt-[7rem] w-max text-center font-semibold">
         {t('others')}
         <GradientUnderline />
       </div>

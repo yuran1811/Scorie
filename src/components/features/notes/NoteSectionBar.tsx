@@ -122,7 +122,7 @@ export const NoteSectionBar = () => {
             </div>
           </div>
 
-          <div className="block medtab:hidden">
+          <div className="block">
             <ListIcon
               className={`${viewMode === 'list' ? 'block' : 'hidden'} mx-5 my-4 cursor-pointer`}
               width="32"
@@ -168,7 +168,7 @@ export const NoteSectionBar = () => {
       )}
 
       {!loading && !!noteList && !noteList.length && (
-        <div className="typo-2xl m-4 w-full p-8 text-center font-bold">{t('no note')}</div>
+        <div className="typo-med m-4 w-full p-8 text-center font-bold">{t('no note')}</div>
       )}
 
       {!loading && !!noteList && !!noteList.length && <NoteSection viewMode={viewMode} filter={filter} notes={noteList} />}

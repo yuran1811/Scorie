@@ -1,8 +1,7 @@
 import { useStore } from '@/store';
 import { LogInRequired } from '@cpns/features/auth/LogInRequired';
-import { FC, lazy } from 'react';
-
-const ChartSectionBar = lazy(() => import('@cpns/features/chart/ChartSectionBar'));
+import ChartSectionBar from '@cpns/features/chart/ChartSectionBar';
+import { FC } from 'react';
 
 export const ChartPage: FC = () => {
   const currentUser = useStore((s) => s.currentUser);

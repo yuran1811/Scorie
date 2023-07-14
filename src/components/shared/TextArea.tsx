@@ -1,8 +1,8 @@
-import { DivProps } from '@/shared';
+import { TextAreaProps } from '@/shared';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface TextAreaProps {
+interface Props {
   formHandle?: any;
   showIndicator?: boolean;
   containerClass?: string;
@@ -10,7 +10,7 @@ interface TextAreaProps {
   bothClass?: string;
 }
 
-export const TextArea: FC<TextAreaProps & DivProps> = ({
+export const TextArea: FC<Props & TextAreaProps> = ({
   formHandle,
   showIndicator = true,
   className = '',

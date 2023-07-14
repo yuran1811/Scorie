@@ -1,7 +1,7 @@
 import { useStore } from '@/store';
 import { getChartData, scrollToTop } from '@/utils';
-import { ArrowRightIcon, BackIcon, ChartIcon, FlatLoading } from '@cpns/icons';
-import { Button } from '@cpns/shared';
+import { ArrowRightIcon, BackIcon, ChartIcon } from '@cpns/icons';
+import { Button, FullScreenLoading } from '@cpns/shared';
 import { t as T } from 'i18next';
 import __ from 'lodash';
 import { FC, Suspense, lazy, useState } from 'react';
@@ -172,22 +172,22 @@ export const ChartSectionBar: FC = () => {
       <div className="typo-4sm mx-auto my-8 flex w-full flex-col items-center justify-start gap-20">
         {Object.values(chartUsed).every((_) => !_) && (
           <div className="typo m-4 w-full p-4 text-center font-bold">
-            {t('click on the label to see the following chart')}
+            {t('click the label to see the following chart')}
           </div>
         )}
 
         {chartUsed.bar && (
-          <Suspense fallback={<FlatLoading />}>
+          <Suspense fallback={<FullScreenLoading />}>
             <ApexChartWrapper data={{ series: srs.column, options: opts.column }} type="bar" />
           </Suspense>
         )}
         {chartUsed.polar && (
-          <Suspense fallback={<FlatLoading />}>
+          <Suspense fallback={<FullScreenLoading />}>
             <ApexChartWrapper data={{ series: srs.polar, options: opts.polar }} type="polarArea" />
           </Suspense>
         )}
         {chartUsed.radar && (
-          <Suspense fallback={<FlatLoading />}>
+          <Suspense fallback={<FullScreenLoading />}>
             <ApexChartWrapper data={{ series: srs.radar, options: opts.radar }} type="radar" />
           </Suspense>
         )}

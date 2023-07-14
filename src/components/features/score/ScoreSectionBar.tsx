@@ -143,7 +143,7 @@ export const ScoreSectionBar = () => {
       </div>
 
       {!loading && subjects !== null && subjects.length === 0 && (
-        <div className="typo-3xl m-4 w-full p-8 text-center font-bold">{t('no subject')}</div>
+        <div className="typo-med m-4 w-full p-8 text-center font-bold">{t('no subject')}</div>
       )}
 
       {loading ? (
@@ -154,7 +154,7 @@ export const ScoreSectionBar = () => {
         <div className="mx-auto mt-4 w-full max-w-[200rem] rounded-[2rem] p-4">
           <div className="flex w-full flex-wrap items-start justify-center">
             {!subjectFilterList.length && subjects.length ? (
-              <div className="typo-med m-4 w-full p-8 text-center font-bold">{t('no subject')}</div>
+              <div className="typo m-4 w-full p-8 text-center font-bold">{t('no subject')}</div>
             ) : (
               subjectFilterList.map((item) => <SubjectCard key={item.id} isShow={item.isShow} subject={item} />)
             )}

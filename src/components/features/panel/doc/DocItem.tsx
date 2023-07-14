@@ -25,7 +25,7 @@ export const DocItem: FC<DocItemProps> = ({ data: docItem }) => {
       <div
         className={`${
           active ? 'sticky left-0 top-0' : ''
-        } typo-sm mb-6 flex w-full items-center justify-start rounded-[1.4rem] bg-ctbg p-6 text-white`}
+        } typo-sm mb-6 flex w-full items-center justify-start rounded-[1.4rem] border-l-2 border-t-2 bg-indigo-950 p-6 text-white`}
       >
         {!active ? <ArrowRightIcon {...ArrowIconConfig} /> : <ArrowDownIcon {...ArrowIconConfig} />}
         <span className="line-clamp-1 w-full font-semibold">{t(docItem.title.toLowerCase())}</span>
@@ -34,7 +34,7 @@ export const DocItem: FC<DocItemProps> = ({ data: docItem }) => {
       {active && (
         <DocItemContent>
           {docItem.data.map((item, idx) => (
-            <li key={idx} className="">
+            <li key={idx} className="text-white">
               {item}
             </li>
           ))}

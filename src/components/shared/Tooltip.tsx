@@ -1,20 +1,22 @@
+import { DivProps } from '@shared/types';
 import Tippy, { TippyProps } from '@tippyjs/react';
-import { FC, PropsWithChildren } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import 'tippy.js/dist/tippy.css';
 
 interface TooltipProps {
   content?: string;
   options?: TippyProps;
+  childrenClass?: string;
 }
 
-export const Tooltip: FC<TooltipProps & PropsWithChildren> = ({ children, content, options }) => {
+export const Tooltip: FC<TooltipProps & DivProps> = ({ className = '', childrenClass = '', children, content, options }) => {
   const { t } = useTranslation();
 
   return (
-    <div>
+    <div className={className}>
       <Tippy {...options} content={t(content?.toLowerCase() || 'tooltip')}>
-        <div>{children}</div>
+        <div className={childrenClass}>{children}</div>
       </Tippy>
     </div>
   );

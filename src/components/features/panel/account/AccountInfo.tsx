@@ -31,6 +31,7 @@ export const AccountInfo: FC = () => {
   const {
     reset,
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ mode: 'onSubmit' });
@@ -67,6 +68,13 @@ export const AccountInfo: FC = () => {
         }, changePWMes.timer * 1000)
       );
   }, [changePWMes]);
+
+  useEffect(() => {
+    return () => {
+      unregister('displayName');
+      unregister('photoURL');
+    };
+  }, []);
 
   return (
     <>

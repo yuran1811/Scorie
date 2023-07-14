@@ -28,6 +28,7 @@ const SignInUseEmailPassWord = () => {
     watch,
     reset,
     register,
+    unregister,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({
@@ -58,6 +59,13 @@ const SignInUseEmailPassWord = () => {
     setErrMsg('');
   }, [watch('email'), watch('password')]);
 
+  useEffect(() => {
+    return () => {
+      unregister('email');
+      unregister('password');
+    };
+  }, []);
+
   return (
     <>
       {isNew ? (
@@ -76,11 +84,11 @@ const SignInUseEmailPassWord = () => {
           )}
 
           <form
-            className={`${loading ? '!hidden' : ''} flexcentercol mt-6 !justify-start`}
+            className={`flexcentercol mt-6 !justify-start ${loading ? '!hidden' : ''}`}
             onSubmit={handleSubmit(onSubmit)}
           >
             <Input
-              className="itypo-3sm !h-[68px] !border-0 !bg-[#121726] !px-16 !tracking-wider"
+              className="itypo-3sm !h-[68px] !border-0 !bg-[#121726] !px-8 !tracking-wider !rounded-[1.8rem]"
               name="email"
               placeholder="Email"
               defaultValue=""

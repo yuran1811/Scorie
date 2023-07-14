@@ -61,6 +61,8 @@ import {
 export const IconCollection = () => {
   return (
     <div className="container mx-auto flex w-full flex-wrap items-start justify-center gap-4">
+      <span className="iconify" data-icon="fa-brands:buffer"></span>
+
       <ArrowLeftIcon className="icon-test" width="24" height="24" />
       <ArrowRightIcon className="icon-test" width="24" height="24" />
       <ArrowUpIcon className="icon-test" width="24" height="24" />

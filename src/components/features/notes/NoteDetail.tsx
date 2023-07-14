@@ -1,14 +1,15 @@
 import { deleteNote, editNote, validateNoteOption } from '@/services';
 import { NoteDetailType } from '@/shared';
 import { useNoteStore, useStore } from '@/store';
-import { shallowObjectCompare, successToast } from '@/utils';
-import { ArchiveIcon, CloseIcon, DoneIcon, PinIcon, ProgressIcon, TrashIcon } from '@cpns/icons';
+import { mdConvert, shallowObjectCompare, successToast } from '@/utils';
+import { ArchiveIcon, CloseIcon, DoneIcon, InfoIcon, PinIcon, ProgressIcon, TrashIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { ConfirmBox, FullScreenLoading, Input, TextArea, TimeContainer } from '@cpns/shared';
+import { ConfirmBox, FullScreenLoading, Input, TextArea, TimeContainer, Tooltip } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { NoteHelp } from './NoteHelp';
 
 interface Inputs {
   title: string;
@@ -31,12 +32,15 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
   const noteIdxList = useNoteStore((s) => s.noteIdxList);
 
   const [loading, setLoading] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
+  const [isPreview, setIsPreview] = useState(true);
   const [showConfirm, setShowConfirm] = useState(false);
   const [status, setStatus] = useState({ type: 'ok', message: '' });
   const [noteOptions, setNoteOptions] = useState({ isDone, isInProgress, isArchived, isPinned });
 
   const {
     register,
+    getValues,
     unregister,
     handleSubmit,
     formState: { errors },
@@ -105,12 +109,24 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
   return createPortal(
     <form
-      className="fullscreen scrollY flex flex-col items-center justify-between px-6 py-8 text-center medtab:px-16"
+      className="fullscreen scrollY flex flex-col items-center justify-between px-6 pb-8 text-center medtab:px-16"
       style={noteStyle}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="flexcenter mb-4 w-full px-4" style={{ backgroundColor: noteStyle.backgroundColor }}>
+      <div
+        className="flexcenter sticky left-0 top-0 z-[100] mb-4 w-full px-4 py-8"
+        style={{ backgroundColor: noteStyle.backgroundColor }}
+      >
         <div className="flexcenter w-full flex-wrap">
+          <Tooltip content="help">
+            <InfoIcon
+              className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
+              width="32"
+              height="32"
+              fill="white"
+              onClick={() => setShowHelp((s) => !s)}
+            />
+          </Tooltip>
           <PinIcon
             className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isPinned ? 'white' : '#f87171'}
@@ -191,11 +207,11 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         </button>
       </div>
 
+      <TimeContainer className="itypo-3sm font-semibold" obj={{ updatedAt }} style={noteStyle} />
+
       {status.type === 'errors' && <ErrorMessage className="p-6" content={status.message} />}
 
       <div className="mx-auto flex h-full w-full max-w-[90rem] flex-col items-center justify-start text-left medmb:px-8 medmb:pb-8">
-        <TimeContainer className="itypo-3sm font-semibold" obj={{ updatedAt }} style={noteStyle} />
-
         <Input
           className="itypo-2sm mt-6 !max-w-full !rounded-[0] !border-0 !p-0 !font-bold"
           style={noteStyle}
@@ -210,16 +226,31 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         />
         {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
-        <TextArea
-          textareaClass="itypo-3sm"
-          bothClass="!m-0 !h-full !w-full !max-w-full !resize-none !rounded-[0] !border-0 !p-0"
-          style={noteStyle}
-          defaultValue={data}
-          formHandle={{ ...register('data') }}
-          showIndicator={false}
-        />
+        <div className="h-full w-full">
+          {isPreview ? (
+            <div className="relative h-full w-full">
+              <div
+                className="typo-3sm mdformat prose relative min-h-[8rem] overflow-y-auto"
+                dangerouslySetInnerHTML={{ __html: mdConvert.render(getValues('data') || '') }}
+                onClick={() => setIsPreview(false)}
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+          ) : (
+            <TextArea
+              textareaClass="itypo-3sm"
+              bothClass="!m-0 !h-full !w-full !max-w-full !resize-none !rounded-[0] !border-0 !p-0"
+              style={noteStyle}
+              defaultValue={data}
+              formHandle={{ ...register('data') }}
+              showIndicator={false}
+              onContextMenu={(e) => (e.preventDefault(), setIsPreview(true))}
+            />
+          )}
+        </div>
       </div>
 
+      {showHelp && <NoteHelp onClick={() => setShowHelp(false)} />}
       {loading && <FullScreenLoading />}
     </form>,
     document.getElementById('modal-container') as HTMLElement

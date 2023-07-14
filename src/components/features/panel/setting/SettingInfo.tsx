@@ -37,6 +37,7 @@ export const SettingInfo: FC = () => {
   useEffect(() => {
     return () => {
       unregister('numberFormat');
+      unregister('maxRecentScoreNum');
     };
   }, []);
 

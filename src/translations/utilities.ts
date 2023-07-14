@@ -165,7 +165,7 @@ const statusTranslation = {
   },
   'copy to clipboard': {
     vi: 'Note có thể đem đi share được rồi !',
-    en: 'Copy to clipboard !',
+    en: 'Copied to clipboard !',
   },
 
   'no note': {
@@ -297,10 +297,9 @@ const chartTranslation = {
     vi: 'Biểu đồ radar',
     en: 'Radar Chart',
   },
-
-  'click on the label to see the following chart': {
+  'click the label to see the following chart': {
     vi: 'Chọn tên biểu đồ để xem biểu đồ tương ứng',
-    en: 'Click on the label to see the following chart',
+    en: 'Click the label to see the following chart',
   },
 };
 
@@ -327,21 +326,21 @@ export default {
   ...chartTranslation,
   ...pwaFunc,
 
-  'sign in with': {
-    vi: 'Đăng nhập với',
-    en: 'Sign in with',
+  info: {
+    vi: 'Thông tin',
+    en: 'Info',
   },
-  'log in': {
-    vi: 'Đăng nhập',
-    en: 'Log in',
+  help: {
+    vi: 'Giúp đỡ',
+    en: 'Help',
   },
-  'log out': {
-    vi: 'Đăng xuất',
-    en: 'Log out',
+  edit: {
+    vi: 'Chỉnh sửa',
+    en: 'Edit',
   },
-  'create new account': {
-    vi: 'Tạo tài khoản',
-    en: 'Create new account',
+  preview: {
+    vi: 'Xem trước',
+    en: 'Preview',
   },
   add: {
     vi: 'Thêm',
@@ -354,10 +353,6 @@ export default {
   update: {
     vi: 'Cập nhật',
     en: 'Update',
-  },
-  'update profile': {
-    vi: 'Cập nhật hồ sơ',
-    en: 'Update profile',
   },
   change: {
     vi: 'Đổi',

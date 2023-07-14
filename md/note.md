@@ -2,10 +2,17 @@
 
 1. React Aria
 2. Downshift
-3. [Base UI](https://mui.com/base-ui/react-autocomplete/)
-4. [Radix](https://www.radix-ui.com/docs/primitives/components/popover)
-5. [Headless UI](https://headlessui.com/react/listbox)
-6. Reach UI
+3. Reach UI
+4. [Base UI](https://mui.com/base-ui/react-autocomplete/)
+5. [Radix](https://www.radix-ui.com/docs/primitives/components/popover)
+6. [Headless UI](https://headlessui.com/react/listbox)
+7. Tailwind UI
+   - [Product overview](https://tailwindui.com/components/ecommerce/components/product-overviews)
+   - [Select Menu](https://tailwindui.com/components/application-ui/forms/select-menus)
+
+## Others
+
+- [Markdown to HTML](https://www.devextent.com/convert-markdown-to-html-nodejs/)
 
 ## Chart Libs
 

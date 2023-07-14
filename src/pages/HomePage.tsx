@@ -1,7 +1,6 @@
+import FeatureLayout from '@cpns/features/main/FeatureLayout';
 import { FullScreenLoading } from '@cpns/shared';
-import { FC, lazy } from 'react';
-
-const FeatureLayout = lazy(() => import('@cpns/features/main/FeatureLayout'));
+import { FC } from 'react';
 
 interface HomePageProps {
   isLoading: any;

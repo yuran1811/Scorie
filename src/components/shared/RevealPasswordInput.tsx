@@ -10,7 +10,7 @@ interface RevealPasswordInputProps extends CustomInputProps {
   changeValue: UseFormReset<any>;
 }
 
-const inputContainerClass = 'flexcenter absolute h-full w-full min-w-[33px] min-h-[33px] pr-[86px] pl-16 resize-none';
+const inputContainerClass = 'flexcenter absolute h-full w-full min-w-[33px] min-h-[33px] pr-[78px] pl-8 resize-none';
 const inputClass = 'w-full border-0 bg-transparent outline-none';
 
 export const RevealPasswordInput: FC<RevealPasswordInputProps & InputProps> = ({
@@ -26,7 +26,7 @@ export const RevealPasswordInput: FC<RevealPasswordInputProps & InputProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className="relative h-[68px] w-full max-w-[32rem] overflow-hidden rounded-[2.4rem]">
+    <div className="relative h-[68px] w-full max-w-[32rem] overflow-hidden rounded-[1.8rem]">
       <div className={`${inputContainerClass} bg-[#121726]`}>
         <input
           {...otherProps}

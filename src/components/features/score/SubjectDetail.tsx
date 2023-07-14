@@ -3,16 +3,16 @@ import { ScoreDetailType, SubjectDetailType, ToastDefaultConfig } from '@/shared
 import { useStore } from '@/store';
 import { shallowObjectCompare, successToast } from '@/utils';
 import { AddIcon, CloseIcon, IgnoreIcon, ImportantIcon, ListAllIcon, ListIcon, StarIcon, TrashIcon } from '@cpns/icons';
+import { ErrorMessage } from '@cpns/interfaces';
 import { ConfirmBox, FullScreenLoading, Input, TimeContainer, Tooltip } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { ScoreAddNew } from './ScoreAddNew';
 import { ScoreContainer } from './ScoreContainer';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { ErrorMessage } from '@cpns/interfaces';
 
 interface SubjectDetailProps {
   style: {
@@ -182,6 +182,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
   useEffect(() => {
     return () => {
       unregister('name');
+      unregister('maxScore');
     };
   }, []);
 
@@ -254,8 +255,8 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
         />
 
         <div className="flexcentercol gap-6 px-8 py-8 text-ctcolor lgtab:!flex-row lgtab:!items-start lgtab:!justify-around">
-          <div className="pt-4 lgtab:sticky lgtab:top-[9rem]">
-            <form className="flexcentercol mb-12" onSubmit={handleSubmit(onSubmit)}>
+          <div className="pt-4">
+            <form className="flexcentercol mb-8" onSubmit={handleSubmit(onSubmit)}>
               <Input
                 className="itypo-5xl !max-w-[36rem] !rounded-none !border-0 !bg-transparent !p-0 text-center !font-bold"
                 defaultValue={subject?.name || ''}
@@ -308,14 +309,14 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
                   </div>
                 </div>
               </div>
-            </form>
 
-            <div
-              className="mx-auto my-4 line-clamp-1 w-max max-w-full rounded-[1rem] px-6 text-center text-[7rem]"
-              style={{ ...style }}
-            >
-              {averageScore}
-            </div>
+              <div
+                className="mx-auto my-4 line-clamp-1 w-max max-w-full rounded-[1rem] px-6 text-center text-[7rem]"
+                style={{ ...style }}
+              >
+                {averageScore}
+              </div>
+            </form>
           </div>
           <div>
             <div className="flex w-full flex-wrap items-center justify-between bg-ctbg py-6 medmb:px-6 lgtab:sticky lgtab:top-[9rem]">

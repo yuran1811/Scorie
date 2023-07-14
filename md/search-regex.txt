@@ -1,1 +1,3 @@
-bg(-[A-Za-z0-9]{1,}){1,}/\d{1,} : search for transparent-color bg
+bg(-[A-Za-z0-9]{1,}){1,}/\d{1,} : transparent-color bg
+import.{1,}from.{1,}'([a-zA-z]{1,})([^(react)])' : import with libs
+rounded-[^(full)(none)] : rounded except rounded-full and rounded-none
