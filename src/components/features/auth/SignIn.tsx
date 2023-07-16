@@ -58,7 +58,7 @@ export const SignIn: FC = () => {
           <ModalBoxHeader onClick={() => setIsAlertOpened(false)} />
 
           <ErrorMessage className="px-8 pb-6" content="cannot sign in" />
-          <p className="typo-sm">Code:</p>
+          <p className="typo-2sm">Code:</p>
           <ErrorMessage className="px-8 pb-10" content={error} />
         </ModalBox>
       )}

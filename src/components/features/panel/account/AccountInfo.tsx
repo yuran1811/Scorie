@@ -158,7 +158,7 @@ export const AccountInfo: FC = () => {
 
               {!messageExpired && changePWMes.type === 'error' && <ErrorMessage content={changePWMes.message} />}
               {!messageExpired && changePWMes.type === 'success' && (
-                <div className="typo mt-4 w-full border-4 border-current text-center font-bold">{changePWMes.message}</div>
+                <div className="typo-2sm mt-4 w-full border-4 border-current text-center font-bold">{changePWMes.message}</div>
               )}
             </div>
           )}

@@ -99,13 +99,13 @@ const settingTranslation = {
     vi: 'Ẩn logo khi khởi động',
     en: 'Hide startup logo',
   },
-  'turn on blur effect': {
+  'turn on transparent effect': {
     vi: 'Bật hiệu ứng mờ',
-    en: 'Turn on `Blur Effect`',
+    en: 'Turn on `Transparent Effect`',
   },
-  'turn off blur effect': {
+  'turn off transparent effect': {
     vi: 'Tắt hiệu ứng mờ',
-    en: 'Turn off `Blur Effect`',
+    en: 'Turn off `Transparent Effect`',
   },
 };
 

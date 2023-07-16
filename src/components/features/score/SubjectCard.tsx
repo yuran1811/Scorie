@@ -65,9 +65,9 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
         </div>
 
         <div className="flexcentercol">
-          <div className="typo-lg line-clamp-1 w-full text-center font-bold text-ctcolor">{subject?.name || ''}</div>
+          <div className="typo-lg line-clamp-2 w-full text-center font-bold text-ctcolor">{subject?.name || ''}</div>
           <div
-            className="my-4 line-clamp-1 max-w-full rounded-[1rem] border-4 border-violet-200 px-6 text-center text-[4.8rem] font-bold"
+            className="my-4 line-clamp-1 max-w-full rounded-[1rem] border-4 border-violet-200 px-6 text-center text-[4rem] font-bold"
             style={{ ...averScoreType }}
           >
             {averageScore}
@@ -78,18 +78,18 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
           )}
 
           {scores.length ? (
-            <ReactSwiper {...swiperOptions} className="typo flex w-full flex-row items-center text-ctcolor">
+            <ReactSwiper {...swiperOptions} className="text-[2.4rem] flex w-full flex-row items-center text-ctcolor">
               {scores
                 .slice(-settings.maxRecentScoreNum)
                 .reverse()
                 .map((_) => (
                   <SwiperSlide key={_.id}>
-                    <div className="h-[6rem] w-[7rem] p-3 text-center">{_.value}</div>
+                    <div className="h-[5.3rem] w-[7rem] p-3 text-center">{_.value}</div>
                   </SwiperSlide>
                 ))}
               {scores.length > settings.maxRecentScoreNum && (
                 <SwiperSlide>
-                  <div className="h-[6rem] w-[7rem] p-3 text-center">...</div>
+                  <div className="h-[5.3rem] w-[7rem] p-3 text-center">...</div>
                 </SwiperSlide>
               )}
             </ReactSwiper>

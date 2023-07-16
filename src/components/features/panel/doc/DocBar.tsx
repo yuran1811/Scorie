@@ -11,8 +11,8 @@ const DocBar: FC<DivProps> = (props) => {
 
   return (
     <div {...props} onClick={() => setActive && setActive((s) => ({ ...s, isDoc: !active.isDoc }))}>
-      <BookIcon className="scale-typo cursor-pointer text-ctcolor" width="32" height="32" />
-      <div className="typo-med line-clamp-1 font-bold">{t('document')}</div>
+      <BookIcon className="scale-typo-sm cursor-pointer text-ctcolor" width="26" height="26" />
+      <div className="typo line-clamp-1 font-bold">{t('document')}</div>
     </div>
   );
 };

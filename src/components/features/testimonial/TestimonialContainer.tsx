@@ -1,6 +1,7 @@
 import { useCollectionQuery } from '@/hooks';
 import { useStore } from '@/store';
-import { getTestimonials } from '@/utils';
+import { classnames, getTestimonials } from '@/utils';
+import { GradientUnderline } from '@cpns/interfaces';
 import { Button, FeatureTestimonial, Testimonial } from '@cpns/shared';
 import { db } from '@shared/firebase';
 import { TestimonialProps } from '@shared/types';
@@ -8,7 +9,6 @@ import { collection, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TestimonialAddNew } from './TestimonialAddNew';
-import { GradientUnderline } from '@cpns/interfaces';
 
 export const TestimonialContainer = () => {
   const currentUser = useStore((s) => s.currentUser);
@@ -31,9 +31,10 @@ export const TestimonialContainer = () => {
 
   return (
     <section
-      className={`mx-auto my-16 max-w-[1024px] rounded-[3.2rem] ${
+      className={classnames(
+        'mx-auto my-16 max-w-[1024px] rounded-[3.2rem] py-8 text-gray-100 medmb:rounded-[4.2rem] medtab:px-4',
         settings.glassmorphismDesign ? 'bg-zinc-950/75' : 'bg-zinc-900'
-      } py-8 text-gray-100 medmb:rounded-[4.2rem] medtab:px-4`}
+      )}
     >
       <div className="container mx-auto flex flex-col items-center p-10">
         <h1 className="typo-lg p-2 text-center font-bold leading-none">{t('what users think')}</h1>

@@ -91,9 +91,10 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
 
           <Input
             name="email"
+            type="email"
+            inputMode="email"
             placeholder="Email"
             defaultValue=""
-            inputMode="email"
             formHandle={{
               ...register('email', {
                 required: 'Please fill in this field',
@@ -108,6 +109,7 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
 
           <Input
             name="password"
+            type="password"
             placeholder="Password"
             defaultValue=""
             formHandle={{
@@ -123,6 +125,7 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
           {errors?.password && <ErrorMessage content={errors.password.message || ''} />}
 
           <Input
+            type="password"
             placeholder="Confirm password"
             defaultValue=""
             formHandle={{

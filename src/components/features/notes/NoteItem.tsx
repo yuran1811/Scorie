@@ -1,7 +1,7 @@
 import { editNote } from '@/services';
 import { NoteItemProps } from '@/shared';
 import { useStore } from '@/store';
-import { copySuccessToast, copyToClipboard, getThemeStyle, mdConvert, shallowObjectCompare } from '@/utils';
+import { classnames, copySuccessToast, copyToClipboard, getThemeStyle, mdConvert, shallowObjectCompare } from '@/utils';
 import { ArchiveIcon, DoneIcon, NodeShareIcon, PaletteIcon, PinIcon, ProgressIcon } from '@cpns/icons';
 import { Tooltip } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
@@ -48,10 +48,11 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
   return (
     <>
       <div
-        className={`${viewMode === 'list' ? 'mx-auto w-[95vw] medtab:w-[calc(100%-2rem)]' : 'w-[20rem]'} ${
-          !isShow && '!hidden'
-        } isAnimated flexcentercol group relative cursor-pointer rounded-[2rem] border-[3px] border-transparent hover:border-white medtab:!mx-0 medtab:w-[24rem]
-        medtab:!max-w-none`}
+        className={classnames(
+          !isShow && '!hidden',
+          viewMode === 'list' ? 'mx-auto w-[95vw] medtab:w-[calc(100%-2rem)]' : 'w-[20rem]',
+          'isAnimated flexcentercol group relative cursor-pointer rounded-[2rem] border-[3px] border-transparent hover:border-white medtab:!mx-0 medtab:w-[24rem] medtab:!max-w-none'
+        )}
         style={noteStyle}
         onClick={() => setOpenDetail(true)}
       >
@@ -63,19 +64,10 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 
         <div className="max-h-[45rem] w-full overflow-hidden p-4">
           <div className="typo-3sm line-clamp-3 w-full whitespace-normal break-words p-2 text-center font-bold">{title}</div>
-          <div className="typo-3sm mdformat prose w-full" dangerouslySetInnerHTML={{ __html: mdConvert.render(data) }} />
-          {/* {data?.split && (
-            <div className="w-full">
-              {data.split('\n').map((datum, idx) => (
-                <p
-                  key={datum + idx}
-                  className="typo-4sm !select-none whitespace-normal break-words bg-transparent p-2 text-current"
-                >
-                  {datum}
-                </p>
-              ))}
-            </div>
-          )} */}
+          <div
+            className="typo-3sm mdformat prose h-full w-full overflow-hidden"
+            dangerouslySetInnerHTML={{ __html: mdConvert.render(data) }}
+          />
         </div>
 
         <div

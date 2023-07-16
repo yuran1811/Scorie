@@ -117,9 +117,9 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
         />
       </ModalBoxHeader>
 
-      <div className="typo-med line-clamp-1 w-full">{t('new subject')}</div>
+      <div className="typo line-clamp-1 w-full">{t('new subject')}</div>
       <form
-        className="flexcentercol typo-xl line-clamp-1 w-full p-8 text-center font-bold text-teal-700"
+        className="flexcentercol line-clamp-1 w-full px-8 py-2 text-center font-bold text-teal-700"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input

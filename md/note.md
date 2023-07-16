@@ -12,6 +12,9 @@
 
 ## Others
 
+- [mousetrap for keybinding](https://github.com/ccampbell/mousetrap)
+- [abcjs to compose music](https://www.abcjs.net/#how)
+- [Blur Img API](https://studio.pixelixe.com/api/blur/v1)
 - [Markdown to HTML](https://www.devextent.com/convert-markdown-to-html-nodejs/)
 
 ## Chart Libs

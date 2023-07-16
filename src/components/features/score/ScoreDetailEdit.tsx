@@ -131,13 +131,14 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
       <TimeContainer className="text-ctcolor" obj={{ createdAt: score?.createdAt, updatedAt: score?.updatedAt }} />
 
       <form
-        className="flexcentercol typo-3xl line-clamp-1 w-full p-8 text-center font-bold text-ctcolor"
+        className="flexcentercol line-clamp-1 w-full px-8 py-2 text-center font-bold text-ctcolor"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
+          type="number"
+          inputMode="decimal"
           placeholder="Score"
           defaultValue={score?.value || ''}
-          inputMode="decimal"
           formHandle={{
             ...register('score', {
               required: 'Please fill in this field',
@@ -151,9 +152,10 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
         {errors?.score && <ErrorMessage content={errors.score.message || ''} />}
 
         <Input
+          type="number"
+          inputMode="decimal"
           placeholder="Base"
           defaultValue={score?.base || ''}
-          inputMode="decimal"
           formHandle={{
             ...register('base', {
               required: 'Please fill in this field',

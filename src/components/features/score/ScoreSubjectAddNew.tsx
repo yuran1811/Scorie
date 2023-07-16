@@ -93,9 +93,9 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
         />
       </ModalBoxHeader>
 
-      <div className="typo-med line-clamp-1 w-full text-ctcolor">{t('new record')}</div>
+      <div className="typo line-clamp-1 w-full text-ctcolor">{t('new record')}</div>
       <form
-        className="flexcentercol typo-3xl line-clamp-1 w-full p-8 text-center font-bold text-ctcolor"
+        className="flexcentercol line-clamp-1 w-full px-8 py-2 text-center font-bold text-ctcolor"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
@@ -114,9 +114,10 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
         {errors?.subject && <ErrorMessage content={errors.subject.message || ''} />}
 
         <Input
+          type="number"
+          inputMode="decimal"
           placeholder="Score"
           defaultValue=""
-          inputMode="decimal"
           formHandle={{
             ...register('score', {
               required: 'Please fill in this field',
@@ -130,9 +131,10 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
         {errors?.score && <ErrorMessage content={errors.score.message || ''} />}
 
         <Input
+          type="number"
+          inputMode="decimal"
           placeholder="Base"
           defaultValue=""
-          inputMode="decimal"
           formHandle={{
             ...register('base', {
               required: 'Please fill in this field',

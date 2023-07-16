@@ -1,4 +1,5 @@
-import { useChangeLogStore } from '@/store';
+import { useChangeLogStore, useStore } from '@/store';
+import { classnames } from '@/utils';
 import { DoubleCheckIcon } from '@cpns/icons';
 import { Overlay } from '@cpns/shared';
 import { DivProps } from '@shared/types';
@@ -7,6 +8,7 @@ import { createPortal } from 'react-dom';
 import { VersionTimeStop } from './VersionTimeStop';
 
 export const VersionTimeline: FC<DivProps> = ({ onClick }) => {
+  const settings = useStore((s) => s.settings);
   const changeLogs = useChangeLogStore((s) => s.changeLogs);
   const changeLogsRead = useChangeLogStore((s) => s.changeLogsRead);
   const setChangeLogsRead = useChangeLogStore((s) => s.setChangeLogsRead);
@@ -17,9 +19,19 @@ export const VersionTimeline: FC<DivProps> = ({ onClick }) => {
     <div className="fullscreen flexcenter z-20 !justify-start">
       <Overlay zIdx="z-[-1]" onClick={onClick} />
 
-      <div className="typo-med scrollY relative m-auto max-h-[70vh] w-full max-w-[58rem] rounded-3xl border-4 border-violet-400/60 bg-gray-900 pb-8 text-gray-100">
+      <div
+        className={classnames(
+          'typo-med scrollY relative m-auto max-h-[70vh] w-full max-w-[58rem] rounded-3xl border-4 border-violet-400/60 pb-8 text-gray-100',
+          settings.glassmorphismDesign ? 'bg-gray-800/60 backdrop-blur-sm' : 'bg-gray-900'
+        )}
+      >
         <div
-          className="flexcenter typo-sm sticky top-0 z-20 cursor-pointer gap-4 bg-inherit px-8 py-4"
+          className={classnames(
+            'flexcenter typo-sm sticky top-0 z-20 cursor-pointer gap-4 px-8 py-4',
+            settings.glassmorphismDesign
+              ? 'bg-gradient-to-b from-gray-800 to-transparent backdrop-blur backdrop-brightness-75'
+              : 'bg-inherit'
+          )}
           onClick={() => {
             changeLogs.forEach((log) => setChangeLogsRead(log.version, !allRead));
           }}
@@ -27,7 +39,6 @@ export const VersionTimeline: FC<DivProps> = ({ onClick }) => {
           <DoubleCheckIcon active={!allRead} height="24" width="24" />
           <span>Mark all as {allRead && 'un'}read</span>
         </div>
-
         <ul className="space-y-12 p-4 medmb:px-8">
           {changeLogs.map((log) => (
             <VersionTimeStop key={log.id} data={log} />

@@ -5,7 +5,7 @@ export * from './chart';
 export * from './commonToast';
 export * from './dayjsUsage';
 export * from './firebase';
-export * from './libs';
+export * from './markdown-it';
 export * from './notes';
 export * from './notifications';
 export * from './pwaFunctions';

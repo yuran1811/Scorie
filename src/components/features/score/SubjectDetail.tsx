@@ -255,12 +255,11 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
         />
 
         <div className="flexcentercol gap-6 px-8 py-8 text-ctcolor lgtab:!flex-row lgtab:!items-start lgtab:!justify-around">
-          <div className="pt-4">
+          <div className="pt-4 lgtab:sticky lgtab:left-0 lgtab:top-[8rem]">
             <form className="flexcentercol mb-8" onSubmit={handleSubmit(onSubmit)}>
               <Input
                 className="itypo-5xl !max-w-[36rem] !rounded-none !border-0 !bg-transparent !p-0 text-center !font-bold"
                 defaultValue={subject?.name || ''}
-                inputMode="decimal"
                 formHandle={{
                   ...register('name', {
                     validate: {
@@ -273,14 +272,15 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
 
               <div className="mx-auto w-max">
                 <div className="flexcenter !justify-end gap-4">
-                  <label htmlFor="maxScore-id" className="typo-semism">
+                  <label htmlFor="maxScore-id" className="typo-sm">
                     {t('max score')}
                   </label>
                   <Input
                     id="maxScore-id"
                     className="!min-w-[7rem] !max-w-[10rem] !rounded-2xl"
-                    defaultValue={subject?.maxScore || '10'}
+                    type="number"
                     inputMode="decimal"
+                    defaultValue={subject?.maxScore || '10'}
                     formHandle={{
                       ...register('maxScore', {
                         validate: {
@@ -292,13 +292,14 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
                   {errors?.maxScore && <ErrorMessage content={errors.maxScore.message || ''} />}
                 </div>
                 <div className="flexcenter !justify-end gap-4">
-                  <label htmlFor="expected-score" className="typo-semism">
+                  <label htmlFor="expected-score" className="typo-sm">
                     {t('expected score')}
                   </label>
                   <div className="w-max">
                     <Input
                       id="expected-score"
                       className="!min-w-[7rem] !max-w-[10rem] !rounded-2xl"
+                      type="number"
                       inputMode="decimal"
                       value={expectedAverage}
                       onChange={(e) => {

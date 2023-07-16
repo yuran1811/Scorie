@@ -55,3 +55,8 @@ export const getThemeStyle = (theme: string) => ({
   backgroundColor: appThemes[theme]?.bg ? appThemes[theme].bg : appThemes.default.bg,
   color: appThemes[theme]?.color ? appThemes[theme].color : appThemes.default.color,
 });
+
+export const invertThemeStyle = ({ backgroundColor, color }: { backgroundColor: string; color: string }) => ({
+  color: backgroundColor,
+  backgroundColor: color,
+});

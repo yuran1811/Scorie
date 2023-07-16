@@ -16,8 +16,8 @@ export const About: FC = () => {
   return (
     <div className="flexcentercol w-full">
       <div className={`flexcenter w-full cursor-pointer gap-8`} onClick={() => setOpenModal((s) => !s)}>
-        <InfoIcon className="scale-typo cursor-pointer text-ctcolor" width="32" height="32" />
-        <div className="typo-med line-clamp-1 font-bold">About</div>
+        <InfoIcon className="scale-typo-sm cursor-pointer text-ctcolor" width="26" height="26" />
+        <div className="typo line-clamp-1 font-bold">About</div>
         {!openModal ? <ArrowRightIcon {...ArrowIconConfig} /> : <ArrowDownIcon {...ArrowIconConfig} />}
       </div>
 
@@ -49,7 +49,7 @@ export const About: FC = () => {
             </div>
             <div>will improve your</div>
             <div
-              className="textGradient typo-semism animate-gdMoveVert uppercase"
+              className="textGradient text-[2.6rem] animate-gdMoveVert uppercase"
               style={{
                 backgroundSize: '400% 400%',
                 backgroundImage: 'linear-gradient(-135deg,#2cccff,#20e3b2,#ffcc70,#c850c0,#4158d0)',
@@ -58,9 +58,9 @@ export const About: FC = () => {
               study quality
             </div>
           </div>
-          <div className="flex-1 py-4">
+          <div className="flex-1 py-2">
             <div className="typo-semism text-center font-bold">Contact</div>
-            <div className="flexcenter m-4 flex-wrap gap-4 p-4">
+            <div className="flexcenter flex-wrap gap-4 mt-2">
               <HighlightLink url={GH_LINK} noUnderline>
                 <GithubIcon />
               </HighlightLink>
@@ -75,7 +75,7 @@ export const About: FC = () => {
               </HighlightLink>
             </div>
           </div>
-          <div className="flexcentercol typo-4sm p-4 text-center text-violet-300/70">
+          <div className="flexcentercol typo-5sm p-4 text-center text-violet-300/70">
             <span>© Copyright 2022. All Rights Reserved.</span>
           </div>
         </div>

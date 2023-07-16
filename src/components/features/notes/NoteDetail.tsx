@@ -1,14 +1,16 @@
 import { deleteNote, editNote, validateNoteOption } from '@/services';
 import { NoteDetailType } from '@/shared';
 import { useNoteStore, useStore } from '@/store';
-import { mdConvert, shallowObjectCompare, successToast } from '@/utils';
+import { classnames, invertThemeStyle, mdConvert, shallowObjectCompare, successToast } from '@/utils';
 import { ArchiveIcon, CloseIcon, DoneIcon, InfoIcon, PinIcon, ProgressIcon, TrashIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
 import { ConfirmBox, FullScreenLoading, Input, TextArea, TimeContainer, Tooltip } from '@cpns/shared';
+import { Tab } from '@headlessui/react';
 import Tippy from '@tippyjs/react/headless';
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { NoteHelp } from './NoteHelp';
 
 interface Inputs {
@@ -31,17 +33,18 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
   const currentUser = useStore((s) => s.currentUser);
   const noteIdxList = useNoteStore((s) => s.noteIdxList);
 
+  const { t } = useTranslation();
+
   const [loading, setLoading] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
-  const [isPreview, setIsPreview] = useState(true);
   const [showConfirm, setShowConfirm] = useState(false);
   const [status, setStatus] = useState({ type: 'ok', message: '' });
   const [noteOptions, setNoteOptions] = useState({ isDone, isInProgress, isArchived, isPinned });
 
   const {
     register,
-    getValues,
     unregister,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({
@@ -109,7 +112,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
   return createPortal(
     <form
-      className="fullscreen scrollY flex flex-col items-center justify-between px-6 pb-8 text-center medtab:px-16"
+      className="fullscreen flex flex-col items-center justify-between px-6 pb-6 text-center medtab:px-16"
       style={noteStyle}
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -211,9 +214,9 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
       {status.type === 'errors' && <ErrorMessage className="p-6" content={status.message} />}
 
-      <div className="mx-auto flex h-full w-full max-w-[90rem] flex-col items-center justify-start text-left medmb:px-8 medmb:pb-8">
+      <div className="mx-auto flex h-full w-full max-w-[90rem] flex-col items-center justify-start text-left medmb:px-8">
         <Input
-          className="itypo-2sm mt-6 !max-w-full !rounded-[0] !border-0 !p-0 !font-bold"
+          className="itypo-2sm mt-4 !max-w-full !rounded-[0] !border-0 !p-0 !font-bold"
           style={noteStyle}
           defaultValue={title}
           formHandle={{
@@ -226,27 +229,44 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         />
         {errors?.title && <ErrorMessage content={errors.title.message || ''} />}
 
-        <div className="h-full w-full">
-          {isPreview ? (
-            <div className="relative h-full w-full">
-              <div
-                className="typo-3sm mdformat prose relative min-h-[8rem] overflow-y-auto"
-                dangerouslySetInnerHTML={{ __html: mdConvert.render(getValues('data') || '') }}
-                onClick={() => setIsPreview(false)}
-                onContextMenu={(e) => e.preventDefault()}
-              />
-            </div>
-          ) : (
-            <TextArea
-              textareaClass="itypo-3sm"
-              bothClass="!m-0 !h-full !w-full !max-w-full !resize-none !rounded-[0] !border-0 !p-0"
-              style={noteStyle}
-              defaultValue={data}
-              formHandle={{ ...register('data') }}
-              showIndicator={false}
-              onContextMenu={(e) => (e.preventDefault(), setIsPreview(true))}
-            />
-          )}
+        <div className="typo-3sm relative h-[calc(100%)] w-full">
+          <Tab.Group>
+            <Tab.List className="absolute right-[10rem] top-0 z-[1] font-semibold">
+              {['content', 'preview'].map((_) => (
+                <Tab
+                  key={_}
+                  className={({ selected }) =>
+                    classnames(
+                      'isAnimated typo-4sm w-max rounded-lg px-4 py-2.5',
+                      'opacity-20 hover:opacity-100',
+                      selected && 'hidden'
+                    )
+                  }
+                  style={invertThemeStyle(noteStyle)}
+                >
+                  {t(_)}
+                </Tab>
+              ))}
+            </Tab.List>
+            <Tab.Panels className="mt-2 overflow-y-auto">
+              <Tab.Panel className="h-[calc(100vh-18rem)] w-full">
+                <TextArea
+                  textareaClass="itypo-3sm"
+                  bothClass="!m-0 !h-full !w-full !max-w-full !resize-none !rounded-[0] !border-0 !p-0"
+                  style={noteStyle}
+                  defaultValue={data}
+                  formHandle={{ ...register('data') }}
+                  showIndicator={false}
+                />
+              </Tab.Panel>
+              <Tab.Panel className="h-[calc(100vh-18rem)] w-full">
+                <div
+                  className="typo-3sm mdformat prose relative h-full min-h-[8rem] overflow-y-auto"
+                  dangerouslySetInnerHTML={{ __html: mdConvert.render(watch('data') || '') }}
+                />
+              </Tab.Panel>
+            </Tab.Panels>
+          </Tab.Group>
         </div>
       </div>
 

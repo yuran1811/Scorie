@@ -1,5 +1,7 @@
 import react from '@vitejs/plugin-react';
 import dns from 'dns';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { PluginOption } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { configDefaults, defineConfig } from 'vitest/config';
@@ -15,6 +17,13 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
+    visualizer({
+      template: 'treemap', // or sunburst
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+      filename: 'analyse.html', // will be saved in project's root
+    }) as PluginOption,
     VitePWA({
       devOptions: { enabled: true },
       registerType: 'autoUpdate',

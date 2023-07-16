@@ -10,7 +10,7 @@ export const ErrorMessage: FC<ErrorMessageProps & DivProps> = ({ className = '',
   const { t } = useTranslation();
 
   return (
-    <div className={`typo-sm my-4 text-center font-semibold text-rose-400 ${className}`}>
+    <div className={`typo-2sm my-4 text-center font-semibold text-rose-400 ${className}`}>
       {children || t(content?.toLowerCase() || '')}
     </div>
   );

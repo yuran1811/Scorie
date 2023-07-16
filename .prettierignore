@@ -1,4 +1,5 @@
 *.css
 *.config.cjs
+.vscode
 .prettierrc
 tsconfig.json

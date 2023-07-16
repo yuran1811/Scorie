@@ -1,5 +1,6 @@
 import { addNewReport } from '@/services';
 import { useStore } from '@/store';
+import { classnames } from '@/utils';
 import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input, Overlay, TextArea } from '@cpns/shared';
 import { DivProps } from '@shared/types';
@@ -56,10 +57,12 @@ export const ReportAddNew: FC<
       <Overlay zIdx="z-[-1]" onClick={() => clickHandle()} />
 
       <form
-        className="flexcentercol typo-2xl mx-auto line-clamp-1 max-h-[70vh] w-max max-w-[80%] rounded-[2rem] border-2 border-violet-400/30 bg-gray-900/70 px-12 pt-8 text-center font-bold text-teal-700 lgmb:max-h-[90vh]"
+        className={classnames(
+          'flexcentercol mx-auto line-clamp-1 max-h-[70vh] w-max max-w-[80%] rounded-[2rem] border-2 border-violet-400/30 bg-gray-900/70 px-12 pt-8 text-center font-bold text-teal-700 lgmb:max-h-[90vh]'
+        )}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="typo-lg text-violet-400">{t('report bugs')}</div>
+        <div className="typo text-violet-400">{t('report bugs')}</div>
 
         <Input
           placeholder="Title"

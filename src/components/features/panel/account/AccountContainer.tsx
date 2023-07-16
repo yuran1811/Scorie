@@ -1,12 +1,10 @@
-import { FC } from 'react';
 import AccountBar from './AccountBar';
 import AccountPanel from './AccountPanel';
-import { DivProps } from '@shared/types';
 
-const AccountContainer: FC<DivProps> = ({ className }) => (
+const AccountContainer = () => (
   <div className="flexcenter w-full">
-    <AccountBar className={`flexcenter w-full cursor-pointer gap-8 ${className}`} />
-    <AccountPanel className={className} />
+    <AccountBar className="flexcenter w-full cursor-pointer gap-8" />
+    <AccountPanel />
   </div>
 );
 

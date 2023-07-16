@@ -44,14 +44,15 @@ export const SettingInfo: FC = () => {
   return (
     <div className="flexcentercol mt-8 h-4/5 w-full !justify-start overflow-y-auto overflow-x-hidden p-3 pb-4">
       <div className="w-full">
-        <form className="flexcentercol mt-8" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flexcentercol mt-8 gap-2" onSubmit={handleSubmit(onSubmit)}>
           <span className="typo-sm text-center font-bold">{t('score format')} (9.xxxx)</span>
           <div className="flexcenter w-4/5 flex-wrap">
             <Input
               className="mx-4 !min-w-[8rem] !max-w-[12rem] flex-1"
+              type="number"
+              inputMode="numeric"
               placeholder="Type a number"
               defaultValue={settings.numberFormat}
-              inputMode="numeric"
               formHandle={{
                 ...register('numberFormat', {
                   required: 'Please fill in this field',
@@ -69,9 +70,10 @@ export const SettingInfo: FC = () => {
           <div className="flexcenter w-4/5 flex-wrap">
             <Input
               className="mx-4 !min-w-[8rem] !max-w-[12rem] flex-1"
+              type="number"
+              inputMode="numeric"
               placeholder="Type a number"
               defaultValue={settings.maxRecentScoreNum}
-              inputMode="numeric"
               formHandle={{
                 ...register('maxRecentScoreNum', {
                   required: 'Please fill in this field',
@@ -100,7 +102,7 @@ export const SettingInfo: FC = () => {
           }
         >
           {t(settings.showStartUpLogo ? 'show startup logo' : 'hide startup logo')}
-          <div className="typo-3sm text-center !font-normal">{t('click to change')}</div>
+          <div className="typo-4sm text-center font-semibold italic">{t('click to change')}</div>
         </div>
 
         <div
@@ -112,8 +114,8 @@ export const SettingInfo: FC = () => {
             })
           }
         >
-          {t(settings.glassmorphismDesign ? 'turn on blur effect' : 'turn off blur effect')}
-          <div className="typo-3sm text-center !font-normal">{t('click to change')}</div>
+          {t(settings.glassmorphismDesign ? 'turn on transparent effect' : 'turn off transparent effect')}
+          <div className="typo-4sm text-center font-semibold italic">{t('click to change')}</div>
         </div>
       </div>
     </div>

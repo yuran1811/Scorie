@@ -1,5 +1,5 @@
 import { useChangeLogStore, useStore } from '@/store';
-import { changeLogStyle, formatDate } from '@/utils';
+import { changeLogStyle, classnames, formatDate } from '@/utils';
 import { DoubleCheckIcon } from '@cpns/icons';
 import { Tooltip } from '@cpns/shared';
 import { ChangeLogProps } from '@shared/types';
@@ -38,9 +38,10 @@ export const VersionTimeStop: FC<VersionTimeStopProps> = ({ data: { content, tim
             </span>
 
             <div
-              className={`${
+              className={classnames(
+                'absolute -right-20 cursor-pointer smmb:-right-16',
                 currentUser && currentUser?.uid ? '' : '!hidden'
-              } absolute -right-20 cursor-pointer smmb:-right-16`}
+              )}
             >
               <Tooltip content={!!changeLogsRead[version] ? 'Mark as unread' : 'Mark as read'}>
                 <div onClick={() => setChangeLogsRead(version, !changeLogsRead[version])}>

@@ -88,11 +88,12 @@ const SignInUseEmailPassWord = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <Input
-              className="itypo-3sm !h-[68px] !border-0 !bg-[#121726] !px-8 !tracking-wider !rounded-[1.8rem]"
+              className="itypo-3sm !h-[68px] !rounded-[1.8rem] !border-0 !bg-[#121726] !px-8 !tracking-wider"
               name="email"
+              type="email"
+              inputMode="email"
               placeholder="Email"
               defaultValue=""
-              inputMode="email"
               formHandle={{
                 ...register('email', {
                   required: 'Please fill in this field',
@@ -105,23 +106,10 @@ const SignInUseEmailPassWord = () => {
             />
             {errors?.email && <ErrorMessage content={errors.email.message || ''} />}
 
-            {/* <Input
-              name="password"
-              placeholder="Password"
-              defaultValue=""
-              formHandle={{
-                ...register('password', {
-                  required: 'Please fill in this field',
-                  validate: {
-                    notEmpty: (v) => v.trim().length !== 0 || 'Password cannot be empty',
-                    isValid: (v) => /^[\w\d. ]{6,}$/.test(v.trim()) || 'At least 6 characters',
-                  },
-                }),
-              }}
-            /> */}
             <RevealPasswordInput
               className="max-w-[32rem]"
               name="password"
+              type="password"
               placeholder="Password"
               defaultValue=""
               inputValue={watch('password')}

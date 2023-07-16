@@ -111,9 +111,9 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
 
       {status.type === 'errors' && <ErrorMessage className="mx-auto w-4/5 py-5 text-center" content={status.message} />}
 
-      <div className="typo-xl line-clamp-1 w-full">{t('new note')}</div>
+      <div className="typo line-clamp-1 w-full">{t('new note')}</div>
       <form
-        className="flexcentercol typo-2xl line-clamp-1 w-full p-8 text-center font-bold text-teal-700"
+        className="flexcentercol line-clamp-1 w-full px-8 py-2 text-center font-bold text-teal-700"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input

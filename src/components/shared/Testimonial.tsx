@@ -1,5 +1,6 @@
 import { getUserProfile, upvoteFeedback } from '@/services';
 import { useStore } from '@/store';
+import { classnames } from '@/utils';
 import { UpvoteIcon } from '@cpns/icons';
 import { TestimonialProps } from '@shared/types';
 import { User } from 'firebase/auth';
@@ -34,9 +35,10 @@ export const Testimonial: FC<{ data: TestimonialProps }> = ({ data: { content, n
   return (
     <div className="relative mx-4 my-6 flex w-full max-w-xl flex-col shadow-lg">
       <div
-        className={`rounded-t-xl border-2 border-b-0 border-r-0 border-violet-600 ${
+        className={classnames(
+          'rounded-t-xl border-2 border-b-0 border-r-0 border-violet-600 px-4 py-12 medtab:px-8 lgtab:px-12',
           settings.glassmorphismDesign ? 'bg-gray-900/70' : 'bg-gray-900'
-        } px-4 py-12 medtab:px-8 lgtab:px-12`}
+        )}
       >
         <p className="typo relative px-6 py-4 text-center italic text-gray-100">
           <svg
@@ -82,9 +84,10 @@ export const FeatureTestimonial: FC<TestimonialProps> = ({ content, name, job = 
 
   return (
     <section
-      className={`mx-auto my-24 w-max max-w-[80%] rounded-[2rem] border-4 border-violet-700 ${
-        settings.glassmorphismDesign ? 'bg-gray-800/70' : 'bg-gray-800'
-      } p-4 text-gray-100 medmb:p-8`}
+      className={classnames(
+        'mx-auto my-24 w-max max-w-[80%] rounded-[2rem] border-4 border-violet-700 p-4 text-gray-100 medmb:p-8',
+        settings.glassmorphismDesign ? 'bg-gray-800/50' : 'bg-gray-800'
+      )}
     >
       <div className="container relative mx-auto flex flex-col items-center space-y-6 p-2 medmb:p-4 lgtab:p-8">
         <div className="absolute -top-[6.5rem] mx-auto w-max">

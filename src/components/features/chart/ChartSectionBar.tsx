@@ -1,5 +1,5 @@
 import { useStore } from '@/store';
-import { getChartData, scrollToTop } from '@/utils';
+import { classnames, getChartData, scrollToTop } from '@/utils';
 import { ArrowRightIcon, BackIcon, ChartIcon } from '@cpns/icons';
 import { Button, FullScreenLoading } from '@cpns/shared';
 import { t as T } from 'i18next';
@@ -112,7 +112,7 @@ export const ChartSectionBar: FC = () => {
   if (!scores.length)
     return (
       <div className="flexcentercol typo-med relative mx-auto my-12 w-full !justify-start py-20 text-white medtab:w-[70%]">
-        <div className="typo-lg p-6 text-center font-semibold">{t('add scores and the chart will be shown')}</div>
+        <div className="typo-semism p-6 text-center font-semibold">{t('add scores and the chart will be shown')}</div>
         <Button
           content="Add scores"
           before={false}
@@ -137,9 +137,10 @@ export const ChartSectionBar: FC = () => {
               content="bar chart"
             />
             <div
-              className={`${
+              className={classnames(
+                'isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400',
                 chartUsed.bar ? '!scale-100' : ''
-              } isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400`}
+              )}
             />
           </div>
           <div className="flexcentercol relative">
@@ -149,9 +150,10 @@ export const ChartSectionBar: FC = () => {
               content="polar chart"
             />
             <div
-              className={`${
+              className={classnames(
+                'isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400',
                 chartUsed.polar ? '!scale-100' : ''
-              } isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400`}
+              )}
             />
           </div>
           <div className="flexcentercol relative">
@@ -161,9 +163,10 @@ export const ChartSectionBar: FC = () => {
               content="radar chart"
             />
             <div
-              className={`${
+              className={classnames(
+                'isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400',
                 chartUsed.radar ? '!scale-100' : ''
-              } isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400`}
+              )}
             />
           </div>
         </div>
@@ -171,9 +174,7 @@ export const ChartSectionBar: FC = () => {
 
       <div className="typo-4sm mx-auto my-8 flex w-full flex-col items-center justify-start gap-20">
         {Object.values(chartUsed).every((_) => !_) && (
-          <div className="typo m-4 w-full p-4 text-center font-bold">
-            {t('click the label to see the following chart')}
-          </div>
+          <div className="typo m-4 w-full p-4 text-center font-bold">{t('click the label to see the following chart')}</div>
         )}
 
         {chartUsed.bar && (

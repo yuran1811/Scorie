@@ -1,5 +1,6 @@
 import { usePanel } from '@/contexts';
 import { DivProps } from '@/shared';
+import { classnames } from '@/utils';
 import { FC } from 'react';
 
 const beforeStyle = (active: boolean) =>
@@ -23,9 +24,12 @@ export const MenuIcon: FC<MenuIconProps & DivProps> = ({ className, ...otherProp
   return (
     <div
       {...otherProps}
-      className={`flexcentercol relative h-[4rem] min-h-[4rem] w-[4rem] min-w-[4rem] cursor-pointer transition-all ${
-        beforeStyle(active.isMenu) + ' ' + afterStyle(active.isMenu)
-      } ${className}`}
+      className={classnames(
+        'flexcentercol relative h-[4rem] min-h-[4rem] w-[4rem] min-w-[4rem] cursor-pointer transition-all',
+        beforeStyle(active.isMenu),
+        afterStyle(active.isMenu),
+        className
+      )}
       onClick={onClickHandle}
     />
   );

@@ -43,7 +43,7 @@ export const BlockQuote: FC<DivProps> = () => {
       ) : (
         <blockquote
           data-tour={step(1)}
-          className="relative mx-auto w-full rounded-[2rem] border-b-2 p-4 lgmb:max-w-[68rem] lgmb:p-12 lgmb:pb-8"
+          className="relative mx-auto w-full rounded-[2rem] border-b-2 p-4 pb-2 lgmb:max-w-[68rem] lgmb:p-12 lgmb:pb-8"
           style={{ backgroundColor: `${bg}85`, color: `${color}`, borderColor: `${color}80` }}
         >
           <QuoteIcon
@@ -53,18 +53,18 @@ export const BlockQuote: FC<DivProps> = () => {
             fill={secondary}
           />
 
-          <div className="flexcentercol relative mt-10 gap-4 p-6 lgmb:p-8">
-            <p className="indent-8 text-[1.9rem] lgmb:indent-12 lgmb:text-[2.4rem]" style={{ color }}>
+          <div className="flexcentercol relative mt-8 gap-4 p-4 lgmb:p-6">
+            <p className="indent-8 text-[1.8rem] lgmb:indent-12 lgmb:text-[2rem]" style={{ color }}>
               {data[quoteIdx]?.content || ''}
             </p>
 
-            <p className="text-center text-[2rem] font-semibold italic lgmb:text-[2.5rem]" style={{ color: `${color}90` }}>
+            <p className="text-center text-[1.9rem] font-semibold italic lgmb:text-[2.1rem]" style={{ color: `${color}90` }}>
               {`- ${data[quoteIdx]?.author} -` || ''}
             </p>
           </div>
 
           <div
-            className="flexcenter absolute -bottom-[5.85rem] left-1/2 w-[82%] min-w-[20.5rem] -translate-x-1/2 !justify-around gap-4 rounded-b-[2rem] border-2 bg-zinc-800 p-4 medmb:min-w-[23rem] lgmb:-bottom-16 lgmb:w-[40%] medtab:rounded-[2rem]"
+            className="flexcenter absolute -bottom-[5.85rem] left-1/2 w-[82%] min-w-[20.5rem] -translate-x-1/2 !justify-around gap-4 rounded-b-[2rem] border-2 bg-zinc-800 p-4 medmb:w-max medmb:min-w-[23rem] lgmb:-bottom-12 medtab:rounded-[2rem]"
             style={{ backgroundColor: bg, borderColor: `${color}80` }}
           >
             <PrevQuoteButton

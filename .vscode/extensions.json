@@ -1,10 +1,1 @@
-{
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "dotenv.dotenv-vscode",
-    "dsznajder.es7-react-js-snippets",
-    "visualstudioexptteam.intellicode-api-usage-examples",
-    "visualstudioexptteam.vscodeintellicode",
-    "wix.vscode-import-cost"
-  ]
-}
+{"recommendations":["dbaeumer.vscode-eslint","dotenv.dotenv-vscode","dsznajder.es7-react-js-snippets","visualstudioexptteam.intellicode-api-usage-examples","visualstudioexptteam.vscodeintellicode","wix.vscode-import-cost"]}

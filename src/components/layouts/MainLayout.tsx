@@ -1,5 +1,6 @@
 import { AppStatusProvider } from '@/contexts';
 import { useStore, useTourStore } from '@/store';
+import { classnames } from '@/utils';
 import { AnimateLogo } from '@cpns/features/animations';
 import { Footer, Header } from '@cpns/layouts/partials';
 import { AppStatusPopup } from '@cpns/shared/AppStatusPopup';
@@ -19,16 +20,15 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <AppStatusProvider>
       <div
-        className={`fullsize typo relative z-0 overflow-x-hidden text-white ${
-          !settings.glassmorphismDesign
-            ? 'bg-[#1f0a48]'
-            : 'after:fullscreen after:z-[-1] after:bg-[#00000099] after:backdrop-blur-lg'
-        }`}
+        className={classnames(
+          'fullsize typo relative z-0 overflow-x-hidden text-white',
+          settings.glassmorphismDesign && 'after:fullscreen after:z-[-1] after:bg-[#00000099]'
+        )}
         style={
           !settings.glassmorphismDesign
-            ? {}
+            ? { backgroundColor: '#1f0a48' }
             : {
-                background: 'url(/bg.jpg) no-repeat fixed',
+                background: 'url(/bg-blur.jpg) no-repeat fixed',
                 backgroundClip: 'content-box',
                 backgroundPosition: 'top left',
                 backgroundSize: 'cover',
@@ -55,7 +55,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
       {false && !status.isRun && (
         <div className="fullscreen flexcenter z-[100] bg-slate-900">
           <button
-            className="typo-3xl text-center font-bold text-white"
+            className="typo-lg text-center font-bold text-white"
             onClick={() => {
               setStatus({ isRun: true });
               setCurrentStep(0);

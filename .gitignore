@@ -22,12 +22,13 @@
 /build
 /coverage
 
+node_modules
 dist
 dist-ssr
 dev-dist
-lerna-debug.log*
 logs
-node_modules
+lerna-debug.log*
+analyse.html
 tsconfig.tsbuildinfo
 
 npm-debug.log*
