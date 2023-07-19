@@ -38,19 +38,19 @@ export const featureRoutes: FeatureRoutesType = [
 export const publicRoutes: RoutesType = [
   {
     path: routes.notes,
-    component: NotePage || ErrorContent,
+    Component: NotePage || ErrorContent,
   },
   {
     path: routes.subjects,
-    component: ScorePage || ErrorContent,
+    Component: ScorePage || ErrorContent,
   },
   {
     path: routes.analytics,
-    component: ChartPage || ErrorContent,
+    Component: ChartPage || ErrorContent,
   },
   {
     path: routes.tools,
-    component: ToolsPage || ErrorContent,
+    Component: ToolsPage || ErrorContent,
   },
 ];
 

@@ -1,31 +1,14 @@
 import { scrollToEle } from '@/utils';
 import { FC, useEffect } from 'react';
-import ReactApexChart from 'react-apexcharts';
+import ReactApexChart, { Props } from 'react-apexcharts';
 import { useTranslation } from 'react-i18next';
 
-interface ApexChartProps {
+type ApexChartProps = Pick<Props, 'type'> & {
   data: {
     options: ApexCharts.ApexOptions;
     series: ApexAxisChartSeries | ApexNonAxisChartSeries;
   };
-  type?:
-    | 'area'
-    | 'line'
-    | 'bar'
-    | 'histogram'
-    | 'pie'
-    | 'donut'
-    | 'radialBar'
-    | 'scatter'
-    | 'bubble'
-    | 'heatmap'
-    | 'treemap'
-    | 'boxPlot'
-    | 'candlestick'
-    | 'radar'
-    | 'polarArea'
-    | 'rangeBar';
-}
+};
 
 export const ApexChartWrapper: FC<ApexChartProps> = ({ data, type = 'bar' }) => {
   const { t } = useTranslation();

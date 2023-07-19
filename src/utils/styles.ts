@@ -4,8 +4,8 @@ export const customStyle = {
 };
 
 export const averageScore = {
-  excellent: { color: '#86efac', background: '#065f46' },
-  good: { color: '#d9f99d', background: '#15803d' },
+  excellent: { color: '#d9f99d', background: '#15803d' },
+  good: { color: '#86efac', background: '#065f46' },
   normal: { color: '#cbd5e1', background: '#1e293b' },
   caution: { color: '#fbbf24', background: '#92400e' },
   danger: { color: '#ef4444', background: '#991b1b' },

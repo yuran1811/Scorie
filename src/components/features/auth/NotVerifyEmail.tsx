@@ -23,11 +23,11 @@ export const NotVerifyEmail: FC = () => {
         });
       })
       .catch((err) => {
-        toast.error(t('cannot send email verification'), {
+        toast.error(`${t('cannot send email verification')}\n${err.message}`, {
           ...ToastDefaultConfig,
           position: 'top-center',
         });
-        console.log(getFirebaseErr(err.message));
+        console.log(err.message, getFirebaseErr(err.message));
       })
       .finally(() => {
         setCanResend(true);

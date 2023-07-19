@@ -14,7 +14,7 @@ import {
   NoteIcon,
   ProgressIcon,
 } from '@cpns/icons';
-import { SearchBar, Tooltip } from '@cpns/shared';
+import { AddButton, SearchBar, Tooltip } from '@cpns/shared';
 import { collection } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -38,7 +38,7 @@ export const NoteSectionBar = () => {
     collection(db, 'users', currentUser?.uid as string, 'notes')
   );
 
-  const [viewMode, setViewMode] = useState(window.innerWidth < 400 ? 'list' : 'grid');
+  const [viewMode, setViewMode] = useState('list');
   const [showImport, setShowImport] = useState(false);
   const [addNewOpen, setAddNewOpen] = useState(false);
   const [noteList, setNoteList] = useState<NoteListType[]>([]);
@@ -72,6 +72,8 @@ export const NoteSectionBar = () => {
 
   return (
     <div className="my-[2rem] mb-[7rem] w-full">
+      <AddButton onClick={() => setAddNewOpen((s) => !s)} />
+
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
         <BackIcon className="scale-75 text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={NoteIcon} content="Note" />

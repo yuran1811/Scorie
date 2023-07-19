@@ -1,13 +1,22 @@
+import { TourProps } from '@reactour/tour';
+
 export * from './defaults';
 export * from './links';
 export * from './locales';
 
-export const NOTE_RULE = `# Heading 1
-## Heading 2
-### Heading 3
-#### Heading 4
-##### Heading 5
-###### Heading 6
+export const tourStyles: Pick<TourProps, 'styles'> = {
+  styles: {
+    close: (base) => ({ ...base, transform: 'scale(1.5)' }),
+    badge: (base) => ({ ...base, fontSize: '2rem' }),
+  },
+};
+
+export const NOTE_RULE = `# Heading 1 {#note-rule_heading1}
+## Heading 2 {#note-rule_heading2}
+### Heading 3 {#note-rule_heading3}
+#### Heading 4 {#note-rule_heading4}
+##### Heading 5 {#note-rule_heading5}
+###### Heading 6 {#note-rule_heading6}
 
 Normal text
 
@@ -18,7 +27,7 @@ Normal text
 
 ---
 
-## Blank line
+## Blank line {#note-rule_blank}
 
 Add \`&nbsp;\` (non-breaking space) to the new line to render blank line
 
@@ -32,12 +41,12 @@ There
 
 \`\`\`
 
-## Horizontal Rules
+## Horizontal Rules {#note-rule_hor}
 ___
 ---
 ***
 
-## Typographic replacements
+## Typographic replacements {#note-rule_typo}
 
 (c) (C) (r) (R) (tm) (TM) +-
 
@@ -45,11 +54,11 @@ will be render as
 
 © © ® ® ™ ™ ±
 
-## Attributes
+## Attributes {#note-rule_attr}
 
 {id="" class="" target="" width="" height=""}
 
-## Emphasis
+## Emphasis {#note-rule_emphasize}
 
 **This is bold text**
 
@@ -65,7 +74,7 @@ This is ^sup^, like 1^st^
 
 This is ~sub~, like H~2~O
 
-## Footnote
+## Footnote {#note-rule_footnote}
 
 Here is a footnote reference,[^1] and another.[^longnote]
 
@@ -77,15 +86,15 @@ Here is an inline note.^[Inlines notes are easier to write, since
   you don't have to pick an identifier and move down to type the
   note.]
 
-## Blockquotes
+## Blockquotes {#note-rule_block}
 
 > Blockquotes can also be nested...
 >> ...by using additional greater-than signs right next to each other...
 > > > ...or with spaces between arrows.
 
-## Lists
+## Lists {#note-rule_lists}
 
-### Unordered
+### Unordered {#note-rule_unorderedlists}
 
 + Create a list by starting a line with \`+\`, \`-\`, or \`*\`
 + Sub-lists are made by indenting 2 spaces:
@@ -95,7 +104,7 @@ Here is an inline note.^[Inlines notes are easier to write, since
     - Nulla volutpat aliquam velit
 + Very easy!
 
-### Ordered
+### Ordered {#note-rule_orderedlists}
 
 1. Lorem ipsum dolor sit amet
 2. Consectetur adipiscing elit
@@ -109,7 +118,7 @@ Start numbering with offset:
 57. foo
 1. bar
 
-## Code
+## Code {#note-rule_code}
 
 Inline \`code\`
 
@@ -128,7 +137,7 @@ Sample text here...
 
 \`\`\`
 
-## Tables
+## Tables {#note-rule_tables}
 
 | Option | Description |
 | ------ | ----------- |
@@ -142,7 +151,7 @@ Right aligned columns
 | data   | aaaaaaaaa   |
 | engine | aaaaaaaaaaa |
 
-## Links
+## Links {#note-rule_links}
 
 [just a link](https://google.com)
 
@@ -150,20 +159,20 @@ Right aligned columns
 
 Auto-converted link https://google.com
 
-## Images
+## Images {#note-rule_imgs}
 
-### Type 1
+### Type 1 {#note-rule_imgstype1}
 ![bg](/bg.jpg)
 ![qrcode](/QRCode.PNG "The qrcode")
 
-#### Responsive
+#### Responsive {#note-rule_imgsresponsive}
 ![bg](/bg.jpg){width="60" height="auto"}
 ![qrcode](/QRCode.PNG "The qrcode"){width="70" height="auto"}
 
 <img src="/bg.jpg" width="60" height="auto">
 <img src="/QRCode.PNG" width="70" height="auto" alt="The qrcode">
 
-### Type 2
+### Type 2 {#note-rule_type2}
 Like links, Images also have a footnote style syntax
 
 ![Alt text][id]

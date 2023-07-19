@@ -14,7 +14,7 @@ export const Header: FC = () => {
     <header
       className={`flexcenter header-h fixed top-0 z-20 w-full !justify-between ${
         settings.glassmorphismDesign
-          ? 'bg-gradient-to-b from-ctbg/20 to-vintage1-5/20 backdrop-blur-md backdrop-brightness-50'
+          ? 'bg-gradient-to-b from-ctbg/20 to-[#355c7d]/20 backdrop-blur-md backdrop-brightness-50'
           : 'bg-[#150731]'
       }`}
     >
@@ -25,7 +25,7 @@ export const Header: FC = () => {
 
       <Link to="/">
         <div className="typo-lg text-center font-bold" onClick={() => scrollToTop()}>
-          Scorie
+          {innerWidth < 280 ? 'S' : 'Scorie'}
           <span className="typo-4sm textGradient !bg-gradient-to-tl !from-gray-600 !to-white px-2 italic">.Beta</span>
         </div>
       </Link>

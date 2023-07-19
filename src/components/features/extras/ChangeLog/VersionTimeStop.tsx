@@ -22,7 +22,7 @@ export const VersionTimeStop: FC<VersionTimeStopProps> = ({ data: { content, tim
       <div className="flex-1 space-y-2">
         <div className="flex flex-col items-start justify-start text-gray-400">
           <div
-            className="typo-3sm group relative my-1 flex items-center rounded-full border-2 p-1 smmb:m-0 smmb:px-4"
+            className="typo-3sm relative my-1 flex items-center rounded-full border-2 p-1 smmb:m-0 smmb:px-4"
             style={{
               backgroundColor: changeLogStyle[type]?.color || '#a78bfa',
               borderColor: changeLogStyle[type]?.bg || '#374151',
@@ -39,13 +39,13 @@ export const VersionTimeStop: FC<VersionTimeStopProps> = ({ data: { content, tim
 
             <div
               className={classnames(
-                'absolute -right-20 cursor-pointer smmb:-right-16',
+                'absolute -right-16 cursor-pointer smmb:-right-16',
                 currentUser && currentUser?.uid ? '' : '!hidden'
               )}
             >
               <Tooltip content={!!changeLogsRead[version] ? 'Mark as unread' : 'Mark as read'}>
                 <div onClick={() => setChangeLogsRead(version, !changeLogsRead[version])}>
-                  <DoubleCheckIcon active={!!changeLogsRead[version]} height="28" width="28" />
+                  <DoubleCheckIcon active={!!changeLogsRead[version]} height="24" width="24" />
                 </div>
               </Tooltip>
             </div>

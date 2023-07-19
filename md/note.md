@@ -1,21 +1,37 @@
+## References
+
+- [Push Notification with FCM](https://blog.logrocket.com/push-notifications-react-firebase/)
+- [Markdown to HTML](https://www.devextent.com/convert-markdown-to-html-nodejs/)
+- [Glassmorphism UI](https://codepen.io/TurkAysenur/pen/ZEpxeYm?editors=1000)
+
 ## UI Component Libs
 
-1. React Aria
-2. Downshift
-3. Reach UI
-4. [Base UI](https://mui.com/base-ui/react-autocomplete/)
-5. [Radix](https://www.radix-ui.com/docs/primitives/components/popover)
-6. [Headless UI](https://headlessui.com/react/listbox)
-7. Tailwind UI
-   - [Product overview](https://tailwindui.com/components/ecommerce/components/product-overviews)
-   - [Select Menu](https://tailwindui.com/components/application-ui/forms/select-menus)
+- React Aria
+- Downshift
+- Reach UI
+- [Base UI](https://mui.com/base-ui/react-autocomplete/)
+- [Radix](https://www.radix-ui.com/docs/primitives/components/popover)
+- [Headless UI](https://headlessui.com/react/listbox)
+- Tailwind UI - Component
+  - [Product overview](https://tailwindui.com/components/ecommerce/components/product-overviews)
 
-## Others
+## Tools
 
+### Using
+
+- [svg to favicon generator](https://realfavicongenerator.net/svg-favicon/)
+- Minifier
+  - [CSS](https://www.toptal.com/developers/cssminifier)
+  - [JS](https://www.toptal.com/developers/javascript-minifier)
+  - [JSON](https://codebeautify.org/jsonminifier)
+  - [SVG](https://www.svgviewer.dev/)
+
+### Amazing
+
+- [transform tools](https://transform.tools/css-to-tailwind)
 - [mousetrap for keybinding](https://github.com/ccampbell/mousetrap)
 - [abcjs to compose music](https://www.abcjs.net/#how)
 - [Blur Img API](https://studio.pixelixe.com/api/blur/v1)
-- [Markdown to HTML](https://www.devextent.com/convert-markdown-to-html-nodejs/)
 
 ## Chart Libs
 
@@ -31,35 +47,6 @@
 - react-google-charts : ^4.0.0
 ```
 
-```css
-div[id^='reactgooglegraph'] svg,
-div[data-chart-source-type~='G2Plot'] svg {
-  @apply !rounded-[2rem];
-}
-div[id^='reactgooglegraph'] text,
-div[data-chart-source-type~='G2Plot'] text {
-  @apply !text-[1.8rem];
-}
-div[id^='reactgooglegraph'] {
-  @apply !mx-auto;
-}
-.g2-tooltip,
-.g2-tooltip-list-item {
-  @apply !text-[1.6rem];
-}
-.g2-tooltip-list-item {
-  @apply !py-3;
-}
-.g2-tooltip-title {
-  @apply !py-2 !text-center !text-[2.5rem];
-}
-.g2-tooltip-marker {
-  @apply !scale-150 !text-left;
-}
-.g2-tooltip-name {
-  @apply !text-[1.8rem] !font-semibold;
-}
-.g2-tooltip-value {
-  @apply !text-[1.8rem];
-}
+```
+div[data-chart-source-type~=G2Plot] svg,div[id^=reactgooglegraph] svg{@apply !rounded-[2rem]}.g2-tooltip-value,div[data-chart-source-type~=G2Plot] text,div[id^=reactgooglegraph] text{@apply !text-[1.8rem]}div[id^=reactgooglegraph]{@apply !mx-auto}.g2-tooltip,.g2-tooltip-list-item{@apply !text-[1.6rem]}.g2-tooltip-list-item{@apply !py-3}.g2-tooltip-title{@apply !py-2 !text-center !text-[2.5rem]}.g2-tooltip-marker{@apply !scale-150 !text-left}.g2-tooltip-name{@apply !text-[1.8rem] !font-semibold}
 ```

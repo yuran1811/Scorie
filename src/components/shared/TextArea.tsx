@@ -26,7 +26,7 @@ export const TextArea: FC<Props & TextAreaProps> = ({
       <textarea
         {...otherProps}
         {...formHandle}
-        className={`typo-sm my-[0.5rem] h-full min-h-[8rem] w-full rounded-[2.5rem] rounded-br-none border-[0.3rem] border-solid border-violet-500/30 bg-gray-900 px-[2rem] py-[1rem] text-white outline-none transition-colors focus:border-violet-400 ${bothClass} ${textareaClass}`}
+        className={`typo-sm my-[0.5rem] h-full min-h-[8rem] w-full rounded-[2rem] rounded-br-none border-[0.3rem] border-solid border-violet-500/30 bg-gray-900 px-[2rem] py-[1rem] text-white outline-none transition-colors focus:border-violet-400 ${bothClass} ${textareaClass}`}
         placeholder={t('content')}
       />
       {showIndicator && false && (

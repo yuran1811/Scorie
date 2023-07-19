@@ -18,23 +18,23 @@ export const ModalUI: FC<ModalUIProps & DivProps> = ({ children, title, titleIco
     <div className="flexcenter fullscreen z-[11]" onClick={() => cancelHandle()}>
       <Overlay />
 
-      <div className="z-20 flex max-w-4xl flex-col gap-4 rounded-[2rem] bg-gray-900 p-8 text-gray-100">
-        <h2 className="typo flex items-center gap-4 font-semibold leading-tight tracking-wide">
-          {titleIcon || <NotificationIcon active width="30" height="30" />}
+      <div className="z-20 m-2 flex max-w-4xl flex-col gap-4 rounded-[2rem] bg-gray-900 p-6 text-gray-100">
+        <h2 className="typo-semism flex items-center gap-4 font-semibold leading-tight tracking-wide">
+          {titleIcon || <NotificationIcon active width="24" height="24" />}
           {title}
         </h2>
 
-        {children}
+        <div className="typo-2sm w-full">{children}</div>
 
-        <div className="typo-2sm mt-8 flex flex-col justify-end gap-5 medtab:flex-row">
+        <div className="typo-2sm mt-4 flex flex-col items-center gap-5 font-semibold ssmmb:flex-row ssmmb:justify-end">
           <div
-            className="cursor-pointer rounded-[2rem] border-4 border-transparent px-6 py-2 transition-colors hover:border-violet-400"
+            className="w-max cursor-pointer rounded-[2rem] border-4 border-transparent px-6 py-2 text-center transition-colors hover:border-violet-400"
             onClick={() => cancelHandle()}
           >
             {t('cancel')}
           </div>
           <div
-            className="cursor-pointer rounded-[2rem] border-4 border-transparent bg-violet-900 px-6 py-2 font-semibold text-violet-300 transition-colors hover:border-violet-400 hover:bg-violet-800"
+            className="w-max cursor-pointer rounded-[2rem] border-4 border-transparent bg-violet-900 px-6 py-2 text-center text-violet-300 transition-colors hover:border-violet-400 hover:bg-violet-800"
             onClick={onClick}
           >
             {t('confirm')}

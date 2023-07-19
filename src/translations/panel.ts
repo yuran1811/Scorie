@@ -53,6 +53,10 @@ const accountTranslation = {
     vi: 'Tạo tài khoản',
     en: 'Create new account',
   },
+  'username is too long': {
+    vi: 'Mật khẩu quá dài',
+    en: 'Username is too long',
+  },
 };
 
 const dataTranslation = {
@@ -106,6 +110,14 @@ const settingTranslation = {
   'turn off transparent effect': {
     vi: 'Tắt hiệu ứng mờ',
     en: 'Turn off `Transparent Effect`',
+  },
+  'show quick settings': {
+    vi: 'Hiện cài đặt nhanh',
+    en: 'Show quick settings',
+  },
+  'hide quick settings': {
+    vi: 'Ẩn cài đặt nhanh',
+    en: 'Hide quick settings',
   },
 };
 

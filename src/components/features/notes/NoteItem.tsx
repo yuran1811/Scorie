@@ -51,7 +51,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
         className={classnames(
           !isShow && '!hidden',
           viewMode === 'list' ? 'mx-auto w-[95vw] medtab:w-[calc(100%-2rem)]' : 'w-[20rem]',
-          'isAnimated flexcentercol group relative cursor-pointer rounded-[2rem] border-[3px] border-transparent hover:border-white medtab:!mx-0 medtab:w-[24rem] medtab:!max-w-none'
+          'isAnimated flexcentercol group relative max-w-[50rem] cursor-pointer rounded-[2rem] border-[3px] border-transparent hover:border-white medtab:!mx-0 medtab:w-[24rem]'
         )}
         style={noteStyle}
         onClick={() => setOpenDetail(true)}
@@ -65,7 +65,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
         <div className="max-h-[45rem] w-full overflow-hidden p-4">
           <div className="typo-3sm line-clamp-3 w-full whitespace-normal break-words p-2 text-center font-bold">{title}</div>
           <div
-            className="typo-3sm mdformat prose h-full w-full overflow-hidden"
+            className="typo-3sm mdformat prose max-h-[45rem] w-full overflow-hidden"
             dangerouslySetInnerHTML={{ __html: mdConvert.render(data) }}
           />
         </div>

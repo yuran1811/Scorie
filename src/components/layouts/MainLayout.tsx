@@ -39,7 +39,6 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
         <div className="header-h relative left-0 top-0 w-full" />
         <>
           {children}
-          {/* {<PostPreview />} */}
           {settings.showStartUpLogo && <AnimateLogo />}
         </>
         <Footer />

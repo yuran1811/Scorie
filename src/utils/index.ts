@@ -3,7 +3,7 @@ export * from './base';
 export * from './changelog';
 export * from './chart';
 export * from './commonToast';
-export * from './dayjsUsage';
+export * from './date-fns';
 export * from './firebase';
 export * from './markdown-it';
 export * from './notes';

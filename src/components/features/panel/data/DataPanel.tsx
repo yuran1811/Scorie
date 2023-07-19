@@ -1,21 +1,14 @@
 import { usePanel } from '@/contexts';
-import { DivProps } from '@/shared';
-import { BackIcon } from '@cpns/icons';
-import { FC } from 'react';
+import { PanelWrapper } from '../PanelWrapper';
 import { DataInfo } from './DataInfo';
 
-const DataPanel: FC<DivProps> = ({ className = '' }) => {
+const DataPanel = () => {
   const { active, setActive } = usePanel();
 
   return (
-    <div
-      className={`${
-        active.isData ? 'translate-y-0' : 'translate-y-[200%]'
-      } isAnimated fullscreen z-20 bg-ctbg px-12 py-20 text-ctcolor medtab:max-w-[50rem] ${className}`}
-    >
-      <BackIcon className="scale-75" onClick={() => setActive && setActive((s) => ({ ...s, isData: false }))} />
+    <PanelWrapper type="isData" activeClass="translate-x-0" inactiveClass="translate-x-[-200%]">
       <DataInfo />
-    </div>
+    </PanelWrapper>
   );
 };
 

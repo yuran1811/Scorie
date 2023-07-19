@@ -25,7 +25,7 @@ export const Button: FC<ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>> =
     <button
       {...props}
       className={classnames(
-        'typo-sm flexcenter mx-auto my-[1.2rem] flex-wrap rounded-[3rem] border-4 border-violet-900 px-8 py-2 text-center font-semibold text-violet-900 transition-all hover:border-violet-400 hover:text-violet-400 active:text-violet-100 disabled:brightness-50',
+        'typo-sm flexcenter mx-auto my-[1rem] flex-wrap rounded-[3rem] border-4 border-violet-900 px-8 py-2 text-center font-semibold text-violet-900 transition-all hover:border-violet-400 hover:text-violet-400 active:text-violet-100 disabled:brightness-50',
         settings.glassmorphismDesign
           ? 'bg-violet-400 hover:bg-violet-900/90 active:bg-violet-700/90'
           : 'bg-violet-400 hover:bg-violet-900 active:bg-violet-700',

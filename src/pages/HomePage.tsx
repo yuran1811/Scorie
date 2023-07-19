@@ -1,10 +1,10 @@
 import FeatureLayout from '@cpns/features/main/FeatureLayout';
-import { FullScreenLoading } from '@cpns/shared';
 import { FC } from 'react';
 
-interface HomePageProps {
-  isLoading: any;
-}
+export const HomePage: FC = () => {
+  // const currentUser = useStore((s) => s.currentUser);
+  // return currentUser === null ? <FullScreenLoading /> : <FeatureLayout />;
+  return <FeatureLayout />;
+};
 
-export const HomePage: FC<HomePageProps> = ({ isLoading }) =>
-  isLoading === undefined ? <FullScreenLoading /> : <FeatureLayout />;
+export default HomePage;

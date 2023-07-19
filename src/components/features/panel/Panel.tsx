@@ -1,6 +1,7 @@
 import { usePanel } from '@/contexts';
 import { DivProps } from '@/shared';
 import { useStore } from '@/store';
+import { classnames } from '@/utils';
 import { Avatar, Overlay } from '@cpns/shared';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +10,6 @@ import AccountContainer from './account/AccountContainer';
 import DataContainer from './data/DataContainer';
 import DocContainer from './doc/DocContainer';
 import SettingContainer from './setting/SettingContainer';
-import { classnames } from '@/utils';
 
 export const Panel: FC<DivProps> = ({ className = '' }) => {
   const settings = useStore((s) => s.settings);
@@ -31,13 +31,13 @@ export const Panel: FC<DivProps> = ({ className = '' }) => {
 
       <div
         className={classnames(
-          'isAnimated fullscreen overflow-hidden border-ctcolor px-12 py-20 text-ctcolor medtab:max-w-[48rem] medtab:border-r-2',
+          'isAnimated fullscreen overflow-hidden border-ctcolor px-6 pb-8 pt-16 text-ctcolor lgmb:max-w-[42rem] lgmb:border-r-2',
           settings.glassmorphismDesign ? 'bg-violet-800/30 backdrop-blur-sm' : 'bg-ctbg',
           active.isMenu ? 'translate-x-0' : 'translate-x-[-200%]',
           className
         )}
       >
-        <div className="flexcentercol z-[2] m-auto mb-12 w-full pt-8 lgmb:!flex-row medtab:px-6">
+        <div className="flexcentercol z-[2] m-auto mb-12 w-full pt-8 lgmb:mb-16 lgmb:!flex-row medtab:px-6">
           {currentUser && (
             <Avatar
               className="hidden cursor-pointer lgmb:block"
@@ -60,7 +60,7 @@ export const Panel: FC<DivProps> = ({ className = '' }) => {
         </div>
 
         <div
-          className={`flexcentercol scrollY z-[1] w-full !justify-start gap-6 space-y-12 pb-24 lgmb:pb-14 ${
+          className={`flexcentercol scrollY z-[1] w-full !justify-start gap-12 pb-24 lgmb:pb-14 ${
             currentUser ? 'h-[calc(100%-15rem)] lgmb:h-[calc(100%-10rem)]' : 'h-[calc(100%-10rem)]'
           }`}
         >

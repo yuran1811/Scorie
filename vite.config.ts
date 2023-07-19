@@ -10,19 +10,16 @@ dns.setDefaultResultOrder('verbatim');
 
 export default defineConfig({
   server: { port: 1811 },
-  test: {
-    name: 'scorie',
-    exclude: [...configDefaults.exclude],
-  },
+  test: { name: 'scorie', exclude: [...configDefaults.exclude] },
   plugins: [
     react(),
     tsconfigPaths(),
     visualizer({
-      template: 'treemap', // or sunburst
+      template: 'sunburst', // treemap or sunburst
       open: true,
       gzipSize: true,
       brotliSize: true,
-      filename: 'analyse.html', // will be saved in project's root
+      filename: 'analyse.html',
     }) as PluginOption,
     VitePWA({
       devOptions: { enabled: true },
@@ -47,37 +44,45 @@ export default defineConfig({
             type: 'image/x-icon',
             purpose: 'maskable',
           },
-          { src: 'logo192.png', type: 'image/png', sizes: '192x192' },
-          { src: 'logo512.png', type: 'image/png', sizes: '512x512' },
+          {
+            src: '/android/android-chrome-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/android/android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
         ],
         shortcuts: [
           {
-            name: 'Note Feature',
+            name: 'Note Page',
             short_name: 'Note',
-            description: 'Full note features',
+            description: 'Goto note page',
             url: '/notes',
-            icons: [{ src: 'logo192.png', type: 'image/png', sizes: '192x192' }],
+            icons: [{ src: '/android/android-chrome-192x192.png', type: 'image/png', sizes: '192x192' }],
           },
           {
-            name: 'Score Feature',
+            name: 'Score Manage',
             short_name: 'Score',
-            description: 'Full score features',
+            description: 'Goto score page',
             url: '/subjects',
-            icons: [{ src: 'logo192.png', type: 'image/png', sizes: '192x192' }],
+            icons: [{ src: '/android/android-chrome-192x192.png', type: 'image/png', sizes: '192x192' }],
           },
           {
-            name: 'Analytics Feature',
+            name: 'Analytics',
             short_name: 'Analytics',
-            description: 'Full analytics features',
+            description: 'Goto analytics page',
             url: '/analytics',
-            icons: [{ src: 'logo192.png', type: 'image/png', sizes: '192x192' }],
+            icons: [{ src: '/android/android-chrome-192x192.png', type: 'image/png', sizes: '192x192' }],
           },
           {
-            name: 'Tools Feature',
+            name: 'Tools',
             short_name: 'Tools',
-            description: 'Full tools features',
+            description: 'Goto tools page',
             url: '/tools',
-            icons: [{ src: 'logo192.png', type: 'image/png', sizes: '192x192' }],
+            icons: [{ src: '/android/android-chrome-192x192.png', type: 'image/png', sizes: '192x192' }],
           },
         ],
       },

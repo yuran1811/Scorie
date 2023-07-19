@@ -25,7 +25,7 @@ export const AnimateLogoBackground = () => (
         transition={{
           default: { duration: 1.5, ease: 'easeInOut' },
           fill: { duration: 1.5, ease: [1, 0, 0.8, 1] },
-          delay: 0.2,
+          delay: 0.1,
         }}
       />
     </g>
@@ -81,18 +81,10 @@ export const AnimateLogo = () => (
   <motion.div
     className="fullscreen flexcenter z-[100] w-full bg-zinc-950/90"
     initial={{ opacity: 0.95 }}
-    animate={{
-      opacity: 0,
-      transitionEnd: {
-        display: 'none',
-      },
-    }}
-    transition={{
-      default: { duration: 1, ease: 'easeInOut' },
-      delay: 2,
-    }}
+    animate={{ opacity: 0, transitionEnd: { display: 'none' } }}
+    transition={{ default: { duration: 1, ease: 'easeInOut' }, delay: 2 }}
   >
-    <div className="flexcenter absolute h-full w-full">
+    <div className="flexcenter absolute h-full w-full min-w-[45rem] max-w-[60rem]">
       <AnimateLogoBackground />
     </div>
     <div className="flexcenter absolute h-full w-full">

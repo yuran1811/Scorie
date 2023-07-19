@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { ScoreAddNew } from './ScoreAddNew';
 import { ScoreContainer } from './ScoreContainer';
+import { SubjectAverage } from './SubjectAverage';
 
 interface SubjectDetailProps {
   style: {
@@ -152,9 +153,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
   const typeList = useMemo<string[]>(() => {
     if (!scores) return [] as string[];
 
-    const list: {
-      [key: string]: boolean;
-    } = {};
+    const list: Record<string, boolean> = {};
 
     scores.forEach((_) => (list[_.type] = true));
     return Object.keys(list) as string[];
@@ -311,12 +310,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
                 </div>
               </div>
 
-              <div
-                className="mx-auto my-4 line-clamp-1 w-max max-w-full rounded-[1rem] px-6 text-center text-[7rem]"
-                style={{ ...style }}
-              >
-                {averageScore}
-              </div>
+              <SubjectAverage averageScoreValue={averageScore} className="mx-auto" showStatus noStyle={false} />
             </form>
           </div>
           <div>

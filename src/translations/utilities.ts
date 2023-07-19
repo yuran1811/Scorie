@@ -163,6 +163,10 @@ const statusTranslation = {
     vi: 'Hoàn tất !',
     en: 'Successfully !',
   },
+  error: {
+    vi: 'Có lỗi gì đó rồi !',
+    en: 'An error has been occured !',
+  },
   'copy to clipboard': {
     vi: 'Note có thể đem đi share được rồi !',
     en: 'Copied to clipboard !',

@@ -55,7 +55,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
       <div
         className={`${
           !isShow ? '!hidden' : ''
-        } m-6 w-full cursor-pointer overflow-hidden rounded-[2.5rem] bg-ctbg p-4 text-center font-bold text-ctcolor smtab:max-w-[25rem]`}
+        } m-6 w-full cursor-pointer overflow-hidden rounded-[1.6rem] bg-ctbg p-4 text-center font-bold text-ctcolor smtab:max-w-[25rem]`}
         onClick={() => setOpenDetail((s) => !s)}
       >
         <div className="flexcenter p-4">
@@ -65,7 +65,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
         </div>
 
         <div className="flexcentercol">
-          <div className="typo-lg line-clamp-2 w-full text-center font-bold text-ctcolor">{subject?.name || ''}</div>
+          <div className="typo-sm line-clamp-2 w-full text-center font-bold text-ctcolor">{subject?.name || ''}</div>
           <div
             className="my-4 line-clamp-1 max-w-full rounded-[1rem] border-4 border-violet-200 px-6 text-center text-[4rem] font-bold"
             style={{ ...averScoreType }}
@@ -74,7 +74,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
           </div>
 
           {scores.length !== 0 && (
-            <div className="typo-sm line-clamp-1 w-full px-4 text-left font-bold text-violet-200">{t('recent')}</div>
+            <div className="typo-2sm line-clamp-1 w-full px-4 mt-4 text-left font-bold text-violet-200">{t('recent')}</div>
           )}
 
           {scores.length ? (

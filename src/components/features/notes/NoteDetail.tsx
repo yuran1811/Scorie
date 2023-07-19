@@ -117,7 +117,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
       onSubmit={handleSubmit(onSubmit)}
     >
       <div
-        className="flexcenter sticky left-0 top-0 z-[100] mb-4 w-full px-4 py-8"
+        className="flexcenter sticky left-0 top-0 z-[100] mb-2 w-full px-4 py-8"
         style={{ backgroundColor: noteStyle.backgroundColor }}
       >
         <div className="flexcenter w-full flex-wrap">
@@ -231,7 +231,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
         <div className="typo-3sm relative h-[calc(100%)] w-full">
           <Tab.Group>
-            <Tab.List className="absolute right-[10rem] top-0 z-[1] font-semibold">
+            <Tab.List className="absolute right-0 top-0 z-[1] font-semibold">
               {['content', 'preview'].map((_) => (
                 <Tab
                   key={_}
@@ -271,7 +271,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
       </div>
 
       {showHelp && <NoteHelp onClick={() => setShowHelp(false)} />}
-      {loading && <FullScreenLoading />}
+      {/* {loading && <FullScreenLoading />} */}
     </form>,
     document.getElementById('modal-container') as HTMLElement
   );

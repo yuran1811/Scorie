@@ -5,7 +5,7 @@ import { GradientUnderline } from '@cpns/interfaces';
 import { Button, FeatureTestimonial, Testimonial } from '@cpns/shared';
 import { db } from '@shared/firebase';
 import { TestimonialProps } from '@shared/types';
-import { collection, orderBy, query } from 'firebase/firestore';
+import { collection, limit, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TestimonialAddNew } from './TestimonialAddNew';
@@ -18,7 +18,7 @@ export const TestimonialContainer = () => {
 
   const { data, loading, error } = useCollectionQuery(
     'testimonials',
-    query(collection(db, 'testimonials'), orderBy('updatedAt', 'desc'))
+    query(collection(db, 'testimonials'), orderBy('voteCount', 'desc'), orderBy('updatedAt', 'desc'), limit(12))
   );
 
   const [testimonials, setTestimonials] = useState<TestimonialProps[]>([]);
@@ -37,7 +37,7 @@ export const TestimonialContainer = () => {
       )}
     >
       <div className="container mx-auto flex flex-col items-center p-10">
-        <h1 className="typo-lg p-2 text-center font-bold leading-none">{t('what users think')}</h1>
+        <h1 className="typo-med p-2 text-center font-bold leading-none">{t('what users think')}</h1>
         <GradientUnderline className="mt-3 w-64" />
       </div>
       <FeatureTestimonial votes={[]} content="Good product for everyone" name="Yuran" job={`CEO & Founder Scorie`} />

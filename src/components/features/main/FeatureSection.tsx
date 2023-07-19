@@ -1,11 +1,14 @@
 import { useStore } from '@/store';
+import { classnames } from '@/utils';
 import { StepType } from '@reactour/tour';
 import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { NotVerifyEmail } from '../auth/NotVerifyEmail';
+import BlockQuote from '../quotes/BlockQuote';
 import { TestimonialContainer } from '../testimonial/TestimonialContainer';
 import { FeatureCard } from './FeatureCard';
+import { QuickSettingSection } from './QuickSettingSection';
 import { WelcomBanner } from './WelcomBanner';
 
 export const mainSteps: StepType[] = [
@@ -17,6 +20,7 @@ export const mainSteps: StepType[] = [
 ];
 
 export const FeatureSection: FC = () => {
+  const settings = useStore((s) => s.settings);
   const currentUser = useStore((s) => s.currentUser);
 
   const navigate = useNavigate();
@@ -31,40 +35,49 @@ export const FeatureSection: FC = () => {
 
   return (
     <>
-      {!isVerify ? <NotVerifyEmail /> : <WelcomBanner>{currentUser?.displayName || t('guest')}</WelcomBanner>}
+      <div className="flexcentercol mb-36 w-full snap-start space-y-16 pt-8">
+        {!isVerify ? <NotVerifyEmail /> : <WelcomBanner content={currentUser?.displayName || t('guest')} />}
 
-      <div className="flexcenter my-12 w-full flex-wrap py-8">
+        <div className="w-full">
+          <BlockQuote />
+        </div>
+      </div>
+
+      {settings.showQuickSetting && <QuickSettingSection />}
+
+      <div
+        className={classnames(
+          'container mx-auto my-28 max-w-[976px] snap-start',
+          'grid grid-flow-row-dense justify-items-center gap-2',
+          'grid-cols-1 smmb:grid-cols-2 medtab:grid-cols-4',
+          'auto-cols-fr',
+          'auto-rows-max'
+        )}
+      >
         <FeatureCard
-          className="bg-gradient-to-tl from-[#5f2c8296] to-[#49a09d96]"
           title="Note"
+          desc="ideal place to keep your mind on"
+          className="bg-gradient-to-tl from-[#5f2c8296] to-[#49a09d96]"
           onClick={() => navigate('/notes')}
-        >
-          <div className="p-2 medmb:px-6 medmb:py-4 lgmb:p-6">{t('ideal place to keep your mind on')}</div>
-        </FeatureCard>
-
+        />
         <FeatureCard
-          className="bg-gradient-to-tl from-[#e9644396] to-[#904e9596]"
           title="Score"
+          desc="manage all your score records"
+          className="bg-gradient-to-tl from-[#e9644396] to-[#904e9596]"
           onClick={() => navigate('/subjects')}
-        >
-          <div className="p-2 medmb:px-6 medmb:py-4 lgmb:p-6">{t('manage all your score records')}</div>
-        </FeatureCard>
-
+        />
         <FeatureCard
-          className="bg-gradient-to-tl from-[#FC466B96] to-[#8056ca96]"
           title="Analytics"
+          desc="variant useful charts"
+          className="bg-gradient-to-tl from-[#FC466B96] to-[#8056ca96]"
           onClick={() => navigate('/analytics')}
-        >
-          <div className="p-2 medmb:px-6 medmb:py-4 lgmb:p-6">{t('variant useful charts')}</div>
-        </FeatureCard>
-
+        />
         <FeatureCard
-          className="bg-gradient-to-tl from-[#71B28096] to-[#56B4D396]"
           title="Tools"
+          desc="helpful tools make school life be better"
+          className="bg-gradient-to-tl from-[#71B28096] to-[#56B4D396]"
           onClick={() => navigate('/tools')}
-        >
-          <div className="p-2 medmb:px-6 medmb:py-4 lgmb:p-6">{t('helpful tools make school life be better')}</div>
-        </FeatureCard>
+        />
       </div>
 
       <TestimonialContainer />

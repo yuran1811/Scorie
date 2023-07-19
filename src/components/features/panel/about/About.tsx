@@ -15,14 +15,14 @@ export const About: FC = () => {
 
   return (
     <div className="flexcentercol w-full">
-      <div className={`flexcenter w-full cursor-pointer gap-8`} onClick={() => setOpenModal((s) => !s)}>
+      <div className="flexcenter w-full cursor-pointer gap-8" onClick={() => setOpenModal((s) => !s)}>
         <InfoIcon className="scale-typo-sm cursor-pointer text-ctcolor" width="26" height="26" />
-        <div className="typo line-clamp-1 font-bold">About</div>
+        <div className="typo-semimed line-clamp-1 font-bold">About</div>
         {!openModal ? <ArrowRightIcon {...ArrowIconConfig} /> : <ArrowDownIcon {...ArrowIconConfig} />}
       </div>
 
       {openModal && (
-        <div id="about-section" className="mt-16 w-full space-y-10 border-x border-b border-ctcolor">
+        <div id="about-section" className="mt-16 w-max space-y-16 border-x border-b border-ctcolor px-8">
           <div className="flexcentercol scale-95 text-[2.2rem] font-bold smmb:scale-100 medmb:scale-105 medtab:scale-110">
             <div>This </div>
             <div className="relative h-[4rem] w-[20rem] overflow-y-hidden text-ctcolor">
@@ -49,7 +49,7 @@ export const About: FC = () => {
             </div>
             <div>will improve your</div>
             <div
-              className="textGradient text-[2.6rem] animate-gdMoveVert uppercase"
+              className="textGradient animate-gdMoveVert text-[2.6rem] uppercase"
               style={{
                 backgroundSize: '400% 400%',
                 backgroundImage: 'linear-gradient(-135deg,#2cccff,#20e3b2,#ffcc70,#c850c0,#4158d0)',
@@ -58,9 +58,9 @@ export const About: FC = () => {
               study quality
             </div>
           </div>
-          <div className="flex-1 py-2">
-            <div className="typo-semism text-center font-bold">Contact</div>
-            <div className="flexcenter flex-wrap gap-4 mt-2">
+          <div>
+            <div className="typo text-center font-bold">Contact</div>
+            <div className="flexcenter mt-6 scale-150 flex-wrap gap-2">
               <HighlightLink url={GH_LINK} noUnderline>
                 <GithubIcon />
               </HighlightLink>

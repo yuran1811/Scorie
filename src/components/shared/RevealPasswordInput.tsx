@@ -10,7 +10,7 @@ interface RevealPasswordInputProps extends CustomInputProps {
   changeValue: UseFormReset<any>;
 }
 
-const inputContainerClass = 'flexcenter absolute h-full w-full min-w-[33px] min-h-[33px] pr-[78px] pl-8 resize-none';
+const inputContainerClass = 'flexcenter absolute h-full w-full min-w-[35px] min-h-[35px] pr-[55px] pl-8 resize-none';
 const inputClass = 'w-full border-0 bg-transparent outline-none';
 
 export const RevealPasswordInput: FC<RevealPasswordInputProps & InputProps> = ({
@@ -26,12 +26,12 @@ export const RevealPasswordInput: FC<RevealPasswordInputProps & InputProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className="relative h-[68px] w-full max-w-[32rem] overflow-hidden rounded-[1.8rem]">
+    <div className="relative h-[54px] w-full max-w-[32rem] overflow-hidden rounded-[2.6rem]">
       <div className={`${inputContainerClass} bg-[#121726]`}>
         <input
           {...otherProps}
           {...formHandle}
-          className={`placeholder:typo-3sm text-[2.8rem] tracking-widest text-[#575cba] placeholder:tracking-wider ${inputClass}`}
+          className={`placeholder:typo-3sm typo-semism tracking-widest text-[#575cba] placeholder:align-middle placeholder:tracking-wider ${inputClass}`}
           type="password"
           placeholder={t(placeholder?.toLowerCase() || '')}
         />
@@ -41,22 +41,22 @@ export const RevealPasswordInput: FC<RevealPasswordInputProps & InputProps> = ({
         className={`${inputContainerClass} bg-white`}
         style={{
           transition: 'clip-path .3s ease-in-out',
-          clipPath: reveal ? `circle(18rem)` : `circle(2rem at calc(100% - 4.1rem) 50%)`,
+          clipPath: reveal ? `circle(18rem)` : `circle(1.8rem at calc(100% - 2.8rem) 50%)`,
         }}
       >
         <input
           className={`typo-3sm tracking-wider text-black ${inputClass}`}
           type="text"
-          value={inputValue}
+          value={inputValue ? inputValue : ''}
           onChange={(e) => changeValue({ password: e.currentTarget.value })}
         />
       </div>
 
       <div
-        className="flexcenter absolute right-[2.3rem] top-[18px] min-h-[36px] min-w-[36px] cursor-pointer rounded-full"
+        className="flexcenter absolute right-[9.1px] top-[9px] min-h-[36px] min-w-[36px] cursor-pointer rounded-full"
         onClick={() => setReveal((s) => !s)}
       >
-        <EyeIcon width="36" height="36" reveal={reveal} />
+        <EyeIcon width="34" height="34" reveal={reveal} />
       </div>
     </div>
   );

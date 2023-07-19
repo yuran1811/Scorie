@@ -7,5 +7,5 @@ export type FeatureRoutesType = {
 
 export type RoutesType = {
   path: string;
-  component: any;
+  Component: any;
 }[];

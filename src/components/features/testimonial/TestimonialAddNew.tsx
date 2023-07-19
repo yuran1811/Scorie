@@ -114,7 +114,7 @@ export const TestimonialAddNew: FC<TestimonialAddNewProps> = ({ data, votes }) =
 
       {openModal && (
         <ModalUI title={t('delete action')} onClick={() => deleteHandle()} cancelHandle={() => setOpenModal(false)}>
-          <p className="typo-sm p-4">{t('this will delete your feedback')}</p>
+          <p className="p-4">{t('this will delete your feedback')}</p>
         </ModalUI>
       )}
     </form>

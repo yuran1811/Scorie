@@ -24,7 +24,7 @@ export const ModalBox: FC<DivProps & ModalBoxProps> = ({
           className={
             disableContainerClass
               ? className
-              : `scrollY max-h-[calc(100vh-5rem)] rounded-[3rem] border-l-4 border-t-4 border-violet-400/70 bg-gray-900 text-center font-bold text-ctcolor medtab:max-h-[calc(100vh-15rem)] ${className}`
+              : `scrollY max-h-[calc(100vh-5rem)] rounded-[2.4rem] border-l-4 border-t-4 border-violet-400/70 bg-gray-900 text-center font-bold text-ctcolor medtab:max-h-[calc(100vh-15rem)] ${className}`
           }
         >
           {children}

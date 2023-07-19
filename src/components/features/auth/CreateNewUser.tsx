@@ -45,8 +45,12 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
 
       await sendVerifyEmail(user);
     } catch (error) {
+      const err = error as any;
+      console.log('err: ', err);
+
       setLoading(false);
-      setErrMsg('Error');
+      // setErrMsg(getFirebaseErr(err.message));
+      setErrMsg('error');
     }
   }, []);
 
@@ -76,6 +80,7 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
           <Input
             name="displayName"
             placeholder="Name"
+            autoComplete="username"
             defaultValue=""
             formHandle={{
               ...register('displayName', {
@@ -94,6 +99,7 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
             type="email"
             inputMode="email"
             placeholder="Email"
+            autoComplete="email"
             defaultValue=""
             formHandle={{
               ...register('email', {
@@ -111,6 +117,7 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
             name="password"
             type="password"
             placeholder="Password"
+            autoComplete="new-password"
             defaultValue=""
             formHandle={{
               ...register('password', {
@@ -127,6 +134,7 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
           <Input
             type="password"
             placeholder="Confirm password"
+            autoComplete="new-password"
             defaultValue=""
             formHandle={{
               ...register('confirmPassword', {

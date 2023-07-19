@@ -1,6 +1,6 @@
 import { DivProps, SubjectDetailType } from '@/shared';
 import { useStore } from '@/store';
-import { averageScore, getAverageScoreString } from '@/utils';
+import { averageScore, classnames, getAverageScoreString } from '@/utils';
 import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -19,13 +19,43 @@ export interface SubjectAverageState {
 }
 
 export interface SubjectAverageProps {
-  subjects: SubjectDetailType[];
+  subjects?: SubjectDetailType[];
+  averageScoreValue?: string | number;
+  showStatus?: boolean;
+  noStyle?: boolean;
 }
 
-export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({ subjects }) => {
+export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({
+  className = '',
+  subjects = [],
+  averageScoreValue = '',
+  showStatus = false,
+  noStyle = true,
+}) => {
   const settings = useStore((s) => s.settings);
 
   const { t } = useTranslation();
+
+  if ((typeof averageScoreValue === 'string' && averageScoreValue.length > 0) || typeof averageScoreValue === 'number') {
+    const status = averageScore.check(Number(averageScoreValue));
+    const { color } = averageScore[status];
+
+    return (
+      <>
+        <div
+          className={classnames('my-4 line-clamp-1 w-max max-w-full rounded-[1rem] px-6 text-center text-[7rem]', className)}
+          style={noStyle ? {} : { ...averageScore[status] }}
+        >
+          {averageScoreValue}
+        </div>
+        {showStatus && (
+          <div className="typo-med w-full capitalize" style={noStyle ? {} : { color }}>
+            {t(status)}
+          </div>
+        )}
+      </>
+    );
+  }
 
   const subjectAverageScore = useMemo(() => {
     const averageScore = subjects.reduce(
@@ -75,12 +105,14 @@ export const SubjectAverage: FC<SubjectAverageProps & DivProps> = ({ subjects })
         ''
       ) : (
         <>
-          <div className="w-full" style={{ color }}>
+          <div className="w-full" style={noStyle ? {} : { color }}>
             {getAverageScoreString(subjectAverageScore, settings.numberFormat)}
           </div>
-          <div className="typo-med w-full capitalize" style={{ color }}>
-            {t(averageScore.check(subjectAverageScore.total / subjectAverageScore.count))}
-          </div>
+          {showStatus && (
+            <div className="typo-med w-full capitalize" style={noStyle ? {} : { color }}>
+              {t(averageScore.check(subjectAverageScore.total / subjectAverageScore.count))}
+            </div>
+          )}
         </>
       )}
     </div>

@@ -79,22 +79,23 @@ export const AccountInfo: FC = () => {
   return (
     <>
       {!currentUser?.emailVerified ? (
-        <div className="scrollY h-4/5 w-full">
+        <div className="scrollY mt-12 h-[calc(100%-4rem)] w-full">
           <NotVerifyEmail />
         </div>
       ) : (
         <>
           {loading ? (
-            <div className="flexcenter h-[10rem] w-full p-6">
+            <div className="flexcenter mt-12 h-[10rem] w-full p-6">
               <ThreeDotsFade />
             </div>
           ) : (
-            <div className={`flexcentercol scrollY mt-[0.6rem] h-4/5 !justify-start p-3 pb-16`}>
+            <div className={`flexcentercol scrollY mt-12 h-[calc(100%-4rem)] !justify-start px-3`}>
               <form className="mb-2" onSubmit={handleSubmit(onSubmit)}>
                 <Input
                   className="!max-w-sm"
                   name="displayName"
                   placeholder="Profile name"
+                  maxLength={18}
                   defaultValue={currentUser?.displayName || t('guest')}
                   formHandle={{
                     ...register('displayName', {
@@ -102,6 +103,7 @@ export const AccountInfo: FC = () => {
                       validate: {
                         notEmpty: (v) => v.trim().length !== 0 || 'Username cannot be empty',
                         isValid: (v) => /[\w\d\s]+/.test(v.trim()) || 'Invalid username',
+                        maxValue: (v) => v.length <= 18 || 'Username is too long',
                       },
                     }),
                   }}
@@ -109,10 +111,12 @@ export const AccountInfo: FC = () => {
                 {errors?.displayName && <ErrorMessage content={errors.displayName.message || ''} />}
 
                 <Button className="itypo-2sm" type="submit" content="Update profile" />
-
-                <GradientUnderline />
               </form>
               {errMsg && <ErrorMessage content={errMsg} />}
+
+              <div className="my-6 w-full">
+                <GradientUnderline className='medmb:max-w-[24rem]' />
+              </div>
 
               <Button
                 className="itypo-2sm"
@@ -158,7 +162,9 @@ export const AccountInfo: FC = () => {
 
               {!messageExpired && changePWMes.type === 'error' && <ErrorMessage content={changePWMes.message} />}
               {!messageExpired && changePWMes.type === 'success' && (
-                <div className="typo-2sm mt-4 w-full border-4 border-current text-center font-bold">{changePWMes.message}</div>
+                <div className="typo-2sm mt-4 w-full border-4 border-current text-center font-bold">
+                  {changePWMes.message}
+                </div>
               )}
             </div>
           )}

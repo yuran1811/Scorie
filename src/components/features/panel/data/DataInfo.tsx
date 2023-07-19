@@ -48,11 +48,11 @@ export const DataInfo: FC = () => {
   }, []);
 
   return (
-    <div className="flexcentercol mt-[2rem] h-4/5 w-full !justify-start overflow-y-auto overflow-x-hidden p-3 pb-8">
+    <div className="flexcentercol mt-12 h-[calc(100%-4rem)] w-full !justify-start overflow-y-auto overflow-x-hidden">
       <div className="flexcenter w-full">
         <a href={backupData} download={backupData ? 'scorie_backup.json' : ''}>
           <Button content="Get backup data">
-            <DownloadIcon className="m-4" width="24" height="24" />
+            <DownloadIcon className="mr-4" width="20" height="20" />
           </Button>
         </a>
       </div>

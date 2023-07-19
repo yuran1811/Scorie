@@ -1,6 +1,7 @@
 import { createContext, Dispatch, FC, PropsWithChildren, SetStateAction, useContext, useState } from 'react';
 
 interface PanelContextProps {
+  [key: string]: boolean;
   isMenu: boolean;
   isAccount: boolean;
   isData: boolean;

@@ -14,11 +14,7 @@ interface Inputs {
   content: string;
 }
 
-export const ReportAddNew: FC<
-  DivProps & {
-    clickHandle: CallableFunction;
-  }
-> = ({ clickHandle }) => {
+export const ReportAddNew: FC<DivProps & { clickHandle: CallableFunction }> = ({ clickHandle }) => {
   const currentUser = useStore((s) => s.currentUser);
 
   const { t } = useTranslation();
@@ -58,7 +54,7 @@ export const ReportAddNew: FC<
 
       <form
         className={classnames(
-          'flexcentercol mx-auto line-clamp-1 max-h-[70vh] w-max max-w-[80%] rounded-[2rem] border-2 border-violet-400/30 bg-gray-900/70 px-12 pt-8 text-center font-bold text-teal-700 lgmb:max-h-[90vh]'
+          'flexcentercol mx-auto line-clamp-1 max-h-[70vh] w-max max-w-[80%] rounded-[2rem] border-2 border-violet-400/30 bg-gray-900/70 px-12 pb-4 pt-6 text-center font-bold text-teal-700 lgmb:max-h-[90vh]'
         )}
         onSubmit={handleSubmit(onSubmit)}
       >

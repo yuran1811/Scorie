@@ -83,6 +83,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
       setloading(true);
       editSubject(currentUser.uid, subject.id, { scores: [...newscores] })
         .then(() => successToast())
+        .catch((err) => console.log(err))
         .finally(() => setloading(false));
     },
     [currentUser, scores, scoreOptions]

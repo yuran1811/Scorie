@@ -1,7 +1,7 @@
 import { db } from '@shared/firebase';
 import { TestimonialProps } from '@shared/types';
 import { FirebaseError } from 'firebase/app';
-import { arrayRemove, arrayUnion, deleteDoc, doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, deleteDoc, doc, increment, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 
 export const addNewFeedback = async (userId: string, data: TestimonialProps) => {
   try {
@@ -9,6 +9,7 @@ export const addNewFeedback = async (userId: string, data: TestimonialProps) => 
     else
       await setDoc(doc(db, 'testimonials', userId), {
         ...data,
+        voteCount: 0,
         updatedAt: serverTimestamp() || new Date(),
       });
     return '';
@@ -21,6 +22,7 @@ export const upvoteFeedback = async (feedbackId: string, userId: string, isVoted
   try {
     await updateDoc(doc(db, 'testimonials', feedbackId), {
       votes: isVoted ? arrayUnion(userId) : arrayRemove(userId),
+      voteCount: increment(isVoted ? 1 : -1),
       updatedAt: serverTimestamp() || new Date(),
     });
     return '';

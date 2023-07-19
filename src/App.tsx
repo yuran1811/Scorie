@@ -2,13 +2,14 @@ import { useQuotes } from '@/hooks';
 import { HomePage } from '@/pages';
 import { publicRoutes } from '@/routes';
 import { setUserProfile } from '@/services';
-import { TOUR_STEPS, auth, getDirOfStep } from '@/shared';
+import { TOUR_STEPS, auth, getDirOfStep, tourStyles } from '@/shared';
 import { useStore, useTourStore } from '@/store';
 import TRANSLATIONS from '@/translations';
 import { mergeQuoteData } from '@/utils';
+import ErrorBoundary from '@cpns/ErrorBoundary';
 import MainLayout from '@cpns/layouts/MainLayout';
 import { ErrorContent, FullScreenLoading } from '@cpns/shared';
-import { TourProps, TourProvider } from '@reactour/tour';
+import { TourProvider } from '@reactour/tour';
 import { onAuthStateChanged } from 'firebase/auth';
 import i18next from 'i18next';
 import { FC, Suspense, useEffect } from 'react';
@@ -26,17 +27,9 @@ i18next.use(initReactI18next).init({
   },
 });
 
-const tourStyles: Pick<TourProps, 'styles'> = {
-  styles: {
-    close: (base) => ({ ...base, transform: 'scale(1.5)' }),
-    badge: (base) => ({ ...base, fontSize: '2rem' }),
-  },
-};
-
 const App: FC = () => {
   const quotes = useStore((s) => s.quotes);
   const setQuotes = useStore((s) => s.setQuotes);
-  const currentUser = useStore((s) => s.currentUser);
   const setCurrentUser = useStore((s) => s.setCurrentUser);
   const currentStep = useTourStore((s) => s.currentStep);
   const setCurrentStep = useTourStore((s) => s.setCurrentStep);
@@ -77,38 +70,40 @@ const App: FC = () => {
   }, [data, error, loading]);
 
   return (
-    <Suspense fallback={<FullScreenLoading />}>
-      <TourProvider
-        scrollSmooth
-        showCloseButton
-        showNavigation
-        steps={TOUR_STEPS}
-        currentStep={currentStep}
-        setCurrentStep={setCurStep}
-        styles={tourStyles.styles}
-      >
-        <MainLayout>
-          <Routes>
-            <Route path="/">
-              <Route index element={<HomePage isLoading={currentUser} />} />
-              {publicRoutes.map(({ component: Page, path }) => (
-                <Route
-                  key={path}
-                  path={path}
-                  element={
-                    <Suspense fallback={<FullScreenLoading />}>
-                      <Page />
-                    </Suspense>
-                  }
-                />
-              ))}
-            </Route>
-            <Route path="*" element={<ErrorContent />} />
-          </Routes>
-          <Outlet />
-        </MainLayout>
-      </TourProvider>
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<FullScreenLoading />}>
+        <TourProvider
+          scrollSmooth
+          showCloseButton
+          showNavigation
+          steps={TOUR_STEPS}
+          currentStep={currentStep}
+          setCurrentStep={setCurStep}
+          styles={tourStyles.styles}
+        >
+          <MainLayout>
+            <Routes>
+              <Route path="/">
+                <Route index element={<HomePage />} />
+                {publicRoutes.map(({ Component: Page, path }) => (
+                  <Route
+                    key={path}
+                    path={path}
+                    element={
+                      <Suspense fallback={<FullScreenLoading />}>
+                        <Page />
+                      </Suspense>
+                    }
+                  />
+                ))}
+              </Route>
+              <Route path="*" element={<ErrorContent />} />
+            </Routes>
+            <Outlet />
+          </MainLayout>
+        </TourProvider>
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 

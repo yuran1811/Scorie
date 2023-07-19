@@ -1,7 +1,7 @@
 import { CollectionReference, DocumentData, onSnapshot, Query, QuerySnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
-const CACHE: { [key: string]: any } = {};
+const CACHE: Record<string, any> = {};
 
 type useCollectionQueryType = (
   key: string,

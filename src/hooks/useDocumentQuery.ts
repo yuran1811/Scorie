@@ -1,7 +1,7 @@
 import { DocumentData, DocumentReference, DocumentSnapshot, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
-const CACHE: { [key: string]: any } = {};
+const CACHE: Record<string, any> = {};
 
 export const useDocumentQuery = (key: string, document: DocumentReference<DocumentData>) => {
   const [data, setData] = useState<DocumentSnapshot<DocumentData> | null>(CACHE[key] || null);

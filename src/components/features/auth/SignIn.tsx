@@ -3,17 +3,14 @@ import { getFirebaseErr } from '@/utils';
 import { FacebookIcon, GoogleIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
 import { ModalBox, ModalBoxHeader } from '@cpns/shared';
-import { LogInButton } from './LogInButton';
 import { AuthProvider, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { FC, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { LogInButton } from './LogInButton';
 
 export const SignIn: FC = () => {
   const [isAlertOpened, setIsAlertOpened] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
-  const { t } = useTranslation();
 
   const handleSignIn = (provider: AuthProvider) => {
     setLoading(true);
@@ -35,22 +32,19 @@ export const SignIn: FC = () => {
     <>
       <div className="flexcenter mb-16 flex-1 flex-row flex-wrap gap-4 medmb:flex-col">
         <LogInButton
+          provider="GG"
+          Icon={GoogleIcon}
           className="bg-slate-900 text-white"
           disabled={loading}
           onClick={() => handleSignIn(new GoogleAuthProvider())}
-        >
-          <GoogleIcon width="32" height="32" />
-          <span className="hidden px-4 font-semibold medmb:block">{t('sign in with')} GG</span>
-        </LogInButton>
-
+        />
         <LogInButton
+          provider="FB"
+          Icon={FacebookIcon}
           className="bg-blue-600 text-white"
           disabled={loading}
           onClick={() => handleSignIn(new FacebookAuthProvider())}
-        >
-          <FacebookIcon width="32" height="32" />
-          <span className="hidden px-4 font-semibold medmb:block">{t('sign in with')} FB</span>
-        </LogInButton>
+        />
       </div>
 
       {isAlertOpened && (

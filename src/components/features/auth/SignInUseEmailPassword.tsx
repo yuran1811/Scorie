@@ -70,7 +70,7 @@ const SignInUseEmailPassWord = () => {
     <>
       {isNew ? (
         <CreateNewUser>
-          <Divider className="!max-w-[40rem]">{t('already have account')}</Divider>
+          <Divider>{t('already have account')}</Divider>
           <Button content="Log in" onClick={() => setNew(false)}>
             <ArrowLeftIcon className="mr-6" width="24" height="24" />
           </Button>
@@ -88,11 +88,12 @@ const SignInUseEmailPassWord = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <Input
-              className="itypo-3sm !h-[68px] !rounded-[1.8rem] !border-0 !bg-[#121726] !px-8 !tracking-wider"
+              className="itypo-3sm !h-[54px] !rounded-[2.6rem] !border-0 !bg-[#121726] !px-8 !tracking-wider"
               name="email"
               type="email"
               inputMode="email"
               placeholder="Email"
+              autoComplete='email'
               defaultValue=""
               formHandle={{
                 ...register('email', {
@@ -111,6 +112,7 @@ const SignInUseEmailPassWord = () => {
               name="password"
               type="password"
               placeholder="Password"
+              autoComplete='current-password'
               defaultValue=""
               inputValue={watch('password')}
               changeValue={reset}
@@ -133,7 +135,7 @@ const SignInUseEmailPassWord = () => {
             </Button>
           </form>
 
-          <Divider className="!max-w-[35rem]">{t('have no account')}</Divider>
+          <Divider>{t('have no account')}</Divider>
 
           <Button before={false} content="Create new account" onClick={() => setNew(true)}>
             <ArrowRightIcon className="ml-6" width="24" height="24" />

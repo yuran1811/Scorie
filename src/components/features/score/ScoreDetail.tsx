@@ -16,7 +16,7 @@ export const ScoreDetail: FC<ScoreDetailProps & DivProps> = ({ subject, score, s
       <div
         className={`${
           score?.isIgnored ? 'bg-slate-400' : 'bg-indigo-900'
-        } w-full max-w-[16rem] cursor-pointer rounded-[2rem] px-10 py-4 smmb:p-4`}
+        } w-full max-w-[16rem] cursor-pointer rounded-[1.8rem] px-10 py-4 smmb:p-4`}
         onClick={() => setEdited(true)}
       >
         <div className="typo-2sm line-clamp-2 hidden w-full overflow-hidden text-white smmb:block">{score?.type}</div>

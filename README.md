@@ -24,6 +24,7 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![OSCS Status](https://www.oscs1024.com/platform/badge/yuran1811/Scorie.svg?size=small)](https://www.oscs1024.com/project/yuran1811/Scorie?ref=badge_small)
 
-### References
+### Docs
 
-- [**_Push Notification with FCM_**](https://blog.logrocket.com/push-notifications-react-firebase/)
+- Read the [installation](./md/install.md)
+- More about the project can be found [here](./md/)

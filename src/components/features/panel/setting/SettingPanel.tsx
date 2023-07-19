@@ -1,21 +1,11 @@
-import { DivProps } from '@/shared';
-import { usePanel } from '@/contexts';
-import { BackIcon } from '@cpns/icons';
+import { PanelWrapper } from '../PanelWrapper';
 import { SettingInfo } from './SettingInfo';
-import { FC } from 'react';
 
-const SettingPanel: FC<DivProps> = ({ className = '' }) => {
-  const { active, setActive } = usePanel();
-
+const SettingPanel = () => {
   return (
-    <div
-      className={`${
-        active.isSetting ? 'translate-y-0' : 'translate-y-[200%]'
-      } isAnimated fullscreen z-20 bg-ctbg px-12 py-20 text-ctcolor medtab:max-w-[50rem] ${className}`}
-    >
-      <BackIcon className="scale-75" onClick={() => setActive && setActive((s) => ({ ...s, isSetting: false }))} />
+    <PanelWrapper type="isSetting" activeClass="translate-y-0" inactiveClass="translate-y-[200%]">
       <SettingInfo />
-    </div>
+    </PanelWrapper>
   );
 };
 

@@ -1,21 +1,11 @@
-import { DivProps } from '@/shared';
-import { usePanel } from '@/contexts';
-import { BackIcon } from '@cpns/icons';
+import { PanelWrapper } from '../PanelWrapper';
 import { DocInfo } from './DocInfo';
-import { FC } from 'react';
 
-const DocPanel: FC<DivProps> = ({ className = '' }) => {
-  const { active, setActive } = usePanel();
-
+const DocPanel = () => {
   return (
-    <div
-      className={`${
-        active.isDoc ? 'translate-x-0' : 'translate-x-[-200%]'
-      } isAnimated fullscreen z-20 bg-ctbg px-4 py-20 text-ctcolor lgmb:px-12 medtab:max-w-[50rem] ${className}`}
-    >
-      <BackIcon className="scale-75" onClick={() => setActive && setActive((s) => ({ ...s, isDoc: false }))} />
+    <PanelWrapper type="isDoc" activeClass="translate-x-0" inactiveClass="translate-x-[-200%]">
       <DocInfo />
-    </div>
+    </PanelWrapper>
   );
 };
 

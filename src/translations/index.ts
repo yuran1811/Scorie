@@ -7,9 +7,7 @@ import TourTranslation from './tour';
 const TRANSLATIONS = [BannerTranslation, PanelTranslation, TooltipTranslation, UtilitiesTranslation, TourTranslation];
 
 const getTranslations = (lang: string) => {
-  const translations = {} as {
-    [key: string]: string;
-  };
+  const translations: Record<string, string> = {};
 
   TRANSLATIONS.forEach((item) =>
     Object.keys(item).forEach((key) => {

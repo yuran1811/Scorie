@@ -4,11 +4,11 @@ import { classnames } from '@/utils';
 import { FC } from 'react';
 
 const beforeStyle = (active: boolean) =>
-  `before:transition-all before:content-[""] before:absolute before:bg-ctcolor before:w-full before:h-[0.5rem] before:top-[1.2rem] before:left-0 ${
+  `before:transition-all before:content-[""] before:absolute before:bg-ctcolor before:w-full before:h-[0.5rem] before:top-[1.2rem] before:rounded-md before:left-0 ${
     active ? 'before:rotate-[135deg] before:top-[2rem]' : 'before:!bg-white'
   }`;
 const afterStyle = (active: boolean) =>
-  `after:transition-all after:content-[""] after:absolute after:bg-ctcolor after:w-full after:h-[0.5rem] after:bottom-[1.2rem] after:left-0 ${
+  `after:transition-all after:content-[""] after:absolute after:bg-ctcolor after:w-full after:h-[0.5rem] after:bottom-[1.2rem] after:left-0 after:rounded-md ${
     active ? 'after:rotate-[-135deg] after:top-[2rem]' : 'after:!bg-white'
   }`;
 

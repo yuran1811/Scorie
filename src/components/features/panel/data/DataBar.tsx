@@ -12,7 +12,7 @@ const DataBar: FC<DivProps> = (props) => {
   return (
     <div {...props} onClick={() => setActive && setActive((s) => ({ ...s, isData: !active.isData }))}>
       <ProgressIcon className="scale-typo-sm cursor-pointer text-ctcolor" width="26" height="26" />
-      <div className="typo line-clamp-1 font-bold">{t('data')}</div>
+      <div className="typo-semimed line-clamp-1 font-bold">{t('data')}</div>
     </div>
   );
 };
