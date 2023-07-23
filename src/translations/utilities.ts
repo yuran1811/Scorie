@@ -1,4 +1,4 @@
-import { TranslationType } from '@shared/types';
+import { TranslationType } from '@/shared';
 
 const confirmTranslation = {
   'confirm delete subject': {
@@ -235,6 +235,15 @@ const statusTranslation = {
     vi: 'bấm vào đây và kiểm tra lại gmail của bạn',
     en: 'click here and check your mail again',
   },
+
+  'all the data will be deleted after 3 days when signing in as guest': {
+    vi: 'Mọi dữ liệu sẽ bị xóa trong vòng 3 ngày bởi việc đăng nhập với tư cách Khách',
+    en: 'All the data will be deleted after 3 days when signing in as guest',
+  },
+  'to keep the data with your new account, click the button below': {
+    vi: 'Để lưu toàn bộ dữ liệu trong quá trình dùng vào tài khoản mới, bấm vào các nút dưới đây',
+    en: 'To keep the data with your new account, click the button below',
+  },
 };
 
 const notificationTranslation = {
@@ -469,6 +478,18 @@ export default {
   'report bugs': {
     vi: 'Báo cáo lỗi',
     en: 'Report bugs',
+  },
+  'get location': {
+    vi: 'Lấy vị trí',
+    en: 'Get location',
+  },
+  plans: {
+    vi: 'Plans',
+    en: 'Plans',
+  },
+  'app settings': {
+    vi: 'Cài đặt ứng dụng',
+    en: 'App settings',
   },
 
   'add scores and the chart will be shown': {

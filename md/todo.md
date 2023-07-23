@@ -7,13 +7,11 @@
 - [ ] Add `pagination` for she subject records
 - [ ] Add gradient bar `loading effect` under header
 - [ ] Add more `colors` for chart
+- [ ] Add scroll snap effect
 - [ ] Organize records with `folder-style`
 
-- `quick setting` in homepage (weather + computer) + tips
-- `clock` info and clock show setting + Timer for learning/break/anything + [timezone](https://time.antfu.me/)
+- Timer for learning/break/anything + [timezone](https://time.antfu.me/)
 - stay focus timer with water design
-- widget feature (weather, calendar, share notion template, clock)
-- widget with swiper in home
-- scroll snap hori for testimonial
 
-- [anonymous-auth with firebase](https://firebase.google.com/docs/auth/web/anonymous-auth)
+- widget features (calendar, share notion template)
+- sidebar widgets

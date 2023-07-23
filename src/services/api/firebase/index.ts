@@ -1,5 +1,5 @@
+import { db } from '@/shared';
 import { getFirebaseErr } from '@/utils';
-import { db } from '@shared/firebase';
 import { FirebaseError } from 'firebase/app';
 import { doc, getDoc } from 'firebase/firestore';
 

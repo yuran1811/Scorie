@@ -1,9 +1,9 @@
 import { DocDataType } from '@/shared';
-import { DocItemContent } from './DocItemContent';
+import { classnames } from '@/utils';
 import { ArrowDownIcon, ArrowRightIcon } from '@cpns/icons';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classnames } from '@/utils';
+import { DocItemContent } from './DocItemContent';
 
 interface DocItemProps {
   data: DocDataType;

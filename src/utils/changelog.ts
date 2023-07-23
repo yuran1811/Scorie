@@ -1,4 +1,4 @@
-import { ChangeLogProps } from '@shared/types';
+import { ChangeLogProps } from '@/shared';
 import { standardizeCollectionData } from './standardize';
 
 export const getChangeLogs = (data: any) => {

@@ -1,9 +1,9 @@
+import { DivProps } from '@/shared';
 import { NotificationIcon } from '@cpns/icons';
-import { DivProps } from '@shared/types';
+import { Overlay } from '@cpns/shared';
 import { FC } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import { Overlay } from './Overlay';
 
 interface ModalUIProps {
   title: string;

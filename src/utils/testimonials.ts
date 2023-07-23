@@ -1,4 +1,4 @@
-import { TestimonialProps } from '@shared/types';
+import { TestimonialProps } from '@/shared';
 import { standardizeCollectionData } from './standardize';
 
 export const getTestimonials = (data: any) => {

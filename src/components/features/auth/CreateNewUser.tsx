@@ -1,8 +1,7 @@
 import { createNewUserEmailMethod, sendVerifyEmail, updateUserProfile } from '@/services';
 import { useStore } from '@/store';
-import { ThreeDotsFade } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { Button, Input } from '@cpns/shared';
+import { Button, InlineLoading, Input } from '@cpns/shared';
 import { FC, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -69,11 +68,7 @@ export const CreateNewUser: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <>
-      {loading && (
-        <div className="flexcenter h-[10rem] w-full p-6">
-          <ThreeDotsFade />
-        </div>
-      )}
+      {loading && <InlineLoading />}
 
       {!loading && (
         <form className={`flexcentercol mt-6 !justify-start`} onSubmit={handleSubmit(onSubmit)}>

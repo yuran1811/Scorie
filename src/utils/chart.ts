@@ -1,6 +1,5 @@
 import { SubjectDetailType } from '@/shared';
-import { getAverageScore } from './scores';
-import { averageScore } from './styles';
+import { averageScore, getAverageScore } from '@/utils';
 
 export const getChartData = (scores: SubjectDetailType[], numberFormat: number) => {
   return [...scores].map((score) => {

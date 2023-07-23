@@ -1,8 +1,8 @@
+import { ChangeLogProps } from '@/shared';
 import { useChangeLogStore, useStore } from '@/store';
 import { changeLogStyle, classnames, formatDate } from '@/utils';
 import { DoubleCheckIcon } from '@cpns/icons';
 import { Tooltip } from '@cpns/shared';
-import { ChangeLogProps } from '@shared/types';
 import { FC } from 'react';
 
 interface VersionTimeStopProps {

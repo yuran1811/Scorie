@@ -1,8 +1,22 @@
+## APIs
+
+- Weather
+  - [Tomorrow](https://docs.tomorrow.io/recipes/build-your-own-weather-app-with-one-call) (recommended)
+  - [Weatherbit](https://www.weatherbit.io/api/weather-current)
+- Quotes: [Quotable](https://api.quotable.io)
+
 ## References
 
+- [Get verified on commimt](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
 - [Push Notification with FCM](https://blog.logrocket.com/push-notifications-react-firebase/)
 - [Markdown to HTML](https://www.devextent.com/convert-markdown-to-html-nodejs/)
 - [Glassmorphism UI](https://codepen.io/TurkAysenur/pen/ZEpxeYm?editors=1000)
+- [HOCs](https://legacy.reactjs.org/docs/higher-order-components.html)
+- Add this line for tailwindcss's type
+
+  ```
+  /** @type {import('tailwindcss').Config} */
+  ```
 
 ## UI Component Libs
 
@@ -11,7 +25,7 @@
 - Reach UI
 - [Base UI](https://mui.com/base-ui/react-autocomplete/)
 - [Radix](https://www.radix-ui.com/docs/primitives/components/popover)
-- [Headless UI](https://headlessui.com/react/listbox)
+- [Headless UI](https://headlessui.com/react/listbox) (recommended)
 - Tailwind UI - Component
   - [Product overview](https://tailwindui.com/components/ecommerce/components/product-overviews)
 

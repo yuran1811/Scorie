@@ -1,8 +1,8 @@
 import { getUserProfile, upvoteFeedback } from '@/services';
+import { TestimonialProps } from '@/shared';
 import { useStore } from '@/store';
 import { classnames } from '@/utils';
 import { UpvoteIcon } from '@cpns/icons';
-import { TestimonialProps } from '@shared/types';
 import { User } from 'firebase/auth';
 import { FC, useEffect, useState } from 'react';
 import { Avatar } from './Avatar';
@@ -93,13 +93,11 @@ export const FeatureTestimonial: FC<TestimonialProps> = ({ content, name, job = 
           </svg>
         </div>
 
-        <p className="typo-semimed py-2 text-center font-semibold text-gray-300 medmb:px-6 medtab:font-bold">
-          "{content}"
-        </p>
+        <p className="typo-semimed py-2 text-center font-semibold text-gray-300 medmb:px-6 medtab:font-bold">"{content}"</p>
         <div className="flexcentercol space-x-3 medtab:flex-row">
           <Avatar className="rounded-full bg-gray-700 bg-cover bg-center" imgUrl="" radius="6rem" />
           <div className="p-4">
-            <p className="typo-sm line-clamp-2 text-center leading-tight medtab:text-left">{name}</p>
+            <p className="typo-sm line-clamp-2 text-center font-semibold leading-tight medtab:text-left">{name}</p>
             <p className="typo-2sm line-clamp-2 text-center leading-tight text-gray-300 medtab:text-left">{job}</p>
           </div>
         </div>

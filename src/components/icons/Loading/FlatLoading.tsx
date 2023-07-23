@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import { DivProps } from '@/shared';
+import { FC } from 'react';
 
 export const FlatLoading: FC<DivProps> = ({ className = '' }) => (
   <div style={{ perspective: '100px' }} className={className}>

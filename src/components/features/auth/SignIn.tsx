@@ -1,9 +1,9 @@
 import { auth } from '@/shared';
 import { getFirebaseErr } from '@/utils';
-import { FacebookIcon, GoogleIcon } from '@cpns/icons';
+import { FacebookIcon, GoogleIcon, UserIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { ModalBox, ModalBoxHeader } from '@cpns/shared';
-import { AuthProvider, FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { Divider, ModalBox, ModalBoxHeader } from '@cpns/shared';
+import { AuthProvider, FacebookAuthProvider, GoogleAuthProvider, signInAnonymously, signInWithPopup } from 'firebase/auth';
 import { FC, useState } from 'react';
 import { LogInButton } from './LogInButton';
 
@@ -14,10 +14,24 @@ export const SignIn: FC = () => {
 
   const handleSignIn = (provider: AuthProvider) => {
     setLoading(true);
-
     signInWithPopup(auth, provider)
-      .then((res) => {
+      .then(() => {
         console.log('Sign in successful');
+      })
+      .catch((err) => {
+        setIsAlertOpened(true);
+        setError(getFirebaseErr(err.message));
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const anonymousSignIn = () => {
+    setLoading(true);
+    signInAnonymously(auth)
+      .then(() => {
+        console.log('Sign in as Guest');
       })
       .catch((err) => {
         setIsAlertOpened(true);
@@ -30,7 +44,7 @@ export const SignIn: FC = () => {
 
   return (
     <>
-      <div className="flexcenter mb-16 flex-1 flex-row flex-wrap gap-4 medmb:flex-col">
+      <div className="flexcenter mb-16 flex-1 flex-row flex-wrap medmb:flex-col">
         <LogInButton
           provider="GG"
           Icon={GoogleIcon}
@@ -44,6 +58,14 @@ export const SignIn: FC = () => {
           className="bg-blue-600 text-white"
           disabled={loading}
           onClick={() => handleSignIn(new FacebookAuthProvider())}
+        />
+        <Divider className="my-6" />
+        <LogInButton
+          provider="guest"
+          Icon={UserIcon}
+          className="bg-white text-black"
+          disabled={loading}
+          onClick={() => anonymousSignIn()}
         />
       </div>
 

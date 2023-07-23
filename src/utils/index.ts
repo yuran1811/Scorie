@@ -14,6 +14,7 @@ export * from './scores';
 export * from './standardize';
 export * from './styles';
 export * from './testimonials';
+export * from './weather';
 
 export const scrollToEle = (selector: string, opts?: any) =>
   document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center', ...opts });

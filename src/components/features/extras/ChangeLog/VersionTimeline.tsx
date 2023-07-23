@@ -2,7 +2,7 @@ import { useChangeLogStore, useStore } from '@/store';
 import { classnames } from '@/utils';
 import { DoubleCheckIcon } from '@cpns/icons';
 import { Overlay } from '@cpns/shared';
-import { DivProps } from '@shared/types';
+import { DivProps } from '@/shared';
 import { FC } from 'react';
 import { createPortal } from 'react-dom';
 import { VersionTimeStop } from './VersionTimeStop';

@@ -1,4 +1,4 @@
-import { TranslationType } from '@shared/types';
+import { TranslationType } from '@/shared';
 
 const accountTranslation = {
   account: {
@@ -41,9 +41,17 @@ const accountTranslation = {
     vi: 'Đăng nhập với',
     en: 'Sign in with',
   },
+  'as guest': {
+    vi: 'tư cách Khách',
+    en: 'as Guest',
+  },
   'log in': {
     vi: 'Đăng nhập',
     en: 'Log in',
+  },
+  'sign in': {
+    vi: 'Đăng nhập',
+    en: 'Sign in',
   },
   'log out': {
     vi: 'Đăng xuất',

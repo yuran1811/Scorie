@@ -1,10 +1,9 @@
 import { useAppStatus } from '@/contexts';
 import { useCollectionQuery } from '@/hooks';
+import { ToastDefaultConfig, db } from '@/shared';
 import { useChangeLogStore, useStore } from '@/store';
 import { getChangeLogs } from '@/utils';
 import { Badge, Clock } from '@cpns/shared';
-import { ToastDefaultConfig } from '@shared/constants';
-import { db } from '@shared/firebase';
 import Tippy from '@tippyjs/react';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { FC, useEffect, useRef, useState } from 'react';
@@ -21,6 +20,7 @@ const toastConfig: ToastOptions = {
 };
 
 export const ExtraTools: FC = () => {
+  const clockStyle = useStore((s) => s.clockStyle);
   const currentUser = useStore((s) => s.currentUser);
   const changeLogs = useChangeLogStore((s) => s.changeLogs);
   const changeLogsRead = useChangeLogStore((s) => s.changeLogsRead);
@@ -88,7 +88,7 @@ export const ExtraTools: FC = () => {
             className="header-h-scale flexcenter absolute right-0 mx-8 h-[4rem] w-[4rem] cursor-pointer"
             onClick={() => setShowMore((a) => !a)}
           >
-            <Clock type="vertical" />
+            <Clock type={clockStyle.type || 'vertical'} />
           </div>
           <Badge className="scale-50" showIndicator={false}>
             {status.badges.changeLog}

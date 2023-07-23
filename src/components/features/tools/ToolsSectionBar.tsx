@@ -1,9 +1,8 @@
-import { BackIcon } from '@cpns/icons';
-import { ToolIcon } from '@cpns/icons/ToolIcon';
+import { scrollToTop } from '@/utils';
+import { BackIcon, ToolIcon } from '@cpns/icons';
 import { useNavigate } from 'react-router-dom';
 import { Title } from '../main/sections/Title';
 import { ToolCard } from './ToolCard';
-import { scrollToTop } from '@/utils';
 
 export const ToolsSectionBar = () => {
   const navigate = useNavigate();
@@ -20,16 +19,6 @@ export const ToolsSectionBar = () => {
           <ToolCard data={{ id: 1, name: 'Quizie (Coming Soon)' }} />
         </div>
       </div>
-
-      {/* <SectionSwiper>
-				{Array(5)
-					.fill(0)
-					.map((_, idx) => (
-						<SwiperSlide key={idx}>
-							<ToolCard data={{ id: idx, name: 'Tool Card ' + idx }} />
-						</SwiperSlide>
-					))}
-			</SectionSwiper> */}
     </div>
   );
 };

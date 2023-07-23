@@ -1,5 +1,6 @@
 import { fakeDocData } from '@/services';
 import { IconCollection, LoadingCollection } from '@cpns/icons';
+import { GradientUnderline } from '@cpns/interfaces';
 import { FC } from 'react';
 import { DocItem } from './DocItem';
 
@@ -16,6 +17,9 @@ export const DocInfo: FC = () => (
           <IconCollection />
         </div>
       </li>
+
+      <GradientUnderline className="my-16" />
+
       {fakeDocData.map((_) => (
         <li key={_.id} className="w-full cursor-pointer">
           <DocItem data={_} />

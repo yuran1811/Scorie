@@ -8,7 +8,7 @@ import { NotVerifyEmail } from '../auth/NotVerifyEmail';
 import BlockQuote from '../quotes/BlockQuote';
 import { TestimonialContainer } from '../testimonial/TestimonialContainer';
 import { FeatureCard } from './FeatureCard';
-import { QuickSettingSection } from './QuickSettingSection';
+import { QuickSettingSection } from '../quick-setting/QuickSettingSection';
 import { WelcomBanner } from './WelcomBanner';
 
 export const mainSteps: StepType[] = [
@@ -28,7 +28,7 @@ export const FeatureSection: FC = () => {
   const { t } = useTranslation();
 
   const isVerify = useMemo(() => {
-    if (currentUser === undefined || currentUser === null) return true;
+    if (currentUser === undefined || currentUser === null || !currentUser?.email) return true;
     if (!currentUser?.emailVerified) return false;
     return currentUser.emailVerified;
   }, [currentUser]);

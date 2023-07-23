@@ -162,14 +162,14 @@ Auto-converted link https://google.com
 ## Images {#note-rule_imgs}
 
 ### Type 1 {#note-rule_imgstype1}
-![bg](/bg.jpg)
+![bg](/bg-blur.jpg)
 ![qrcode](/QRCode.PNG "The qrcode")
 
 #### Responsive {#note-rule_imgsresponsive}
-![bg](/bg.jpg){width="60" height="auto"}
+![bg](/bg-blur.jpg){width="60" height="auto"}
 ![qrcode](/QRCode.PNG "The qrcode"){width="70" height="auto"}
 
-<img src="/bg.jpg" width="60" height="auto">
+<img src="/bg-blur.jpg" width="60" height="auto">
 <img src="/QRCode.PNG" width="70" height="auto" alt="The qrcode">
 
 ### Type 2 {#note-rule_type2}
@@ -179,5 +179,5 @@ Like links, Images also have a footnote style syntax
 
 With a reference later in the document defining the URL location:
 
-[id]: /bg.jpg "bg"
+[id]: /bg-blur.jpg "bg"
 `;

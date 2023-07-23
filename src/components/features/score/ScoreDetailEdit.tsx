@@ -4,7 +4,7 @@ import { useStore } from '@/store';
 import { successToast } from '@/utils';
 import { IgnoreIcon, TrashIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { Button, ConfirmBox, FullScreenLoading, Input, ModalBox, ModalBoxHeader, TimeContainer } from '@cpns/shared';
+import { Button, ConfirmBox, InlineLoading, Input, ModalBox, ModalBoxHeader, TimeContainer } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
 import { Timestamp } from 'firebase/firestore';
 import { FC, useCallback, useEffect, useState } from 'react';
@@ -130,6 +130,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
       </ModalBoxHeader>
 
       <TimeContainer className="text-ctcolor" obj={{ createdAt: score?.createdAt, updatedAt: score?.updatedAt }} />
+      {loading && <InlineLoading />}
 
       <form
         className="flexcentercol line-clamp-1 w-full px-8 py-2 text-center font-bold text-ctcolor"
@@ -186,8 +187,6 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
 
         <Button type="submit" content="Update" />
       </form>
-
-      {loading && <FullScreenLoading />}
     </ModalBox>
   );
 };

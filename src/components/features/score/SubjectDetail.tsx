@@ -4,7 +4,7 @@ import { useStore } from '@/store';
 import { shallowObjectCompare, successToast } from '@/utils';
 import { AddIcon, CloseIcon, IgnoreIcon, ImportantIcon, ListAllIcon, ListIcon, StarIcon, TrashIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { ConfirmBox, FullScreenLoading, Input, TimeContainer, Tooltip } from '@cpns/shared';
+import { ConfirmBox, InlineLoading, Input, TimeContainer, Tooltip } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -136,8 +136,6 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
   const onSubmit: SubmitHandler<Inputs> = ({ maxScore, ...data }: any) => {
     if (!currentUser || !currentUser?.uid || !subject?.id) return;
 
-    console.log('submit');
-
     setLoading(true);
     editSubject(currentUser.uid, subject.id, { ...data, maxScore: +maxScore })
       .then(() => {
@@ -252,6 +250,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
           className="itypo-3sm font-semibold text-ctcolor"
           obj={{ createdAt: subject?.createdAt, updatedAt: subject?.updatedAt }}
         />
+        {loading && <InlineLoading />}
 
         <div className="flexcentercol gap-6 px-8 py-8 text-ctcolor lgtab:!flex-row lgtab:!items-start lgtab:!justify-around">
           <div className="pt-4 lgtab:sticky lgtab:left-0 lgtab:top-[8rem]">
@@ -347,8 +346,6 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
           </div>
         </div>
       </div>
-
-      {loading && <FullScreenLoading />}
     </>,
     document.getElementById('modal-container') as HTMLElement
   );

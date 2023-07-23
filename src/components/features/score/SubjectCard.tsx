@@ -4,10 +4,11 @@ import { averageScore as averageScoreStyle, getAverageScore, getAverageScoreStri
 import { IgnoreIcon, ImportantIcon, StarIcon } from '@cpns/icons';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { A11y } from 'swiper';
-import 'swiper/css';
-import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { A11y } from 'swiper/modules';
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
 import { SubjectDetail } from './SubjectDetail';
+
+import 'swiper/css';
 
 interface SubjectCardProps {
   isShow: boolean;
@@ -74,11 +75,11 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
           </div>
 
           {scores.length !== 0 && (
-            <div className="typo-2sm line-clamp-1 w-full px-4 mt-4 text-left font-bold text-violet-200">{t('recent')}</div>
+            <div className="typo-2sm mt-4 line-clamp-1 w-full px-4 text-left font-bold text-violet-200">{t('recent')}</div>
           )}
 
           {scores.length ? (
-            <ReactSwiper {...swiperOptions} className="text-[2.4rem] flex w-full flex-row items-center text-ctcolor">
+            <Swiper {...swiperOptions} className="flex w-full flex-row items-center text-[2.4rem] text-ctcolor">
               {scores
                 .slice(-settings.maxRecentScoreNum)
                 .reverse()
@@ -92,7 +93,7 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
                   <div className="h-[5.3rem] w-[7rem] p-3 text-center">...</div>
                 </SwiperSlide>
               )}
-            </ReactSwiper>
+            </Swiper>
           ) : (
             <div className="typo-3sm m-4 w-full p-8 text-center font-bold">{t('no record')}</div>
           )}

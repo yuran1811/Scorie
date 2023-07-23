@@ -1,6 +1,6 @@
+import { DivProps } from '@/shared';
 import { classnames } from '@/utils';
-import { DivProps } from '@shared/types';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface BadgeProps {
   showIndicator?: boolean;

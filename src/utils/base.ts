@@ -2,7 +2,8 @@ interface CmpObject extends Object {
   [key: string]: any;
 }
 
-export const classnames: (...classes: any[]) => string = (...classes) => classes.filter(Boolean).join(' ');
+export const classnames: (...classes: any[]) => string = (...classes) =>
+  classes.filter((_) => typeof _ === 'string').join(' ');
 
 export const randomInArray = (arr: any[]) => {
   const getIdx = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
@@ -11,8 +12,8 @@ export const randomInArray = (arr: any[]) => {
   return { idx, item: arr[idx] };
 };
 
-const isObject = (object: Object) => {
-  return object != null && typeof object === 'object';
+export const isObject = (object: Object) => {
+  return object !== null && typeof object === 'object';
 };
 
 export const deepObjectCompare = (a: CmpObject, b: CmpObject) => {

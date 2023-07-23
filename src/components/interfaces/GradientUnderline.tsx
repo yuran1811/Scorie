@@ -1,4 +1,4 @@
-import { DivProps } from '@shared/types';
+import { DivProps } from '@/shared';
 import { FC } from 'react';
 
 export const GradientUnderline: FC<DivProps> = ({ className = '' }) => (

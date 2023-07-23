@@ -1,4 +1,5 @@
 export * from './changelog';
+export * from './clock';
 export * from './docs';
 export * from './elements';
 export * from './notes';
@@ -8,3 +9,4 @@ export * from './scores';
 export * from './settings';
 export * from './testimonials';
 export * from './translations';
+export * from './weather';

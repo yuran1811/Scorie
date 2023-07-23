@@ -1,5 +1,5 @@
+import { InputProps } from '@/shared';
 import { EyeIcon } from '@cpns/icons';
-import { InputProps } from '@shared/types';
 import { FC, useState } from 'react';
 import { UseFormReset } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

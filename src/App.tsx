@@ -7,7 +7,7 @@ import { useStore, useTourStore } from '@/store';
 import TRANSLATIONS from '@/translations';
 import { mergeQuoteData } from '@/utils';
 import ErrorBoundary from '@cpns/ErrorBoundary';
-import MainLayout from '@cpns/layouts/MainLayout';
+import { MainLayout } from '@cpns/layouts';
 import { ErrorContent, FullScreenLoading } from '@cpns/shared';
 import { TourProvider } from '@reactour/tour';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -36,7 +36,11 @@ const App: FC = () => {
 
   const navigate = useNavigate();
 
-  const { data, error, loading } = useQuotes(quotes.numPage, !quotes.numPage || quotes.isFetch);
+  const {
+    data: quoteData,
+    error: quoteError,
+    loading: quoteLoading,
+  } = useQuotes(quotes.numPage, !quotes.numPage || quotes.isFetch);
 
   const setCurStep: any = (step: number) => {
     getDirOfStep(step, navigate);
@@ -58,16 +62,16 @@ const App: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (error) {
+    if (quoteError) {
       setQuotes({ ...quotes, isFetch: false, loading: false });
       return;
     }
 
-    if (!data || loading) return;
+    if (!quoteData || quoteLoading) return;
 
-    const { canUpdate, mergeData } = mergeQuoteData(quotes, data);
+    const { canUpdate, mergeData } = mergeQuoteData(quotes, quoteData);
     canUpdate && setQuotes(mergeData);
-  }, [data, error, loading]);
+  }, [quoteData, quoteError, quoteLoading]);
 
   return (
     <ErrorBoundary>

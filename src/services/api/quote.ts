@@ -1,11 +1,11 @@
-import { QuoteType } from '@/hooks';
-import { QuoteListType } from '@/shared';
+import { QuoteListType, QuoteType } from '@/shared';
 import getAxiosInst from '@shared/axios';
 import { AxiosError, AxiosRequestConfig } from 'axios';
+import queryString from 'query-string';
 
 const { root, tags, maxLength } = {
   root: 'https://api.quotable.io',
-  maxLength: 180,
+  maxLength: 190,
   tags: [
     'education',
     'courage',
@@ -26,7 +26,15 @@ const { root, tags, maxLength } = {
 
 export const getRandomQuote = async (config: AxiosRequestConfig = {}) => {
   try {
-    const data: QuoteType = await getAxiosInst().get(`${root}/random?tags=${tags.join('|')}&maxLength=${maxLength}`);
+    const data: Pick<QuoteType, 'author' | 'content'> = await getAxiosInst().get(
+      `${root}/random?${queryString.stringify(
+        {
+          maxLength,
+          tags,
+        },
+        { arrayFormat: 'separator', arrayFormatSeparator: '|' }
+      )}`
+    );
     return data;
   } catch (error) {
     const err = error as AxiosError;
@@ -38,7 +46,14 @@ export const getRandomQuote = async (config: AxiosRequestConfig = {}) => {
 export const getQuotes = async (page: number, config: AxiosRequestConfig = {}) => {
   try {
     const data = await getAxiosInst().get<any, QuoteListType>(
-      `${root}/quotes?tags=${tags.join('|')}&maxLength=${maxLength}&page=${page + 1}`
+      `${root}/quotes?${queryString.stringify(
+        {
+          maxLength,
+          tags,
+          page: page + 1,
+        },
+        { arrayFormat: 'separator', arrayFormatSeparator: '|' }
+      )}`
     );
     return { data, err: '' };
   } catch (error) {

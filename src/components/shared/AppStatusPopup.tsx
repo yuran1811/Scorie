@@ -1,6 +1,5 @@
 import { useAppStatus } from '@/contexts';
-import { ThreeDotsFade } from '@cpns/icons';
-import { ModalBox, ModalBoxHeader } from '@cpns/shared';
+import { InlineLoading, ModalBox, ModalBoxHeader } from '@cpns/shared';
 import { t } from 'i18next';
 import { FC } from 'react';
 
@@ -12,9 +11,7 @@ export const AppStatusPopup: FC<AppStatusPopupProps> = ({}) => {
   if (!status.openModal) return <></>;
 
   return status.type === 'loading' ? (
-    <div>
-      <ThreeDotsFade />
-    </div>
+    <InlineLoading />
   ) : status.type === 'error' ? (
     <ModalBox onClick={() => setStatus && setStatus((s) => ({ ...s, openModal: false }))}>
       <ModalBoxHeader onClick={() => setStatus && setStatus((s) => ({ ...s, openModal: false }))} />

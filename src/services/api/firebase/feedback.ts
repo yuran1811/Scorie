@@ -1,5 +1,4 @@
-import { db } from '@shared/firebase';
-import { TestimonialProps } from '@shared/types';
+import { TestimonialProps, db } from '@/shared';
 import { FirebaseError } from 'firebase/app';
 import { arrayRemove, arrayUnion, deleteDoc, doc, increment, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 

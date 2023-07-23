@@ -1,6 +1,6 @@
+import { FACEBOOK_PROFILE, GH_LINK, LINKEDIN_PROFILE, YOUTUBE_PROFILE } from '@/shared';
 import { ArrowDownIcon, ArrowRightIcon, FacebookIcon2, GithubIcon, InfoIcon, LinkedinIcon, YoutubeIcon } from '@cpns/icons';
 import { HighlightLink } from '@cpns/interfaces';
-import { FACEBOOK_PROFILE, GH_LINK, LINKEDIN_PROFILE, YOUTUBE_PROFILE } from '@shared/constants';
 import { FC, useState } from 'react';
 
 const ArrowIconConfig = {

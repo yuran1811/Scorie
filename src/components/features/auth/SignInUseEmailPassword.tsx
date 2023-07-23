@@ -1,14 +1,14 @@
 import { auth } from '@/shared';
 import { useStore } from '@/store';
 import { getFirebaseErr } from '@/utils';
-import { ArrowLeftIcon, ArrowRightIcon, LogInIcon, ThreeDotsFade } from '@cpns/icons';
+import { ArrowLeftIcon, ArrowRightIcon, LogInIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { Button, Divider, Input, RevealPasswordInput } from '@cpns/shared';
-import { CreateNewUser } from './CreateNewUser';
+import { Button, Divider, InlineLoading, Input, RevealPasswordInput } from '@cpns/shared';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { CreateNewUser } from './CreateNewUser';
 
 interface Inputs {
   email: string;
@@ -77,11 +77,7 @@ const SignInUseEmailPassWord = () => {
         </CreateNewUser>
       ) : (
         <>
-          {loading && (
-            <div className="flexcenter h-[10rem] w-full p-6">
-              <ThreeDotsFade />
-            </div>
-          )}
+          {loading && <InlineLoading />}
 
           <form
             className={`flexcentercol mt-6 !justify-start ${loading ? '!hidden' : ''}`}
@@ -93,7 +89,7 @@ const SignInUseEmailPassWord = () => {
               type="email"
               inputMode="email"
               placeholder="Email"
-              autoComplete='email'
+              autoComplete="email"
               defaultValue=""
               formHandle={{
                 ...register('email', {
@@ -112,7 +108,7 @@ const SignInUseEmailPassWord = () => {
               name="password"
               type="password"
               placeholder="Password"
-              autoComplete='current-password'
+              autoComplete="current-password"
               defaultValue=""
               inputValue={watch('password')}
               changeValue={reset}

@@ -1,8 +1,8 @@
 import { addNewNote, addNewSubject } from '@/services';
 import { useStore } from '@/store';
 import { BackupDataType, createDownloadBackupData } from '@/utils';
-import { DownloadIcon, ThreeDotsFade } from '@cpns/icons';
-import { Button, inputClass } from '@cpns/shared';
+import { DownloadIcon } from '@cpns/icons';
+import { Button, InlineLoading, inputClass } from '@cpns/shared';
 import { FC, useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -73,11 +73,7 @@ export const DataInfo: FC = () => {
         />
 
         {openModal && !loading && <Button content="Import" onClick={() => saveToDB()} />}
-        {loading && (
-          <div className="flexcenter my-6">
-            <ThreeDotsFade />
-          </div>
-        )}
+        {loading && <InlineLoading />}
       </div>
     </div>
   );

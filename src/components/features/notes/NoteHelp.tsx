@@ -1,8 +1,7 @@
+import { DivProps, NOTE_RULE } from '@/shared';
 import { classnames, mdConvert } from '@/utils';
 import { ModalBox, ModalBoxHeader } from '@cpns/shared';
 import { Tab } from '@headlessui/react';
-import { NOTE_RULE } from '@shared/constants';
-import { DivProps } from '@shared/types';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 

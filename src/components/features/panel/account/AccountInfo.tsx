@@ -3,9 +3,9 @@ import { auth } from '@/shared';
 import { useStore } from '@/store';
 import { getFirebaseErr, successToast } from '@/utils';
 import { NotVerifyEmail } from '@cpns/features/auth/NotVerifyEmail';
-import { LogOutIcon, ThreeDotsFade } from '@cpns/icons';
+import { LogOutIcon } from '@cpns/icons';
 import { ErrorMessage, GradientUnderline } from '@cpns/interfaces';
-import { Button, Input } from '@cpns/shared';
+import { Button, InlineLoading, Input } from '@cpns/shared';
 import { FirebaseError } from 'firebase/app';
 import { sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { FC, useEffect, useState } from 'react';
@@ -78,16 +78,14 @@ export const AccountInfo: FC = () => {
 
   return (
     <>
-      {!currentUser?.emailVerified ? (
+      {currentUser?.email && !currentUser?.emailVerified ? (
         <div className="scrollY mt-12 h-[calc(100%-4rem)] w-full">
           <NotVerifyEmail />
         </div>
       ) : (
         <>
           {loading ? (
-            <div className="flexcenter mt-12 h-[10rem] w-full p-6">
-              <ThreeDotsFade />
-            </div>
+            <InlineLoading className="mt-12" />
           ) : (
             <div className={`flexcentercol scrollY mt-12 h-[calc(100%-4rem)] !justify-start px-3`}>
               <form className="mb-2" onSubmit={handleSubmit(onSubmit)}>
@@ -115,7 +113,7 @@ export const AccountInfo: FC = () => {
               {errMsg && <ErrorMessage content={errMsg} />}
 
               <div className="my-6 w-full">
-                <GradientUnderline className='medmb:max-w-[24rem]' />
+                <GradientUnderline className="medmb:max-w-[24rem]" />
               </div>
 
               <Button

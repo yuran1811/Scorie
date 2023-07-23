@@ -1,10 +1,9 @@
 import { useCollectionQuery } from '@/hooks';
+import { TestimonialProps, db } from '@/shared';
 import { useStore } from '@/store';
 import { classnames, getTestimonials } from '@/utils';
 import { GradientUnderline } from '@cpns/interfaces';
 import { Button, FeatureTestimonial, Testimonial } from '@cpns/shared';
-import { db } from '@shared/firebase';
-import { TestimonialProps } from '@shared/types';
 import { collection, limit, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';

@@ -6,10 +6,7 @@ export interface BackupDataType {
   notes: NoteDetailType[];
 }
 
-export const getStoredData = () => {
-  const localData = localStorage.getItem(GENERAL_STORE_NAME) || '';
-  return localData;
-};
+export const getStoredData = () => localStorage.getItem(GENERAL_STORE_NAME) || '';
 
 export const createDownloadBackupData = () => {
   const rawData = getStoredData();

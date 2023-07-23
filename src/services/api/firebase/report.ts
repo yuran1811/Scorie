@@ -1,4 +1,4 @@
-import { db } from '@shared/firebase';
+import { db } from '@/shared';
 import { FirebaseError } from 'firebase/app';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 

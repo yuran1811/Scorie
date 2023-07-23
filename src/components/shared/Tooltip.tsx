@@ -1,4 +1,4 @@
-import { DivProps } from '@shared/types';
+import { DivProps } from '@/shared';
 import Tippy, { TippyProps } from '@tippyjs/react';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';

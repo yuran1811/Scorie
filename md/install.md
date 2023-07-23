@@ -13,7 +13,7 @@ cd Scorie
 cp .env.example .env
 ```
 
-then fill all the field in `.env`
+then fill all the fields in `.env`
 
 - Init and run the project
 

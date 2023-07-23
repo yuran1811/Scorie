@@ -2,11 +2,6 @@ import { getQuotes } from '@/services';
 import { QuoteListType } from '@/shared';
 import { useEffect, useState } from 'react';
 
-export interface QuoteType {
-  author: string;
-  content: string;
-}
-
 export const useQuotes = (page: number, isFetch: boolean) => {
   const controller = new AbortController();
 

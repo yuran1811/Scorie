@@ -3,7 +3,7 @@ import { useStore } from '@/store';
 import { classnames } from '@/utils';
 import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input, Overlay, TextArea } from '@cpns/shared';
-import { DivProps } from '@shared/types';
+import { DivProps } from '@/shared';
 import { FC, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';

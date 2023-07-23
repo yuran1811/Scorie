@@ -4,7 +4,7 @@ import { useNoteStore, useStore } from '@/store';
 import { classnames, invertThemeStyle, mdConvert, shallowObjectCompare, successToast } from '@/utils';
 import { ArchiveIcon, CloseIcon, DoneIcon, InfoIcon, PinIcon, ProgressIcon, TrashIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
-import { ConfirmBox, FullScreenLoading, Input, TextArea, TimeContainer, Tooltip } from '@cpns/shared';
+import { ConfirmBox, InlineLoading, Input, TextArea, TimeContainer, Tooltip } from '@cpns/shared';
 import { Tab } from '@headlessui/react';
 import Tippy from '@tippyjs/react/headless';
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
@@ -211,6 +211,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
       </div>
 
       <TimeContainer className="itypo-3sm font-semibold" obj={{ updatedAt }} style={noteStyle} />
+      {loading && <InlineLoading />}
 
       {status.type === 'errors' && <ErrorMessage className="p-6" content={status.message} />}
 
@@ -271,7 +272,6 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
       </div>
 
       {showHelp && <NoteHelp onClick={() => setShowHelp(false)} />}
-      {/* {loading && <FullScreenLoading />} */}
     </form>,
     document.getElementById('modal-container') as HTMLElement
   );

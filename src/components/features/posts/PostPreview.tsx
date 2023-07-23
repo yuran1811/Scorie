@@ -8,8 +8,9 @@ export const PostPreview = () => {
 
   useEffect(() => {
     if (error || !data || loading) return;
-    setPosts(posts);
+
     console.log('posts: ', posts);
+    setPosts(posts);
   }, [data, error, loading]);
 
   return (

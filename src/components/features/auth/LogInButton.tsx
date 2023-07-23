@@ -23,7 +23,7 @@ export const LogInButton: FC<Props & ButtonProps> = ({ provider, size = 24, Icon
     >
       {!!Icon && <Icon height={size} width={size} />}
       <span className="hidden px-4 font-semibold medmb:block">
-        {t('sign in with')} {provider}
+        {provider === 'guest' ? `${t('sign in')} ${t('as guest')}` : `${t('sign in with')} ${provider}`}
       </span>
     </button>
   );

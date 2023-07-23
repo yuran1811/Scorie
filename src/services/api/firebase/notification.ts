@@ -1,6 +1,6 @@
 import { firebaseConfig } from '@/config';
+import { BASE_URL } from '@/shared';
 import getAxiosInst from '@shared/axios';
-import { BASE_URL } from '@shared/constants';
 
 const { cloudMessagingServerKey } = firebaseConfig;
 

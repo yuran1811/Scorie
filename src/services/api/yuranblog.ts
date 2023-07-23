@@ -1,5 +1,5 @@
+import { YURAN_BLOG_URL } from '@/shared';
 import getAxiosInst from '@shared/axios';
-import { YURAN_BLOG_URL } from '@shared/constants';
 import { AxiosError } from 'axios';
 
 export const getRecentPosts = async () => {

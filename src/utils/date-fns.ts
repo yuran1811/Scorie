@@ -1,4 +1,15 @@
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
+
+export const formatTimeForWeather = (timestamp?: string) => {
+  const now = dayjs.utc(timestamp || Date.now());
+  const startTime = dayjs.utc(now).add(0, 'minutes').toISOString();
+  const endTime = dayjs.utc(now).add(1, 'days').toISOString();
+
+  return { startTime, endTime };
+};
 
 export const formatDate = (timestamp: number, format: string = '') => {
   const now = new Date();

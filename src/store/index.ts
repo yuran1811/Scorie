@@ -1,4 +1,13 @@
-import { QuoteStoreType, QUOTES_STORED_DEFAULT, SettingsType, SETTINGS_DEFAULT, SubjectDetailType } from '@/shared';
+import {
+  ClockStoreType,
+  QUOTES_STORED_DEFAULT,
+  QuoteStoreType,
+  SETTINGS_DEFAULT,
+  SettingsType,
+  SubjectDetailType,
+  WEATHER_STORED_DEFAULT,
+  WeatherStoreType,
+} from '@/shared';
 import { User } from 'firebase/auth';
 import __ from 'lodash';
 import { create } from 'zustand';
@@ -17,6 +26,12 @@ interface StoreType {
 
   quotes: QuoteStoreType;
   setQuotes: (data: QuoteStoreType) => void;
+
+  clockStyle: ClockStoreType;
+  setClockStyle: (data: ClockStoreType) => void;
+
+  weather: WeatherStoreType;
+  setWeather: (data: WeatherStoreType) => void;
 
   scores: SubjectDetailType[];
   setScores: (data: SubjectDetailType[]) => void;
@@ -43,6 +58,12 @@ export const useStore = create<StoreType>()(
 
         quotes: { ...QUOTES_STORED_DEFAULT },
         setQuotes: (quotes) => set({ quotes }),
+
+        clockStyle: { type: 'vertical' },
+        setClockStyle: (clockStyle) => set({ clockStyle }),
+
+        weather: { ...WEATHER_STORED_DEFAULT },
+        setWeather: (weather) => set({ weather }),
 
         scores: [],
         setScores: (scores) => set({ scores: [...scores] }),

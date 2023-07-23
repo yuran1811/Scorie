@@ -1,8 +1,8 @@
 import { addNewFeedback, deleteFeedback } from '@/services';
+import { TestimonialProps } from '@/shared';
 import { useStore } from '@/store';
 import { ErrorMessage } from '@cpns/interfaces';
 import { Button, Input, ModalUI, TextArea } from '@cpns/shared';
-import { TestimonialProps } from '@shared/types';
 import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

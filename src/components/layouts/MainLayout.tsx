@@ -2,14 +2,15 @@ import { AppStatusProvider } from '@/contexts';
 import { useStore, useTourStore } from '@/store';
 import { classnames } from '@/utils';
 import { AnimateLogo } from '@cpns/features/animations';
-import { Footer, Header } from '@cpns/layouts/partials';
-import { AppStatusPopup } from '@cpns/shared/AppStatusPopup';
+import { Footer, Header } from '@cpns/layouts';
+import { AppStatusPopup } from '@cpns/shared';
 import { useTour } from '@reactour/tour';
 import { FC, PropsWithChildren } from 'react';
 import { ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.min.css';
 
-const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   const settings = useStore((s) => s.settings);
   const status = useTourStore((s) => s.status);
   const setStatus = useTourStore((s) => s.setStatus);

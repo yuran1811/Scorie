@@ -1,6 +1,6 @@
+import { DivProps } from '@/shared';
 import { sharingHandle } from '@/utils';
 import { Button, Overlay } from '@cpns/shared';
-import { DivProps } from '@shared/types';
 import { FC } from 'react';
 import { createPortal } from 'react-dom';
 

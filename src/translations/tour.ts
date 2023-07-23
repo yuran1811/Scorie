@@ -1,4 +1,4 @@
-import { TranslationType } from '@shared/types';
+import { TranslationType } from '@/shared';
 
 export default {
   blockquote: {

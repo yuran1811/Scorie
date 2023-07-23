@@ -1,4 +1,4 @@
-import { ToastDefaultConfig } from '@shared/constants';
+import { ToastDefaultConfig } from '@/shared';
 import { t } from 'i18next';
 import { toast } from 'react-toastify';
 

@@ -1,17 +1,18 @@
 import { useStore } from '@/store';
-import { classnames, getChartData, scrollToTop } from '@/utils';
+import { getChartData, scrollToTop } from '@/utils';
 import { ArrowRightIcon, BackIcon, ChartIcon } from '@cpns/icons';
-import { Button, FullScreenLoading } from '@cpns/shared';
+import { Button, InlineLoading } from '@cpns/shared';
 import __ from 'lodash';
 import { FC, Suspense, lazy, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Title } from '../main/sections/Title';
+import { ChartFilter } from './ChartFilter';
 import { columnDefaultOptions, polarDefaultOptions, radarDefaultOptions } from './chartDefaultOptions';
 
-const ApexChartWrapper = lazy(() => import('./ApexChart'));
-
 type ChartUsedType = Record<string, boolean>;
+
+const ApexChartWrapper = lazy(() => import('./ApexChart'));
 
 export const ChartSectionBar: FC = () => {
   const scores = useStore((s) => s.scores);
@@ -74,45 +75,21 @@ export const ChartSectionBar: FC = () => {
         <BackIcon className="scale-75 text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={ChartIcon} content="Analytics" />
         <div className="flexcenter flex-wrap gap-4 medmb:px-4 medmb:py-8">
-          <div className="flexcentercol relative">
-            <Button
-              className="!font-bold"
-              onClick={() => setChartUsed((s) => ({ ...s, bar: !s.bar }))}
-              content="bar chart"
-            />
-            <div
-              className={classnames(
-                'isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400',
-                chartUsed.bar ? '!scale-100' : ''
-              )}
-            />
-          </div>
-          <div className="flexcentercol relative">
-            <Button
-              className="!font-bold"
-              onClick={() => setChartUsed((s) => ({ ...s, polar: !s.polar }))}
-              content="polar chart"
-            />
-            <div
-              className={classnames(
-                'isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400',
-                chartUsed.polar ? '!scale-100' : ''
-              )}
-            />
-          </div>
-          <div className="flexcentercol relative">
-            <Button
-              className="!font-bold"
-              onClick={() => setChartUsed((s) => ({ ...s, radar: !s.radar }))}
-              content="radar chart"
-            />
-            <div
-              className={classnames(
-                'isAnimated absolute bottom-3 left-1/2 z-[1] h-[2rem] w-[2rem] -translate-x-1/2 scale-0 rounded-full border-4 border-violet-900 bg-green-400',
-                chartUsed.radar ? '!scale-100' : ''
-              )}
-            />
-          </div>
+          <ChartFilter
+            active={chartUsed.bar}
+            content="bar chart"
+            onClick={() => setChartUsed((s) => ({ ...s, bar: !s.bar }))}
+          />
+          <ChartFilter
+            active={chartUsed.polar}
+            content="polar chart"
+            onClick={() => setChartUsed((s) => ({ ...s, polar: !s.polar }))}
+          />
+          <ChartFilter
+            active={chartUsed.radar}
+            content="radar chart"
+            onClick={() => setChartUsed((s) => ({ ...s, radar: !s.radar }))}
+          />
         </div>
       </div>
 
@@ -122,17 +99,17 @@ export const ChartSectionBar: FC = () => {
         )}
 
         {chartUsed.bar && (
-          <Suspense fallback={<FullScreenLoading />}>
+          <Suspense fallback={<InlineLoading />}>
             <ApexChartWrapper data={{ series: srs.column, options: opts.column }} type="bar" />
           </Suspense>
         )}
         {chartUsed.polar && (
-          <Suspense fallback={<FullScreenLoading />}>
+          <Suspense fallback={<InlineLoading />}>
             <ApexChartWrapper data={{ series: srs.polar, options: opts.polar }} type="polarArea" />
           </Suspense>
         )}
         {chartUsed.radar && (
-          <Suspense fallback={<FullScreenLoading />}>
+          <Suspense fallback={<InlineLoading />}>
             <ApexChartWrapper data={{ series: srs.radar, options: opts.radar }} type="radar" />
           </Suspense>
         )}
