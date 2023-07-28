@@ -5,6 +5,7 @@ import {
   SETTINGS_DEFAULT,
   SettingsType,
   SubjectDetailType,
+  TimerStoreType,
   WEATHER_STORED_DEFAULT,
   WeatherStoreType,
 } from '@/shared';
@@ -30,6 +31,9 @@ interface StoreType {
   clockStyle: ClockStoreType;
   setClockStyle: (data: ClockStoreType) => void;
 
+  timers: TimerStoreType[];
+  setTimers: (data: TimerStoreType[]) => void;
+
   weather: WeatherStoreType;
   setWeather: (data: WeatherStoreType) => void;
 
@@ -44,7 +48,7 @@ interface StoreType {
 }
 
 export const GENERAL_STORE_NAME = __.kebabCase('General Store');
-export const GENERAL_STORE_VERSION = 0.01;
+export const GENERAL_STORE_VERSION = 0.02;
 
 export const useStore = create<StoreType>()(
   devtools(
@@ -62,6 +66,9 @@ export const useStore = create<StoreType>()(
         clockStyle: { type: 'vertical' },
         setClockStyle: (clockStyle) => set({ clockStyle }),
 
+        timers: [],
+        setTimers: (timers) => set({ timers }),
+
         weather: { ...WEATHER_STORED_DEFAULT },
         setWeather: (weather) => set({ weather }),
 
@@ -77,7 +84,7 @@ export const useStore = create<StoreType>()(
       {
         name: GENERAL_STORE_NAME,
         version: GENERAL_STORE_VERSION,
-      }
-    )
-  )
+      },
+    ),
+  ),
 );

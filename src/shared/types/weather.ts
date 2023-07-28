@@ -6,16 +6,17 @@ export interface GeoLocationType {
 export interface WeatherIntervalType {
   startTime: string;
   values: {
-    // 'cloudBase',
-    // 'cloudCeiling',
-    // 'cloudCover',
-    // 'precipitationIntensity',
-    // 'precipitationType',
-    // 'windDirection',
-    // 'windGust',
+    epaIndex: number;
+    humidity: number;
+    moonPhase: number;
+    pressureSurfaceLevel: number;
+    sunriseTime: string;
+    sunsetTime: string;
     temperature: number;
     temperatureApparent: number;
+    uvIndex: number;
     weatherCode: number;
+    weatherCodeFullDay: number;
     windSpeed: number;
   };
 }

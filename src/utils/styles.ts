@@ -1,3 +1,21 @@
+export const tabListStickyClass =
+  'sticky left-0 top-[6.4rem] z-10 w-full max-w-full rounded-[2rem] bg-ctbgdark p-4 medtab:max-w-[920px]';
+
+export const zIdxOrder = {
+  behind: 'z-[-1]',
+  1: 'z-[1]',
+  2: 'z-[2]',
+  3: 'z-[3]',
+  4: 'z-[4]',
+  5: 'z-[5]',
+  10: 'z-[10]',
+  15: 'z-[15]',
+  20: 'z-[20]',
+  50: 'z-[50]',
+  100: 'z-[100]',
+  1000: 'z-[1000]',
+};
+
 export const customStyle = {
   underline:
     'after:flex after:items-center after:justify-center after:content-[""] after:absolute after:bottom-0 after:left-0 after:h-[0.3rem] after:scale-100 after:origin-center after:w-[100%] after:bg-current',

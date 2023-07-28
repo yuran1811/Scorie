@@ -1,16 +1,22 @@
 import { useWeather } from '@/hooks';
 import { useStore } from '@/store';
+import { QuickSettingTabUI } from '@cpns/features/quick-setting/QuickSettingTabUI';
 import { LocationIcon, SettingIcon } from '@cpns/icons';
 import { Button, InlineLoading, SwitchBtn } from '@cpns/shared';
 import { Popover, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
-import { HourWeather } from './HourWeather';
+import { DayWeather, HourWeather, WeatherCard } from '.';
+
+export interface WeatherPanelSettingsType {
+  showMoreInfo: boolean;
+  showIcon: boolean;
+}
 
 export const WeatherPanel = () => {
   const weather = useStore((s) => s.weather);
   const setWeather = useStore((s) => s.setWeather);
 
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<WeatherPanelSettingsType>({
     showMoreInfo: true,
     showIcon: true,
   });
@@ -19,7 +25,7 @@ export const WeatherPanel = () => {
 
   const dailyWeather = weather.data?.timelines[0] || undefined;
   const hourlyWeather = weather.data?.timelines[1] || undefined;
-  const currentWeather = weather.data?.timelines[3] || undefined;
+  const currentWeather = weather.data?.timelines[2] || undefined;
 
   useEffect(() => {
     if (error) {
@@ -48,7 +54,7 @@ export const WeatherPanel = () => {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Popover.Panel className="typo-4sm absolute -right-8 -top-6 mt-2 w-max origin-top-right divide-y divide-gray-400 rounded-md bg-gray-700">
+            <Popover.Panel className="typo-4sm absolute -right-8 -top-6 mt-2 w-max origin-top-right divide-y divide-gray-400 rounded-md bg-gray-700/80 backdrop-blur-sm">
               <div className="mt-10 py-3 pl-4">
                 <div className="flex w-full items-center justify-between py-1 pl-4">
                   <span>Show detail</span>
@@ -84,8 +90,8 @@ export const WeatherPanel = () => {
           content="Update"
           onClick={() => {
             navigator.geolocation.getCurrentPosition((position) => {
-              const lat = position.coords.latitude.toFixed(6);
-              const lon = position.coords.longitude.toFixed(6);
+              const lat = position.coords.latitude.toFixed(9);
+              const lon = position.coords.longitude.toFixed(9);
               if (!lat || !lon) return;
 
               setWeather({ ...weather, isFetch: true, location: { lat, lon } });
@@ -101,7 +107,23 @@ export const WeatherPanel = () => {
           <InlineLoading />
         ) : (
           <div className="w-full">
-            <HourWeather data={hourlyWeather} showDetail={settings.showMoreInfo} showIcons={settings.showIcon} />
+            <QuickSettingTabUI
+              tabList={['Current', 'Daily', 'Hourly']}
+              panelList={[
+                {
+                  _id: 'current',
+                  Component: !currentWeather ? (
+                    <></>
+                  ) : (
+                    <div className="typo-2sm mx-auto w-full max-w-full rounded-3xl bg-white px-6 py-4 text-black medmb:w-[30rem]">
+                      <WeatherCard type="current" idx={0} settings={settings} data={currentWeather.intervals[0]} />
+                    </div>
+                  ),
+                },
+                { _id: 'daily', Component: <DayWeather data={dailyWeather} settings={settings} /> },
+                { _id: 'hourly', Component: <HourWeather data={hourlyWeather} settings={settings} /> },
+              ]}
+            />
           </div>
         )}
       </div>

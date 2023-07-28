@@ -15,7 +15,7 @@ export const Tooltip: FC<TooltipProps & DivProps> = ({ className = '', childrenC
 
   return (
     <div className={className}>
-      <Tippy {...options} content={t(content?.toLowerCase() || 'tooltip')}>
+      <Tippy touch={['hold', 750]} {...options} content={t(content?.toLowerCase() || 'tooltip')}>
         <div className={childrenClass}>{children}</div>
       </Tippy>
     </div>

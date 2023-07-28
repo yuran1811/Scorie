@@ -24,7 +24,7 @@ window.addEventListener('load', () => {
         ...ToastDefaultConfig,
         autoClose: false,
         position: 'top-center',
-      }
+      },
     );
     isAppOnline = false;
   });

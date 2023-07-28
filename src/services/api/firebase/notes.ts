@@ -7,10 +7,9 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
   serverTimestamp,
   setDoc,
-  updateDoc,
+  updateDoc
 } from 'firebase/firestore';
 
 export const validateNoteOption = (opt: {

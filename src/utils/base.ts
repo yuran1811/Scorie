@@ -1,6 +1,30 @@
-interface CmpObject extends Object {
-  [key: string]: any;
-}
+import { v4 as uuidv4 } from 'uuid';
+
+export const getStepId = (prefix: string) => {
+  let idx = 0;
+  return (pattern?: string | number) => {
+    if (typeof pattern === 'number') idx = pattern;
+    return `${!!prefix.length ? prefix : 'reactour-step'}-${pattern || ++idx}`;
+  };
+};
+
+export const getUniqueId = () => uuidv4();
+
+export const scrollToTop = () => document.querySelector('#root>div')?.scroll({ top: 0, left: 0, behavior: 'smooth' });
+
+export const scrollToEle = (selector: string, opts?: any) =>
+  document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center', ...opts });
+
+export const checkPlatform = () => {
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  return isIOS ? 'iOS' : 'others';
+};
+
+export const copyToClipboard = (data: string) => {
+  navigator.clipboard.writeText(data);
+};
+
+type ComparedObj = Object & Record<string, any>;
 
 export const classnames: (...classes: any[]) => string = (...classes) =>
   classes.filter((_) => typeof _ === 'string').join(' ');
@@ -16,7 +40,7 @@ export const isObject = (object: Object) => {
   return object !== null && typeof object === 'object';
 };
 
-export const deepObjectCompare = (a: CmpObject, b: CmpObject) => {
+export const deepObjectCompare = (a: ComparedObj, b: ComparedObj) => {
   const keys1 = Object.keys(a);
   const keys2 = Object.keys(b);
 
@@ -33,7 +57,7 @@ export const deepObjectCompare = (a: CmpObject, b: CmpObject) => {
   return true;
 };
 
-export const shallowObjectCompare = (a: CmpObject, b: CmpObject) => {
+export const shallowObjectCompare = (a: ComparedObj, b: ComparedObj) => {
   const keys1 = Object.keys(a);
   const keys2 = Object.keys(b);
 

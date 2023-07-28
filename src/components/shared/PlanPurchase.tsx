@@ -1,6 +1,11 @@
 import { classnames } from '@/utils';
 import { RadioGroup } from '@headlessui/react';
 import { FC, SVGProps, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCards } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/effect-cards';
 
 const plans = [
   {
@@ -54,47 +59,53 @@ export const PlanPurchase = () => {
         <RadioGroup value={selected} onChange={setSelected}>
           <RadioGroup.Label className="sr-only">Plan Purchase</RadioGroup.Label>
           <div className="space-y-2">
-            {plans.map((plan) => (
-              <RadioGroup.Option
-                key={plan.name}
-                value={plan}
-                className={({ active, checked }) =>
-                  classnames(
-                    'relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none',
-                    checked ? 'bg-sky-900 bg-opacity-75 text-white' : 'bg-white'
-                  )
-                }
-              >
-                {({ active, checked }) => (
-                  <div className="w-full">
-                    <div className="flexcentercol">
-                      <RadioGroup.Label
-                        as="div"
-                        className={`typo-sm flexcenter w-full gap-4 font-bold  ${checked ? 'text-white' : 'text-gray-900'}`}
-                      >
-                        {plan.name}
-                        {checked && <CheckIcon2 className="h-8 w-8" />}
-                      </RadioGroup.Label>
+            <Swiper effect={'cards'} grabCursor={true} modules={[EffectCards]} className="mySwiper">
+              {plans.map((plan) => (
+                <SwiperSlide key={plan.name}>
+                  <RadioGroup.Option
+                    key={plan.name}
+                    value={plan}
+                    className={({ active, checked }) =>
+                      classnames(
+                        'relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none',
+                        checked ? 'bg-sky-900 text-white' : 'bg-white'
+                      )
+                    }
+                  >
+                    {({ active, checked }) => (
+                      <div className="w-full">
+                        <div className="flexcentercol">
+                          <RadioGroup.Label
+                            as="div"
+                            className={`typo-sm flexcenter w-full gap-4 font-bold  ${
+                              checked ? 'text-white' : 'text-gray-900'
+                            }`}
+                          >
+                            {plan.name}
+                            {checked && <CheckIcon2 className="h-8 w-8" />}
+                          </RadioGroup.Label>
 
-                      <RadioGroup.Description
-                        as="div"
-                        className={`typo-4sm w-full ${checked ? 'text-gray-100' : 'text-gray-500'}`}
-                      >
-                        <div className="typo-3xl text-center font-bold">{plan.price}</div>
-                        <ul className="mx-auto w-4/5 list-disc">
-                          {plan.desc.map((_, idx) => (
-                            <li key={idx} className={`${checked ? 'text-gray-300' : 'text-gray-700'}`}>
-                              {_}
-                            </li>
-                          ))}
-                        </ul>
-                        {checked && <div className={`mt-8 text-center font-bold`}>{plan.message}</div>}
-                      </RadioGroup.Description>
-                    </div>
-                  </div>
-                )}
-              </RadioGroup.Option>
-            ))}
+                          <RadioGroup.Description
+                            as="div"
+                            className={`typo-4sm w-full ${checked ? 'text-gray-100' : 'text-gray-500'}`}
+                          >
+                            <div className="typo-3xl text-center font-bold">{plan.price}</div>
+                            <ul className="mx-auto w-4/5 list-disc">
+                              {plan.desc.map((_, idx) => (
+                                <li key={idx} className={`${checked ? 'text-gray-300' : 'text-gray-700'}`}>
+                                  {_}
+                                </li>
+                              ))}
+                            </ul>
+                            {checked && <div className={`mt-8 text-center font-bold`}>{plan.message}</div>}
+                          </RadioGroup.Description>
+                        </div>
+                      </div>
+                    )}
+                  </RadioGroup.Option>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </RadioGroup>
       </div>

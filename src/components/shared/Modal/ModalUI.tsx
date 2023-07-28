@@ -1,8 +1,7 @@
 import { DivProps } from '@/shared';
 import { NotificationIcon } from '@cpns/icons';
-import { Overlay } from '@cpns/shared';
+import { FullscreenOverlay } from '@cpns/shared';
 import { FC } from 'react';
-import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 interface ModalUIProps {
@@ -14,10 +13,8 @@ interface ModalUIProps {
 export const ModalUI: FC<ModalUIProps & DivProps> = ({ children, title, titleIcon, onClick, cancelHandle }) => {
   const { t } = useTranslation();
 
-  return createPortal(
-    <div className="flexcenter fullscreen z-[11]" onClick={() => cancelHandle()}>
-      <Overlay />
-
+  return (
+    <FullscreenOverlay overlayInteractive onClick={() => cancelHandle()}>
       <div className="z-20 m-2 flex max-w-4xl flex-col gap-4 rounded-[2rem] bg-gray-900 p-6 text-gray-100">
         <h2 className="typo-semism flex items-center gap-4 font-semibold leading-tight tracking-wide">
           {titleIcon || <NotificationIcon active width="24" height="24" />}
@@ -41,7 +38,6 @@ export const ModalUI: FC<ModalUIProps & DivProps> = ({ children, title, titleIco
           </div>
         </div>
       </div>
-    </div>,
-    document.querySelector('#modal-container') as HTMLElement
+    </FullscreenOverlay>
   );
 };

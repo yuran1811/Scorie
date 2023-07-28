@@ -7,11 +7,13 @@
 
 ## References
 
-- [Get verified on commimt](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
+- [Verify commit](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
 - [Push Notification with FCM](https://blog.logrocket.com/push-notifications-react-firebase/)
 - [Markdown to HTML](https://www.devextent.com/convert-markdown-to-html-nodejs/)
 - [Glassmorphism UI](https://codepen.io/TurkAysenur/pen/ZEpxeYm?editors=1000)
-- [HOCs](https://legacy.reactjs.org/docs/higher-order-components.html)
+- HOC
+  - [react typescript](https://react-typescript-cheatsheet.netlify.app/docs/hoc/full_example)
+  - [Legacy react](https://legacy.reactjs.org/docs/higher-order-components.html)
 - Add this line for tailwindcss's type
 
   ```

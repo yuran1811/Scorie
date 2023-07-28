@@ -1,14 +1,15 @@
 import { DivProps } from '@/shared';
+import { classnames, zIdxOrder } from '@/utils';
 import { FC } from 'react';
 
 interface OverlayProps {
-  zIdx?: string;
+  zIdx?: keyof typeof zIdxOrder;
   background?: string;
 }
 
 export const Overlay: FC<OverlayProps & DivProps> = ({
-  zIdx = 'z-10',
+  zIdx = 10,
   background = 'bg-zinc-950/90',
   className = '',
   ...otherProps
-}) => <div {...otherProps} className={`fullscreen cursor-pointer ${className} ${zIdx} ${background}`} />;
+}) => <div {...otherProps} className={classnames('fullscreen cursor-pointer', className, zIdxOrder[zIdx], background)} />;

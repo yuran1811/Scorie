@@ -35,12 +35,13 @@ export const ExtraTools: FC = () => {
 
   const { data, loading, error } = useCollectionQuery(
     'change_logs',
-    query(collection(db, 'change_logs'), orderBy('time', 'desc'))
+    query(collection(db, 'change_logs'), orderBy('time', 'desc')),
   );
 
   useEffect(() => {
     setShowLogWarn(!loading);
     if (loading || error || data === null) return;
+    
     setChangeLogs(getChangeLogs(data));
   }, [data, loading, error]);
 

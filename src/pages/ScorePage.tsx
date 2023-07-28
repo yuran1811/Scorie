@@ -1,11 +1,9 @@
-import { useStore } from '@/store';
-import { LogInRequired } from '@cpns/features/auth/LogInRequired';
+import { withSignIn } from '@/hocs';
 import ScoreSectionBar from '@cpns/features/score/ScoreSectionBar';
 import { FC } from 'react';
 
 export const ScorePage: FC = () => {
-  const currentUser = useStore((s) => s.currentUser);
-  return currentUser === null ? <LogInRequired /> : <ScoreSectionBar />;
+  return <ScoreSectionBar />;
 };
 
-export default ScorePage;
+export default withSignIn(ScorePage);

@@ -5,6 +5,7 @@ import { DarkDimClockStyle, DoubleClockStyle, HorizontalClockStyle, RectClockSty
 export const Clock: FC<ClockProps> = ({ type = 'vertical' }) => {
   const [timestamp, setTimestamp] = useState(Date.now());
 
+  // Auto update time value by rerendering each 1s
   setTimeout(() => {
     setTimestamp(Date.now());
   }, 1000);

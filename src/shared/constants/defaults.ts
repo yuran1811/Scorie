@@ -1,15 +1,18 @@
 import { QuoteStoreType, SettingsType, WeatherDataType, WeatherStoreType } from '@/shared';
 import { ToastOptions } from 'react-toastify';
 
-const MAX_SCORE_RECENT_LTH = 5;
-const GLASSMORPHISM_DESIGN = false;
+const MAX_SCORE_RECENT_LTH: number = 5;
+const GLASSMORPHISM_DESIGN: boolean = false;
 
 export const SETTINGS_DEFAULT: SettingsType = {
   glassmorphismDesign: GLASSMORPHISM_DESIGN,
   maxRecentScoreNum: MAX_SCORE_RECENT_LTH,
   numberFormat: 2,
+
   showQuickSetting: true,
   showStartUpLogo: true,
+
+  quickSetting: { position: 'home', minimizeUI: false },
 };
 
 export const QUOTES_STORED_DEFAULT: QuoteStoreType = {

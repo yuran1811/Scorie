@@ -14,11 +14,11 @@ export const PostPreview = () => {
   }, [data, error, loading]);
 
   return (
-    <div>
+    <div className="grid grid-flow-row-dense grid-cols-1 medmb:grid-cols-2">
       {posts.map((post) => (
-        <div>
-          {post.title}
-          {post.url}
+        <div className="flexcentercol gap-4">
+          <p className="font-bold">{post.title}</p>
+          <p>{post.url}</p>
         </div>
       ))}
     </div>

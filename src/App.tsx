@@ -10,6 +10,7 @@ import ErrorBoundary from '@cpns/ErrorBoundary';
 import { MainLayout } from '@cpns/layouts';
 import { ErrorContent, FullScreenLoading } from '@cpns/shared';
 import { TourProvider } from '@reactour/tour';
+import dayjs from 'dayjs';
 import { onAuthStateChanged } from 'firebase/auth';
 import i18next from 'i18next';
 import { FC, Suspense, useEffect } from 'react';
@@ -17,6 +18,8 @@ import { initReactI18next } from 'react-i18next';
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 
 import 'dayjs/locale/vi';
+
+dayjs.locale(useStore.getState().locale || 'vi');
 
 i18next.use(initReactI18next).init({
   lng: useStore.getState().locale || 'vi',
@@ -28,9 +31,11 @@ i18next.use(initReactI18next).init({
 });
 
 const App: FC = () => {
+  const setCurrentUser = useStore((s) => s.setCurrentUser);
+
   const quotes = useStore((s) => s.quotes);
   const setQuotes = useStore((s) => s.setQuotes);
-  const setCurrentUser = useStore((s) => s.setCurrentUser);
+  
   const currentStep = useTourStore((s) => s.currentStep);
   const setCurrentStep = useTourStore((s) => s.setCurrentStep);
 
@@ -66,7 +71,6 @@ const App: FC = () => {
       setQuotes({ ...quotes, isFetch: false, loading: false });
       return;
     }
-
     if (!quoteData || quoteLoading) return;
 
     const { canUpdate, mergeData } = mergeQuoteData(quotes, quoteData);

@@ -7,7 +7,36 @@ import { Button, FeatureTestimonial, Testimonial } from '@cpns/shared';
 import { collection, limit, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { A11y, FreeMode, Grid, Pagination } from 'swiper/modules';
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
 import { TestimonialAddNew } from './TestimonialAddNew';
+
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
+
+const swiperOptions: SwiperProps = {
+  modules: [A11y, Pagination, FreeMode, Grid],
+
+  pagination: {
+    clickable: true,
+    dynamicBullets: true,
+    dynamicMainBullets: 4,
+    renderBullet: (idx, className) => `<span class="${className} brightness-150 scale-150 bg-gray-200"></span>`,
+  },
+  freeMode: {
+    enabled: true,
+    sticky: true,
+    momentumVelocityRatio: 0.4,
+  },
+
+  spaceBetween: 10,
+
+  breakpoints: {
+    480: { slidesPerView: 3 },
+    0: { slidesPerView: 2 },
+  },
+};
 
 export const TestimonialContainer = () => {
   const currentUser = useStore((s) => s.currentUser);
@@ -40,13 +69,19 @@ export const TestimonialContainer = () => {
         <GradientUnderline className="mt-3 w-64" />
       </div>
       <FeatureTestimonial votes={[]} content="Good product for everyone" name="Yuran" job={`CEO & Founder Scorie`} />
-      <div className="flexcentercol container mx-auto !justify-start lgtab:flex-row lgtab:flex-wrap lgtab:!justify-center lgtab:px-10">
+
+      <Swiper
+        {...swiperOptions}
+        className="flexcentercol mx-auto w-full !justify-start lgtab:flex-row lgtab:flex-wrap lgtab:!justify-center lgtab:px-10"
+      >
         {testimonials
           .sort((a, b) => b.votes.length - a.votes.length)
           .map((testimonial) => (
-            <Testimonial key={testimonial.id} data={testimonial} />
+            <SwiperSlide key={testimonial.id} className="mb-14 w-max">
+              <Testimonial key={testimonial.id} data={testimonial} />
+            </SwiperSlide>
           ))}
-      </div>
+      </Swiper>
 
       {!!currentUser && currentUser?.uid && (
         <Button className="mt-24" content={openModal ? 'Minimize' : 'Open'} onClick={() => setOpenModal((s) => !s)} />

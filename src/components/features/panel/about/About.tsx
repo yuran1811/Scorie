@@ -2,6 +2,7 @@ import { FACEBOOK_PROFILE, GH_LINK, LINKEDIN_PROFILE, YOUTUBE_PROFILE } from '@/
 import { ArrowDownIcon, ArrowRightIcon, FacebookIcon2, GithubIcon, InfoIcon, LinkedinIcon, YoutubeIcon } from '@cpns/icons';
 import { HighlightLink } from '@cpns/interfaces';
 import { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ArrowIconConfig = {
   className: '',
@@ -12,6 +13,8 @@ const ArrowIconConfig = {
 
 export const About: FC = () => {
   const [openModal, setOpenModal] = useState(false);
+
+  const { t } = useTranslation();
 
   return (
     <div className="flexcentercol w-full">
@@ -59,7 +62,7 @@ export const About: FC = () => {
             </div>
           </div>
           <div>
-            <div className="typo text-center font-bold">Contact</div>
+            <div className="typo-semism text-center font-bold">{t('contact')}</div>
             <div className="flexcenter mt-6 scale-150 flex-wrap gap-2">
               <HighlightLink url={GH_LINK} noUnderline>
                 <GithubIcon />

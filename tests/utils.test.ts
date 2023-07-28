@@ -2,7 +2,7 @@ import { isObject as isObjectLD } from 'lodash';
 import { describe, expect, test } from 'vitest';
 
 import { classnames, deepObjectCompare, isObject } from '@/utils/base';
-import { formatTimeForWeather } from '@/utils/date-fns';
+import { formatTimeForWeather, formatTimerValue } from '@/utils/date-fns';
 import { getFirebaseErr } from '@/utils/firebase';
 
 describe('utils', () => {
@@ -11,6 +11,22 @@ describe('utils', () => {
       endTime: '2005-11-19T18:11:00.000Z',
       startTime: '2005-11-18T18:11:00.000Z',
     });
+  });
+
+  test('"timer format" SHOULD work as EXPECTED', () => {
+    expect(formatTimerValue((2 * 60 + 30) * 1000, 'HH:mm:ss:SSS')).toBe('00:02:30:000');
+
+    expect(formatTimerValue(120)).toBe('0:120');
+
+    expect(formatTimerValue(0)).toBe("Time's up");
+    expect(formatTimerValue(3 * 1000)).toBe('3');
+    expect(formatTimerValue(30 * 1000)).toBe('30');
+
+    expect(formatTimerValue(60 * 1000)).toBe('1:00');
+    expect(formatTimerValue(12 * 60 * 1000)).toBe('12:00');
+
+    expect(formatTimerValue((2 * 60 * 60 + 30 * 60) * 1000)).toBe('2:30:00');
+    expect(formatTimerValue((12 * 60 * 60 + 30 * 60) * 1000)).toBe('12:30:00');
   });
 
   test('"classnames" SHOULD work as EXPECTED', () => {
@@ -26,14 +42,14 @@ describe('utils', () => {
     expect(
       deepObjectCompare(
         { hello: 'world', helloworld: { hello: 'world' } },
-        { hello: 'world', helloworld: { hello: 'world2' } }
-      )
+        { hello: 'world', helloworld: { hello: 'world2' } },
+      ),
     ).toBe(false);
     expect(
       deepObjectCompare(
         { hello: 'world', helloworld: { hello: 'world' } },
-        { hello: 'world', helloworld: { hello: 'world2', helloo: 'world' } }
-      )
+        { hello: 'world', helloworld: { hello: 'world2', helloo: 'world' } },
+      ),
     ).toBe(false);
   });
 

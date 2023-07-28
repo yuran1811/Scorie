@@ -347,6 +347,11 @@ export default {
     vi: 'Giúp đỡ',
     en: 'Help',
   },
+  contact: {
+    vi: 'Liên hệ',
+    en: 'Contact',
+  },
+
   edit: {
     vi: 'Chỉnh sửa',
     en: 'Edit',
@@ -383,6 +388,10 @@ export default {
     vi: 'Mở',
     en: 'Open',
   },
+  cancel: {
+    vi: 'Hủy',
+    en: 'Cancel',
+  },
   minimize: {
     vi: 'Thu nhỏ',
     en: 'Minimize',
@@ -395,6 +404,7 @@ export default {
     vi: 'Chia sẻ',
     en: 'Share',
   },
+  
   or: {
     vi: 'hoặc',
     en: 'or',

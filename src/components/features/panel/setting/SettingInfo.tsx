@@ -2,7 +2,7 @@ import { SettingsType } from '@/shared';
 import { useStore } from '@/store';
 import { successToast } from '@/utils';
 import { ErrorMessage, GradientUnderline } from '@cpns/interfaces';
-import { Button, Input } from '@cpns/shared';
+import { Button, Input, SettingSwitchItem } from '@cpns/shared';
 import { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -20,13 +20,7 @@ export const SettingInfo: FC = () => {
     formState: { errors },
   } = useForm<SettingsType>({
     mode: 'onChange',
-    values: {
-      glassmorphismDesign: settings.glassmorphismDesign,
-      maxRecentScoreNum: settings.maxRecentScoreNum,
-      numberFormat: settings.numberFormat,
-      showQuickSetting: settings.showQuickSetting,
-      showStartUpLogo: settings.showStartUpLogo,
-    },
+    values: { ...settings },
   });
 
   const onSubmit: SubmitHandler<SettingsType> = (data) => {
@@ -91,44 +85,47 @@ export const SettingInfo: FC = () => {
         <GradientUnderline className="medmb:max-w-[28rem]" />
       </div>
       <div>
-        <div
-          className="typo-sm mt-10 cursor-pointer text-center font-bold"
+        <SettingSwitchItem
+          enable={settings.showQuickSetting}
+          message={{
+            enable: 'show quick settings',
+            disable: 'hide quick settings',
+          }}
           onClick={() =>
             setSettings({
               ...settings,
               showQuickSetting: !settings.showQuickSetting,
             })
           }
-        >
-          {t(settings.showQuickSetting ? 'show quick settings' : 'hide quick settings')}
-          <div className="typo-4sm text-center font-semibold italic">{t('click to change')}</div>
-        </div>
+        />
 
-        <div
-          className="typo-sm mt-10 cursor-pointer text-center font-bold"
+        <SettingSwitchItem
+          enable={settings.showStartUpLogo}
+          message={{
+            enable: 'show startup logo',
+            disable: 'hide startup logo',
+          }}
           onClick={() =>
             setSettings({
               ...settings,
               showStartUpLogo: !settings.showStartUpLogo,
             })
           }
-        >
-          {t(settings.showStartUpLogo ? 'show startup logo' : 'hide startup logo')}
-          <div className="typo-4sm text-center font-semibold italic">{t('click to change')}</div>
-        </div>
+        />
 
-        <div
-          className="typo-sm mt-10 cursor-pointer text-center font-bold"
+        <SettingSwitchItem
+          enable={settings.glassmorphismDesign}
+          message={{
+            enable: 'turn on transparent effect',
+            disable: 'turn off transparent effect',
+          }}
           onClick={() =>
             setSettings({
               ...settings,
               glassmorphismDesign: !settings.glassmorphismDesign,
             })
           }
-        >
-          {t(settings.glassmorphismDesign ? 'turn on transparent effect' : 'turn off transparent effect')}
-          <div className="typo-4sm text-center font-semibold italic">{t('click to change')}</div>
-        </div>
+        />
       </div>
     </div>
   );

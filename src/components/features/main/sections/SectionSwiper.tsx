@@ -18,6 +18,7 @@ interface SectionSwiperProps {
 
 const swiperOptions: SwiperProps = {
   modules: [Navigation, Pagination, A11y],
+
   navigation: true,
   pagination: { clickable: true },
 

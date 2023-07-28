@@ -1,37 +1,57 @@
+import { useStore } from '@/store';
 import { classnames } from '@/utils';
 import { SettingInfo } from '@cpns/features/panel/setting/SettingInfo';
-import { Button, PlanPurchase } from '@cpns/shared';
-import { useState } from 'react';
+import { PlanPurchase, SelectInput, SwitchBtn } from '@cpns/shared';
+import { QuickSettingPositionType } from '@shared/types';
+import { QuickSettingTabUI } from '../QuickSettingTabUI';
 
 export const QuickSettingPanel = () => {
-  const [activeStatus, setActiveStatus] = useState({
-    showAppSettings: false,
-    showPlanPurchase: false,
-  });
+  const settings = useStore((s) => s.settings);
+  const setSettings = useStore((s) => s.setSettings);
 
   return (
-    <div
-      className={classnames(
-        'flex flex-col items-center justify-start gap-8 medtab:items-start medtab:justify-center',
-        activeStatus.showAppSettings && activeStatus.showPlanPurchase ? 'medtab:flex-row' : ''
-      )}
-    >
-      <div className="w-full">
-        <Button
-          content="App settings"
-          className="font-bold"
-          onClick={() => setActiveStatus((s) => ({ ...s, showAppSettings: !s.showAppSettings }))}
-        />
-        {activeStatus.showAppSettings && <SettingInfo />}
-      </div>
-      <div className="w-full">
-        <Button
-          content="Plans"
-          className="font-bold"
-          onClick={() => setActiveStatus((s) => ({ ...s, showPlanPurchase: !s.showPlanPurchase }))}
-        />
-        {activeStatus.showPlanPurchase && <PlanPurchase />}
-      </div>
+    <div className={classnames('flexcentercol')}>
+      <QuickSettingTabUI
+        tabList={['Config', 'App settings', 'Plans']}
+        panelList={[
+          {
+            _id: 'config',
+            Component: (
+              <div className="flexcentercol typo-2sm w-full space-y-5">
+                <div className="flexcenter w-full gap-4">
+                  <p className="font-semibold">Minimize UI</p>
+                  <SwitchBtn
+                    containterClass="scale-50"
+                    enable={settings.quickSetting.minimizeUI}
+                    onChange={() =>
+                      setSettings({
+                        ...settings,
+                        quickSetting: { ...settings.quickSetting, minimizeUI: !settings.quickSetting.minimizeUI },
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="flexcenter w-full gap-6">
+                  <p className="font-semibold">Position</p>
+                  <SelectInput
+                    list={[
+                      { _id: 'home', data: 'home' },
+                      { _id: 'bubble', data: 'bubble' },
+                    ]}
+                    defaultSelected={settings.quickSetting.position}
+                    setWhenSelected={(value: QuickSettingPositionType) =>
+                      setSettings({ ...settings, quickSetting: { ...settings.quickSetting, position: value } })
+                    }
+                  />
+                </div>
+              </div>
+            ),
+          },
+          { _id: 'app_settings', Component: <SettingInfo /> },
+          { _id: 'plan_purchase', Component: <PlanPurchase /> },
+        ]}
+      />
     </div>
   );
 };

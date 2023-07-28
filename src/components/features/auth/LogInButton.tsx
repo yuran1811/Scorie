@@ -18,7 +18,7 @@ export const LogInButton: FC<Props & ButtonProps> = ({ provider, size = 24, Icon
       onClick={onClick}
       className={classnames(
         'flexcenter typo-2sm my-2 h-20 w-20 cursor-pointer gap-2 rounded-full px-6 py-3 transition duration-300 hover:scale-105 disabled:!cursor-default disabled:!brightness-75 medmb:h-auto medmb:w-max',
-        className || 'bg-white text-black'
+        className || 'bg-white text-black',
       )}
     >
       {!!Icon && <Icon height={size} width={size} />}

@@ -5,10 +5,10 @@ import { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { NotVerifyEmail } from '../auth/NotVerifyEmail';
+import { QuickSettingSection } from '../quick-setting/QuickSettingSection';
 import BlockQuote from '../quotes/BlockQuote';
 import { TestimonialContainer } from '../testimonial/TestimonialContainer';
 import { FeatureCard } from './FeatureCard';
-import { QuickSettingSection } from '../quick-setting/QuickSettingSection';
 import { WelcomBanner } from './WelcomBanner';
 
 export const mainSteps: StepType[] = [

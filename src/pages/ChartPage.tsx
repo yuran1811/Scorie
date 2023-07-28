@@ -1,11 +1,9 @@
-import { useStore } from '@/store';
-import { LogInRequired } from '@cpns/features/auth/LogInRequired';
+import { withSignIn } from '@/hocs';
 import ChartSectionBar from '@cpns/features/chart/ChartSectionBar';
 import { FC } from 'react';
 
-export const ChartPage: FC = () => {
-  const currentUser = useStore((s) => s.currentUser);
-  return currentUser === null ? <LogInRequired /> : <ChartSectionBar />;
+const ChartPage: FC = () => {
+  return <ChartSectionBar />;
 };
 
-export default ChartPage;
+export default withSignIn(ChartPage);

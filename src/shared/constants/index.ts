@@ -179,5 +179,4 @@ Like links, Images also have a footnote style syntax
 
 With a reference later in the document defining the URL location:
 
-[id]: /bg-blur.jpg "bg"
-`;
+[id]: /bg-blur.jpg "bg"`;

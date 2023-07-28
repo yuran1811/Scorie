@@ -9,6 +9,7 @@
 .pnp.loader.mjs
 .yarn
 
+*.ignore.*
 *.local
 *.log
 *.njsproj
@@ -16,22 +17,22 @@
 *.sln
 *.suo
 *.sw?
-*.ignore.*
 
 /.pnp
 /build
 /coverage
 
-node_modules
+dev-dist
 dist
 dist-ssr
-dev-dist
 logs
-lerna-debug.log*
-analyse.html
-tsconfig.tsbuildinfo
+node_modules
 
+lerna-debug.log*
 npm-debug.log*
 pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+analyse.html
+tsconfig.tsbuildinfo

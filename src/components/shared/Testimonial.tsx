@@ -33,31 +33,35 @@ export const Testimonial: FC<{ data: TestimonialProps }> = ({ data: { content, n
   }, []);
 
   return (
-    <div className="relative mx-4 my-6 flex w-full max-w-xl flex-col shadow-lg">
+    <div className="relative mx-4 my-6 flex w-full max-w-2xl flex-col shadow-lg">
       <div
         className={classnames(
-          'rounded-t-xl border-2 border-b-0 border-r-0 border-violet-600 px-4 py-8 medtab:px-8 lgtab:px-10 lgtab:py-10',
+          'rounded-t-xl border-y-2 border-violet-600 px-3 py-6 medtab:px-6 lgtab:px-8 lgtab:py-8',
           settings.glassmorphismDesign ? 'bg-gray-900/70' : 'bg-gray-900'
         )}
       >
-        <p className="typo-semism relative px-6 py-4 text-center text-gray-100">
+        <div className="typo-3sm relative px-6 py-4 text-center text-gray-100">
           <svg viewBox="0 0 512 512" className="h-8 w-8 fill-current text-violet-400">
             <path d="M232,246.857V16H16V416H54.4ZM48,48H200V233.143L48,377.905Z"></path>
             <path d="M280,416h38.4L496,246.857V16H280ZM312,48H464V233.143L312,377.905Z"></path>
           </svg>
-          {content}
+
+          <p className="font-normal">{content}</p>
+
           <svg viewBox="0 0 512 512" className="ml-auto h-8 w-8 fill-current text-violet-400">
             <path d="M280,185.143V416H496V16H457.6ZM464,384H312V198.857L464,54.1Z"></path>
             <path d="M232,16H193.6L16,185.143V416H232ZM200,384H48V198.857L200,54.1Z"></path>
           </svg>
-        </p>
+        </div>
       </div>
-      <div className="flex flex-col items-center justify-center rounded-b-lg bg-violet-400 p-8 text-gray-900">
-        <Avatar className="-mt-20 mb-2" imgUrl={testimonialImg} radius="6rem" />
-        <p className="typo-2sm line-clamp-2 w-full px-8 text-center font-semibold leading-tight medmb:px-20">{name}</p>
-        <p className="typo-3sm line-clamp-2 w-full px-8 text-center uppercase medmb:px-20">{job}</p>
+      <div className="flexcentercol rounded-b-lg px-5">
+        <Avatar className="-mt-14 mb-2" imgUrl={testimonialImg} radius="6.4rem" />
+        <div className="-mt-8 grid grid-cols-2 grid-rows-1 items-center gap-32 leading-tight">
+          <p className="typo-2sm line-clamp-2 w-full text-right font-semibold">@{name}</p>
+          <p className="typo-3sm line-clamp-2 w-full text-left capitalize">{job}</p>
+        </div>
       </div>
-      <div className="absolute bottom-28 right-8 cursor-pointer">
+      <div className="absolute right-8 top-8 cursor-pointer">
         <div className="typo-2sm absolute -right-6 -top-6 h-12 w-12 scale-90 rounded-full bg-violet-800 text-center">
           {votes?.length ? (votes.length > 99 ? '99+' : votes.length) : 0}
         </div>
