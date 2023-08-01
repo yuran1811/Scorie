@@ -17,3 +17,10 @@ export interface TimerStoreType {
   _id: string;
   data: TimerType;
 }
+
+export interface LapseTimeType {
+  timestamp: number;
+  lapseTime: number;
+}
+
+export type LapseListType = ({ id: number } & LapseTimeType)[];

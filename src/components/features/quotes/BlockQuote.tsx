@@ -47,9 +47,7 @@ export const BlockQuote: FC<DivProps> = () => {
           style={{ backgroundColor: `${bg}85`, color: `${color}`, borderColor: `${color}80` }}
         >
           <QuoteIcon
-            className="absolute block lgmb:left-8 lgmb:top-8 lgmb:scale-125 lgtab:left-12 lgtab:top-12 lgtab:scale-150"
-            width="32"
-            height="32"
+            className="absolute block aspect-square w-12 lgmb:left-8 lgmb:top-8 lgmb:scale-125 lgtab:left-12 lgtab:top-12 lgtab:scale-150"
             fill={secondary}
           />
 
@@ -98,8 +96,8 @@ export const BlockQuote: FC<DivProps> = () => {
             <div data-tour={step(2)} className="cursor-pointer">
               <Tooltip content="Shuffle">
                 <ShuffleIcon
-                  width="35"
-                  height="35"
+                  width="32"
+                  height="32"
                   onClick={() => setQuotes({ ...quotes, quoteIdx: Math.floor(Math.random() * quotes.data.length) })}
                 />
               </Tooltip>

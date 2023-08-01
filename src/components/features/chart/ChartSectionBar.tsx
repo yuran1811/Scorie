@@ -31,7 +31,7 @@ export const ChartSectionBar: FC = () => {
   const dataToUse: any = getChartData(scores, settings.numberFormat);
 
   const radarCategories = __.uniq(
-    __.flattenDeep(scores.map((subject) => subject.scores.map((score) => Math.round(score.value))))
+    __.flattenDeep(scores.map((subject) => subject.scores.map((score) => Math.round(score.value)))),
   ).sort();
 
   const srs: Record<string, ApexAxisChartSeries | ApexNonAxisChartSeries> = {
@@ -40,7 +40,7 @@ export const ChartSectionBar: FC = () => {
     radar: scores.map((subject) => ({
       name: subject.name,
       data: radarCategories.map((cate) =>
-        __.map(subject.scores, 'value').reduce((prev, score) => prev + +(Math.round(score) === cate), 0)
+        __.map(subject.scores, 'value').reduce((prev, score) => prev + +(Math.round(score) === cate), 0),
       ),
     })),
   };
@@ -64,7 +64,7 @@ export const ChartSectionBar: FC = () => {
           className="group !bg-gradient-to-br from-violet-500 to-violet-800 !text-white"
           onClick={() => navigate('/subjects')}
         >
-          <ArrowRightIcon className="isAnimated group-hover:translate-x-2" width="24" height="24" />
+          <ArrowRightIcon className="isAnimated aspect-square w-10 group-hover:translate-x-2" />
         </Button>
       </div>
     );

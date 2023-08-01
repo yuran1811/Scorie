@@ -24,7 +24,7 @@ export const ScoreSectionBar = () => {
 
   const { data, loading } = useCollectionQuery(
     'users_subjects',
-    collection(db, 'users', currentUser?.uid as string, 'subjects')
+    collection(db, 'users', currentUser?.uid as string, 'subjects'),
   );
 
   const [addNewSSOpen, setAddNewSSOpen] = useState(false);
@@ -67,7 +67,7 @@ export const ScoreSectionBar = () => {
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
         <BackIcon className="scale-75 text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={HashtagIcon} content="Score" />
-        <div className="flexcenter flex-wrap medmb:px-4 medmb:py-8">
+        <div className="flexcenter flex-wrap medmb:px-4 medmb:py-6">
           <Tooltip
             content="Special subject"
             options={{
@@ -75,10 +75,8 @@ export const ScoreSectionBar = () => {
             }}
           >
             <StarIcon
-              className="mx-5 my-4 cursor-pointer"
+              className="mx-5 my-4 aspect-square w-12 cursor-pointer"
               fill={!filter.hasSpecial ? 'white' : '#fcd34d'}
-              width="32"
-              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasSpecial: !f.hasSpecial }))}
             />
           </Tooltip>
@@ -90,30 +88,24 @@ export const ScoreSectionBar = () => {
             }}
           >
             <ImportantIcon
-              className="mx-5 my-4 cursor-pointer"
+              className="mx-5 my-4 aspect-square w-12 cursor-pointer"
               fill={!filter.hasVital ? 'white' : '#38bdf8'}
-              width="32"
-              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasVital: !f.hasVital }))}
             />
           </Tooltip>
 
           <Tooltip content="Ignored subject" options={{ delay: 400 }}>
             <IgnoreIcon
-              className="mx-5 my-4 cursor-pointer"
+              className="mx-5 my-4 aspect-square w-12 cursor-pointer"
               fill={!filter.hasIgnored ? 'white' : '#0891b2'}
-              width="32"
-              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasIgnored: !f.hasIgnored }))}
             />
           </Tooltip>
 
           <Tooltip content="Add new subject" options={{ delay: 400 }}>
             <AddIcon
-              className="mx-5 my-4 cursor-pointer"
+              className="mx-5 my-4 aspect-square w-12 cursor-pointer"
               fill={'white'}
-              width="32"
-              height="32"
               onClick={() => setAddNewOpen(true)}
             />
           </Tooltip>

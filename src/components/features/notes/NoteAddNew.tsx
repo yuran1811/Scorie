@@ -75,17 +75,13 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
     <ModalBox onClick={() => onClickHandle(false)}>
       <ModalBoxHeader onClick={() => onClickHandle(false)}>
         <PinIcon
-          className="mx-5 cursor-pointer"
+          className="mx-5 aspect-square w-12 cursor-pointer"
           fill={!noteOptions.isPinned ? 'white' : '#f87171'}
-          width="32"
-          height="32"
           onClick={() => setNoteOptions((s) => ({ ...s, isPinned: !s.isPinned }))}
         />
         <DoneIcon
-          className="mx-5 cursor-pointer"
+          className="mx-5 aspect-square w-12 cursor-pointer"
           fill={!noteOptions.isDone ? 'white' : '#d97706'}
-          width="32"
-          height="32"
           onClick={() =>
             setNoteOptions((s) => ({
               ...s,
@@ -95,10 +91,8 @@ export const NoteAddNew: FC<NoteAddNewProps & DivProps> = ({ onClickHandle }) =>
           }
         />
         <ProgressIcon
-          className="mx-5 cursor-pointer"
+          className="mx-5 aspect-square w-12 cursor-pointer"
           fill={!noteOptions.isInProgress ? 'white' : '#94a3b8'}
-          width="32"
-          height="32"
           onClick={() =>
             setNoteOptions((s) => ({
               ...s,

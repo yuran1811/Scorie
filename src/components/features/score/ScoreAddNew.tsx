@@ -63,10 +63,8 @@ export const ScoreAddNew: FC<ScoreAddNewProps & DivProps> = ({ subject, onClick 
     <ModalBox onClick={onClick}>
       <ModalBoxHeader onClick={onClick}>
         <IgnoreIcon
-          className="mx-5 cursor-pointer"
+          className="mx-5 aspect-square w-12 cursor-pointer"
           fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
-          width="32"
-          height="32"
           onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
         />
       </ModalBoxHeader>

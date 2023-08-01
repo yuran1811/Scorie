@@ -52,6 +52,7 @@ export * from './Socials';
 export * from './Socials2';
 export * from './StarIcon';
 export * from './TagIcon';
+export * from './TimerIcons';
 export * from './ToolIcon';
 export * from './TrashIcon';
 export * from './UpvoteIcon';

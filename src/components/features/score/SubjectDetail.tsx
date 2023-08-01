@@ -91,7 +91,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
           expectedAverage: +expectedAverage,
           maxScore: +getValues('maxScore'),
           subjectName: getValues('name'),
-        }
+        },
       )
     ) {
       setSaveErr({ content: '', counter: saveErr.counter + 1 });
@@ -119,7 +119,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
         setTimeoutId(
           setTimeout(() => {
             setOpenDetail(false);
-          }, 2000)
+          }, 2000),
         );
       })
       .finally(() => setLoading(false));
@@ -189,24 +189,18 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
         <div className="sticky left-0 right-0 top-0 flex items-center justify-between bg-ctbg p-8">
           <div className="flexcenter w-full flex-wrap lgmb:pl-24">
             <StarIcon
-              className="m-[0.6rem] scale-75 cursor-pointer lgmb:m-5 lgmb:scale-100"
+              className="m-[0.6rem] aspect-square w-12 scale-75 cursor-pointer lgmb:m-5 lgmb:scale-100"
               fill={!scoreOptions.isSpecial ? 'white' : '#d97706'}
-              width="32"
-              height="32"
               onClick={() => setScoreOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
             />
             <ImportantIcon
-              className="m-[0.6rem] scale-75 cursor-pointer lgmb:m-5 lgmb:scale-100"
+              className="m-[0.6rem] aspect-square w-12 scale-75 cursor-pointer lgmb:m-5 lgmb:scale-100"
               fill={!scoreOptions.isVital ? 'white' : '#94a3b8'}
-              width="32"
-              height="32"
               onClick={() => setScoreOptions((s) => ({ ...s, isVital: !s.isVital }))}
             />
             <IgnoreIcon
-              className="m-[0.6rem] scale-75 cursor-pointer lgmb:m-5 lgmb:scale-100"
+              className="m-[0.6rem] aspect-square w-12 scale-75 cursor-pointer lgmb:m-5 lgmb:scale-100"
               fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
-              width="32"
-              height="32"
               onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
             />
 
@@ -226,20 +220,14 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
                 )}
               >
                 <div onClick={() => setShowConfirm((s) => !s)}>
-                  <TrashIcon
-                    className="m-[0.6rem] scale-75 cursor-pointer text-slate-500 lgmb:m-5 lgmb:scale-100"
-                    width="30"
-                    height="30"
-                  />
+                  <TrashIcon className="m-[0.6rem] aspect-square w-12 scale-75 cursor-pointer text-slate-500 lgmb:m-5 lgmb:scale-100" />
                 </div>
               </Tippy>
             </div>
           </div>
 
           <CloseIcon
-            className="mx-4 cursor-pointer text-rose-500"
-            width="32"
-            height="32"
+            className="mx-4 aspect-square w-12 cursor-pointer text-rose-500"
             onClick={() => {
               updateSubjectData();
             }}
@@ -256,7 +244,7 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
           <div className="pt-4 lgtab:sticky lgtab:left-0 lgtab:top-[8rem]">
             <form className="flexcentercol mb-8" onSubmit={handleSubmit(onSubmit)}>
               <Input
-                className="itypo-5xl !max-w-[36rem] !rounded-none !border-0 !bg-transparent !p-0 text-center !font-bold"
+                className="itypo-xl !max-w-[36rem] !rounded-none !border-0 !bg-transparent !p-0 text-center !font-bold"
                 defaultValue={subject?.name || ''}
                 formHandle={{
                   ...register('name', {
@@ -319,22 +307,18 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
               </div>
               <div className="flex w-full items-start justify-center smmb:w-auto smmb:justify-end">
                 <Tooltip content="Add new score" options={{ delay: 400 }}>
-                  <AddIcon className={`mx-5 cursor-pointer`} width="32" height="32" onClick={() => setAddNewOpen(true)} />
+                  <AddIcon className="mx-5 aspect-square w-12 cursor-pointer" onClick={() => setAddNewOpen(true)} />
                 </Tooltip>
                 {addNewOpen && <ScoreAddNew subject={subject} onClick={() => setAddNewOpen(false)} />}
                 <Tooltip content="Grid view" options={{ delay: 400 }}>
                   <ListIcon
-                    className={`${viewMode === 'group' ? 'block' : 'hidden'} mx-5 cursor-pointer`}
-                    width="32"
-                    height="32"
+                    className={`${viewMode === 'group' ? 'block' : 'hidden'} mx-5 aspect-square w-12 cursor-pointer`}
                     onClick={() => setViewMode('all')}
                   />
                 </Tooltip>
                 <Tooltip content="Show all" options={{ delay: 400 }}>
                   <ListAllIcon
-                    className={`${viewMode === 'all' ? 'block' : 'hidden'} mx-5 cursor-pointer`}
-                    width="32"
-                    height="32"
+                    className={`${viewMode === 'all' ? 'block' : 'hidden'} mx-5 aspect-square w-12 cursor-pointer`}
                     onClick={() => setViewMode('group')}
                   />
                 </Tooltip>
@@ -347,6 +331,6 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
         </div>
       </div>
     </>,
-    document.getElementById('modal-container') as HTMLElement
+    document.getElementById('modal-container') as HTMLElement,
   );
 };

@@ -1,11 +1,10 @@
 import { addNewReport } from '@/services';
+import { DivProps } from '@/shared';
 import { useStore } from '@/store';
 import { classnames } from '@/utils';
 import { ErrorMessage } from '@cpns/interfaces';
-import { Button, FullscreenOverlay, Input, Overlay, TextArea } from '@cpns/shared';
-import { DivProps } from '@/shared';
+import { Button, FullscreenOverlay, Input, TextArea } from '@cpns/shared';
 import { FC, useEffect } from 'react';
-import { createPortal } from 'react-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -52,7 +51,7 @@ export const ReportAddNew: FC<DivProps & { clickHandle: CallableFunction }> = ({
     <FullscreenOverlay overlayInteractive onClick={() => clickHandle()}>
       <form
         className={classnames(
-          'flexcentercol mx-auto line-clamp-1 max-h-[70vh] w-max max-w-[80%] rounded-[2rem] border-2 border-violet-400/30 bg-gray-900/70 px-12 pb-4 pt-6 text-center font-bold text-teal-700 lgmb:max-h-[90vh]',
+          'flexcentercol mx-auto line-clamp-1 max-h-[70vh] w-max max-w-[80%] gap-3 rounded-[2rem] border-2 border-violet-400/30 bg-gray-900/70 px-12 pb-2 pt-5 text-center font-bold text-teal-700 lgmb:max-h-[90vh]',
         )}
         onSubmit={handleSubmit(onSubmit)}
       >

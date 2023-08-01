@@ -11,7 +11,7 @@ const SettingBar: FC<DivProps> = (props) => {
 
   return (
     <div {...props} onClick={() => setActive && setActive((s) => ({ ...s, isSetting: !active.isSetting }))}>
-      <SettingIcon className="scale-typo-sm cursor-pointer text-ctcolor" width="26" height="26" />
+      <SettingIcon className="scale-typo-sm aspect-square w-10 cursor-pointer text-ctcolor" />
       <div className="typo-semimed line-clamp-1 font-bold">{t('settings')}</div>
     </div>
   );

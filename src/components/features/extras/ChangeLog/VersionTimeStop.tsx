@@ -40,12 +40,12 @@ export const VersionTimeStop: FC<VersionTimeStopProps> = ({ data: { content, tim
             <div
               className={classnames(
                 'absolute -right-16 cursor-pointer smmb:-right-16',
-                currentUser && currentUser?.uid ? '' : '!hidden'
+                currentUser && currentUser?.uid ? '' : '!hidden',
               )}
             >
               <Tooltip content={!!changeLogsRead[version] ? 'Mark as unread' : 'Mark as read'}>
                 <div onClick={() => setChangeLogsRead(version, !changeLogsRead[version])}>
-                  <DoubleCheckIcon active={!!changeLogsRead[version]} height="24" width="24" />
+                  <DoubleCheckIcon active={!!changeLogsRead[version]} className="aspect-square w-10" />
                 </div>
               </Tooltip>
             </div>

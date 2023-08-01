@@ -35,7 +35,7 @@ export const VersionTimeline: FC<DivProps> = ({ onClick }) => {
             changeLogs.forEach((log) => setChangeLogsRead(log.version, !allRead));
           }}
         >
-          <DoubleCheckIcon active={!allRead} height="24" width="24" />
+          <DoubleCheckIcon active={!allRead} className="aspect-square w-10" />
           <span>Mark all as {allRead && 'un'}read</span>
         </div>
         <ul className={classnames('space-y-12 p-4 medmb:px-8', currentUser && currentUser?.uid ? '' : 'mt-8')}>

@@ -35,7 +35,7 @@ export const NoteSectionBar = () => {
 
   const { data, loading, error } = useCollectionQuery(
     'users_notes',
-    collection(db, 'users', currentUser?.uid as string, 'notes')
+    collection(db, 'users', currentUser?.uid as string, 'notes'),
   );
 
   const [viewMode, setViewMode] = useState('list');
@@ -77,40 +77,32 @@ export const NoteSectionBar = () => {
       <div className="flexcenter w-full flex-wrap gap-4 px-4">
         <BackIcon className="scale-75 text-white" onClick={() => (navigate('/'), scrollToTop())} />
         <Title Icon={NoteIcon} content="Note" />
-        <div className="flexcenter flex-wrap medmb:px-4 medmb:py-8">
+        <div className="flexcenter flex-wrap medmb:px-4 medmb:py-6">
           <Tooltip content="Filter done note" options={{ delay: 400 }}>
             <DoneIcon
-              className="mx-5 my-4 cursor-pointer"
+              className="mx-5 my-4 aspect-square w-12 cursor-pointer"
               fill={!filter.hasDone ? 'white' : '#fcd34d'}
-              width="32"
-              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasDone: !f.hasDone }))}
             />
           </Tooltip>
           <Tooltip content="Filter in progress note" options={{ delay: 400 }}>
             <ProgressIcon
-              className="mx-5 my-4 cursor-pointer"
+              className="mx-5 my-4 aspect-square w-12 cursor-pointer"
               fill={!filter.hasInProgress ? 'white' : '#38bdf8'}
-              width="32"
-              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasInProgress: !f.hasInProgress }))}
             />
           </Tooltip>
           <Tooltip content="Archived note" options={{ delay: 400 }}>
             <ArchiveIcon
-              className="mx-5 my-4 cursor-pointer"
+              className="mx-5 my-4 aspect-square w-12 cursor-pointer"
               fill={!filter.hasArchived ? 'white' : '#94a3b8'}
-              width="32"
-              height="32"
               onClick={() => setFilter((f) => ({ ...f, hasArchived: !f.hasArchived }))}
             />
           </Tooltip>
           <Tooltip content="Add note manually" options={{ delay: 400 }}>
             <AddIcon
-              className="mx-5 my-4 cursor-pointer"
+              className="mx-5 my-4 aspect-square w-12 cursor-pointer"
               fill={'white'}
-              width="32"
-              height="32"
               onClick={() => setAddNewOpen(true)}
             />
           </Tooltip>
@@ -119,22 +111,18 @@ export const NoteSectionBar = () => {
             {showImport && <NoteImport setShowImport={setShowImport} />}
             <div onClick={() => setShowImport(true)}>
               <Tooltip content="Import note" options={{ delay: 400 }}>
-                <ImportIcon className="mx-5 my-4 cursor-pointer" fill={'white'} width="32" height="32" />
+                <ImportIcon className="mx-5 my-4 aspect-square w-12 cursor-pointer" fill={'white'} />
               </Tooltip>
             </div>
           </div>
 
           <div className="block">
             <ListIcon
-              className={`${viewMode === 'list' ? 'block' : 'hidden'} mx-5 my-4 cursor-pointer`}
-              width="32"
-              height="32"
+              className={`${viewMode === 'list' ? 'block' : 'hidden'} mx-5 my-4 aspect-square w-12 cursor-pointer`}
               onClick={() => setViewMode('grid')}
             />
             <ListAllIcon
-              className={`${viewMode === 'grid' ? 'block' : 'hidden'} mx-5 my-4 cursor-pointer`}
-              width="32"
-              height="32"
+              className={`${viewMode === 'grid' ? 'block' : 'hidden'} mx-5 my-4 aspect-square w-12 cursor-pointer`}
               onClick={() => setViewMode('list')}
             />
           </div>

@@ -11,7 +11,7 @@ const AccountBar: FC<DivProps> = (props) => {
 
   return (
     <div {...props} onClick={() => setActive && setActive((s) => ({ ...s, isAccount: !active.isAccount }))}>
-      <UserIcon className="scale-typo-sm cursor-pointer text-ctcolor" width="26" height="26" />
+      <UserIcon className="scale-typo-sm aspect-square w-10 cursor-pointer text-ctcolor" />
       <div className="typo-semimed line-clamp-1 font-bold">{t('account')}</div>
     </div>
   );

@@ -51,15 +51,15 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
         className={classnames(
           !isShow && '!hidden',
           viewMode === 'list' ? 'mx-auto w-[95vw] medtab:w-[calc(100%-2rem)]' : 'w-[20rem]',
-          'isAnimated flexcentercol group relative max-w-[50rem] cursor-pointer rounded-[2rem] border-[3px] border-transparent hover:border-white medtab:!mx-0 medtab:w-[24rem]'
+          'isAnimated flexcentercol group relative max-w-[50rem] cursor-pointer rounded-[2rem] border-[3px] border-transparent hover:border-white medtab:!mx-0 medtab:w-[24rem]',
         )}
         style={noteStyle}
         onClick={() => setOpenDetail(true)}
       >
         <div className="flexcenter pt-4">
-          {isPinned && <PinIcon className="mx-5" width="30" height="30" fill="#f87171" />}
-          {isDone && <DoneIcon className="mx-4" width="30" height="30" fill="#eab308" />}
-          {isInProgress && <ProgressIcon className="mx-4" width="30" height="30" fill="#cbd5e1" />}
+          {isPinned && <PinIcon className="mx-5 aspect-square w-12" fill="#f87171" />}
+          {isDone && <DoneIcon className="mx-4 aspect-square w-12" fill="#eab308" />}
+          {isInProgress && <ProgressIcon className="mx-4 aspect-square w-12" fill="#cbd5e1" />}
         </div>
 
         <div className="max-h-[45rem] w-full overflow-hidden p-4">
@@ -118,7 +118,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
                     isArchived: note.isArchived,
                     isDone: note.isDone,
                     isInProgress: note.isInProgress,
-                  })
+                  }),
                 );
                 shareNotify();
               }}
