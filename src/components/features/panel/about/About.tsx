@@ -19,7 +19,7 @@ export const About: FC = () => {
   return (
     <div className="flexcentercol w-full">
       <div className="flexcenter w-full cursor-pointer gap-8" onClick={() => setOpenModal((s) => !s)}>
-        <InfoIcon className="scale-typo-sm cursor-pointer text-ctcolor" width="26" height="26" />
+        <InfoIcon className="scale-typo-sm aspect-square w-10 cursor-pointer text-ctcolor" />
         <div className="typo-semimed line-clamp-1 font-bold">About</div>
         {!openModal ? <ArrowRightIcon {...ArrowIconConfig} /> : <ArrowDownIcon {...ArrowIconConfig} />}
       </div>

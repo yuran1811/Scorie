@@ -37,7 +37,7 @@ export const DataInfo: FC = () => {
           setLoading(false);
         });
     },
-    [currentUser]
+    [currentUser],
   );
   const saveToDB = useCallback(() => {
     if (!inputRef.current || !inputRef.current?.files) return;
@@ -52,7 +52,7 @@ export const DataInfo: FC = () => {
       <div className="flexcenter w-full">
         <a href={backupData} download={backupData ? 'scorie_backup.json' : ''}>
           <Button content="Get backup data">
-            <DownloadIcon className="mr-4" width="20" height="20" />
+            <DownloadIcon className="mr-4 aspect-square w-8" />
           </Button>
         </a>
       </div>

@@ -86,7 +86,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
         .catch((err) => console.log(err))
         .finally(() => setloading(false));
     },
-    [currentUser, scores, scoreOptions]
+    [currentUser, scores, scoreOptions],
   );
 
   useEffect(() => {
@@ -101,10 +101,8 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
     <ModalBox onClick={onClick}>
       <ModalBoxHeader onClick={onClick}>
         <IgnoreIcon
-          className="m-[0.6rem] mx-4 cursor-pointer lgmb:m-5"
+          className="m-[0.6rem] mx-4 aspect-square w-12 cursor-pointer lgmb:m-5"
           fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
-          width="32"
-          height="32"
           onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
         />
         <div className="custom-tippy">
@@ -123,7 +121,7 @@ export const ScoreDetailEdit: FC<ScoreDetailProps & DivProps> = ({ subject, scor
             )}
           >
             <div onClick={() => setShowConfirm((s) => !s)}>
-              <TrashIcon className="m-[0.6rem] mx-4 cursor-pointer text-slate-500 lgmb:m-5" width="30" height="30" />
+              <TrashIcon className="m-[0.6rem] mx-4 aspect-square w-12 cursor-pointer text-slate-500 lgmb:m-5" />
             </div>
           </Tippy>
         </div>

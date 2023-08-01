@@ -72,7 +72,7 @@ const SignInUseEmailPassWord = () => {
         <CreateNewUser>
           <Divider>{t('already have account')}</Divider>
           <Button content="Log in" onClick={() => setNew(false)}>
-            <ArrowLeftIcon className="mr-6" width="24" height="24" />
+            <ArrowLeftIcon className="mr-6 aspect-square w-10" />
           </Button>
         </CreateNewUser>
       ) : (
@@ -127,14 +127,14 @@ const SignInUseEmailPassWord = () => {
             {errMsg && <ErrorMessage content={errMsg} />}
 
             <Button type="submit" content="Log in">
-              <LogInIcon className="mr-6" width="24" height="24" />
+              <LogInIcon className="mr-6 aspect-square w-10" />
             </Button>
           </form>
 
           <Divider>{t('have no account')}</Divider>
 
           <Button before={false} content="Create new account" onClick={() => setNew(true)}>
-            <ArrowRightIcon className="ml-6" width="24" height="24" />
+            <ArrowRightIcon className="ml-6 aspect-square w-10" />
           </Button>
         </>
       )}

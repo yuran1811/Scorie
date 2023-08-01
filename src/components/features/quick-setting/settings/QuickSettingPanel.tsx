@@ -17,7 +17,7 @@ export const QuickSettingPanel = () => {
           {
             _id: 'config',
             Component: (
-              <div className="flexcentercol typo-2sm w-full space-y-5">
+              <div className="flexcentercol typo-2sm w-full mt-6 space-y-5">
                 <div className="flexcenter w-full gap-4">
                   <p className="font-semibold">Minimize UI</p>
                   <SwitchBtn

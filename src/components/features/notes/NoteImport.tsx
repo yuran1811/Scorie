@@ -76,7 +76,7 @@ const NoteImport: FC<NoteImportProps> = ({ setShowImport }) => {
             />
           </div>
           <div className="cursor-pointer px-4" onClick={onClickHandle}>
-            <AddIcon width="36" height="36" />
+            <AddIcon className='aspect-square w-14' />
           </div>
         </div>
       </div>

@@ -65,7 +65,7 @@ export const AccountInfo: FC = () => {
       setTimeoutId(
         setTimeout(() => {
           setMessageExpired(true);
-        }, changePWMes.timer * 1000)
+        }, changePWMes.timer * 1000),
       );
   }, [changePWMes]);
 
@@ -124,7 +124,7 @@ export const AccountInfo: FC = () => {
                   signOut(auth);
                 }}
               >
-                <LogOutIcon className="ml-6" width="24" height="24" />
+                <LogOutIcon className="ml-6 aspect-square w-10" />
               </Button>
 
               <Button

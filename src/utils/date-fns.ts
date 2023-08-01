@@ -4,22 +4,26 @@ import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
 
 const getTimerIdx = (time: number): number => {
+  if (time >= 24 * 60 * 60 * 1000) return 5;
   if (time >= 1 * 60 * 60 * 1000) return 4;
   if (time >= 1 * 60 * 1000) return 3;
   if (time >= 1 * 1000) return 2;
   return 1;
 };
 
-const getFormatTimerIdx = (time: number): string => {
+const getFormatTimerIdx = (time: number, alwaysShowMs?: boolean): string => {
   const timeIdx = getTimerIdx(time);
+  const __ = alwaysShowMs ? ':SSS' : '';
 
   switch (timeIdx) {
+    case 5:
+      return `HH:mm:ss${__}`;
     case 4:
-      return 'H:mm:ss';
+      return `H:mm:ss${__}`;
     case 3:
-      return 'm:ss';
+      return `m:ss${__}`;
     case 2:
-      return 's';
+      return `s${__}`;
     case 1:
       return 's:SSS';
     default:
@@ -60,14 +64,20 @@ export const formatTime = (timestamp: number, format: string = 'H:mm'): string =
   return formatter.format(format);
 };
 
-export const formatTimerValue = (timerLength: number, format: string = ''): string => {
-  if (!timerLength) return "Time's up";
+export const formatTimerValue = (
+  timerLength: number,
+  opts: { alwaysShowMs?: boolean } = { alwaysShowMs: false },
+): string => {
+  if (!timerLength) return '0';
 
   const formatter = dayjs(timerLength).subtract(8, 'hour');
 
-  if (format.length) return formatter.format(format);
+  const formatTimerIdx = getFormatTimerIdx(timerLength, opts?.alwaysShowMs);
 
-  const formatTimerIdx = getFormatTimerIdx(timerLength);
+  if (getTimerIdx(timerLength) === 5) {
+    const days = Math.floor(timerLength / (24 * 60 * 60 * 1000));
+    return days + ':' + formatter.format(formatTimerIdx);
+  }
 
   return formatter.format(formatTimerIdx);
 };

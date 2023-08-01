@@ -60,9 +60,9 @@ export const SubjectCard: FC<SubjectCardProps & DivProps> = ({ isShow, subject }
         onClick={() => setOpenDetail((s) => !s)}
       >
         <div className="flexcenter p-4">
-          <StarIcon className="mx-4" fill={subject && !subject.isSpecial ? 'white' : '#d97706'} width="30" height="30" />
-          <ImportantIcon className="mx-4" fill={subject && !subject.isVital ? 'white' : '#94a3b8'} width="30" height="30" />
-          <IgnoreIcon className="mx-4" fill={subject && !subject.isIgnored ? 'white' : '#0891b2'} width="30" height="30" />
+          <StarIcon className="mx-4 aspect-square w-12" fill={subject && !subject.isSpecial ? 'white' : '#d97706'} />
+          <ImportantIcon className="mx-4 aspect-square w-12" fill={subject && !subject.isVital ? 'white' : '#94a3b8'} />
+          <IgnoreIcon className="mx-4 aspect-square w-12" fill={subject && !subject.isIgnored ? 'white' : '#0891b2'} />
         </div>
 
         <div className="flexcentercol">

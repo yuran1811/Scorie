@@ -9,9 +9,7 @@ export const TourGuide = () => {
   return (
     <>
       <BookIcon
-        className="mx-6 my-4 cursor-pointer"
-        width="32"
-        height="32"
+        className="mx-6 my-4 aspect-square w-12 cursor-pointer"
         onClick={() => {
           setIsOpen(true);
           setCurrentStep(0);

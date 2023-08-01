@@ -14,11 +14,7 @@ export const AddButton: FC<DivProps> = ({ onClick }) => (
       onClick={onClick}
     >
       <Tooltip content="Add new score" options={{ delay: 400 }}>
-        <PlusIcon
-          className="relative right-[-0.8rem] top-[-1.5rem] z-[1] cursor-pointer text-white"
-          width="55"
-          height="55"
-        />
+        <PlusIcon className="relative right-[-0.8rem] top-[-1.5rem] z-[1] aspect-square w-20 cursor-pointer text-white" />
       </Tooltip>
     </m.div>
   </LazyMotion>

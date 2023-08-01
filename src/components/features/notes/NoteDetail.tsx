@@ -100,7 +100,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         })
         .finally(() => setLoading(false));
     },
-    [currentUser, noteIdxList, note, noteOptions]
+    [currentUser, noteIdxList, note, noteOptions],
   );
 
   useEffect(() => {
@@ -123,18 +123,14 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         <div className="flexcenter w-full flex-wrap">
           <Tooltip content="help">
             <InfoIcon
-              className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
-              width="32"
-              height="32"
+              className="mx-3 aspect-square w-12 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
               fill="white"
               onClick={() => setShowHelp((s) => !s)}
             />
           </Tooltip>
           <PinIcon
-            className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
+            className="mx-3 aspect-square w-12 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isPinned ? 'white' : '#f87171'}
-            width="32"
-            height="32"
             onClick={() =>
               setNoteOptions((s) => ({
                 ...s,
@@ -144,10 +140,8 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             }
           />
           <ArchiveIcon
-            className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
+            className="mx-3 aspect-square w-12 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isArchived ? 'white' : '#94a3b8'}
-            width="32"
-            height="32"
             onClick={() =>
               setNoteOptions((s) => ({
                 ...s,
@@ -157,10 +151,8 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             }
           />
           <DoneIcon
-            className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
+            className="mx-3 aspect-square w-12 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isDone ? 'white' : '#d97706'}
-            width="32"
-            height="32"
             onClick={() =>
               setNoteOptions((s) => ({
                 ...s,
@@ -170,10 +162,8 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
             }
           />
           <ProgressIcon
-            className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
+            className="mx-3 aspect-square w-12 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100"
             fill={!noteOptions.isInProgress ? 'white' : '#9ca3af'}
-            width="32"
-            height="32"
             onClick={() =>
               setNoteOptions((s) => ({
                 ...s,
@@ -199,14 +189,14 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
               )}
             >
               <div onClick={() => setShowConfirm((s) => !s)}>
-                <TrashIcon className="mx-3 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100" width="30" height="30" />
+                <TrashIcon className="mx-3 aspect-square w-12 scale-75 cursor-pointer medtab:mx-6 medtab:scale-100" />
               </div>
             </Tippy>
           </div>
         </div>
 
         <button type="submit">
-          <CloseIcon className="mr-4 cursor-pointer text-rose-500" width="32" height="32" />
+          <CloseIcon className="mr-4 aspect-square w-12 cursor-pointer text-rose-500" />
         </button>
       </div>
 
@@ -240,7 +230,7 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
                     classnames(
                       'isAnimated typo-4sm w-max rounded-lg px-4 py-2.5',
                       'opacity-20 hover:opacity-100',
-                      selected && 'hidden'
+                      selected && 'hidden',
                     )
                   }
                   style={invertThemeStyle(noteStyle)}
@@ -273,6 +263,6 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
 
       {showHelp && <NoteHelp onClick={() => setShowHelp(false)} />}
     </form>,
-    document.getElementById('modal-container') as HTMLElement
+    document.getElementById('modal-container') as HTMLElement,
   );
 };

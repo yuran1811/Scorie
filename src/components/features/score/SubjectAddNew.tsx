@@ -67,7 +67,7 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
         });
       }
     },
-    [subjectOptions, subjects]
+    [subjectOptions, subjects],
   );
 
   useEffect(() => {
@@ -95,24 +95,18 @@ export const SubjectAddNew: FC<ScoreAddNewProps & DivProps> = ({ subjects, onCli
     <ModalBox onClick={() => onClickHandle(false)}>
       <ModalBoxHeader onClick={() => onClickHandle(false)}>
         <StarIcon
-          className="m-[0.6rem] mx-4 cursor-pointer lgmb:m-5"
+          className="m-[0.6rem] mx-4 aspect-square w-12 cursor-pointer lgmb:m-5"
           fill={!subjectOptions.isSpecial ? 'white' : '#d97706'}
-          width="32"
-          height="32"
           onClick={() => setSubjectOptions((s) => ({ ...s, isSpecial: !s.isSpecial }))}
         />
         <ImportantIcon
-          className="m-[0.6rem] mx-4 cursor-pointer lgmb:m-5"
+          className="m-[0.6rem] mx-4 aspect-square w-12 cursor-pointer lgmb:m-5"
           fill={!subjectOptions.isVital ? 'white' : '#94a3b8'}
-          width="32"
-          height="32"
           onClick={() => setSubjectOptions((s) => ({ ...s, isVital: !s.isVital }))}
         />
         <IgnoreIcon
-          className="m-[0.6rem] mx-4 cursor-pointer lgmb:m-5"
+          className="m-[0.6rem] mx-4 aspect-square w-12 cursor-pointer lgmb:m-5"
           fill={!subjectOptions.isIgnored ? 'white' : '#0891b2'}
-          width="32"
-          height="32"
           onClick={() => setSubjectOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
         />
       </ModalBoxHeader>

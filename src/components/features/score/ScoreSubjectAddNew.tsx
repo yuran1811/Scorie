@@ -69,7 +69,7 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
 
       reset({ score: '', base: '', type: '' }, { keepErrors: false });
     },
-    [scoreOptions, subjects]
+    [scoreOptions, subjects],
   );
 
   useEffect(() => {
@@ -85,10 +85,8 @@ export const ScoreSubjectAddNew: FC<ScoreSubjectAddNewProps & DivProps> = ({ onC
     <ModalBox onClick={onClick}>
       <ModalBoxHeader onClick={onClick}>
         <IgnoreIcon
-          className="mx-5 cursor-pointer"
+          className="mx-5 aspect-square w-12 cursor-pointer"
           fill={!scoreOptions.isIgnored ? 'white' : '#0891b2'}
-          width="32"
-          height="32"
           onClick={() => setScoreOptions((s) => ({ ...s, isIgnored: !s.isIgnored }))}
         />
       </ModalBoxHeader>

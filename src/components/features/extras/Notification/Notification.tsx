@@ -104,10 +104,8 @@
 //   return (
 //     <>
 //       <NotificationIcon
-//         className="mx-6 my-4 cursor-pointer"
+//         className="mx-6 my-4 cursor-pointer aspect-square w-12"
 //         active={notificationActive}
-//         width="30"
-//         height="30"
 //         onClick={notificationHandle}
 //       />
 //     </>

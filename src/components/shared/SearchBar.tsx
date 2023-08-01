@@ -20,7 +20,7 @@ export const SearchBar: FC<SearchBarProps & InputProps> = ({ className = '', isH
   return isHide ? (
     <></>
   ) : (
-    <div className={`flexcenter relative my-4 mb-8 h-[6rem] w-4/5 ${className}`}>
+    <div className={`flexcenter relative my-4 h-[6rem] w-4/5 ${className}`}>
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <input
           ref={inputRef}

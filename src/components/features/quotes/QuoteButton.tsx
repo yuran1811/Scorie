@@ -8,8 +8,8 @@ export const PrevQuoteButton: FC<ButtonProps> = ({ disabled, onClick }) => (
     <button disabled={disabled} className="flexcenter group right-[10rem]" onClick={onClick}>
       <ArrowLeftIcon
         className={`isAnimated ${disabled ? 'text-gray-500/60' : 'group-hover:translate-x-[-0.6rem]'}`}
-        width="35"
-        height="35"
+        width="32"
+        height="32"
       />
     </button>
   </Tooltip>
@@ -20,8 +20,8 @@ export const NextQuoteButton: FC<ButtonProps> = ({ disabled, onClick }) => (
     <button disabled={disabled} className="flexcenter group right-[5rem]" onClick={onClick}>
       <ArrowRightIcon
         className={`isAnimated ${disabled ? 'text-gray-500/60' : 'group-hover:translate-x-[0.6rem]'}`}
-        width="35"
-        height="35"
+        width="32"
+        height="32"
       />
     </button>
   </Tooltip>
@@ -30,7 +30,7 @@ export const NextQuoteButton: FC<ButtonProps> = ({ disabled, onClick }) => (
 export const FetchQuoteButton: FC<ButtonProps> = ({ onClick }) => (
   <Tooltip content="Get new quotes">
     <button className="flexcenter right-[5rem]" onClick={onClick}>
-      <AddIcon width="35" height="35" />
+      <AddIcon width="32" height="32" />
     </button>
   </Tooltip>
 );
