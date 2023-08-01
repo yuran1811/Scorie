@@ -62,9 +62,9 @@ export const Timer: FC<TimerProps> = ({ _id, timeLength, style = 'bar' }) => {
   }, [timeDelta, timerStatus.paused]);
 
   return (
-    <div className="relative mx-auto w-max rounded-3xl border-2 px-6 py-4">
+    <div className="group relative mx-auto w-max rounded-3xl border-4 border-violet-400 px-6 py-4">
       <div
-        className="flexcenter absolute -right-4 -top-4 aspect-square w-14 cursor-pointer rounded-full bg-rose-700"
+        className="flexcenter isAnimated absolute -right-4 -top-4 aspect-square w-14 cursor-pointer rounded-full bg-rose-700 opacity-40 group-hover:opacity-100"
         onClick={() => {
           deleteTimer();
         }}

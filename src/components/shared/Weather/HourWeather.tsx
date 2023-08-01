@@ -24,7 +24,6 @@ const swiperOptions: SwiperProps = {
   },
   freeMode: {
     enabled: true,
-    sticky: true,
     momentumVelocityRatio: 0.4,
   },
 

@@ -1,5 +1,5 @@
 export const tabListStickyClass =
-  'sticky left-0 top-[6.4rem] z-10 w-full max-w-full rounded-[2rem] bg-ctbgdark p-4 medtab:max-w-[920px]';
+  'sticky left-0 top-[5.6rem] medmb:top-[6rem] z-10 w-full max-w-full bg-ctbgdark px-4 py-2 medtab:max-w-[920px]';
 
 export const zIdxOrder = {
   behind: 'z-[-1]',

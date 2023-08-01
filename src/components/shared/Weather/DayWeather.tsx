@@ -1,6 +1,6 @@
 import { WeatherTimelineType } from '@/shared';
 import { FC } from 'react';
-import { Swiper as ReactSwiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
 import { WeatherCard, WeatherPanelSettingsType } from '.';
 
 import 'swiper/css';
@@ -12,9 +12,12 @@ interface DayWeatherProps {
 
 const swiperOptions: SwiperProps = {
   centeredSlides: true,
-  spaceBetween: 15,
+  centeredSlidesBounds: false,
+  spaceBetween: 12,
   breakpoints: {
-    0: { slidesPerView: 3 },
+    540: { slidesPerView: 3 },
+    380: { slidesPerView: 2 },
+    0: { slidesPerView: 1 },
   },
 };
 
@@ -25,7 +28,7 @@ export const DayWeather: FC<DayWeatherProps> = ({ data, settings = { showIcon: t
 
   return (
     <div className="w-full">
-      <ReactSwiper
+      <Swiper
         {...swiperOptions}
         className="typo-4sm flex h-full w-full flex-row items-center text-ctcolor medtab:max-w-[64rem]"
       >
@@ -37,7 +40,7 @@ export const DayWeather: FC<DayWeatherProps> = ({ data, settings = { showIcon: t
             <WeatherCard type="daily" idx={idx} settings={settings} data={{ values, startTime }} />
           </SwiperSlide>
         ))}
-      </ReactSwiper>
+      </Swiper>
     </div>
   );
 };

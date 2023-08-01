@@ -36,7 +36,7 @@ export const TabUI: FC<TabProps> = ({
 }) => {
   return (
     <Tab.Group {...TabOptions}>
-      <Tab.List className={classnames('flexcenter flex-wrap gap-8 p-8 medtab:p-4', tabListClass)}>
+      <Tab.List className={classnames('flexcenter flex-wrap gap-6', tabListClass)}>
         {tabList.map((_, idx) => (
           <Tab
             key={_}

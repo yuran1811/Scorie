@@ -33,7 +33,7 @@ const SettingIcon = (props: SVGProps<SVGSVGElement>) => (
 
 export const QuickSettingSection = () => {
   return (
-    <div className="container mx-auto my-28 w-full p-4">
+    <div className="container mx-auto my-28 w-full">
       <QuickSettingTabUI
         tabListClass="flexcenter mx-auto flex-wrap gap-2 medmb:gap-8"
         tabIcon={[

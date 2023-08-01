@@ -18,16 +18,16 @@ const swiperOptions: SwiperProps = {
   },
   freeMode: {
     enabled: true,
-    sticky: true,
     momentumVelocityRatio: 0.4,
   },
 
-  spaceBetween: 50,
+  spaceBetween: 12,
 
   breakpoints: {
-    640: { slidesPerView: 4 },
-    420: { slidesPerView: 3 },
-    0: { slidesPerView: 2 },
+    600: { slidesPerView: 4 },
+    360: { slidesPerView: 3 },
+    280: { slidesPerView: 2 },
+    0: { slidesPerView: 1 },
   },
 };
 

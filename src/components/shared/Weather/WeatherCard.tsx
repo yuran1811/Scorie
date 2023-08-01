@@ -84,13 +84,13 @@ export const WeatherCard: FC<WeatherCardProps> = ({
       )}
 
       {type !== 'hourly' && (
-        <div className="my-2 flex items-center justify-around border-y-2 px-4 py-2 font-semibold">
-          <div>
-            <img src={getWeatherIcon('sunrise')} alt="sunrise_icon" />
+        <div className="my-2 flex items-center justify-around border-y-2 px-3 py-2 font-semibold">
+          <div className="flexcentercol">
+            <img className="aspect-square w-10" src={getWeatherIcon('sunrise')} alt="sunrise_icon" />
             <span className="text-gray-900">{getSunTime(sunriseTime)}</span>
           </div>
-          <div>
-            <img src={getWeatherIcon('sunset')} alt="sunset_icon" />
+          <div className="flexcentercol">
+            <img className="aspect-square w-10" src={getWeatherIcon('sunset')} alt="sunset_icon" />
             <span className="text-gray-900">{getSunTime(sunsetTime)}</span>
           </div>
         </div>

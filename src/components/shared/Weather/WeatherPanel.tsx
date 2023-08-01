@@ -106,25 +106,23 @@ export const WeatherPanel = () => {
         {loading ? (
           <InlineLoading />
         ) : (
-          <div className="w-full">
-            <QuickSettingTabUI
-              tabList={['Current', 'Daily', 'Hourly']}
-              panelList={[
-                {
-                  _id: 'current',
-                  Component: !currentWeather ? (
-                    <></>
-                  ) : (
-                    <div className="typo-2sm mx-auto w-full max-w-full rounded-3xl bg-white px-6 py-4 text-black medmb:w-[30rem]">
-                      <WeatherCard type="current" idx={0} settings={settings} data={currentWeather.intervals[0]} />
-                    </div>
-                  ),
-                },
-                { _id: 'daily', Component: <DayWeather data={dailyWeather} settings={settings} /> },
-                { _id: 'hourly', Component: <HourWeather data={hourlyWeather} settings={settings} /> },
-              ]}
-            />
-          </div>
+          <QuickSettingTabUI
+            tabList={['Current', 'Daily', 'Hourly']}
+            panelList={[
+              {
+                _id: 'current',
+                Component: !currentWeather ? (
+                  <></>
+                ) : (
+                  <div className="typo-2sm mx-auto w-full max-w-full rounded-3xl bg-white px-6 py-4 text-black medmb:w-[30rem]">
+                    <WeatherCard type="current" idx={0} settings={settings} data={currentWeather.intervals[0]} />
+                  </div>
+                ),
+              },
+              { _id: 'daily', Component: <DayWeather data={dailyWeather} settings={settings} /> },
+              { _id: 'hourly', Component: <HourWeather data={hourlyWeather} settings={settings} /> },
+            ]}
+          />
         )}
       </div>
     </div>

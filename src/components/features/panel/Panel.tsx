@@ -60,7 +60,7 @@ export const Panel: FC<DivProps> = ({ className = '' }) => {
         </div>
 
         <div
-          className={`flexcentercol scrollY z-[1] w-full !justify-start gap-12 pb-24 lgmb:pb-14 ${
+          className={`flexcentercol scrollY z-[1] w-full !justify-start gap-14 pb-24 lgmb:pb-14 ${
             currentUser ? 'h-[calc(100%-15rem)] lgmb:h-[calc(100%-10rem)]' : 'h-[calc(100%-10rem)]'
           }`}
         >
