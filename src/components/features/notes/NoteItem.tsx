@@ -6,8 +6,8 @@ import { ArchiveIcon, DoneIcon, NodeShareIcon, PaletteIcon, PinIcon, ProgressIco
 import { Tooltip } from '@cpns/shared';
 import Tippy from '@tippyjs/react/headless';
 import { FC, useEffect, useState } from 'react';
-import { NoteDetail } from './NoteDetail';
 import { ThemePanel } from './ThemePanel';
+import { useNavigate } from 'react-router-dom';
 
 const toolClass = 'isAnimated m-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100';
 const toolProps = { width: '30', height: '30', fill: 'white' };
@@ -18,8 +18,9 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
 
   const currentUser = useStore((s) => s.currentUser);
 
+  const navigate = useNavigate();
+
   const [openTheme, setOpenTheme] = useState(false);
-  const [openDetail, setOpenDetail] = useState<boolean>(false);
   const [newTheme, setNewTheme] = useState(theme || 'default');
   const [noteOpts, setNoteOpts] = useState({ isDone, isInProgress, isArchived, isPinned });
 
@@ -54,7 +55,7 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
           'isAnimated flexcentercol group relative max-w-[50rem] cursor-pointer rounded-[2rem] border-[3px] border-transparent hover:border-white medtab:!mx-0 medtab:w-[24rem]',
         )}
         style={noteStyle}
-        onClick={() => setOpenDetail(true)}
+        onClick={() => navigate(`/notes/detail/${id}`)}
       >
         <div className="flexcenter pt-4">
           {isPinned && <PinIcon className="mx-5 aspect-square w-12" fill="#f87171" />}
@@ -188,8 +189,6 @@ export const NoteItem: FC<NoteItemProps> = ({ viewMode, isShow, note }) => {
           </Tooltip>
         </div>
       </div>
-
-      {openDetail && <NoteDetail noteStyle={noteStyle} note={note} setOpenDetail={setOpenDetail} />}
     </>
   );
 };

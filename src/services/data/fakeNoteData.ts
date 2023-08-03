@@ -2,7 +2,7 @@ import { NoteDetailType } from '@/shared';
 
 export const getFakeNotes = (size?: number) => {
   const arrayLength = size || 10;
-  const array = Array(arrayLength);
+  const array = Array(arrayLength).fill(0);
 
   return array.map((_, idx) => {
     const pinned = Math.random() - 0.5 > 0;

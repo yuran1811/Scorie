@@ -44,7 +44,7 @@ export const NoteSection: FC<NoteSectionProps> = (props) => {
     setTimeoutId(
       setTimeout(() => {
         setCanUpdate(true);
-      }, 300)
+      }, 300),
     );
     return true;
   }, [timeoutId]);

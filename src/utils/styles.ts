@@ -21,6 +21,12 @@ export const customStyle = {
     'after:flex after:items-center after:justify-center after:content-[""] after:absolute after:bottom-0 after:left-0 after:h-[0.3rem] after:scale-100 after:origin-center after:w-[100%] after:bg-current',
 };
 
+export const confirmActionStyle = {
+  normal: { color: '#cbd5e1', background: '#1e293b' },
+  caution: { color: '#fbbf24', background: '#92400e' },
+  danger: { color: '#ff6e6e', background: '#7d0e0e' },
+};
+
 export const averageScore = {
   excellent: { color: '#d9f99d', background: '#15803d' },
   good: { color: '#86efac', background: '#065f46' },

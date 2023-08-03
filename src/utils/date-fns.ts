@@ -66,11 +66,13 @@ export const formatTime = (timestamp: number, format: string = 'H:mm'): string =
 
 export const formatTimerValue = (
   timerLength: number,
-  opts: { alwaysShowMs?: boolean } = { alwaysShowMs: false },
+  opts: { alwaysShowMs?: boolean; format?: string } = { alwaysShowMs: false, format: '' },
 ): string => {
   if (!timerLength) return '0';
 
   const formatter = dayjs(timerLength).subtract(8, 'hour');
+
+  if (opts?.format && opts.format.length) return formatter.format(opts.format);
 
   const formatTimerIdx = getFormatTimerIdx(timerLength, opts?.alwaysShowMs);
 

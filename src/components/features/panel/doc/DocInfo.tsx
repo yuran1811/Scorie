@@ -1,8 +1,11 @@
 import { fakeDocData } from '@/services';
-import { IconCollection, LoadingCollection } from '@cpns/icons';
+import { LoadingCollection } from '@cpns/icons';
 import { GradientUnderline } from '@cpns/interfaces';
-import { FC } from 'react';
+import { InlineLoading } from '@cpns/shared';
+import { FC, Suspense, lazy } from 'react';
 import { DocItem } from './DocItem';
+
+const IconCollection = lazy(() => import('@cpns/icons/IconCollection'));
 
 export const DocInfo: FC = () => (
   <div className="flexcentercol scrollY mt-12 h-[calc(100%-4rem)] w-full !justify-start">
@@ -14,7 +17,9 @@ export const DocInfo: FC = () => (
         </div>
         <div>
           <div className="mb-4 px-4 font-bold">Icons</div>
-          <IconCollection />
+          <Suspense fallback={<InlineLoading />}>
+            <IconCollection />
+          </Suspense>
         </div>
       </li>
 

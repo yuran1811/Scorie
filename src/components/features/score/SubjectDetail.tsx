@@ -214,8 +214,9 @@ export const SubjectDetail: FC<SubjectDetailProps> = ({ style, subject, scores, 
                     {...attrs}
                     className={showConfirm ? '' : 'z-[-1] !hidden'}
                     content="confirm delete subject"
-                    setConfirm={setShowConfirm}
+                    actionStyle="danger"
                     actionWhenConfirm={removeSubjectRecord}
+                    setConfirm={setShowConfirm}
                   />
                 )}
               >

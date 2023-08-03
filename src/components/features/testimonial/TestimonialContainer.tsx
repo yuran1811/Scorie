@@ -46,7 +46,7 @@ export const TestimonialContainer = () => {
 
   const { data, loading, error } = useCollectionQuery(
     'testimonials',
-    query(collection(db, 'testimonials'), orderBy('voteCount', 'desc'), orderBy('updatedAt', 'desc'), limit(12))
+    query(collection(db, 'testimonials'), orderBy('voteCount', 'desc'), orderBy('updatedAt', 'desc'), limit(12)),
   );
 
   const [testimonials, setTestimonials] = useState<TestimonialProps[]>([]);
@@ -61,7 +61,7 @@ export const TestimonialContainer = () => {
     <section
       className={classnames(
         'mx-auto my-16 max-w-[1024px] rounded-[3.2rem] py-8 text-gray-100 medmb:rounded-[4.2rem] medtab:px-4',
-        settings.glassmorphismDesign ? 'bg-zinc-950/75' : 'bg-zinc-900'
+        settings.glassmorphismDesign ? 'bg-zinc-950/75' : 'bg-zinc-900',
       )}
     >
       <div className="container mx-auto flex flex-col items-center p-10">

@@ -1,6 +1,5 @@
 import { useQuotes } from '@/hooks';
-import { HomePage } from '@/pages';
-import { publicRoutes } from '@/routes';
+import { treeRoutes } from '@/routes';
 import { setUserProfile } from '@/services';
 import { TOUR_STEPS, auth, getDirOfStep, tourStyles } from '@/shared';
 import { useStore, useTourStore } from '@/store';
@@ -8,14 +7,14 @@ import TRANSLATIONS from '@/translations';
 import { mergeQuoteData } from '@/utils';
 import ErrorBoundary from '@cpns/ErrorBoundary';
 import { MainLayout } from '@cpns/layouts';
-import { ErrorContent, FullScreenLoading } from '@cpns/shared';
+import { FullScreenLoading } from '@cpns/shared';
 import { TourProvider } from '@reactour/tour';
 import dayjs from 'dayjs';
 import { onAuthStateChanged } from 'firebase/auth';
 import i18next from 'i18next';
 import { FC, Suspense, useEffect } from 'react';
 import { initReactI18next } from 'react-i18next';
-import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useRoutes } from 'react-router-dom';
 
 import 'dayjs/locale/vi';
 
@@ -31,15 +30,16 @@ i18next.use(initReactI18next).init({
 });
 
 const App: FC = () => {
-  const setCurrentUser = useStore((s) => s.setCurrentUser);
-
   const quotes = useStore((s) => s.quotes);
   const setQuotes = useStore((s) => s.setQuotes);
-  
+
+  const setCurrentUser = useStore((s) => s.setCurrentUser);
+
   const currentStep = useTourStore((s) => s.currentStep);
   const setCurrentStep = useTourStore((s) => s.setCurrentStep);
 
   const navigate = useNavigate();
+  const RouteRender = useRoutes(treeRoutes);
 
   const {
     data: quoteData,
@@ -90,23 +90,7 @@ const App: FC = () => {
           styles={tourStyles.styles}
         >
           <MainLayout>
-            <Routes>
-              <Route path="/">
-                <Route index element={<HomePage />} />
-                {publicRoutes.map(({ Component: Page, path }) => (
-                  <Route
-                    key={path}
-                    path={path}
-                    element={
-                      <Suspense fallback={<FullScreenLoading />}>
-                        <Page />
-                      </Suspense>
-                    }
-                  />
-                ))}
-              </Route>
-              <Route path="*" element={<ErrorContent />} />
-            </Routes>
+            {RouteRender}
             <Outlet />
           </MainLayout>
         </TourProvider>

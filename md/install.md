@@ -4,7 +4,7 @@
 
 ```bash
 git clone https://github.com/yuran1811/Scorie.git
-cd Scorie
+cd scorie
 ```
 
 - env config
@@ -20,6 +20,13 @@ then fill all the fields in `.env`
 ```bash
 yarn
 yarn dev
+```
+
+- Build and preview the project
+
+```bash
+yarn build
+yarn preview
 ```
 
 - Finish!

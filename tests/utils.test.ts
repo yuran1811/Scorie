@@ -14,11 +14,11 @@ describe('utils', () => {
   });
 
   test('"timer format" SHOULD work as EXPECTED', () => {
-    expect(formatTimerValue((2 * 60 + 30) * 1000, 'HH:mm:ss:SSS')).toBe('00:02:30:000');
+    expect(formatTimerValue((2 * 60 + 30) * 1000, { format: 'HH:mm:ss:SSS' })).toBe('00:02:30:000');
 
     expect(formatTimerValue(120)).toBe('0:120');
 
-    expect(formatTimerValue(0)).toBe("Time's up");
+    expect(formatTimerValue(0)).toBe('0');
     expect(formatTimerValue(3 * 1000)).toBe('3');
     expect(formatTimerValue(30 * 1000)).toBe('30');
 
@@ -27,6 +27,8 @@ describe('utils', () => {
 
     expect(formatTimerValue((2 * 60 * 60 + 30 * 60) * 1000)).toBe('2:30:00');
     expect(formatTimerValue((12 * 60 * 60 + 30 * 60) * 1000)).toBe('12:30:00');
+
+    expect(formatTimerValue((26 * 60 * 60 + 30 * 60) * 1000)).toBe('1:02:30:00');
   });
 
   test('"classnames" SHOULD work as EXPECTED', () => {

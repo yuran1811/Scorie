@@ -1,16 +1,18 @@
 import { deleteNote, editNote, validateNoteOption } from '@/services';
 import { NoteDetailType } from '@/shared';
 import { useNoteStore, useStore } from '@/store';
-import { classnames, invertThemeStyle, mdConvert, shallowObjectCompare, successToast } from '@/utils';
+import { classnames, getThemeStyle, invertThemeStyle, mdConvert, shallowObjectCompare, successToast } from '@/utils';
 import { ArchiveIcon, CloseIcon, DoneIcon, InfoIcon, PinIcon, ProgressIcon, TrashIcon } from '@cpns/icons';
 import { ErrorMessage } from '@cpns/interfaces';
 import { ConfirmBox, InlineLoading, Input, TextArea, TimeContainer, Tooltip } from '@cpns/shared';
 import { Tab } from '@headlessui/react';
 import Tippy from '@tippyjs/react/headless';
-import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate, useParams } from 'react-router-dom';
+import { NoteNotFound } from './NoteError';
 import { NoteHelp } from './NoteHelp';
 
 interface Inputs {
@@ -18,22 +20,31 @@ interface Inputs {
   data: string;
 }
 
-interface NoteDetailProps {
-  note: NoteDetailType;
-  noteStyle: {
-    backgroundColor: string;
-    color: string;
-  };
-  setOpenDetail: Dispatch<SetStateAction<boolean>>;
+interface NoteDetailInfoProps {
+  noteData: NoteDetailType;
 }
 
-export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail }) => {
-  const { id, isPinned, isArchived, isDone, isInProgress, title, data, updatedAt } = note;
+export const NoteDetail: FC = () => {
+  const notes = useNoteStore((s) => s.notes);
 
+  const { noteId } = useParams();
+
+  const thisNote = notes.find((_) => _.id === noteId);
+  if (!thisNote) return <NoteNotFound />;
+
+  return <NoteDetailInfo noteData={thisNote} />;
+};
+
+export const NoteDetailInfo: FC<NoteDetailInfoProps> = ({ noteData: thisNote }) => {
   const currentUser = useStore((s) => s.currentUser);
   const noteIdxList = useNoteStore((s) => s.noteIdxList);
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const { id, isPinned, isArchived, isDone, isInProgress, title, data, updatedAt, theme } = thisNote;
+
+  const noteStyle = getThemeStyle(theme);
 
   const [loading, setLoading] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
@@ -49,8 +60,8 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
     formState: { errors },
   } = useForm<Inputs>({
     values: {
-      title: note?.title || '',
-      data: note?.data || '',
+      title: thisNote?.title || '',
+      data: thisNote?.data || '',
     },
   });
 
@@ -58,9 +69,10 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
     updateNote({ ...data });
   };
 
-  const removeNote = () => {
-    if (!currentUser || !currentUser?.uid || !id) return new Promise((res, rej) => rej('Failed'));
-    return deleteNote(currentUser.uid, id, noteIdxList.id);
+  const removeNote = async () => {
+    if (!currentUser || !currentUser?.uid || !id) return;
+    await deleteNote(currentUser.uid, id, noteIdxList.id);
+    navigate('/notes');
   };
 
   const updateNote = useCallback(
@@ -74,11 +86,11 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
       if (checkNoteOpts.type === 'errors') return;
 
       if (
-        note.title === data.title.trim() &&
-        note.data === data.data.trim() &&
+        thisNote.title === data.title.trim() &&
+        thisNote.data === data.data.trim() &&
         shallowObjectCompare(noteOptions, { isDone, isInProgress, isArchived, isPinned })
       ) {
-        setOpenDetail(false);
+        navigate('/notes');
         return;
       }
 
@@ -93,14 +105,14 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
         .then(() => {
           successToast();
           setStatus({ type: 'ok', message: 'Update successfully' });
-          setOpenDetail(false);
+          navigate('/notes');
         })
         .catch(() => {
           setStatus({ type: 'errors', message: 'Fail to update' });
         })
         .finally(() => setLoading(false));
     },
-    [currentUser, noteIdxList, note, noteOptions],
+    [currentUser, noteIdxList, noteOptions],
   );
 
   useEffect(() => {
@@ -183,8 +195,9 @@ export const NoteDetail: FC<NoteDetailProps> = ({ note, noteStyle, setOpenDetail
                   {...attrs}
                   className={showConfirm ? '' : 'z-[-1] !hidden'}
                   content="confirm delete note"
-                  setConfirm={setShowConfirm}
+                  actionStyle="danger"
                   actionWhenConfirm={removeNote}
+                  setConfirm={setShowConfirm}
                 />
               )}
             >

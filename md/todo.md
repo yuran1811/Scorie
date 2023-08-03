@@ -11,5 +11,5 @@
 - [ ] Add scroll snap effect
 
 - widget features (calendar, share notion template)
-- Timer for learning | breath + [timezone](https://time.antfu.me/)
+- breath timer + [timezone](https://time.antfu.me/)
 - stay focus timer with water design

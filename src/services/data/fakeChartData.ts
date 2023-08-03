@@ -2,7 +2,7 @@ import { randomInArray } from '@/utils';
 
 export const getFakeAntChartData = (size?: number) => {
   const arrayLength = size || 80;
-  const array = Array(arrayLength);
+  const array = Array(arrayLength).fill(0);
 
   const categories = ['Cate A', 'Cate B', 'Cate C', 'Cate D', 'Cate E'];
 

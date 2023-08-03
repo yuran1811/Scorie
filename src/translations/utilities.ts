@@ -71,6 +71,10 @@ const errorTranslation = {
     vi: 'Có lỗi gì đó rồi',
     en: 'An error has occured',
   },
+  'no note found': {
+    vi: 'Không tìm thấy ghi chú nào hết!',
+    en: 'No note found!',
+  },
 };
 
 const formValidateTranslation = {
@@ -404,7 +408,7 @@ export default {
     vi: 'Chia sẻ',
     en: 'Share',
   },
-  
+
   or: {
     vi: 'hoặc',
     en: 'or',
